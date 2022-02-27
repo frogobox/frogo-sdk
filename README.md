@@ -1,13 +1,16 @@
 ![ScreenShoot Apps](docs/image/ss_banner.png?raw=true)
 
 ## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
-SDK for anything your problem to make easier developing android apps
+- SDK for anything your problem to make easier developing android apps
+- Privacy Policy [Click Here](https://github.com/amirisback/frogo-sdk/blob/master/PRIVACY-POLICY.md)
+- License [Click Here](https://github.com/amirisback/frogo-sdk/blob/master/LICENSE)
+
 
 ## Version Release
 This Is Latest Release
 
     ~ Beta Release
-    $version_release = 0.0.1-beta01
+    $version_release = 0.0.1-beta02
 
 What's New??
 
@@ -48,14 +51,14 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:0.0.1-beta01'
+            implementation 'com.github.frogobox:frogo-sdk:0.0.1-beta02'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:0.0.1-beta01")
+            implementation("com.github.frogobox:frogo-sdk:0.0.1-beta02")
         }
 
 ### Step 3. Function from this SDK
