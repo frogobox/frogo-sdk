@@ -1,18 +1,18 @@
 ![ScreenShoot Apps](docs/image/ss_banner.png?raw=true)
 
-## About This Project
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-frogo--android--sdk-brightgreen.svg?style=flat-square)](https://android-arsenal.com/details/1/8317)
-[![](https://jitpack.io/v/frogobox/frogo-android-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-android-sdk) <br>
+## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
 SDK for anything your problem to make easier developing android apps
 
 ## Version Release
 This Is Latest Release
 
-    $version_release = 2.0.8
+    ~ Beta Release
+    $version_release = 0.0.1-beta01
 
 What's New??
 
-    * Update build gradle kts version library *
+    * SDK Android and Desktop *
+    * Beta Release *
 
 ## Download this project
 
@@ -48,34 +48,44 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-android-sdk:2.0.8'
+            implementation 'com.github.frogobox:frogo-sdk:0.0.1-beta01'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-android-sdk:2.0.8")
+            implementation("com.github.frogobox:frogo-sdk:0.0.1-beta01")
         }
 
 ### Step 3. Function from this SDK
 
-#### All Class SDK
+#### All Class SDK (android)
 ```kotlin
 FrogoActivity
-FrogoApiCallback
 FrogoApiClient
-FrogoApiModel
+FrogoApplication
 FrogoComposeActivity
-FrogoConstant
 FrogoDate
 FrogoFragment
 FrogoFunc
-FrogoLiveEvent
-FrogoLocalCallback
 FrogoMusic
+FrogoMutableLiveData
 FrogoNavigation
+FrogoPagerHelper
 FrogoPreference
+FrogoViewModel
+```
+
+### All Class SDK (desktop & android)
+```kotlin
+FrogoApiModel
+FrogoApiObserver
+FrogoConstant
+FrogoCoreApiClient
+FrogoDataResponse
+FrogoLocalObserver
+FrogoStateResponse
 ```
 
 #### FrogoActivity
@@ -216,11 +226,6 @@ fun convertTargetDate(string: String?): String
 
 fun diffTime(timeStart: String, timeEnd: String): Long
 ```
-
-#### FrogoComposeActivity
-
-    In Progress Development
-
 
 ## Colaborator
 Very open to anyone, I'll write your name under this, please contribute by sending an email to me

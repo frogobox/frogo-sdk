@@ -12,28 +12,34 @@
  */
 
 object ProjectSetting {
-    // project settings
+
     const val NAME_APP = "Frogo SDK"
 
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
     const val APP_NAME = "appsdk"
 
-    const val VERSION_MAJOR = 1
-    const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 0
-
-    const val PROJECT_COMPILE_SDK = 31
-    const val PROJECT_MIN_SDK = 21
-    const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
-
-    const val BASE_PACAKGE_NAME = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
-
     const val LIBRARY_NAME_SDK = "sdk"
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
 
     const val MODULE_NAME_SDK = "frogosdk"
     const val MODULE_NAME_CORE_SDK = "frogocoresdk"
+
+    // ---------------------------------------------------------------------------------------------
+
+    const val VERSION_MAJOR = 1
+    const val VERSION_MINOR = 0
+    const val VERSION_PATCH = 0
+
+    // ---------------------------------------------------------------------------------------------
+
+    const val PROJECT_MIN_SDK = 21
+    const val PROJECT_COMPILE_SDK = 31
+    const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
+
+    // ---------------------------------------------------------------------------------------------
+
+    const val BASE_PACAKGE_NAME = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
 
     const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.$APP_NAME"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
@@ -47,7 +53,8 @@ object ProjectSetting {
     val NAME_DB = NAME_APP.toLowerCase().replace(" ", "_")
     val DB = "\"$NAME_DB.db\""
 
-    // Key Store
+    // ---------------------------------------------------------------------------------------------
+
     const val PLAYSTORE_STORE_FILE = "frogoboxmedia.jks"
     const val PLAYSTORE_STORE_PASSWORD = "amirisback"
     const val PLAYSTORE_KEY_ALIAS = "frogoisback"

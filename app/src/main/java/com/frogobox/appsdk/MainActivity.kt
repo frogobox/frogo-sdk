@@ -13,7 +13,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setupViewModel() {
     }
 
-    override fun setupUI(savedInstanceState: Bundle?) {
+    override fun setupOnCreate(savedInstanceState: Bundle?) {
         binding.apply {
             tv.text = "Frogo Android SDK"
             tv.setOnClickListener {

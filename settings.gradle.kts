@@ -19,5 +19,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "FrogoSDK"
-include(":app", ":frogosdk")
-include(":frogocoresdk")
+include(":app", ":frogosdk", ":frogocoresdk")

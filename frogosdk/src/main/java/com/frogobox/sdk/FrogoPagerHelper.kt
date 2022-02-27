@@ -1,4 +1,4 @@
-package com.frogobox.sdk.util
+package com.frogobox.sdk
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter
  * All rights reserved
  *
  */
-class PagerHelper(fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager){
+class FrogoPagerHelper(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
     private val fragments = mutableListOf<Fragment>()
     private val titles = mutableListOf<String>()

@@ -34,24 +34,27 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
 
     private val TAG: String = FrogoActivity::class.java.simpleName
 
+    private var piracyCheckerDisplay = Display.DIALOG
+
     protected val frogoActivity by lazy { this }
 
-    protected var piracyCheckerDisplay = Display.DIALOG
+    protected val binding: VB by lazy { setupViewBinding() }
 
-    protected lateinit var binding: VB
+    // ---------------------------------------------------------------------------------------------
 
     abstract fun setupViewBinding(): VB
 
     abstract fun setupViewModel()
 
-    abstract fun setupUI(savedInstanceState: Bundle?)
+    abstract fun setupOnCreate(savedInstanceState: Bundle?)
+
+    // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = setupViewBinding()
         setContentView(binding.root)
         setupViewModel()
-        setupUI(savedInstanceState)
+        setupOnCreate(savedInstanceState)
         Log.d(TAG, "View Binding : ${binding::class.java.simpleName}")
     }
 
@@ -87,7 +90,7 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         Log.d(TAG, "Toast : $message")
     }
 
-    override fun setupEventEmptyView(view: View, isEmpty: Boolean) {
+    override fun setupEmptyView(view: View, isEmpty: Boolean) {
         if (isEmpty) {
             view.visibility = View.VISIBLE
         } else {
@@ -95,7 +98,7 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         }
     }
 
-    override fun setupEventProgressView(view: View, progress: Boolean) {
+    override fun setupProgressView(view: View, progress: Boolean) {
         if (progress) {
             view.visibility = View.VISIBLE
         } else {

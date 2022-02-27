@@ -22,9 +22,9 @@ interface IFrogoActivity {
 
     fun showToast(message: String)
 
-    fun setupEventEmptyView(view: View, isEmpty: Boolean)
+    fun setupEmptyView(view: View, isEmpty: Boolean)
 
-    fun setupEventProgressView(view: View, progress: Boolean)
+    fun setupProgressView(view: View, progress: Boolean)
 
     fun checkExtra(extraKey: String): Boolean
 

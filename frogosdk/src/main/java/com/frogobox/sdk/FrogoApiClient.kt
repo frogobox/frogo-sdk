@@ -2,6 +2,7 @@ package com.frogobox.sdk
 
 import android.content.Context
 import android.util.Log
+import com.frogobox.coresdk.FrogoCoreApiClient
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,41 +24,20 @@ import java.util.concurrent.TimeUnit
  *
  */
 
-object FrogoApiClient {
+object FrogoApiClient  {
 
-    val TAG = FrogoApiClient::class.java.simpleName
+    val TAG: String = FrogoApiClient::class.java.simpleName
 
     inline fun <reified T> create(url: String): T {
-
         Log.d(TAG, "Create Retrofit Request without Client")
-
-        return Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build().create(T::class.java)
+        return FrogoCoreApiClient.create(url)
     }
 
     inline fun <reified T> create(url: String, context: Context): T {
 
         Log.d(TAG, "Create Retrofit Request with Client")
 
-        val mLoggingInterceptor = HttpLoggingInterceptor()
-        mLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
-        val mClient = OkHttpClient.Builder()
-            .addInterceptor(mLoggingInterceptor)
-            .addInterceptor(ChuckInterceptor(context))
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .build()
-
-        return Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(mClient)
-            .build().create(T::class.java)
+        return FrogoCoreApiClient.create(url, ChuckInterceptor(context))
     }
 
 }

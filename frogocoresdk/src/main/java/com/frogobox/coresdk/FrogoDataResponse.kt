@@ -1,9 +1,7 @@
-package com.frogobox.sdk
-
-import androidx.activity.ComponentActivity
+package com.frogobox.coresdk
 
 /*
- * Created by faisalamir on 23/08/21
+ * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
@@ -14,6 +12,12 @@ import androidx.activity.ComponentActivity
  * All rights reserved
  *
  */
-abstract class FrogoComposeActivity : ComponentActivity(), IFrogoComposeActivity {
+
+interface FrogoDataResponse<T> {
+
+    fun onSuccess(data: T)
+    fun onFailed(statusCode: Int, errorMessage: String? = "")
+    fun onShowProgress()
+    fun onHideProgress()
 
 }

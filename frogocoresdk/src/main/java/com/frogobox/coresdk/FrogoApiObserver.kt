@@ -1,4 +1,4 @@
-package com.frogobox.sdk
+package com.frogobox.coresdk
 
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -18,11 +18,13 @@ import java.net.UnknownHostException
  * All rights reserved
  *
  */
-abstract class FrogoApiCallback<M> : Observer<M> {
+abstract class FrogoApiObserver<M> : Observer<M> {
 
     abstract fun onSuccess(data: M)
 
     abstract fun onFailure(code: Int, errorMessage: String)
+
+    // ---------------------------------------------------------------------------------------------
 
     override fun onComplete() {
     }
@@ -37,18 +39,7 @@ abstract class FrogoApiCallback<M> : Observer<M> {
     override fun onError(e: Throwable) {
         e.printStackTrace()
         when (e) {
-            is HttpException -> {
-
-                var baseDao: M? = null
-                try {
-                    val body = e.response()?.errorBody()
-                } catch (exception: Exception) {
-                    onFailure(504, exception.message!!)
-                }
-
-                onFailure(504, "Error Response")
-            }
-
+            is HttpException -> onFailure(504, "Error response with ${e.message}")
             is UnknownHostException -> onFailure(
                 -1,
                 "Telah terjadi kesalahan ketika koneksi ke server: ${e.message}"

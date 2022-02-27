@@ -16,7 +16,7 @@ import androidx.lifecycle.AndroidViewModel
  *
  */
 abstract class FrogoViewModel(application: Application) : AndroidViewModel(application) {
-    var eventShowProgress = FrogoLiveEvent<Boolean>()
-    var eventEmptyData = FrogoLiveEvent<Boolean>()
-    var eventFailed = FrogoLiveEvent<String>()
+    var eventShowProgress = FrogoMutableLiveData<Boolean>()
+    var eventEmptyData = FrogoMutableLiveData<Boolean>()
+    var eventFailed = FrogoMutableLiveData<String>()
 }

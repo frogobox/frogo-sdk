@@ -18,9 +18,9 @@ import android.util.Log
  */
 object FrogoMusic : IFrogoMusic {
 
-    private val TAG = FrogoMusic::class.java.simpleName
+    val TAG: String = FrogoMusic::class.java.simpleName
 
-    lateinit var mediaPlayer: MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun playMusic(context: Context, musicFile: Int) {
         mediaPlayer = MediaPlayer.create(context, musicFile)

@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  */
 
-class FrogoLiveEvent<T> : MutableLiveData<T>() {
+class FrogoMutableLiveData<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)
 
@@ -32,11 +32,11 @@ class FrogoLiveEvent<T> : MutableLiveData<T>() {
         }
 
         // Observe the internal MutableLiveData
-        super.observe(owner, {
+        super.observe(owner) {
             if (pending.compareAndSet(true, false)) {
                 observer.onChanged(it)
             }
-        })
+        }
     }
 
     @MainThread
@@ -54,6 +54,6 @@ class FrogoLiveEvent<T> : MutableLiveData<T>() {
     }
 
     companion object {
-        private const val TAG = "SingleLiveEvent"
+        private const val TAG = "FrogoLiveEvent"
     }
 }

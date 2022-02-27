@@ -1,6 +1,4 @@
-package com.frogobox.sdk
-
-import android.os.Environment
+package com.frogobox.coresdk
 
 /*
  * Created by faisalamir on 26/07/21
@@ -16,7 +14,7 @@ import android.os.Environment
  */
 object FrogoConstant {
 
-    val TAG = FrogoConstant::class.java.simpleName
+    val TAG: String = FrogoConstant::class.java.simpleName
 
     const val OPTION_GET = "OPTION_GET"
     const val OPTION_DELETE = "OPTION_DELETE"
@@ -39,22 +37,12 @@ object FrogoConstant {
 
         const val TAG_FROM_ACTIVITY = 801
         const val TAG_FROM_FRAGMENT = 800
-
-        const val TAG_CAMERA_VIDEO = "Camera2VideoFragment"
     }
 
     object Ext {
         const val MP4 = ".mp4"
         const val PNG = ".png"
         const val CSV = ".csv"
-    }
-
-    object Dir {
-        private const val BASE_FILE_NAME = "SPEECH_"
-        private const val BASE_DIR_NAME = "BaseMusicPlayer"
-
-        val DIR_NAME = "${Environment.DIRECTORY_PICTURES}/$BASE_DIR_NAME"
-        val VIDEO_FILE_NAME = "$BASE_FILE_NAME${System.currentTimeMillis()}${Ext.MP4}"
     }
 
 }

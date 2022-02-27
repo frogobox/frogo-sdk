@@ -6,8 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Environment
 import android.os.Handler
-import com.frogobox.sdk.FrogoConstant.Dir.DIR_NAME
-import com.frogobox.sdk.FrogoConstant.Dir.VIDEO_FILE_NAME
+import com.frogobox.coresdk.FrogoConstant
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
@@ -31,6 +30,12 @@ import java.util.ArrayList
 object FrogoFunc : IFrogoFunc {
 
     val TAG = FrogoFunc::class.java.simpleName
+
+    private const val BASE_FILE_NAME = "SPEECH_"
+    private const val BASE_DIR_NAME = "BaseMusicPlayer"
+
+    val DIR_NAME = "${Environment.DIRECTORY_PICTURES}/$BASE_DIR_NAME"
+    val VIDEO_FILE_NAME = "$BASE_FILE_NAME${System.currentTimeMillis()}${FrogoConstant.Ext.MP4}"
 
     override fun createFolderPictureVideo() {
         val videoFolder = Environment.getExternalStoragePublicDirectory(DIR_NAME)

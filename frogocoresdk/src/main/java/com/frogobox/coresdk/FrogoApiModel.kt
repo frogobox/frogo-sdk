@@ -1,4 +1,4 @@
-package com.frogobox.sdk
+package com.frogobox.coresdk
 
 import com.google.gson.annotations.SerializedName
 

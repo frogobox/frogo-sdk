@@ -15,7 +15,7 @@ class FrogoAboutUsActivity : FrogoActivity<ActivityFrogoAboutUsBinding>() {
     override fun setupViewModel() {
     }
 
-    override fun setupUI(savedInstanceState: Bundle?) {
+    override fun setupOnCreate(savedInstanceState: Bundle?) {
         setupDetailActivity("About Frogobox")
 
         binding.apply {
