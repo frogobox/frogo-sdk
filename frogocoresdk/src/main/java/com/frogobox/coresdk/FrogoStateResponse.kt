@@ -15,8 +15,13 @@ package com.frogobox.coresdk
  */
 
 interface FrogoStateResponse {
+
     fun onSuccess()
+
     fun onFailed(statusCode: Int, errorMessage: String? = "")
+
     fun onShowProgress()
+
     fun onHideProgress()
+
 }
