@@ -21,9 +21,9 @@ interface IFrogoFragment {
 
     fun checkArgument(argsKey: String): Boolean
 
-    fun setupEventEmptyView(view: View, isEmpty: Boolean)
+    fun setupEmptyView(view: View, isEmpty: Boolean)
 
-    fun setupEventProgressView(view: View, progress: Boolean)
+    fun setupProgressView(view: View, isProgress: Boolean)
 
     fun showToast(message: String)
 

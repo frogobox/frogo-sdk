@@ -24,7 +24,7 @@ interface IFrogoActivity {
 
     fun setupEmptyView(view: View, isEmpty: Boolean)
 
-    fun setupProgressView(view: View, progress: Boolean)
+    fun setupProgressView(view: View, isProgress: Boolean)
 
     fun checkExtra(extraKey: String): Boolean
 

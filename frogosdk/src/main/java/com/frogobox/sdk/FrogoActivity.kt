@@ -32,7 +32,9 @@ import com.google.gson.Gson
  */
 abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActivity {
 
-    private val TAG: String = FrogoActivity::class.java.simpleName
+    companion object {
+        val TAG: String = FrogoActivity::class.java.simpleName
+    }
 
     private var piracyCheckerDisplay = Display.DIALOG
 
@@ -96,14 +98,16 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         } else {
             view.visibility = View.GONE
         }
+        Log.d(TAG, "Setup Empty View : $isEmpty")
     }
 
-    override fun setupProgressView(view: View, progress: Boolean) {
-        if (progress) {
+    override fun setupProgressView(view: View, isProgress: Boolean) {
+        if (isProgress) {
             view.visibility = View.VISIBLE
         } else {
             view.visibility = View.GONE
         }
+        Log.d(TAG, "Setup Progress View : $isProgress")
     }
 
     override fun checkExtra(extraKey: String): Boolean {
@@ -116,10 +120,6 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         extraDataResult: Model
     ) {
         fragment.baseNewInstance(argumentKey, extraDataResult)
-    }
-
-    protected fun setupCustomTitleToolbar(title: Int) {
-        supportActionBar?.setTitle(title)
     }
 
     protected inline fun <reified ClassActivity> baseStartActivity() {
@@ -140,6 +140,8 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         val extraIntent = intent.getStringExtra(extraKey)
         return Gson().fromJson(extraIntent, Model::class.java)
     }
+
+    // ---------------------------------------------------------------------------------------------
 
     override fun verifySignature() {
         piracyChecker {

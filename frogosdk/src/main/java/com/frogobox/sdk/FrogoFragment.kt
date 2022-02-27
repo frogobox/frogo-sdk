@@ -25,17 +25,27 @@ import com.google.gson.Gson
  */
 abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
 
-    private val TAG = FrogoFragment::class.java.simpleName
-    protected lateinit var frogoActivity: FrogoActivity<*>
+    companion object {
+        val TAG = FrogoFragment::class.java.simpleName
+    }
 
     private var _binding: VB? = null
+
     protected val binding: VB get() = _binding!!
+
+    protected val frogoActivity: FrogoActivity<*> by lazy {
+        (activity as FrogoActivity<*>)
+    }
+
+    // ---------------------------------------------------------------------------------------------
 
     abstract fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     abstract fun setupViewModel()
 
-    abstract fun setupUI(savedInstanceState: Bundle?)
+    abstract fun setupOnViewCreated(view: View, savedInstanceState: Bundle?)
+
+    // ---------------------------------------------------------------------------------------------
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,14 +58,10 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        frogoActivity = (activity as FrogoActivity<*>)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI(savedInstanceState)
+        setupOnViewCreated(view, savedInstanceState)
+        Log.d(TAG, "Overriding on ViewCreated")
     }
 
     override fun onDestroy() {
@@ -75,20 +81,22 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         return requireArguments().containsKey(argsKey)
     }
 
-    override fun setupEventEmptyView(view: View, isEmpty: Boolean) {
+    override fun setupEmptyView(view: View, isEmpty: Boolean) {
         if (isEmpty) {
             view.visibility = View.VISIBLE
         } else {
             view.visibility = View.GONE
         }
+        Log.d(TAG, "Setup Empty View : $isEmpty")
     }
 
-    override fun setupEventProgressView(view: View, progress: Boolean) {
-        if (progress) {
+    override fun setupProgressView(view: View, isProgress: Boolean) {
+        if (isProgress) {
             view.visibility = View.VISIBLE
         } else {
             view.visibility = View.GONE
         }
+        Log.d(TAG, "Setup Progress View : $isProgress")
     }
 
     override fun showToast(message: String) {

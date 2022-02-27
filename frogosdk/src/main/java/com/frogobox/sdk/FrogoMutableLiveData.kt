@@ -22,6 +22,10 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class FrogoMutableLiveData<T> : MutableLiveData<T>() {
 
+    companion object {
+        val TAG: String = FrogoMutableLiveData::class.java.simpleName
+    }
+
     private val pending = AtomicBoolean(false)
 
     @MainThread
@@ -53,7 +57,4 @@ class FrogoMutableLiveData<T> : MutableLiveData<T>() {
         value = null
     }
 
-    companion object {
-        private const val TAG = "FrogoLiveEvent"
-    }
 }
