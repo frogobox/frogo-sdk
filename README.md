@@ -3,6 +3,7 @@
 ## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
 [![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 - SDK for anything your problem to make easier developing android apps
+- Available for android and desktop
 - Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
 - License [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
 
