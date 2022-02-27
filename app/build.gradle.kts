@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.compose") version Dependency.COMPOSE_MULTIPLATFORM_VERSION
+    id("org.jetbrains.compose") version DependencyGradle.COMPOSE_MULTIPLATFORM_VERSION
     id("kotlin-kapt")
 }
 
@@ -78,7 +78,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependency.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -91,9 +91,16 @@ android {
 
 dependencies {
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependency.KOTLIN_VERSION}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${DependencyGradle.KOTLIN_VERSION}")
 
     implementation(project(":frogosdk"))
+
+    implementation(compose.ui)
+    implementation(compose.runtime)
+    implementation(compose.preview)
+    implementation(compose.uiTooling)
+    implementation(compose.material)
+    implementation(compose.materialIconsExtended)
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -104,14 +111,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation("androidx.activity:activity-compose:1.4.0")
 
-    implementation(compose.ui)
-    implementation(compose.runtime)
-    implementation(compose.preview)
-    implementation(compose.uiTooling)
-    implementation(compose.material)
-    implementation(compose.materialIconsExtended)
-
-    implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.google.android.material:material:1.5.0")
 
 }
