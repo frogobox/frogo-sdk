@@ -1,6 +1,7 @@
 ![ScreenShoot Apps](docs/image/ss_banner.png?raw=true)
 
 ## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
+[![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 - SDK for anything your problem to make easier developing android apps
 - Privacy Policy [Click Here](https://github.com/amirisback/frogo-sdk/blob/master/PRIVACY-POLICY.md)
 - License [Click Here](https://github.com/amirisback/frogo-sdk/blob/master/LICENSE)
