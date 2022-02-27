@@ -1,4 +1,4 @@
-package com.frogobox.sdk
+package com.frogobox.coresdk
 
 /*
  * Created by faisalamir on 28/07/21
@@ -23,24 +23,6 @@ interface IFrogoDate {
     fun dateTimeToTimeStamp(date: String?): Long
 
     fun getCurrentUTC(): String
-
-    fun timetoHour(date: String?): String
-
-    fun dateTimeTZtoHour(date: String?): String
-
-    fun DateTimeMonth(date: String?): String
-
-    fun dateTimeSet(date: String?): String
-
-    fun dateTimeProblem(date: String?): String
-
-    fun getTimeAgo(time: Long): String?
-
-    fun compareDate(newDate: String): String?
-
-    fun messageDate(newDate: String): String?
-
-    fun getDataChat(time: Long): String?
 
     fun convertClassificationDate(string: String?): String
 
