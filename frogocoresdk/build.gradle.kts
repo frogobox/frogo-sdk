@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    java
+    kotlin("jvm")
     id("org.jetbrains.compose") version Dependency.COMPOSE_MULTIPLATFORM_VERSION
     `maven-publish`
 }
