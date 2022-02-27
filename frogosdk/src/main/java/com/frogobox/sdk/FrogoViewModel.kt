@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

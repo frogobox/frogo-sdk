@@ -2,7 +2,7 @@ package com.frogobox.appsdk
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.core.FrogoActivity
+import com.frogobox.sdk.FrogoActivity
 
 /*
  * Created by faisalamir on 02/08/21

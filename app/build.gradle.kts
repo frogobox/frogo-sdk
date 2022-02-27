@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.compose") version Dependency.COMPOSE_MULTIPLATFORM_VERSION
     id("kotlin-kapt")
 }
 
@@ -103,9 +104,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation("androidx.activity:activity-compose:1.4.0")
 
-    implementation("androidx.compose.ui:ui:${Dependency.COMPOSE_VERSION}")
-    implementation("androidx.compose.material:material:${Dependency.COMPOSE_VERSION}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${Dependency.COMPOSE_VERSION}")
+    implementation(compose.ui)
+    implementation(compose.runtime)
+    implementation(compose.preview)
+    implementation(compose.uiTooling)
+    implementation(compose.material)
+    implementation(compose.materialIconsExtended)
 
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.google.android.material:material:1.5.0")

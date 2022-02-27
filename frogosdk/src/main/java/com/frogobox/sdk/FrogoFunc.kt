@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,9 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Environment
 import android.os.Handler
-import com.frogobox.sdk.R
-import com.frogobox.sdk.core.FrogoConstant.Dir.DIR_NAME
-import com.frogobox.sdk.core.FrogoConstant.Dir.VIDEO_FILE_NAME
+import com.frogobox.sdk.FrogoConstant.Dir.DIR_NAME
+import com.frogobox.sdk.FrogoConstant.Dir.VIDEO_FILE_NAME
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader

@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

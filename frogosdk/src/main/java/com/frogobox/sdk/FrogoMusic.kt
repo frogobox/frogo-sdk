@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import android.content.Context
 import android.media.MediaPlayer
@@ -16,7 +16,7 @@ import android.util.Log
  * All rights reserved
  *
  */
-object FrogoMusic : IFrogoMusic{
+object FrogoMusic : IFrogoMusic {
 
     private val TAG = FrogoMusic::class.java.simpleName
 

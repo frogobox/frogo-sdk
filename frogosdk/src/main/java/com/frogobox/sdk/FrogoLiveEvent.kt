@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import android.util.Log
 import androidx.annotation.MainThread

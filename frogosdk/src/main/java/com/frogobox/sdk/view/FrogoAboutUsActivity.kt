@@ -2,7 +2,7 @@ package com.frogobox.sdk.view
 
 import android.os.Bundle
 import com.frogobox.sdk.R
-import com.frogobox.sdk.core.FrogoActivity
+import com.frogobox.sdk.FrogoActivity
 import com.frogobox.sdk.databinding.ActivityFrogoAboutUsBinding
 import java.util.*
 

@@ -1,7 +1,8 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 import android.view.View
 import androidx.fragment.app.Fragment
+
 /*
  * Created by faisalamir on 28/07/21
  * FrogoSDK
@@ -14,40 +15,18 @@ import androidx.fragment.app.Fragment
  * All rights reserved
  *
  */
-interface IFrogoActivity {
-
-    fun setupDetailActivity(title: String)
+interface IFrogoFragment {
 
     fun setupChildFragment(frameId: Int, fragment: Fragment)
 
-    fun showToast(message: String)
+    fun checkArgument(argsKey: String): Boolean
 
     fun setupEventEmptyView(view: View, isEmpty: Boolean)
 
     fun setupEventProgressView(view: View, progress: Boolean)
 
-    fun checkExtra(extraKey: String): Boolean
+    fun showToast(message: String)
 
-    fun <Model> baseFragmentNewInstance(
-        fragment: FrogoFragment<*>,
-        argumentKey: String,
-        extraDataResult: Model
-    )
-
-    fun verifySignature()
-
-    fun readSignature()
-
-    fun verifyInstallerId()
-
-    fun verifyUnauthorizedApps()
-
-    fun verifyStores()
-
-    fun verifyDebug()
-
-    fun verifyEmulator()
-
-    fun showApkSignatures()
+    fun <Model> baseNewInstance(argsKey: String, data: Model)
 
 }

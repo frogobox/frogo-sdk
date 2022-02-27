@@ -1,7 +1,10 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
+
+import android.content.Context
+import android.media.MediaPlayer
 
 /*
- * Created by faisalamir on 23/08/21
+ * Created by faisalamir on 29/08/21
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
@@ -12,6 +15,12 @@ package com.frogobox.sdk.core
  * All rights reserved
  *
  */
-interface IFrogoComposeActivity {
+interface IFrogoMusic {
+
+    fun playMusic(context: Context, musicFile: Int)
+
+    fun stopMusic()
+
+    fun pauseMusic()
 
 }

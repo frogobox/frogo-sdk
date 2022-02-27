@@ -1,4 +1,4 @@
-package com.frogobox.sdk.core
+package com.frogobox.sdk
 
 /*
  * Created by faisalamir on 28/07/21

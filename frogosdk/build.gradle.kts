@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.compose") version Dependency.COMPOSE_MULTIPLATFORM_VERSION
     id("kotlin-kapt")
     `maven-publish`
 }
@@ -64,9 +65,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    implementation("androidx.compose.ui:ui:${Dependency.COMPOSE_VERSION}")
-    implementation("androidx.compose.material:material:${Dependency.COMPOSE_VERSION}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${Dependency.COMPOSE_VERSION}")
+    implementation(compose.ui)
+    implementation(compose.runtime)
+    implementation(compose.preview)
+    implementation(compose.uiTooling)
+    implementation(compose.material)
+    implementation(compose.materialIconsExtended)
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation("androidx.activity:activity-compose:1.4.0")
@@ -133,11 +137,11 @@ afterEvaluate {
 
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
-                groupId = ProjectSetting.PROJECT_LIB_ID
+                groupId = ProjectSetting.PROJECT_LIB_ID_SDK
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
-                artifactId = ProjectSetting.NAME_APK
+                artifactId = ProjectSetting.MODULE_NAME_SDK
 
                 // Version Library Name (Example : "1.0.0")
                 version = ProjectSetting.PROJECT_VERSION_NAME
