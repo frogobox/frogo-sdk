@@ -2,7 +2,7 @@ package com.frogobox.appsdk
 
 import android.os.Bundle
 import com.frogobox.appsdk.databinding.ActivityMainBinding
-import com.frogobox.sdk.ui.FrogoAboutUsActivity
+import com.frogobox.sdk.view.FrogoAboutUsActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 

@@ -7,7 +7,7 @@
 
     <application>
         <activity
-            android:name=".ui.FrogoAboutUsActivity"
+            android:name=".view.FrogoAboutUsActivity"
             android:exported="true" />
     </application>
 
