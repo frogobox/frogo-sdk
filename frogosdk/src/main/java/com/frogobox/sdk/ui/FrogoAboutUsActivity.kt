@@ -1,4 +1,4 @@
-package com.frogobox.sdk.view
+package com.frogobox.sdk.ui
 
 import android.os.Bundle
 import com.frogobox.sdk.R

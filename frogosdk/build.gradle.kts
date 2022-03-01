@@ -45,10 +45,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
-    }
-
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_11.toString()
@@ -107,9 +103,6 @@ dependencies {
     implementation("com.github.javiersantos:PiracyChecker:1.2.8")
     implementation("com.github.bumptech.glide:glide:4.12.0")
 
-    implementation("com.facebook.stetho:stetho:1.5.1")
-    implementation("com.readystatesoftware.chuck:library:1.1.0")
-
     api("com.google.dagger:dagger:2.38.1")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
@@ -124,6 +117,12 @@ dependencies {
     implementation("io.insert-koin:koin-android-compat:${DependencyGradle.KOIN_VERSION}") // Koin Java Compatibility
     implementation("io.insert-koin:koin-androidx-workmanager:${DependencyGradle.KOIN_VERSION}") // Koin for Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-compose:${DependencyGradle.KOIN_VERSION}") // Koin for Jetpack Compose
+
+    debugImplementation(compose.ui)
+    debugImplementation(compose.uiTooling)
+    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
 }
 

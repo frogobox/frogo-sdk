@@ -77,10 +77,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
-    }
-
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_11.toString()
@@ -112,5 +108,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.4.0")
 
     implementation("com.google.android.material:material:1.5.0")
+
+    debugImplementation(compose.ui)
+    debugImplementation(compose.uiTooling)
 
 }

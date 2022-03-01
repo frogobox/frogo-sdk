@@ -13,14 +13,11 @@
 
 object DependencyGradle {
 
-    // dependencies version
-    const val COMPOSE_VERSION = "1.0.5"
+    const val KOTLIN_VERSION = "1.6.10"
+    const val COMPOSE_MULTIPLATFORM_VERSION = "1.1.0"
 
     const val KOIN_VERSION = "3.1.5"
     const val ROOM_VERSION = "2.4.1"
-
-    const val KOTLIN_VERSION = "1.6.10"
-    const val COMPOSE_MULTIPLATFORM_VERSION = "1.1.0"
 
     const val ACTIVITY_KTX_VERSION = "1.4.0"
     const val FRAGMENT_KTX_VERSION = "1.4.0"
