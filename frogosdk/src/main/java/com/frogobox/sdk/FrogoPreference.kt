@@ -1,4 +1,4 @@
-package com.frogobox.sdk
+package com.frogobox.nutritionframework.core
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,82 +11,78 @@ import android.content.SharedPreferences
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.      
+ * Copyright (C) 2021 FrogoBox Inc.
  * All rights reserved
  *
  */
 
-object FrogoPreference {
+class FrogoPreference(private val context: Context, private val prefName: String) {
 
-    fun getSp(context: Context, prefName: String): SharedPreferences {
-        return context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+    private val sharedPreferences by lazy {
+        context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }
 
-    object Save {
-        fun savePrefFloat(
-            sharedPreferences: SharedPreferences,
-            constPref: String,
-            data: Float
-        ) {
-            sharedPreferences.edit().putFloat(constPref, data).apply()
-        }
-
-        fun savePrefInt(sharedPreferences: SharedPreferences, constPref: String, data: Int) {
-            sharedPreferences.edit().putInt(constPref, data).apply()
-        }
-
-        fun savePrefString(
-            sharedPreferences: SharedPreferences,
-            constPref: String,
-            data: String
-        ) {
-            sharedPreferences.edit().putString(constPref, data).apply()
-        }
-
-        fun savePrefBoolean(
-            sharedPreferences: SharedPreferences,
-            constPref: String,
-            data: Boolean
-        ) {
-            sharedPreferences.edit().putBoolean(constPref, data).apply()
-        }
-
-        fun savePrefLong(sharedPreferences: SharedPreferences, constPref: String, data: Long) {
-            sharedPreferences.edit().putLong(constPref, data).apply()
-        }
-
+    private val prefEditor by lazy {
+        sharedPreferences.edit()
     }
 
-    object Delete {
-
-        fun deletePref(sharedPreferences: SharedPreferences, constPref: String) {
-            sharedPreferences.edit().remove(constPref).apply()
-        }
-
+    fun savePrefFloat(
+        key: String,
+        value: Float
+    ) {
+        prefEditor.putFloat(key, value).apply()
     }
 
-    object Load {
-
-        fun loadPrefFloat(sharedPreferences: SharedPreferences, constPref: String): Float {
-            return sharedPreferences.getFloat(constPref, 0f)
-        }
-
-        fun loadPrefString(sharedPreferences: SharedPreferences, constPref: String): String {
-            return sharedPreferences.getString(constPref, "")!!
-        }
-
-        fun loadPrefInt(sharedPreferences: SharedPreferences, constPref: String): Int {
-            return sharedPreferences.getInt(constPref, 0)
-        }
-
-        fun loadPrefLong(sharedPreferences: SharedPreferences, constPref: String): Long {
-            return sharedPreferences.getLong(constPref, 0)
-        }
-
-        fun loadPrefBoolean(sharedPreferences: SharedPreferences, constPref: String): Boolean {
-            return sharedPreferences.getBoolean(constPref, false)
-        }
-
+    fun savePrefInt(key: String, value: Int) {
+        prefEditor.putInt(key, value).apply()
     }
+
+    fun savePrefString(
+        key: String,
+        value: String
+    ) {
+        prefEditor.putString(key, value).apply()
+    }
+
+    fun savePrefBoolean(
+        key: String,
+        value: Boolean
+    ) {
+        prefEditor.putBoolean(key, value).apply()
+    }
+
+    fun savePrefLong(key: String, value: Long) {
+        prefEditor.putLong(key, value).apply()
+    }
+
+    fun deletePref(key: String) {
+        prefEditor.remove(key).apply()
+    }
+
+    fun nukePref(){
+        prefEditor.clear().apply()
+    }
+
+    fun loadPrefFloat(key: String): Float {
+        return sharedPreferences.getFloat(key, 0f)
+    }
+
+    fun loadPrefString(key: String): String {
+        return sharedPreferences.getString(key, "")!!
+    }
+
+    fun loadPrefInt(key: String): Int {
+        return sharedPreferences.getInt(key, 0)
+    }
+
+    fun loadPrefLong(key: String): Long {
+        return sharedPreferences.getLong(key, 0)
+    }
+
+    fun loadPrefBoolean(key: String): Boolean {
+        return sharedPreferences.getBoolean(key, false)
+    }
+
+    // Please Add Your Code Under This Line --------------------------------------------------------
 
 }
