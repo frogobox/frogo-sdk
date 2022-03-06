@@ -2,7 +2,6 @@ package com.frogobox.appsdk
 
 import android.os.Bundle
 import com.frogobox.appsdk.databinding.ActivityMainBinding
-import com.frogobox.sdk.view.FrogoAboutUsActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -14,11 +13,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun setupOnCreate(savedInstanceState: Bundle?) {
+        setupHideSystemUI()
         binding.apply {
-            tv.text = "Frogo Android SDK"
+            tv.text = if (isNetworkConnected()) {
+                "Internet Connected"
+            } else {
+                "Disconnet from the Internet"
+            }
             tv.setOnClickListener {
-                baseStartActivity<FrogoAboutUsActivity>()
+                shareApp(packageName, getString(R.string.app_name))
             }
         }
     }
+
 }

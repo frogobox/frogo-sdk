@@ -33,7 +33,7 @@ interface IFrogoFunc {
 
     fun randomNumber(start: Int, end: Int): Int
 
-    fun isNetworkAvailable(context: Context): Boolean?
+    fun isNetworkConnected(context: Context): Boolean
 
     fun <T> fetchRawData(mContext: Context, sourceRaw: Int): ArrayList<T>
 

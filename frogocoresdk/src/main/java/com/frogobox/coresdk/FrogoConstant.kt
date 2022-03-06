@@ -45,4 +45,8 @@ object FrogoConstant {
         const val CSV = ".csv"
     }
 
+    object Url {
+        const val BASE_PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
+    }
+
 }

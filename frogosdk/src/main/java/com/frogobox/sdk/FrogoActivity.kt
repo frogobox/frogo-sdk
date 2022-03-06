@@ -1,16 +1,20 @@
 package com.frogobox.sdk
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.frogobox.coresdk.FrogoConstant.Url.BASE_PLAY_STORE_URL
 import com.github.javiersantos.piracychecker.*
 import com.github.javiersantos.piracychecker.enums.Display
 import com.github.javiersantos.piracychecker.enums.InstallerID
@@ -123,7 +127,7 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
     }
 
     protected inline fun <reified ClassActivity> baseStartActivity() {
-        this.startActivity(Intent(this, ClassActivity::class.java))
+        startActivity(Intent(this, ClassActivity::class.java))
     }
 
     protected inline fun <reified ClassActivity, Model> baseStartActivity(
@@ -133,12 +137,56 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         val intent = Intent(this, ClassActivity::class.java)
         val extraData = Gson().toJson(data)
         intent.putExtra(extraKey, extraData)
-        this.startActivity(intent)
+        Log.d(TAG, "Base Start Activity Extra Data (${extraData::class.java.simpleName}) : $extraData")
+        startActivity(intent)
     }
 
     protected inline fun <reified Model> baseGetExtraData(extraKey: String): Model {
         val extraIntent = intent.getStringExtra(extraKey)
         return Gson().fromJson(extraIntent, Model::class.java)
+    }
+
+    override fun isNetworkConnected(): Boolean {
+        return FrogoFunc.isNetworkConnected(this)
+    }
+
+    override fun setupFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val controller = window.insetsController
+            if (controller != null) {
+                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                controller.systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+    }
+
+    override fun setupHideSystemUI() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+        Log.d(TAG, "Hide System UI a.k.a Status Bar Android CutOut")
+    }
+
+    override fun shareApp(packageName: String, appName: String) {
+        val messageShare = "Hi, let's play $appName. Download now on Google Play! $BASE_PLAY_STORE_URL$packageName"
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_SUBJECT, appName)
+        intent.putExtra(Intent.EXTRA_TEXT, messageShare)
+        Log.d(TAG, "Message Share App : $messageShare")
+        startActivity(Intent.createChooser(intent, "Share"))
+    }
+
+    override fun rateApp(packageName: String) {
+        val url = "$BASE_PLAY_STORE_URL$packageName"
+        Log.d(TAG, "Url Play Store : $url")
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -219,7 +267,7 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
     }
 
     override fun showApkSignatures() {
-        apkSignatures.forEach { Log.d(TAG,"Signature This Apps : $it") }
+        apkSignatures.forEach { Log.d(TAG, "Signature This Apps : $it") }
     }
 
 }

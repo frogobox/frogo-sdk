@@ -2,6 +2,7 @@ package com.frogobox.sdk
 
 import android.view.View
 import androidx.fragment.app.Fragment
+
 /*
  * Created by faisalamir on 28/07/21
  * FrogoSDK
@@ -33,6 +34,16 @@ interface IFrogoActivity {
         argumentKey: String,
         extraDataResult: Model
     )
+
+    fun isNetworkConnected(): Boolean
+
+    fun setupFullScreen()
+
+    fun setupHideSystemUI()
+
+    fun shareApp(packageName: String, appName: String)
+
+    fun rateApp(packageName: String)
 
     fun verifySignature()
 
