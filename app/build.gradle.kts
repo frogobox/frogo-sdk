@@ -87,8 +87,6 @@ android {
 
 dependencies {
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${DependencyGradle.KOTLIN_VERSION}")
-
     implementation(project(":frogosdk"))
 
     implementation(compose.ui)
@@ -105,7 +103,7 @@ dependencies {
     implementation(Androidx.fragmentKtx)
 
     implementation(Androidx.constraintLayout)
-    
+
     implementation(Androidx.preferenceKtx)
 
     implementation(Androidx.Core.ktx)
