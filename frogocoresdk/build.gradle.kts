@@ -35,13 +35,10 @@ dependencies {
 
     implementation(Square.Retrofit2.retrofit)
     implementation(Square.Retrofit2.converterGson)
-    implementation(Square.Retrofit2.adapterRxJava)
-    implementation(Square.Retrofit2.adapterRxJava2)
     implementation(Square.Retrofit2.adapterRxJava3)
 
     implementation(Koin.core)
 
-    implementation(Reactivex.rxJava2)
     implementation(Reactivex.rxJava3)
 }
 
