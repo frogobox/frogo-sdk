@@ -98,16 +98,23 @@ dependencies {
     implementation(compose.material)
     implementation(compose.materialIconsExtended)
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation(Androidx.appCompat)
+    implementation(Androidx.appCompatResources)
 
-    implementation("androidx.work:work-runtime-ktx:2.7.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation(Androidx.activityKtx)
+    implementation(Androidx.fragmentKtx)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation(Androidx.constraintLayout)
+    
+    implementation(Androidx.preferenceKtx)
 
-    implementation("com.google.android.material:material:1.5.0")
+    implementation(Androidx.Core.ktx)
+    implementation(Androidx.Work.runtimeKtx)
+
+    implementation(Google.material)
+    implementation(Androidx.Lifecycle.runtimeKtx)
+
+    implementation(Compose.activity)
 
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)

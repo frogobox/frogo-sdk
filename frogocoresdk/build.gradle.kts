@@ -28,19 +28,21 @@ dependencies {
     implementation(compose.material)
     implementation(compose.materialIconsExtended)
 
-    implementation("com.google.code.gson:gson:${DependencyGradle.GSON_VERSION}")
+    implementation(Google.gson)
 
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation(Square.okhttp)
+    implementation(Square.okhttpLogging)
 
-    implementation("com.squareup.retrofit2:retrofit:${DependencyGradle.RETROFIT_VERSION}")
-    implementation("com.squareup.retrofit2:converter-gson:${DependencyGradle.RETROFIT_VERSION}")
-    implementation("com.squareup.retrofit2:adapter-rxjava:${DependencyGradle.RETROFIT_VERSION}")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:${DependencyGradle.RETROFIT_VERSION}")
+    implementation(Square.Retrofit2.retrofit)
+    implementation(Square.Retrofit2.converterGson)
+    implementation(Square.Retrofit2.adapterRxJava)
+    implementation(Square.Retrofit2.adapterRxJava2)
+    implementation(Square.Retrofit2.adapterRxJava3)
 
-    implementation("io.insert-koin:koin-core:${DependencyGradle.KOIN_VERSION}") // Koin core features
+    implementation(Koin.core)
 
-    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation(Reactivex.rxJava2)
+    implementation(Reactivex.rxJava3)
 }
 
 publishing {
@@ -68,7 +70,7 @@ publishing {
     }
 
     repositories {
-        maven { url = uri("https://jitpack.io") }
+        maven { url = uri(Util.jitpackUrl) }
     }
 
 }

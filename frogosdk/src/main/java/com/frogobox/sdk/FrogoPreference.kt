@@ -1,7 +1,6 @@
-package com.frogobox.nutritionframework.core
+package com.frogobox.sdk
 
 import android.content.Context
-import android.content.SharedPreferences
 
 /*
  * Created by faisalamir on 26/07/21
@@ -59,7 +58,7 @@ class FrogoPreference(private val context: Context, private val prefName: String
         prefEditor.remove(key).apply()
     }
 
-    fun nukePref(){
+    fun nukePref() {
         prefEditor.clear().apply()
     }
 
