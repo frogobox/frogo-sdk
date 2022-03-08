@@ -84,7 +84,6 @@ dependencies {
 
     implementation(Androidx.Room.ktx)
     implementation(Androidx.Room.runtime)
-    implementation(Androidx.Room.rxJava2)
     implementation(Androidx.Room.rxJava3)
 
     implementation(Google.material)
