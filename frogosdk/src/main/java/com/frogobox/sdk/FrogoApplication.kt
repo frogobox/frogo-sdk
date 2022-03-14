@@ -23,6 +23,8 @@ import org.koin.core.logger.Level
 abstract class FrogoApplication : Application() {
 
     companion object {
+        val TAG: String = FrogoApplication::class.java.simpleName
+
         lateinit var instance: FrogoApplication
         fun getContext(): Context = instance.applicationContext
     }

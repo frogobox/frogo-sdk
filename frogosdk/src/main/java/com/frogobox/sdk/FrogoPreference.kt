@@ -17,6 +17,10 @@ import android.content.Context
 
 class FrogoPreference(private val context: Context, private val prefName: String) {
 
+    companion object {
+        val TAG: String = FrogoPreference::class.java.simpleName
+    }
+
     private val sharedPreferences by lazy {
         context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }

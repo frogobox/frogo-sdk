@@ -112,7 +112,7 @@ dependencies {
     implementation(Google.material)
     implementation(Androidx.Lifecycle.runtimeKtx)
 
-    implementation(Compose.activity)
+    implementation(Androidx.Compose.activity)
 
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)

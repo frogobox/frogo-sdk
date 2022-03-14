@@ -26,7 +26,7 @@ import com.google.gson.Gson
 abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
 
     companion object {
-        val TAG = FrogoFragment::class.java.simpleName
+        val TAG: String = FrogoFragment::class.java.simpleName
     }
 
     private var _binding: VB? = null

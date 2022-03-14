@@ -23,6 +23,10 @@ class AppExecutors constructor(
     val mainThread: Executor = MainThreadExecutor()
 ) {
 
+    companion object {
+        val TAG: String = AppExecutors::class.java.simpleName
+    }
+
     private class MainThreadExecutor : Executor {
         private val mainThreadHandler = Handler(Looper.getMainLooper())
 

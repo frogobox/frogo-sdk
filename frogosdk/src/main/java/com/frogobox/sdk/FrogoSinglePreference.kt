@@ -18,6 +18,8 @@ import android.content.SharedPreferences
 
 object FrogoSinglePreference {
 
+    val TAG: String = FrogoSinglePreference::class.java.simpleName
+
     fun getSp(context: Context, prefName: String): SharedPreferences {
         return context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }

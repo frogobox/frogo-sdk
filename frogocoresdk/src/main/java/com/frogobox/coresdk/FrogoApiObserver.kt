@@ -21,6 +21,10 @@ import java.net.UnknownHostException
  */
 abstract class FrogoApiObserver<M> : Observer<M> {
 
+    companion object {
+        val TAG: String = FrogoApiObserver::class.java.simpleName
+    }
+
     abstract fun onSuccess(data: M)
 
     abstract fun onFailure(code: Int, errorMessage: String)

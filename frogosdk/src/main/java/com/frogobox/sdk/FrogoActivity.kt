@@ -127,17 +127,22 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
     }
 
     protected inline fun <reified ClassActivity> baseStartActivity() {
+        Log.d(TAG, "Base Start Activity : ${ClassActivity::class.java.simpleName}")
         startActivity(Intent(this, ClassActivity::class.java))
     }
 
-    protected inline fun <reified ClassActivity, Model> baseStartActivity(
+    protected inline fun <reified ClassActivity, reified Model> baseStartActivity(
         extraKey: String,
         data: Model
     ) {
         val intent = Intent(this, ClassActivity::class.java)
         val extraData = Gson().toJson(data)
         intent.putExtra(extraKey, extraData)
-        Log.d(TAG, "Base Start Activity Extra Data (${extraData::class.java.simpleName}) : $extraData")
+        Log.d(TAG, "Base Start Activity : ${ClassActivity::class.java.simpleName}")
+        Log.d(
+            TAG,
+            "Base Start Activity : Extra Data (${Model::class.java.simpleName}) : $extraData"
+        )
         startActivity(intent)
     }
 
@@ -174,7 +179,8 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
     }
 
     override fun shareApp(packageName: String, appName: String) {
-        val messageShare = "Hi, let's play $appName. Download now on Google Play! $BASE_PLAY_STORE_URL$packageName"
+        val messageShare =
+            "Hi, let's play $appName. Download now on Google Play! $BASE_PLAY_STORE_URL$packageName"
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_SUBJECT, appName)

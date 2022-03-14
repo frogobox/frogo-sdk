@@ -16,4 +16,8 @@ import androidx.activity.ComponentActivity
  */
 abstract class FrogoComposeActivity : ComponentActivity(), IFrogoComposeActivity {
 
+    companion object {
+        val TAG: String = FrogoComposeActivity::class.java.simpleName
+    }
+
 }

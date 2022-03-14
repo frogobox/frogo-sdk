@@ -23,6 +23,8 @@ import com.google.gson.Gson
 
 object FrogoNavigation {
 
+    val TAG: String = FrogoNavigation::class.java.simpleName
+
     lateinit var bundle: Any
 
     const val TYPE_INT = "TYPE_INT"

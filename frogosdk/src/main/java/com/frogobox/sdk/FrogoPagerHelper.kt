@@ -18,6 +18,10 @@ import androidx.fragment.app.FragmentPagerAdapter
  */
 class FrogoPagerHelper(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
+    companion object {
+        val TAG: String = FrogoPagerHelper::class.java.simpleName
+    }
+
     private val fragments = mutableListOf<Fragment>()
     private val titles = mutableListOf<String>()
 
