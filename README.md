@@ -2,6 +2,9 @@
 
 ## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
 [![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
+[![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
+[![Scan with Detekt](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml)
+[![pages-build-deployment](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
 - Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
