@@ -104,7 +104,7 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         Log.d(TAG, "Toast message : $message")
     }
 
-    override fun <Model> baseNewInstance(argsKey: String, data: Model) {
+    override fun <Model> frogoNewInstance(argsKey: String, data: Model) {
         val argsData = Gson().toJson(data)
         val bundleArgs = Bundle().apply {
             putString(argsKey, argsData)
@@ -112,23 +112,23 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         this.arguments = bundleArgs
     }
 
-    protected inline fun <reified Model> baseGetInstance(argsKey: String): Model {
+    protected inline fun <reified Model> frogoGetInstance(argsKey: String): Model {
         val argsData = this.arguments?.getString(argsKey)
         return Gson().fromJson(argsData, Model::class.java)
     }
 
-    protected inline fun <reified ClassActivity> baseStartActivity() {
+    protected inline fun <reified ClassActivity> frogoStartActivity() {
         context?.startActivity(Intent(context, ClassActivity::class.java))
     }
 
-    protected inline fun <reified ClassActivity, Model> baseStartActivity(
+    protected inline fun <reified ClassActivity, Model> frogoStartActivity(
         extraKey: String,
         data: Model
     ) {
         val intent = Intent(context, ClassActivity::class.java)
         val extraData = Gson().toJson(data)
         intent.putExtra(extraKey, extraData)
-        this.startActivity(intent)
+        context?.startActivity(intent)
     }
 
 }

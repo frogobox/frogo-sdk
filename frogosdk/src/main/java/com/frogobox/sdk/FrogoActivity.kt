@@ -118,35 +118,35 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
         return intent?.hasExtra(extraKey)!!
     }
 
-    override fun <Model> baseFragmentNewInstance(
+    override fun <Model> FrogoFragmentNewInstance(
         fragment: FrogoFragment<*>,
         argumentKey: String,
         extraDataResult: Model
     ) {
-        fragment.baseNewInstance(argumentKey, extraDataResult)
+        fragment.frogoNewInstance(argumentKey, extraDataResult)
     }
 
-    protected inline fun <reified ClassActivity> baseStartActivity() {
-        Log.d(TAG, "Base Start Activity : ${ClassActivity::class.java.simpleName}")
+    protected inline fun <reified ClassActivity> frogoStartActivity() {
+        Log.d(TAG, "Frogo Start Activity : ${ClassActivity::class.java.simpleName}")
         startActivity(Intent(this, ClassActivity::class.java))
     }
 
-    protected inline fun <reified ClassActivity, reified Model> baseStartActivity(
+    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
         extraKey: String,
         data: Model
     ) {
         val intent = Intent(this, ClassActivity::class.java)
         val extraData = Gson().toJson(data)
         intent.putExtra(extraKey, extraData)
-        Log.d(TAG, "Base Start Activity : ${ClassActivity::class.java.simpleName}")
+        Log.d(TAG, "Frogo Start Activity : ${ClassActivity::class.java.simpleName}")
         Log.d(
             TAG,
-            "Base Start Activity : Extra Data (${Model::class.java.simpleName}) : $extraData"
+            "Frogo Start Activity : Extra Data (${Model::class.java.simpleName}) : $extraData"
         )
         startActivity(intent)
     }
 
-    protected inline fun <reified Model> baseGetExtraData(extraKey: String): Model {
+    protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
         val extraIntent = intent.getStringExtra(extraKey)
         return Gson().fromJson(extraIntent, Model::class.java)
     }

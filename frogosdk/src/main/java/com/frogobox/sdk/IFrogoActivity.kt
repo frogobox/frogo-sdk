@@ -29,7 +29,7 @@ interface IFrogoActivity {
 
     fun checkExtra(extraKey: String): Boolean
 
-    fun <Model> baseFragmentNewInstance(
+    fun <Model> FrogoFragmentNewInstance(
         fragment: FrogoFragment<*>,
         argumentKey: String,
         extraDataResult: Model

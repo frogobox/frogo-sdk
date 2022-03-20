@@ -109,6 +109,7 @@ dependencies {
     implementation(Util.glide)
 
     implementation("com.github.javiersantos:PiracyChecker:1.2.8")
+    implementation("com.github.chuckerteam.chucker:library:3.5.2")
 
     api(JetBrains.coroutinesCore)
     api(JetBrains.coroutinesAndroid)

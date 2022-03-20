@@ -27,6 +27,6 @@ interface IFrogoFragment {
 
     fun showToast(message: String)
 
-    fun <Model> baseNewInstance(argsKey: String, data: Model)
+    fun <Model> frogoNewInstance(argsKey: String, data: Model)
 
 }
