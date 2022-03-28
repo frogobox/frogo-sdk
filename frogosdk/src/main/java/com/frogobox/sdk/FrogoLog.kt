@@ -1,8 +1,8 @@
 package com.frogobox.sdk
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
-import com.frogobox.coresdk.Log
 
 /*
  * Created by Faisal Amir on 14/01/2021
