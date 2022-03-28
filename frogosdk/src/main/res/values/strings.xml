@@ -23,4 +23,9 @@
     <string name="dialog_title_delete">Delete Data</string>
     <string name="dialog_message_delete">Are you sure you want to delete data?</string>
 
+
+    <string name="frogo_notification_content_title">Frogo Content Title</string>
+    <string name="frogo_notification_content_text">Frogo Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</string>
+    <string name="frogo_notification_subtext">Frogo Sub Text</string>
+
 </resources>

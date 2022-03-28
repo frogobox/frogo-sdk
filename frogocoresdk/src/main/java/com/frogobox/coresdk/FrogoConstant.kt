@@ -49,4 +49,10 @@ object FrogoConstant {
         const val BASE_PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
     }
 
+    object Notification {
+        const val FROGO_NOTIFICATION_ID = 0
+        const val FROGO_CHANNEL_ID = "FROGO_CHANNEL_ID"
+        const val FROGO_CHANNEL_NAME = "FROGO_CHANNEL_NAME"
+    }
+
 }

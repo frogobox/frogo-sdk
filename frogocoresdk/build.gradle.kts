@@ -35,14 +35,6 @@ dependencies {
 
     implementation(Square.Retrofit2.retrofit)
     implementation(Square.Retrofit2.converterGson)
-    implementation(Square.Retrofit2.converterJackson)
-    implementation(Square.Retrofit2.converterMoshi)
-    implementation(Square.Retrofit2.converterProtobuf)
-    implementation(Square.Retrofit2.converterWire)
-    implementation(Square.Retrofit2.converterSimpleXml)
-    implementation(Square.Retrofit2.converterJAXB)
-    implementation(Square.Retrofit2.converterScalars)
-
     implementation(Square.Retrofit2.adapterRxJava3)
 
     implementation(Koin.core)
