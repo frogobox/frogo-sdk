@@ -14,6 +14,8 @@
 object DependencyGradle {
 
     const val KOTLIN_VERSION = Version.JetBrains.kotlin
-    const val COMPOSE_MULTIPLATFORM_VERSION = Version.AndroidX.composeMultiPlatform
+    const val COMPOSE_MULTIPLATFORM_VERSION = Version.Androidx.composeMultiPlatform
+    const val FROGO_CORE_SDK_PATH = ":frogocoresdk"
+    const val FROGO_SDK_PATH = ":frogosdk"
 
 }

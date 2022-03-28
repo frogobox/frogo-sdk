@@ -87,7 +87,8 @@ android {
 
 dependencies {
 
-    implementation(project(":frogosdk"))
+    implementation(project(DependencyGradle.FROGO_CORE_SDK_PATH))
+    implementation(project(DependencyGradle.FROGO_SDK_PATH))
 
     implementation(compose.ui)
     implementation(compose.runtime)
@@ -98,21 +99,17 @@ dependencies {
 
     implementation(Androidx.appCompat)
     implementation(Androidx.appCompatResources)
-
     implementation(Androidx.activityKtx)
     implementation(Androidx.fragmentKtx)
-
     implementation(Androidx.constraintLayout)
-
     implementation(Androidx.preferenceKtx)
 
     implementation(Androidx.Core.ktx)
     implementation(Androidx.Work.runtimeKtx)
+    implementation(Androidx.Lifecycle.runtimeKtx)
+    implementation(Androidx.Compose.activity)
 
     implementation(Google.material)
-    implementation(Androidx.Lifecycle.runtimeKtx)
-
-    implementation(Androidx.Compose.activity)
 
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)

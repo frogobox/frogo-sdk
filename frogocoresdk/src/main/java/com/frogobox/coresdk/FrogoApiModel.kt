@@ -15,8 +15,17 @@ import com.google.gson.annotations.SerializedName
  *
  */
 data class FrogoApiModel<T>(
-    @SerializedName("code") val code: Int,
-    @SerializedName("message") val message: String,
-    @SerializedName("status") val status: String,
-    @SerializedName("data") val data: T? = null
+
+    @SerializedName("code")
+    var code: Int = 0,
+
+    @SerializedName("message")
+    var message: String = "",
+
+    @SerializedName("status")
+    var status: String = "",
+
+    @SerializedName("data")
+    var data: T? = null
+
 )

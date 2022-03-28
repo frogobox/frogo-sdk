@@ -55,15 +55,6 @@ object FrogoApiClient {
 
     // ---------------------------------------------------------------------------------------------
 
-    inline fun <reified T> create(url: String): T {
-        return Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(client())
-            .build().create(T::class.java)
-    }
-
     inline fun <reified T> createWithInterceptor(url: String): T {
         return Retrofit.Builder()
             .baseUrl(url)
@@ -80,6 +71,53 @@ object FrogoApiClient {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(clientWithInterceptor(chuckInterceptor))
             .build().create(T::class.java)
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    inline fun <reified T> create(url: String): T {
+        return Retrofit.Builder()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .client(client())
+            .build().create(T::class.java)
+    }
+
+    inline fun <reified T> create(url: String, isDebug: Boolean): T {
+        return if (isDebug) {
+            Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(clientWithInterceptor())
+                .build().create(T::class.java)
+        } else {
+            Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(client())
+                .build().create(T::class.java)
+        }
+    }
+
+    inline fun <reified T> create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor): T {
+        return if (isDebug) {
+            Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(clientWithInterceptor(chuckInterceptor))
+                .build().create(T::class.java)
+        } else {
+            Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(client())
+                .build().create(T::class.java)
+        }
     }
 
 }

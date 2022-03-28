@@ -55,7 +55,7 @@ android {
 
 dependencies {
 
-    implementation(project(":frogocoresdk"))
+    implementation(project(DependencyGradle.FROGO_CORE_SDK_PATH))
 
     implementation(Androidx.appCompat)
     implementation(Androidx.appCompatResources)
@@ -106,10 +106,10 @@ dependencies {
     implementation(Koin.androidxCompose)
     implementation(Koin.ktor)
 
+    implementation(Util.chucker)
     implementation(Util.glide)
 
     implementation("com.github.javiersantos:PiracyChecker:1.2.8")
-    implementation("com.github.chuckerteam.chucker:library:3.5.2")
 
     api(JetBrains.coroutinesCore)
     api(JetBrains.coroutinesAndroid)

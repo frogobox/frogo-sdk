@@ -36,7 +36,7 @@ abstract class FrogoApplication : Application() {
         instance = this
         startKoin {
             androidContext(this@FrogoApplication)
-            androidLogger(Level.NONE)
+            androidLogger(Level.DEBUG)
             setupKoinModule(this)
         }
     }
