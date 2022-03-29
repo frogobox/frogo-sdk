@@ -1,6 +1,6 @@
-![ScreenShoot Apps](docs/image/ss_banner.png?raw=true)
+![ScreenShoot Apps](https://raw.githubusercontent.com/frogobox/frogo-sdk/master/docs/image/ss_banner.png?raw=true)
 
-## About This Project (release-and-work-in-progress 👷🔧️👷‍♀️⛏)
+## About This Project (release 👷🔧️👷‍♀️⛏)
 [![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 [![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
 [![Scan with Detekt](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml)
