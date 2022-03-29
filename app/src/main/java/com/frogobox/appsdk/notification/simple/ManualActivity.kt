@@ -67,5 +67,4 @@ class ManualActivity : BaseActivity<ActivityManualBinding>() {
         notificationManager.notify(FrogoApp.NOTIFICATION_ID, notification)
     }
 
-
 }

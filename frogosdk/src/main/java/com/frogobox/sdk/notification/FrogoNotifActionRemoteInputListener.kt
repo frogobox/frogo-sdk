@@ -29,7 +29,7 @@ interface FrogoNotifActionRemoteInputListener {
     fun setActionTitle(): String
 
     // Initialize for Action Intent
-    fun setActionIntent(): PendingIntent?
+    fun setActionIntent(): PendingIntent
 
     // Initialize for Action Allow Generated Replies
     fun setAllowGeneratedReplies(): Boolean

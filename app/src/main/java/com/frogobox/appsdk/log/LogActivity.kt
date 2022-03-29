@@ -16,6 +16,7 @@ class LogActivity : BaseActivity<ActivityLogBinding>() {
     }
 
     override fun setupOnCreate(savedInstanceState: Bundle?) {
+        setupDetailActivity("Frogo Log")
         binding.apply {
 
             btnFlog.setOnClickListener {

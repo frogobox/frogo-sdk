@@ -61,7 +61,7 @@ class NotificationService : IntentService("NotificationService") {
                     return getString(R.string.notif_action_reply)
                 }
 
-                override fun setActionIntent(): PendingIntent? {
+                override fun setActionIntent(): PendingIntent {
                     return getReplyPendingIntent()
                 }
 

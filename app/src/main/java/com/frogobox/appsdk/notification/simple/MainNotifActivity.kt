@@ -8,9 +8,9 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
-import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.FrogoApp
 import com.frogobox.appsdk.R
+import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityMainNotifBinding
 import com.frogobox.appsdk.notification.custom.CustomNotifActivity
 import com.frogobox.appsdk.notification.stack.StackNotifActivity
@@ -34,6 +34,7 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
     }
 
     override fun setupOnCreate(savedInstanceState: Bundle?) {
+        setupDetailActivity("FrogoNotification")
         binding.apply {
 
             btnSendNotif.setOnClickListener {

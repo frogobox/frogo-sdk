@@ -125,6 +125,4 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
 
     }
 
-
-
 }
