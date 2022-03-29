@@ -14,7 +14,6 @@
 ## Version Release
 This Is Latest Release
 
-    ~ Beta Release
     $version_release = 0.0.2
 
 What's New??
@@ -572,6 +571,5 @@ Waiting for your contribute
 ## Attention !!!
 - Please enjoy and don't forget fork and give a star
 - Don't Forget Follow My Github Account
-
 
 ![ScreenShoot Apps](docs/image/mad_score.png?raw=true)
