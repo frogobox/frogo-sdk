@@ -16,7 +16,9 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
 }
 
 dependencies {
@@ -30,8 +32,8 @@ dependencies {
 
     implementation(Google.gson)
 
-    implementation(Square.okhttp)
-    implementation(Square.okhttpLogging)
+    implementation(Square.OkHttp.okhttp)
+    implementation(Square.OkHttp.loggingInterceptor)
 
     implementation(Square.Retrofit2.retrofit)
     implementation(Square.Retrofit2.converterGson)

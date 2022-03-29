@@ -45,8 +45,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
     }
 
 }
@@ -88,8 +90,8 @@ dependencies {
     implementation(Google.material)
     implementation(Google.gson)
 
-    implementation(Square.okhttp)
-    implementation(Square.okhttpLogging)
+    implementation(Square.OkHttp.okhttp)
+    implementation(Square.OkHttp.loggingInterceptor)
 
     implementation(Square.Retrofit2.retrofit)
     implementation(Square.Retrofit2.converterGson)
@@ -105,8 +107,8 @@ dependencies {
     implementation(Koin.androidxCompose)
     implementation(Koin.ktor)
 
-    implementation(Util.chucker)
-    implementation(Util.glide)
+    implementation(GitHub.chucker)
+    implementation(GitHub.glide)
 
     implementation("com.github.javiersantos:PiracyChecker:1.2.8")
 
@@ -115,7 +117,7 @@ dependencies {
 
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
-    kapt(Util.glideCompiler)
+    kapt(GitHub.glideCompiler)
 
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)
