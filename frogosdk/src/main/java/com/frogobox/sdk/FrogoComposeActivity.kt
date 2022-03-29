@@ -1,5 +1,6 @@
 package com.frogobox.sdk
 
+import android.os.Bundle
 import androidx.activity.ComponentActivity
 
 /*
@@ -18,6 +19,13 @@ abstract class FrogoComposeActivity : ComponentActivity(), IFrogoComposeActivity
 
     companion object {
         val TAG: String = FrogoComposeActivity::class.java.simpleName
+    }
+
+    abstract fun setupViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupViewModel()
     }
 
 }

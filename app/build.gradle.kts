@@ -111,6 +111,12 @@ dependencies {
 
     implementation(Google.material)
 
+    implementation(Koin.core)
+    implementation(Koin.android)
+    implementation(Koin.androidCompat)
+    implementation(Koin.androidxWorkManager)
+    implementation(Koin.androidxCompose)
+
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)
 

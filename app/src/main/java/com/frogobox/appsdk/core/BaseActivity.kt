@@ -1,4 +1,4 @@
-package com.frogobox.appsdk
+package com.frogobox.appsdk.core
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding

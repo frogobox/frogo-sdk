@@ -31,9 +31,12 @@ abstract class FrogoApplication : Application() {
 
     abstract fun setupKoinModule(koinApplication: KoinApplication)
 
+    abstract fun setupOnCreate()
+
     override fun onCreate() {
         super.onCreate()
         instance = this
+        setupOnCreate()
         startKoin {
             androidContext(this@FrogoApplication)
             androidLogger(Level.DEBUG)

@@ -3,6 +3,7 @@
     package="com.frogobox.appsdk">
 
     <application
+        android:name=".FrogoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".log.LogActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".notification.simple.ManualActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.stack.StackNotifActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.custom.ReplyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.custom.CustomNotifActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.simple.MainNotifActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".main.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme.HideStatusBarUI"
             android:windowSoftInputMode="adjustResize">
@@ -20,6 +41,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <receiver
+            android:name=".notification.custom.NotificationBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver android:name=".notification.simple.MainNotifReceiver" />
+
+        <service
+            android:name=".notification.custom.NotificationService"
+            android:exported="false" />
+
     </application>
 
 </manifest>
