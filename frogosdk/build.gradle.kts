@@ -45,17 +45,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
-        }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
 }
 
 dependencies {
 
-    implementation(project(DependencyGradle.FROGO_CORE_SDK_PATH))
+    implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
+    implementation(project(DependencyGradle.FROGO_PATH_LOG))
 
     implementation(Androidx.appCompat)
     implementation(Androidx.appCompatResources)

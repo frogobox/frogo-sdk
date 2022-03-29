@@ -19,11 +19,13 @@ object ProjectSetting {
     const val APP_PLAY_CONSOLE = "frogobox"
     const val APP_NAME = "appsdk"
 
-    const val LIBRARY_NAME_SDK = "sdk"
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
+    const val LIBRARY_NAME_SDK = "sdk"
+    const val LIBRARY_NAME_LOG = "log"
 
-    const val MODULE_NAME_SDK = "frogosdk"
     const val MODULE_NAME_CORE_SDK = "frogocoresdk"
+    const val MODULE_NAME_SDK = "frogosdk"
+    const val MODULE_NAME_LOG = "frogolog"
 
     // ---------------------------------------------------------------------------------------------
 
@@ -34,7 +36,7 @@ object ProjectSetting {
     // ---------------------------------------------------------------------------------------------
 
     const val PROJECT_MIN_SDK = 21
-    const val PROJECT_COMPILE_SDK = 31
+    const val PROJECT_COMPILE_SDK = 32
     const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
 
     // ---------------------------------------------------------------------------------------------
@@ -44,6 +46,7 @@ object ProjectSetting {
     const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.$APP_NAME"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
+    const val PROJECT_LIB_ID_LOG = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_LOG"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

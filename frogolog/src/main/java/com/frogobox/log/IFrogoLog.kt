@@ -1,9 +1,9 @@
-package com.frogobox.sdk
+package com.frogobox.log
 
 import android.content.Context
 
 /*
- * Created by Faisal Amir on 14/02/2021
+ * Created by Faisal Amir on 14/01/2021
  * LogCat Source Code
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
@@ -14,7 +14,7 @@ import android.content.Context
  * All rights reserved
  *
  */
-interface IFLog {
+interface IFrogoLog {
 
     // Function Log Simple Debug without message params
     fun d()

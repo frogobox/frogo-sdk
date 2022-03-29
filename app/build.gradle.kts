@@ -77,18 +77,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
-        }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
 }
 
 dependencies {
 
-    implementation(project(DependencyGradle.FROGO_CORE_SDK_PATH))
-    implementation(project(DependencyGradle.FROGO_SDK_PATH))
+    implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
+    implementation(project(DependencyGradle.FROGO_PATH_SDK))
+    implementation(project(DependencyGradle.FROGO_PATH_LOG))
 
     implementation(compose.ui)
     implementation(compose.runtime)

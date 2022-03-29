@@ -20,6 +20,7 @@ import com.github.javiersantos.piracychecker.enums.Display
 import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.github.javiersantos.piracychecker.utils.apkSignatures
 import com.google.gson.Gson
+import java.util.*
 
 
 /*
@@ -45,6 +46,10 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(), IFrogoActi
     protected val frogoActivity by lazy { this }
 
     protected val binding: VB by lazy { setupViewBinding() }
+
+    protected val textCopyright : String by lazy {
+        "${getString(R.string.about_all_right_reserved)} ${getString(R.string.about_copyright)} ${Calendar.getInstance().get(Calendar.YEAR)}"
+    }
 
     // ---------------------------------------------------------------------------------------------
 
