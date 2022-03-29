@@ -237,17 +237,16 @@ fun diffTime(timeStart: String, timeEnd: String): Long
 
 ### Added Function
 
-#### FrogoLog
 <details>
 <summary>Click for detail !!!</summary>
 
-## About This Project
+## FrogoLog
 - SDK for your Log problem to make easier developing android apps
 - frogo-log is Long Term Service
 - Line number show
 - Toast for easy develop and debug
 
-## Screenshoot Result
+### Screenshoot Result
 <table>
     <tr>
         <th>SS 1</th>
@@ -263,10 +262,10 @@ fun diffTime(timeStart: String, timeEnd: String): Long
     </tr>
 <table>
 
-## Screenshoot Library Sample
+### Screenshoot Library Sample
 ![ScreenShoot Apps](docs/image/log/ss_result_1.png?raw=true)
 
-## FrogoLog (with line code)
+### FrogoLog (with line code)
 ```kotlin
 // Function Log Debug
 FrogoLog.d("Debug")
@@ -287,7 +286,7 @@ FrogoLog.e("Error")
 FrogoLog.d()
 
 ```
-## FrogoLog (with line code and Toast)
+### FrogoLog (with line code and Toast)
 ```kotlin
 // Function Log Debug (adding context params)
 FrogoLog.d("Debug", this@MainActivity)
@@ -308,7 +307,7 @@ FrogoLog.e("Error", this@MainActivity)
 FrogoLog.d(this@MainActivity)
 ```
 
-## FLog (without line code)
+### FLog (without line code)
 
 ```kotlin
 // Function Log Debug
@@ -330,7 +329,7 @@ FLog.e("Error")
 FLog.d()
 ```
 
-#### Flog (without line code with toast)
+### Flog (without line code with toast)
 ```kotlin
 // Function Log Debug (adding context params)
 FLog.d("Debug", this@MainActivity)
@@ -351,19 +350,10 @@ FLog.e("Error", this@MainActivity)
 FLog.d(this@MainActivity)
 ```
 
-## Result
+### Result FrogoLog
 ![ScreenShoot Apps](docs/image/log/ss_result_2.png?raw=true)
 
-</details>
-
-
-
-#### FrogoNotification
-
-<details>
-<summary>Click for detail !!!</summary>
-
-## About This Project
+## FrogoNotification
 - SDK for your notification problem to make easier developing android apps
 - frogo-notification is under huge large development
 - Notification with singleton method
@@ -372,7 +362,7 @@ FLog.d(this@MainActivity)
 - Full documentation
 - Custom Layout Notification
 
-## Screenshoot Sample
+### Screenshoot Sample
 
 <table>
     <tr>
@@ -403,8 +393,6 @@ FrogoNotification.Inject(this) // Intialize for Context
     .build() // Build the Frogo Notification
     .launch(NOTIFICATION_ID) // Notify the Frogo Notification
 ```
-
-## Feature frogo-notification
 
 ### Simple Notification
 ```kotlin
