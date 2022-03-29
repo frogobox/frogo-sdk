@@ -26,7 +26,12 @@ class LogActivity : BaseActivity<ActivityLogBinding>() {
                 FLog.v("Verbose")
                 FLog.w("Warn")
                 FLog.e("Error")
+
                 FLog.d()
+                FLog.i()
+                FLog.v()
+                FLog.w()
+                FLog.e()
             }
 
             btnFlogToast.setOnClickListener {
@@ -36,7 +41,12 @@ class LogActivity : BaseActivity<ActivityLogBinding>() {
                 FLog.v("Verbose", this@LogActivity)
                 FLog.w("Warn", this@LogActivity)
                 FLog.e("Error", this@LogActivity)
-                FLog.d()
+
+                FLog.d(this@LogActivity)
+                FLog.i(this@LogActivity)
+                FLog.v(this@LogActivity)
+                FLog.w(this@LogActivity)
+                FLog.e(this@LogActivity)
             }
 
             btnFrogolog.setOnClickListener {
@@ -46,7 +56,12 @@ class LogActivity : BaseActivity<ActivityLogBinding>() {
                 FrogoLog.v("Verbose")
                 FrogoLog.w("Warn")
                 FrogoLog.e("Error")
+
                 FrogoLog.d()
+                FrogoLog.i()
+                FrogoLog.v()
+                FrogoLog.w()
+                FrogoLog.e()
             }
 
             btnFrogologToast.setOnClickListener {
@@ -56,7 +71,12 @@ class LogActivity : BaseActivity<ActivityLogBinding>() {
                 FrogoLog.v("Verbose", this@LogActivity)
                 FrogoLog.w("Warn", this@LogActivity)
                 FrogoLog.e("Error", this@LogActivity)
+
                 FrogoLog.d(this@LogActivity)
+                FrogoLog.i(this@LogActivity)
+                FrogoLog.v(this@LogActivity)
+                FrogoLog.w(this@LogActivity)
+                FrogoLog.e(this@LogActivity)
             }
 
         }

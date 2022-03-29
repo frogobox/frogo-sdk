@@ -28,17 +28,35 @@ interface IFrogoLog {
     // Function Log Debug with Toast
     fun d(msg: String?, context: Context)
 
+    // Function Log Simple Verbose without message params
+    fun v()
+
+    // Function Log Simple Verbose without message params with Toast
+    fun v(context: Context)
+
     // Function Log Verbose
     fun v(msg: String?)
 
     // Function Log Verbose with Toast
     fun v(msg: String?, context: Context)
 
+    // Function Log Simple Info without message params
+    fun i()
+
+    // Function Log Simple Info without message params with Toast
+    fun i(context: Context)
+
     // Function Log Info
     fun i(msg: String?)
 
     // Function Log Info with Toast
     fun i(msg: String?, context: Context)
+
+    // Function Log Simple Warn without message params
+    fun w()
+
+    // Function Log Simple Warn without message params with Toast
+    fun w(context: Context)
 
     // Function Log Warn
     fun w(msg: String?)
@@ -57,6 +75,12 @@ interface IFrogoLog {
 
     // Function Log Warn with Toast
     fun w(e: Exception?, context: Context)
+
+    // Function Log Simple Error without message params
+    fun e()
+
+    // Function Log Simple Error without message params with Toast
+    fun e(context: Context)
 
     // Function Log Error
     fun e(msg: String?)

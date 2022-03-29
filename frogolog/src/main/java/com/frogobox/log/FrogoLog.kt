@@ -3,6 +3,7 @@ package com.frogobox.log
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.frogobox.log.LogConstant.SIMPLE_MESSSAGE
 
 /*
  * Created by Faisal Amir on 14/01/2021
@@ -17,9 +18,6 @@ import android.widget.Toast
  *
  */
 object FrogoLog : IFrogoLog {
-
-    // Constant Variable Simple Message
-    const val SIMPLE_MESSSAGE = "SIMPLE DEBUG FOR MARK LINE OF CODE"
 
     // Tag for get class name this function
     private fun tag() : String {
@@ -43,14 +41,29 @@ object FrogoLog : IFrogoLog {
         Log.d(tag(), "${lineNumber()}: $msg")
     }
 
+    // Function Log Simple Verbose without message params
+    override fun v(){
+        Log.v(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
+    }
+
     // Function Log Verbose
     override fun v(msg: String?) {
         Log.v(tag(), "${lineNumber()}: $msg")
     }
 
+    // Function Log Simple Info without message params
+    override fun i(){
+        Log.i(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
+    }
+
     // Function Log Info
     override fun i(msg: String?) {
         Log.i(tag(), "${lineNumber()}: $msg")
+    }
+
+    // Function Log Simple Warn without message params
+    override fun w(){
+        Log.w(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
     // Function Log Warn
@@ -66,6 +79,11 @@ object FrogoLog : IFrogoLog {
     // Function Log Warn
     override fun w(e: Exception?) {
         Log.w(tag(), "${lineNumber()}: ${e?.localizedMessage}")
+    }
+
+    // Function Log Simple Error without message params
+    override fun e(){
+        Log.e(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
     // Function Log Error
@@ -87,16 +105,34 @@ object FrogoLog : IFrogoLog {
         Toast.makeText(context, "${lineNumber()}: $msg", Toast.LENGTH_LONG).show()
     }
 
+    // Function Log Simple Verbose without message params
+    override fun v(context: Context) {
+        Log.v(tag(), SIMPLE_MESSSAGE)
+        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+    }
+
     // Function Log Verbose
     override fun v(msg: String?, context: Context) {
         Log.v(tag(), "${lineNumber()}: $msg")
         Toast.makeText(context, "${lineNumber()}: $msg", Toast.LENGTH_LONG).show()
     }
 
+    // Function Log Simple Info without message params
+    override fun i(context: Context) {
+        Log.i(tag(), SIMPLE_MESSSAGE)
+        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+    }
+
     // Function Log Info
     override fun i(msg: String?, context: Context) {
         Log.i(tag(), "${lineNumber()}: $msg")
         Toast.makeText(context, "${lineNumber()}: $msg", Toast.LENGTH_LONG).show()
+    }
+
+    // Function Log Simple Warn without message params
+    override fun w(context: Context) {
+        Log.w(tag(), SIMPLE_MESSSAGE)
+        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
     }
 
     // Function Log Warn
@@ -115,6 +151,12 @@ object FrogoLog : IFrogoLog {
     override fun w(e: Throwable?, context: Context) {
         Log.w(tag(), "${lineNumber()}: ${e?.localizedMessage}")
         Toast.makeText(context, "${lineNumber()}: ${e?.localizedMessage}", Toast.LENGTH_LONG).show()
+    }
+
+    // Function Log Simple Error without message params
+    override fun e(context: Context) {
+        Log.e(tag(), SIMPLE_MESSSAGE)
+        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
     }
 
     // Function Log Error
