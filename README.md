@@ -264,7 +264,7 @@ fun diffTime(timeStart: String, timeEnd: String): Long
 <table>
 
 ## Screenshoot Library Sample
-![ScreenShoot Apps](docs/image/ss_result_1.png?raw=true)
+![ScreenShoot Apps](docs/image/log/ss_result_1.png?raw=true)
 
 ## FrogoLog (with line code)
 ```kotlin
@@ -355,6 +355,7 @@ FLog.d(this@MainActivity)
 ![ScreenShoot Apps](docs/image/log/ss_result_2.png?raw=true)
 
 </details>
+
 
 #### FrogoNotification
 
