@@ -15,7 +15,7 @@
 This Is Latest Release
 
     ~ Beta Release
-    $version_release = 0.0.2-beta01
+    $version_release = 0.0.2-beta02
 
 What's New??
 
@@ -45,7 +45,7 @@ What's New??
 allprojects {
     repositories {
         ...
-        maven { url = uri("https://jitpack.io") }
+        maven("https://jitpack.io")
     }
 }
 ```
@@ -56,14 +56,14 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:0.0.2-beta01'
+            implementation 'com.github.frogobox:frogo-sdk:0.0.2-beta02'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:0.0.2-beta01")
+            implementation("com.github.frogobox:frogo-sdk:0.0.2-beta02")
         }
 
 ### Step 3. Function from this SDK
