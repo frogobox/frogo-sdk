@@ -241,120 +241,121 @@ fun diffTime(timeStart: String, timeEnd: String): Long
 <details>
 <summary>Click for detail !!!</summary>
 
-    ## About This Project
-    - SDK for your Log problem to make easier developing android apps
-    - frogo-log is Long Term Service
-    - Line number show
-    - Toast for easy develop and debug
+## About This Project
+- SDK for your Log problem to make easier developing android apps
+- frogo-log is Long Term Service
+- Line number show
+- Toast for easy develop and debug
 
-    ## Screenshoot Result
-    <table>
-        <tr>
-            <th>SS 1</th>
-            <th>SS 2</th>
-            <th>SS 3</th>
-            <th>SS 4</th>
-        </tr>
-        <tr>
-            <td><img width="200px" height="360px" src="docs/image/log/ss-1.png"></td>
-            <td><img width="200px" height="360px" src="docs/image/log/ss-2.png"></td>
-            <td><img width="200px" height="360px" src="docs/image/log/ss-3.png"></td>
-            <td><img width="200px" height="360px" src="docs/image/log/ss-4.png"></td>
-        </tr>
-    <table>
+## Screenshoot Result
+<table>
+    <tr>
+        <th>SS 1</th>
+        <th>SS 2</th>
+        <th>SS 3</th>
+        <th>SS 4</th>
+    </tr>
+    <tr>
+        <td><img width="200px" height="360px" src="docs/image/log/ss-1.png"></td>
+        <td><img width="200px" height="360px" src="docs/image/log/ss-2.png"></td>
+        <td><img width="200px" height="360px" src="docs/image/log/ss-3.png"></td>
+        <td><img width="200px" height="360px" src="docs/image/log/ss-4.png"></td>
+    </tr>
+<table>
 
-    ## Screenshoot Library Sample
-    ![ScreenShoot Apps](docs/image/log/ss_result_1.png?raw=true)
+## Screenshoot Library Sample
+![ScreenShoot Apps](docs/image/log/ss_result_1.png?raw=true)
 
-    ## FrogoLog (with line code)
-    ```kotlin
-    // Function Log Debug
-    FrogoLog.d("Debug")
+## FrogoLog (with line code)
+```kotlin
+// Function Log Debug
+FrogoLog.d("Debug")
 
-    // Function Log Info
-    FrogoLog.i("Info")
+// Function Log Info
+FrogoLog.i("Info")
 
-    // Function Log Verbose
-    FrogoLog.v("Verbose")
+// Function Log Verbose
+FrogoLog.v("Verbose")
 
-    // Function Log Warn
-    FrogoLog.w("Warn")
+// Function Log Warn
+FrogoLog.w("Warn")
 
-    // Function Log Error
-    FrogoLog.e("Error")
+// Function Log Error
+FrogoLog.e("Error")
 
-    // Function Log Simple Debug without message params
-    FrogoLog.d()
+// Function Log Simple Debug without message params
+FrogoLog.d()
 
-    ```
-    ## FrogoLog (with line code and Toast)
-    ```kotlin
-    // Function Log Debug (adding context params)
-    FrogoLog.d("Debug", this@MainActivity)
+```
+## FrogoLog (with line code and Toast)
+```kotlin
+// Function Log Debug (adding context params)
+FrogoLog.d("Debug", this@MainActivity)
 
-    // Function Log Info (adding context params)
-    FrogoLog.i("Info", this@MainActivity)
+// Function Log Info (adding context params)
+FrogoLog.i("Info", this@MainActivity)
 
-    // Function Log Verbose
-    FrogoLog.v("Verbose", this@MainActivity)
+// Function Log Verbose
+FrogoLog.v("Verbose", this@MainActivity)
 
-    // Function Log Warn (adding context params)
-    FrogoLog.w("Warn", this@MainActivity)
+// Function Log Warn (adding context params)
+FrogoLog.w("Warn", this@MainActivity)
 
-    // Function Log Error (adding context params)
-    FrogoLog.e("Error", this@MainActivity)
+// Function Log Error (adding context params)
+FrogoLog.e("Error", this@MainActivity)
 
-    // Function Log Simple Debug without message params
-    FrogoLog.d(this@MainActivity)
-    ```
+// Function Log Simple Debug without message params
+FrogoLog.d(this@MainActivity)
+```
 
-    ## FLog (without line code)
+## FLog (without line code)
 
-    ```kotlin
-    // Function Log Debug
-    FLog.d("Debug")
+```kotlin
+// Function Log Debug
+FLog.d("Debug")
 
-    // Function Log Info
-    FLog.i("Info")
+// Function Log Info
+FLog.i("Info")
 
-    // Function Log Verbose
-    FLog.v("Verbose")
+// Function Log Verbose
+FLog.v("Verbose")
 
-    // Function Log Warn
-    FLog.w("Warn")
+// Function Log Warn
+FLog.w("Warn")
 
-    // Function Log Error
-    FLog.e("Error")
+// Function Log Error
+FLog.e("Error")
 
-    // Function Log Simple Debug without message params
-    FLog.d()
-    ```
+// Function Log Simple Debug without message params
+FLog.d()
+```
 
-    #### Flog (without line code with toast)
-    ```kotlin
-    // Function Log Debug (adding context params)
-    FLog.d("Debug", this@MainActivity)
+#### Flog (without line code with toast)
+```kotlin
+// Function Log Debug (adding context params)
+FLog.d("Debug", this@MainActivity)
 
-    // Function Log Info (adding context params)
-    FLog.i("Info", this@MainActivity)
+// Function Log Info (adding context params)
+FLog.i("Info", this@MainActivity)
 
-    // Function Log Verbose
-    FLog.v("Verbose", this@MainActivity)
+// Function Log Verbose
+FLog.v("Verbose", this@MainActivity)
 
-    // Function Log Warn (adding context params)
-    FLog.w("Warn", this@MainActivity)
+// Function Log Warn (adding context params)
+FLog.w("Warn", this@MainActivity)
 
-    // Function Log Error (adding context params)
-    FLog.e("Error", this@MainActivity)
+// Function Log Error (adding context params)
+FLog.e("Error", this@MainActivity)
 
-    // Function Log Simple Debug without message params
-    FLog.d(this@MainActivity)
-    ```
+// Function Log Simple Debug without message params
+FLog.d(this@MainActivity)
+```
 
-    ## Result
-    ![ScreenShoot Apps](docs/image/log/ss_result_2.png?raw=true)
+## Result
+![ScreenShoot Apps](docs/image/log/ss_result_2.png?raw=true)
 
 </details>
+
 
 
 #### FrogoNotification
