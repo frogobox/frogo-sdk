@@ -14,12 +14,12 @@
 ## Version Release
 This Is Latest Release
 
-    $version_release = 0.0.2
+    $version_release = 0.0.3
 
 What's New??
 
     * SDK Android and Desktop *
-    * Beta Release *
+    * Adding Ext Function *
 
 ## Download this project
 
@@ -55,14 +55,14 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:0.0.2'
+            implementation 'com.github.frogobox:frogo-sdk:0.0.3'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:0.0.2")
+            implementation("com.github.frogobox:frogo-sdk:0.0.3")
         }
 
 ### Step 3. Function from this SDK
@@ -70,29 +70,31 @@ allprojects {
 #### All Class SDK (android)
 ```kotlin
 FrogoActivity
-FrogoApiClient
 FrogoApplication
 FrogoComposeActivity
-FrogoDate
 FrogoFragment
 FrogoFunc
 FrogoMusic
 FrogoMutableLiveData
 FrogoNavigation
 FrogoPagerHelper
+FrogoPiracyActivity
 FrogoPreference
+FrogoSinglePreference
 FrogoViewModel
 ```
 
 ### All Class SDK (desktop & android)
 ```kotlin
+FrogoApiClient
 FrogoApiModel
 FrogoApiObserver
 FrogoConstant
-FrogoCoreApiClient
 FrogoDataResponse
+FrogoDate
 FrogoLocalObserver
 FrogoStateResponse
+IFrogoDate
 ```
 
 #### FrogoActivity
@@ -103,33 +105,27 @@ fun setupChildFragment(frameId: Int, fragment: Fragment)
 
 fun showToast(message: String)
 
-fun setupEventEmptyView(view: View, isEmpty: Boolean)
+fun setupEmptyView(view: View, isEmpty: Boolean)
 
-fun setupEventProgressView(view: View, progress: Boolean)
+fun setupProgressView(view: View, isProgress: Boolean)
 
 fun checkExtra(extraKey: String): Boolean
 
-fun <Model> baseFragmentNewInstance(
+fun <Model> FrogoFragmentNewInstance(
     fragment: FrogoFragment<*>,
     argumentKey: String,
     extraDataResult: Model
 )
 
-fun verifySignature()
+fun isNetworkConnected(): Boolean
 
-fun readSignature()
+fun setupFullScreen()
 
-fun verifyInstallerId()
+fun setupHideSystemUI()
 
-fun verifyUnauthorizedApps()
+fun shareApp(packageName: String, appName: String)
 
-fun verifyStores()
-
-fun verifyDebug()
-
-fun verifyEmulator()
-
-fun showApkSignatures()
+fun rateApp(packageName: String)
 ```
 
 #### FrogoFragment
@@ -138,100 +134,253 @@ fun setupChildFragment(frameId: Int, fragment: Fragment)
 
 fun checkArgument(argsKey: String): Boolean
 
-fun setupEventEmptyView(view: View, isEmpty: Boolean)
+fun setupEmptyView(view: View, isEmpty: Boolean)
 
-fun setupEventProgressView(view: View, progress: Boolean)
+fun setupProgressView(view: View, isProgress: Boolean)
 
 fun showToast(message: String)
 
-fun <Model> baseNewInstance(argsKey: String, data: Model)
+fun <Model> frogoNewInstance(argsKey: String, data: Model)
 ```
-#### FrogoFunc
 
+### Ext Function
+
+#### FrogoRetrofitExt.kt
 ```kotlin
-fun createFolderPictureVideo()
 
-fun getVideoFilePath(): String
+// Single Api Request
+fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
 
-fun createDialogDefault(
-    context: Context,
-    title: String,
+    callback.onShowProgress()
+    enqueue(object : Callback<T> {
+        override fun onResponse(call: Call<T>, response: Response<T>) {
+            response.body()?.let { callback.onSuccess(it) }
+            callback.onHideProgress()
+        }
+
+        override fun onFailure(call: Call<T>, t: Throwable) {
+            callback.onFailed(500, t.localizedMessage)
+            callback.onHideProgress()
+        }
+    })
+
+}
+
+```
+
+#### FrogoRxJavaObservableExt.kt
+```kotlin
+
+// Single Api Request with scheduler
+fun <T : Any> Observable<T>.doApiRequest(scheduler: Scheduler, callback: FrogoDataResponse<T>) {
+    subscribeOn(Schedulers.io())
+        .doOnSubscribe { callback.onShowProgress() }
+        .doOnTerminate { callback.onHideProgress() }
+        .observeOn(scheduler)
+        .subscribe(object : FrogoApiObserver<T>() {
+            override fun onSuccess(data: T) {
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(code: Int, errorMessage: String) {
+                callback.onFailed(code, errorMessage)
+            }
+        })
+}
+
+// -------------------------------------------------------------------------------------------------
+
+// Single Api Request
+fun <T : Any> Observable<T>.doApiRequest(callback: FrogoDataResponse<T>) {
+    doOnSubscribe { callback.onShowProgress() }
+        .doOnTerminate { callback.onHideProgress() }
+        .subscribe(object : FrogoApiObserver<T>() {
+            override fun onSuccess(data: T) {
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(code: Int, errorMessage: String) {
+                callback.onFailed(code, errorMessage)
+            }
+        })
+}
+
+```
+
+#### FrogoContextActivityExt.kt
+```kotlin
+
+inline fun <reified ClassActivity> Context.singleStartActivity() {
+    FLog.d("Activity : ${ClassActivity::class.java.simpleName}")
+    startActivity(Intent(this, ClassActivity::class.java))
+}
+
+// -------------------------------------------------------------------------------------------------
+
+inline fun <reified ClassActivity, reified Model> Context.singleStartActivity(
+    extraKey: String,
+    data: Model
+) {
+    val intent = Intent(this, ClassActivity::class.java)
+    val extraData = Gson().toJson(data)
+    intent.putExtra(extraKey, extraData)
+    FLog.d("Activity : ${ClassActivity::class.java.simpleName}")
+    FLog.d("Data     : Extra Data (${Model::class.java.simpleName}) : $extraData")
+    startActivity(intent)
+}
+
+// -------------------------------------------------------------------------------------------------
+
+inline fun <reified Model> Activity.singleGetExtraData(extraKey: String): Model {
+    val extraIntent = intent.getStringExtra(extraKey)
+    return Gson().fromJson(extraIntent, Model::class.java)
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun Context.singleStartActivityShareApp(subject: String, text: String) {
+    val intent = Intent(Intent.ACTION_SEND)
+    intent.type = "text/plain"
+    intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+    intent.putExtra(Intent.EXTRA_TEXT, text)
+    FLog.d("$TAG : Subject Share App : $subject")
+    FLog.d("$TAG : Message Share App : $text")
+    startActivity(Intent.createChooser(intent, subject))
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun Context.singleStartActivityOpenApp(url: String) {
+    FLog.d("$TAG : Url : $url")
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+}
+
+```
+
+#### FrogoContextFragmentExt.kt
+```kotlin
+
+fun <Model> Fragment.singleNewInstance(argsKey: String, data: Model) {
+    val argsData = Gson().toJson(data)
+    val bundleArgs = Bundle().apply {
+        putString(argsKey, argsData)
+    }
+    this.arguments = bundleArgs
+}
+
+// -------------------------------------------------------------------------------------------------
+
+inline fun <reified Model> Fragment.singleGetInstance(argsKey: String): Model {
+    val argsData = this.arguments?.getString(argsKey)
+    return Gson().fromJson(argsData, Model::class.java)
+}
+
+```
+
+#### FrogoImageViewExt.kt
+```kotlin
+
+fun ImageView.glideLoad(data: Any?) {
+    FLog.d("$TAG : Params : $data")
+    FLog.d("$TAG : Glide Load Ext")
+    Glide.with(context).load(data).into(this)
+}
+
+```
+
+#### FrogoViewExt.kt
+```kotlin
+
+fun View.visible() {
+    FLog.d("$TAG : View Visible")
+    visibility = View.VISIBLE
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.gone() {
+    FLog.d("$TAG : View Gone")
+    visibility = View.GONE
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.invisible() {
+    FLog.d("$TAG : View Invisible")
+    visibility = View.INVISIBLE
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.progressViewHandle(isProgressState: Boolean) {
+    FLog.d("$TAG : isProgressState >> $isProgressState")
+    if (isProgressState) {
+        visible()
+    } else {
+        gone()
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.emptyViewHandle(isEmptyState: Boolean) {
+    FLog.d("$TAG : isEmptyState >> $isEmptyState")
+    if (isEmptyState) {
+        visible()
+    } else {
+        gone()
+    }
+}
+
+```
+
+#### FrogoContextExt.kt
+```kotlin
+
+fun Context.getAppVersionCode(): Int? {
+    try {
+        return packageManager?.getPackageInfo(packageName, 0)
+            ?.let { PackageInfoCompat.getLongVersionCode(it).toInt() }
+    } catch (ex: Exception) {
+        FLog.e("$TAG : ${ex.message.orEmpty()}")
+    }
+
+    return null
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun Context.showToast(
     message: String,
-    listenerYes: () -> Unit,
-    listenerNo: () -> Unit
-)
+    duration: Int = Toast.LENGTH_SHORT
+) {
+    Toast.makeText(this, message, duration).show()
+}
 
-fun noAction(): Boolean
+// -------------------------------------------------------------------------------------------------
 
-fun randomNumber(start: Int, end: Int): Int
+fun Context.hasCameraPermission(): Boolean =
+    ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.CAMERA
+    ) == PackageManager.PERMISSION_GRANTED
 
-fun isNetworkAvailable(context: Context): Boolean?
+// -------------------------------------------------------------------------------------------------
 
-fun <T> fetchRawData(mContext: Context, sourceRaw: Int): ArrayList<T>
+fun Context.hasReadExtStoragePermission(): Boolean {
+    return ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED
+}
 
-fun <T> fetchRawData(mContext: Context, sourceRaw: Int, shuffle: Boolean): ArrayList<T>
+fun Context.hasWriteExtStoragePermission(): Boolean {
+    return ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED
+}
 
-fun getJsonFromAsset(context: Context, filename: String): String?
-
-fun <T> getArrayFromJsonAsset(context: Context, filename: String): MutableList<T>
-
-fun getDrawableString(context: Context, nameResource: String): Int
-
-fun getRawString(context: Context, nameResource: String): Int
-```
-
-#### FrogoMusic
-
-```kotlin
-fun playMusic(context: Context, musicFile: Int)
-
-fun stopMusic()
-
-fun pauseMusic()
-```
-
-#### FrogoDate
-
-```kotlin
-fun getTimeStamp(): String
-
-fun getTimeNow(): String
-
-fun getCurrentDate(format: String): String
-
-fun dateTimeToTimeStamp(date: String?): Long
-
-fun getCurrentUTC(): String
-
-fun timetoHour(date: String?): String
-
-fun dateTimeTZtoHour(date: String?): String
-
-fun DateTimeMonth(date: String?): String
-
-fun dateTimeSet(date: String?): String
-
-fun dateTimeProblem(date: String?): String
-
-fun getTimeAgo(time: Long): String?
-
-fun compareDate(newDate: String): String?
-
-fun messageDate(newDate: String): String?
-
-fun getDataChat(time: Long): String?
-
-fun convertClassificationDate(string: String?): String
-
-fun convertDateNewFormat(string: String?): String
-
-fun convertLongDateNewFormat(string: String?): String
-
-fun revertFromLongDateNewFormat(string: String?): String
-
-fun convertTargetDate(string: String?): String
-
-fun diffTime(timeStart: String, timeEnd: String): Long
 ```
 
 ### Added Function
