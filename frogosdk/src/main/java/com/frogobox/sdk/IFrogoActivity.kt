@@ -45,20 +45,4 @@ interface IFrogoActivity {
 
     fun rateApp(packageName: String)
 
-    fun verifySignature()
-
-    fun readSignature()
-
-    fun verifyInstallerId()
-
-    fun verifyUnauthorizedApps()
-
-    fun verifyStores()
-
-    fun verifyDebug()
-
-    fun verifyEmulator()
-
-    fun showApkSignatures()
-
 }

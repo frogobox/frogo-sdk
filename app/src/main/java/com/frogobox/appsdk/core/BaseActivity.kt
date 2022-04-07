@@ -1,6 +1,5 @@
 package com.frogobox.appsdk.core
 
-import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.frogobox.sdk.FrogoActivity
 
@@ -16,11 +15,4 @@ import com.frogobox.sdk.FrogoActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoActivity<VB>() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-}
+abstract class BaseActivity<VB : ViewBinding> : FrogoActivity<VB>()

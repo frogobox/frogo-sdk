@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeSdk">
         <activity
+            android:name=".main.MainJavaActivity"
+            android:exported="false" />
+        <activity
             android:name=".log.LogActivity"
             android:exported="false" />
-
         <activity
             android:name=".notification.simple.ManualActivity"
             android:exported="false" />
@@ -29,7 +31,6 @@
         <activity
             android:name=".notification.simple.MainNotifActivity"
             android:exported="false" />
-
         <activity
             android:name=".main.MainActivity"
             android:exported="true"
@@ -42,18 +43,15 @@
             </intent-filter>
         </activity>
 
-
         <receiver
             android:name=".notification.custom.NotificationBroadcastReceiver"
             android:enabled="true"
             android:exported="false" />
-
         <receiver android:name=".notification.simple.MainNotifReceiver" />
 
         <service
             android:name=".notification.custom.NotificationService"
             android:exported="false" />
-
     </application>
 
 </manifest>

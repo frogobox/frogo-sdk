@@ -27,6 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 frogoStartActivity<MainNotifActivity>()
             }
 
+            btnMenuJavaActivity.setOnClickListener {
+                frogoStartActivity<MainJavaActivity>()
+            }
+
         }
     }
 

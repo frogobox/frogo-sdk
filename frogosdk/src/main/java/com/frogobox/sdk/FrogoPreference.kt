@@ -15,7 +15,10 @@ import android.content.Context
  *
  */
 
-class FrogoPreference(private val context: Context, private val prefName: String) {
+class FrogoPreference(
+    private val context: Context,
+    private val prefName: String
+) : IFrogoPreference {
 
     companion object {
         val TAG: String = FrogoPreference::class.java.simpleName
@@ -29,60 +32,60 @@ class FrogoPreference(private val context: Context, private val prefName: String
         sharedPreferences.edit()
     }
 
-    fun savePrefFloat(
+    override fun savePrefFloat(
         key: String,
         value: Float
     ) {
         prefEditor.putFloat(key, value).apply()
     }
 
-    fun savePrefInt(key: String, value: Int) {
+    override fun savePrefInt(key: String, value: Int) {
         prefEditor.putInt(key, value).apply()
     }
 
-    fun savePrefString(
+    override fun savePrefString(
         key: String,
         value: String
     ) {
         prefEditor.putString(key, value).apply()
     }
 
-    fun savePrefBoolean(
+    override fun savePrefBoolean(
         key: String,
         value: Boolean
     ) {
         prefEditor.putBoolean(key, value).apply()
     }
 
-    fun savePrefLong(key: String, value: Long) {
+    override fun savePrefLong(key: String, value: Long) {
         prefEditor.putLong(key, value).apply()
     }
 
-    fun deletePref(key: String) {
+    override fun deletePref(key: String) {
         prefEditor.remove(key).apply()
     }
 
-    fun nukePref() {
+    override fun nukePref() {
         prefEditor.clear().apply()
     }
 
-    fun loadPrefFloat(key: String): Float {
+    override fun loadPrefFloat(key: String): Float {
         return sharedPreferences.getFloat(key, 0f)
     }
 
-    fun loadPrefString(key: String): String {
+    override fun loadPrefString(key: String): String {
         return sharedPreferences.getString(key, "")!!
     }
 
-    fun loadPrefInt(key: String): Int {
+    override fun loadPrefInt(key: String): Int {
         return sharedPreferences.getInt(key, 0)
     }
 
-    fun loadPrefLong(key: String): Long {
+    override fun loadPrefLong(key: String): Long {
         return sharedPreferences.getLong(key, 0)
     }
 
-    fun loadPrefBoolean(key: String): Boolean {
+    override fun loadPrefBoolean(key: String): Boolean {
         return sharedPreferences.getBoolean(key, false)
     }
 

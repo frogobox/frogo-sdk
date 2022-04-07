@@ -1,6 +1,5 @@
 package com.frogobox.sdk
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.google.gson.Gson
+import com.frogobox.sdk.ext.*
 
 /*
  * Created by faisalamir on 28/07/21
@@ -82,53 +81,34 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
     }
 
     override fun setupEmptyView(view: View, isEmpty: Boolean) {
-        if (isEmpty) {
-            view.visibility = View.VISIBLE
-        } else {
-            view.visibility = View.GONE
-        }
-        Log.d(TAG, "Setup Empty View : $isEmpty")
+        view.emptyViewHandle(isEmpty)
     }
 
     override fun setupProgressView(view: View, isProgress: Boolean) {
-        if (isProgress) {
-            view.visibility = View.VISIBLE
-        } else {
-            view.visibility = View.GONE
-        }
-        Log.d(TAG, "Setup Progress View : $isProgress")
+        view.progressViewHandle(isProgress)
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        Log.d(TAG, "Toast message : $message")
+        context?.showToast(message, Toast.LENGTH_SHORT)
     }
 
     override fun <Model> frogoNewInstance(argsKey: String, data: Model) {
-        val argsData = Gson().toJson(data)
-        val bundleArgs = Bundle().apply {
-            putString(argsKey, argsData)
-        }
-        this.arguments = bundleArgs
+        singleNewInstance(argsKey, data)
     }
 
     protected inline fun <reified Model> frogoGetInstance(argsKey: String): Model {
-        val argsData = this.arguments?.getString(argsKey)
-        return Gson().fromJson(argsData, Model::class.java)
+        return singleGetInstance(argsKey)
     }
 
     protected inline fun <reified ClassActivity> frogoStartActivity() {
-        context?.startActivity(Intent(context, ClassActivity::class.java))
+        context?.singleStartActivity<ClassActivity>()
     }
 
-    protected inline fun <reified ClassActivity, Model> frogoStartActivity(
+    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
         extraKey: String,
         data: Model
     ) {
-        val intent = Intent(context, ClassActivity::class.java)
-        val extraData = Gson().toJson(data)
-        intent.putExtra(extraKey, extraData)
-        context?.startActivity(intent)
+        context?.singleStartActivity<ClassActivity, Model>(extraKey, data)
     }
 
 }
