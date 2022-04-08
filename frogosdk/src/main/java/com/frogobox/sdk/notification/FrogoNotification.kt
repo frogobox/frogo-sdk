@@ -11,9 +11,9 @@ import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
-import com.frogobox.coresdk.FrogoConstant.Notification.FROGO_CHANNEL_ID
-import com.frogobox.coresdk.FrogoConstant.Notification.FROGO_CHANNEL_NAME
-import com.frogobox.coresdk.FrogoConstant.Notification.FROGO_NOTIFICATION_ID
+import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_CHANNEL_ID
+import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_CHANNEL_NAME
+import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_NOTIFICATION_ID
 import com.frogobox.sdk.R
 
 /*

@@ -1,10 +1,7 @@
-package com.frogobox.appsdk.core
-
-import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.view.FrogoActivity
+package com.frogobox.coresdk.response
 
 /*
- * Created by faisalamir on 02/08/21
+ * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
@@ -15,4 +12,7 @@ import com.frogobox.sdk.view.FrogoActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoActivity<VB>()
+
+interface FrogoDataResponse<T> : BaseResponseCallback {
+    fun onSuccess(data: T)
+}

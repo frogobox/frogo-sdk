@@ -1,9 +1,10 @@
 package com.frogobox.coresdk.ext
 
-import com.frogobox.coresdk.FrogoApiObserver
-import com.frogobox.coresdk.FrogoDataResponse
+import com.frogobox.coresdk.observer.FrogoApiObserver
+import com.frogobox.coresdk.response.FrogoDataResponse
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 
@@ -23,18 +24,26 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 // Single Api Request with scheduler
 fun <T : Any> Observable<T>.doApiRequest(scheduler: Scheduler, callback: FrogoDataResponse<T>) {
     subscribeOn(Schedulers.io())
-        .doOnSubscribe { callback.onShowProgress() }
-        .doOnTerminate { callback.onHideProgress() }
-        .observeOn(scheduler)
-        .subscribe(object : FrogoApiObserver<T>() {
-            override fun onSuccess(data: T) {
-                callback.onSuccess(data)
-            }
+    doOnSubscribe { callback.onShowProgress() }
+    doOnTerminate { callback.onHideProgress() }
+    observeOn(scheduler)
+    subscribe(object : FrogoApiObserver<T>() {
+        override fun onSuccess(data: T) {
+            callback.onSuccess(data)
+        }
 
-            override fun onFailure(code: Int, errorMessage: String) {
-                callback.onFailed(code, errorMessage)
-            }
-        })
+        override fun onFailure(code: Int, errorMessage: String) {
+            callback.onFailed(code, errorMessage)
+        }
+
+        override fun onFinish() {
+            callback.onFinish()
+        }
+
+        override fun onStartObserver(disposable: Disposable) {
+
+        }
+    })
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -42,14 +51,22 @@ fun <T : Any> Observable<T>.doApiRequest(scheduler: Scheduler, callback: FrogoDa
 // Single Api Request
 fun <T : Any> Observable<T>.doApiRequest(callback: FrogoDataResponse<T>) {
     doOnSubscribe { callback.onShowProgress() }
-        .doOnTerminate { callback.onHideProgress() }
-        .subscribe(object : FrogoApiObserver<T>() {
-            override fun onSuccess(data: T) {
-                callback.onSuccess(data)
-            }
+    doOnTerminate { callback.onHideProgress() }
+    subscribe(object : FrogoApiObserver<T>() {
+        override fun onSuccess(data: T) {
+            callback.onSuccess(data)
+        }
 
-            override fun onFailure(code: Int, errorMessage: String) {
-                callback.onFailed(code, errorMessage)
-            }
-        })
+        override fun onFailure(code: Int, errorMessage: String) {
+            callback.onFailed(code, errorMessage)
+        }
+
+        override fun onFinish() {
+            callback.onFinish()
+        }
+
+        override fun onStartObserver(disposable: Disposable) {
+
+        }
+    })
 }

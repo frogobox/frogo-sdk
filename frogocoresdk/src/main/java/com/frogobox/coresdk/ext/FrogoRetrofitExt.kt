@@ -1,6 +1,6 @@
 package com.frogobox.coresdk.ext
 
-import com.frogobox.coresdk.FrogoDataResponse
+import com.frogobox.coresdk.response.FrogoDataResponse
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,5 +35,5 @@ fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
             callback.onHideProgress()
         }
     })
-    
+
 }

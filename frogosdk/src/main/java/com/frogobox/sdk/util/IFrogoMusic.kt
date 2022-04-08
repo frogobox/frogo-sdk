@@ -1,10 +1,9 @@
-package com.frogobox.appsdk.core
+package com.frogobox.sdk.util
 
-import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.view.FrogoActivity
+import android.content.Context
 
 /*
- * Created by faisalamir on 02/08/21
+ * Created by faisalamir on 29/08/21
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
@@ -15,4 +14,12 @@ import com.frogobox.sdk.view.FrogoActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoActivity<VB>()
+interface IFrogoMusic {
+
+    fun playMusic(context: Context, musicFile: Int)
+
+    fun stopMusic()
+
+    fun pauseMusic()
+
+}
