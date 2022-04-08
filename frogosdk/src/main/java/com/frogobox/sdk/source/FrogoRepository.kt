@@ -1,4 +1,6 @@
-package com.frogobox.coresdk.response
+package com.frogobox.sdk.source
+
+import com.frogobox.coresdk.source.CoreDataSource
 
 
 /*
@@ -14,9 +16,9 @@ package com.frogobox.coresdk.response
  *
  */
 
-interface BaseResponseCallback {
-    fun onFailed(statusCode: Int, errorMessage: String = "")
-    fun onFinish()
-    fun onHideProgress()
-    fun onShowProgress()
+open class FrogoRepository(
+    private val remoteDataSource: CoreDataSource,
+    private val localDataSource: CoreDataSource
+): CoreDataSource() {
+
 }

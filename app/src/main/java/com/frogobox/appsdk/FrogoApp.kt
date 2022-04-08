@@ -3,6 +3,8 @@ package com.frogobox.appsdk
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.frogobox.appsdk.di.repositoryModule
+import com.frogobox.appsdk.di.viewModelModule
 import com.frogobox.sdk.FrogoApplication
 
 /*
@@ -26,7 +28,9 @@ class FrogoApp : FrogoApplication() {
         const val CHANNEL_NAME = "CHANNEL_NAME_$CHANNEL_ID"
     }
 
-    override fun setupKoinModule(koinApplication: org.koin.core.KoinApplication) {}
+    override fun setupKoinModule(koinApplication: org.koin.core.KoinApplication) {
+        koinApplication.modules(listOf(repositoryModule, viewModelModule))
+    }
 
     override fun setupOnCreate() {
         createNotificationChannel()

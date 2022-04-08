@@ -25,26 +25,23 @@ abstract class FrogoApiObserver<M> : Observer<M> {
         val TAG: String = FrogoApiObserver::class.java.simpleName
     }
 
-    abstract fun onFinish()
-
-    abstract fun onFailure(code: Int, errorMessage: String)
-
-    abstract fun onSuccess(data: M)
-
-    abstract fun onStartObserver(disposable: Disposable)
+    abstract fun onApiFinish()
+    abstract fun onApiFailure(code: Int, errorMessage: String)
+    abstract fun onApiSuccess(data: M)
+    abstract fun onApiStartObserver(disposable: Disposable)
 
     // ---------------------------------------------------------------------------------------------
 
     override fun onComplete() {
-        onFinish()
+        onApiFinish()
     }
 
     override fun onSubscribe(d: Disposable) {
-        onStartObserver(d)
+        onApiStartObserver(d)
     }
 
     override fun onNext(t: M) {
-        onSuccess(t)
+        onApiSuccess(t)
     }
 
     override fun onError(e: Throwable) {
@@ -68,19 +65,19 @@ abstract class FrogoApiObserver<M> : Observer<M> {
                         msg = "${e.message()} Not Authorized"
                     }
                 }
-                onFailure(code, msg)
+                onApiFailure(code, msg)
             }
-            is UnknownHostException -> onFailure(
+            is UnknownHostException -> onApiFailure(
                 -1,
                 "Telah terjadi kesalahan ketika koneksi ke server: ${e.message}"
             )
-            is SocketTimeoutException -> onFailure(
+            is SocketTimeoutException -> onApiFailure(
                 -1,
                 "Telah terjadi kesalahan ketika koneksi ke server: ${e.message}"
             )
-            else -> onFailure(-1, e.message ?: "Unknown error occured")
+            else -> onApiFailure(-1, e.message ?: "Unknown error occured")
         }
 
-        onFinish()
+        onApiFinish()
     }
 }

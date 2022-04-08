@@ -1,7 +1,5 @@
 package com.frogobox.coresdk.observer
 
-import com.frogobox.coresdk.source.FrogoApiModel
-import com.google.gson.Gson
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import retrofit2.HttpException
@@ -26,69 +24,59 @@ abstract class FrogoLocalObserver<M> : SingleObserver<M> {
         val TAG: String = FrogoLocalObserver::class.java.simpleName
     }
 
-    abstract fun onCallbackSucces(data: M)
-    abstract fun onCallbackError(code: Int, errorMessage: String)
-    abstract fun onAddSubscribe(disposable: Disposable)
-    abstract fun onCompleted()
+    abstract fun onLocalFinish()
+    abstract fun onLocalFailure(code: Int, errorMessage: String)
+    abstract fun onLocalSuccess(data: M)
+    abstract fun onLocalStartObserver(disposable: Disposable)
 
     override fun onSuccess(t: M) {
-        onCompleted()
         if (t == null) {
-            onCallbackError(200, "Data is empty")
+            onLocalFailure(200, "Data is empty")
         } else {
-            onCallbackSucces(t)
+            onLocalSuccess(t)
         }
+        onLocalFinish()
     }
 
     override fun onSubscribe(d: Disposable) {
-        onAddSubscribe(d)
+        onLocalStartObserver(d)
     }
 
     override fun onError(e: Throwable) {
-        onCompleted()
         e.printStackTrace()
         when (e) {
             is HttpException -> {
                 val code = e.code()
                 var msg = e.message()
-                var baseDao: FrogoApiModel<M>? = null
-                try {
-                    val body = e.response()?.errorBody()
-                    baseDao = Gson().fromJson<FrogoApiModel<M>>(
-                        body!!.string(),
-                        FrogoApiModel::class.java
-                    )
-                } catch (exception: Exception) {
-                    onCallbackError(code, exception.message!!)
-                }
 
                 when (code) {
                     504 -> {
-                        msg = baseDao?.message ?: "Error Response"
+                        msg = "${e.message()} : Error Response"
                     }
                     502, 404 -> {
-                        msg = baseDao?.message ?: "Error Connect or Resource Not Found"
+                        msg = "${e.message()} : Error Connect or Resource Not Found"
                     }
                     400 -> {
-                        msg = baseDao?.message ?: "Bad Request"
+                        msg = "${e.message()} : Bad Request"
                     }
                     401 -> {
-                        msg = baseDao?.message ?: "Not Authorized"
+                        msg = "${e.message()} : Not Authorized"
                     }
                 }
 
-                onCallbackError(code, msg)
+                onLocalFailure(code, msg)
             }
 
-            is UnknownHostException -> onCallbackError(
+            is UnknownHostException -> onLocalFailure(
                 -1,
                 "Telah terjadi kesalahan ketika koneksi ke server: ${e.message}"
             )
-            is SocketTimeoutException -> onCallbackError(
+            is SocketTimeoutException -> onLocalFailure(
                 -1,
                 "Telah terjadi kesalahan ketika koneksi ke server: ${e.message}"
             )
-            else -> onCallbackError(-1, e.message ?: "Unknown error occured")
+            else -> onLocalFailure(-1, e.message ?: "Unknown error occured")
         }
+        onLocalFinish()
     }
 }

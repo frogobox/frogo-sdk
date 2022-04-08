@@ -1,4 +1,6 @@
-package com.frogobox.coresdk.response
+package com.frogobox.coresdk.source
+
+import io.reactivex.rxjava3.disposables.Disposable
 
 
 /*
@@ -14,9 +16,10 @@ package com.frogobox.coresdk.response
  *
  */
 
-interface BaseResponseCallback {
-    fun onFailed(statusCode: Int, errorMessage: String = "")
-    fun onFinish()
-    fun onHideProgress()
-    fun onShowProgress()
+interface ICoreDataSource {
+
+    fun onClearDisposables()
+
+    fun addSubscribe(disposable: Disposable)
+
 }

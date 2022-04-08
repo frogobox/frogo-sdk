@@ -1,4 +1,9 @@
-package com.frogobox.coresdk.response
+package com.frogobox.appsdk.di
+
+import com.frogobox.appsdk.news.NewsViewModel
+import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 
 /*
@@ -14,9 +19,10 @@ package com.frogobox.coresdk.response
  *
  */
 
-interface BaseResponseCallback {
-    fun onFailed(statusCode: Int, errorMessage: String = "")
-    fun onFinish()
-    fun onHideProgress()
-    fun onShowProgress()
+val viewModelModule = module {
+
+    viewModel {
+        NewsViewModel(androidApplication(), get())
+    }
+
 }

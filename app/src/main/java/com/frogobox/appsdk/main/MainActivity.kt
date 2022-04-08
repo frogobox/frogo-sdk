@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityMainBinding
 import com.frogobox.appsdk.log.LogActivity
+import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -28,7 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
             btnMenuJavaActivity.setOnClickListener {
-                frogoStartActivity<MainJavaActivity>()
+                frogoStartActivity<NewsActivity>()
             }
 
         }

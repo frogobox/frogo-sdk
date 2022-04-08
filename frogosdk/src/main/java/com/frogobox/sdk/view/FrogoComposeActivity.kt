@@ -21,7 +21,7 @@ abstract class FrogoComposeActivity : ComponentActivity(), IFrogoComposeActivity
         val TAG: String = FrogoComposeActivity::class.java.simpleName
     }
 
-    abstract fun setupViewModel()
+    open fun setupViewModel() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

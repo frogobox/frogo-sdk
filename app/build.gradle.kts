@@ -120,6 +120,11 @@ dependencies {
     implementation(Koin.androidxWorkManager)
     implementation(Koin.androidxCompose)
 
+    implementation("com.github.frogobox:frogo-consume-api:2.1.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)
 

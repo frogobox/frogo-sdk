@@ -49,9 +49,11 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
 
     abstract fun setupViewBinding(): VB
 
-    abstract fun setupViewModel()
-
     abstract fun setupOnCreate(savedInstanceState: Bundle?)
+
+    // ---------------------------------------------------------------------------------------------
+
+    open fun setupViewModel() {}
 
     // ---------------------------------------------------------------------------------------------
 

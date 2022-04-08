@@ -2,6 +2,7 @@ package com.frogobox.sdk.view
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.frogobox.log.FLog
 import com.frogobox.sdk.util.FrogoMutableLiveData
 
 /*
@@ -25,4 +26,18 @@ abstract class FrogoViewModel(application: Application) : AndroidViewModel(appli
     var eventShowProgress = FrogoMutableLiveData<Boolean>()
     var eventEmpty = FrogoMutableLiveData<Boolean>()
     var eventFailed = FrogoMutableLiveData<String>()
+    var eventFinish = FrogoMutableLiveData<Boolean>()
+
+    protected fun showLogDebug(message: String) {
+        FLog.d(message)
+    }
+
+    protected fun showLogError(message: String) {
+        FLog.e(message)
+    }
+
+    open fun start() {}
+
+    open fun onClearDisposable() {}
+
 }

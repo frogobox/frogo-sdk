@@ -40,9 +40,11 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
 
     abstract fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
-    abstract fun setupViewModel()
-
     abstract fun setupOnViewCreated(view: View, savedInstanceState: Bundle?)
+
+    // ---------------------------------------------------------------------------------------------
+
+    open fun setupViewModel() {}
 
     // ---------------------------------------------------------------------------------------------
 
