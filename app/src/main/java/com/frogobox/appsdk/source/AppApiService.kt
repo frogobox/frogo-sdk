@@ -1,9 +1,9 @@
 package com.frogobox.appsdk.source
 
-import com.frogobox.coreapi.news.NewsConstant
-import com.frogobox.coreapi.news.NewsUrl
-import com.frogobox.coreapi.news.response.ArticleResponse
-import com.frogobox.coreapi.news.response.SourceResponse
+import com.frogobox.appsdk.util.NewsConstant
+import com.frogobox.appsdk.util.NewsUrl
+import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.SourceResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

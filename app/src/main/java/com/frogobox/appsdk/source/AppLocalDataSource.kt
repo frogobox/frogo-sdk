@@ -1,12 +1,11 @@
 package com.frogobox.appsdk.source
 
-import com.frogobox.coreapi.news.response.ArticleResponse
-import com.frogobox.coreapi.news.response.SourceResponse
+import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
-import io.reactivex.rxjava3.core.Scheduler
 
 
 /*
@@ -36,7 +35,7 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<ArticleResponse>
     ) {
-        
+
     }
 
     override fun getEverythings(
@@ -53,7 +52,7 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<ArticleResponse>
     ) {
-        
+
     }
 
     override fun getSources(
@@ -62,6 +61,7 @@ class AppLocalDataSource(
         category: String,
         callback: FrogoDataResponse<SourceResponse>
     ) {
-        
+
     }
+
 }

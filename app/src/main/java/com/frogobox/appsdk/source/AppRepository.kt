@@ -1,7 +1,7 @@
 package com.frogobox.appsdk.source
 
-import com.frogobox.coreapi.news.response.ArticleResponse
-import com.frogobox.coreapi.news.response.SourceResponse
+import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.source.FrogoRepository
 

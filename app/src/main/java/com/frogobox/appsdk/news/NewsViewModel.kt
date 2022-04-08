@@ -2,9 +2,9 @@ package com.frogobox.appsdk.news
 
 import android.app.Application
 import com.frogobox.appsdk.source.AppRepository
-import com.frogobox.coreapi.news.NewsConstant
-import com.frogobox.coreapi.news.model.Article
-import com.frogobox.coreapi.news.response.ArticleResponse
+import com.frogobox.appsdk.util.NewsConstant
+import com.frogobox.appsdk.model.Article
+import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.util.FrogoMutableLiveData
 import com.frogobox.sdk.view.FrogoViewModel
@@ -61,6 +61,10 @@ class NewsViewModel(
             }
         )
     }
-    
+
+    override fun onClearDisposable() {
+        super.onClearDisposable()
+        repository.onClearDisposables()
+    }
     
 }

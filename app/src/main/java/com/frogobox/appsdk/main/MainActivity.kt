@@ -28,8 +28,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 frogoStartActivity<MainNotifActivity>()
             }
 
-            btnMenuJavaActivity.setOnClickListener {
+            btnMenuNews.setOnClickListener {
                 frogoStartActivity<NewsActivity>()
+            }
+
+            btnMenuJavaActivity.setOnClickListener {
+                frogoStartActivity<MainJavaActivity>()
             }
 
         }

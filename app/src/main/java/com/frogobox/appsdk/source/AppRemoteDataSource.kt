@@ -2,14 +2,13 @@ package com.frogobox.appsdk.source
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.frogobox.coreapi.news.NewsUrl
-import com.frogobox.coreapi.news.response.ArticleResponse
-import com.frogobox.coreapi.news.response.SourceResponse
-import com.frogobox.coresdk.ext.doApiRequest
+import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.SourceResponse
+import com.frogobox.appsdk.util.NewsUrl
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.source.FrogoApiClient
+import com.frogobox.sdk.ext.doApiRequest
 import com.frogobox.sdk.source.FrogoRemoteDataSource
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 
 /*
@@ -20,7 +19,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -42,8 +41,8 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
                 false,
                 ChuckerInterceptor(context)
             )
-            .getTopHeadline("NewsUrl.API_KEY", q, sources, category, country, pageSize, page)
-            .doApiRequest(AndroidSchedulers.mainThread(), callback) {
+            .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
+            .doApiRequest(callback) {
                 addSubscribe(it)
             }
     }
@@ -82,7 +81,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
                 pageSize,
                 page
             )
-            .doApiRequest(AndroidSchedulers.mainThread(), callback) {
+            .doApiRequest(callback) {
                 addSubscribe(it)
             }
     }
@@ -100,7 +99,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
                 ChuckerInterceptor(context)
             )
             .getSources(NewsUrl.API_KEY, language, country, category)
-            .doApiRequest(AndroidSchedulers.mainThread(), callback) {
+            .doApiRequest(callback) {
                 addSubscribe(it)
             }
     }
