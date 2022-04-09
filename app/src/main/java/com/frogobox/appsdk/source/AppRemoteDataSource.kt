@@ -2,6 +2,7 @@ package com.frogobox.appsdk.source
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.frogobox.appsdk.BuildConfig
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.util.NewsUrl
@@ -38,7 +39,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         FrogoApiClient
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
-                false,
+                BuildConfig.DEBUG,
                 ChuckerInterceptor(context)
             )
             .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
@@ -64,7 +65,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         FrogoApiClient
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
-                false,
+                BuildConfig.DEBUG,
                 ChuckerInterceptor(context)
             )
             .getEverythings(
@@ -95,7 +96,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         FrogoApiClient
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
-                false,
+                BuildConfig.DEBUG,
                 ChuckerInterceptor(context)
             )
             .getSources(NewsUrl.API_KEY, language, country, category)

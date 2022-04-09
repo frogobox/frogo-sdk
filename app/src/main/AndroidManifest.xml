@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeSdk">
         <activity
+            android:name=".news.NewsDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".news.NewsActivity"
             android:exported="false" />
         <activity

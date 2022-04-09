@@ -18,4 +18,6 @@
     <string name="navigate_custom">Go to custom notif</string>
     <string name="navigate_stack">Go to stack notif</string>
     <string name="send_custom_notification">Send Custom Layout Notification</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
