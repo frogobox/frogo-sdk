@@ -3,7 +3,9 @@ package com.frogobox.sdk.ext
 import com.frogobox.coresdk.observer.FrogoApiObserver
 import com.frogobox.coresdk.observer.FrogoLocalObserver
 import com.frogobox.coresdk.response.FrogoDataResponse
+import com.frogobox.coresdk.response.FrogoStateResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -129,4 +131,34 @@ fun <T : Any> Single<T>.doLocalRequest(
         }
 
     })
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun rxJavaCompletableFromAction(callback: FrogoStateResponse, action: () -> Unit) {
+    Completable.fromAction { action() }
+        .doOnSubscribe { callback.onShowProgress() }
+        .doOnTerminate { callback.onHideProgress() }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            callback.onSuccess()
+        }) {
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+        }
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun <T : Any> rxJavaObservableSingleJust(data: T, callback: FrogoDataResponse<T>) {
+    Observable.just(data)
+        .doOnSubscribe { callback.onShowProgress() }
+        .doOnTerminate { callback.onHideProgress() }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            callback.onSuccess(it)
+        }, {
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+        })
 }

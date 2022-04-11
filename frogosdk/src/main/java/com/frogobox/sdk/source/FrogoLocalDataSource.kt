@@ -3,12 +3,10 @@ package com.frogobox.sdk.source
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.CoreDataSource
+import com.frogobox.sdk.ext.rxJavaCompletableFromAction
+import com.frogobox.sdk.ext.rxJavaObservableSingleJust
 import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.util.AppExecutors
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 /*
@@ -50,73 +48,33 @@ open class FrogoLocalDataSource(
     }
 
     override fun savePrefString(key: String, value: String, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.savePrefString(key, value)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun savePrefLong(key: String, value: Long, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.savePrefLong(key, value)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun savePrefFloat(key: String, value: Float, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.savePrefFloat(key, value)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun savePrefInt(key: String, value: Int, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.savePrefInt(key, value)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun savePrefBoolean(key: String, value: Boolean, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.savePrefBoolean(key, value)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun deletePref(key: String) {
@@ -124,17 +82,9 @@ open class FrogoLocalDataSource(
     }
 
     override fun deletePref(key: String, callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.deletePref(key)
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun nukePref() {
@@ -142,17 +92,9 @@ open class FrogoLocalDataSource(
     }
 
     override fun nukePref(callback: FrogoStateResponse) {
-        Completable.fromAction {
+        rxJavaCompletableFromAction(callback) {
             preferences.nukePref()
-        }.doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess()
-            }) {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            }
+        }
     }
 
     override fun getPrefString(key: String): String {
@@ -176,68 +118,23 @@ open class FrogoLocalDataSource(
     }
 
     override fun getPrefString(key: String, callback: FrogoDataResponse<String>) {
-        Observable.just(preferences.loadPrefString(key))
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            })
+        rxJavaObservableSingleJust(preferences.loadPrefString(key), callback)
     }
 
     override fun getPrefLong(key: String, callback: FrogoDataResponse<Long>) {
-        Observable.just(preferences.loadPrefLong(key))
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            })
+        rxJavaObservableSingleJust(preferences.loadPrefLong(key), callback)
     }
 
     override fun getPrefFloat(key: String, callback: FrogoDataResponse<Float>) {
-        Observable.just(preferences.loadPrefFloat(key))
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            })
+        rxJavaObservableSingleJust(preferences.loadPrefFloat(key), callback)
     }
 
     override fun getPrefInt(key: String, callback: FrogoDataResponse<Int>) {
-        Observable.just(preferences.loadPrefInt(key))
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            })
+        rxJavaObservableSingleJust(preferences.loadPrefInt(key), callback)
     }
 
     override fun getPrefBoolean(key: String, callback: FrogoDataResponse<Boolean>) {
-        Observable.just(preferences.loadPrefBoolean(key))
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                it.message?.let { it1 -> callback.onFailed(200, it1) }
-            })
+        rxJavaObservableSingleJust(preferences.loadPrefBoolean(key), callback)
     }
 
 }
