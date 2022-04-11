@@ -1,10 +1,9 @@
 package com.frogobox.appsdk.news
 
 import android.app.Application
+import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.util.NewsConstant
-import com.frogobox.appsdk.model.Article
-import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.util.FrogoMutableLiveData
 import com.frogobox.sdk.view.FrogoViewModel
@@ -29,7 +28,7 @@ class NewsViewModel(
 ) : FrogoViewModel(application) {
 
     val listData = FrogoMutableLiveData<List<Article>>()
-    
+
     fun getData() {
         repository.getTopHeadline(
             null,
@@ -38,7 +37,7 @@ class NewsViewModel(
             NewsConstant.COUNTRY_ID,
             null,
             null,
-            object : FrogoDataResponse<ArticleResponse>{
+            object : FrogoDataResponse<List<Article>> {
                 override fun onFailed(statusCode: Int, errorMessage: String) {
                     showLogError(errorMessage)
                 }
@@ -55,8 +54,8 @@ class NewsViewModel(
                     showLogDebug("ON SHOW PROGRES --------> ")
                 }
 
-                override fun onSuccess(data: ArticleResponse) {
-                    listData.postValue(data.articles!!)
+                override fun onSuccess(data: List<Article>) {
+                    listData.postValue(data)
                 }
             }
         )
@@ -66,5 +65,5 @@ class NewsViewModel(
         super.onClearDisposable()
         repository.onClearDisposables()
     }
-    
+
 }

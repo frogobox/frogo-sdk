@@ -112,6 +112,10 @@ dependencies {
     implementation(Androidx.Lifecycle.runtimeKtx)
     implementation(Androidx.Compose.activity)
 
+    implementation(Androidx.Room.runtime)
+    implementation(Androidx.Room.ktx)
+    implementation(Androidx.Room.rxJava3)
+
     implementation(Google.material)
 
     implementation(Koin.core)
@@ -119,6 +123,9 @@ dependencies {
     implementation(Koin.androidCompat)
     implementation(Koin.androidxWorkManager)
     implementation(Koin.androidxCompose)
+
+    kapt(Androidx.Lifecycle.compiler)
+    kapt(Androidx.Room.compiler)
 
     debugImplementation(compose.ui)
     debugImplementation(compose.uiTooling)

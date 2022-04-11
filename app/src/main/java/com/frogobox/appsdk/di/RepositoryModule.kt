@@ -1,5 +1,6 @@
 package com.frogobox.appsdk.di
 
+import com.frogobox.appsdk.source.AppDatabase
 import com.frogobox.appsdk.source.AppLocalDataSource
 import com.frogobox.appsdk.source.AppRemoteDataSource
 import com.frogobox.appsdk.source.AppRepository
@@ -29,7 +30,11 @@ val repositoryModule = module {
     }
 
     single {
-        AppLocalDataSource(AppExecutors(), get())
+        AppDatabase.getInstance(androidContext()).articleDao()
+    }
+
+    single {
+        AppLocalDataSource(AppExecutors(), get(), get())
     }
 
     single {

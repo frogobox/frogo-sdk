@@ -1,15 +1,22 @@
 package com.frogobox.appsdk.source
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.frogobox.appsdk.BuildConfig
+import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.util.NewsUrl
+import com.frogobox.coresdk.observer.FrogoApiObserver
 import com.frogobox.coresdk.response.FrogoDataResponse
+import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoApiClient
 import com.frogobox.sdk.ext.doApiRequest
 import com.frogobox.sdk.source.FrogoRemoteDataSource
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 /*
@@ -34,18 +41,41 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     ) {
         FrogoApiClient
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
                 BuildConfig.DEBUG,
-                ChuckerInterceptor(context)
+                ChuckerInterceptor.Builder(context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
             )
             .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
-            .doApiRequest(callback) {
-                addSubscribe(it)
-            }
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { callback.onShowProgress() }
+            .doOnTerminate { callback.onHideProgress() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : FrogoApiObserver<ArticleResponse>() {
+                override fun onApiSuccess(data: ArticleResponse) {
+                    data.articles?.let { callback.onSuccess(it) }
+                }
+
+                override fun onApiFailure(code: Int, errorMessage: String) {
+                    callback.onFailed(code, errorMessage)
+                }
+
+                override fun onApiFinish() {
+                    callback.onFinish()
+                }
+
+                override fun onApiStartObserver(disposable: Disposable) {
+                    addSubscribe(disposable)
+                }
+            })
     }
 
     override fun getEverythings(
@@ -60,13 +90,18 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     ) {
         FrogoApiClient
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
                 BuildConfig.DEBUG,
-                ChuckerInterceptor(context)
+                ChuckerInterceptor.Builder(context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
             )
             .getEverythings(
                 NewsUrl.API_KEY,
@@ -82,9 +117,27 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
                 pageSize,
                 page
             )
-            .doApiRequest(callback) {
-                addSubscribe(it)
-            }
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { callback.onShowProgress() }
+            .doOnTerminate { callback.onHideProgress() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : FrogoApiObserver<ArticleResponse>() {
+                override fun onApiSuccess(data: ArticleResponse) {
+                    data.articles?.let { callback.onSuccess(it) }
+                }
+
+                override fun onApiFailure(code: Int, errorMessage: String) {
+                    callback.onFailed(code, errorMessage)
+                }
+
+                override fun onApiFinish() {
+                    callback.onFinish()
+                }
+
+                override fun onApiStartObserver(disposable: Disposable) {
+                    addSubscribe(disposable)
+                }
+            })
     }
 
     override fun getSources(
@@ -97,7 +150,12 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
             .create<AppApiService>(
                 NewsUrl.BASE_URL,
                 BuildConfig.DEBUG,
-                ChuckerInterceptor(context)
+                ChuckerInterceptor.Builder(context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
             )
             .getSources(NewsUrl.API_KEY, language, country, category)
             .doApiRequest(callback) {
@@ -105,4 +163,8 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
             }
     }
 
+    override fun saveArticles(data: List<Article>, callback: FrogoStateResponse) {
+    }
+
+    override fun deleteArticles(callback: FrogoStateResponse) {}
 }

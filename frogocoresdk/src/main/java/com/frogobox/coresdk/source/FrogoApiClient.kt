@@ -55,6 +55,10 @@ object FrogoApiClient {
 
     // ---------------------------------------------------------------------------------------------
 
+    @Deprecated(
+        "createWithInterceptor is to complicated",
+        ReplaceWith("create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor) for simple implementation")
+    )
     inline fun <reified T> createWithInterceptor(url: String): T {
         return Retrofit.Builder()
             .baseUrl(url)
@@ -64,6 +68,10 @@ object FrogoApiClient {
             .build().create(T::class.java)
     }
 
+    @Deprecated(
+        "createWithInterceptor is to complicated",
+        ReplaceWith("create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor) for simple implementation")
+    )
     inline fun <reified T> createWithInterceptor(url: String, chuckInterceptor: Interceptor): T {
         return Retrofit.Builder()
             .baseUrl(url)

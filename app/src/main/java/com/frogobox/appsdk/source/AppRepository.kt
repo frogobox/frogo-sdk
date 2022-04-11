@@ -1,8 +1,9 @@
 package com.frogobox.appsdk.source
 
-import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
+import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.sdk.source.FrogoRepository
 
 
@@ -31,9 +32,59 @@ class AppRepository(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     ) {
-        remoteDataSource.getTopHeadline(q, sources, category, country, pageSize, page, callback)
+        localDataSource.getTopHeadline(q, sources, category, country, pageSize, page,
+            object : FrogoDataResponse<List<Article>> {
+                override fun onFailed(statusCode: Int, errorMessage: String) {
+                    callback.onFailed(statusCode, errorMessage)
+                }
+
+                override fun onFinish() {
+                    callback.onFinish()
+                }
+
+                override fun onHideProgress() {
+                    callback.onHideProgress()
+                }
+
+                override fun onShowProgress() {
+                    callback.onShowProgress()
+                }
+
+                override fun onSuccess(data: List<Article>) {
+                    if (data.isNotEmpty()) {
+                        callback.onSuccess(data)
+                    } else {
+                        deleteArticles(object : FrogoStateResponse {
+                            override fun onSuccess() {
+                                remoteDataSource.getTopHeadline(q, sources, category, country, pageSize, page,
+                                    object : FrogoDataResponse<List<Article>> {
+                                        override fun onFailed(statusCode: Int, errorMessage: String) {}
+                                        override fun onFinish() {}
+                                        override fun onHideProgress() {}
+                                        override fun onShowProgress() {}
+                                        override fun onSuccess(data: List<Article>) {
+                                            callback.onSuccess(data)
+                                            saveArticles(data, object : FrogoStateResponse {
+                                                override fun onSuccess() {}
+                                                override fun onFailed(statusCode: Int, errorMessage: String) {}
+                                                override fun onFinish() {}
+                                                override fun onHideProgress() {}
+                                                override fun onShowProgress() {}
+                                            })
+                                        }
+                                    })
+                            }
+                            override fun onFailed(statusCode: Int, errorMessage: String) {}
+                            override fun onFinish() {}
+                            override fun onHideProgress() {}
+                            override fun onShowProgress() {}
+                        })
+                    }
+                }
+
+            })
     }
 
     override fun getEverythings(
@@ -48,7 +99,7 @@ class AppRepository(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     ) {
         remoteDataSource.getEverythings(
             q,
@@ -75,4 +126,11 @@ class AppRepository(
         remoteDataSource.getSources(language, country, category, callback)
     }
 
+    override fun saveArticles(data: List<Article>, callback: FrogoStateResponse) {
+        localDataSource.saveArticles(data, callback)
+    }
+
+    override fun deleteArticles(callback: FrogoStateResponse) {
+        localDataSource.deleteArticles(callback)
+    }
 }

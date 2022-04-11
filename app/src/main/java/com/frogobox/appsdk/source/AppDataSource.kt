@@ -1,8 +1,9 @@
 package com.frogobox.appsdk.source
 
-import com.frogobox.appsdk.model.ArticleResponse
+import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
+import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.ICoreDataSource
 
 
@@ -29,7 +30,7 @@ interface AppDataSource : ICoreDataSource {
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     )
 
     // Get Everythings
@@ -45,7 +46,7 @@ interface AppDataSource : ICoreDataSource {
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<ArticleResponse>
+        callback: FrogoDataResponse<List<Article>>
     )
 
     // Get Sources
@@ -55,5 +56,9 @@ interface AppDataSource : ICoreDataSource {
         category: String,
         callback: FrogoDataResponse<SourceResponse>
     )
+    
+    fun saveArticles(data: List<Article> , callback: FrogoStateResponse)
+
+    fun deleteArticles(callback: FrogoStateResponse)
 
 }

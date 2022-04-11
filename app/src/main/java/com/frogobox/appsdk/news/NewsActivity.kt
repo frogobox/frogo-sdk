@@ -18,7 +18,9 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
         newsViewModel.apply {
 
             listData.observe(this@NewsActivity) {
-
+                for (i in it.indices) {
+                    println("$i : ${it[i].title}")
+                }
             }
 
             getData()

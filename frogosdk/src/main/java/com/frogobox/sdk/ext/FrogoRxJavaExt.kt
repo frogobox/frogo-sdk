@@ -143,8 +143,10 @@ fun rxJavaCompletableFromAction(callback: FrogoStateResponse, action: () -> Unit
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             callback.onSuccess()
+            callback.onFinish()
         }) {
             it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFinish()
         }
 }
 
