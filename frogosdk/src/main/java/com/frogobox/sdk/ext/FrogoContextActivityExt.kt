@@ -26,7 +26,7 @@ private const val TAG = "FrogoContextActivityExt"
 // -------------------------------------------------------------------------------------------------
 
 inline fun <reified ClassActivity> Context.singleStartActivity() {
-    FLog.d("Activity : ${ClassActivity::class.java.simpleName}")
+    showLogDebug("Activity : ${ClassActivity::class.java.simpleName}")
     startActivity(Intent(this, ClassActivity::class.java))
 }
 
@@ -39,8 +39,8 @@ inline fun <reified ClassActivity, reified Model> Context.singleStartActivity(
     val intent = Intent(this, ClassActivity::class.java)
     val extraData = Gson().toJson(data)
     intent.putExtra(extraKey, extraData)
-    FLog.d("Activity : ${ClassActivity::class.java.simpleName}")
-    FLog.d("Data     : Extra Data (${Model::class.java.simpleName}) : $extraData")
+    showLogDebug("Activity : ${ClassActivity::class.java.simpleName}")
+    showLogDebug("Data     : Extra Data (${Model::class.java.simpleName}) : $extraData")
     startActivity(intent)
 }
 
@@ -58,14 +58,14 @@ fun Context.singleStartActivityShareApp(subject: String, text: String) {
     intent.type = "text/plain"
     intent.putExtra(Intent.EXTRA_SUBJECT, subject)
     intent.putExtra(Intent.EXTRA_TEXT, text)
-    FLog.d("$TAG : Subject Share App : $subject")
-    FLog.d("$TAG : Message Share App : $text")
+    showLogDebug("$TAG : Subject Share App : $subject")
+    showLogDebug("$TAG : Message Share App : $text")
     startActivity(Intent.createChooser(intent, subject))
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun Context.singleStartActivityOpenApp(url: String) {
-    FLog.d("$TAG : Url : $url")
+    showLogDebug("$TAG : Url : $url")
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }

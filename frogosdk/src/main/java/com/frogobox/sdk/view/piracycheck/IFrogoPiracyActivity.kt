@@ -1,4 +1,4 @@
-package com.frogobox.sdk.view
+package com.frogobox.sdk.view.piracycheck
 
 
 /*

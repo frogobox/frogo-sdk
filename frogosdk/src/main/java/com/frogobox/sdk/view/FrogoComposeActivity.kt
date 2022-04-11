@@ -1,7 +1,7 @@
 package com.frogobox.sdk.view
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import com.frogobox.sdk.view.piracycheck.FrogoComponentPiracyActivity
 
 /*
  * Created by faisalamir on 23/08/21
@@ -15,7 +15,7 @@ import androidx.activity.ComponentActivity
  * All rights reserved
  *
  */
-abstract class FrogoComposeActivity : ComponentActivity(), IFrogoComposeActivity {
+abstract class FrogoComposeActivity : FrogoComponentPiracyActivity(), IFrogoComposeActivity {
 
     companion object {
         val TAG: String = FrogoComposeActivity::class.java.simpleName

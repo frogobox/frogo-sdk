@@ -30,7 +30,7 @@ class NewsViewModel(
     val listData = FrogoMutableLiveData<List<Article>>()
 
     fun getData() {
-        repository.getTopHeadline(
+        repository.handlingNetworkTopHeadLine(
             null,
             null,
             NewsConstant.CATEGORY_GENERAL,

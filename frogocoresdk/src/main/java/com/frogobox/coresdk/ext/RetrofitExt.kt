@@ -22,16 +22,22 @@ import retrofit2.Response
 
 // Single Api Request
 fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
-
+    showPrintLog("doApiRequest : onShowProgress")
     callback.onShowProgress()
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
+            showPrintLog("doApiRequest : onSuccess")
             response.body()?.let { callback.onSuccess(it) }
+
+            showPrintLog("doApiRequest : onHideProgress")
             callback.onHideProgress()
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
+            showPrintLog("doApiRequest : onFailed")
             callback.onFailed(500, t.localizedMessage)
+
+            showPrintLog("doApiRequest : onHideProgress")
             callback.onHideProgress()
         }
     })

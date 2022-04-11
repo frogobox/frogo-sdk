@@ -1,8 +1,9 @@
-package com.frogobox.sdk.view
+package com.frogobox.sdk.view.piracycheck
 
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.sdk.view.FrogoActivity
 import com.github.javiersantos.piracychecker.*
 import com.github.javiersantos.piracychecker.enums.Display
 import com.github.javiersantos.piracychecker.enums.InstallerID

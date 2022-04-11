@@ -22,28 +22,28 @@ private const val TAG = "FrogoViewExt"
 // -------------------------------------------------------------------------------------------------
 
 fun View.visible() {
-    FLog.d("$TAG : View Visible")
+    showLogDebug("$TAG : View Visible")
     visibility = View.VISIBLE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.gone() {
-    FLog.d("$TAG : View Gone")
+    showLogDebug("$TAG : View Gone")
     visibility = View.GONE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.invisible() {
-    FLog.d("$TAG : View Invisible")
+    showLogDebug("$TAG : View Invisible")
     visibility = View.INVISIBLE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.progressViewHandle(isProgressState: Boolean) {
-    FLog.d("$TAG : isProgressState >> $isProgressState")
+    showLogDebug("$TAG : isProgressState >> $isProgressState")
     if (isProgressState) {
         visible()
     } else {
@@ -54,7 +54,7 @@ fun View.progressViewHandle(isProgressState: Boolean) {
 // -------------------------------------------------------------------------------------------------
 
 fun View.emptyViewHandle(isEmptyState: Boolean) {
-    FLog.d("$TAG : isEmptyState >> $isEmptyState")
+    showLogDebug("$TAG : isEmptyState >> $isEmptyState")
     if (isEmptyState) {
         visible()
     } else {

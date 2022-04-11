@@ -2,7 +2,6 @@ package com.frogobox.sdk.view
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.view.WindowCompat
@@ -14,6 +13,7 @@ import com.frogobox.coresdk.util.FrogoConstant.Url.BASE_PLAY_STORE_URL
 import com.frogobox.sdk.util.FrogoFunc
 import com.frogobox.sdk.R
 import com.frogobox.sdk.ext.*
+import com.frogobox.sdk.view.piracycheck.FrogoPiracyActivity
 import java.util.*
 
 
@@ -62,7 +62,7 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
         setContentView(binding.root)
         setupViewModel()
         setupOnCreate(savedInstanceState)
-        Log.d(TAG, "View Binding : ${binding::class.java.simpleName}")
+        showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,7 +82,7 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
     override fun setupDetailActivity(title: String) {
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        Log.d(TAG, "Setup Detail Activity : $title")
+        showLogDebug("$TAG Setup Detail Activity : $title")
     }
 
     override fun setupChildFragment(frameId: Int, fragment: Fragment) {
@@ -166,7 +166,7 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
-        Log.d(TAG, "Hide System UI a.k.a Status Bar Android CutOut")
+        showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
     }
 
 }

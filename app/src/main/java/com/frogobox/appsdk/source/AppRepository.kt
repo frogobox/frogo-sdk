@@ -28,7 +28,7 @@ class AppRepository(
     private val localDataSource: AppLocalDataSource
 ) : FrogoRepository(remoteDataSource, localDataSource), AppDataSource {
 
-    override fun getTopHeadline(
+    fun handlingNetworkTopHeadLine(
         q: String?,
         sources: String?,
         category: String?,
@@ -61,37 +61,77 @@ class AppRepository(
                     } else {
                         deleteArticles(object : FrogoStateResponse {
                             override fun onSuccess() {
-                                remoteDataSource.getTopHeadline(q, sources, category, country, pageSize, page,
+                                remoteDataSource.getTopHeadline(q,
+                                    sources,
+                                    category,
+                                    country,
+                                    pageSize,
+                                    page,
                                     object : FrogoDataResponse<List<Article>> {
-                                        override fun onFailed(statusCode: Int, errorMessage: String) {}
+                                        override fun onFailed(
+                                            statusCode: Int,
+                                            errorMessage: String
+                                        ) {
+                                        }
+
                                         override fun onFinish() {}
                                         override fun onHideProgress() {
                                             callback.onHideProgress()
                                         }
+
                                         override fun onShowProgress() {
                                             callback.onShowProgress()
                                         }
+
                                         override fun onSuccess(data: List<Article>) {
                                             callback.onSuccess(data)
                                             saveArticles(data, object : FrogoStateResponse {
                                                 override fun onSuccess() {}
-                                                override fun onFailed(statusCode: Int, errorMessage: String) {}
+                                                override fun onFailed(
+                                                    statusCode: Int,
+                                                    errorMessage: String
+                                                ) {
+                                                }
+
                                                 override fun onFinish() {}
-                                                override fun onHideProgress() {}
-                                                override fun onShowProgress() {}
+                                                override fun onHideProgress() {
+                                                    callback.onHideProgress()
+                                                }
+
+                                                override fun onShowProgress() {
+                                                    callback.onShowProgress()
+                                                }
                                             })
                                         }
                                     })
                             }
+
                             override fun onFailed(statusCode: Int, errorMessage: String) {}
                             override fun onFinish() {}
-                            override fun onHideProgress() {}
-                            override fun onShowProgress() {}
+                            override fun onHideProgress() {
+                                callback.onHideProgress()
+                            }
+
+                            override fun onShowProgress() {
+                                callback.onShowProgress()
+                            }
                         })
                     }
                 }
 
             })
+    }
+
+    override fun getTopHeadline(
+        q: String?,
+        sources: String?,
+        category: String?,
+        country: String?,
+        pageSize: Int?,
+        page: Int?,
+        callback: FrogoDataResponse<List<Article>>
+    ) {
+        remoteDataSource.getTopHeadline(q, sources, category, country, pageSize, page, callback)
     }
 
     override fun getEverythings(
