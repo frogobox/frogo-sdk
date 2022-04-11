@@ -42,7 +42,7 @@ val repositoryModule = module {
     }
 
     single {
-        AppRepository(get(), get())
+        AppRepository(androidContext(), get(), get())
     }
 
     // Please Add Your Code Under This Line --------------------------------------------------------

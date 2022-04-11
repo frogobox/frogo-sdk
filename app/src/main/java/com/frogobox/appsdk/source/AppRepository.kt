@@ -1,10 +1,12 @@
 package com.frogobox.appsdk.source
 
+import android.content.Context
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.sdk.source.FrogoRepository
+import com.frogobox.sdk.util.FrogoFunc
 
 
 /*
@@ -21,6 +23,7 @@ import com.frogobox.sdk.source.FrogoRepository
  */
 
 class AppRepository(
+    private val context: Context,
     private val remoteDataSource: AppRemoteDataSource,
     private val localDataSource: AppLocalDataSource
 ) : FrogoRepository(remoteDataSource, localDataSource), AppDataSource {
@@ -53,7 +56,7 @@ class AppRepository(
                 }
 
                 override fun onSuccess(data: List<Article>) {
-                    if (data.isNotEmpty()) {
+                    if (!FrogoFunc.isNetworkConnected(context)) {
                         callback.onSuccess(data)
                     } else {
                         deleteArticles(object : FrogoStateResponse {
