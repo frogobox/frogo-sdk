@@ -1,8 +1,11 @@
 package com.frogobox.appsdk.news
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityNewsBinding
+import com.frogobox.appsdk.model.Article
+import com.frogobox.sdk.ext.progressViewHandle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsActivity : BaseActivity<ActivityNewsBinding>() {
@@ -18,9 +21,11 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
         newsViewModel.apply {
 
             listData.observe(this@NewsActivity) {
-                for (i in it.indices) {
-                    println("$i : ${it[i].title}")
-                }
+                setupRecyclerView(it)
+            }
+
+            eventShowProgress.observe(this@NewsActivity) {
+                binding.progressCircular.progressViewHandle(it)
             }
 
             getData()
@@ -29,7 +34,20 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
     }
 
     override fun setupOnCreate(savedInstanceState: Bundle?) {
+        setupDetailActivity("News API")
+    }
 
+    private fun setupRecyclerView(data: List<Article>) {
+        binding.recyclerView.apply {
+            adapter = NewsViewAdapter().apply {
+                setupData(data)
+            }
+            layoutManager = LinearLayoutManager(context).apply {
+                orientation = LinearLayoutManager.VERTICAL
+                stackFromEnd = false
+                reverseLayout = false
+            }
+        }
     }
 
     override fun onDestroy() {

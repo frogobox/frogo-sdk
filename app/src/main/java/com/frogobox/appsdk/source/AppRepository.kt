@@ -65,8 +65,12 @@ class AppRepository(
                                     object : FrogoDataResponse<List<Article>> {
                                         override fun onFailed(statusCode: Int, errorMessage: String) {}
                                         override fun onFinish() {}
-                                        override fun onHideProgress() {}
-                                        override fun onShowProgress() {}
+                                        override fun onHideProgress() {
+                                            callback.onHideProgress()
+                                        }
+                                        override fun onShowProgress() {
+                                            callback.onShowProgress()
+                                        }
                                         override fun onSuccess(data: List<Article>) {
                                             callback.onSuccess(data)
                                             saveArticles(data, object : FrogoStateResponse {

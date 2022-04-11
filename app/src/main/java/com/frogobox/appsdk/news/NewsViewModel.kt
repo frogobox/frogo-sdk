@@ -48,10 +48,12 @@ class NewsViewModel(
 
                 override fun onHideProgress() {
                     showLogDebug("ON HIDE PROGRES --------> ")
+                    eventShowProgress.postValue(false)
                 }
 
                 override fun onShowProgress() {
                     showLogDebug("ON SHOW PROGRES --------> ")
+                    eventShowProgress.postValue(true)
                 }
 
                 override fun onSuccess(data: List<Article>) {
