@@ -21,10 +21,10 @@
 </tr>
 
 <tr>
-    <td><img width="200px" height="360px" src="docs/image/main/ss_1.png"></td>
-    <td><img width="200px" height="360px" src="docs/image/main/ss_2.png"></td>
-    <td><img width="200px" height="360px" src="docs/image/main/ss_3.png"></td>
-    <td><img width="200px" height="360px" src="docs/image/main/ss_4.gif"></td>
+    <td><img width="200px" height="320px" src="docs/image/main/ss_1.png"></td>
+    <td><img width="200px" height="320px" src="docs/image/main/ss_2.png"></td>
+    <td><img width="200px" height="320px" src="docs/image/main/ss_3.png"></td>
+    <td><img width="200px" height="320px" src="docs/image/main/ss_4.gif"></td>
 </tr>
 
 </table>
