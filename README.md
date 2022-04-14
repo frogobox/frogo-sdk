@@ -32,12 +32,13 @@
 ## Version Release
 This Is Latest Release
 
-    $version_release = 1.0.1
+    $version_release = 1.0.2
 
 What's New??
 
     * SDK Android and Desktop *
     * Adding Ext Function *
+    * Update: Fixing Bug RxJava Ext *
 
 ## Download this project
 
@@ -73,14 +74,20 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:1.0.1'
+            implementation 'com.github.frogobox:frogo-sdk:1.0.2'
+
+            // library frogo-sdk for desktop
+            implementation 'com.github.frogobox.frogo-sdk:frogocoresdk:1.0.2'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:1.0.1")
+            implementation("com.github.frogobox:frogo-sdk:1.0.2")
+
+            // library frogo-sdk for desktop
+            implementation("com.github.frogobox.frogo-sdk:frogocoresdk:1.0.2")
         }
 
 ### Step 3. Function from this SDK
