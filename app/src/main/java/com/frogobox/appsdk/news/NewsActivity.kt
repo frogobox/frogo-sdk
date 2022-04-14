@@ -29,7 +29,7 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
             }
 
             getData()
-
+            getPref()
         }
     }
 

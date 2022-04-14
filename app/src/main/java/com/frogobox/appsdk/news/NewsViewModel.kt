@@ -63,6 +63,31 @@ class NewsViewModel(
         )
     }
 
+    fun getPref() {
+        repository.getPrefString("KEY_PREF", object : FrogoDataResponse<String> {
+            override fun onFailed(statusCode: Int, errorMessage: String) {
+                
+            }
+
+            override fun onFinish() {
+                
+            }
+
+            override fun onHideProgress() {
+                
+            }
+
+            override fun onShowProgress() {
+                
+            }
+
+            override fun onSuccess(data: String) {
+                showLogDebug("BECAUSE TONIGT WILL BE THE NIGHT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $data")
+            }
+
+        })
+    }
+
     override fun onClearDisposable() {
         super.onClearDisposable()
         repository.onClearDisposables()

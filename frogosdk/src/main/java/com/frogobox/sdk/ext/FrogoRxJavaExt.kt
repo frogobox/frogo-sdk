@@ -64,91 +64,125 @@ fun <T : Any> Observable<T>.doApiRequest(
 
 // -------------------------------------------------------------------------------------------------
 
-fun <T : Any> Single<T>.doLocalRequest(
+fun <T : Any> Single<T>.fetchRoomDB(
     callback: FrogoDataResponse<T>,
     addCallbackSubcribe: (d: Disposable) -> Unit
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            showLogDebug("doLocalRequest : doOnSubscribe / onShowProgress")
+            showLogDebug("fetchRoomDB : doOnSubscribe / onShowProgress")
             callback.onShowProgress()
         }
         .doOnTerminate {
-            showLogDebug("doLocalRequest : doOnTerminate / onHideProgress")
+            showLogDebug("fetchRoomDB : doOnTerminate / onHideProgress")
             callback.onHideProgress()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : FrogoLocalObserver<T>() {
 
             override fun onLocalFinish() {
-                showLogDebug("doLocalRequest : onLocalFinish / onFinish")
+                showLogDebug("fetchRoomDB : onLocalFinish / onFinish")
                 callback.onFinish()
             }
 
             override fun onLocalFailure(code: Int, errorMessage: String) {
-                showLogError("doLocalRequest : onLocalFailure / onFailed")
+                showLogError("fetchRoomDB : onLocalFailure / onFailed")
                 callback.onFailed(code, errorMessage)
             }
 
             override fun onLocalSuccess(data: T) {
-                showLogDebug("doLocalRequest : onLocalSuccess / onSuccess")
+                showLogDebug("fetchRoomDB : onLocalSuccess / onSuccess")
                 callback.onSuccess(data)
             }
 
             override fun onLocalStartObserver(disposable: Disposable) {
-                showLogDebug("doLocalRequest : onLocalStartObserver / onStartObserver")
+                showLogDebug("fetchRoomDB : onLocalStartObserver / onStartObserver")
                 addCallbackSubcribe(disposable)
             }
 
         })
 }
 
-// -------------------------------------------------------------------------------------------------
-
-fun rxJavaCompletableFromAction(callback: FrogoStateResponse, action: () -> Unit) {
-    Completable.fromAction { action() }
-        .subscribeOn(Schedulers.io())
+fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
+    subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            showLogDebug("rxJavaCompletableFromAction : doOnSubscribe / onShowProgress")
+            showLogDebug("fetchPreference : doOnSubscribe / onShowProgress")
             callback.onShowProgress()
         }
         .doOnTerminate {
-            showLogDebug("rxJavaCompletableFromAction : doOnTerminate / onHideProgress")
+            showLogDebug("fetchPreference : doOnTerminate / onHideProgress")
             callback.onHideProgress()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
-            showLogDebug("rxJavaCompletableFromAction : onLocalSuccess / onSuccess")
-            showLogDebug("rxJavaCompletableFromAction : onLocalFinish / onFinish")
-            callback.onSuccess()
-            callback.onFinish()
-        }) {
-            showLogError("rxJavaCompletableFromAction : onLocalFailure / onFailed")
-            showLogDebug("rxJavaCompletableFromAction : onLocalFinish / onFinish")
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
-            callback.onFinish()
-        }
-}
-
-// -------------------------------------------------------------------------------------------------
-
-fun <T : Any> rxJavaObservableSingleJust(data: T, callback: FrogoDataResponse<T>) {
-    Observable.just(data)
-        .subscribeOn(Schedulers.io())
-        .doOnSubscribe {
-            showLogDebug("rxJavaObservableSingleJust : doOnSubscribe / onShowProgress")
-            callback.onShowProgress()
-        }
-        .doOnTerminate {
-            showLogDebug("rxJavaObservableSingleJust : doOnTerminate / onHideProgress")
-            callback.onHideProgress()
-        }
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-            showLogDebug("rxJavaObservableSingleJust : onLocalSuccess / onSuccess")
+            showLogDebug("fetchPreference : onLocalSuccess / onSuccess")
             callback.onSuccess(it)
         }, {
-            showLogError("rxJavaObservableSingleJust : onLocalFailure / onFailed")
+            showLogError("fetchPreference : onLocalFailure / onFailed")
             it.message?.let { it1 -> callback.onFailed(200, it1) }
         })
 }
+
+// -------------------------------------------------------------------------------------------------
+
+fun Completable.executeRoomDB(callback: FrogoStateResponse) {
+    subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            showLogDebug("executeRoomDB : onLocalSuccess / onSuccess")
+            showLogDebug("executeRoomDB : onLocalFinish / onFinish")
+            showLogDebug("executeRoomDB : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            callback.onSuccess()
+            callback.onFinish()
+        }) {
+            showLogError("executeRoomDB : onLocalFailure / onFailed")
+            showLogError("executeRoomDB : onLocalFinish / onFinish")
+            showLogError("executeRoomDB : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFinish()
+        }
+}
+
+fun Completable.executePreference(callback: FrogoStateResponse) {
+    subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            showLogDebug("executePreference : onLocalSuccess / onSuccess")
+            showLogDebug("executePreference : onLocalFinish / onFinish")
+            showLogDebug("executePreference : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            callback.onSuccess()
+            callback.onFinish()
+        }) {
+            showLogError("executePreference : onLocalFailure / onFailed")
+            showLogError("executePreference : onLocalFinish / onFinish")
+            showLogError("executePreference : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFinish()
+        }
+}
+
+fun Completable.executeAction(callback: FrogoStateResponse) {
+    subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            showLogDebug("executeAction : onLocalSuccess / onSuccess")
+            showLogDebug("executeAction : onLocalFinish / onFinish")
+            showLogDebug("executeAction : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            callback.onSuccess()
+            callback.onFinish()
+        }) {
+            showLogError("executeAction : onLocalFailure / onFailed")
+            showLogError("executeAction : onLocalFinish / onFinish")
+            showLogError("executeAction : doOnTerminate / onHideProgress")
+            callback.onHideProgress()
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFinish()
+        }
+}
+
+// -------------------------------------------------------------------------------------------------

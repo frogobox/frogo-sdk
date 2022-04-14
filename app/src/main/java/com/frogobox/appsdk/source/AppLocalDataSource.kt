@@ -5,15 +5,11 @@ import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.source.dao.ArticleDao
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.sdk.ext.doLocalRequest
-import com.frogobox.sdk.ext.rxJavaCompletableFromAction
+import com.frogobox.sdk.ext.executeRoomDB
+import com.frogobox.sdk.ext.fetchRoomDB
 import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.SingleObserver
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 /*
@@ -44,7 +40,7 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>
     ) {
-        articleDao.getArticleList().doLocalRequest(callback) {
+        articleDao.getArticles().fetchRoomDB(callback) {
             addSubscribe(it)
         }
     }
@@ -63,25 +59,9 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>
     ) {
-        articleDao.getArticleList()
-            .doOnSubscribe { callback.onShowProgress() }
-            .doOnTerminate { callback.onHideProgress() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : SingleObserver<List<Article>> {
-                override fun onSuccess(t: List<Article>) {
-                    callback.onSuccess(t)
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                    addSubscribe(d)
-                }
-
-                override fun onError(e: Throwable) {
-                    callback.onHideProgress()
-                    e.message?.let { callback.onFailed(404, it) }
-                }
-            })
+        articleDao.getArticles().fetchRoomDB(callback) {
+            addSubscribe(it)
+        }
     }
 
     override fun getSources(
@@ -94,14 +74,10 @@ class AppLocalDataSource(
     }
 
     override fun saveArticles(data: List<Article>, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            articleDao.insertAllArticles(data)
-        }
+        articleDao.insertArticles(data).executeRoomDB(callback)
     }
 
     override fun deleteArticles(callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback){
-            articleDao.deleteAllArticles()
-        }
+        articleDao.deleteArticles().executeRoomDB(callback)
     }
 }

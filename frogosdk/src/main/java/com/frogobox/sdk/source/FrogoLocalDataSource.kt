@@ -3,10 +3,13 @@ package com.frogobox.sdk.source
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.CoreDataSource
-import com.frogobox.sdk.ext.rxJavaCompletableFromAction
-import com.frogobox.sdk.ext.rxJavaObservableSingleJust
+import com.frogobox.sdk.ext.executePreference
+import com.frogobox.sdk.ext.fetchPreference
+import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.util.AppExecutors
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 
 
 /*
@@ -48,33 +51,33 @@ open class FrogoLocalDataSource(
     }
 
     override fun savePrefString(key: String, value: String, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.savePrefString(key, value)
-        }
+        Completable
+            .fromAction { preferences.savePrefString(key, value) }
+            .executePreference(callback)
     }
 
     override fun savePrefLong(key: String, value: Long, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.savePrefLong(key, value)
-        }
+        Completable
+            .fromAction { preferences.savePrefLong(key, value) }
+            .executePreference(callback)
     }
 
     override fun savePrefFloat(key: String, value: Float, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.savePrefFloat(key, value)
-        }
+        Completable
+            .fromAction { preferences.savePrefFloat(key, value) }
+            .executePreference(callback)
     }
 
     override fun savePrefInt(key: String, value: Int, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.savePrefInt(key, value)
-        }
+        Completable
+            .fromAction { preferences.savePrefInt(key, value) }
+            .executePreference(callback)
     }
 
     override fun savePrefBoolean(key: String, value: Boolean, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.savePrefBoolean(key, value)
-        }
+        Completable
+            .fromAction { preferences.savePrefBoolean(key, value) }
+            .executePreference(callback)
     }
 
     override fun deletePref(key: String) {
@@ -82,9 +85,9 @@ open class FrogoLocalDataSource(
     }
 
     override fun deletePref(key: String, callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.deletePref(key)
-        }
+        Completable
+            .fromAction { preferences.deletePref(key) }
+            .executePreference(callback)
     }
 
     override fun nukePref() {
@@ -92,9 +95,9 @@ open class FrogoLocalDataSource(
     }
 
     override fun nukePref(callback: FrogoStateResponse) {
-        rxJavaCompletableFromAction(callback) {
-            preferences.nukePref()
-        }
+        Completable
+            .fromAction { preferences.nukePref() }
+            .executePreference(callback)
     }
 
     override fun getPrefString(key: String): String {
@@ -118,23 +121,23 @@ open class FrogoLocalDataSource(
     }
 
     override fun getPrefString(key: String, callback: FrogoDataResponse<String>) {
-        rxJavaObservableSingleJust(preferences.loadPrefString(key), callback)
+        Observable.just(preferences.loadPrefString(key)).fetchPreference(callback)
     }
 
     override fun getPrefLong(key: String, callback: FrogoDataResponse<Long>) {
-        rxJavaObservableSingleJust(preferences.loadPrefLong(key), callback)
+        Observable.just(preferences.loadPrefLong(key)).fetchPreference(callback)
     }
 
     override fun getPrefFloat(key: String, callback: FrogoDataResponse<Float>) {
-        rxJavaObservableSingleJust(preferences.loadPrefFloat(key), callback)
+        Observable.just(preferences.loadPrefFloat(key)).fetchPreference(callback)
     }
 
     override fun getPrefInt(key: String, callback: FrogoDataResponse<Int>) {
-        rxJavaObservableSingleJust(preferences.loadPrefInt(key), callback)
+        Observable.just(preferences.loadPrefInt(key)).fetchPreference(callback)
     }
 
     override fun getPrefBoolean(key: String, callback: FrogoDataResponse<Boolean>) {
-        rxJavaObservableSingleJust(preferences.loadPrefBoolean(key), callback)
+        Observable.just(preferences.loadPrefBoolean(key)).fetchPreference(callback)
     }
 
 }

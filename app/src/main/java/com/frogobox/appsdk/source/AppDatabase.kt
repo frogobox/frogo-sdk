@@ -46,18 +46,14 @@ abstract class AppDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java, "db_article.db"
-                )
-                    .allowMainThreadQueries()
-                    .addMigrations(MIGRATION_2_3)
+                ).addMigrations(MIGRATION_2_3)
                     .fallbackToDestructiveMigration() // FOR DEVELOPMENT ONLY !!!!
                     .build()
             } else {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java, "db_article.db"
-                )
-                    .allowMainThreadQueries()
-                    .addMigrations(MIGRATION_2_3)
+                ).addMigrations(MIGRATION_2_3)
                     .build()
             }
         }
