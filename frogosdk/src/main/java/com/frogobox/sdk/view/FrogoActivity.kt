@@ -63,6 +63,7 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
         setupViewModel()
         setupOnCreate(savedInstanceState)
         showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
+        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

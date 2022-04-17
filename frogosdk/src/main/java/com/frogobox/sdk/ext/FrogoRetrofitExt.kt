@@ -26,19 +26,25 @@ fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
     callback.onShowProgress()
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
-            showLogDebug("doApiRequest : onSuccess")
+            showLogDebug("doApiRequest : onSuccess : $response")
             response.body()?.let { callback.onSuccess(it) }
 
             showLogDebug("doApiRequest : onHideProgress")
             callback.onHideProgress()
+
+            showLogDebug("doApiRequest : onFinish")
+            callback.onFinish()
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-            showLogDebug("doApiRequest : onFailed")
+            showLogDebug("doApiRequest : onFailed : $t")
             t.localizedMessage?.let { callback.onFailed(500, it) }
 
             showLogDebug("doApiRequest : onHideProgress")
             callback.onHideProgress()
+
+            showLogDebug("doApiRequest : onFinish")
+            callback.onFinish()
         }
     })
 }

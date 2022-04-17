@@ -1,6 +1,8 @@
 package com.frogobox.sdk.view
 
 import android.os.Bundle
+import com.frogobox.sdk.ext.isNetworkConnected
+import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.view.piracycheck.FrogoComponentPiracyActivity
 
 /*
@@ -26,6 +28,7 @@ abstract class FrogoComposeActivity : FrogoComponentPiracyActivity(), IFrogoComp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupViewModel()
+        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
     }
 
 }

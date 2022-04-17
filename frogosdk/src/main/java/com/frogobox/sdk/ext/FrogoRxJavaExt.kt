@@ -117,70 +117,93 @@ fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
         .subscribe({
             showLogDebug("fetchPreference : onLocalSuccess / onSuccess")
             callback.onSuccess(it)
+
+            showLogDebug("fetchPreference : onLocalSuccess / onFinish")
+            callback.onFinish()
         }, {
             showLogError("fetchPreference : onLocalFailure / onFailed")
             it.message?.let { it1 -> callback.onFailed(200, it1) }
+
+            showLogDebug("fetchPreference : onLocalSuccess / onFinish")
+            callback.onFinish()
         })
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun Completable.executeRoomDB(callback: FrogoStateResponse) {
+    callback.onShowProgress()
     subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             showLogDebug("executeRoomDB : onLocalSuccess / onSuccess")
-            showLogDebug("executeRoomDB : onLocalFinish / onFinish")
+            callback.onSuccess()
+
             showLogDebug("executeRoomDB : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            callback.onSuccess()
+
+            showLogDebug("executeRoomDB : onLocalFinish / onFinish")
             callback.onFinish()
         }) {
             showLogError("executeRoomDB : onLocalFailure / onFailed")
-            showLogError("executeRoomDB : onLocalFinish / onFinish")
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
             showLogError("executeRoomDB : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
+            showLogError("executeRoomDB : onLocalFinish / onFinish")
             callback.onFinish()
         }
 }
 
 fun Completable.executePreference(callback: FrogoStateResponse) {
+    showLogDebug("executePreference : doOnSubscribe / onShowProgress")
+    callback.onShowProgress()
     subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             showLogDebug("executePreference : onLocalSuccess / onSuccess")
-            showLogDebug("executePreference : onLocalFinish / onFinish")
+            callback.onSuccess()
+
             showLogDebug("executePreference : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            callback.onSuccess()
+
+            showLogDebug("executePreference : onLocalFinish / onFinish")
             callback.onFinish()
         }) {
             showLogError("executePreference : onLocalFailure / onFailed")
-            showLogError("executePreference : onLocalFinish / onFinish")
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
             showLogError("executePreference : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
+            showLogError("executePreference : onLocalFinish / onFinish")
             callback.onFinish()
         }
 }
 
 fun Completable.executeAction(callback: FrogoStateResponse) {
+    showLogDebug("executeAction : onLocalSuccess / onShowProgress")
+    callback.onShowProgress()
     subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             showLogDebug("executeAction : onLocalSuccess / onSuccess")
-            showLogDebug("executeAction : onLocalFinish / onFinish")
+            callback.onSuccess()
+
             showLogDebug("executeAction : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            callback.onSuccess()
+
+            showLogDebug("executeAction : onLocalFinish / onFinish")
             callback.onFinish()
         }) {
             showLogError("executeAction : onLocalFailure / onFailed")
-            showLogError("executeAction : onLocalFinish / onFinish")
+            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
             showLogError("executeAction : doOnTerminate / onHideProgress")
             callback.onHideProgress()
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+
+            showLogError("executeAction : onLocalFinish / onFinish")
             callback.onFinish()
         }
 }

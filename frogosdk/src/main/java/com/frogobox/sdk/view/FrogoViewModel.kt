@@ -25,15 +25,17 @@ abstract class FrogoViewModel(application: Application) : AndroidViewModel(appli
 
     var eventShowProgress = FrogoMutableLiveData<Boolean>()
     var eventEmpty = FrogoMutableLiveData<Boolean>()
-    var eventFailed = FrogoMutableLiveData<String>()
+    var eventNoInternet = FrogoMutableLiveData<Boolean>()
     var eventFinish = FrogoMutableLiveData<Boolean>()
+    var eventFailedState = FrogoMutableLiveData<Boolean>()
+    var eventFailed = FrogoMutableLiveData<String>()
 
     protected fun showLogDebug(message: String) {
-        FLog.d(message)
+        FLog.d("$TAG : $message")
     }
 
     protected fun showLogError(message: String) {
-        FLog.e(message)
+        FLog.e("$TAG : $message")
     }
 
     open fun start() {}

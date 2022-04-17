@@ -9,6 +9,7 @@ import androidx.core.content.pm.PackageInfoCompat
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.frogobox.log.FLog
+import com.frogobox.sdk.util.FrogoFunc
 import okhttp3.Interceptor
 
 
@@ -75,6 +76,17 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
 
 // -------------------------------------------------------------------------------------------------
 
+fun Context.usingChuck(): Interceptor {
+    return ChuckerInterceptor.Builder(this)
+        .collector(ChuckerCollector(this))
+        .maxContentLength(250000L)
+        .redactHeaders(emptySet())
+        .alwaysReadResponseBody(false)
+        .build()
+}
+
+// -------------------------------------------------------------------------------------------------
+
 fun showLogDebug(message: String) {
     FLog.d("$FROGO_SDK_TAG : $message")
 }
@@ -83,11 +95,8 @@ fun showLogError(message: String) {
     FLog.e("$FROGO_SDK_TAG : $message")
 }
 
-fun Context.usingChuck(): Interceptor {
-    return ChuckerInterceptor.Builder(this)
-        .collector(ChuckerCollector(this))
-        .maxContentLength(250000L)
-        .redactHeaders(emptySet())
-        .alwaysReadResponseBody(false)
-        .build()
+// -------------------------------------------------------------------------------------------------
+
+fun Context.isNetworkConnected(): Boolean {
+    return FrogoFunc.isNetworkConnected(this)
 }

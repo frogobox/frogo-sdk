@@ -1,7 +1,6 @@
 package com.frogobox.sdk.ext
 
 import android.view.View
-import com.frogobox.log.FLog
 
 
 /*
@@ -59,5 +58,27 @@ fun View.emptyViewHandle(isEmptyState: Boolean) {
         visible()
     } else {
         gone()
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.errorViewHandle(isErrorState: Boolean) {
+    showLogDebug("$TAG : isErrorState >> $isErrorState")
+    if (isErrorState) {
+        visible()
+    } else {
+        gone()
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun View.networkViewHandle() {
+    showLogDebug("$TAG : isNetworkState >> ${this.context.isNetworkConnected()}")
+    if (this.context.isNetworkConnected()) {
+        gone()
+    } else {
+        visible()
     }
 }
