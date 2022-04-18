@@ -1,7 +1,6 @@
 package com.frogobox.sdk.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.frogobox.sdk.ext.*
-import com.frogobox.sdk.util.FrogoFunc.isNetworkConnected
 
 /*
  * Created by faisalamir on 28/07/21
@@ -56,15 +54,19 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
     ): View? {
         _binding = setupViewBinding(inflater, container)
         setupViewModel()
-        showLogDebug("$TAG : View Binding : ${binding::class.java.simpleName}")
-        showLogDebug("$TAG : Internet Status : ${context?.isNetworkConnected()}")
+        if (savedInstanceState == null) {
+            showLogDebug("$TAG : View Binding : ${binding::class.java.simpleName}")
+            showLogDebug("$TAG : Internet Status : ${context?.isNetworkConnected()}")
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnViewCreated(view, savedInstanceState)
-        showLogDebug("$TAG : Overriding on ViewCreated")
+        if (savedInstanceState == null) {
+            showLogDebug("$TAG : Overriding on ViewCreated")
+        }
     }
 
     override fun onDestroy() {

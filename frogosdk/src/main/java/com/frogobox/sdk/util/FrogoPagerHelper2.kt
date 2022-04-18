@@ -2,38 +2,41 @@ package com.frogobox.sdk.util
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.frogobox.sdk.ext.showLogDebug
 
+
 /*
- * Created by faisalamir on 26/07/21
+ * Created by faisalamir on 18/04/22
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
  *
  */
-@Deprecated("Use ViewPager2 and FrogoPagerHelper2 instead")
-class FrogoPagerHelper(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager),
-    IFrogoPagerHelper {
+
+class FrogoPagerHelper2(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle), IFrogoPagerHelper {
 
     companion object {
         val TAG: String = FrogoPagerHelper::class.java.simpleName
     }
 
     private val fragments = mutableListOf<Fragment>()
-
     private val titles = mutableListOf<String>()
 
-    override fun getItem(position: Int): Fragment = fragments[position]
+    override fun getItemCount(): Int {
+        return fragments.size
+    }
 
-    override fun getCount(): Int = fragments.size
-
-    override fun getPageTitle(position: Int): CharSequence = titles[position]
+    override fun createFragment(position: Int): Fragment {
+        return fragments[position]
+    }
 
     override fun getTitles(): List<String> {
         return titles

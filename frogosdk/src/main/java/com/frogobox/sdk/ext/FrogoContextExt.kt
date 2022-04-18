@@ -2,8 +2,12 @@ package com.frogobox.sdk.ext
 
 import android.Manifest
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import com.chuckerteam.chucker.api.ChuckerCollector
@@ -99,4 +103,20 @@ fun showLogError(message: String) {
 
 fun Context.isNetworkConnected(): Boolean {
     return FrogoFunc.isNetworkConnected(this)
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun Context.getResColor(@ColorRes color: Int): Int {
+    return ContextCompat.getColor(this, color)
+}
+
+// -------------------------------------------------------------------------------------------------
+
+fun Context.getResDrawable(@DrawableRes drawable: Int): Drawable? {
+    return ContextCompat.getDrawable(this, drawable)
+}
+
+fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
+    return getSharedPreferences(name, Context.MODE_PRIVATE)
 }

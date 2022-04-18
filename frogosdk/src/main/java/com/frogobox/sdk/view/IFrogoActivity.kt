@@ -1,6 +1,8 @@
 package com.frogobox.sdk.view
 
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 
 /*
@@ -19,6 +21,17 @@ interface IFrogoActivity {
 
     fun setupDetailActivity(title: String)
 
+    fun setupDetailActivity(
+        title: String,
+        @DrawableRes actionBackIcon: Int?
+    )
+
+    fun setupDetailActivity(
+        title: String,
+        @DrawableRes actionBackIcon: Int?,
+        @ColorRes backgroundColor: Int?
+    )
+
     fun setupChildFragment(frameId: Int, fragment: Fragment)
 
     fun showToast(message: String)
@@ -29,7 +42,7 @@ interface IFrogoActivity {
 
     fun checkExtra(extraKey: String): Boolean
 
-    fun <Model> FrogoFragmentNewInstance(
+    fun <Model> frogoFragmentNewInstance(
         fragment: FrogoFragment<*>,
         argumentKey: String,
         extraDataResult: Model

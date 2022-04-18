@@ -37,6 +37,13 @@
             android:layout_marginTop="16dp"
             android:text="News API" />
 
+        <Button
+            android:id="@+id/btn_menu_view_pager_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="View Pager 2" />
+
     </LinearLayout>
 
 </ScrollView>

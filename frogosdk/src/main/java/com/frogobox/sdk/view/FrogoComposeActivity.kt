@@ -28,7 +28,9 @@ abstract class FrogoComposeActivity : FrogoComponentPiracyActivity(), IFrogoComp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupViewModel()
-        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
+        if (savedInstanceState == null) {
+            showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
+        }
     }
 
 }

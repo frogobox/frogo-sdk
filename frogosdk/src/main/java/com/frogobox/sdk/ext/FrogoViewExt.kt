@@ -1,6 +1,11 @@
 package com.frogobox.sdk.ext
 
 import android.view.View
+import android.widget.TextView
+import androidx.viewpager2.widget.ViewPager2
+import com.frogobox.sdk.util.FrogoPagerHelper2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 /*

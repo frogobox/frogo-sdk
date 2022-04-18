@@ -1,18 +1,21 @@
 package com.frogobox.sdk.view
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.frogobox.coresdk.util.FrogoConstant.Url.BASE_PLAY_STORE_URL
-import com.frogobox.sdk.util.FrogoFunc
 import com.frogobox.sdk.R
 import com.frogobox.sdk.ext.*
+import com.frogobox.sdk.util.FrogoFunc
 import com.frogobox.sdk.view.piracycheck.FrogoPiracyActivity
 import java.util.*
 
@@ -62,8 +65,10 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
         setContentView(binding.root)
         setupViewModel()
         setupOnCreate(savedInstanceState)
-        showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
-        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
+        if (savedInstanceState == null) {
+            showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
+            showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -81,9 +86,29 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
     }
 
     override fun setupDetailActivity(title: String) {
+        setupDetailActivity(title, null, null)
+    }
+
+    override fun setupDetailActivity(title: String, actionBackIcon: Int?) {
+        setupDetailActivity(title, actionBackIcon, null)
+    }
+
+    override fun setupDetailActivity(
+        title: String,
+        @DrawableRes actionBackIcon: Int?,
+        @ColorRes backgroundColor: Int?
+    ) {
+        showLogDebug("$TAG Setup Detail Activity : Title : $title")
+        showLogDebug("$TAG Setup Detail Activity : Action Back Icon : $actionBackIcon")
+        showLogDebug("$TAG Setup Detail Activity : Background Color: $backgroundColor")
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        showLogDebug("$TAG Setup Detail Activity : $title")
+        if (actionBackIcon != null) {
+            supportActionBar?.setHomeAsUpIndicator(getResDrawable(actionBackIcon))
+        }
+        if (backgroundColor != null) {
+            supportActionBar?.setBackgroundDrawable(ColorDrawable(getResColor(backgroundColor)))
+        }
     }
 
     override fun setupChildFragment(frameId: Int, fragment: Fragment) {
@@ -109,7 +134,7 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
         return intent?.hasExtra(extraKey)!!
     }
 
-    override fun <Model> FrogoFragmentNewInstance(
+    override fun <Model> frogoFragmentNewInstance(
         fragment: FrogoFragment<*>,
         argumentKey: String,
         extraDataResult: Model

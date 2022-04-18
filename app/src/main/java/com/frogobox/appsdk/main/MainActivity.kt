@@ -6,6 +6,7 @@ import com.frogobox.appsdk.databinding.ActivityMainBinding
 import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
+import com.frogobox.appsdk.viewpager.VPagerActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -34,6 +35,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             btnMenuJavaActivity.setOnClickListener {
                 frogoStartActivity<MainJavaActivity>()
+            }
+
+            btnMenuViewPager2.setOnClickListener {
+                frogoStartActivity<VPagerActivity>()
             }
 
         }
