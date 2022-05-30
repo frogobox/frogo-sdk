@@ -112,10 +112,10 @@ dependencies {
     implementation(Androidx.Room.ktx)
     implementation(Androidx.Room.rxJava3)
 
-    implementation("androidx.compose.ui:ui-tooling-preview:${Version.Androidx.compose}")
     implementation(Androidx.Compose.activity)
-    implementation(Androidx.Compose.ui)
     implementation(Androidx.Compose.material)
+    implementation(Androidx.Compose.ui)
+    implementation(Androidx.Compose.uiToolingPreview)
 
     implementation(Google.material)
 
