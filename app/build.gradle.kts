@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.compose") version DependencyGradle.COMPOSE_MULTIPLATFORM_VERSION
     id("kotlin-kapt")
 }
 
@@ -75,11 +74,14 @@ android {
         compose = true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
@@ -94,13 +96,6 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_LOG))
-
-    implementation(compose.ui)
-    implementation(compose.runtime)
-    implementation(compose.preview)
-    implementation(compose.uiTooling)
-    implementation(compose.material)
-    implementation(compose.materialIconsExtended)
 
     implementation(Androidx.appCompat)
     implementation(Androidx.appCompatResources)
@@ -118,6 +113,11 @@ dependencies {
     implementation(Androidx.Room.ktx)
     implementation(Androidx.Room.rxJava3)
 
+    api("androidx.compose.ui:ui-tooling-preview:${Version.Androidx.compose}")
+    api(Androidx.Compose.activity)
+    api(Androidx.Compose.ui)
+    api(Androidx.Compose.material)
+
     implementation(Google.material)
 
     implementation(Koin.core)
@@ -129,7 +129,7 @@ dependencies {
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
 
-    debugImplementation(compose.ui)
-    debugImplementation(compose.uiTooling)
+    debugImplementation(Androidx.Compose.uiTooling)
+    debugImplementation(Androidx.Compose.uiTestManifest)
 
 }

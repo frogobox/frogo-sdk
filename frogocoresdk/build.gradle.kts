@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.compose") version DependencyGradle.COMPOSE_MULTIPLATFORM_VERSION
     `maven-publish`
 }
 
@@ -22,13 +21,6 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-
-    api(compose.ui)
-    api(compose.runtime)
-    api(compose.preview)
-    api(compose.uiTooling)
-    api(compose.material)
-    api(compose.materialIconsExtended)
 
     api(Google.gson)
 
