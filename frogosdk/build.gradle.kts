@@ -111,7 +111,7 @@ dependencies {
     api(GitHub.chucker)
     api(GitHub.glide)
 
-    api("com.github.javiersantos:PiracyChecker:1.2.8")
+    api(GitHub.piracyChecker)
 
     api(JetBrains.coroutinesCore)
     api(JetBrains.coroutinesAndroid)
