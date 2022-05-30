@@ -107,16 +107,15 @@ dependencies {
     implementation(Androidx.Core.ktx)
     implementation(Androidx.Work.runtimeKtx)
     implementation(Androidx.Lifecycle.runtimeKtx)
-    implementation(Androidx.Compose.activity)
 
     implementation(Androidx.Room.runtime)
     implementation(Androidx.Room.ktx)
     implementation(Androidx.Room.rxJava3)
 
-    api("androidx.compose.ui:ui-tooling-preview:${Version.Androidx.compose}")
-    api(Androidx.Compose.activity)
-    api(Androidx.Compose.ui)
-    api(Androidx.Compose.material)
+    implementation("androidx.compose.ui:ui-tooling-preview:${Version.Androidx.compose}")
+    implementation(Androidx.Compose.activity)
+    implementation(Androidx.Compose.ui)
+    implementation(Androidx.Compose.material)
 
     implementation(Google.material)
 
