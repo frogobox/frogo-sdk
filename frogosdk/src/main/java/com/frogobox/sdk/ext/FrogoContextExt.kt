@@ -91,6 +91,15 @@ fun Context.usingChuck(): Interceptor {
 
 // -------------------------------------------------------------------------------------------------
 
+
+inline fun <reified ClassActivity> showLogD(message: String) {
+    FLog.d("${ClassActivity::class.java.simpleName} : $message")
+}
+
+inline fun <reified ClassActivity> showLogE(message: String) {
+    FLog.e("${ClassActivity::class.java.simpleName} : $message")
+}
+
 fun showLogDebug(message: String) {
     FLog.d("$FROGO_SDK_TAG : $message")
 }
