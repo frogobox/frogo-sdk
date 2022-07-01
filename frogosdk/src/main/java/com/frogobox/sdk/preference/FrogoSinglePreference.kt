@@ -17,6 +17,7 @@ import com.frogobox.sdk.ext.singleGetSharedPreferences
  *
  */
 
+@Deprecated("Use PreferenceDelegatesImpl")
 object FrogoSinglePreference {
 
     val TAG: String = FrogoSinglePreference::class.java.simpleName
