@@ -22,12 +22,16 @@ import com.github.javiersantos.piracychecker.utils.apkSignatures
  *
  */
 
-class PiracyDelegatesImpl() : PiracyDelegates {
+class PiracyDelegatesImpl : PiracyDelegates {
+
+    companion object {
+        val TAG: String = PiracyDelegatesImpl::class.java.simpleName
+    }
 
     private var piracyCheckerDisplay = Display.DIALOG
     private lateinit var piracyDelegateContext: Context
 
-    override fun setupPiracyDelegateContext(context: Context) {
+    override fun setupPiracyDelegate(context: Context) {
         showLogD<PiracyDelegatesImpl>("Context : $context")
         piracyDelegateContext = context
     }

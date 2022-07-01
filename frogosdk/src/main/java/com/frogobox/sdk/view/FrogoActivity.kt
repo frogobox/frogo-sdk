@@ -4,19 +4,24 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.frogobox.coresdk.util.FrogoConstant.Url.BASE_PLAY_STORE_URL
 import com.frogobox.sdk.R
+import com.frogobox.sdk.delegate.piracy.PiracyDelegates
+import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
+import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.util.UtilDelegates
+import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
+import com.frogobox.sdk.delegate.view.ViewDelegates
+import com.frogobox.sdk.delegate.view.ViewDelegatesImpl
 import com.frogobox.sdk.ext.*
-import com.frogobox.sdk.util.FrogoFunc
-import com.frogobox.sdk.view.piracycheck.FrogoPiracyActivity
 import java.util.*
 
 
@@ -32,7 +37,12 @@ import java.util.*
  * All rights reserved
  *
  */
-abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoActivity {
+abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(),
+    IFrogoActivity,
+    PiracyDelegates by PiracyDelegatesImpl(),
+    PreferenceDelegates by PreferenceDelegatesImpl(),
+    ViewDelegates by ViewDelegatesImpl(),
+    UtilDelegates by UtilDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoActivity::class.java.simpleName
@@ -52,23 +62,36 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
 
     abstract fun setupViewBinding(): VB
 
-    abstract fun setupOnCreate(savedInstanceState: Bundle?)
-
     // ---------------------------------------------------------------------------------------------
 
-    open fun setupViewModel() {}
+    @Deprecated("Use onCreateExt instead")
+    open fun setupOnCreate(savedInstanceState: Bundle?) {
+    }
+
+    open fun onCreateExt(savedInstanceState: Bundle?) {
+        showLogD<FrogoActivity<VB>>("onCreateExt()")
+    }
+
+    open fun setupViewModel() {
+        showLogD<FrogoActivity<VB>>("setupViewModel()")
+    }
 
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupViewModel()
-        setupOnCreate(savedInstanceState)
         if (savedInstanceState == null) {
+            setupPreferenceDelegates(this)
+            setupPiracyDelegate(this)
+            setupViewDelegates(this)
+            setupUtilDelegates(this)
             showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
+        setupOnCreate(savedInstanceState)
+        onCreateExt(savedInstanceState)
+        setupViewModel()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -84,6 +107,8 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    // ---------------------------------------------------------------------------------------------
 
     override fun setupDetailActivity(title: String) {
         setupDetailActivity(title, null, null)
@@ -118,18 +143,6 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
         }
     }
 
-    override fun showToast(message: String) {
-        showToast(message, Toast.LENGTH_SHORT)
-    }
-
-    override fun setupEmptyView(view: View, isEmpty: Boolean) {
-        view.emptyViewHandle(isEmpty)
-    }
-
-    override fun setupProgressView(view: View, isProgress: Boolean) {
-        view.progressViewHandle(isProgress)
-    }
-
     override fun checkExtra(extraKey: String): Boolean {
         return intent?.hasExtra(extraKey)!!
     }
@@ -155,21 +168,6 @@ abstract class FrogoActivity<VB : ViewBinding> : FrogoPiracyActivity(), IFrogoAc
 
     protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
         return singleGetExtraData(extraKey)
-    }
-
-    override fun isNetworkConnected(): Boolean {
-        return FrogoFunc.isNetworkConnected(this)
-    }
-
-    override fun shareApp(packageName: String, appName: String) {
-        singleStartActivityShareApp(
-            appName,
-            "Hi, let's play $appName. Download now on Google Play! $BASE_PLAY_STORE_URL$packageName"
-        )
-    }
-
-    override fun rateApp(packageName: String) {
-        singleStartActivityOpenApp("$BASE_PLAY_STORE_URL$packageName")
     }
 
     override fun setupFullScreen() {

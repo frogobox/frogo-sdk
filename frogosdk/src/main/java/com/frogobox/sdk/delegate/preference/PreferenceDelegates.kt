@@ -20,6 +20,10 @@ interface PreferenceDelegates {
 
     fun setupPreferenceDelegates(context: Context, prefName: String)
 
+    fun setupPreferenceDelegates(context: Context)
+
+    fun setupPreferenceDelegates(prefName: String)
+
     fun savePrefFloat(key: String, value: Float)
 
     fun savePrefInt(key: String, value: Int)

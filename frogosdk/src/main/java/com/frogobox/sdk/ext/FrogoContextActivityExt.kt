@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.frogobox.log.FLog
 import com.google.gson.Gson
 
 
@@ -23,14 +22,10 @@ import com.google.gson.Gson
 
 private const val TAG = "FrogoContextActivityExt"
 
-// -------------------------------------------------------------------------------------------------
-
 inline fun <reified ClassActivity> Context.startActivityExt() {
     showLogDebug("Activity : ${ClassActivity::class.java.simpleName}")
     startActivity(Intent(this, ClassActivity::class.java))
 }
-
-// -------------------------------------------------------------------------------------------------
 
 inline fun <reified ClassActivity, reified Model> Context.startActivityExt(
     extraKey: String,
@@ -44,14 +39,10 @@ inline fun <reified ClassActivity, reified Model> Context.startActivityExt(
     startActivity(intent)
 }
 
-// -------------------------------------------------------------------------------------------------
-
 inline fun <reified Model> Activity.getExtraDataExt(extraKey: String): Model {
     val extraIntent = intent.getStringExtra(extraKey)
     return Gson().fromJson(extraIntent, Model::class.java)
 }
-
-// -------------------------------------------------------------------------------------------------
 
 fun Context.startActivityExtShareApp(subject: String, text: String) {
     val intent = Intent(Intent.ACTION_SEND)
@@ -63,8 +54,6 @@ fun Context.startActivityExtShareApp(subject: String, text: String) {
     startActivity(Intent.createChooser(intent, subject))
 }
 
-// -------------------------------------------------------------------------------------------------
-
 fun Context.startActivityExtOpenApp(url: String) {
     showLogDebug("$TAG : Url : $url")
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
@@ -72,13 +61,14 @@ fun Context.startActivityExtOpenApp(url: String) {
 
 // -------------------------------------------------------------------------------------------------
 
+
+@Deprecated("Use startActivityExt instead")
 inline fun <reified ClassActivity> Context.singleStartActivity() {
     showLogDebug("Activity : ${ClassActivity::class.java.simpleName}")
     startActivity(Intent(this, ClassActivity::class.java))
 }
 
-// -------------------------------------------------------------------------------------------------
-
+@Deprecated("Use startActivityExt instead")
 inline fun <reified ClassActivity, reified Model> Context.singleStartActivity(
     extraKey: String,
     data: Model
@@ -91,15 +81,13 @@ inline fun <reified ClassActivity, reified Model> Context.singleStartActivity(
     startActivity(intent)
 }
 
-// -------------------------------------------------------------------------------------------------
-
+@Deprecated("Use getExtraDataExt instead")
 inline fun <reified Model> Activity.singleGetExtraData(extraKey: String): Model {
     val extraIntent = intent.getStringExtra(extraKey)
     return Gson().fromJson(extraIntent, Model::class.java)
 }
 
-// -------------------------------------------------------------------------------------------------
-
+@Deprecated("Use startActivityExtShareApp instead")
 fun Context.singleStartActivityShareApp(subject: String, text: String) {
     val intent = Intent(Intent.ACTION_SEND)
     intent.type = "text/plain"
@@ -110,8 +98,7 @@ fun Context.singleStartActivityShareApp(subject: String, text: String) {
     startActivity(Intent.createChooser(intent, subject))
 }
 
-// -------------------------------------------------------------------------------------------------
-
+@Deprecated("Use startActivityExtOpenApp instead")
 fun Context.singleStartActivityOpenApp(url: String) {
     showLogDebug("$TAG : Url : $url")
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))

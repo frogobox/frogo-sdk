@@ -100,12 +100,20 @@ inline fun <reified ClassActivity> showLogE(message: String) {
     FLog.e("${ClassActivity::class.java.simpleName} : $message")
 }
 
+inline fun <reified ClassActivity> showLogI(message: String) {
+    FLog.i("${ClassActivity::class.java.simpleName} : $message")
+}
+
 fun showLogDebug(message: String) {
     FLog.d("$FROGO_SDK_TAG : $message")
 }
 
 fun showLogError(message: String) {
     FLog.e("$FROGO_SDK_TAG : $message")
+}
+
+fun showLogInfo(message: String) {
+    FLog.i("$FROGO_SDK_TAG : $message")
 }
 
 // -------------------------------------------------------------------------------------------------

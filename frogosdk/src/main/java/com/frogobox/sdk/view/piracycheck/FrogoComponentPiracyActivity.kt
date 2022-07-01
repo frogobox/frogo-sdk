@@ -23,6 +23,7 @@ import com.github.javiersantos.piracychecker.utils.apkSignatures
  *
  */
 
+@Deprecated("Use FrogoComposeActivity")
 abstract class FrogoComponentPiracyActivity : ComponentActivity(), IFrogoPiracyActivity {
 
     private var piracyCheckerDisplay = Display.DIALOG

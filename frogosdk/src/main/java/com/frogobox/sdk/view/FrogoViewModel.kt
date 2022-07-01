@@ -17,6 +17,7 @@ import com.frogobox.sdk.util.FrogoMutableLiveData
  * All rights reserved
  *
  */
+@Deprecated("Use FrogoViewModel2 instead")
 abstract class FrogoViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {

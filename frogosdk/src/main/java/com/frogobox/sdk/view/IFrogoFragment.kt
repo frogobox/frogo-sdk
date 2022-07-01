@@ -21,12 +21,6 @@ interface IFrogoFragment {
 
     fun checkArgument(argsKey: String): Boolean
 
-    fun setupEmptyView(view: View, isEmpty: Boolean)
-
-    fun setupProgressView(view: View, isProgress: Boolean)
-
-    fun showToast(message: String)
-
     fun <Model> frogoNewInstance(argsKey: String, data: Model)
 
 }

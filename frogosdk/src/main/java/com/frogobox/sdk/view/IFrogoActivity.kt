@@ -34,12 +34,6 @@ interface IFrogoActivity {
 
     fun setupChildFragment(frameId: Int, fragment: Fragment)
 
-    fun showToast(message: String)
-
-    fun setupEmptyView(view: View, isEmpty: Boolean)
-
-    fun setupProgressView(view: View, isProgress: Boolean)
-
     fun checkExtra(extraKey: String): Boolean
 
     fun <Model> frogoFragmentNewInstance(
@@ -48,14 +42,8 @@ interface IFrogoActivity {
         extraDataResult: Model
     )
 
-    fun isNetworkConnected(): Boolean
-
     fun setupFullScreen()
 
     fun setupHideSystemUI()
-
-    fun shareApp(packageName: String, appName: String)
-
-    fun rateApp(packageName: String)
 
 }

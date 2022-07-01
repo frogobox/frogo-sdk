@@ -18,7 +18,7 @@ import android.content.Context
 
 interface PiracyDelegates {
 
-    fun setupPiracyDelegateContext(context: Context)
+    fun setupPiracyDelegate(context: Context)
 
     fun verifySignature()
 

@@ -4,9 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.frogobox.sdk.delegate.piracy.PiracyDelegates
+import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
+import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.util.UtilDelegates
+import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
+import com.frogobox.sdk.delegate.view.ViewDelegates
+import com.frogobox.sdk.delegate.view.ViewDelegatesImpl
 import com.frogobox.sdk.ext.*
 
 /*
@@ -21,7 +28,12 @@ import com.frogobox.sdk.ext.*
  * All rights reserved
  *
  */
-abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
+abstract class FrogoFragment<VB : ViewBinding> : Fragment(),
+    IFrogoFragment,
+    PiracyDelegates by PiracyDelegatesImpl(),
+    PreferenceDelegates by PreferenceDelegatesImpl(),
+    ViewDelegates by ViewDelegatesImpl(),
+    UtilDelegates by UtilDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoFragment::class.java.simpleName
@@ -53,11 +65,15 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         savedInstanceState: Bundle?
     ): View? {
         _binding = setupViewBinding(inflater, container)
-        setupViewModel()
         if (savedInstanceState == null) {
+            setupPreferenceDelegates(requireContext())
+            setupPiracyDelegate(requireContext())
+            setupViewDelegates(requireContext())
+            setupUtilDelegates(requireContext())
             showLogDebug("$TAG : View Binding : ${binding::class.java.simpleName}")
             showLogDebug("$TAG : Internet Status : ${context?.isNetworkConnected()}")
         }
+        setupViewModel()
         return binding.root
     }
 
@@ -75,6 +91,8 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
         showLogDebug("$TAG : Destroying View Binding")
     }
 
+    // ---------------------------------------------------------------------------------------------
+
     override fun setupChildFragment(frameId: Int, fragment: Fragment) {
         childFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
@@ -84,18 +102,6 @@ abstract class FrogoFragment<VB : ViewBinding> : Fragment(), IFrogoFragment {
 
     override fun checkArgument(argsKey: String): Boolean {
         return requireArguments().containsKey(argsKey)
-    }
-
-    override fun setupEmptyView(view: View, isEmpty: Boolean) {
-        view.emptyViewHandle(isEmpty)
-    }
-
-    override fun setupProgressView(view: View, isProgress: Boolean) {
-        view.progressViewHandle(isProgress)
-    }
-
-    override fun showToast(message: String) {
-        context?.showToast(message, Toast.LENGTH_SHORT)
     }
 
     override fun <Model> frogoNewInstance(argsKey: String, data: Model) {

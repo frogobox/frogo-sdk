@@ -14,6 +14,7 @@ package com.frogobox.sdk.view.piracycheck
  *
  */
 
+@Deprecated("Use IFrogoActivity instead")
 interface IFrogoPiracyActivity {
 
     fun verifySignature()
