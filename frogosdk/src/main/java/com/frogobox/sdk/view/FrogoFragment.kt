@@ -68,7 +68,7 @@ abstract class FrogoFragment : Fragment(),
             setupPiracyDelegate(requireContext())
             setupViewDelegates(requireContext())
             setupUtilDelegates(requireContext())
-            showLogDebug("$TAG : Internet Status : ${context?.isNetworkConnected()}")
+            showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
         }
     }
 
