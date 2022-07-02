@@ -5,6 +5,7 @@ import com.frogobox.appsdk.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
 import com.frogobox.sdk.ext.glideLoad
 import com.frogobox.sdk.ext.singleStartActivity
+import com.frogobox.sdk.ext.startActivityExt
 
 
 /*
@@ -28,7 +29,7 @@ class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHo
             tvNewsTitle.text = data.title
             tvNewsDescription.text = data.description
             root.setOnClickListener {
-                it.context.singleStartActivity<NewsDetailActivity, Article>(
+                it.context.startActivityExt<NewsDetailActivity, Article>(
                     "EXTRA_NEWS_DETAIL",
                     data
                 )

@@ -25,12 +25,12 @@ abstract class FrogoViewModel2 : ViewModel() {
     var eventFailed = FrogoMutableLiveData<String>()
     var eventSuccess = FrogoMutableLiveData<String>()
 
-    var eventEmptyState = FrogoMutableLiveData<Boolean>()
-    var eventFailedState = FrogoMutableLiveData<Boolean>()
-    var eventFinishState = FrogoMutableLiveData<Boolean>()
-    var eventSuccessState = FrogoMutableLiveData<Boolean>()
-    var eventNoInternetState = FrogoMutableLiveData<Boolean>()
-    var eventShowProgressState = FrogoMutableLiveData<Boolean>()
+    var eventEmptyState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventFailedState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventFinishState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventSuccessState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventNoInternetState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventShowProgressState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
 
     open fun onStart() {
         showLogD<FrogoViewModel2>("onStart()")

@@ -1,7 +1,7 @@
 package com.frogobox.appsdk.core
 
 import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.view.FrogoActivity
+import com.frogobox.sdk.view.FrogoBindActivity
 
 /*
  * Created by faisalamir on 02/08/21
@@ -15,4 +15,4 @@ import com.frogobox.sdk.view.FrogoActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoActivity<VB>()
+abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>()

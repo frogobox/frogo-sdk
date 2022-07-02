@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.frogobox.appsdk.databinding.FragmentVpagerBinding
-import com.frogobox.sdk.view.FrogoFragment
+import com.frogobox.sdk.view.FrogoBindFragment
 
 
 /*
@@ -21,7 +21,7 @@ import com.frogobox.sdk.view.FrogoFragment
  *
  */
 
-class VPagerFragment : FrogoFragment<FragmentVpagerBinding>() {
+class VPagerFragment : FrogoBindFragment<FragmentVpagerBinding>() {
     override fun setupViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -29,7 +29,7 @@ class VPagerFragment : FrogoFragment<FragmentVpagerBinding>() {
         return FragmentVpagerBinding.inflate(inflater, container, false)
     }
 
-    override fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
 
     }
 }

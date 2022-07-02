@@ -1,10 +1,10 @@
 package com.frogobox.sdk.ui
 
 import android.os.Bundle
-import com.frogobox.sdk.view.FrogoActivity
 import com.frogobox.sdk.databinding.ActivityFrogoAboutUsBinding
+import com.frogobox.sdk.view.FrogoBindActivity
 
-class FrogoAboutUsActivity : FrogoActivity<ActivityFrogoAboutUsBinding>() {
+class FrogoAboutUsActivity : FrogoBindActivity<ActivityFrogoAboutUsBinding>() {
 
     override fun setupViewBinding(): ActivityFrogoAboutUsBinding {
         return ActivityFrogoAboutUsBinding.inflate(layoutInflater)
@@ -13,7 +13,7 @@ class FrogoAboutUsActivity : FrogoActivity<ActivityFrogoAboutUsBinding>() {
     override fun setupViewModel() {
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
         setupDetailActivity("About Frogobox")
         binding.tvCopyright.text = textCopyright
     }

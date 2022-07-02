@@ -6,17 +6,19 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import com.frogobox.sdk.R
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
 import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.util.DateDelegates
+import com.frogobox.sdk.delegate.util.DateDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
 import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
 import com.frogobox.sdk.delegate.view.ViewDelegates
@@ -37,20 +39,20 @@ import java.util.*
  * All rights reserved
  *
  */
-abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(),
+
+abstract class FrogoActivity: AppCompatActivity(),
     IFrogoActivity,
-    PiracyDelegates by PiracyDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl(),
     ViewDelegates by ViewDelegatesImpl(),
-    UtilDelegates by UtilDelegatesImpl() {
+    UtilDelegates by UtilDelegatesImpl(),
+    DateDelegates by DateDelegatesImpl(),
+    PiracyDelegates by PiracyDelegatesImpl(),
+    PreferenceDelegates by PreferenceDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoActivity::class.java.simpleName
     }
 
     protected val frogoActivity by lazy { this }
-
-    protected val binding: VB by lazy { setupViewBinding() }
 
     protected val textCopyright: String by lazy {
         "${getString(R.string.about_all_right_reserved)} ${getString(R.string.about_copyright)} ${
@@ -60,33 +62,27 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(),
 
     // ---------------------------------------------------------------------------------------------
 
-    abstract fun setupViewBinding(): VB
-
-    // ---------------------------------------------------------------------------------------------
-
     @Deprecated("Use onCreateExt instead")
     open fun setupOnCreate(savedInstanceState: Bundle?) {
     }
 
     open fun onCreateExt(savedInstanceState: Bundle?) {
-        showLogD<FrogoActivity<VB>>("onCreateExt()")
+        showLogD<FrogoActivity>("onCreateExt()")
     }
 
     open fun setupViewModel() {
-        showLogD<FrogoActivity<VB>>("setupViewModel()")
+        showLogD<FrogoActivity>("setupViewModel()")
     }
 
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         if (savedInstanceState == null) {
             setupPreferenceDelegates(this)
             setupPiracyDelegate(this)
             setupViewDelegates(this)
             setupUtilDelegates(this)
-            showLogDebug("$TAG View Binding : ${binding::class.java.simpleName}")
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
         setupOnCreate(savedInstanceState)
@@ -148,7 +144,7 @@ abstract class FrogoActivity<VB : ViewBinding> : AppCompatActivity(),
     }
 
     override fun <Model> frogoFragmentNewInstance(
-        fragment: FrogoFragment<*>,
+        fragment: FrogoFragment,
         argumentKey: String,
         extraDataResult: Model
     ) {

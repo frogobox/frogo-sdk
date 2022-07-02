@@ -1,6 +1,5 @@
 package com.frogobox.sdk.view
 
-import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
@@ -37,7 +36,7 @@ interface IFrogoActivity {
     fun checkExtra(extraKey: String): Boolean
 
     fun <Model> frogoFragmentNewInstance(
-        fragment: FrogoFragment<*>,
+        fragment: FrogoFragment,
         argumentKey: String,
         extraDataResult: Model
     )

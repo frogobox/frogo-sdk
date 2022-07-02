@@ -1,6 +1,5 @@
 package com.frogobox.sdk.view
 
-import android.view.View
 import androidx.fragment.app.Fragment
 
 /*

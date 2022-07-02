@@ -24,12 +24,12 @@ abstract class FrogoViewModel(application: Application) : AndroidViewModel(appli
         val TAG: String = FrogoViewModel::class.java.simpleName
     }
 
-    var eventShowProgress = FrogoMutableLiveData<Boolean>()
-    var eventEmpty = FrogoMutableLiveData<Boolean>()
-    var eventNoInternet = FrogoMutableLiveData<Boolean>()
-    var eventFinish = FrogoMutableLiveData<Boolean>()
-    var eventFailedState = FrogoMutableLiveData<Boolean>()
     var eventFailed = FrogoMutableLiveData<String>()
+    var eventEmpty = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventNoInternet = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventFinish = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventFailedState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var eventShowProgress = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
 
     protected fun showLogDebug(message: String) {
         FLog.d("$TAG : $message")

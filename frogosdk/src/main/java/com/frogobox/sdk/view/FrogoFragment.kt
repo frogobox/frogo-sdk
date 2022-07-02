@@ -1,20 +1,21 @@
 package com.frogobox.sdk.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
+import com.frogobox.sdk.R
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
 import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.util.DateDelegates
+import com.frogobox.sdk.delegate.util.DateDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
 import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
 import com.frogobox.sdk.delegate.view.ViewDelegates
 import com.frogobox.sdk.delegate.view.ViewDelegatesImpl
 import com.frogobox.sdk.ext.*
+import java.util.*
 
 /*
  * Created by faisalamir on 28/07/21
@@ -28,67 +29,56 @@ import com.frogobox.sdk.ext.*
  * All rights reserved
  *
  */
-abstract class FrogoFragment<VB : ViewBinding> : Fragment(),
+abstract class FrogoFragment : Fragment(),
     IFrogoFragment,
     PiracyDelegates by PiracyDelegatesImpl(),
     PreferenceDelegates by PreferenceDelegatesImpl(),
     ViewDelegates by ViewDelegatesImpl(),
-    UtilDelegates by UtilDelegatesImpl() {
+    UtilDelegates by UtilDelegatesImpl(),
+    DateDelegates by DateDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoFragment::class.java.simpleName
     }
 
-    private var _binding: VB? = null
+    protected val frogoActivity: FrogoActivity by lazy {
+        (activity as FrogoActivity)
+    }
 
-    protected val binding: VB get() = _binding!!
-
-    protected val frogoActivity: FrogoActivity<*> by lazy {
-        (activity as FrogoActivity<*>)
+    protected val textCopyright: String by lazy {
+        "${getString(R.string.about_all_right_reserved)} ${getString(R.string.about_copyright)} ${
+            Calendar.getInstance().get(Calendar.YEAR)
+        }"
     }
 
     // ---------------------------------------------------------------------------------------------
 
-    abstract fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+    @Deprecated("Use onViewCreatedExt instead")
+    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {
+    }
 
-    abstract fun setupOnViewCreated(view: View, savedInstanceState: Bundle?)
-
-    // ---------------------------------------------------------------------------------------------
+    open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {}
 
     open fun setupViewModel() {}
 
-    // ---------------------------------------------------------------------------------------------
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = setupViewBinding(inflater, container)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             setupPreferenceDelegates(requireContext())
             setupPiracyDelegate(requireContext())
             setupViewDelegates(requireContext())
             setupUtilDelegates(requireContext())
-            showLogDebug("$TAG : View Binding : ${binding::class.java.simpleName}")
             showLogDebug("$TAG : Internet Status : ${context?.isNetworkConnected()}")
         }
-        setupViewModel()
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnViewCreated(view, savedInstanceState)
+        onViewCreatedExt(view, savedInstanceState)
         if (savedInstanceState == null) {
             showLogDebug("$TAG : Overriding on ViewCreated")
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-        showLogDebug("$TAG : Destroying View Binding")
     }
 
     // ---------------------------------------------------------------------------------------------
