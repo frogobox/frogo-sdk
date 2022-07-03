@@ -53,13 +53,16 @@ abstract class FrogoFragment : Fragment(),
 
     // ---------------------------------------------------------------------------------------------
 
-    @Deprecated("Use onViewCreatedExt instead")
-    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {
+    @Deprecated("Use onViewCreatedExt instead", ReplaceWith("onViewCreatedExt"))
+    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {}
+
+    open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
+        showLogD<FrogoFragment>("Call onViewCreatedExt()")
     }
 
-    open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {}
-
-    open fun setupViewModel() {}
+    open fun setupViewModel() {
+        showLogD<FrogoFragment>("Call setupViewModel()")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,11 +77,12 @@ abstract class FrogoFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupOnViewCreated(view, savedInstanceState)
-        onViewCreatedExt(view, savedInstanceState)
         if (savedInstanceState == null) {
             showLogDebug("$TAG : Overriding on ViewCreated")
         }
+        setupViewModel()
+        setupOnViewCreated(view, savedInstanceState)
+        onViewCreatedExt(view, savedInstanceState)
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -95,22 +99,22 @@ abstract class FrogoFragment : Fragment(),
     }
 
     override fun <Model> frogoNewInstance(argsKey: String, data: Model) {
-        singleNewInstance(argsKey, data)
+        newInstanceExt(argsKey, data)
     }
 
     protected inline fun <reified Model> frogoGetInstance(argsKey: String): Model {
-        return singleGetInstance(argsKey)
+        return getInstanceExt(argsKey)
     }
 
     protected inline fun <reified ClassActivity> frogoStartActivity() {
-        context?.singleStartActivity<ClassActivity>()
+        requireContext().startActivityExt<ClassActivity>()
     }
 
     protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
         extraKey: String,
         data: Model
     ) {
-        context?.singleStartActivity<ClassActivity, Model>(extraKey, data)
+        requireContext().startActivityExt<ClassActivity, Model>(extraKey, data)
     }
 
 }

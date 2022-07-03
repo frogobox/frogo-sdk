@@ -35,6 +35,7 @@ inline fun <reified Model> Fragment.getInstanceExt(argsKey: String): Model {
 
 // -------------------------------------------------------------------------------------------------
 
+@Deprecated("Use newInstanceExt instead")
 fun <Model> Fragment.singleNewInstance(argsKey: String, data: Model) {
     val argsData = Gson().toJson(data)
     val bundleArgs = Bundle().apply {
@@ -43,6 +44,7 @@ fun <Model> Fragment.singleNewInstance(argsKey: String, data: Model) {
     this.arguments = bundleArgs
 }
 
+@Deprecated("Use getInstanceExt instead")
 inline fun <reified Model> Fragment.singleGetInstance(argsKey: String): Model {
     val argsData = this.arguments?.getString(argsKey)
     return Gson().fromJson(argsData, Model::class.java)

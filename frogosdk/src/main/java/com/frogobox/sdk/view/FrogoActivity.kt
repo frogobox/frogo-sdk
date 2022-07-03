@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -62,9 +61,8 @@ abstract class FrogoActivity: AppCompatActivity(),
 
     // ---------------------------------------------------------------------------------------------
 
-    @Deprecated("Use onCreateExt instead")
-    open fun setupOnCreate(savedInstanceState: Bundle?) {
-    }
+    @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
+    open fun setupOnCreate(savedInstanceState: Bundle?) {}
 
     open fun onCreateExt(savedInstanceState: Bundle?) {
         showLogD<FrogoActivity>("onCreateExt()")
@@ -85,9 +83,9 @@ abstract class FrogoActivity: AppCompatActivity(),
             setupUtilDelegates(this)
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
+        setupViewModel()
         setupOnCreate(savedInstanceState)
         onCreateExt(savedInstanceState)
-        setupViewModel()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -151,21 +149,6 @@ abstract class FrogoActivity: AppCompatActivity(),
         fragment.frogoNewInstance(argumentKey, extraDataResult)
     }
 
-    protected inline fun <reified ClassActivity> frogoStartActivity() {
-        singleStartActivity<ClassActivity>()
-    }
-
-    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
-        extraKey: String,
-        data: Model
-    ) {
-        singleStartActivity<ClassActivity, Model>(extraKey, data)
-    }
-
-    protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
-        return singleGetExtraData(extraKey)
-    }
-
     override fun setupFullScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val controller = window.insetsController
@@ -187,6 +170,21 @@ abstract class FrogoActivity: AppCompatActivity(),
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
         showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
+    }
+
+    protected inline fun <reified ClassActivity> frogoStartActivity() {
+        startActivityExt<ClassActivity>()
+    }
+
+    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
+        extraKey: String,
+        data: Model
+    ) {
+        startActivityExt<ClassActivity, Model>(extraKey, data)
+    }
+
+    protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
+        return getExtraDataExt(extraKey)
     }
 
 }
