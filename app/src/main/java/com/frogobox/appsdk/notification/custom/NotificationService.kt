@@ -91,7 +91,7 @@ class NotificationService : IntentService("NotificationService") {
         } else {
             intent = ReplyActivity.getReplyMessageIntent(this, mNotificationId, mMessageId)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_MUTABLE)
         }
     }
 }

@@ -72,7 +72,7 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
             this,
             NOTIFICATION_REQUEST_CODE,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_MUTABLE
         )
 
         val frogoNotification = FrogoNotification.Inject(this)
