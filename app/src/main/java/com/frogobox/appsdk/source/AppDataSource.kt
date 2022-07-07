@@ -56,8 +56,8 @@ interface AppDataSource : ICoreDataSource {
         category: String,
         callback: FrogoDataResponse<SourceResponse>
     )
-    
-    fun saveArticles(data: List<Article> , callback: FrogoStateResponse)
+
+    fun saveArticles(data: List<Article>, callback: FrogoStateResponse)
 
     fun deleteArticles(callback: FrogoStateResponse)
 

@@ -5,7 +5,6 @@ import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.CoreDataSource
 import com.frogobox.sdk.ext.executePreference
 import com.frogobox.sdk.ext.fetchPreference
-import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.util.AppExecutors
 import io.reactivex.rxjava3.core.Completable

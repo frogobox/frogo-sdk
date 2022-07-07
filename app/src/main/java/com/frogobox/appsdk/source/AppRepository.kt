@@ -105,25 +105,29 @@ class AppRepository(
                                                 }
                                             })
 
-                                            savePrefString("KEY_PREF", Gson().toJson(data[0]), object : FrogoStateResponse {
-                                                override fun onSuccess() {
-                                                    showLogDebug("PREFERENCE >>>>>> SUCCESS CREATED")
-                                                }
-                                                override fun onFailed(
-                                                    statusCode: Int,
-                                                    errorMessage: String
-                                                ) {
-                                                }
+                                            savePrefString(
+                                                "KEY_PREF",
+                                                Gson().toJson(data[0]),
+                                                object : FrogoStateResponse {
+                                                    override fun onSuccess() {
+                                                        showLogDebug("PREFERENCE >>>>>> SUCCESS CREATED")
+                                                    }
 
-                                                override fun onFinish() {}
-                                                override fun onHideProgress() {
-                                                    callback.onHideProgress()
-                                                }
+                                                    override fun onFailed(
+                                                        statusCode: Int,
+                                                        errorMessage: String
+                                                    ) {
+                                                    }
 
-                                                override fun onShowProgress() {
-                                                    callback.onShowProgress()
-                                                }
-                                            })
+                                                    override fun onFinish() {}
+                                                    override fun onHideProgress() {
+                                                        callback.onHideProgress()
+                                                    }
+
+                                                    override fun onShowProgress() {
+                                                        callback.onShowProgress()
+                                                    }
+                                                })
 
                                         }
                                     })

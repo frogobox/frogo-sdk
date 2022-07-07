@@ -1,6 +1,5 @@
 package com.frogobox.appsdk.model
 
-import com.frogobox.appsdk.model.Article
 import com.google.gson.annotations.SerializedName
 
 /**

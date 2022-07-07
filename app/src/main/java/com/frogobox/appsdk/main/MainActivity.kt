@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setupViewModel() {
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
         setupHideSystemUI()
         binding.apply {
 

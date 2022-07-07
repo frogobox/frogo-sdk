@@ -6,8 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.R
+import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityStackNotifBinding
 import com.frogobox.sdk.notification.FrogoNotifInboxStyleListener
 import com.frogobox.sdk.notification.FrogoNotification

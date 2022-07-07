@@ -18,7 +18,7 @@ import com.frogobox.sdk.util.FrogoPagerHelper2
  *
  */
 
-fun AppCompatActivity.getViewPagerAdapter() : FrogoPagerHelper {
+fun AppCompatActivity.getViewPagerAdapter(): FrogoPagerHelper {
     return FrogoPagerHelper(this.supportFragmentManager)
 }
 

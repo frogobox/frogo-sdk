@@ -83,6 +83,11 @@ public class FrogoShimmerFrameLayout extends FrameLayout {
         }
     }
 
+    public @Nullable
+    FrogoShimmer getShimmer() {
+        return mFrogoShimmerDrawable.getShimmer();
+    }
+
     public FrogoShimmerFrameLayout setShimmer(@Nullable FrogoShimmer frogoShimmer) {
         mFrogoShimmerDrawable.setShimmer(frogoShimmer);
         if (frogoShimmer != null && frogoShimmer.clipToChildren) {
@@ -92,11 +97,6 @@ public class FrogoShimmerFrameLayout extends FrameLayout {
         }
 
         return this;
-    }
-
-    public @Nullable
-    FrogoShimmer getShimmer() {
-        return mFrogoShimmerDrawable.getShimmer();
     }
 
     /**

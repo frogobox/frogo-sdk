@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.FrogoApp
 import com.frogobox.appsdk.R
+import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityManualBinding
 
 /*

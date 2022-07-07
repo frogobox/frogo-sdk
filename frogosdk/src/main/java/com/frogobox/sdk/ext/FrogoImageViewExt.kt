@@ -2,7 +2,6 @@ package com.frogobox.sdk.ext
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.frogobox.log.FLog
 
 
 /*

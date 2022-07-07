@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsActivity : BaseActivity<ActivityNewsBinding>() {
 
-    private val newsViewModel : NewsViewModel by viewModel()
+    private val newsViewModel: NewsViewModel by viewModel()
 
     override fun setupViewBinding(): ActivityNewsBinding {
         return ActivityNewsBinding.inflate(layoutInflater)
@@ -33,7 +33,7 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
         }
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
         setupDetailActivity("News API")
     }
 

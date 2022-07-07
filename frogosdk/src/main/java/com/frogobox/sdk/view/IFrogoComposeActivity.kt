@@ -12,6 +12,4 @@ package com.frogobox.sdk.view
  * All rights reserved
  *
  */
-interface IFrogoComposeActivity {
-
-}
+interface IFrogoComposeActivity

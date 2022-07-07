@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frogobox.appsdk.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
 import com.frogobox.sdk.ext.glideLoad
-import com.frogobox.sdk.ext.singleStartActivity
 import com.frogobox.sdk.ext.startActivityExt
 
 

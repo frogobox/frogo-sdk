@@ -54,7 +54,8 @@ abstract class FrogoFragment : Fragment(),
     // ---------------------------------------------------------------------------------------------
 
     @Deprecated("Use onViewCreatedExt instead", ReplaceWith("onViewCreatedExt"))
-    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {}
+    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {
+    }
 
     open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
         showLogD<FrogoFragment>("Call onViewCreatedExt()")

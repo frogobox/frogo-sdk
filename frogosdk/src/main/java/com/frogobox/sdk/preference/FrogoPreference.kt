@@ -77,31 +77,66 @@ class FrogoPreference(
 
     override fun loadPrefFloat(key: String): Float {
         showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefFloat -> key   : $key")
-        showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefFloat -> value : ${sharedPreferences.getFloat(key, 0f)}")
+        showLogDebug(
+            "${PreferenceDelegatesImpl.TAG} : loadPrefFloat -> value : ${
+                sharedPreferences.getFloat(
+                    key,
+                    0f
+                )
+            }"
+        )
         return sharedPreferences.getFloat(key, 0f)
     }
 
     override fun loadPrefString(key: String): String {
         showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefString -> key   : $key")
-        showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefString -> value : ${sharedPreferences.getString(key, "")}")
+        showLogDebug(
+            "${PreferenceDelegatesImpl.TAG} : loadPrefString -> value : ${
+                sharedPreferences.getString(
+                    key,
+                    ""
+                )
+            }"
+        )
         return sharedPreferences.getString(key, "")!!
     }
 
     override fun loadPrefInt(key: String): Int {
         showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefInt -> key   : $key")
-        showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefInt -> value : ${sharedPreferences.getInt(key, 0)}")
+        showLogDebug(
+            "${PreferenceDelegatesImpl.TAG} : loadPrefInt -> value : ${
+                sharedPreferences.getInt(
+                    key,
+                    0
+                )
+            }"
+        )
         return sharedPreferences.getInt(key, 0)
     }
 
     override fun loadPrefLong(key: String): Long {
         showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefLong -> key   : $key")
-        showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefLong -> value : ${sharedPreferences.getLong(key, 0)}")
+        showLogDebug(
+            "${PreferenceDelegatesImpl.TAG} : loadPrefLong -> value : ${
+                sharedPreferences.getLong(
+                    key,
+                    0
+                )
+            }"
+        )
         return sharedPreferences.getLong(key, 0)
     }
 
     override fun loadPrefBoolean(key: String): Boolean {
         showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefBoolean -> key   : $key")
-        showLogDebug("${PreferenceDelegatesImpl.TAG} : loadPrefBoolean -> value : ${sharedPreferences.getBoolean(key, false)}")
+        showLogDebug(
+            "${PreferenceDelegatesImpl.TAG} : loadPrefBoolean -> value : ${
+                sharedPreferences.getBoolean(
+                    key,
+                    false
+                )
+            }"
+        )
         return sharedPreferences.getBoolean(key, false)
     }
 

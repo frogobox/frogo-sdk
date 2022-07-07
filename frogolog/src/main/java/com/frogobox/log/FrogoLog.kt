@@ -20,7 +20,7 @@ import com.frogobox.log.LogConstant.SIMPLE_MESSSAGE
 object FrogoLog : IFrogoLog {
 
     // Tag for get class name this function
-    private fun tag() : String {
+    private fun tag(): String {
         return this.javaClass.simpleName
     }
 
@@ -32,7 +32,7 @@ object FrogoLog : IFrogoLog {
     }
 
     // Function Log Simple Debug without message params
-    override fun d(){
+    override fun d() {
         Log.d(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
@@ -42,7 +42,7 @@ object FrogoLog : IFrogoLog {
     }
 
     // Function Log Simple Verbose without message params
-    override fun v(){
+    override fun v() {
         Log.v(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
@@ -52,7 +52,7 @@ object FrogoLog : IFrogoLog {
     }
 
     // Function Log Simple Info without message params
-    override fun i(){
+    override fun i() {
         Log.i(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
@@ -62,7 +62,7 @@ object FrogoLog : IFrogoLog {
     }
 
     // Function Log Simple Warn without message params
-    override fun w(){
+    override fun w() {
         Log.w(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 
@@ -82,7 +82,7 @@ object FrogoLog : IFrogoLog {
     }
 
     // Function Log Simple Error without message params
-    override fun e(){
+    override fun e() {
         Log.e(tag(), "${lineNumber()}: $SIMPLE_MESSSAGE")
     }
 

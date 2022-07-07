@@ -76,7 +76,7 @@ object FrogoDate : IFrogoDate {
             }
 
         } else {
-            timestamp = Date().getTime() / 1000
+            timestamp = Date().time / 1000
         }
         return timestamp
     }

@@ -1,8 +1,5 @@
 package com.frogobox.sdk.preference
 
-import com.frogobox.coresdk.response.FrogoStateResponse
-import io.reactivex.rxjava3.core.Completable
-
 
 /*
  * Created by faisalamir on 07/04/22

@@ -31,44 +31,9 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class FrogoShimmer {
     private static final int COMPONENT_COUNT = 4;
-
-    /**
-     * The shape of the shimmer's highlight. By default LINEAR is used.
-     */
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({Shape.LINEAR, Shape.RADIAL})
-    public @interface Shape {
-        /**
-         * Linear gives a ray reflection effect.
-         */
-        int LINEAR = 0;
-        /**
-         * Radial gives a spotlight effect.
-         */
-        int RADIAL = 1;
-    }
-
-    /**
-     * Direction of the shimmer's sweep.
-     */
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({
-            Direction.LEFT_TO_RIGHT,
-            Direction.TOP_TO_BOTTOM,
-            Direction.RIGHT_TO_LEFT,
-            Direction.BOTTOM_TO_TOP
-    })
-    public @interface Direction {
-        int LEFT_TO_RIGHT = 0;
-        int TOP_TO_BOTTOM = 1;
-        int RIGHT_TO_LEFT = 2;
-        int BOTTOM_TO_TOP = 3;
-    }
-
     final float[] positions = new float[COMPONENT_COUNT];
     final int[] colors = new int[COMPONENT_COUNT];
     final RectF bounds = new RectF();
-
     @Direction
     int direction = Direction.LEFT_TO_RIGHT;
     @ColorInt
@@ -79,23 +44,19 @@ public class FrogoShimmer {
     int shape = Shape.LINEAR;
     int fixedWidth = 0;
     int fixedHeight = 0;
-
     float widthRatio = 1f;
     float heightRatio = 1f;
     float intensity = 0f;
     float dropoff = 0.5f;
     float tilt = 20f;
-
     boolean clipToChildren = true;
     boolean autoStart = true;
     boolean alphaShimmer = true;
-
     int repeatCount = ValueAnimator.INFINITE;
     int repeatMode = ValueAnimator.RESTART;
     long animationDuration = 1000L;
     long repeatDelay;
     long startDelay;
-
     FrogoShimmer() {
     }
 
@@ -151,8 +112,45 @@ public class FrogoShimmer {
         bounds.set(-padding, -padding, width(viewWidth) + padding, height(viewHeight) + padding);
     }
 
+    /**
+     * The shape of the shimmer's highlight. By default LINEAR is used.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({Shape.LINEAR, Shape.RADIAL})
+    public @interface Shape {
+        /**
+         * Linear gives a ray reflection effect.
+         */
+        int LINEAR = 0;
+        /**
+         * Radial gives a spotlight effect.
+         */
+        int RADIAL = 1;
+    }
+
+    /**
+     * Direction of the shimmer's sweep.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            Direction.LEFT_TO_RIGHT,
+            Direction.TOP_TO_BOTTOM,
+            Direction.RIGHT_TO_LEFT,
+            Direction.BOTTOM_TO_TOP
+    })
+    public @interface Direction {
+        int LEFT_TO_RIGHT = 0;
+        int TOP_TO_BOTTOM = 1;
+        int RIGHT_TO_LEFT = 2;
+        int BOTTOM_TO_TOP = 3;
+    }
+
     public abstract static class Builder<T extends Builder<T>> {
         final FrogoShimmer mFrogoShimmer = new FrogoShimmer();
+
+        private static float clamp(float min, float max, float value) {
+            return Math.min(max, Math.max(min, value));
+        }
 
         // Gets around unchecked cast
         protected abstract T getThis();
@@ -474,10 +472,6 @@ public class FrogoShimmer {
             mFrogoShimmer.updateColors();
             mFrogoShimmer.updatePositions();
             return mFrogoShimmer;
-        }
-
-        private static float clamp(float min, float max, float value) {
-            return Math.min(max, Math.max(min, value));
         }
     }
 

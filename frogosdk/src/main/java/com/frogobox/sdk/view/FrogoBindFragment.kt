@@ -4,21 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.R
-import com.frogobox.sdk.delegate.piracy.PiracyDelegates
-import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.preference.PreferenceDelegates
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
-import com.frogobox.sdk.delegate.util.DateDelegates
-import com.frogobox.sdk.delegate.util.DateDelegatesImpl
-import com.frogobox.sdk.delegate.util.UtilDelegates
-import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
-import com.frogobox.sdk.delegate.view.ViewDelegates
-import com.frogobox.sdk.delegate.view.ViewDelegatesImpl
-import com.frogobox.sdk.ext.*
-import java.util.*
+import com.frogobox.sdk.ext.showLogDebug
 
 /*
  * Created by faisalamir on 28/07/21

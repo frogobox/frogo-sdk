@@ -50,6 +50,11 @@ public final class FrogoShimmerDrawable extends Drawable {
         mShimmerPaint.setAntiAlias(true);
     }
 
+    public @Nullable
+    FrogoShimmer getShimmer() {
+        return mFrogoShimmer;
+    }
+
     public void setShimmer(@Nullable FrogoShimmer frogoShimmer) {
         mFrogoShimmer = frogoShimmer;
         if (mFrogoShimmer != null) {
@@ -60,11 +65,6 @@ public final class FrogoShimmerDrawable extends Drawable {
         updateShader();
         updateValueAnimator();
         invalidateSelf();
-    }
-
-    public @Nullable
-    FrogoShimmer getShimmer() {
-        return mFrogoShimmer;
     }
 
     /**

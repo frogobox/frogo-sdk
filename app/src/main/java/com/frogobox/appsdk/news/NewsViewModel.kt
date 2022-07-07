@@ -66,19 +66,19 @@ class NewsViewModel(
     fun getPref() {
         repository.getPrefString("KEY_PREF", object : FrogoDataResponse<String> {
             override fun onFailed(statusCode: Int, errorMessage: String) {
-                
+
             }
 
             override fun onFinish() {
-                
+
             }
 
             override fun onHideProgress() {
-                
+
             }
 
             override fun onShowProgress() {
-                
+
             }
 
             override fun onSuccess(data: String) {

@@ -1,7 +1,6 @@
 package com.frogobox.sdk.util
 
 import android.content.Context
-import java.util.ArrayList
 
 /*
  * Created by faisalamir on 28/07/21
@@ -45,6 +44,6 @@ interface IFrogoFunc {
 
     fun getRawString(context: Context, nameResource: String): Int
 
-    fun waitingMoment(delay: Long, listener:() -> Unit)
+    fun waitingMoment(delay: Long, listener: () -> Unit)
 
 }

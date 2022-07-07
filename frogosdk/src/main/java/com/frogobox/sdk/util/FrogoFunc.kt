@@ -15,7 +15,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.reflect.Type
-import java.util.ArrayList
 
 /*
  * Created by faisalamir on 26/07/21
@@ -91,7 +90,8 @@ object FrogoFunc : IFrogoFunc {
     override fun isNetworkConnected(context: Context): Boolean {
 
         // register activity with the connectivity manager service
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         // if the android version is equal to M
         // or greater we need to use the
@@ -143,7 +143,11 @@ object FrogoFunc : IFrogoFunc {
         return dataArrayList
     }
 
-    override fun <T> fetchRawData(mContext: Context, sourceRaw: Int, shuffle: Boolean): ArrayList<T> {
+    override fun <T> fetchRawData(
+        mContext: Context,
+        sourceRaw: Int,
+        shuffle: Boolean
+    ): ArrayList<T> {
         val dataArrayList = ArrayList<T>()
         val rawDict = mContext.resources.openRawResource(sourceRaw)
         val reader = BufferedReader(InputStreamReader(rawDict))
@@ -176,7 +180,10 @@ object FrogoFunc : IFrogoFunc {
         return gson.fromJson(json, typeToken)
     }
 
-    inline fun <reified T> getArrayFromJsonAsset(context: Context, filename: String): MutableList<T> {
+    inline fun <reified T> getArrayFromJsonAsset(
+        context: Context,
+        filename: String
+    ): MutableList<T> {
         val listData = mutableListOf<T>()
         val rawJson = getJsonFromAsset(context, filename)
         val typeToken = object : TypeToken<List<T>>() {}.type
@@ -198,7 +205,7 @@ object FrogoFunc : IFrogoFunc {
         return (start..end).random()
     }
 
-    override fun waitingMoment(delay: Long, listener:() -> Unit) {
+    override fun waitingMoment(delay: Long, listener: () -> Unit) {
         Handler().postDelayed({ listener() }, delay)
     }
 

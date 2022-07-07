@@ -39,7 +39,7 @@ import java.util.*
  *
  */
 
-abstract class FrogoActivity: AppCompatActivity(),
+abstract class FrogoActivity : AppCompatActivity(),
     IFrogoActivity,
     ViewDelegates by ViewDelegatesImpl(),
     UtilDelegates by UtilDelegatesImpl(),
@@ -62,7 +62,8 @@ abstract class FrogoActivity: AppCompatActivity(),
     // ---------------------------------------------------------------------------------------------
 
     @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
-    open fun setupOnCreate(savedInstanceState: Bundle?) {}
+    open fun setupOnCreate(savedInstanceState: Bundle?) {
+    }
 
     open fun onCreateExt(savedInstanceState: Bundle?) {
         showLogD<FrogoActivity>("onCreateExt()")

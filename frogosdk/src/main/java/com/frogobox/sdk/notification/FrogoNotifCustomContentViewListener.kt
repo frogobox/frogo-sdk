@@ -17,7 +17,7 @@ import android.widget.RemoteViews
  */
 interface FrogoNotifCustomContentViewListener {
 
-    fun setupCustomView() : Int
+    fun setupCustomView(): Int
 
     fun setupComponent(context: Context, customView: RemoteViews)
 

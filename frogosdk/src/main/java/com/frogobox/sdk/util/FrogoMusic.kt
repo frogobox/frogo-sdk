@@ -2,7 +2,6 @@ package com.frogobox.sdk.util
 
 import android.content.Context
 import android.media.MediaPlayer
-import android.util.Log
 import com.frogobox.sdk.ext.showLogDebug
 
 /*

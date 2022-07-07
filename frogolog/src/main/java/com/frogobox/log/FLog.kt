@@ -20,12 +20,12 @@ import com.frogobox.log.LogConstant.SIMPLE_MESSSAGE
 object FLog : IFLog {
 
     // Tag for get class name this function
-    private fun tag() : String {
+    private fun tag(): String {
         return this.javaClass.simpleName
     }
-    
+
     // Function Log Simple Debug without message params
-    override fun d(){
+    override fun d() {
         Log.d(tag(), SIMPLE_MESSSAGE)
     }
 
