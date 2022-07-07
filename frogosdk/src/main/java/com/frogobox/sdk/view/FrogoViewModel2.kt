@@ -1,8 +1,9 @@
 package com.frogobox.sdk.view
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.frogobox.sdk.ext.showLogD
-import com.frogobox.sdk.util.FrogoMutableLiveData
 
 /*
  * Created by faisalamir on 26/07/21
@@ -22,15 +23,29 @@ abstract class FrogoViewModel2 : ViewModel() {
         val TAG: String = FrogoViewModel2::class.java.simpleName
     }
 
-    var eventFailed = FrogoMutableLiveData<String>()
-    var eventSuccess = FrogoMutableLiveData<String>()
+    var _eventFailed = MutableLiveData<String>()
+    var eventFailed: LiveData<String> = _eventFailed
 
-    var eventEmptyState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
-    var eventFailedState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
-    var eventFinishState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
-    var eventSuccessState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
-    var eventNoInternetState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
-    var eventShowProgressState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
+    var _eventSuccess = MutableLiveData<String>()
+    var eventSuccess: LiveData<String> = _eventSuccess
+
+    var _eventEmptyState = MutableLiveData<Boolean>()
+    var eventEmptyState: LiveData<Boolean> = _eventEmptyState
+
+    var _eventFailedState = MutableLiveData<Boolean>()
+    var eventFailedState: LiveData<Boolean> = _eventFailedState
+
+    var _eventFinishState = MutableLiveData<Boolean>()
+    var eventFinishState: LiveData<Boolean> = _eventFinishState
+
+    var _eventSuccessState = MutableLiveData<Boolean>()
+    var eventSuccessState: LiveData<Boolean> = _eventSuccessState
+
+    var _eventNoInternetState = MutableLiveData<Boolean>()
+    var eventNoInternetState: LiveData<Boolean> = _eventNoInternetState
+
+    var _eventShowProgressState = MutableLiveData<Boolean>()
+    var eventShowProgressState: LiveData<Boolean> = _eventShowProgressState
 
     open fun onStart() {
         showLogD<FrogoViewModel2>("onStart()")

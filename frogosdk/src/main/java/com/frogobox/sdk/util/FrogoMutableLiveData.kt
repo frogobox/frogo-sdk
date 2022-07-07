@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  */
 
+@Deprecated("Use MutableLiveData From AndroidX Lifecycle KTX instead")
 class FrogoMutableLiveData<T> : MutableLiveData<T>() {
 
     companion object {
