@@ -20,6 +20,16 @@ interface PiracyDelegates {
 
     fun setupPiracyDelegate(context: Context)
 
+    fun isEmulator(isDebug: Boolean): Boolean
+
+    fun checkRootMethod1(): Boolean
+
+    fun checkRootMethod2(): Boolean
+
+    fun checkRootMethod3(): Boolean
+
+    fun verifyAppFromGooglePlayStore()
+
     fun verifySignature()
 
     fun readSignature()

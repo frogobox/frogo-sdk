@@ -35,7 +35,7 @@ class PreferenceDelegatesImpl : PreferenceDelegates {
         preferenceDelegatesContext = context
     }
 
-    override fun setupPreferenceDelegates(prefName: String) {
+    override fun setupPreferenceDelegatesPrefName(prefName: String) {
         preferenceDelegatesContext.singleGetSharedPreferences(prefName)
         prefEditor = sharedPreferences.edit()
     }

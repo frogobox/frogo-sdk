@@ -22,7 +22,7 @@ interface PreferenceDelegates {
 
     fun setupPreferenceDelegates(context: Context)
 
-    fun setupPreferenceDelegates(prefName: String)
+    fun setupPreferenceDelegatesPrefName(prefName: String)
 
     fun savePrefFloat(key: String, value: Float)
 
@@ -47,6 +47,5 @@ interface PreferenceDelegates {
     fun loadPrefLong(key: String): Long
 
     fun loadPrefBoolean(key: String): Boolean
-
 
 }

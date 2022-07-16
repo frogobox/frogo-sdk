@@ -1,12 +1,16 @@
 package com.frogobox.sdk.delegate.piracy
 
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import com.frogobox.sdk.ext.showLogD
 import com.github.javiersantos.piracychecker.*
 import com.github.javiersantos.piracychecker.enums.Display
 import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.github.javiersantos.piracychecker.utils.apkSignatures
+import java.io.BufferedReader
+import java.io.File
+import java.io.InputStreamReader
 
 
 /*
@@ -35,6 +39,67 @@ class PiracyDelegatesImpl : PiracyDelegates {
         showLogD<PiracyDelegatesImpl>("Context : $context")
         piracyDelegateContext = context
     }
+
+    override fun verifyAppFromGooglePlayStore() {
+        val checker = PiracyChecker(piracyDelegateContext)
+            .enableInstallerId(InstallerID.GOOGLE_PLAY)
+        checker.start()
+    }
+
+    override fun checkRootMethod1(): Boolean {
+        val buildTags = Build.TAGS
+        return buildTags != null && buildTags.contains("test-keys")
+    }
+
+    override fun checkRootMethod2(): Boolean {
+        val paths = arrayOf(
+            "/system/app/Superuser.apk", "/sbin/su", "/system/bin/su", "/system/xbin/su",
+            "/data/local/xbin/su", "/data/local/bin/su", "/system/sd/xbin/su",
+            "/system/bin/failsafe/su", "/data/local/su", "/su/bin/su"
+        )
+        for (path in paths) {
+            if (File(path).exists()) return true
+        }
+        return false
+    }
+
+    override fun checkRootMethod3(): Boolean {
+        var process: Process? = null
+        return try {
+            process = Runtime.getRuntime().exec(arrayOf("/system/xbin/which", "su"))
+            val `in` = BufferedReader(InputStreamReader(process.inputStream))
+            `in`.readLine() != null
+        } catch (t: Throwable) {
+            false
+        } finally {
+            process?.destroy()
+        }
+    }
+
+    override fun isEmulator(isDebug: Boolean): Boolean {
+        return if (isDebug) {
+            false
+        } else {
+            (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")
+                    || Build.FINGERPRINT.startsWith("generic")
+                    || Build.FINGERPRINT.startsWith("unknown")
+                    || Build.HARDWARE.contains("goldfish")
+                    || Build.HARDWARE.contains("ranchu")
+                    || Build.MODEL.contains("google_sdk")
+                    || Build.MODEL.contains("Emulator")
+                    || Build.MODEL.contains("Android SDK built for x86")
+                    || Build.MODEL.contains("VirtualBox")
+                    || Build.MANUFACTURER.contains("Genymotion")
+                    || Build.PRODUCT.contains("sdk_google")
+                    || Build.PRODUCT.contains("google_sdk")
+                    || Build.PRODUCT.contains("sdk")
+                    || Build.PRODUCT.contains("sdk_x86")
+                    || Build.PRODUCT.contains("vbox86p")
+                    || Build.PRODUCT.contains("emulator")
+                    || Build.PRODUCT.contains("simulator"))
+        }
+    }
+
 
     override fun verifySignature() {
         piracyDelegateContext.piracyChecker {
