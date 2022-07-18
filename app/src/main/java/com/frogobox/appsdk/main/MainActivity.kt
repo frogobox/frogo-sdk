@@ -18,6 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupHideSystemUI()
         binding.apply {
 

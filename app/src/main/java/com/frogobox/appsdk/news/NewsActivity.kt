@@ -34,6 +34,7 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
     }
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("News API")
     }
 

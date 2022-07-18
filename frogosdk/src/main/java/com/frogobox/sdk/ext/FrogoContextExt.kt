@@ -137,3 +137,7 @@ fun Context.getResDrawable(@DrawableRes drawable: Int): Drawable? {
 fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
     return getSharedPreferences(name, Context.MODE_PRIVATE)
 }
+
+fun Context.getInstallerId(): String? {
+    return packageManager.getInstallerPackageName(packageName)
+}

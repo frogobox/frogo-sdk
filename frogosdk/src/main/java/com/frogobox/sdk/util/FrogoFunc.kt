@@ -83,6 +83,30 @@ object FrogoFunc : IFrogoFunc {
         alert.show()
     }
 
+    override fun createDialogDefault(
+        context: Context,
+        title: String,
+        message: String,
+        listenerYes: () -> Unit
+    ) {
+        val dialogBuilder = AlertDialog.Builder(context)
+        // set message of alert dialog
+        dialogBuilder.setMessage(message)
+            // if the dialog is cancelable
+            .setCancelable(false)
+            .setPositiveButton("Close") { dialog, id ->
+                // positive button text and action
+                listenerYes()
+                dialog.dismiss()
+            }
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle(title)
+        // show alert dialog
+        alert.show()
+    }
+
     override fun noAction(): Boolean {
         return false
     }

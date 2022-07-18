@@ -1,6 +1,8 @@
 package com.frogobox.appsdk.core
 
+import android.os.Bundle
 import androidx.viewbinding.ViewBinding
+import com.frogobox.appsdk.BuildConfig
 import com.frogobox.sdk.view.FrogoBindActivity
 
 /*
@@ -15,4 +17,10 @@ import com.frogobox.sdk.view.FrogoBindActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>()
+abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>() {
+
+    override fun setupDebugMode(): Boolean {
+        return BuildConfig.DEBUG
+    }
+
+}

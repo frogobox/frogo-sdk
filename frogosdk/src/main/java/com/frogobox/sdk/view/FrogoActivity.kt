@@ -63,6 +63,7 @@ abstract class FrogoActivity : AppCompatActivity(),
 
     @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
     open fun setupOnCreate(savedInstanceState: Bundle?) {
+        showLogD<FrogoActivity>("setupOnCreate() Deprecated use onCreateExt() instead")
     }
 
     open fun onCreateExt(savedInstanceState: Bundle?) {
@@ -73,15 +74,21 @@ abstract class FrogoActivity : AppCompatActivity(),
         showLogD<FrogoActivity>("setupViewModel()")
     }
 
+    open fun setupDebugMode(): Boolean {
+        return true
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             setupPreferenceDelegates(this)
-            setupPiracyDelegate(this)
             setupViewDelegates(this)
             setupUtilDelegates(this)
+            setupPiracyDelegate(this, this)
+            setupPiracyDelegatesDebug(setupDebugMode())
+            connectPiracyChecker()
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
         setupViewModel()

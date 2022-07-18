@@ -37,8 +37,8 @@ class ReplyActivity : BaseActivity<ActivityReplyBinding>() {
 
     override fun setupViewModel() {}
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
-
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         val intent = intent
         if (REPLY_ACTION == intent.action) {
             mMessageId = intent.getIntExtra(KEY_MESSAGE_ID, 0)

@@ -33,7 +33,8 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
     override fun setupViewModel() {
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("FrogoNotification")
         binding.apply {
 

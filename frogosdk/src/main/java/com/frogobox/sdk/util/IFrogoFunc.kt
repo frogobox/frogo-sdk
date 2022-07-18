@@ -28,6 +28,13 @@ interface IFrogoFunc {
         listenerNo: () -> Unit
     )
 
+    fun createDialogDefault(
+        context: Context,
+        title: String,
+        message: String,
+        listenerYes: () -> Unit
+    )
+
     fun noAction(): Boolean
 
     fun randomNumber(start: Int, end: Int): Int

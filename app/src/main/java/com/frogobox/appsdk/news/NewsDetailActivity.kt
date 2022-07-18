@@ -18,6 +18,7 @@ class NewsDetailActivity : BaseActivity<ActivityNewsDetailBinding>() {
     }
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("Detail News")
         binding.apply {
             ivNewsDetailImage.glideLoad(extraData.urlToImage)

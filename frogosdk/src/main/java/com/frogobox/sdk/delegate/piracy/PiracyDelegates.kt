@@ -1,6 +1,7 @@
 package com.frogobox.sdk.delegate.piracy
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 
 
 /*
@@ -16,23 +17,23 @@ import android.content.Context
  *
  */
 
-interface PiracyDelegates {
+interface PiracyDelegates : PiracyCheckRoot {
+
+    fun setupPiracyDelegate(context: Context, activity: AppCompatActivity)
 
     fun setupPiracyDelegate(context: Context)
 
-    fun isEmulator(isDebug: Boolean): Boolean
+    fun setupPiracyDelegatesDebug(isDebug: Boolean)
 
-    fun checkRootMethod1(): Boolean
+    fun connectPiracyChecker()
 
-    fun checkRootMethod2(): Boolean
+    fun connectPiracyChecker(doIsEmulator: () -> Unit)
 
-    fun checkRootMethod3(): Boolean
-
-    fun verifyAppFromGooglePlayStore()
-
-    fun verifySignature()
+    fun isEmulator(): Boolean
 
     fun readSignature()
+
+    fun verifySignature()
 
     fun verifyInstallerId()
 

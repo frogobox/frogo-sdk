@@ -3,7 +3,10 @@ package com.frogobox.sdk.delegate.piracy
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.sdk.ext.getInstallerId
 import com.frogobox.sdk.ext.showLogD
+import com.frogobox.sdk.util.FrogoFunc
 import com.github.javiersantos.piracychecker.*
 import com.github.javiersantos.piracychecker.enums.Display
 import com.github.javiersantos.piracychecker.enums.InstallerID
@@ -32,18 +35,75 @@ class PiracyDelegatesImpl : PiracyDelegates {
         val TAG: String = PiracyDelegatesImpl::class.java.simpleName
     }
 
+    private var piracyCheckerIsDebug = true
     private var piracyCheckerDisplay = Display.DIALOG
     private lateinit var piracyDelegateContext: Context
+    private lateinit var piracyDelegateActivity: AppCompatActivity
+
+    override fun setupPiracyDelegatesDebug(isDebug: Boolean) {
+        piracyCheckerIsDebug = isDebug
+    }
+
+    override fun setupPiracyDelegate(context: Context, activity: AppCompatActivity) {
+        showLogD<PiracyDelegatesImpl>("Context : $context")
+        showLogD<PiracyDelegatesImpl>("Activity : $activity")
+        piracyDelegateContext = context
+        piracyDelegateActivity = activity
+    }
 
     override fun setupPiracyDelegate(context: Context) {
         showLogD<PiracyDelegatesImpl>("Context : $context")
         piracyDelegateContext = context
     }
 
-    override fun verifyAppFromGooglePlayStore() {
-        val checker = PiracyChecker(piracyDelegateContext)
-            .enableInstallerId(InstallerID.GOOGLE_PLAY)
-        checker.start()
+    override fun connectPiracyChecker() {
+        if (piracyCheckerIsDebug) {
+            showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
+            showLogD<PiracyDelegatesImpl>("IntallerId  : ${piracyDelegateContext.getInstallerId()}")
+            showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
+            showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
+            showLogD<PiracyDelegatesImpl>("Please setupDebugMode() to false if using FrogoActivity")
+            showLogD<PiracyDelegatesImpl>("Please set build variant to release")
+        } else {
+            if (isEmulator()) {
+                showLogD<PiracyDelegatesImpl>("isEmulator")
+                FrogoFunc.createDialogDefault(
+                    piracyDelegateContext,
+                    "Warning Prohibited Activity",
+                    "This app is not intended for emulators",
+                ) {
+                    piracyDelegateActivity.finishAffinity()
+                }
+            } else {
+                showLogD<PiracyDelegatesImpl>("isNotEmulator")
+                verifyInstallerId()
+            }
+        }
+    }
+
+    override fun connectPiracyChecker(doIsEmulator: () -> Unit) {
+        if (piracyCheckerIsDebug) {
+            showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
+            showLogD<PiracyDelegatesImpl>("IntallerId  : ${piracyDelegateContext.getInstallerId()}")
+            showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
+            showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
+            showLogD<PiracyDelegatesImpl>("Please setupDebugMode() to false if using FrogoActivity")
+            showLogD<PiracyDelegatesImpl>("Please set build variant to release")
+        } else {
+            if (isEmulator()) {
+                showLogD<PiracyDelegatesImpl>("isEmulator")
+                FrogoFunc.createDialogDefault(
+                    piracyDelegateContext,
+                    "Warning Prohibited Activity",
+                    "This app is not intended for emulators",
+                ) {
+                    doIsEmulator()
+                }
+            } else {
+                showLogD<PiracyDelegatesImpl>("isNotEmulator")
+                verifyInstallerId()
+            }
+        }
     }
 
     override fun checkRootMethod1(): Boolean {
@@ -76,37 +136,24 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }
     }
 
-    override fun isEmulator(isDebug: Boolean): Boolean {
-        return if (isDebug) {
-            false
-        } else {
-            (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")
-                    || Build.FINGERPRINT.startsWith("generic")
-                    || Build.FINGERPRINT.startsWith("unknown")
-                    || Build.HARDWARE.contains("goldfish")
-                    || Build.HARDWARE.contains("ranchu")
-                    || Build.MODEL.contains("google_sdk")
-                    || Build.MODEL.contains("Emulator")
-                    || Build.MODEL.contains("Android SDK built for x86")
-                    || Build.MODEL.contains("VirtualBox")
-                    || Build.MANUFACTURER.contains("Genymotion")
-                    || Build.PRODUCT.contains("sdk_google")
-                    || Build.PRODUCT.contains("google_sdk")
-                    || Build.PRODUCT.contains("sdk")
-                    || Build.PRODUCT.contains("sdk_x86")
-                    || Build.PRODUCT.contains("vbox86p")
-                    || Build.PRODUCT.contains("emulator")
-                    || Build.PRODUCT.contains("simulator"))
-        }
-    }
-
-
-    override fun verifySignature() {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
-            // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
-        }.start()
+    override fun isEmulator(): Boolean {
+        return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.HARDWARE.contains("goldfish")
+                || Build.HARDWARE.contains("ranchu")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MODEL.contains("VirtualBox")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || Build.PRODUCT.contains("sdk_google")
+                || Build.PRODUCT.contains("google_sdk")
+                || Build.PRODUCT.contains("sdk")
+                || Build.PRODUCT.contains("sdk_x86")
+                || Build.PRODUCT.contains("vbox86p")
+                || Build.PRODUCT.contains("emulator")
+                || Build.PRODUCT.contains("simulator"))
     }
 
     override fun readSignature() {
@@ -121,10 +168,23 @@ class PiracyDelegatesImpl : PiracyDelegates {
             .show()
     }
 
+    override fun verifySignature() {
+        piracyDelegateContext.piracyChecker {
+            display(piracyCheckerDisplay)
+            enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
+            // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
+        }.start()
+    }
+
     override fun verifyInstallerId() {
         piracyDelegateContext.piracyChecker {
             display(piracyCheckerDisplay)
-            enableInstallerId(InstallerID.GOOGLE_PLAY)
+            enableInstallerId(
+                InstallerID.GOOGLE_PLAY,
+                InstallerID.AMAZON_APP_STORE,
+                InstallerID.GALAXY_APPS,
+                InstallerID.HUAWEI_APP_GALLERY
+            )
         }.start()
     }
 
@@ -132,7 +192,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         piracyDelegateContext.piracyChecker {
             display(piracyCheckerDisplay)
             enableUnauthorizedAppsCheck()
-            // blockIfUnauthorizedAppUninstalled("license_checker", "block")
+            blockIfUnauthorizedAppUninstalled("license_checker", "block")
         }.start()
     }
 
@@ -172,7 +232,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
     override fun verifyEmulator() {
         piracyDelegateContext.piracyChecker {
             display(piracyCheckerDisplay)
-            enableEmulatorCheck(false)
+            enableEmulatorCheck(true)
         }.start()
     }
 

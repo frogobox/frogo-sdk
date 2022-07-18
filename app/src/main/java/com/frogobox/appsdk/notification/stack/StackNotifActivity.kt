@@ -34,7 +34,8 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
 
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("Stack Notif")
         binding.apply {
             btnSend.setOnClickListener {

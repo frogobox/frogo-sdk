@@ -13,8 +13,8 @@ class VPagerActivity : BaseActivity<ActivityVpagerBinding>() {
         return ActivityVpagerBinding.inflate(layoutInflater)
     }
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
-
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("ViewPager2")
         binding.viewPager2.adapter = getViewPager2Adapter().apply {
             addFragment(VPagerFragment(), "Fragment 1")

@@ -13,7 +13,8 @@ class CustomNotifActivity : BaseActivity<ActivityCustomNotifBinding>() {
 
     override fun setupViewModel() {}
 
-    override fun setupOnCreate(savedInstanceState: Bundle?) {
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        super.onCreateExt(savedInstanceState)
         setupDetailActivity("Custom Notif")
         binding.buttonShowNotification.setOnClickListener {
             startService(Intent(this, NotificationService::class.java))
