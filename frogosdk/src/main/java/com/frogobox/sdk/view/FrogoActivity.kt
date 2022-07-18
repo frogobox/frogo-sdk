@@ -84,9 +84,9 @@ abstract class FrogoActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             setupPreferenceDelegates(this)
+            setupPiracyDelegate(this, this)
             setupViewDelegates(this)
             setupUtilDelegates(this)
-            setupPiracyDelegate(this, this)
             setupPiracyDelegatesDebug(setupDebugMode())
             connectPiracyChecker()
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
