@@ -78,17 +78,23 @@ abstract class FrogoActivity : AppCompatActivity(),
         return true
     }
 
+    open fun setupPiracyMode() {
+        showLogD<FrogoActivity>("setupPiracyMode(), Default Function Call connectPiracyChecker()")
+        showLogD<FrogoActivity>("setupPiracyMode(), For Customize Delete super declaration")
+        connectPiracyChecker()
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             setupPreferenceDelegates(this)
-            setupPiracyDelegate(this, this)
             setupViewDelegates(this)
             setupUtilDelegates(this)
+            setupPiracyDelegate(this, this)
             setupPiracyDelegatesDebug(setupDebugMode())
-            connectPiracyChecker()
+            setupPiracyMode()
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
         setupViewModel()

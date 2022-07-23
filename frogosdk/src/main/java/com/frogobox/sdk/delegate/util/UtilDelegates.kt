@@ -26,4 +26,6 @@ interface UtilDelegates {
 
     fun rateApp(packageName: String)
 
+    fun openPlaystore(packageName: String)
+
 }

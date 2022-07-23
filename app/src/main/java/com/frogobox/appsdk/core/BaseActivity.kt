@@ -1,8 +1,10 @@
 package com.frogobox.appsdk.core
 
-import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.frogobox.appsdk.BuildConfig
+import com.frogobox.sdk.delegate.piracy.FrogoPiracyCallback
+import com.frogobox.sdk.delegate.piracy.FrogoPiracyDialogCallback
+import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.view.FrogoBindActivity
 
 /*
@@ -20,7 +22,21 @@ import com.frogobox.sdk.view.FrogoBindActivity
 abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>() {
 
     override fun setupDebugMode(): Boolean {
-        return BuildConfig.DEBUG
+        return false
+    }
+
+    override fun setupPiracyMode() {
+        connectPiracyChecker(object : FrogoPiracyCallback {
+            override fun doOnPirated(message: PiracyMessage) {
+
+                showPiracedDialog(message, object : FrogoPiracyDialogCallback {
+                    override fun doOnPirated(message: PiracyMessage) {
+                        openPlaystore(packageName)
+                    }
+
+                })
+            }
+        })
     }
 
 }

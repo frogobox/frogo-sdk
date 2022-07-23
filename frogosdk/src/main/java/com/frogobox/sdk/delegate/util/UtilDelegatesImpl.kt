@@ -49,4 +49,8 @@ class UtilDelegatesImpl : UtilDelegates {
         utilDelegatesContext.startActivityExtOpenApp("${FrogoConstant.Url.BASE_PLAY_STORE_URL}$packageName")
     }
 
+    override fun openPlaystore(packageName: String) {
+        utilDelegatesContext.startActivityExtOpenApp("${FrogoConstant.Url.BASE_PLAY_STORE_URL}$packageName")
+    }
+
 }
