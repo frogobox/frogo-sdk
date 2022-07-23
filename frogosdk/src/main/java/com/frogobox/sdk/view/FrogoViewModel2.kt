@@ -23,28 +23,28 @@ abstract class FrogoViewModel2 : ViewModel() {
         val TAG: String = FrogoViewModel2::class.java.simpleName
     }
 
-    var _eventFailed = MutableLiveData<String>()
+    protected var _eventFailed = MutableLiveData<String>()
     var eventFailed: LiveData<String> = _eventFailed
 
-    var _eventSuccess = MutableLiveData<String>()
+    protected var _eventSuccess = MutableLiveData<String>()
     var eventSuccess: LiveData<String> = _eventSuccess
 
-    var _eventEmptyState = MutableLiveData<Boolean>()
+    protected var _eventEmptyState = MutableLiveData<Boolean>()
     var eventEmptyState: LiveData<Boolean> = _eventEmptyState
 
-    var _eventFailedState = MutableLiveData<Boolean>()
+    protected var _eventFailedState = MutableLiveData<Boolean>()
     var eventFailedState: LiveData<Boolean> = _eventFailedState
 
-    var _eventFinishState = MutableLiveData<Boolean>()
+    protected var _eventFinishState = MutableLiveData<Boolean>()
     var eventFinishState: LiveData<Boolean> = _eventFinishState
 
-    var _eventSuccessState = MutableLiveData<Boolean>()
+    protected var _eventSuccessState = MutableLiveData<Boolean>()
     var eventSuccessState: LiveData<Boolean> = _eventSuccessState
 
-    var _eventNoInternetState = MutableLiveData<Boolean>()
+    protected var _eventNoInternetState = MutableLiveData<Boolean>()
     var eventNoInternetState: LiveData<Boolean> = _eventNoInternetState
 
-    var _eventShowProgressState = MutableLiveData<Boolean>()
+    protected var _eventShowProgressState = MutableLiveData<Boolean>()
     var eventShowProgressState: LiveData<Boolean> = _eventShowProgressState
 
     open fun onStart() {
