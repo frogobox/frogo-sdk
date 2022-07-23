@@ -32,7 +32,7 @@
 ## Version Release
 This Is Latest Release
 
-    $version_release = 2.0.4
+    $version_release = 2.0.5
 
 What's New??
 
@@ -77,20 +77,20 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:2.0.4'
+            implementation 'com.github.frogobox:frogo-sdk:2.0.5'
 
             // library frogo-sdk for desktop
-            implementation 'com.github.frogobox.frogo-sdk:frogocoresdk:2.0.4'
+            implementation 'com.github.frogobox.frogo-sdk:frogocoresdk:2.0.5'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:2.0.4")
+            implementation("com.github.frogobox:frogo-sdk:2.0.5")
 
             // library frogo-sdk for desktop
-            implementation("com.github.frogobox.frogo-sdk:frogocoresdk:2.0.4")
+            implementation("com.github.frogobox.frogo-sdk:frogocoresdk:2.0.5")
         }
 
 ### Step 3. Function from this SDK
