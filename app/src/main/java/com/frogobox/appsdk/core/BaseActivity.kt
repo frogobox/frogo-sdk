@@ -22,7 +22,7 @@ import com.frogobox.sdk.view.FrogoBindActivity
 abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>() {
 
     override fun setupDebugMode(): Boolean {
-        return false
+        return BuildConfig.DEBUG
     }
 
     override fun setupPiracyMode() {

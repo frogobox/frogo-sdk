@@ -10,7 +10,7 @@ env:
 on:
   # Triggers the workflow on push or pull request events but only for default and protected branches
   workflow_dispatch:
-    # The workflow will be dispatched to the default queue
+  # The workflow will be dispatched to the default queue
 
 jobs:
   build:

@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.`kotlin-dsl`
-
 plugins {
     `kotlin-dsl`
 }
@@ -9,7 +7,7 @@ repositories {
     maven("https://jitpack.io")
 }
 
-dependencies{
+dependencies {
     // library frogo-build-src
     implementation("com.github.frogobox:open-build-src:2.0.1")
 }

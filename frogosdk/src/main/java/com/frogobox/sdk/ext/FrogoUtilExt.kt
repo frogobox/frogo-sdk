@@ -19,7 +19,7 @@ import java.util.*
  *
  */
 
-fun Any.decimalFormat(): String{
+fun Any.decimalFormat(): String {
     val symbols = DecimalFormatSymbols(Locale.getDefault())
     symbols.decimalSeparator = ','
     symbols.groupingSeparator = '.'

@@ -57,6 +57,7 @@ public class FrogoShimmer {
     long animationDuration = 1000L;
     long repeatDelay;
     long startDelay;
+
     FrogoShimmer() {
     }
 

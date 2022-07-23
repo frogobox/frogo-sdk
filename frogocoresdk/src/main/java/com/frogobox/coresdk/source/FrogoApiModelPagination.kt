@@ -1,7 +1,5 @@
 package com.frogobox.coresdk.source
 
-import com.google.gson.annotations.SerializedName
-
 /*
  * Created by faisalamir on 26/07/21
  * FrogoSDK

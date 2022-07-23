@@ -1,16 +1,19 @@
 ![ScreenShoot Apps](https://raw.githubusercontent.com/frogobox/frogo-sdk/master/docs/image/ss_banner.png?raw=true)
 
 ## About This Project (release 👷🔧️👷‍♀️⛏)
+
 [![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 [![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
 [![Scan with Detekt](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/detekt-analysis.yml)
 [![pages-build-deployment](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
+
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
 - Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
 - License [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
 
 ## ScreenShoot
+
 <table>
 
 <tr>
@@ -30,6 +33,7 @@
 </table>
 
 ## Version Release
+
 This Is Latest Release
 
     $version_release = 2.0.5
@@ -46,7 +50,7 @@ What's New??
 ## Download this project
 
 ### Step 1. Add the JitPack repository to your build file (build.gradle : Project)
-    
+
 #### <Option 1> Groovy Gradle
 
     // Add it in your root build.gradle at the end of repositories:
@@ -70,7 +74,7 @@ allprojects {
     }
 }
 ```
-      
+
 ### Step 2. Add the dependency (build.gradle : Module)
 
     #### <Option 1> Groovy Gradle
@@ -96,6 +100,7 @@ allprojects {
 ### Step 3. Function from this SDK
 
 #### All Class SDK (android)
+
 ```kotlin
 FrogoActivity
 FrogoApplication
@@ -113,6 +118,7 @@ FrogoViewModel
 ```
 
 ### All Class SDK (desktop & android)
+
 ```kotlin
 FrogoApiClient
 FrogoApiModel
@@ -126,6 +132,7 @@ IFrogoDate
 ```
 
 #### FrogoActivity
+
 ```kotlin
 fun setupDetailActivity(title: String)
 
@@ -157,6 +164,7 @@ fun rateApp(packageName: String)
 ```
 
 #### FrogoFragment
+
 ```kotlin
 fun setupChildFragment(frameId: Int, fragment: Fragment)
 
@@ -174,6 +182,7 @@ fun <Model> frogoNewInstance(argsKey: String, data: Model)
 ### Ext Function
 
 #### FrogoRetrofitExt.kt
+
 ```kotlin
 
 // Single Api Request
@@ -197,6 +206,7 @@ fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
 ```
 
 #### FrogoRxJavaObservableExt.kt
+
 ```kotlin
 
 // Single Api Request with scheduler
@@ -236,6 +246,7 @@ fun <T : Any> Observable<T>.doApiRequest(callback: FrogoDataResponse<T>) {
 ```
 
 #### FrogoContextActivityExt.kt
+
 ```kotlin
 
 inline fun <reified ClassActivity> Context.singleStartActivity() {
@@ -286,6 +297,7 @@ fun Context.singleStartActivityOpenApp(url: String) {
 ```
 
 #### FrogoContextFragmentExt.kt
+
 ```kotlin
 
 fun <Model> Fragment.singleNewInstance(argsKey: String, data: Model) {
@@ -306,6 +318,7 @@ inline fun <reified Model> Fragment.singleGetInstance(argsKey: String): Model {
 ```
 
 #### FrogoImageViewExt.kt
+
 ```kotlin
 
 fun ImageView.glideLoad(data: Any?) {
@@ -317,6 +330,7 @@ fun ImageView.glideLoad(data: Any?) {
 ```
 
 #### FrogoViewExt.kt
+
 ```kotlin
 
 fun View.visible() {
@@ -363,6 +377,7 @@ fun View.emptyViewHandle(isEmptyState: Boolean) {
 ```
 
 #### FrogoContextExt.kt
+
 ```kotlin
 
 fun Context.getAppVersionCode(): Int? {
@@ -417,12 +432,14 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
 <summary>Click for detail !!!</summary>
 
 ## FrogoLog
+
 - SDK for your Log problem to make easier developing android apps
 - frogo-log is Long Term Service
 - Line number show
 - Toast for easy develop and debug
 
 ### Screenshoot Result
+
 <table>
     <tr>
         <th>SS 1</th>
@@ -439,9 +456,11 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
 <table>
 
 ### Screenshoot Library Sample
+
 ![ScreenShoot Apps](docs/image/log/ss_result_1.png?raw=true)
 
 ### FrogoLog (with line code)
+
 ```kotlin
 // Function Log Debug
 FrogoLog.d("Debug")
@@ -462,7 +481,9 @@ FrogoLog.e("Error")
 FrogoLog.d()
 
 ```
+
 ### FrogoLog (with line code and Toast)
+
 ```kotlin
 // Function Log Debug (adding context params)
 FrogoLog.d("Debug", this@MainActivity)
@@ -506,6 +527,7 @@ FLog.d()
 ```
 
 ### Flog (without line code with toast)
+
 ```kotlin
 // Function Log Debug (adding context params)
 FLog.d("Debug", this@MainActivity)
@@ -527,9 +549,11 @@ FLog.d(this@MainActivity)
 ```
 
 ### Result FrogoLog
+
 ![ScreenShoot Apps](docs/image/log/ss_result_2.png?raw=true)
 
 ## FrogoNotification
+
 - SDK for your notification problem to make easier developing android apps
 - frogo-notification is under huge large development
 - Notification with singleton method
@@ -571,6 +595,7 @@ FrogoNotification.Inject(this) // Intialize for Context
 ```
 
 ### Simple Notification
+
 ```kotlin
 FrogoNotification.Inject(this) // Intialize for Context
     .setChannelId(CHANNEL_ID) // Intialize for Channel ID
@@ -587,6 +612,7 @@ FrogoNotification.Inject(this) // Intialize for Context
 ```
 
 ### Custom Layout (NEW FEATURE)
+
 ```kotlin
 val collapsed = object : FrogoNotifCustomContentViewListener {
     override fun setupCustomView(): Int {
@@ -594,7 +620,7 @@ val collapsed = object : FrogoNotifCustomContentViewListener {
     }
 
     override fun setupComponent(context: Context, customView: RemoteViews) {
-        customView.apply{
+        customView.apply {
             setTextViewText(R.id.text_view_collapsed_1, "Hello World!")
         }
     }
@@ -624,6 +650,7 @@ FrogoNotification.Inject(this) // Intialize for Context
 ```
 
 ### With Action Replay
+
 ```kotlin
 FrogoNotification.Inject(this)
     .setChannelId(CHANNEL_ID)
@@ -662,6 +689,7 @@ FrogoNotification.Inject(this)
 ```
 
 ### With Inbox Style (Stack)
+
 ```kotlin
 val frogoNotification = FrogoNotification.Inject(this)
     .setChannelId(CHANNEL_ID)
@@ -713,6 +741,7 @@ frogoNotification
 ```
 
 ### With Frogo Style
+
 ```kotlin
 FrogoNotification.Inject(this) // Intialize for Context
     .setSmallIcon(R.drawable.ic_frogo_notif) // Initialize for Small Icon
@@ -723,15 +752,19 @@ FrogoNotification.Inject(this) // Intialize for Context
 
 ### For Documentation
 
-- Method with description [Click Here](https://github.com/amirisback/frogo-notification/blob/master/frogonotification/src/main/java/com/frogobox/frogonotification/IFrogoNotification.kt)
-- Simple Notification [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/simple/MainActivity.kt)
-- With Action Replay [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/custom/NotificationService.kt)
-- With Inbox Style (Stack) [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/stack/StackNotifActivity.kt)
+- Method with
+  description [Click Here](https://github.com/amirisback/frogo-notification/blob/master/frogonotification/src/main/java/com/frogobox/frogonotification/IFrogoNotification.kt)
+- Simple
+  Notification [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/simple/MainActivity.kt)
+- With Action
+  Replay [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/custom/NotificationService.kt)
+- With Inbox Style (
+  Stack) [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/stack/StackNotifActivity.kt)
 
 </details>
 
-
 ## Colaborator
+
 Very open to anyone, I'll write your name under this, please contribute by sending an email to me
 
 - Mail To faisalamircs@gmail.com
@@ -739,6 +772,7 @@ Very open to anyone, I'll write your name under this, please contribute by sendi
 - Example : Github_amirisback_kotlin_admob-helper-implementation
 
 Name Of Contribute
+
 - Muhammad Faisal Amir
 - Waiting List
 - Waiting List
@@ -746,6 +780,7 @@ Name Of Contribute
 Waiting for your contribute
 
 ## Attention !!!
+
 - Please enjoy and don't forget fork and give a star
 - Don't Forget Follow My Github Account
 

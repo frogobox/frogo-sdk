@@ -15,7 +15,7 @@ on:
     branches: [ master ]
 
   workflow_dispatch:
-    # The workflow will be dispatched to the default queue
+  # The workflow will be dispatched to the default queue
 
 jobs:
   build:

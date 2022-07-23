@@ -61,19 +61,6 @@ abstract class FrogoActivity : AppCompatActivity(),
 
     // ---------------------------------------------------------------------------------------------
 
-    @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
-    open fun setupOnCreate(savedInstanceState: Bundle?) {
-        showLogD<FrogoActivity>("setupOnCreate() Deprecated use onCreateExt() instead")
-    }
-
-    open fun onCreateExt(savedInstanceState: Bundle?) {
-        showLogD<FrogoActivity>("onCreateExt()")
-    }
-
-    open fun setupViewModel() {
-        showLogD<FrogoActivity>("setupViewModel()")
-    }
-
     open fun setupDebugMode(): Boolean {
         return true
     }
@@ -84,10 +71,34 @@ abstract class FrogoActivity : AppCompatActivity(),
         connectPiracyChecker()
     }
 
+    open fun setupMonetized() {
+        showLogD<FrogoActivity>("SetupMonetized(), Place For Setup Ads Monetization")
+    }
+
+    open fun setupContentView() {
+        showLogD<FrogoActivity>("setupContentView(), Place For setContentView(view: View)")
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    open fun setupViewModel() {
+        showLogD<FrogoActivity>("setupViewModel()")
+    }
+
+    @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
+    open fun setupOnCreate(savedInstanceState: Bundle?) {
+        showLogD<FrogoActivity>("setupOnCreate() Deprecated use onCreateExt() instead")
+    }
+
+    open fun onCreateExt(savedInstanceState: Bundle?) {
+        showLogD<FrogoActivity>("onCreateExt()")
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupContentView()
         if (savedInstanceState == null) {
             setupPreferenceDelegates(this)
             setupViewDelegates(this)
@@ -95,6 +106,7 @@ abstract class FrogoActivity : AppCompatActivity(),
             setupPiracyDelegate(this, this)
             setupPiracyDelegatesDebug(setupDebugMode())
             setupPiracyMode()
+            setupMonetized()
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
         setupViewModel()

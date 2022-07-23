@@ -38,7 +38,8 @@ class PiracyDelegatesImpl : PiracyDelegates {
         val TAG: String = PiracyDelegatesImpl::class.java.simpleName
 
         const val PIRACY_MESSAGE_TITLE = "This app is not licensed"
-        const val PIRACY_MESSAGE_DESC = "This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources"
+        const val PIRACY_MESSAGE_DESC =
+            "This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources"
         const val PIRACY_MESSAGE_EMU_TITLE = "Warning Prohibited Activity"
         const val PIRACY_MESSAGE_EMU_DESC = "This app is not intended for emulators"
 

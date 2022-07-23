@@ -1,7 +1,7 @@
 package com.frogobox.sdk.view
 
-import android.os.Bundle
 import androidx.viewbinding.ViewBinding
+import com.frogobox.sdk.ext.showLogD
 
 
 /*
@@ -26,8 +26,9 @@ abstract class FrogoBindActivity<VB : ViewBinding> : FrogoActivity() {
 
     abstract fun setupViewBinding(): VB
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setupContentView() {
+        super.setupContentView()
+        showLogD<FrogoBindActivity<VB>>("Binding : $binding")
         setContentView(binding.root)
     }
 
