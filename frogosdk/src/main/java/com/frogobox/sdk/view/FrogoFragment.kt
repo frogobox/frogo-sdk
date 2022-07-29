@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import com.frogobox.sdk.R
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.preference.PreferenceDelegates
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.delegate.util.DateDelegates
 import com.frogobox.sdk.delegate.util.DateDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
@@ -31,11 +29,10 @@ import java.util.*
  */
 abstract class FrogoFragment : Fragment(),
     IFrogoFragment,
-    PiracyDelegates by PiracyDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl(),
     ViewDelegates by ViewDelegatesImpl(),
     UtilDelegates by UtilDelegatesImpl(),
-    DateDelegates by DateDelegatesImpl() {
+    DateDelegates by DateDelegatesImpl(),
+    PiracyDelegates by PiracyDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoFragment::class.java.simpleName
@@ -68,7 +65,6 @@ abstract class FrogoFragment : Fragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            setupPreferenceDelegates(requireContext())
             setupPiracyDelegate(requireContext())
             setupViewDelegates(requireContext())
             setupUtilDelegates(requireContext())

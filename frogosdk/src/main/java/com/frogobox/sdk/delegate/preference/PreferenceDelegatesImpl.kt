@@ -2,7 +2,6 @@ package com.frogobox.sdk.delegate.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.singleGetSharedPreferences
 
@@ -20,33 +19,17 @@ import com.frogobox.sdk.ext.singleGetSharedPreferences
  *
  */
 
-class PreferenceDelegatesImpl : PreferenceDelegates {
+class PreferenceDelegatesImpl(
+    private val context: Context,
+    private val prefName: String
+) : PreferenceDelegates {
 
     companion object {
         val TAG: String = PreferenceDelegatesImpl::class.java.simpleName
     }
 
-    private lateinit var preferenceDelegatesContext: Context
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var prefEditor: SharedPreferences.Editor
-
-    override fun setupPreferenceDelegates(context: Context) {
-        showLogD<PreferenceDelegatesImpl>("Context : $context")
-        preferenceDelegatesContext = context
-    }
-
-    override fun setupPreferenceDelegatesPrefName(prefName: String) {
-        preferenceDelegatesContext.singleGetSharedPreferences(prefName)
-        prefEditor = sharedPreferences.edit()
-    }
-
-    override fun setupPreferenceDelegates(context: Context, prefName: String) {
-        showLogD<PreferenceDelegatesImpl>("Context : $context")
-        showLogD<PreferenceDelegates>("Pref Name : $prefName")
-        preferenceDelegatesContext = context
-        preferenceDelegatesContext.singleGetSharedPreferences(prefName)
-        prefEditor = sharedPreferences.edit()
-    }
+    private val sharedPreferences: SharedPreferences = context.singleGetSharedPreferences(prefName)
+    private val prefEditor: SharedPreferences.Editor = sharedPreferences.edit()
 
     override fun savePrefFloat(key: String, value: Float) {
         showLogDebug("$TAG : savePrefFloat -> key   : $key")
@@ -114,14 +97,7 @@ class PreferenceDelegatesImpl : PreferenceDelegates {
 
     override fun loadPrefBoolean(key: String): Boolean {
         showLogDebug("$TAG : loadPrefBoolean -> key   : $key")
-        showLogDebug(
-            "$TAG : loadPrefBoolean -> value : ${
-                sharedPreferences.getBoolean(
-                    key,
-                    false
-                )
-            }"
-        )
+        showLogDebug("$TAG : loadPrefBoolean -> value : ${sharedPreferences.getBoolean(key, false)}")
         return sharedPreferences.getBoolean(key, false)
     }
 

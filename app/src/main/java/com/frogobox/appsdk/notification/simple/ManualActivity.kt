@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.frogobox.appsdk.FrogoApp
 import com.frogobox.appsdk.R
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityManualBinding
+import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
+import com.frogobox.appsdk.util.AppConstant.NOTIFICATION_ID
 
 /*
  * Created by faisalamir on 19/08/21
@@ -59,13 +60,13 @@ class ManualActivity : BaseActivity<ActivityManualBinding>() {
         expandedView.setImageViewResource(R.id.image_view_expanded, R.drawable.ic_android)
         expandedView.setOnClickPendingIntent(R.id.image_view_expanded, clickPendingIntent)
 
-        val notification = NotificationCompat.Builder(this, FrogoApp.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_android)
             .setCustomContentView(collapsedView)
             .setCustomBigContentView(expandedView) //.setStyle(new NotificationCompat.DecoratedCustomViewStyle())
             .build()
 
-        notificationManager.notify(FrogoApp.NOTIFICATION_ID, notification)
+        notificationManager.notify(NOTIFICATION_ID, notification)
     }
 
 }

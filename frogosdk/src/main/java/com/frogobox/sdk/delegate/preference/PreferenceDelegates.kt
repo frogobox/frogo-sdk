@@ -1,7 +1,5 @@
 package com.frogobox.sdk.delegate.preference
 
-import android.content.Context
-
 
 /*
  * Created by faisalamir on 01/07/22
@@ -17,12 +15,6 @@ import android.content.Context
  */
 
 interface PreferenceDelegates {
-
-    fun setupPreferenceDelegates(context: Context, prefName: String)
-
-    fun setupPreferenceDelegates(context: Context)
-
-    fun setupPreferenceDelegatesPrefName(prefName: String)
 
     fun savePrefFloat(key: String, value: Float)
 

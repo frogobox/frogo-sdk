@@ -2,10 +2,14 @@ package com.frogobox.appsdk
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import com.frogobox.appsdk.di.repositoryModule
 import com.frogobox.appsdk.di.viewModelModule
+import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
+import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
 import com.frogobox.sdk.FrogoApplication
+import java.util.*
 
 /*
  * Created by faisalamir on 19/08/21
@@ -23,16 +27,29 @@ import com.frogobox.sdk.FrogoApplication
 class FrogoApp : FrogoApplication() {
 
     companion object {
-        const val NOTIFICATION_ID = 2
-        const val CHANNEL_ID = "CHANNEL_$NOTIFICATION_ID"
-        const val CHANNEL_NAME = "CHANNEL_NAME_$CHANNEL_ID"
+        val TAG: String = FrogoApplication::class.java.simpleName
+
+        lateinit var instance: FrogoApplication
+
+        fun getContext(): Context = instance.applicationContext
+
+        fun getCurrentLocale(): Locale? {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                instance.resources.configuration.locales[0]
+            } else {
+                instance.resources.configuration.locale
+            }
+        }
+
     }
 
     override fun setupKoinModule(koinApplication: org.koin.core.KoinApplication) {
         koinApplication.modules(listOf(repositoryModule, viewModelModule))
     }
 
-    override fun setupOnCreate() {
+    override fun onCreateExt() {
+        super.onCreateExt()
+        instance = this
         createNotificationChannel()
     }
 

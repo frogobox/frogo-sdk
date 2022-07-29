@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.preference.PreferenceDelegates
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.delegate.util.DateDelegates
 import com.frogobox.sdk.delegate.util.DateDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
@@ -32,11 +30,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  */
 
 abstract class FrogoBottomSheet : BottomSheetDialogFragment(),
-    PiracyDelegates by PiracyDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl(),
     ViewDelegates by ViewDelegatesImpl(),
     UtilDelegates by UtilDelegatesImpl(),
-    DateDelegates by DateDelegatesImpl() {
+    DateDelegates by DateDelegatesImpl(),
+    PiracyDelegates by PiracyDelegatesImpl() {
 
     open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
         showLogD<FrogoFragment>("Call onViewCreatedExt()")
@@ -49,7 +46,6 @@ abstract class FrogoBottomSheet : BottomSheetDialogFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            setupPreferenceDelegates(requireContext())
             setupPiracyDelegate(requireContext())
             setupViewDelegates(requireContext())
             setupUtilDelegates(requireContext())

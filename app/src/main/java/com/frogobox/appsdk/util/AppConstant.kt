@@ -16,6 +16,10 @@ package com.frogobox.appsdk.util
 
 object AppConstant {
 
+    const val NOTIFICATION_ID = 2
+    const val CHANNEL_ID = "CHANNEL_$NOTIFICATION_ID"
+    const val CHANNEL_NAME = "CHANNEL_NAME_$CHANNEL_ID"
+
     object RoomDatabase {
         const val BASE_TABLE_NAME = "table"
         const val TABLE_NAME_DATA = "news_apps_frogo_$BASE_TABLE_NAME"

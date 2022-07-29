@@ -44,8 +44,7 @@ abstract class FrogoActivity : AppCompatActivity(),
     ViewDelegates by ViewDelegatesImpl(),
     UtilDelegates by UtilDelegatesImpl(),
     DateDelegates by DateDelegatesImpl(),
-    PiracyDelegates by PiracyDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl() {
+    PiracyDelegates by PiracyDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoActivity::class.java.simpleName
@@ -100,7 +99,6 @@ abstract class FrogoActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setupContentView()
         if (savedInstanceState == null) {
-            setupPreferenceDelegates(this)
             setupViewDelegates(this)
             setupUtilDelegates(this)
             setupPiracyDelegate(this, this)

@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.preference.PreferenceDelegates
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
 import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
 import com.frogobox.sdk.ext.showLogDebug
@@ -18,15 +16,14 @@ import com.frogobox.sdk.ext.showLogDebug
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.      
+ * Copyright (C) 2021 FrogoBox Inc.
  * All rights reserved
  *
  */
 abstract class FrogoComposeActivity : ComponentActivity(),
     IFrogoComposeActivity,
-    PiracyDelegates by PiracyDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl(),
-    UtilDelegates by UtilDelegatesImpl() {
+    UtilDelegates by UtilDelegatesImpl(),
+    PiracyDelegates by PiracyDelegatesImpl() {
 
     companion object {
         val TAG: String = FrogoComposeActivity::class.java.simpleName
@@ -38,10 +35,10 @@ abstract class FrogoComposeActivity : ComponentActivity(),
         super.onCreate(savedInstanceState)
         setupViewModel()
         if (savedInstanceState == null) {
-            setupPreferenceDelegates(this)
             setupPiracyDelegate(this)
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
     }
 
 }
+

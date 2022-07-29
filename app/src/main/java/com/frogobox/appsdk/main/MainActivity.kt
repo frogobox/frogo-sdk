@@ -7,14 +7,20 @@ import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
 import com.frogobox.appsdk.viewpager.VPagerActivity
+import com.frogobox.sdk.ext.showLogD
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    private val tes: String by lazy {
+        loadPrefString("test")
+    }
 
     override fun setupViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun setupViewModel() {
+        showLogD<MainActivity>(tes)
     }
 
     override fun onCreateExt(savedInstanceState: Bundle?) {

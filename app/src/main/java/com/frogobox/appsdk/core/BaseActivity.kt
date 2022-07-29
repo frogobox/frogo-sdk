@@ -2,9 +2,12 @@ package com.frogobox.appsdk.core
 
 import androidx.viewbinding.ViewBinding
 import com.frogobox.appsdk.BuildConfig
+import com.frogobox.appsdk.FrogoApp
 import com.frogobox.sdk.delegate.piracy.FrogoPiracyCallback
 import com.frogobox.sdk.delegate.piracy.FrogoPiracyDialogCallback
 import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
+import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.view.FrogoBindActivity
 
 /*
@@ -19,7 +22,8 @@ import com.frogobox.sdk.view.FrogoBindActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>() {
+abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>(),
+    PreferenceDelegates by PreferenceDelegatesImpl(FrogoApp.getContext(),"ANJAYY") {
 
     override fun setupDebugMode(): Boolean {
         return BuildConfig.DEBUG

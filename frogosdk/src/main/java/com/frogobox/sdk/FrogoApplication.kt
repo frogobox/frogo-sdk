@@ -3,6 +3,7 @@ package com.frogobox.sdk
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import com.frogobox.sdk.ext.showLogD
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication
@@ -43,12 +44,20 @@ abstract class FrogoApplication : Application() {
 
     abstract fun setupKoinModule(koinApplication: KoinApplication)
 
-    abstract fun setupOnCreate()
+    @Deprecated("Use onCreateExt() instead", ReplaceWith("onCreateExt()"))
+    open fun setupOnCreate() {
+        showLogD<FrogoApplication>("setupOnCreate()")
+    }
+
+    open fun onCreateExt() {
+        showLogD<FrogoApplication>("onCreateExt()")
+    }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
         setupOnCreate()
+        onCreateExt()
         startKoin {
             androidContext(this@FrogoApplication)
             androidLogger(Level.DEBUG)

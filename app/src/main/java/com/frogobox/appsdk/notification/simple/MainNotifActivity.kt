@@ -111,13 +111,13 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
         }
 
         FrogoNotification.Inject(this) // Intialize for Context
-            .setChannelId(FrogoApp.CHANNEL_ID) // Intialize for Channel ID
-            .setChannelName(FrogoApp.CHANNEL_NAME) // Initialize for Channel Name
+            .setChannelId(CHANNEL_ID) // Intialize for Channel ID
+            .setChannelName(CHANNEL_NAME) // Initialize for Channel Name
             .setSmallIcon(R.drawable.ic_android) // Initialize for Small Icon
             .setCustomContentView(collapsed)
             .setCustomBigContentView(expanded)
             .build() // Build the Frogo Notification
-            .launch(FrogoApp.NOTIFICATION_ID) // Notify the Frogo Notification
+            .launch(NOTIFICATION_ID) // Notify the Frogo Notification
 
     }
 
