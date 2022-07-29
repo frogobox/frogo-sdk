@@ -23,7 +23,7 @@ import com.frogobox.sdk.view.FrogoBindActivity
  *
  */
 abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>(),
-    PreferenceDelegates by PreferenceDelegatesImpl(FrogoApp.getContext(),"ANJAYY") {
+    PreferenceDelegates by PreferenceDelegatesImpl(FrogoApp.getContext(), "ANJAYY") {
 
     override fun setupDebugMode(): Boolean {
         return BuildConfig.DEBUG

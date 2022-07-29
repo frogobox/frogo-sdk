@@ -78,6 +78,13 @@ abstract class FrogoActivity : AppCompatActivity(),
         showLogD<FrogoActivity>("setupContentView(), Place For setContentView(view: View)")
     }
 
+    open fun setupDelegates() {
+        showLogD<FrogoActivity>("setupDelegates(), Place For setupDelegates()")
+        setupViewDelegates(this)
+        setupUtilDelegates(this)
+        setupPiracyDelegate(this, this)
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     open fun setupViewModel() {
@@ -99,9 +106,7 @@ abstract class FrogoActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setupContentView()
         if (savedInstanceState == null) {
-            setupViewDelegates(this)
-            setupUtilDelegates(this)
-            setupPiracyDelegate(this, this)
+            setupDelegates()
             setupPiracyDelegatesDebug(setupDebugMode())
             setupPiracyMode()
             setupMonetized()

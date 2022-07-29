@@ -62,12 +62,17 @@ abstract class FrogoFragment : Fragment(),
         showLogD<FrogoFragment>("Call setupViewModel()")
     }
 
+    open fun setupDelegates() {
+        showLogD<FrogoFragment>("Call setupDelegates()")
+        setupViewDelegates(requireContext())
+        setupUtilDelegates(requireContext())
+        setupPiracyDelegate(requireContext())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            setupPiracyDelegate(requireContext())
-            setupViewDelegates(requireContext())
-            setupUtilDelegates(requireContext())
+            setupDelegates()
             showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
         }
     }
