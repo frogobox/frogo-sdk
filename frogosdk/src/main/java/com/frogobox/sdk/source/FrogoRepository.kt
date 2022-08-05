@@ -119,4 +119,55 @@ open class FrogoRepository(
         localDataSource.getPrefBoolean(key, callback)
     }
 
+    override fun getPrefString(key: String, defaultValue: String): String {
+        return localDataSource.getPrefString(key, defaultValue)
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long): Long {
+        return localDataSource.getPrefLong(key, defaultValue)
+    }
+
+    override fun getPrefFloat(key: String, defaultValue: Float): Float {
+        return localDataSource.getPrefFloat(key, defaultValue)
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int): Int {
+        return localDataSource.getPrefInt(key, defaultValue)
+    }
+
+    override fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean {
+        return localDataSource.getPrefBoolean(key, defaultValue)
+    }
+
+    override fun getPrefString(
+        key: String,
+        defaultValue: String,
+        callback: FrogoDataResponse<String>
+    ) {
+        localDataSource.getPrefString(key, defaultValue, callback)
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long, callback: FrogoDataResponse<Long>) {
+        localDataSource.getPrefLong(key, defaultValue, callback)
+    }
+
+    override fun getPrefFloat(
+        key: String,
+        defaultValue: Float,
+        callback: FrogoDataResponse<Float>
+    ) {
+        localDataSource.getPrefFloat(key, defaultValue, callback)
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int, callback: FrogoDataResponse<Int>) {
+        localDataSource.getPrefInt(key, defaultValue, callback)
+    }
+
+    override fun getPrefBoolean(
+        key: String,
+        defaultValue: Boolean,
+        callback: FrogoDataResponse<Boolean>
+    ) {
+        localDataSource.getPrefBoolean(key, defaultValue, callback)
+    }
 }

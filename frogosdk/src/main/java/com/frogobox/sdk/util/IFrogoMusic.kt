@@ -1,6 +1,7 @@
 package com.frogobox.sdk.util
 
 import android.content.Context
+import android.media.MediaPlayer
 
 /*
  * Created by faisalamir on 29/08/21
@@ -16,7 +17,11 @@ import android.content.Context
  */
 interface IFrogoMusic {
 
-    fun playMusic(context: Context, musicFile: Int)
+    fun getMusicPlayer(): MediaPlayer
+
+    fun playMusic()
+
+    fun playMusic(isLooping: Boolean)
 
     fun stopMusic()
 

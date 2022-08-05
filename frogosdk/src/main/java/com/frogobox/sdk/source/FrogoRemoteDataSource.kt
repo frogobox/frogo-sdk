@@ -78,4 +78,48 @@ open class FrogoRemoteDataSource : CoreDataSource() {
 
     override fun getPrefBoolean(key: String, callback: FrogoDataResponse<Boolean>) {}
 
+    override fun getPrefString(key: String, defaultValue: String): String {
+        return defaultValue
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long): Long {
+        return defaultValue
+    }
+
+    override fun getPrefFloat(key: String, defaultValue: Float): Float {
+        return defaultValue
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int): Int {
+        return defaultValue
+    }
+
+    override fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean {
+        return defaultValue
+    }
+
+    override fun getPrefString(
+        key: String,
+        defaultValue: String,
+        callback: FrogoDataResponse<String>
+    ) {
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long, callback: FrogoDataResponse<Long>) {}
+
+    override fun getPrefFloat(
+        key: String,
+        defaultValue: Float,
+        callback: FrogoDataResponse<Float>
+    ) {
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int, callback: FrogoDataResponse<Int>) {}
+
+    override fun getPrefBoolean(
+        key: String,
+        defaultValue: Boolean,
+        callback: FrogoDataResponse<Boolean>
+    ) {
+    }
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -140,4 +141,8 @@ fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
 
 fun Context.getInstallerId(): String? {
     return packageManager.getInstallerPackageName(packageName)
+}
+
+fun Context.createMediaPlayer(resId: Int): MediaPlayer {
+    return MediaPlayer.create(this, resId)
 }

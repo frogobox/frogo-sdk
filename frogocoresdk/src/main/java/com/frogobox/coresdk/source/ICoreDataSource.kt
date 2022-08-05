@@ -54,11 +54,23 @@ interface ICoreDataSource {
     fun getPrefInt(key: String): Int
     fun getPrefBoolean(key: String): Boolean
 
+    fun getPrefString(key: String, defaultValue: String): String
+    fun getPrefLong(key: String, defaultValue: Long): Long
+    fun getPrefFloat(key: String, defaultValue: Float): Float
+    fun getPrefInt(key: String, defaultValue: Int): Int
+    fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean
+
     fun getPrefString(key: String, callback: FrogoDataResponse<String>)
     fun getPrefLong(key: String, callback: FrogoDataResponse<Long>)
     fun getPrefFloat(key: String, callback: FrogoDataResponse<Float>)
     fun getPrefInt(key: String, callback: FrogoDataResponse<Int>)
     fun getPrefBoolean(key: String, callback: FrogoDataResponse<Boolean>)
+
+    fun getPrefString(key: String, defaultValue: String, callback: FrogoDataResponse<String>)
+    fun getPrefLong(key: String, defaultValue: Long, callback: FrogoDataResponse<Long>)
+    fun getPrefFloat(key: String, defaultValue: Float, callback: FrogoDataResponse<Float>)
+    fun getPrefInt(key: String, defaultValue: Int, callback: FrogoDataResponse<Int>)
+    fun getPrefBoolean(key: String, defaultValue: Boolean, callback: FrogoDataResponse<Boolean>)
 
 
 }

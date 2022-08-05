@@ -139,4 +139,55 @@ open class FrogoLocalDataSource(
         Observable.just(preferences.loadPrefBoolean(key)).fetchPreference(callback)
     }
 
+    override fun getPrefString(key: String, defaultValue: String): String {
+        return preferences.loadPrefString(key, defaultValue)
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long): Long {
+        return preferences.loadPrefLong(key, defaultValue)
+    }
+
+    override fun getPrefFloat(key: String, defaultValue: Float): Float {
+        return preferences.loadPrefFloat(key, defaultValue)
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int): Int {
+        return preferences.loadPrefInt(key, defaultValue)
+    }
+
+    override fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean {
+        return preferences.loadPrefBoolean(key, defaultValue)
+    }
+
+    override fun getPrefString(
+        key: String,
+        defaultValue: String,
+        callback: FrogoDataResponse<String>
+    ) {
+        Observable.just(preferences.loadPrefString(key, defaultValue)).fetchPreference(callback)
+    }
+
+    override fun getPrefLong(key: String, defaultValue: Long, callback: FrogoDataResponse<Long>) {
+        Observable.just(preferences.loadPrefLong(key, defaultValue)).fetchPreference(callback)
+    }
+
+    override fun getPrefFloat(
+        key: String,
+        defaultValue: Float,
+        callback: FrogoDataResponse<Float>
+    ) {
+        Observable.just(preferences.loadPrefFloat(key, defaultValue)).fetchPreference(callback)
+    }
+
+    override fun getPrefInt(key: String, defaultValue: Int, callback: FrogoDataResponse<Int>) {
+        Observable.just(preferences.loadPrefInt(key, defaultValue)).fetchPreference(callback)
+    }
+
+    override fun getPrefBoolean(
+        key: String,
+        defaultValue: Boolean,
+        callback: FrogoDataResponse<Boolean>
+    ) {
+        Observable.just(preferences.loadPrefBoolean(key, defaultValue)).fetchPreference(callback)
+    }
 }

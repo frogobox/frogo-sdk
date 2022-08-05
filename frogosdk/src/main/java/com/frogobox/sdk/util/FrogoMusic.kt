@@ -16,27 +16,41 @@ import com.frogobox.sdk.ext.showLogDebug
  * All rights reserved
  *
  */
-object FrogoMusic : IFrogoMusic {
+class FrogoMusic(
+    private val context: Context,
+    private val musicFile: Int
+) : IFrogoMusic {
 
-    val TAG: String = FrogoMusic::class.java.simpleName
+    companion object {
+        val TAG: String = FrogoMusic::class.java.simpleName
+    }
 
-    private lateinit var mediaPlayer: MediaPlayer
+    private val musicPlayer: MediaPlayer = MediaPlayer.create(context, musicFile)
 
-    override fun playMusic(context: Context, musicFile: Int) {
-        mediaPlayer = MediaPlayer.create(context, musicFile)
-        mediaPlayer.start()
-        mediaPlayer.isLooping = true
+    override fun getMusicPlayer(): MediaPlayer {
+        return musicPlayer
+    }
+
+    override fun playMusic(isLooping: Boolean) {
+        musicPlayer.apply {
+            this.isLooping = isLooping
+        }.start()
+        showLogDebug("$TAG : Playing Music : $musicFile")
+    }
+
+    override fun playMusic() {
+        musicPlayer.start()
         showLogDebug("$TAG : Playing Music : $musicFile")
     }
 
     override fun stopMusic() {
-        mediaPlayer.stop()
-        mediaPlayer.release()
+        musicPlayer.stop()
+        musicPlayer.release()
         showLogDebug("$TAG : Music Has Been Stoped")
     }
 
     override fun pauseMusic() {
-        mediaPlayer.pause()
+        musicPlayer.pause()
         showLogDebug("$TAG : Music Has Been Paused")
     }
 

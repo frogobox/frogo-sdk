@@ -32,12 +32,22 @@ interface IFrogoPreference {
 
     fun loadPrefFloat(key: String): Float
 
+    fun loadPrefFloat(key: String, defaultValue: Float): Float
+
     fun loadPrefString(key: String): String
+
+    fun loadPrefString(key: String, defaultValue: String): String
 
     fun loadPrefInt(key: String): Int
 
+    fun loadPrefInt(key: String, defaultValue: Int): Int
+
     fun loadPrefLong(key: String): Long
 
+    fun loadPrefLong(key: String, defaultValue: Long): Long
+
     fun loadPrefBoolean(key: String): Boolean
+
+    fun loadPrefBoolean(key: String, defaultValue: Boolean): Boolean
 
 }
