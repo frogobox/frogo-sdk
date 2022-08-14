@@ -113,6 +113,7 @@ dependencies {
     api(GitHub.glide)
 
     api(GitHub.piracyChecker)
+    api(GitHub.customActivityOnCrash)
 
     api(JetBrains.coroutinesCore)
     api(JetBrains.coroutinesAndroid)

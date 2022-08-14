@@ -35,7 +35,6 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: Web
 
     apply {
 
-        settings.setAppCacheEnabled(true)
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
         settings.mediaPlaybackRequiresUserGesture = false
         settings.loadsImagesAutomatically = true
@@ -99,7 +98,6 @@ fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
 
     apply {
 
-        settings.setAppCacheEnabled(true)
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
         settings.mediaPlaybackRequiresUserGesture = false
         settings.loadsImagesAutomatically = true
@@ -161,8 +159,6 @@ fun WebView.loadUrlExt(url: String) {
     }
 
     apply {
-
-        settings.setAppCacheEnabled(true)
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
         settings.mediaPlaybackRequiresUserGesture = false
         settings.loadsImagesAutomatically = true

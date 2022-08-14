@@ -44,6 +44,13 @@
             android:layout_marginTop="16dp"
             android:text="View Pager 2" />
 
+        <Button
+            android:id="@+id/btn_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Error Crash" />
+
     </LinearLayout>
 
 </ScrollView>

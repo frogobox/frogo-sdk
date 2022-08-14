@@ -6,6 +6,9 @@
 
     <application>
         <activity
+            android:name=".ui.FrogoCustomCrashActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.FrogoAboutUsActivity"
             android:exported="true" />
     </application>

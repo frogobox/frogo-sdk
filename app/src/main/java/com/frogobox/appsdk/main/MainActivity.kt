@@ -48,6 +48,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 frogoStartActivity<VPagerActivity>()
             }
 
+            btnError.setOnClickListener {
+                throw RuntimeException("I'm a cool exception and I crashed the main thread!")
+            }
+
         }
     }
 
