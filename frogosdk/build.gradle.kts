@@ -37,11 +37,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
     }
 
     compileOptions {
@@ -76,11 +71,6 @@ dependencies {
 
     api(Androidx.Core.ktx)
 
-    api(Androidx.Compose.activity)
-    api(Androidx.Compose.material)
-    api(Androidx.Compose.ui)
-    api(Androidx.Compose.uiToolingPreview)
-
     api(Androidx.Lifecycle.runtimeKtx)
     api(Androidx.Lifecycle.viewmodelKtx)
     api(Androidx.Lifecycle.livedataKtx)
@@ -106,7 +96,6 @@ dependencies {
     api(Koin.android)
     api(Koin.androidCompat)
     api(Koin.androidxWorkManager)
-    api(Koin.androidxCompose)
     api(Koin.ktor)
 
     api(GitHub.chucker)
@@ -121,9 +110,6 @@ dependencies {
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
     kapt(GitHub.glideCompiler)
-
-    debugImplementation(Androidx.Compose.uiTooling)
-    debugImplementation(Androidx.Compose.uiTestManifest)
 
 }
 
