@@ -1,8 +1,7 @@
 package com.frogobox.sdk.ext
 
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
+import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.util.FrogoPagerHelper
 import com.frogobox.sdk.util.FrogoPagerHelper2
 
@@ -28,4 +27,10 @@ fun AppCompatActivity.getViewPagerAdapter(): FrogoPagerHelper {
 
 fun AppCompatActivity.getViewPager2Adapter(): FrogoPagerHelper2 {
     return FrogoPagerHelper2(this.supportFragmentManager, this.lifecycle)
+}
+
+fun AppCompatActivity.preference(prefName: String): Lazy<FrogoPreference> {
+    return lazy {
+        FrogoPreference(this, prefName)
+    }
 }
