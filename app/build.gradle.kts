@@ -123,7 +123,6 @@ dependencies {
     implementation(Koin.android)
     implementation(Koin.androidCompat)
     implementation(Koin.androidxWorkManager)
-    implementation(Koin.androidxCompose)
 
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
