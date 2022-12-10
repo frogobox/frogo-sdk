@@ -1,11 +1,11 @@
 package com.frogobox.sdk.view
 
-import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorRes
@@ -70,6 +70,16 @@ abstract class FrogoActivity : AppCompatActivity(),
         showLogD<FrogoActivity>("setupActivityResultExt: $result")
     }
 
+    open fun doOnBackPressedExt() {
+        showLogD<FrogoActivity>("doOnBackPressedExt(), Callback when doing back pressed")
+        finish()
+    }
+
+    open fun onBackPressedExt() {
+        showLogD<FrogoActivity>("onBackPressedExt(), Function call back pressed")
+        onBackPressedDispatcher.onBackPressed()
+    }
+
     open fun setupDebugMode(): Boolean {
         return true
     }
@@ -122,6 +132,7 @@ abstract class FrogoActivity : AppCompatActivity(),
             setupMonetized()
             showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         }
+        setupDoOnBackPressedExt()
         setupViewModel()
         setupOnCreate(savedInstanceState)
         onCreateExt(savedInstanceState)
@@ -224,6 +235,22 @@ abstract class FrogoActivity : AppCompatActivity(),
 
     protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
         return getExtraDataExt(extraKey)
+    }
+
+    private fun setupDoOnBackPressedExt() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT) {
+                // Back is pressed... Finishing the activity
+                doOnBackPressedExt()
+            }
+        } else {
+            onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Back is pressed... Finishing the activity
+                    doOnBackPressedExt()
+                }
+            })
+        }
     }
 
 }
