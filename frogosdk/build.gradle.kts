@@ -97,7 +97,6 @@ dependencies {
     api(Koin.android)
     api(Koin.androidCompat)
     api(Koin.androidxWorkManager)
-    api(Koin.ktor)
 
     api(GitHub.chucker)
     api(GitHub.glide)

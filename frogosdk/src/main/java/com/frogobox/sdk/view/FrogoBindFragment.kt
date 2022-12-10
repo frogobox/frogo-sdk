@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.frogobox.sdk.ext.showLogDebug
 
-/*
+/**
  * Created by faisalamir on 28/07/21
  * FrogoSDK
  * -----------------------------------------

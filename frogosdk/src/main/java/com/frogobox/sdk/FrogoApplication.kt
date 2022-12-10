@@ -15,7 +15,7 @@ import org.koin.core.logger.Level
 import java.util.*
 
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -27,6 +27,7 @@ import java.util.*
  * All rights reserved
  *
  */
+
 abstract class FrogoApplication : Application() {
 
     companion object {

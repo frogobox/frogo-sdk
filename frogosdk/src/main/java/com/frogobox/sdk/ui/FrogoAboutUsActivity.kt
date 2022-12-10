@@ -1,5 +1,7 @@
 package com.frogobox.sdk.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.frogobox.sdk.databinding.ActivityFrogoAboutUsBinding
 import com.frogobox.sdk.view.FrogoBindActivity

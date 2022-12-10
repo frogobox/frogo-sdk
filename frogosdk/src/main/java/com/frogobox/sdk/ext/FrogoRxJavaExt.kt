@@ -1,9 +1,11 @@
 package com.frogobox.sdk.ext
 
+import androidx.lifecycle.MutableLiveData
 import com.frogobox.coresdk.observer.FrogoApiObserver
 import com.frogobox.coresdk.observer.FrogoLocalObserver
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
+import com.frogobox.sdk.source.FrogoResult
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -37,6 +39,7 @@ fun <T : Any> Observable<T>.doApiRequest(
         .doOnTerminate {
             showLogDebug("doApiRequest : doOnTerminate / onHideProgress")
             callback.onHideProgress()
+            callback.onFinish()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : FrogoApiObserver<T>() {
@@ -60,6 +63,35 @@ fun <T : Any> Observable<T>.doApiRequest(
                 addCallbackSubcribe(disposable)
             }
         })
+}
+
+fun <T : Any> Observable<T>.doApiRequest(
+    result: MutableLiveData<FrogoResult<T>>,
+    addCallbackSubcribe: (d: Disposable) -> Unit
+) {
+    doApiRequest(object : FrogoDataResponse<T> {
+        override fun onShowProgress() {
+            result.postValue(FrogoResult.Loading(true))
+        }
+
+        override fun onHideProgress() {
+            result.postValue(FrogoResult.Loading(false))
+        }
+
+        override fun onSuccess(data: T) {
+            result.postValue(FrogoResult.Success(data))
+        }
+
+        override fun onFailed(code: Int, errorMessage: String) {
+            result.postValue(FrogoResult.Error(code, errorMessage))
+        }
+
+        override fun onFinish() {
+            result.postValue(FrogoResult.Finish)
+        }
+    }) {
+        addCallbackSubcribe(it)
+    }
 }
 
 // -------------------------------------------------------------------------------------------------

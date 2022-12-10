@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityNewsBinding
 import com.frogobox.appsdk.model.Article
+import com.frogobox.log.FLog
 import com.frogobox.sdk.ext.progressViewHandle
+import com.frogobox.sdk.source.FrogoResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsActivity : BaseActivity<ActivityNewsBinding>() {

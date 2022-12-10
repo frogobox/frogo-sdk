@@ -4,7 +4,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 
-/*
+/**
  * Created by faisalamir on 28/07/21
  * FrogoSDK
  * -----------------------------------------

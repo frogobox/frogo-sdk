@@ -6,9 +6,16 @@
 
     <application>
         <activity
+            android:name=".ui.FrogoWebViewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.FrogoCustomCrashActivity"
             android:exported="false"
-            android:theme="@style/FrogoAppTheme.HideStatusBarUI"/>
+            android:theme="@style/FrogoAppTheme.HideStatusBarUI" />
         <activity
             android:name=".ui.FrogoAboutUsActivity"
             android:exported="true" />

@@ -25,181 +25,186 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: Web
 
     showLogDebug("WebViewExt : url : $url")
     showLogDebug("WebViewExt : auth : $auth")
-
     callback.onShowProgress()
-    CookieManager.getInstance().setAcceptCookie(true)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
-    }
+    if (!url.contains("http") || !url.contains("https")) {
+        showLogDebug("WebViewExt : Invalid URL")
+        callback.onHideProgress()
+        callback.onFailed()
+    } else {
 
-    apply {
-
-        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
-        settings.mediaPlaybackRequiresUserGesture = false
-        settings.loadsImagesAutomatically = true
-        settings.loadWithOverviewMode = true
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.useWideViewPort = true
+        CookieManager.getInstance().setAcceptCookie(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
         }
 
-        settings.setSupportZoom(true)
-        settings.builtInZoomControls = true
-        settings.displayZoomControls = false
+        apply {
 
-        scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+            settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+            settings.mediaPlaybackRequiresUserGesture = false
+            settings.loadsImagesAutomatically = true
+            settings.loadWithOverviewMode = true
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.useWideViewPort = true
 
-        webChromeClient = WebChromeClient()
-
-        webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                showLogDebug("WebViewExt : onPageFinished : $url")
-                callback.onHideProgress()
-                callback.onFinish()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             }
 
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (error != null) {
-                        showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
-                        showLogDebug("WebViewExt : onReceivedError : ${error.description}")
-                    }
+            settings.setSupportZoom(true)
+            settings.builtInZoomControls = true
+            settings.displayZoomControls = false
+
+            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+
+            webChromeClient = WebChromeClient()
+
+            webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    showLogDebug("WebViewExt : onPageFinished : $url")
+                    callback.onHideProgress()
+                    callback.onFinish()
                 }
-                callback.onHideProgress()
-                callback.onFailed()
-            }
-        }
 
-    }.loadUrl(url, auth)
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?,
+                ) {
+                    super.onReceivedError(view, request, error)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (error != null) {
+                            showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
+                            showLogDebug("WebViewExt : onReceivedError : ${error.description}")
+                        }
+                    }
+                    callback.onHideProgress()
+                    callback.onFailed()
+                }
+            }
+
+        }.loadUrl(url, auth)
+
+    }
 
 }
 
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
 
-    showLogDebug("WebViewExt : url : $url")
-
+    showLogDebug("WebViewExt : URL : $url")
     callback.onShowProgress()
-    CookieManager.getInstance().setAcceptCookie(true)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
-    }
+    if (!url.contains("http") || !url.contains("https")) {
+        showLogDebug("WebViewExt : Invalid URL")
+        callback.onHideProgress()
+        callback.onFailed()
+    } else {
 
-    apply {
-
-        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
-        settings.mediaPlaybackRequiresUserGesture = false
-        settings.loadsImagesAutomatically = true
-        settings.loadWithOverviewMode = true
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.useWideViewPort = true
+        CookieManager.getInstance().setAcceptCookie(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
         }
 
-        settings.setSupportZoom(true)
-        settings.builtInZoomControls = true
-        settings.displayZoomControls = false
+        apply {
 
-        scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+            settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+            settings.mediaPlaybackRequiresUserGesture = false
+            settings.loadsImagesAutomatically = true
+            settings.loadWithOverviewMode = true
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.useWideViewPort = true
 
-        webChromeClient = WebChromeClient()
-
-        webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                showLogDebug("WebViewExt : onPageFinished : $url")
-                callback.onHideProgress()
-                callback.onFinish()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             }
 
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (error != null) {
-                        showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
-                        showLogDebug("WebViewExt : onReceivedError : ${error.description}")
-                    }
+            settings.setSupportZoom(true)
+            settings.builtInZoomControls = true
+            settings.displayZoomControls = false
+
+            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+
+            webChromeClient = WebChromeClient()
+
+            webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    showLogDebug("WebViewExt : onPageFinished : $url")
+                    callback.onHideProgress()
+                    callback.onFinish()
                 }
-                callback.onHideProgress()
-                callback.onFailed()
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?,
+                ) {
+                    super.onReceivedError(view, request, error)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (error != null) {
+                            showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
+                            showLogDebug("WebViewExt : onReceivedError : ${error.description}")
+                        }
+                    }
+                    callback.onHideProgress()
+                    callback.onFailed()
+                }
             }
+
+        }.loadUrl(url)
+
+    }
+
+}
+
+@SuppressLint("SetJavaScriptEnabled")
+fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>) {
+
+    loadUrlExt(url, auth, object : WebViewCallback {
+        override fun onShowProgress() {
+            showLogDebug("WebViewExt : onShowProgress")
         }
 
-    }.loadUrl(url)
+        override fun onHideProgress() {
+            showLogDebug("WebViewExt : onHideProgress")
+        }
+
+        override fun onFinish() {
+            showLogDebug("WebViewExt : onFinish")
+        }
+
+        override fun onFailed() {
+            showLogDebug("WebViewExt : onFailed")
+        }
+    })
 
 }
 
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlExt(url: String) {
 
-    showLogDebug("WebViewExt : url : $url")
-
-    CookieManager.getInstance().setAcceptCookie(true)
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
-    }
-
-    apply {
-        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
-        settings.mediaPlaybackRequiresUserGesture = false
-        settings.loadsImagesAutomatically = true
-        settings.loadWithOverviewMode = true
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.useWideViewPort = true
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+    loadUrlExt(url, object : WebViewCallback {
+        override fun onShowProgress() {
+            showLogDebug("WebViewExt : onShowProgress")
         }
 
-        settings.setSupportZoom(true)
-        settings.builtInZoomControls = true
-        settings.displayZoomControls = false
-
-        scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-
-        webChromeClient = WebChromeClient()
-
-        webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                showLogDebug("WebViewExt : onPageFinished : $url")
-            }
-
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (error != null) {
-                        showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
-                        showLogDebug("WebViewExt : onReceivedError : ${error.description}")
-                    }
-                }
-            }
+        override fun onHideProgress() {
+            showLogDebug("WebViewExt : onHideProgress")
         }
 
-    }.loadUrl(url)
+        override fun onFinish() {
+            showLogDebug("WebViewExt : onFinish")
+        }
+
+        override fun onFailed() {
+            showLogDebug("WebViewExt : onFailed")
+        }
+    })
 
 }

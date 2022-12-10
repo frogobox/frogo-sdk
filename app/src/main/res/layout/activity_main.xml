@@ -51,6 +51,28 @@
             android:layout_marginTop="16dp"
             android:text="Error Crash" />
 
+        <Button
+            android:id="@+id/btn_webview_frogobox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Frogobox Github Page" />
+
+        <Button
+            android:id="@+id/btn_webview_amirisback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Amirisback Github Page" />
+
+        <Button
+            android:id="@+id/btn_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="About Us" />
+
+
     </LinearLayout>
 
 </ScrollView>

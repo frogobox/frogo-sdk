@@ -1,9 +1,13 @@
 package com.frogobox.sdk.view
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +18,6 @@ import androidx.fragment.app.Fragment
 import com.frogobox.sdk.R
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.preference.PreferenceDelegates
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.delegate.util.DateDelegates
 import com.frogobox.sdk.delegate.util.DateDelegatesImpl
 import com.frogobox.sdk.delegate.util.UtilDelegates
@@ -26,7 +28,7 @@ import com.frogobox.sdk.ext.*
 import java.util.*
 
 
-/*
+/**
  * Created by faisalamir on 28/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -58,7 +60,15 @@ abstract class FrogoActivity : AppCompatActivity(),
         }"
     }
 
+    protected var startActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        setupActivityResultExt(result)
+    }
+
     // ---------------------------------------------------------------------------------------------
+
+    open fun setupActivityResultExt(result: ActivityResult) {
+        showLogD<FrogoActivity>("setupActivityResultExt: $result")
+    }
 
     open fun setupDebugMode(): Boolean {
         return true

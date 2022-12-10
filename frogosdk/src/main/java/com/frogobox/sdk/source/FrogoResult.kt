@@ -1,7 +1,5 @@
 package com.frogobox.sdk.source
 
-import androidx.annotation.Keep
-
 /**
  * Created by Faisal Amir on 10/12/22
  * -----------------------------------------
@@ -12,20 +10,23 @@ import androidx.annotation.Keep
  * All rights reserved
  */
 
-@Keep
+
 sealed class FrogoResult<out T> {
 
-    @Keep
     data class Success<out R>(
-        val result: R
+        val result: R,
     ) : FrogoResult<R>()
 
-    @Keep
-    data class Failure(
+    data class Error(
+        val code: Int? = 500,
         val message: String? = "",
-        val t: Throwable
+        val t: Throwable? = null,
+    ) : FrogoResult<Nothing>()
+    
+    data class Loading(
+        val isLoading: Boolean,
     ) : FrogoResult<Nothing>()
 
-    object Loading : FrogoResult<Nothing>()
+    object Finish : FrogoResult<Nothing>()
 
 }

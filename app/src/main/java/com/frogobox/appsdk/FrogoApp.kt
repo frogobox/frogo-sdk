@@ -1,13 +1,11 @@
 package com.frogobox.appsdk
 
-import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.frogobox.appsdk.di.repositoryModule
 import com.frogobox.appsdk.di.viewModelModule
-import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
 import com.frogobox.sdk.FrogoApplication

@@ -8,6 +8,9 @@ import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
 import com.frogobox.appsdk.viewpager.VPagerActivity
 import com.frogobox.sdk.ext.showLogD
+import com.frogobox.sdk.ext.startActivityExt
+import com.frogobox.sdk.ui.FrogoAboutUsActivity
+import com.frogobox.sdk.ui.FrogoWebViewActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -50,6 +53,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             btnError.setOnClickListener {
                 throw RuntimeException("I'm a cool exception and I crashed the main thread!")
+            }
+
+            btnWebviewFrogobox.setOnClickListener {
+                FrogoWebViewActivity.startActivityExt(this@MainActivity,
+                    "https://frogobox.github.io",
+                    "Frogobox")
+            }
+
+            btnWebviewAmirisback.setOnClickListener {
+                FrogoWebViewActivity.startActivityExt(this@MainActivity,
+                    "https://amirisback.github.io",
+                    "Faisal Amir")
+            }
+
+            btnAboutUs.setOnClickListener {
+                startActivityExt<FrogoAboutUsActivity>()
             }
 
         }

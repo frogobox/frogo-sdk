@@ -1,12 +1,18 @@
 package com.frogobox.appsdk.news
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.util.NewsConstant
 import com.frogobox.coresdk.response.FrogoDataResponse
+import com.frogobox.sdk.ext.showLogDebug
+import com.frogobox.sdk.ext.showLogError
+import com.frogobox.sdk.source.FrogoResult
 import com.frogobox.sdk.util.FrogoMutableLiveData
 import com.frogobox.sdk.view.FrogoViewModel
+import com.frogobox.sdk.view.FrogoViewModel2
 
 
 /*
