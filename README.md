@@ -36,16 +36,13 @@
 
 This Is Latest Release
 
-    $version_release = 2.0.9
+    $version_release = 2.1.0
 
 What's New??
 
     * SDK Android and Desktop *
-    * Adding Ext Function *
-    * Update: Fixing Bug RxJava Ext *
-    * Seperate FrogoActivity and FrogoFragment to FrogoBindActivity And FrogoBindFragment *
-    * Using Delegate Class *
-    * Using Piracy Checker *
+    * Update latest version library *
+    
 
 ## Download this project
 
@@ -81,20 +78,20 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:2.0.9'
+            implementation 'com.github.frogobox:frogo-sdk:2.1.0'
 
             // library frogo-sdk for desktop
-            implementation 'com.github.frogobox.frogo-sdk:frogocoresdk:2.0.9'
+            implementation 'com.github.frogobox.frogo-sdk:frogocoresdk:2.1.0'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:2.0.9")
+            implementation("com.github.frogobox:frogo-sdk:2.1.0")
 
             // library frogo-sdk for desktop
-            implementation("com.github.frogobox.frogo-sdk:frogocoresdk:2.0.9")
+            implementation("com.github.frogobox.frogo-sdk:frogocoresdk:2.1.0")
         }
 
 ### Step 3. Function from this SDK
