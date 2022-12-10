@@ -68,6 +68,7 @@ dependencies {
     api(Androidx.savedState)
     api(Androidx.viewPager2)
     api(Androidx.preferenceKtx)
+    api(Androidx.annotation)
 
     api(Androidx.Core.ktx)
 

@@ -113,7 +113,7 @@ dependencies {
     implementation(Androidx.Room.rxJava3)
 
     implementation(Androidx.Compose.activity)
-    implementation(Androidx.Compose.material)
+    implementation(Androidx.Compose.material("1.3.1"))
     implementation(Androidx.Compose.ui)
     implementation(Androidx.Compose.uiToolingPreview)
 
