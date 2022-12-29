@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityNewsBinding
 import com.frogobox.appsdk.model.Article
-import com.frogobox.log.FLog
+import com.frogobox.coresdk.source.FrogoResult
 import com.frogobox.sdk.ext.progressViewHandle
-import com.frogobox.sdk.source.FrogoResult
+import com.frogobox.sdk.ext.showLogD
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsActivity : BaseActivity<ActivityNewsBinding>() {
@@ -22,22 +22,23 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
         super.setupViewModel()
         newsViewModel.apply {
 
-            listData.observe(this@NewsActivity) {
-                setupRecyclerView(it)
-            }
-
-            eventShowProgress.observe(this@NewsActivity) {
+            eventShowProgressState.observe(this@NewsActivity) {
                 binding.progressCircular.progressViewHandle(it)
             }
 
-            getData()
-            getPref()
+            articles.observe(this@NewsActivity) {
+                setupRecyclerView(it)
+            }
+
         }
     }
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
         super.onCreateExt(savedInstanceState)
         setupDetailActivity("News API")
+        if (savedInstanceState == null) {
+            newsViewModel.onStart()
+        }
     }
 
     private fun setupRecyclerView(data: List<Article>) {

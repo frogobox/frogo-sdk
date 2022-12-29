@@ -34,8 +34,8 @@ fun <T : Any> Observable<T>.doApiRequest(
                 showPrintLog("doApiRequest : doOnSubscribe")
                 callback.onShowProgress()
             }
-            .doOnTerminate {
-                showPrintLog("doApiRequest : doOnTerminate")
+            .doAfterTerminate {
+                showPrintLog("doApiRequest : doAfterTerminate")
                 callback.onHideProgress()
             }
             .observeOn(scheduler)
@@ -66,8 +66,8 @@ fun <T : Any> Observable<T>.doApiRequest(
             showPrintLog("doApiRequest : doOnSubscribe")
             callback.onShowProgress()
         }
-            .doOnTerminate {
-                showPrintLog("doApiRequest : doOnTerminate")
+            .doAfterTerminate {
+                showPrintLog("doApiRequest : doAfterTerminate")
                 callback.onHideProgress()
             }
             .subscribe(object : FrogoApiObserver<T>() {

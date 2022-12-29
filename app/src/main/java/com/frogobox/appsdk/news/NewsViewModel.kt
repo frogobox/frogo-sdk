@@ -1,6 +1,5 @@
 package com.frogobox.appsdk.news
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.Article
@@ -9,9 +8,6 @@ import com.frogobox.appsdk.util.NewsConstant
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.showLogError
-import com.frogobox.sdk.source.FrogoResult
-import com.frogobox.sdk.util.FrogoMutableLiveData
-import com.frogobox.sdk.view.FrogoViewModel
 import com.frogobox.sdk.view.FrogoViewModel2
 
 
@@ -29,13 +25,13 @@ import com.frogobox.sdk.view.FrogoViewModel2
  */
 
 class NewsViewModel(
-    application: Application,
-    private val repository: AppRepository
-) : FrogoViewModel(application) {
+    private val repository: AppRepository,
+) : FrogoViewModel2() {
 
-    val listData = FrogoMutableLiveData<List<Article>>()
+    private var _articles = MutableLiveData<List<Article>>()
+    var articles: LiveData<List<Article>> = _articles
 
-    fun getData() {
+    private fun getData() {
         repository.handlingNetworkTopHeadLine(
             null,
             null,
@@ -54,44 +50,35 @@ class NewsViewModel(
 
                 override fun onHideProgress() {
                     showLogDebug("ON HIDE PROGRES --------> ")
-                    eventShowProgress.postValue(false)
+                    _eventShowProgressState.postValue(false)
                 }
 
                 override fun onShowProgress() {
                     showLogDebug("ON SHOW PROGRES --------> ")
-                    eventShowProgress.postValue(true)
+                    _eventShowProgressState.postValue(true)
                 }
 
                 override fun onSuccess(data: List<Article>) {
-                    listData.postValue(data)
+                    _articles.postValue(data)
                 }
             }
         )
     }
 
-    fun getPref() {
+    private fun getPref() {
         repository.getPrefString("KEY_PREF", object : FrogoDataResponse<String> {
-            override fun onFailed(statusCode: Int, errorMessage: String) {
-
-            }
-
-            override fun onFinish() {
-
-            }
-
-            override fun onHideProgress() {
-
-            }
-
-            override fun onShowProgress() {
-
-            }
-
-            override fun onSuccess(data: String) {
-                showLogDebug("BECAUSE TONIGT WILL BE THE NIGHT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $data")
-            }
-
+            override fun onFailed(statusCode: Int, errorMessage: String) {}
+            override fun onFinish() {}
+            override fun onHideProgress() {}
+            override fun onShowProgress() {}
+            override fun onSuccess(data: String) {}
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getData()
+        getPref()
     }
 
     override fun onClearDisposable() {

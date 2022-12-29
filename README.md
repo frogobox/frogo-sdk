@@ -210,7 +210,7 @@ fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
 fun <T : Any> Observable<T>.doApiRequest(scheduler: Scheduler, callback: FrogoDataResponse<T>) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe { callback.onShowProgress() }
-        .doOnTerminate { callback.onHideProgress() }
+        .doAfterTerminate { callback.onHideProgress() }
         .observeOn(scheduler)
         .subscribe(object : FrogoApiObserver<T>() {
             override fun onSuccess(data: T) {
@@ -228,7 +228,7 @@ fun <T : Any> Observable<T>.doApiRequest(scheduler: Scheduler, callback: FrogoDa
 // Single Api Request
 fun <T : Any> Observable<T>.doApiRequest(callback: FrogoDataResponse<T>) {
     doOnSubscribe { callback.onShowProgress() }
-        .doOnTerminate { callback.onHideProgress() }
+        .doAfterTerminate { callback.onHideProgress() }
         .subscribe(object : FrogoApiObserver<T>() {
             override fun onSuccess(data: T) {
                 callback.onSuccess(data)

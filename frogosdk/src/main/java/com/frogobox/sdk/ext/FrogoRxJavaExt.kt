@@ -5,7 +5,7 @@ import com.frogobox.coresdk.observer.FrogoApiObserver
 import com.frogobox.coresdk.observer.FrogoLocalObserver
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.sdk.source.FrogoResult
+import com.frogobox.coresdk.source.FrogoResult
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -29,15 +29,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 fun <T : Any> Observable<T>.doApiRequest(
     callback: FrogoDataResponse<T>,
-    addCallbackSubcribe: (d: Disposable) -> Unit
+    addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
             showLogDebug("doApiRequest : doOnSubscribe / onShowProgress")
             callback.onShowProgress()
         }
-        .doOnTerminate {
-            showLogDebug("doApiRequest : doOnTerminate / onHideProgress")
+        .doAfterTerminate {
+            showLogDebug("doApiRequest : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
             callback.onFinish()
         }
@@ -60,22 +60,22 @@ fun <T : Any> Observable<T>.doApiRequest(
 
             override fun onApiStartObserver(disposable: Disposable) {
                 showLogDebug("doApiRequest : onApiStartObserver / onStartObserver")
-                addCallbackSubcribe(disposable)
+                addCallbackSubscribe(disposable)
             }
         })
 }
 
 fun <T : Any> Observable<T>.doApiRequest(
     result: MutableLiveData<FrogoResult<T>>,
-    addCallbackSubcribe: (d: Disposable) -> Unit
+    addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
     doApiRequest(object : FrogoDataResponse<T> {
         override fun onShowProgress() {
-            result.postValue(FrogoResult.Loading(true))
+            result.postValue(FrogoResult.ShowLoading())
         }
 
         override fun onHideProgress() {
-            result.postValue(FrogoResult.Loading(false))
+            result.postValue(FrogoResult.HideLoading())
         }
 
         override fun onSuccess(data: T) {
@@ -87,10 +87,10 @@ fun <T : Any> Observable<T>.doApiRequest(
         }
 
         override fun onFinish() {
-            result.postValue(FrogoResult.Finish)
+            result.postValue(FrogoResult.Finish())
         }
     }) {
-        addCallbackSubcribe(it)
+        addCallbackSubscribe(it)
     }
 }
 
@@ -98,15 +98,15 @@ fun <T : Any> Observable<T>.doApiRequest(
 
 fun <T : Any> Single<T>.fetchRoomDB(
     callback: FrogoDataResponse<T>,
-    addCallbackSubcribe: (d: Disposable) -> Unit
+    addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
             showLogDebug("fetchRoomDB : doOnSubscribe / onShowProgress")
             callback.onShowProgress()
         }
-        .doOnTerminate {
-            showLogDebug("fetchRoomDB : doOnTerminate / onHideProgress")
+        .doAfterTerminate {
+            showLogDebug("fetchRoomDB : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
         }
         .observeOn(AndroidSchedulers.mainThread())
@@ -129,7 +129,7 @@ fun <T : Any> Single<T>.fetchRoomDB(
 
             override fun onLocalStartObserver(disposable: Disposable) {
                 showLogDebug("fetchRoomDB : onLocalStartObserver / onStartObserver")
-                addCallbackSubcribe(disposable)
+                addCallbackSubscribe(disposable)
             }
 
         })
@@ -141,8 +141,8 @@ fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
             showLogDebug("fetchPreference : doOnSubscribe / onShowProgress")
             callback.onShowProgress()
         }
-        .doOnTerminate {
-            showLogDebug("fetchPreference : doOnTerminate / onHideProgress")
+        .doAfterTerminate {
+            showLogDebug("fetchPreference : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
         }
         .observeOn(AndroidSchedulers.mainThread())
@@ -171,7 +171,7 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
             showLogDebug("executeRoomDB : onLocalSuccess / onSuccess")
             callback.onSuccess()
 
-            showLogDebug("executeRoomDB : doOnTerminate / onHideProgress")
+            showLogDebug("executeRoomDB : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogDebug("executeRoomDB : onLocalFinish / onFinish")
@@ -180,7 +180,7 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
             showLogError("executeRoomDB : onLocalFailure / onFailed")
             it.message?.let { it1 -> callback.onFailed(200, it1) }
 
-            showLogError("executeRoomDB : doOnTerminate / onHideProgress")
+            showLogError("executeRoomDB : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogError("executeRoomDB : onLocalFinish / onFinish")
@@ -197,7 +197,7 @@ fun Completable.executePreference(callback: FrogoStateResponse) {
             showLogDebug("executePreference : onLocalSuccess / onSuccess")
             callback.onSuccess()
 
-            showLogDebug("executePreference : doOnTerminate / onHideProgress")
+            showLogDebug("executePreference : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogDebug("executePreference : onLocalFinish / onFinish")
@@ -206,7 +206,7 @@ fun Completable.executePreference(callback: FrogoStateResponse) {
             showLogError("executePreference : onLocalFailure / onFailed")
             it.message?.let { it1 -> callback.onFailed(200, it1) }
 
-            showLogError("executePreference : doOnTerminate / onHideProgress")
+            showLogError("executePreference : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogError("executePreference : onLocalFinish / onFinish")
@@ -223,7 +223,7 @@ fun Completable.executeAction(callback: FrogoStateResponse) {
             showLogDebug("executeAction : onLocalSuccess / onSuccess")
             callback.onSuccess()
 
-            showLogDebug("executeAction : doOnTerminate / onHideProgress")
+            showLogDebug("executeAction : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogDebug("executeAction : onLocalFinish / onFinish")
@@ -232,7 +232,7 @@ fun Completable.executeAction(callback: FrogoStateResponse) {
             showLogError("executeAction : onLocalFailure / onFailed")
             it.message?.let { it1 -> callback.onFailed(200, it1) }
 
-            showLogError("executeAction : doOnTerminate / onHideProgress")
+            showLogError("executeAction : doAfterTerminate / onHideProgress")
             callback.onHideProgress()
 
             showLogError("executeAction : onLocalFinish / onFinish")
