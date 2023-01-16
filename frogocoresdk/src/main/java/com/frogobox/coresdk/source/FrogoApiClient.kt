@@ -29,17 +29,17 @@ object FrogoApiClient {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    fun client(): OkHttpClient {
+    fun client(timeout: Long? = 30L): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(timeout ?: 30L, TimeUnit.SECONDS)
+            .connectTimeout(timeout ?: 30L, TimeUnit.SECONDS)
             .build()
     }
 
-    fun clientWithInterceptor(): OkHttpClient {
+    fun clientWithInterceptor(timeout: Long? = 30L): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(timeout ?: 30L, TimeUnit.SECONDS)
+            .connectTimeout(timeout ?: 30L, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }
@@ -55,62 +55,39 @@ object FrogoApiClient {
 
     // ---------------------------------------------------------------------------------------------
 
-    @Deprecated(
-        "createWithInterceptor is to complicated",
-        ReplaceWith("create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor) for simple implementation")
-    )
-    inline fun <reified T> createWithInterceptor(url: String): T {
+    inline fun <reified T> create(url: String, timeout: Long? = 30L): T {
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(clientWithInterceptor())
+            .client(client(timeout))
             .build().create(T::class.java)
     }
 
-    @Deprecated(
-        "createWithInterceptor is to complicated",
-        ReplaceWith("create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor) for simple implementation")
-    )
-    inline fun <reified T> createWithInterceptor(url: String, chuckInterceptor: Interceptor): T {
-        return Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(clientWithInterceptor(chuckInterceptor))
-            .build().create(T::class.java)
-    }
-
-    // ---------------------------------------------------------------------------------------------
-
-    inline fun <reified T> create(url: String): T {
-        return Retrofit.Builder()
-            .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(client())
-            .build().create(T::class.java)
-    }
-
-    inline fun <reified T> create(url: String, isDebug: Boolean): T {
+    inline fun <reified T> create(url: String, isDebug: Boolean, timeout: Long? = 30L): T {
         return if (isDebug) {
             Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(clientWithInterceptor())
+                .client(clientWithInterceptor(timeout))
                 .build().create(T::class.java)
         } else {
             Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(client())
+                .client(client(timeout))
                 .build().create(T::class.java)
         }
     }
 
-    inline fun <reified T> create(url: String, isDebug: Boolean, chuckInterceptor: Interceptor): T {
+    inline fun <reified T> create(
+        url: String,
+        isDebug: Boolean,
+        chuckInterceptor: Interceptor,
+        timeout: Long? = 30L,
+    ): T {
         return if (isDebug) {
             Retrofit.Builder()
                 .baseUrl(url)
@@ -123,7 +100,7 @@ object FrogoApiClient {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(client())
+                .client(client(timeout))
                 .build().create(T::class.java)
         }
     }

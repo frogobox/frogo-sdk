@@ -35,12 +35,6 @@ interface IFrogoActivity {
 
     fun checkExtra(extraKey: String): Boolean
 
-    fun <Model> frogoFragmentNewInstance(
-        fragment: FrogoFragment,
-        argumentKey: String,
-        extraDataResult: Model
-    )
-
     fun setupFullScreen()
 
     fun setupHideSystemUI()

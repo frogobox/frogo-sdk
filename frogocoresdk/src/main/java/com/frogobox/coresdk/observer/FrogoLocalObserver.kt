@@ -18,7 +18,7 @@ import java.net.UnknownHostException
  * All rights reserved
  *
  */
-abstract class FrogoLocalObserver<M> : SingleObserver<M> {
+abstract class FrogoLocalObserver<M : Any> : SingleObserver<M> {
 
     companion object {
         val TAG: String = FrogoLocalObserver::class.java.simpleName
@@ -30,11 +30,7 @@ abstract class FrogoLocalObserver<M> : SingleObserver<M> {
     abstract fun onLocalStartObserver(disposable: Disposable)
 
     override fun onSuccess(t: M) {
-        if (t == null) {
-            onLocalFailure(200, "Data is empty")
-        } else {
-            onLocalSuccess(t)
-        }
+        onLocalSuccess(t)
         onLocalFinish()
     }
 

@@ -27,6 +27,7 @@ import java.util.*
  * All rights reserved
  *
  */
+
 abstract class FrogoFragment : Fragment(),
     IFrogoFragment,
     ViewDelegates by ViewDelegatesImpl(),
@@ -46,12 +47,6 @@ abstract class FrogoFragment : Fragment(),
         "${getString(R.string.about_all_right_reserved)} ${getString(R.string.about_copyright)} ${
             Calendar.getInstance().get(Calendar.YEAR)
         }"
-    }
-
-    // ---------------------------------------------------------------------------------------------
-
-    @Deprecated("Use onViewCreatedExt instead", ReplaceWith("onViewCreatedExt"))
-    open fun setupOnViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
@@ -79,11 +74,7 @@ abstract class FrogoFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (savedInstanceState == null) {
-            showLogDebug("$TAG : Overriding on ViewCreated")
-        }
         setupViewModel()
-        setupOnViewCreated(view, savedInstanceState)
         onViewCreatedExt(view, savedInstanceState)
     }
 
@@ -98,25 +89,6 @@ abstract class FrogoFragment : Fragment(),
 
     override fun checkArgument(argsKey: String): Boolean {
         return requireArguments().containsKey(argsKey)
-    }
-
-    override fun <Model> frogoNewInstance(argsKey: String, data: Model) {
-        newInstanceExt(argsKey, data)
-    }
-
-    protected inline fun <reified Model> frogoGetInstance(argsKey: String): Model {
-        return getInstanceExt(argsKey)
-    }
-
-    protected inline fun <reified ClassActivity> frogoStartActivity() {
-        requireContext().startActivityExt<ClassActivity>()
-    }
-
-    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
-        extraKey: String,
-        data: Model
-    ) {
-        requireContext().startActivityExt<ClassActivity, Model>(extraKey, data)
     }
 
 }

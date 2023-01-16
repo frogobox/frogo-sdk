@@ -20,6 +20,4 @@ interface IFrogoFragment {
 
     fun checkArgument(argsKey: String): Boolean
 
-    fun <Model> frogoNewInstance(argsKey: String, data: Model)
-
 }

@@ -8,7 +8,7 @@ import com.frogobox.sdk.ext.startActivityExtOpenApp
 import com.frogobox.sdk.ext.startActivityExtShareApp
 
 
-/*
+/**
  * Created by faisalamir on 02/07/22
  * FrogoSDK
  * -----------------------------------------

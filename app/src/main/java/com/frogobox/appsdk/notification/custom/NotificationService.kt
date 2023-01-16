@@ -27,6 +27,7 @@ class NotificationService : IntentService("NotificationService") {
     private var mNotificationId: Int = 0
     private var mMessageId: Int = 0
 
+    @Deprecated("Deprecated in Java")
     override fun onHandleIntent(intent: Intent?) {
         if (intent != null) {
             showNotification()

@@ -5,7 +5,7 @@ import android.os.Looper
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -17,6 +17,7 @@ import java.util.concurrent.Executors
  * All rights reserved
  *
  */
+
 class AppExecutors constructor(
     val diskIO: Executor = DiskIOThreadExecutor(),
     val networkIO: Executor = Executors.newFixedThreadPool(3),

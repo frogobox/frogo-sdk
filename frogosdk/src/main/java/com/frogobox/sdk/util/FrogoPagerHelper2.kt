@@ -24,7 +24,7 @@ class FrogoPagerHelper2(fragmentManager: FragmentManager, lifecycle: Lifecycle) 
     FragmentStateAdapter(fragmentManager, lifecycle), IFrogoPagerHelper {
 
     companion object {
-        val TAG: String = FrogoPagerHelper::class.java.simpleName
+        val TAG: String = FrogoPagerHelper2::class.java.simpleName
     }
 
     private val fragments = mutableListOf<Fragment>()

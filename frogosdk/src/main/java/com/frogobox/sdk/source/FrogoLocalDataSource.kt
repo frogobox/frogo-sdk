@@ -3,9 +3,9 @@ package com.frogobox.sdk.source
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.CoreDataSource
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.ext.executePreference
 import com.frogobox.sdk.ext.fetchPreference
-import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.util.AppExecutors
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -26,7 +26,7 @@ import io.reactivex.rxjava3.core.Observable
 
 open class FrogoLocalDataSource(
     private val appExecutors: AppExecutors,
-    private val preferences: FrogoPreference
+    private val preferences: PreferenceDelegates
 ) : CoreDataSource() {
 
     override fun savePrefString(key: String, value: String) {

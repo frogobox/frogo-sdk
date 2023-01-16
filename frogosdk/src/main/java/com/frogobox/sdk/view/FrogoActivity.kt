@@ -111,11 +111,6 @@ abstract class FrogoActivity : AppCompatActivity(),
         showLogD<FrogoActivity>("setupViewModel()")
     }
 
-    @Deprecated("Use onCreateExt instead", ReplaceWith("onCreateExt"))
-    open fun setupOnCreate(savedInstanceState: Bundle?) {
-        showLogD<FrogoActivity>("setupOnCreate() Deprecated use onCreateExt() instead")
-    }
-
     open fun onCreateExt(savedInstanceState: Bundle?) {
         showLogD<FrogoActivity>("onCreateExt()")
     }
@@ -134,7 +129,6 @@ abstract class FrogoActivity : AppCompatActivity(),
         }
         setupDoOnBackPressedExt()
         setupViewModel()
-        setupOnCreate(savedInstanceState)
         onCreateExt(savedInstanceState)
     }
 
@@ -167,9 +161,6 @@ abstract class FrogoActivity : AppCompatActivity(),
         @DrawableRes actionBackIcon: Int?,
         @ColorRes backgroundColor: Int?
     ) {
-        showLogDebug("$TAG Setup Detail Activity : Title : $title")
-        showLogDebug("$TAG Setup Detail Activity : Action Back Icon : $actionBackIcon")
-        showLogDebug("$TAG Setup Detail Activity : Background Color: $backgroundColor")
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if (actionBackIcon != null) {
@@ -189,14 +180,6 @@ abstract class FrogoActivity : AppCompatActivity(),
 
     override fun checkExtra(extraKey: String): Boolean {
         return intent?.hasExtra(extraKey)!!
-    }
-
-    override fun <Model> frogoFragmentNewInstance(
-        fragment: FrogoFragment,
-        argumentKey: String,
-        extraDataResult: Model
-    ) {
-        fragment.frogoNewInstance(argumentKey, extraDataResult)
     }
 
     override fun setupFullScreen() {
@@ -220,21 +203,6 @@ abstract class FrogoActivity : AppCompatActivity(),
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
         showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
-    }
-
-    protected inline fun <reified ClassActivity> frogoStartActivity() {
-        startActivityExt<ClassActivity>()
-    }
-
-    protected inline fun <reified ClassActivity, reified Model> frogoStartActivity(
-        extraKey: String,
-        data: Model
-    ) {
-        startActivityExt<ClassActivity, Model>(extraKey, data)
-    }
-
-    protected inline fun <reified Model> frogoGetExtraData(extraKey: String): Model {
-        return getExtraDataExt(extraKey)
     }
 
     private fun setupDoOnBackPressedExt() {

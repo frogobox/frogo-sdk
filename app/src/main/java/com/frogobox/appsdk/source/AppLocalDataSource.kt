@@ -5,9 +5,9 @@ import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.source.dao.ArticleDao
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
+import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.ext.executeRoomDB
 import com.frogobox.sdk.ext.fetchRoomDB
-import com.frogobox.sdk.preference.FrogoPreference
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
 
@@ -27,7 +27,7 @@ import com.frogobox.sdk.util.AppExecutors
 
 class AppLocalDataSource(
     private val appExecutors: AppExecutors,
-    private val preferences: FrogoPreference,
+    private val preferences: PreferenceDelegatesImpl,
     private val articleDao: ArticleDao
 ) : FrogoLocalDataSource(appExecutors, preferences), AppDataSource {
 

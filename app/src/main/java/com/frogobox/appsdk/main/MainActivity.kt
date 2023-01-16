@@ -32,23 +32,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.apply {
 
             btnMenuLog.setOnClickListener {
-                frogoStartActivity<LogActivity>()
+                startActivityExt<LogActivity>()
             }
 
             btnMenuNotif.setOnClickListener {
-                frogoStartActivity<MainNotifActivity>()
+                startActivityExt<MainNotifActivity>()
             }
 
             btnMenuNews.setOnClickListener {
-                frogoStartActivity<NewsActivity>()
+                startActivityExt<NewsActivity>()
             }
 
             btnMenuJavaActivity.setOnClickListener {
-                frogoStartActivity<MainJavaActivity>()
+                startActivityExt<MainJavaActivity>()
             }
 
             btnMenuViewPager2.setOnClickListener {
-                frogoStartActivity<VPagerActivity>()
+                startActivityExt<VPagerActivity>()
             }
 
             btnError.setOnClickListener {

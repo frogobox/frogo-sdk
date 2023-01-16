@@ -18,8 +18,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 
-
-/*
+/**
  * Created by faisalamir on 01/07/22
  * FrogoSDK
  * -----------------------------------------
@@ -61,6 +60,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
             showLogD<PiracyDelegatesImpl>("MODEL        : ${Build.MODEL}")
             showLogD<PiracyDelegatesImpl>("MANUFACTURER : ${Build.MANUFACTURER}")
             showLogD<PiracyDelegatesImpl>("PRODUCT      : ${Build.PRODUCT}")
+            showLogD<PiracyDelegatesImpl>("IS EMULATOR  : ${isEmulator()}")
         }
     }
 

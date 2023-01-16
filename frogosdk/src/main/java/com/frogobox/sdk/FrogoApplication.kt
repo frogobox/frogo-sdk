@@ -47,12 +47,7 @@ abstract class FrogoApplication : Application() {
 
     }
 
-    abstract fun setupKoinModule(koinApplication: KoinApplication)
-
-    @Deprecated("Use onCreateExt() instead", ReplaceWith("onCreateExt()"))
-    open fun setupOnCreate() {
-        showLogD<FrogoApplication>("setupOnCreate()")
-    }
+    open fun setupKoinModule(koinApplication: KoinApplication) {}
 
     open fun onCreateExt() {
         showLogD<FrogoApplication>("onCreateExt()")
@@ -83,7 +78,6 @@ abstract class FrogoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        setupOnCreate()
         onCreateExt()
         startKoin {
             androidContext(this@FrogoApplication)
