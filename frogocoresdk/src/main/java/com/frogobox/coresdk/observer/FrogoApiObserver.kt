@@ -19,7 +19,7 @@ import java.net.UnknownHostException
  * All rights reserved
  *
  */
-abstract class FrogoApiObserver<M : Any> : Observer<M> {
+abstract class FrogoApiObserver<M> : Observer<M> {
 
     companion object {
         val TAG: String = FrogoApiObserver::class.java.simpleName
