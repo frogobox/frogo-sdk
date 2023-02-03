@@ -34,10 +34,6 @@ class UtilDelegatesImpl : UtilDelegates {
         utilDelegatesContext = context
     }
 
-    override fun isNetworkConnected(): Boolean {
-        return utilDelegatesContext.isNetworkConnected()
-    }
-
     override fun shareApp(packageName: String, appName: String) {
         utilDelegatesContext.startActivityExtShareApp(
             packageName,

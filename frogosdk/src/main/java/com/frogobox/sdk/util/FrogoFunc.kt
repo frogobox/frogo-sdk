@@ -16,7 +16,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.reflect.Type
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -28,6 +28,7 @@ import java.lang.reflect.Type
  * All rights reserved
  *
  */
+
 object FrogoFunc : IFrogoFunc {
 
     val TAG = FrogoFunc::class.java.simpleName

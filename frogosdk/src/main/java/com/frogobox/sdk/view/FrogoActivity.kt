@@ -119,14 +119,12 @@ abstract class FrogoActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupDelegates()
+        setupPiracyDelegatesDebug(setupDebugMode())
+        setupPiracyMode()
+        setupMonetized()
+        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         setupContentView()
-        if (savedInstanceState == null) {
-            setupDelegates()
-            setupPiracyDelegatesDebug(setupDebugMode())
-            setupPiracyMode()
-            setupMonetized()
-            showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
-        }
         setupDoOnBackPressedExt()
         setupViewModel()
         onCreateExt(savedInstanceState)

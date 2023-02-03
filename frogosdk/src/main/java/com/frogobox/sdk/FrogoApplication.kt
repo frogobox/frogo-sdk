@@ -30,25 +30,6 @@ import java.util.*
 
 abstract class FrogoApplication : Application() {
 
-    companion object {
-        val TAG: String = FrogoApplication::class.java.simpleName
-
-        lateinit var instance: FrogoApplication
-
-        fun getContext(): Context = instance.applicationContext
-
-        fun getCurrentLocale(): Locale? {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                instance.resources.configuration.locales[0]
-            } else {
-                instance.resources.configuration.locale
-            }
-        }
-
-    }
-
-    open fun setupKoinModule(koinApplication: KoinApplication) {}
-
     open fun onCreateExt() {
         showLogD<FrogoApplication>("onCreateExt()")
     }
@@ -77,19 +58,7 @@ abstract class FrogoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
         onCreateExt()
-        startKoin {
-            androidContext(this@FrogoApplication)
-            androidLogger(
-                if (isDebugMode()) {
-                    Level.DEBUG
-                } else {
-                    Level.ERROR
-                }
-            )
-            setupKoinModule(this)
-        }
         setupCAOC()
     }
 

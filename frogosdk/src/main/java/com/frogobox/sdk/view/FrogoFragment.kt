@@ -66,10 +66,8 @@ abstract class FrogoFragment : Fragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            setupDelegates()
-            showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
-        }
+        setupDelegates()
+        showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -20,8 +20,6 @@ interface UtilDelegates {
 
     fun setupUtilDelegates(context: Context)
 
-    fun isNetworkConnected(): Boolean
-
     fun shareApp(packageName: String, appName: String)
 
     fun rateApp(packageName: String)
