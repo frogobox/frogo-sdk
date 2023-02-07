@@ -64,14 +64,10 @@ abstract class FrogoFragment : Fragment(),
         setupPiracyDelegate(requireContext())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupDelegates()
-        showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showLogDebug("$TAG : Internet Status : ${requireContext().isNetworkConnected()}")
+        setupDelegates()
         setupViewModel()
         onViewCreatedExt(view, savedInstanceState)
     }

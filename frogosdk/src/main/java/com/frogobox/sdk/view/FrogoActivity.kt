@@ -126,15 +126,15 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupContentView()
         setupDoOnBackPressedExt()
         setupDelegates()
         setupPiracyDelegatesDebug(setupDebugMode())
         setupPiracyMode()
         setupMonetized()
-        setupContentView()
         setupViewModel()
-        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         onCreateExt(savedInstanceState)
+        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
