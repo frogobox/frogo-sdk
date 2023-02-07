@@ -4,7 +4,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -41,8 +40,7 @@ import java.util.*
  *
  */
 
-abstract class FrogoActivity : AppCompatActivity(),
-    IFrogoActivity,
+abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
     ViewDelegates by ViewDelegatesImpl(),
     UtilDelegates by UtilDelegatesImpl(),
     DateDelegates by DateDelegatesImpl(),
@@ -115,18 +113,27 @@ abstract class FrogoActivity : AppCompatActivity(),
         showLogD<FrogoActivity>("onCreateExt()")
     }
 
+    open fun setupDoOnBackPressedExt() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Back is pressed... Finishing the activity
+                doOnBackPressedExt()
+            }
+        })
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupDoOnBackPressedExt()
         setupDelegates()
         setupPiracyDelegatesDebug(setupDebugMode())
         setupPiracyMode()
         setupMonetized()
-        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         setupContentView()
-        setupDoOnBackPressedExt()
         setupViewModel()
+        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
         onCreateExt(savedInstanceState)
     }
 
@@ -201,22 +208,6 @@ abstract class FrogoActivity : AppCompatActivity(),
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
         showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
-    }
-
-    private fun setupDoOnBackPressedExt() {
-        if (Build.VERSION.SDK_INT >= 33) {
-            onBackInvokedDispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT) {
-                // Back is pressed... Finishing the activity
-                doOnBackPressedExt()
-            }
-        } else {
-            onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    // Back is pressed... Finishing the activity
-                    doOnBackPressedExt()
-                }
-            })
-        }
     }
 
 }
