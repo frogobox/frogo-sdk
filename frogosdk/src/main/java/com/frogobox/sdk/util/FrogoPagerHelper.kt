@@ -3,7 +3,6 @@ package com.frogobox.sdk.util
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.frogobox.sdk.ext.showLogDebug
 
 /*
  * Created by faisalamir on 26/07/21

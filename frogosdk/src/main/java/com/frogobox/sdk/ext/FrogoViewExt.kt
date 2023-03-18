@@ -21,28 +21,24 @@ private const val TAG = "FrogoViewExt"
 // -------------------------------------------------------------------------------------------------
 
 fun View.visible() {
-    showLogDebug("$TAG : View Visible")
     visibility = View.VISIBLE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.gone() {
-    showLogDebug("$TAG : View Gone")
     visibility = View.GONE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.invisible() {
-    showLogDebug("$TAG : View Invisible")
     visibility = View.INVISIBLE
 }
 
 // -------------------------------------------------------------------------------------------------
 
 fun View.progressViewHandle(isProgressState: Boolean) {
-    showLogDebug("$TAG : isProgressState >> $isProgressState")
     if (isProgressState) {
         visible()
     } else {
@@ -53,7 +49,6 @@ fun View.progressViewHandle(isProgressState: Boolean) {
 // -------------------------------------------------------------------------------------------------
 
 fun View.emptyViewHandle(isEmptyState: Boolean) {
-    showLogDebug("$TAG : isEmptyState >> $isEmptyState")
     if (isEmptyState) {
         visible()
     } else {
@@ -64,7 +59,6 @@ fun View.emptyViewHandle(isEmptyState: Boolean) {
 // -------------------------------------------------------------------------------------------------
 
 fun View.errorViewHandle(isErrorState: Boolean) {
-    showLogDebug("$TAG : isErrorState >> $isErrorState")
     if (isErrorState) {
         visible()
     } else {
@@ -75,7 +69,6 @@ fun View.errorViewHandle(isErrorState: Boolean) {
 // -------------------------------------------------------------------------------------------------
 
 fun View.networkViewHandle() {
-    showLogDebug("$TAG : isNetworkState >> ${this.context.isNetworkConnected()}")
     if (this.context.isNetworkConnected()) {
         gone()
     } else {

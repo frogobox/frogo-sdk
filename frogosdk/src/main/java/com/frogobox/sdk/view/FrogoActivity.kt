@@ -15,11 +15,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.frogobox.sdk.R
-import com.frogobox.sdk.delegate.piracy.PiracyDelegates
-import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
 import com.frogobox.sdk.ext.getResColor
 import com.frogobox.sdk.ext.getResDrawable
-import com.frogobox.sdk.ext.showLogDebug
 import java.util.*
 
 
@@ -36,8 +33,7 @@ import java.util.*
  *
  */
 
-abstract class FrogoActivity : AppCompatActivity(),
-    PiracyDelegates by PiracyDelegatesImpl() {
+abstract class FrogoActivity : AppCompatActivity() {
 
     companion object {
         val TAG: String = FrogoActivity::class.java.simpleName
@@ -69,16 +65,10 @@ abstract class FrogoActivity : AppCompatActivity(),
         return true
     }
 
-    open fun setupPiracyMode() {
-        connectPiracyChecker()
-    }
-
-    open fun setupDelegates() {
-        setupPiracyDelegate(this, this)
-    }
-
     // ---------------------------------------------------------------------------------------------
 
+    open fun setupPiracyMode() {}
+    open fun setupDelegates() {}
     open fun setupViewModel() {}
     open fun setupMonetized() {}
     open fun setupContentView() {}
@@ -102,7 +92,6 @@ abstract class FrogoActivity : AppCompatActivity(),
         setupContentView()
         setupDoOnBackPressedExt()
         setupDelegates()
-        setupPiracyDelegatesDebug(setupDebugMode())
         setupPiracyMode()
         setupMonetized()
         setupViewModel()
@@ -175,7 +164,6 @@ abstract class FrogoActivity : AppCompatActivity(),
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
-        showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
     }
 
 }

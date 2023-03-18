@@ -2,8 +2,6 @@ package com.frogobox.sdk.delegate.util
 
 import android.content.Context
 import com.frogobox.coresdk.util.FrogoConstant
-import com.frogobox.sdk.ext.isNetworkConnected
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.startActivityExtOpenApp
 import com.frogobox.sdk.ext.startActivityExtShareApp
 
@@ -30,7 +28,6 @@ class UtilDelegatesImpl : UtilDelegates {
     private lateinit var utilDelegatesContext: Context
 
     override fun setupUtilDelegates(context: Context) {
-        showLogD<UtilDelegatesImpl>("Context : $context")
         utilDelegatesContext = context
     }
 

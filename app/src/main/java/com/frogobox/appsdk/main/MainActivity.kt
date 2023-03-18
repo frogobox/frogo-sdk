@@ -1,7 +1,6 @@
 package com.frogobox.appsdk.main
 
 import android.os.Bundle
-import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityMainBinding
 import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
@@ -12,7 +11,7 @@ import com.frogobox.sdk.ext.startActivityExt
 import com.frogobox.sdk.ui.FrogoAboutUsActivity
 import com.frogobox.sdk.ui.FrogoWebViewActivity
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : CoreMainActivity<ActivityMainBinding>() {
 
     private val tes: String by lazy {
         loadPrefString("test")

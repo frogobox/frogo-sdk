@@ -2,17 +2,8 @@ package com.frogobox.sdk
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.os.Build
 import cat.ereza.customactivityoncrash.config.CaocConfig
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ui.FrogoCustomCrashActivity
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.KoinApplication
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
-import java.util.*
 
 
 /**
@@ -30,9 +21,7 @@ import java.util.*
 
 abstract class FrogoApplication : Application() {
 
-    open fun onCreateExt() {
-        showLogD<FrogoApplication>("onCreateExt()")
-    }
+    open fun onCreateExt() {}
 
     open fun customErrorActivity(): Class<out Activity> {
         return FrogoCustomCrashActivity::class.java

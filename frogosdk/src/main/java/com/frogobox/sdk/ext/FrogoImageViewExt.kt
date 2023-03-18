@@ -22,7 +22,5 @@ private const val TAG = "FrogoImageViewExt"
 // -------------------------------------------------------------------------------------------------
 
 fun ImageView.glideLoad(data: Any?) {
-    showLogDebug("$TAG : Params : $data")
-    showLogDebug("$TAG : Glide Load Ext")
     Glide.with(context).load(data).into(this)
 }

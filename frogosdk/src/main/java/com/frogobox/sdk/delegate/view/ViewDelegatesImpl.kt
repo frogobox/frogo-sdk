@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import com.frogobox.sdk.ext.emptyViewHandle
 import com.frogobox.sdk.ext.progressViewHandle
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.showToast
 
 
