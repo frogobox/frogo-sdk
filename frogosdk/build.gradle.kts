@@ -104,9 +104,6 @@ dependencies {
     api(GitHub.piracyChecker)
     api(GitHub.customActivityOnCrash)
 
-    api(JetBrains.coroutinesCore)
-    api(JetBrains.coroutinesAndroid)
-
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
     kapt(GitHub.glideCompiler)

@@ -22,13 +22,9 @@ import com.frogobox.sdk.widget.webview.WebViewCallback
 
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: WebViewCallback) {
-
-    showLogDebug("WebViewExt : url : $url")
-    showLogDebug("WebViewExt : auth : $auth")
     callback.onShowProgress()
 
     if (!url.contains("http") || !url.contains("https")) {
-        showLogDebug("WebViewExt : Invalid URL")
         callback.onHideProgress()
         callback.onFailed()
     } else {
@@ -64,7 +60,6 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: Web
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    showLogDebug("WebViewExt : onPageFinished : $url")
                     callback.onHideProgress()
                     callback.onFinish()
                 }
@@ -75,12 +70,6 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: Web
                     error: WebResourceError?,
                 ) {
                     super.onReceivedError(view, request, error)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (error != null) {
-                            showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
-                            showLogDebug("WebViewExt : onReceivedError : ${error.description}")
-                        }
-                    }
                     callback.onHideProgress()
                     callback.onFailed()
                 }
@@ -94,12 +83,9 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>, callback: Web
 
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
-
-    showLogDebug("WebViewExt : URL : $url")
     callback.onShowProgress()
 
     if (!url.contains("http") || !url.contains("https")) {
-        showLogDebug("WebViewExt : Invalid URL")
         callback.onHideProgress()
         callback.onFailed()
     } else {
@@ -135,7 +121,6 @@ fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    showLogDebug("WebViewExt : onPageFinished : $url")
                     callback.onHideProgress()
                     callback.onFinish()
                 }
@@ -146,12 +131,6 @@ fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
                     error: WebResourceError?,
                 ) {
                     super.onReceivedError(view, request, error)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (error != null) {
-                            showLogDebug("WebViewExt : onReceivedError : ${error.errorCode}")
-                            showLogDebug("WebViewExt : onReceivedError : ${error.description}")
-                        }
-                    }
                     callback.onHideProgress()
                     callback.onFailed()
                 }
@@ -167,21 +146,10 @@ fun WebView.loadUrlExt(url: String, callback: WebViewCallback) {
 fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>) {
 
     loadUrlExt(url, auth, object : WebViewCallback {
-        override fun onShowProgress() {
-            showLogDebug("WebViewExt : onShowProgress")
-        }
-
-        override fun onHideProgress() {
-            showLogDebug("WebViewExt : onHideProgress")
-        }
-
-        override fun onFinish() {
-            showLogDebug("WebViewExt : onFinish")
-        }
-
-        override fun onFailed() {
-            showLogDebug("WebViewExt : onFailed")
-        }
+        override fun onShowProgress() {}
+        override fun onHideProgress() {}
+        override fun onFinish() {}
+        override fun onFailed() {}
     })
 
 }
@@ -190,21 +158,10 @@ fun WebView.loadUrlExt(url: String, auth: HashMap<String, String>) {
 fun WebView.loadUrlExt(url: String) {
 
     loadUrlExt(url, object : WebViewCallback {
-        override fun onShowProgress() {
-            showLogDebug("WebViewExt : onShowProgress")
-        }
-
-        override fun onHideProgress() {
-            showLogDebug("WebViewExt : onHideProgress")
-        }
-
-        override fun onFinish() {
-            showLogDebug("WebViewExt : onFinish")
-        }
-
-        override fun onFailed() {
-            showLogDebug("WebViewExt : onFailed")
-        }
+        override fun onShowProgress() {}
+        override fun onHideProgress() {}
+        override fun onFinish() {}
+        override fun onFailed() {}
     })
 
 }

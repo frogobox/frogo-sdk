@@ -141,8 +141,8 @@ object FrogoDate : IFrogoDate {
         val diff: Long
         val format = SimpleDateFormat(TIME_GENERAL_HH_MM_SS, Locale.getDefault())
 
-        var d1: Date? = null
-        var d2: Date? = null
+        val d1: Date?
+        val d2: Date?
 
         try {
             d1 = format.parse(timeStart)

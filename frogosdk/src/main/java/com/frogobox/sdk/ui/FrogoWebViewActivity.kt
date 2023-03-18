@@ -6,12 +6,11 @@ import android.os.Bundle
 import com.frogobox.sdk.databinding.ActivityFrogoWebViewBinding
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.loadUrlExt
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.visible
 import com.frogobox.sdk.view.FrogoBindActivity
 import com.frogobox.sdk.widget.webview.WebViewCallback
 
-class FrogoWebViewActivity : FrogoBindActivity<ActivityFrogoWebViewBinding>() {
+open class FrogoWebViewActivity : FrogoBindActivity<ActivityFrogoWebViewBinding>() {
 
     companion object {
         const val EXTRA_URL = "EXTRA_URL"
@@ -42,22 +41,17 @@ class FrogoWebViewActivity : FrogoBindActivity<ActivityFrogoWebViewBinding>() {
         binding.apply {
             webView.loadUrlExt(url, object : WebViewCallback {
                 override fun onShowProgress() {
-                    showLogD<FrogoWebViewActivity>("onShowProgress")
                     progressBar.visible()
                 }
 
                 override fun onHideProgress() {
-                    showLogD<FrogoWebViewActivity>("onHideProgress")
                     progressBar.gone()
                 }
 
-                override fun onFinish() {
-                    showLogD<FrogoWebViewActivity>("onFinish")
-                }
+                override fun onFinish() {}
 
-                override fun onFailed() {
-                    showLogD<FrogoWebViewActivity>("onFailed")
-                }
+                override fun onFailed() {}
+
             })
         }
     }

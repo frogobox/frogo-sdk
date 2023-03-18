@@ -1,7 +1,6 @@
 package com.frogobox.sdk.delegate.util
 
 import com.frogobox.coresdk.util.FrogoDate
-import com.frogobox.sdk.ext.showLogD
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -55,22 +54,16 @@ class DateDelegatesImpl : DateDelegates {
 
     override fun getCurrentTimeStamp(): String {
         val simpleDateFormat = SimpleDateFormat(DATE_TIME_STANDARD, Locale.getDefault())
-        showLogD<DateDelegatesImpl>("getCurrentTimeStamp : $DATE_TIME_STANDARD")
-        showLogD<DateDelegatesImpl>("getCurrentTimeStamp : ${simpleDateFormat.format(Date())}")
         return simpleDateFormat.format(Date())
     }
 
     override fun getCurrentTime(): String {
         val simpleDateFormat = SimpleDateFormat(TIME_GENERAL_HH_MM_SS, Locale.getDefault())
-        showLogD<DateDelegatesImpl>("getCurrentTime : $TIME_GENERAL_HH_MM_SS")
-        showLogD<DateDelegatesImpl>("getCurrentTime : ${simpleDateFormat.format(Date())}")
         return simpleDateFormat.format(Date())
     }
 
     override fun getCurrentDate(format: String): String {
         val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
-        showLogD<DateDelegatesImpl>("getCurrentDate : $format")
-        showLogD<DateDelegatesImpl>("getCurrentDate : ${simpleDateFormat.format(Date())}")
         return simpleDateFormat.format(Date())
     }
 

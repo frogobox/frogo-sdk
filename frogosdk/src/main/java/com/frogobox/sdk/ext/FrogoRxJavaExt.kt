@@ -159,7 +159,6 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
 }
 
 fun Completable.executePreference(callback: FrogoStateResponse) {
-    showLogDebug("executePreference : doOnSubscribe / onShowProgress")
     callback.onShowProgress()
     subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

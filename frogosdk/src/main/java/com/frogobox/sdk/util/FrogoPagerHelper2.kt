@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.frogobox.sdk.ext.showLogDebug
 
 
 /*
@@ -47,13 +46,10 @@ class FrogoPagerHelper2(fragmentManager: FragmentManager, lifecycle: Lifecycle) 
     }
 
     override fun addFragment(fragment: Fragment) {
-        showLogDebug("$TAG : addFragment : Fragment >> ${fragment.javaClass.simpleName}")
         fragments.add(fragment)
     }
 
     override fun addFragment(fragment: Fragment, title: String) {
-        showLogDebug("$TAG : addFragment : Fragment >> ${fragment.javaClass.simpleName}")
-        showLogDebug("$TAG : addFragment : Title >> ${fragment.javaClass.simpleName}")
         fragments.add(fragment)
         titles.add(title)
     }

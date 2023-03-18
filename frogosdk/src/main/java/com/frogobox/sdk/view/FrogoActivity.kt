@@ -15,15 +15,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.frogobox.sdk.R
-import com.frogobox.sdk.delegate.piracy.PiracyDelegates
-import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
-import com.frogobox.sdk.delegate.util.DateDelegates
-import com.frogobox.sdk.delegate.util.DateDelegatesImpl
-import com.frogobox.sdk.delegate.util.UtilDelegates
-import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
-import com.frogobox.sdk.delegate.view.ViewDelegates
-import com.frogobox.sdk.delegate.view.ViewDelegatesImpl
-import com.frogobox.sdk.ext.*
+import com.frogobox.sdk.ext.getResColor
+import com.frogobox.sdk.ext.getResDrawable
 import java.util.*
 
 
@@ -40,11 +33,7 @@ import java.util.*
  *
  */
 
-abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
-    ViewDelegates by ViewDelegatesImpl(),
-    UtilDelegates by UtilDelegatesImpl(),
-    DateDelegates by DateDelegatesImpl(),
-    PiracyDelegates by PiracyDelegatesImpl() {
+abstract class FrogoActivity : AppCompatActivity() {
 
     companion object {
         val TAG: String = FrogoActivity::class.java.simpleName
@@ -64,17 +53,11 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
 
     // ---------------------------------------------------------------------------------------------
 
-    open fun setupActivityResultExt(result: ActivityResult) {
-        showLogD<FrogoActivity>("setupActivityResultExt: $result")
-    }
-
     open fun doOnBackPressedExt() {
-        showLogD<FrogoActivity>("doOnBackPressedExt(), Callback when doing back pressed")
         finish()
     }
 
     open fun onBackPressedExt() {
-        showLogD<FrogoActivity>("onBackPressedExt(), Function call back pressed")
         onBackPressedDispatcher.onBackPressed()
     }
 
@@ -82,36 +65,16 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
         return true
     }
 
-    open fun setupPiracyMode() {
-        showLogD<FrogoActivity>("setupPiracyMode(), Default Function Call connectPiracyChecker()")
-        showLogD<FrogoActivity>("setupPiracyMode(), For Customize Delete super declaration")
-        connectPiracyChecker()
-    }
-
-    open fun setupMonetized() {
-        showLogD<FrogoActivity>("SetupMonetized(), Place For Setup Ads Monetization")
-    }
-
-    open fun setupContentView() {
-        showLogD<FrogoActivity>("setupContentView(), Place For setContentView(view: View)")
-    }
-
-    open fun setupDelegates() {
-        showLogD<FrogoActivity>("setupDelegates(), Place For setupDelegates()")
-        setupViewDelegates(this)
-        setupUtilDelegates(this)
-        setupPiracyDelegate(this, this)
-    }
-
     // ---------------------------------------------------------------------------------------------
 
-    open fun setupViewModel() {
-        showLogD<FrogoActivity>("setupViewModel()")
-    }
+    open fun setupPiracyMode() {}
+    open fun setupDelegates() {}
+    open fun setupViewModel() {}
+    open fun setupMonetized() {}
+    open fun setupContentView() {}
+    open fun setupActivityResultExt(result: ActivityResult) {}
+    open fun onCreateExt(savedInstanceState: Bundle?) {}
 
-    open fun onCreateExt(savedInstanceState: Bundle?) {
-        showLogD<FrogoActivity>("onCreateExt()")
-    }
 
     open fun setupDoOnBackPressedExt() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -129,12 +92,10 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
         setupContentView()
         setupDoOnBackPressedExt()
         setupDelegates()
-        setupPiracyDelegatesDebug(setupDebugMode())
         setupPiracyMode()
         setupMonetized()
         setupViewModel()
         onCreateExt(savedInstanceState)
-        showLogDebug("$TAG Internet Status : ${isNetworkConnected()}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -153,15 +114,15 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
 
     // ---------------------------------------------------------------------------------------------
 
-    override fun setupDetailActivity(title: String) {
+    open fun setupDetailActivity(title: String) {
         setupDetailActivity(title, null, null)
     }
 
-    override fun setupDetailActivity(title: String, actionBackIcon: Int?) {
+    open fun setupDetailActivity(title: String, actionBackIcon: Int?) {
         setupDetailActivity(title, actionBackIcon, null)
     }
 
-    override fun setupDetailActivity(
+    open fun setupDetailActivity(
         title: String,
         @DrawableRes actionBackIcon: Int?,
         @ColorRes backgroundColor: Int?
@@ -176,18 +137,14 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
         }
     }
 
-    override fun setupChildFragment(frameId: Int, fragment: Fragment) {
+    open fun setupChildFragment(frameId: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
             commit()
         }
     }
 
-    override fun checkExtra(extraKey: String): Boolean {
-        return intent?.hasExtra(extraKey)!!
-    }
-
-    override fun setupFullScreen() {
+    open fun setupFullScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val controller = window.insetsController
             if (controller != null) {
@@ -200,14 +157,13 @@ abstract class FrogoActivity : AppCompatActivity(), IFrogoActivity,
         }
     }
 
-    override fun setupHideSystemUI() {
+    open fun setupHideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, window.decorView).let { controller ->
             controller.hide(WindowInsetsCompat.Type.systemBars())
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
-        showLogDebug("$TAG Hide System UI a.k.a Status Bar Android CutOut")
     }
 
 }

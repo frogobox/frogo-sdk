@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.frogobox.sdk.ext.showLogDebug
 
 
 /**
@@ -39,16 +38,12 @@ abstract class FrogoBindBottomSheet<VB : ViewBinding> : FrogoBottomSheet() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = setupViewBinding(inflater, container)
-        if (savedInstanceState == null) {
-            showLogDebug("${FrogoBindFragment.TAG} : View Binding : ${binding::class.java.simpleName}")
-        }
         return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        showLogDebug("${FrogoBindFragment.TAG} : Destroying View Binding")
     }
 
 }

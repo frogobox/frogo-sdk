@@ -47,6 +47,22 @@ inline fun <reified Model> Activity.getExtraDataExt(extraKey: String): Model {
     return Gson().fromJson(extraIntent, Model::class.java)
 }
 
+inline fun <reified Model> Activity.getExtraExt(extraKey: String): Model {
+    return when (Model::class) {
+        String::class -> intent.getStringExtra(extraKey) as Model
+        Int::class -> intent.getIntExtra(extraKey, 0) as Model
+        Boolean::class -> intent.getBooleanExtra(extraKey, false) as Model
+        Double::class -> intent.getDoubleExtra(extraKey, 0.0) as Model
+        Float::class -> intent.getFloatExtra(extraKey, 0.0f) as Model
+        Long::class -> intent.getLongExtra(extraKey, 0L) as Model
+        else -> throw Exception("Type not found")
+    }
+}
+
+fun Activity.hasExtraExt(extraKey: String): Boolean {
+    return intent.hasExtra(extraKey)
+}
+
 fun Context.startActivityExtShareApp(subject: String, text: String) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
