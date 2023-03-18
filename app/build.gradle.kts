@@ -93,11 +93,9 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_LOG))
 
     implementation(Androidx.appCompat)
-    implementation(Androidx.appCompatResources)
     implementation(Androidx.activityKtx)
     implementation(Androidx.fragmentKtx)
     implementation(Androidx.constraintLayout)
-    implementation(Androidx.preferenceKtx)
 
     implementation(Androidx.Core.ktx)
     implementation(Androidx.Work.runtimeKtx)
@@ -116,8 +114,5 @@ dependencies {
 
     kapt(Androidx.Lifecycle.compiler)
     kapt(Androidx.Room.compiler)
-
-    debugImplementation(Androidx.Compose.uiTooling)
-    debugImplementation(Androidx.Compose.uiTestManifest)
 
 }

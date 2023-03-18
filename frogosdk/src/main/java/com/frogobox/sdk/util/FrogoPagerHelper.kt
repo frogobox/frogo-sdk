@@ -44,13 +44,10 @@ class FrogoPagerHelper(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     }
 
     override fun addFragment(fragment: Fragment) {
-        showLogDebug("$TAG : addFragment : Fragment >> ${fragment.javaClass.simpleName}")
         fragments.add(fragment)
     }
 
     override fun addFragment(fragment: Fragment, title: String) {
-        showLogDebug("$TAG : addFragment : Fragment >> ${fragment.javaClass.simpleName}")
-        showLogDebug("$TAG : addFragment : Title >> ${fragment.javaClass.simpleName}")
         fragments.add(fragment)
         titles.add(title)
     }

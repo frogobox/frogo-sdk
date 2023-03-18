@@ -28,66 +28,53 @@ fun <T : Any> Observable<T>.doApiRequest(
     addCallbackSubcribe: (d: Disposable) -> Unit
 ) {
     if (scheduler != null) {
-        showPrintLog("doApiRequest : Scheduler is not null")
         subscribeOn(Schedulers.io())
             .doOnSubscribe {
-                showPrintLog("doApiRequest : doOnSubscribe")
                 callback.onShowProgress()
             }
             .doAfterTerminate {
-                showPrintLog("doApiRequest : doAfterTerminate")
                 callback.onHideProgress()
             }
             .observeOn(scheduler)
             .subscribe(object : FrogoApiObserver<T>() {
                 override fun onApiSuccess(data: T) {
-                    showPrintLog("doApiRequest : onApiSuccess")
                     callback.onSuccess(data)
                 }
 
                 override fun onApiFailure(code: Int, errorMessage: String) {
-                    showPrintLog("doApiRequest : onApiFailure")
                     callback.onFailed(code, errorMessage)
                 }
 
                 override fun onApiFinish() {
-                    showPrintLog("doApiRequest : onApiFinish")
                     callback.onFinish()
                 }
 
                 override fun onApiStartObserver(disposable: Disposable) {
-                    showPrintLog("doApiRequest : onApiStartObserver")
                     addCallbackSubcribe(disposable)
                 }
 
             })
     } else {
         doOnSubscribe {
-            showPrintLog("doApiRequest : doOnSubscribe")
             callback.onShowProgress()
         }
             .doAfterTerminate {
-                showPrintLog("doApiRequest : doAfterTerminate")
                 callback.onHideProgress()
             }
             .subscribe(object : FrogoApiObserver<T>() {
                 override fun onApiSuccess(data: T) {
-                    showPrintLog("doApiRequest : onApiSuccess")
                     callback.onSuccess(data)
                 }
 
                 override fun onApiFailure(code: Int, errorMessage: String) {
-                    showPrintLog("doApiRequest : onApiFailure")
                     callback.onFailed(code, errorMessage)
                 }
 
                 override fun onApiFinish() {
-                    showPrintLog("doApiRequest : onApiFinish")
                     callback.onFinish()
                 }
 
                 override fun onApiStartObserver(disposable: Disposable) {
-                    showPrintLog("doApiRequest : onApiStartObserver")
                     addCallbackSubcribe(disposable)
                 }
 

@@ -31,7 +31,6 @@ class ViewDelegatesImpl : ViewDelegates {
     private lateinit var viewDelegates: Context
 
     override fun setupViewDelegates(context: Context) {
-        showLogD<ViewDelegatesImpl>("Context : $context")
         viewDelegates = context
     }
 

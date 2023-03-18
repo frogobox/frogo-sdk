@@ -8,6 +8,8 @@ import com.frogobox.sdk.delegate.piracy.FrogoPiracyDialogCallback
 import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.util.UtilDelegates
+import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
 import com.frogobox.sdk.view.FrogoBindActivity
 
 /*
@@ -23,7 +25,13 @@ import com.frogobox.sdk.view.FrogoBindActivity
  *
  */
 abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>(),
+    UtilDelegates by UtilDelegatesImpl(),
     PreferenceDelegates by PreferenceDelegatesImpl(FrogoApp.getContext(), "ANJAYY") {
+
+    override fun setupDelegates() {
+        super.setupDelegates()
+        setupUtilDelegates(this)
+    }
 
     override fun setupDebugMode(): Boolean {
         return BuildConfig.DEBUG

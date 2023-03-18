@@ -6,7 +6,7 @@ import com.frogobox.sdk.R
 import com.frogobox.sdk.databinding.ActivityFrogoCustomCrashBinding
 import com.frogobox.sdk.view.FrogoBindActivity
 
-class FrogoCustomCrashActivity : FrogoBindActivity<ActivityFrogoCustomCrashBinding>() {
+open class FrogoCustomCrashActivity : FrogoBindActivity<ActivityFrogoCustomCrashBinding>() {
 
     override fun setupViewBinding(): ActivityFrogoCustomCrashBinding {
         return ActivityFrogoCustomCrashBinding.inflate(layoutInflater)

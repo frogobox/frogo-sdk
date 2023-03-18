@@ -3,7 +3,6 @@ package com.frogobox.sdk.view
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.frogobox.sdk.ext.showLogD
 
 /**
  * Created by faisalamir on 26/07/21
@@ -47,12 +46,7 @@ abstract class FrogoViewModel2 : ViewModel() {
     protected var _eventShowProgressState = MutableLiveData<Boolean>()
     var eventShowProgressState: LiveData<Boolean> = _eventShowProgressState
 
-    open fun onStart() {
-        showLogD<FrogoViewModel2>("onStart()")
-    }
-
-    open fun onClearDisposable() {
-        showLogD<FrogoViewModel2>("onClearDisposable()")
-    }
+    open fun onStart() {}
+    open fun onClearDisposable() {}
 
 }

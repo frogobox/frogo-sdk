@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.frogobox.log.FLog
-import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.util.FrogoMutableLiveData
 
 /**
@@ -52,20 +50,7 @@ abstract class FrogoViewModel(application: Application) : AndroidViewModel(appli
     var eventFailedState = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
     var eventShowProgress = FrogoMutableLiveData<Boolean>().apply { postValue(false) }
 
-    protected fun showLogDebug(message: String) {
-        FLog.d("$TAG : $message")
-    }
-
-    protected fun showLogError(message: String) {
-        FLog.e("$TAG : $message")
-    }
-
-    open fun onStart() {
-        showLogD<FrogoViewModel>("onStart()")
-    }
-
-    open fun onClearDisposable() {
-        showLogD<FrogoViewModel>("onClearDisposable()")
-    }
+    open fun onStart() {}
+    open fun onClearDisposable() {}
 
 }
