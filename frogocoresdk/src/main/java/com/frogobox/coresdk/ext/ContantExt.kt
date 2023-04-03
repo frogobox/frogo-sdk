@@ -1,7 +1,7 @@
 package com.frogobox.coresdk.ext
 
 
-/*
+/**
  * Created by faisalamir on 11/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -18,4 +18,8 @@ const val FROGO_CORE_SDK_TAG = "FrogoCoreSDK"
 
 fun showPrintLog(message: String) {
     println("$FROGO_CORE_SDK_TAG : $message")
+}
+
+fun Any?.println() {
+    showPrintLog(this.toString())
 }

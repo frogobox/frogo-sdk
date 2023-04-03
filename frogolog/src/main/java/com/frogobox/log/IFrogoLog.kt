@@ -2,7 +2,7 @@ package com.frogobox.log
 
 import android.content.Context
 
-/*
+/**
  * Created by Faisal Amir on 14/01/2021
  * LogCat Source Code
  * -----------------------------------------

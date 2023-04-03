@@ -217,12 +217,12 @@ object FrogoFunc : IFrogoFunc {
         return listData
     }
 
-    override fun getDrawableString(context: Context, nameResource: String): Int {
-        return context.resources.getIdentifier(nameResource, "drawable", context.packageName)
+    override fun getDrawableString(context: Context, resName: String): Int {
+        return context.resources.getIdentifier(resName, "drawable", context.packageName)
     }
 
-    override fun getRawString(context: Context, nameResource: String): Int {
-        return context.resources.getIdentifier(nameResource, "raw", context.packageName)
+    override fun getRawString(context: Context, resName: String): Int {
+        return context.resources.getIdentifier(resName, "raw", context.packageName)
     }
 
     override fun randomNumber(start: Int, end: Int): Int {

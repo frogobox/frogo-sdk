@@ -2,7 +2,7 @@ package com.frogobox.log
 
 import android.content.Context
 
-/*
+/**
  * Created by Faisal Amir on 14/02/2021
  * LogCat Source Code
  * -----------------------------------------
@@ -14,6 +14,7 @@ import android.content.Context
  * All rights reserved
  *
  */
+
 interface IFLog {
 
     // Function Log Simple Debug without message params

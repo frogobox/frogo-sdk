@@ -92,19 +92,7 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_LOG))
 
-    implementation(Androidx.appCompat)
-    implementation(Androidx.activityKtx)
-    implementation(Androidx.fragmentKtx)
-    implementation(Androidx.constraintLayout)
-
-    implementation(Androidx.Core.ktx)
     implementation(Androidx.Work.runtimeKtx)
-    implementation(Androidx.Lifecycle.runtimeKtx)
-
-    implementation(Androidx.Room.runtime)
-    implementation(Androidx.Room.ktx)
-    implementation(Androidx.Room.rxJava3)
-
     implementation(Google.material)
 
     implementation(Koin.core)

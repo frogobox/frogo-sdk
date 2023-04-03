@@ -5,7 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import com.frogobox.log.LogConstant.SIMPLE_MESSSAGE
 
-/*
+/**
  * Created by Faisal Amir on 14/01/2021
  * LogCat Source Code
  * -----------------------------------------
