@@ -3,8 +3,8 @@ package com.frogobox.appsdk.log
 import android.os.Bundle
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.databinding.ActivityLogBinding
-import com.frogobox.log.FLog
-import com.frogobox.log.FrogoLog
+import com.frogobox.sdk.log.FLog
+import com.frogobox.sdk.log.FrogoLog
 
 class LogActivity : BaseActivity<ActivityLogBinding>() {
 

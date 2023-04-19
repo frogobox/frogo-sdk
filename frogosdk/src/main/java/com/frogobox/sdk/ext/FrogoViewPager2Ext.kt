@@ -3,7 +3,6 @@ package com.frogobox.sdk.ext
 import android.content.Context
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
-import com.frogobox.sdk.ext.getTitles
 import com.frogobox.sdk.util.FrogoPagerHelper2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator

@@ -38,13 +38,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
         jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of("11"))
+            languageVersion.set(JavaLanguageVersion.of("17"))
         }
     }
 }
@@ -52,20 +52,14 @@ android {
 dependencies {
 
     api(project(DependencyGradle.FROGO_PATH_CORE_SDK))
-    api(project(DependencyGradle.FROGO_PATH_LOG))
 
     api(Androidx.appCompat)
-    api(Androidx.appCompatResources)
 
     api(Androidx.activityKtx)
     api(Androidx.fragmentKtx)
 
     api(Androidx.constraintLayout)
-    api(Androidx.collection)
-    api(Androidx.savedState)
     api(Androidx.viewPager2)
-    api(Androidx.preferenceKtx)
-    api(Androidx.annotation)
 
     api(Androidx.Core.ktx)
 
@@ -78,19 +72,9 @@ dependencies {
     api(Androidx.Room.rxJava3)
 
     api(Google.material)
-    api(Google.gson)
 
-    api(Square.OkHttp.okhttp)
-    api(Square.OkHttp.loggingInterceptor)
-
-    api(Square.Retrofit2.retrofit)
-    api(Square.Retrofit2.converterGson)
-    api(Square.Retrofit2.adapterRxJava3)
-
-    api(Reactivex.rxJava3)
     api(Reactivex.rxAndroid3)
 
-    api(Koin.core)
     api(Koin.android)
     api(Koin.androidCompat)
     api(Koin.androidxWorkManager)

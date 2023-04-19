@@ -72,13 +72,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
         jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of("11"))
+            languageVersion.set(JavaLanguageVersion.of("17"))
         }
     }
 
@@ -88,7 +88,6 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
-    implementation(project(DependencyGradle.FROGO_PATH_LOG))
 
     implementation(Androidx.Work.runtimeKtx)
     implementation(Google.material)
