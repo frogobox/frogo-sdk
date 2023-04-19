@@ -7,7 +7,7 @@ import android.webkit.*
 import com.frogobox.sdk.widget.webview.WebViewCallback
 
 
-/*
+/**
  * Created by faisalamir on 19/07/22
  * FrogoSDK
  * -----------------------------------------

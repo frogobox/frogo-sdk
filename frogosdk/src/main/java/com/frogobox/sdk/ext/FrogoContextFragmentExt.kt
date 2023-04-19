@@ -1,5 +1,7 @@
 package com.frogobox.sdk.ext
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -33,19 +35,14 @@ inline fun <reified Model> Fragment.getInstanceExt(argsKey: String): Model {
     return Gson().fromJson(argsData, Model::class.java)
 }
 
+inline fun <reified ClassActivity> Fragment.startActivityExt() {
+    startActivity(Intent(this.context, ClassActivity::class.java))
+}
+
+inline fun <reified ClassActivity> Fragment.startActivityExt(onIntent: (intent: Intent) -> Unit) {
+    startActivity(Intent(this.context, ClassActivity::class.java).apply {
+        onIntent(this)
+    })
+}
+
 // -------------------------------------------------------------------------------------------------
-
-@Deprecated("Use newInstanceExt instead")
-fun <Model> Fragment.singleNewInstance(argsKey: String, data: Model) {
-    val argsData = Gson().toJson(data)
-    val bundleArgs = Bundle().apply {
-        putString(argsKey, argsData)
-    }
-    this.arguments = bundleArgs
-}
-
-@Deprecated("Use getInstanceExt instead")
-inline fun <reified Model> Fragment.singleGetInstance(argsKey: String): Model {
-    val argsData = this.arguments?.getString(argsKey)
-    return Gson().fromJson(argsData, Model::class.java)
-}

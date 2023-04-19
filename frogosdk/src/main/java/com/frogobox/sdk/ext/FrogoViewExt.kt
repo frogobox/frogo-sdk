@@ -3,7 +3,7 @@ package com.frogobox.sdk.ext
 import android.view.View
 
 
-/*
+/**
  * Created by faisalamir on 06/04/22
  * FrogoUI
  * -----------------------------------------
