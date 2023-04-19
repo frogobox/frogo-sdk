@@ -2,6 +2,7 @@ package com.frogobox.appsdk.notification.simple
 
 import android.Manifest
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -15,7 +16,7 @@ import com.frogobox.appsdk.databinding.ActivityManualBinding
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.NOTIFICATION_ID
 
-/*
+/**
  * Created by faisalamir on 19/08/21
  * FrogoNotification
  * -----------------------------------------
@@ -54,7 +55,7 @@ class ManualActivity : BaseActivity<ActivityManualBinding>() {
     private fun showNotification() {
 
         val clickIntent = Intent(this, MainNotifReceiver::class.java)
-        val clickPendingIntent = PendingIntent.getBroadcast(this, 0, clickIntent, 0)
+        val clickPendingIntent = PendingIntent.getBroadcast(this, 0, clickIntent, FLAG_IMMUTABLE)
 
         val collapsedView = RemoteViews(packageName, R.layout.notification_collapsed)
         collapsedView.setTextViewText(R.id.text_view_collapsed_1, "Hello World!")
