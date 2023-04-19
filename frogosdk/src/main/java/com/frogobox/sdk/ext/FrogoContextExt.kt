@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.frogobox.log.FLog
+import com.frogobox.sdk.log.FLog
 import com.frogobox.sdk.util.FrogoFunc
 import okhttp3.Interceptor
 

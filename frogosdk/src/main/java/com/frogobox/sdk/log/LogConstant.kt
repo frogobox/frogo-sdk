@@ -1,4 +1,4 @@
-package com.frogobox.log
+package com.frogobox.sdk.log
 
 
 /**

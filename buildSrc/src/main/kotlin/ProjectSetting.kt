@@ -52,9 +52,9 @@ object ProjectSetting {
         (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 
-    val NAME_APK = NAME_APP.toLowerCase().replace(" ", "-")
+    val NAME_APK = NAME_APP.lowercase().replace(" ", "-")
 
-    val NAME_DB = NAME_APP.toLowerCase().replace(" ", "_")
+    val NAME_DB = NAME_APP.lowercase().replace(" ", "_")
     val DB = "\"$NAME_DB.db\""
 
     // ---------------------------------------------------------------------------------------------
