@@ -4,6 +4,7 @@ import com.frogobox.appsdk.source.AppDatabase
 import com.frogobox.appsdk.source.AppLocalDataSource
 import com.frogobox.appsdk.source.AppRemoteDataSource
 import com.frogobox.appsdk.source.AppRepository
+import com.frogobox.appsdk.util.AppConstant.PREF_NAME
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.util.AppExecutors
 import org.koin.android.ext.koin.androidContext
@@ -26,7 +27,8 @@ import org.koin.dsl.module
 val repositoryModule = module {
 
     single {
-        PreferenceDelegatesImpl(androidContext(), "ANJAYY")
+
+        PreferenceDelegatesImpl(androidContext(), PREF_NAME)
     }
 
     single {

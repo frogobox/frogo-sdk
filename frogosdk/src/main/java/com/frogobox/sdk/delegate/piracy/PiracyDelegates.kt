@@ -7,7 +7,7 @@ import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.delegate.piracy.util.PiracyVerifyDelegates
 
 
-/*
+/**
  * Created by faisalamir on 01/07/22
  * FrogoSDK
  * -----------------------------------------

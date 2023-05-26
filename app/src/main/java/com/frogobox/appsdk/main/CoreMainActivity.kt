@@ -7,6 +7,7 @@ import com.frogobox.sdk.delegate.piracy.FrogoPiracyDialogCallback
 import com.frogobox.sdk.delegate.piracy.PiracyDelegates
 import com.frogobox.sdk.delegate.piracy.PiracyDelegatesImpl
 import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
+import com.frogobox.sdk.ext.openPlayStore
 
 /**
  * Created by Faisal Amir on 19/03/23
@@ -33,7 +34,7 @@ abstract class CoreMainActivity<VB : ViewBinding> : BaseActivity<VB>(),
 
                 showPiracedDialog(message, object : FrogoPiracyDialogCallback {
                     override fun doOnPirated(message: PiracyMessage) {
-                        openPlaystore(packageName)
+                        openPlayStore(packageName)
                     }
 
                 })

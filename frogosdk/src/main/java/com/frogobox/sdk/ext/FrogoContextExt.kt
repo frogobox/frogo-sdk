@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.frogobox.coresdk.util.FrogoConstant
 import com.frogobox.sdk.log.FLog
 import com.frogobox.sdk.util.FrogoFunc
 import okhttp3.Interceptor
@@ -26,7 +27,7 @@ import okhttp3.Interceptor
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -145,4 +146,12 @@ fun Context.getInstallerId(): String? {
 
 fun Context.createMediaPlayer(resId: Int): MediaPlayer {
     return MediaPlayer.create(this, resId)
+}
+
+fun Context.openPlayStore(packageName: String) {
+    startActivityExtOpenApp("${FrogoConstant.Url.BASE_PLAY_STORE_URL}$packageName")
+}
+
+fun Context.shareApp(packageName: String, text: String) {
+    startActivityExtShareApp(packageName, text)
 }

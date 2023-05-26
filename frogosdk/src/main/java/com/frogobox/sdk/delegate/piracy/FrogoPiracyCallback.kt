@@ -2,7 +2,7 @@ package com.frogobox.sdk.delegate.piracy
 
 import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 
-/*
+/**
  * Created by faisalamir on 01/07/22
  * FrogoSDK
  * -----------------------------------------

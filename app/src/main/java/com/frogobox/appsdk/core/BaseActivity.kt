@@ -1,14 +1,12 @@
 package com.frogobox.appsdk.core
 
 import androidx.viewbinding.ViewBinding
-import com.frogobox.appsdk.FrogoApp
 import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
-import com.frogobox.sdk.delegate.util.UtilDelegates
-import com.frogobox.sdk.delegate.util.UtilDelegatesImpl
 import com.frogobox.sdk.view.FrogoBindActivity
+import org.koin.android.ext.android.inject
 
-/*
+/**
  * Created by faisalamir on 02/08/21
  * FrogoSDK
  * -----------------------------------------
@@ -20,13 +18,9 @@ import com.frogobox.sdk.view.FrogoBindActivity
  * All rights reserved
  *
  */
-abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>(),
-    UtilDelegates by UtilDelegatesImpl(),
-    PreferenceDelegates by PreferenceDelegatesImpl(FrogoApp.getContext(), "ANJAYY") {
 
-    override fun setupDelegates() {
-        super.setupDelegates()
-        setupUtilDelegates(this)
-    }
+abstract class BaseActivity<VB : ViewBinding> : FrogoBindActivity<VB>() {
+
+    protected val singlePref: PreferenceDelegates by inject<PreferenceDelegatesImpl>()
 
 }

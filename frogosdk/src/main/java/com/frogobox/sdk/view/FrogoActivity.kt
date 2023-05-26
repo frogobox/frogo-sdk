@@ -1,5 +1,6 @@
 package com.frogobox.sdk.view
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -47,7 +48,7 @@ abstract class FrogoActivity : AppCompatActivity() {
         }"
     }
 
-    protected var startActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         setupActivityResultExt(result)
     }
 
@@ -135,6 +136,10 @@ abstract class FrogoActivity : AppCompatActivity() {
         if (backgroundColor != null) {
             supportActionBar?.setBackgroundDrawable(ColorDrawable(getResColor(backgroundColor)))
         }
+    }
+
+    open fun startActivityResultExt(intent: Intent) {
+        activityResult.launch(intent)
     }
 
     open fun setupChildFragment(frameId: Int, fragment: Fragment) {

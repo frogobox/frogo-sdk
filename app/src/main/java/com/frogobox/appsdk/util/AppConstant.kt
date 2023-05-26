@@ -19,6 +19,7 @@ object AppConstant {
     const val NOTIFICATION_ID = 2
     const val CHANNEL_ID = "CHANNEL_$NOTIFICATION_ID"
     const val CHANNEL_NAME = "CHANNEL_NAME_$CHANNEL_ID"
+    const val PREF_NAME = "FROGO_PREF_NAME"
 
     object RoomDatabase {
         const val BASE_TABLE_NAME = "table"

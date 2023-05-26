@@ -6,6 +6,7 @@ import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
 import com.frogobox.appsdk.viewpager.VPagerActivity
+import com.frogobox.sdk.ext.preference
 import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.startActivityExt
 import com.frogobox.sdk.ui.FrogoAboutUsActivity
@@ -14,7 +15,7 @@ import com.frogobox.sdk.ui.FrogoWebViewActivity
 class MainActivity : CoreMainActivity<ActivityMainBinding>() {
 
     private val tes: String by lazy {
-        loadPrefString("test")
+        singlePref.loadPrefString("test")
     }
 
     override fun setupViewBinding(): ActivityMainBinding {
