@@ -18,8 +18,7 @@ object DependencyGradle {
     const val COMPOSE_VERSION = Version.Androidx.composeCompiler
     const val HILT_VERSION = Version.Google.hilt
 
-    const val FROGO_PATH_CORE_SDK = ":frogocoresdk"
-    const val FROGO_PATH_SDK = ":frogosdk"
-    const val FROGO_PATH_LOG = ":frogolog"
+    const val FROGO_PATH_CORE_SDK = ":core-sdk"
+    const val FROGO_PATH_SDK = ":core-sdk-android"
 
 }
