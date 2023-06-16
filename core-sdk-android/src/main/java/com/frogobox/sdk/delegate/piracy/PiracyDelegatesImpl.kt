@@ -37,8 +37,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         val TAG: String = PiracyDelegatesImpl::class.java.simpleName
 
         const val PIRACY_MESSAGE_TITLE = "This app is not licensed"
-        const val PIRACY_MESSAGE_DESC =
-            "This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources"
+        const val PIRACY_MESSAGE_DESC = "This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources"
         const val PIRACY_MESSAGE_EMU_TITLE = "Warning Prohibited Activity"
         const val PIRACY_MESSAGE_EMU_DESC = "This app is not intended for emulators"
 
@@ -207,7 +206,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
             enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
             // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
@@ -241,7 +240,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
                 InstallerID.HUAWEI_APP_GALLERY
             )
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
@@ -262,7 +261,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
             enableUnauthorizedAppsCheck()
             blockIfUnauthorizedAppUninstalled("license_checker", "block")
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
@@ -280,7 +279,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         piracyDelegateContext.piracyChecker {
             enableStoresCheck()
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
@@ -298,7 +297,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         piracyDelegateContext.piracyChecker {
             enableDebugCheck()
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
@@ -316,7 +315,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         piracyDelegateContext.piracyChecker {
             enableEmulatorCheck(true)
             callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
+                doNotAllow { _, _ ->
                     callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
                 }
             }
