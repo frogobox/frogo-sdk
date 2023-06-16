@@ -22,20 +22,16 @@ import com.frogobox.sdk.delegate.piracy.util.PiracyVerifyDelegates
 
 interface PiracyDelegates : PiracyVerifyDelegates, PiracyCheckRootDelegates {
 
-    fun setupPiracyDelegate(context: Context, activity: AppCompatActivity)
+    fun isEmulator(): Boolean
 
-    fun setupPiracyDelegate(context: Context)
+    fun setupPiracyDelegate(context: Context, activity: AppCompatActivity? = null)
 
     fun setupPiracyDelegatesDebug(isDebug: Boolean)
 
-    fun isEmulator(): Boolean
+    fun connectPiracyChecker(callback: FrogoPiracyCallback? = null)
 
-    fun connectPiracyChecker()
+    fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback? = null)
 
-    fun connectPiracyChecker(callback: FrogoPiracyCallback)
-
-    fun showPiracedDialog(message: PiracyMessage)
-
-    fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback)
+    fun piracyMessage(isEmulator: Boolean = false) : PiracyMessage
 
 }
