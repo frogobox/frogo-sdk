@@ -19,6 +19,6 @@ dependencyResolutionManagement {
 rootProject.name = "FrogoSDK"
 include(
     ":app",
-    ":frogosdk",
-    ":frogocoresdk"
+    ":core-sdk",
+    ":core-sdk-android"
 )

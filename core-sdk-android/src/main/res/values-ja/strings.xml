@@ -1,0 +1,62 @@
+<resources>
+
+    <string name="read_signature">APK 署名を読み取る</string>
+    <string name="verify_signature">APK 署名を使用して検証する</string>
+    <string name="verify_installer_id">インストーラー ID を使用して確認する</string>
+    <string name="verify_unauthorized_apps">不正なアプリを確認します: Lucky Patcher、Freedom、CreeHack、HappyMod</string>
+    <string name="verify_stores">サードパーティ ストアを確認します: Aptoide、BlackMart、1Mobile、GetApk など</string>
+    <string name="verify_debug">アプリがデバッグ ビルドであるかどうかを確認する</string>
+    <string name="verify_emulator">アプリがエミュレータで実行されているかどうかを確認する</string>
+
+    <string name="about_frogobox">Frogobox ID</string>
+    <string name="about_copyright">©著作権</string>
+    <string name="about_all_right_reserved">無断転載禁止</string>
+
+    <string name="title_about_us">ツールバー_about_us</string>
+    <string name="title_copyright">著作権</string>
+
+    <string name="dummyLong">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam veniam similiquevoluptates odit、ipsum Laborum 建築家、distinctio halum、provident fugiat praesentium ex quod doloreslaudantium aliquid quidem placeat incidunt vitae!</string>
+    <string name="dummy">ダミー</string>
+
+    <string name="dialog_button_yes">はい</string>
+    <string name="dialog_button_no">いいえ</string>
+    <string name="dialog_title_delete">データの削除</string>
+    <string name="dialog_message_delete">データを削除してもよろしいですか?</string>
+
+
+    <string name="frogo_notification_content_title">Frogo コンテンツのタイトル</string>
+    <string name="frogo_notification_content_text">Frogo Lorem Ipsum は、印刷および植字業界の単なるダミー テキストです。 Lorem Ipsum は、無名の印刷業者が活字のゲラをスクランブルして活字見本帳を作成した 1500 年代以来、業界の標準的なダミーテキストです。 生き残ったのは 5 世紀だけではありません</string>
+    <string name="frogo_notification_subtext">フロゴのサブテキスト</string>
+
+    <!-- 主なアクティビティ文字列 -->
+    <string name="hello">こんにちは! アプリをクラッシュするには、次のボタンのいずれかを押します:</string>
+    <string name="crash_main_thread">メインスレッドがクラッシュする</string>
+    <string name="crash_background_thread">クラッシュ バックグラウンド スレッド</string>
+    <string name="crash_with_delay">遅延付きクラッシュ (5 秒)</string>
+
+    <!-- これらの文字列はカスタム エラー アクティビティ専用です。デフォルトのアクティビティを使用している場合は必要ありません。 -->
+    <string name="error_title">何か問題が発生しました!</string>
+    <string name="error_occurred">エラーが発生しました。 大変申し訳ございません。</string>
+    <string name="error_details">エラーの詳細:</string>
+    <string name="unknown_exception">不明な例外</string>
+    <string name="restart_app">アプリを再起動</string>
+    <string name="close_app">アプリを閉じる</string>
+
+    <string name="piracy_message_title">このアプリにはライセンスがありません</string>
+    <string name="piracy_message_desc">このアプリケーションはライセンスが付与されておらず、有効でもありません。 アプリケーションがハッキングされた可能性が高いと警告します。信頼できるソースからアプリケーションをダウンロードしてください。</string>
+    <string name="piracy_message_emu_title">警告禁止行為</string>
+    <string name="piracy_message_emu_desc">このアプリはエミュレータ向けではありません</string>
+
+    <!-- デフォルトのエラーアクティビティ用にいくつかのカスタム文字列を定義します -->
+    <!-- もちろん、これはデフォルトのエラー アクティビティを使用する場合にのみ適用されます。 -->
+    <!-- それらを表示するには、それらのコメントを解除し、SampleCrashingApplication のカスタム エラー アクティビティを無効にします -->
+    <!--<string name="customactivityoncrash_error_activity_error_occurred_explanation">このサンプル アプリでエラーが発生しました。 これは、カスタマイズされた文字列を含むデフォルトのエラー アクティビティです。</string>-->
+    <!--<string name="customactivityoncrash_error_activity_unknown_Exception">利用可能なスタックトレースがありません!</string>-->
+    <!--<string name="customactivityoncrash_error_activity_restart_app">今すぐ再起動</string>-->
+    <!--<string name="customactivityoncrash_error_activity_close_app">今すぐ終了</string>-->
+    <!--<string name="customactivityoncrash_error_activity_error_details">エラー情報</string>-->
+    <!--<string name="customactivityoncrash_error_activity_error_details_title">エラー情報</string>-->
+    <!--<string name="customactivityoncrash_error_activity_error_details_close">OK</string>-->
+
+
+</resources>
