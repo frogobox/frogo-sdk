@@ -42,6 +42,11 @@
     <string name="restart_app">Restart app</string>
     <string name="close_app">Close app</string>
 
+    <string name="piracy_message_title">This app is not licensed</string>
+    <string name="piracy_message_desc">This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources</string>
+    <string name="piracy_message_emu_title">Warning Prohibited Activity</string>
+    <string name="piracy_message_emu_desc">This app is not intended for emulators</string>
+
     <!-- We define some custom strings for the default error activity -->
     <!-- This only applies when using the default error activity, of course! -->
     <!-- To see them, uncomment them and disable the custom error activity in SampleCrashingApplication -->

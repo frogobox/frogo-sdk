@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.sdk.R
 import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.ext.getInstallerId
 import com.frogobox.sdk.ext.showLogD
@@ -26,7 +27,7 @@ import java.io.InputStreamReader
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -35,14 +36,6 @@ class PiracyDelegatesImpl : PiracyDelegates {
 
     companion object {
         val TAG: String = PiracyDelegatesImpl::class.java.simpleName
-
-        const val PIRACY_MESSAGE_TITLE = "This app is not licensed"
-        const val PIRACY_MESSAGE_DESC =
-            "This application is not licensed nor valid. Warning most likely the application has been hacked, Please download the app from trusted sources"
-        const val PIRACY_MESSAGE_EMU_TITLE = "Warning Prohibited Activity"
-        const val PIRACY_MESSAGE_EMU_DESC = "This app is not intended for emulators"
-
-        val PIRACY_MESSAGE_CALLBACK = PiracyMessage(PIRACY_MESSAGE_TITLE, PIRACY_MESSAGE_DESC)
     }
 
     private var piracyCheckerIsDebug = true
@@ -64,71 +57,57 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }
     }
 
-    override fun setupPiracyDelegate(context: Context, activity: AppCompatActivity) {
+    override fun setupPiracyDelegate(context: Context, activity: AppCompatActivity?) {
         piracyDelegateContext = context
-        piracyDelegateActivity = activity
-    }
-
-    override fun setupPiracyDelegate(context: Context) {
-        piracyDelegateContext = context
-    }
-
-    override fun connectPiracyChecker() {
-        if (piracyCheckerIsDebug) {
-            showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
-            showLogD<PiracyDelegatesImpl>("IntallerId  : ${piracyDelegateContext.getInstallerId()}")
-            showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
-            showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
-            showLogD<PiracyDelegatesImpl>("Please call setupDebugMode() set to false if using FrogoActivity")
-            showLogD<PiracyDelegatesImpl>("Please set build variant to release")
-        } else {
-            if (isEmulator()) {
-                showPiracedDialog(PiracyMessage(PIRACY_MESSAGE_EMU_TITLE, PIRACY_MESSAGE_EMU_DESC))
-            } else {
-                verifyInstallerId()
-            }
+        if (activity != null) {
+            piracyDelegateActivity = activity
         }
     }
 
-    override fun connectPiracyChecker(callback: FrogoPiracyCallback) {
-        if (piracyCheckerIsDebug) {
-            showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
-            showLogD<PiracyDelegatesImpl>("IntallerId  : ${piracyDelegateContext.getInstallerId()}")
-            showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
-            showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
-            showLogD<PiracyDelegatesImpl>("Please setupDebugMode() to false if using FrogoActivity")
-            showLogD<PiracyDelegatesImpl>("Please set build variant to release")
-        } else {
-            if (isEmulator()) {
-                callback.doOnPirated(
-                    PiracyMessage(
-                        PIRACY_MESSAGE_EMU_TITLE,
-                        PIRACY_MESSAGE_EMU_DESC
-                    )
-                )
+    override fun connectPiracyChecker(callback: FrogoPiracyCallback?) {
+
+        if (callback != null) {
+            if (piracyCheckerIsDebug) {
+                showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
+                showLogD<PiracyDelegatesImpl>("InstallerId  : ${piracyDelegateContext.getInstallerId()}")
+                showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
+                showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
+                showLogD<PiracyDelegatesImpl>("Please setupDebugMode() to false if using FrogoActivity")
+                showLogD<PiracyDelegatesImpl>("Please set build variant to release")
             } else {
-                verifyInstallerId(callback)
+                if (isEmulator()) {
+                    callback.doOnPirated(piracyMessage(true))
+                } else {
+                    verifyInstallerId(callback)
+                }
+            }
+        } else {
+            if (piracyCheckerIsDebug) {
+                showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
+                showLogD<PiracyDelegatesImpl>("InstallerId  : ${piracyDelegateContext.getInstallerId()}")
+                showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
+                showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
+                showLogD<PiracyDelegatesImpl>("Please call setupDebugMode() set to false if using FrogoActivity")
+                showLogD<PiracyDelegatesImpl>("Please set build variant to release")
+            } else {
+                if (isEmulator()) {
+                    showPiracedDialog(piracyMessage(true))
+                } else {
+                    verifyInstallerId()
+                }
             }
         }
+
+
     }
 
-    override fun showPiracedDialog(message: PiracyMessage) {
+    override fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback?) {
         FrogoFunc.createDialogDefault(
             piracyDelegateContext,
             message.title,
             message.description,
         ) {
-            piracyDelegateActivity.finishAffinity()
-        }
-    }
-
-    override fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback) {
-        FrogoFunc.createDialogDefault(
-            piracyDelegateContext,
-            message.title,
-            message.description,
-        ) {
-            callback.doOnPirated(message)
+            callback?.doOnPirated(message)
             piracyDelegateActivity.finishAffinity()
         }
     }
@@ -194,22 +173,21 @@ class PiracyDelegatesImpl : PiracyDelegates {
             .show()
     }
 
-    override fun verifySignature() {
+    override fun verifySignature(callback: FrogoPiracyCallback?) {
         piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
-            // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
-        }.start()
-    }
+            if (callback != null) {
+                enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
+                // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
 
-    override fun verifySignature(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
-            // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
                 }
+            } else {
+                display(piracyCheckerDisplay)
+                enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
+                // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
             }
         }.start()
     }
@@ -220,107 +198,112 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }
     }
 
-    override fun verifyInstallerId() {
+    override fun verifyInstallerId(callback: FrogoPiracyCallback?) {
         piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableInstallerId(
-                InstallerID.GOOGLE_PLAY,
-                InstallerID.AMAZON_APP_STORE,
-                InstallerID.GALAXY_APPS,
-                InstallerID.HUAWEI_APP_GALLERY
+            if (callback != null) {
+                enableInstallerId(
+                    InstallerID.GOOGLE_PLAY,
+                    InstallerID.AMAZON_APP_STORE,
+                    InstallerID.GALAXY_APPS,
+                    InstallerID.HUAWEI_APP_GALLERY
+                )
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
+                }
+            } else {
+                display(piracyCheckerDisplay)
+                enableInstallerId(
+                    InstallerID.GOOGLE_PLAY,
+                    InstallerID.AMAZON_APP_STORE,
+                    InstallerID.GALAXY_APPS,
+                    InstallerID.HUAWEI_APP_GALLERY
+                )
+            }
+        }.start()
+    }
+
+    override fun verifyUnauthorizedApps(callback: FrogoPiracyCallback?) {
+        piracyDelegateContext.piracyChecker {
+            if (callback != null) {
+                enableUnauthorizedAppsCheck()
+                blockIfUnauthorizedAppUninstalled("license_checker", "block")
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
+                }
+            } else {
+                display(piracyCheckerDisplay)
+                enableUnauthorizedAppsCheck()
+                blockIfUnauthorizedAppUninstalled("license_checker", "block")
+
+            }
+
+        }.start()
+    }
+
+    override fun verifyStores(callback: FrogoPiracyCallback?) {
+        piracyDelegateContext.piracyChecker {
+            if (callback != null) {
+                enableStoresCheck()
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
+                }
+            } else {
+                display(piracyCheckerDisplay)
+                enableStoresCheck()
+            }
+        }.start()
+    }
+
+    override fun verifyDebug(callback: FrogoPiracyCallback?) {
+        piracyDelegateContext.piracyChecker {
+            if (callback != null) {
+                enableDebugCheck()
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
+                }
+            } else {
+                display(piracyCheckerDisplay)
+                enableDebugCheck()
+            }
+        }.start()
+    }
+
+    override fun verifyEmulator(callback: FrogoPiracyCallback?) {
+        piracyDelegateContext.piracyChecker {
+            if (callback != null) {
+                enableEmulatorCheck(true)
+                callback {
+                    doNotAllow { _, _ ->
+                        callback.doOnPirated(piracyMessage())
+                    }
+                }
+            } else {
+                display(piracyCheckerDisplay)
+                enableEmulatorCheck(true)
+            }
+        }.start()
+    }
+
+    override fun piracyMessage(isEmulator: Boolean): PiracyMessage {
+        return if (isEmulator) {
+            PiracyMessage(
+                title = piracyDelegateContext.getString(R.string.piracy_message_emu_title),
+                description = piracyDelegateContext.getString(R.string.piracy_message_emu_desc)
             )
-        }.start()
-    }
-
-    override fun verifyInstallerId(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            enableInstallerId(
-                InstallerID.GOOGLE_PLAY,
-                InstallerID.AMAZON_APP_STORE,
-                InstallerID.GALAXY_APPS,
-                InstallerID.HUAWEI_APP_GALLERY
+        } else {
+            PiracyMessage(
+                title = piracyDelegateContext.getString(R.string.piracy_message_title),
+                description = piracyDelegateContext.getString(R.string.piracy_message_desc)
             )
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
-                }
-            }
-        }.start()
-    }
-
-    override fun verifyUnauthorizedApps() {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableUnauthorizedAppsCheck()
-            blockIfUnauthorizedAppUninstalled("license_checker", "block")
-        }.start()
-    }
-
-    override fun verifyUnauthorizedApps(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableUnauthorizedAppsCheck()
-            blockIfUnauthorizedAppUninstalled("license_checker", "block")
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
-                }
-            }
-        }.start()
-    }
-
-    override fun verifyStores() {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableStoresCheck()
-        }.start()
-    }
-
-    override fun verifyStores(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            enableStoresCheck()
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
-                }
-            }
-        }.start()
-    }
-
-    override fun verifyDebug() {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableDebugCheck()
-        }.start()
-    }
-
-    override fun verifyDebug(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            enableDebugCheck()
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
-                }
-            }
-        }.start()
-    }
-
-    override fun verifyEmulator() {
-        piracyDelegateContext.piracyChecker {
-            display(piracyCheckerDisplay)
-            enableEmulatorCheck(true)
-        }.start()
-    }
-
-    override fun verifyEmulator(callback: FrogoPiracyCallback) {
-        piracyDelegateContext.piracyChecker {
-            enableEmulatorCheck(true)
-            callback {
-                doNotAllow { piracyCheckerError, pirateApp ->
-                    callback.doOnPirated(PIRACY_MESSAGE_CALLBACK)
-                }
-            }
-        }.start()
+        }
     }
 
 }

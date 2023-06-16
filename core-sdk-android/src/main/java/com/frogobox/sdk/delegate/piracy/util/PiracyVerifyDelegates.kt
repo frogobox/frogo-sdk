@@ -2,7 +2,7 @@ package com.frogobox.sdk.delegate.piracy.util
 
 import com.frogobox.sdk.delegate.piracy.FrogoPiracyCallback
 
-/*
+/**
  * Created by faisalamir on 01/07/22
  * FrogoSDK
  * -----------------------------------------
@@ -22,28 +22,16 @@ interface PiracyVerifyDelegates {
 
     fun showApkSignatures()
 
-    fun verifySignature()
+    fun verifySignature(callback: FrogoPiracyCallback? = null)
 
-    fun verifySignature(callback: FrogoPiracyCallback)
+    fun verifyInstallerId(callback: FrogoPiracyCallback? = null)
 
-    fun verifyInstallerId()
+    fun verifyUnauthorizedApps(callback: FrogoPiracyCallback? = null)
 
-    fun verifyInstallerId(callback: FrogoPiracyCallback)
+    fun verifyStores(callback: FrogoPiracyCallback? = null)
 
-    fun verifyUnauthorizedApps()
+    fun verifyDebug(callback: FrogoPiracyCallback? = null)
 
-    fun verifyUnauthorizedApps(callback: FrogoPiracyCallback)
-
-    fun verifyStores()
-
-    fun verifyStores(callback: FrogoPiracyCallback)
-
-    fun verifyDebug()
-
-    fun verifyDebug(callback: FrogoPiracyCallback)
-
-    fun verifyEmulator()
-
-    fun verifyEmulator(callback: FrogoPiracyCallback)
+    fun verifyEmulator(callback: FrogoPiracyCallback? = null)
 
 }
