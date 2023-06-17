@@ -21,17 +21,15 @@ object ProjectSetting {
 
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
-    const val LIBRARY_NAME_LOG = "log"
 
-    const val MODULE_NAME_CORE_SDK = "frogocoresdk"
-    const val MODULE_NAME_SDK = "frogosdk"
-    const val MODULE_NAME_LOG = "frogolog"
+    const val MODULE_NAME_CORE_SDK = "core-sdk"
+    const val MODULE_NAME_SDK = "core-sdk-android"
 
     // ---------------------------------------------------------------------------------------------
 
     const val VERSION_MAJOR = 2
     const val VERSION_MINOR = 2
-    const val VERSION_PATCH = 0
+    const val VERSION_PATCH = 1
 
     // ---------------------------------------------------------------------------------------------
 
@@ -46,10 +44,8 @@ object ProjectSetting {
     const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.$APP_NAME"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
-    const val PROJECT_LIB_ID_LOG = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_LOG"
 
-    const val PROJECT_VERSION_CODE =
-        (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
+    const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 
     val NAME_APK = NAME_APP.lowercase().replace(" ", "-")
