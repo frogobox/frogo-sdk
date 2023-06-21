@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.frogobox.appsdk.R;
 import com.frogobox.appsdk.core.BaseActivity;
@@ -31,6 +30,10 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(getBinding().toolbar);
+        setupUI();
+    }
+
+    private void setupUI() {
 
         getBinding().layoutContentMain.radioDisplay.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i) {
@@ -44,13 +47,23 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
         for (String signature : LibraryUtilsKt.getApkSignatures(PiracyMainActivity.this)) {
             Log.e("Signature", signature);
         }
+
+        getBinding().layoutContentMain.cvReadSignature.setOnClickListener(view -> readSignature());
+        getBinding().layoutContentMain.cvVerifySignature.setOnClickListener(view -> verifySignature());
+        getBinding().layoutContentMain.cvVerifyInstallerId.setOnClickListener(view -> verifyInstallerId());
+        getBinding().layoutContentMain.cvVerifyUnauthorizedApps.setOnClickListener(view -> verifyUnauthorizedApps());
+        getBinding().layoutContentMain.cvVerifyStores.setOnClickListener(view -> verifyStores());
+        getBinding().layoutContentMain.cvVerifyDebug.setOnClickListener(view -> verifyDebug());
+        getBinding().layoutContentMain.cvVerifyEmulator.setOnClickListener(view -> verifyEmulator());
+        getBinding().fabToGithub.setOnClickListener(view -> toGithub());
+
     }
 
-    public void toGithub(View view) {
+    public void toGithub() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/javiersantos/PiracyChecker")));
     }
 
-    public void verifySignature(View view) {
+    public void verifySignature() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
@@ -58,7 +71,7 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
             .start();
     }
 
-    public void readSignature(View view) {
+    public void readSignature() {
         StringBuilder dialogMessage = new StringBuilder();
         for (String signature : LibraryUtilsKt.getApkSignatures(PiracyMainActivity.this)) {
             Log.e("Signature", signature);
@@ -70,14 +83,14 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
             .show();
     }
 
-    public void verifyInstallerId(View view) {
+    public void verifyInstallerId() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableInstallerId(InstallerID.GOOGLE_PLAY)
             .start();
     }
 
-    public void verifyUnauthorizedApps(View view) {
+    public void verifyUnauthorizedApps() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableUnauthorizedAppsCheck()
@@ -85,21 +98,21 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
             .start();
     }
 
-    public void verifyStores(View view) {
+    public void verifyStores() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableStoresCheck()
             .start();
     }
 
-    public void verifyDebug(View view) {
+    public void verifyDebug() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableDebugCheck()
             .start();
     }
 
-    public void verifyEmulator(View view) {
+    public void verifyEmulator() {
         new PiracyChecker(PiracyMainActivity.this)
             .display(piracyCheckerDisplay)
             .enableEmulatorCheck(false)
