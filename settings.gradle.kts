@@ -20,5 +20,6 @@ rootProject.name = "FrogoSDK"
 include(
     ":app",
     ":core-sdk",
-    ":core-sdk-android"
+    ":core-sdk-android",
+    ":core-sdk-android-util"
 )

@@ -424,10 +424,7 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
 
 ```
 
-### Added Function
-
-<details>
-<summary>Click for detail !!!</summary>
+## Added Function
 
 ## FrogoLog
 
@@ -560,7 +557,7 @@ FLog.d(this@MainActivity)
 - Full documentation
 - Custom Layout Notification
 
-### Screenshoot Sample
+### Screen shot Sample
 
 <table>
     <tr>
@@ -750,16 +747,11 @@ FrogoNotification.Inject(this) // Intialize for Context
 
 ### For Documentation
 
-- Method with
-  description [Click Here](https://github.com/amirisback/frogo-notification/blob/master/frogonotification/src/main/java/com/frogobox/frogonotification/IFrogoNotification.kt)
-- Simple
-  Notification [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/simple/MainActivity.kt)
-- With Action
-  Replay [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/custom/NotificationService.kt)
-- With Inbox Style (
-  Stack) [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/stack/StackNotifActivity.kt)
-
-</details>
+- Method with description [Click Here](https://github.com/amirisback/frogo-notification/blob/master/frogonotification/src/main/java/com/frogobox/frogonotification/IFrogoNotification.kt)
+- Simple Notification [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/simple/MainActivity.kt)
+- With Action Replay [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/custom/NotificationService.kt)
+- With Inbox Style (Stack) [Click Here](https://github.com/amirisback/frogo-notification/blob/master/app/src/main/java/com/frogobox/notification/stack/StackNotifActivity.kt)
+- Piracy Checker [Click Here](https://github.com/javiersantos/PiracyChecker)
 
 ## Colaborator
 

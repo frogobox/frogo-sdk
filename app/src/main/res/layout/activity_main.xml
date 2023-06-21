@@ -52,6 +52,20 @@
             android:text="Error Crash" />
 
         <Button
+            android:id="@+id/btn_piracy_kotlin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Piracy Checker (Kotlin)" />
+
+        <Button
+            android:id="@+id/btn_piracy_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Piracy Checker (Main)" />
+
+        <Button
             android:id="@+id/btn_webview_frogobox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
