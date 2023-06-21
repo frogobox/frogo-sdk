@@ -424,7 +424,7 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
 
 ```
 
-### Added Function
+## Added Function
 
 ## FrogoLog
 
