@@ -5,8 +5,9 @@ import com.frogobox.appsdk.databinding.ActivityMainBinding
 import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
+import com.frogobox.appsdk.piracy.KotlinActivity
+import com.frogobox.appsdk.piracy.PiracyMainActivity
 import com.frogobox.appsdk.viewpager.VPagerActivity
-import com.frogobox.sdk.ext.preference
 import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.ext.startActivityExt
 import com.frogobox.sdk.ui.FrogoAboutUsActivity
@@ -56,19 +57,31 @@ class MainActivity : CoreMainActivity<ActivityMainBinding>() {
             }
 
             btnWebviewFrogobox.setOnClickListener {
-                FrogoWebViewActivity.startActivityExt(this@MainActivity,
+                FrogoWebViewActivity.startActivityExt(
+                    this@MainActivity,
                     "https://frogobox.github.io",
-                    "Frogobox")
+                    "Frogobox"
+                )
             }
 
             btnWebviewAmirisback.setOnClickListener {
-                FrogoWebViewActivity.startActivityExt(this@MainActivity,
+                FrogoWebViewActivity.startActivityExt(
+                    this@MainActivity,
                     "https://amirisback.github.io",
-                    "Faisal Amir")
+                    "Faisal Amir"
+                )
             }
 
             btnAboutUs.setOnClickListener {
                 startActivityExt<FrogoAboutUsActivity>()
+            }
+
+            btnPiracyKotlin.setOnClickListener {
+                startActivityExt<KotlinActivity>()
+            }
+
+            btnPiracyMain.setOnClickListener {
+                startActivityExt<PiracyMainActivity>()
             }
 
         }

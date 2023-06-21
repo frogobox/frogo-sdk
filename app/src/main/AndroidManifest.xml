@@ -16,42 +16,57 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeSdk"
         tools:targetApi="tiramisu">
+
         <activity
             android:name=".viewpager.VPagerActivity"
             android:exported="false" />
+
         <activity
             android:name=".news.NewsDetailActivity"
             android:exported="false" />
+
         <activity
             android:name=".news.NewsActivity"
             android:exported="false" />
+
         <activity
             android:name=".main.MainJavaActivity"
             android:exported="false" />
+
         <activity
             android:name=".log.LogActivity"
             android:exported="false" />
+
         <activity
             android:name=".notification.simple.ManualActivity"
             android:exported="false" />
+
         <activity
             android:name=".notification.stack.StackNotifActivity"
             android:exported="false" />
+
         <activity
             android:name=".notification.custom.ReplyActivity"
             android:exported="false" />
+
         <activity
             android:name=".notification.custom.CustomNotifActivity"
             android:exported="false" />
+
         <activity
             android:name=".notification.simple.MainNotifActivity"
             android:exported="false" />
+
         <activity
             android:name=".piracy.KotlinActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".piracy.PiracyMainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".main.MainActivity"
             android:exported="true"
