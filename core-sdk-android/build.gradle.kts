@@ -52,26 +52,11 @@ android {
 dependencies {
 
     api(project(DependencyGradle.FROGO_PATH_CORE_SDK))
-
-    api(Androidx.appCompat)
-
-    api(Androidx.activityKtx)
-    api(Androidx.fragmentKtx)
-
-    api(Androidx.constraintLayout)
-    api(Androidx.viewPager2)
-
-    api(Androidx.Core.ktx)
-
-    api(Androidx.Lifecycle.runtimeKtx)
-    api(Androidx.Lifecycle.viewmodelKtx)
-    api(Androidx.Lifecycle.livedataKtx)
+    api(project(DependencyGradle.FROGO_PATH_SDK_UTIL))
 
     api(Androidx.Room.ktx)
     api(Androidx.Room.runtime)
     api(Androidx.Room.rxJava3)
-
-    api(Google.material)
 
     api(Reactivex.rxAndroid3)
 
@@ -82,7 +67,6 @@ dependencies {
     api(GitHub.chucker)
     api(GitHub.glide)
 
-    api(GitHub.piracyChecker)
     api(GitHub.customActivityOnCrash)
 
     ksp(Androidx.Lifecycle.compiler)

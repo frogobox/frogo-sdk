@@ -24,6 +24,7 @@ object ProjectSetting {
 
     const val MODULE_NAME_CORE_SDK = "core-sdk"
     const val MODULE_NAME_SDK = "core-sdk-android"
+    const val MODULE_NAME_SDK_UTIL = "core-sdk-android-util"
 
     // ---------------------------------------------------------------------------------------------
 
