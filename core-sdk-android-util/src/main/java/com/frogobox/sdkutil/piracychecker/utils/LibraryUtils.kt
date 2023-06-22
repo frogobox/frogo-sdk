@@ -15,7 +15,7 @@ import android.os.Environment
 import android.util.Base64
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import com.frogobox.sdkutil.piracychecker.R
+import com.frogobox.sdkutil.R
 import com.frogobox.sdkutil.piracychecker.enums.AppType
 import com.frogobox.sdkutil.piracychecker.enums.InstallerID
 import com.frogobox.sdkutil.piracychecker.enums.PirateApp

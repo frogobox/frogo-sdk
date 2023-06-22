@@ -12,7 +12,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.frogobox.sdkutil.piracychecker.R
+import com.frogobox.sdkutil.R
 
 class LicenseActivity : AppCompatActivity() {
     private var description: String? = null
