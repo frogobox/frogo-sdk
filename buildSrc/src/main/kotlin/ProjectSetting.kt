@@ -21,6 +21,7 @@ object ProjectSetting {
 
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
+    const val LIBRARY_NAME_SDK_UTIL = "sdkutil"
 
     const val MODULE_NAME_CORE_SDK = "core-sdk"
     const val MODULE_NAME_SDK = "core-sdk-android"
@@ -45,6 +46,7 @@ object ProjectSetting {
     const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.$APP_NAME"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
+    const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

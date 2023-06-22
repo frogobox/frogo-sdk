@@ -6,7 +6,8 @@ enum class InstallerID(private val text: String) {
     GOOGLE_PLAY("com.android.vending|com.google.android.feedback"),
     AMAZON_APP_STORE("com.amazon.venezia"),
     GALAXY_APPS("com.sec.android.app.samsungapps"),
-    HUAWEI_APP_GALLERY("com.huawei.appmarket");
+    HUAWEI_APP_GALLERY("com.huawei.appmarket"),
+    XIAOMI_GET_APPS("com.xiaomi.mipicks");
     
     /* (non-Javadoc)
      * @see java.lang.Enum#toString()

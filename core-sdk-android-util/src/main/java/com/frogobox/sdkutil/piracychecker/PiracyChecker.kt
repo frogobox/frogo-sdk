@@ -14,7 +14,7 @@ import com.frogobox.sdkutil.licensing.AESObfuscator
 import com.frogobox.sdkutil.licensing.LibraryChecker
 import com.frogobox.sdkutil.licensing.LibraryCheckerCallback
 import com.frogobox.sdkutil.licensing.ServerManagedPolicy
-import com.frogobox.sdkutil.piracychecker.R
+import com.frogobox.sdkutil.R
 import com.frogobox.sdkutil.piracychecker.activities.LicenseActivity
 import com.frogobox.sdkutil.piracychecker.callbacks.AllowCallback
 import com.frogobox.sdkutil.piracychecker.callbacks.DoNotAllowCallback
@@ -43,17 +43,17 @@ class PiracyChecker(
         context?.getString(R.string.app_unlicensed).orEmpty(),
     var unlicensedDialogDescription: String? =
         context?.getString(R.string.app_unlicensed_description).orEmpty()
-                   ) {
-    
+) {
+
     private var display: Display? = null
-    
+
     @ColorRes
     private var colorPrimary: Int = 0
-    
+
     @ColorRes
     private var colorPrimaryDark: Int = 0
     private var withLightStatusBar: Boolean = false
-    
+
     @LayoutRes
     private var layoutXML = -1
     private var enableLVL: Boolean = false
@@ -74,17 +74,17 @@ class PiracyChecker(
     private var signatures: Array<String> = arrayOf()
     private val installerIDs: MutableList<InstallerID>
     private val extraApps: ArrayList<PirateApp>
-    
+
     private var allowCallback: AllowCallback? = null
     private var doNotAllowCallback: DoNotAllowCallback? = null
     private var onErrorCallback: OnErrorCallback? = null
-    
+
     // LVL
     private var libraryLVLChecker: LibraryChecker? = null
-    
+
     // Dialog
     private var dialog: PiracyCheckerDialog? = null
-    
+
     init {
         this.display = Display.DIALOG
         this.installerIDs = ArrayList()
@@ -92,141 +92,146 @@ class PiracyChecker(
         this.colorPrimary = R.color.colorPrimary
         this.colorPrimaryDark = R.color.colorPrimaryDark
     }
-    
+
     constructor(context: Context?) :
-        this(
-            context, context?.getString(R.string.app_unlicensed).orEmpty(),
-            context?.getString(R.string.app_unlicensed_description).orEmpty())
-    
+            this(
+                context, context?.getString(R.string.app_unlicensed).orEmpty(),
+                context?.getString(R.string.app_unlicensed_description).orEmpty()
+            )
+
     constructor(context: Context?, title: String?) :
-        this(
-            context, title.orEmpty(),
-            context?.getString(R.string.app_unlicensed_description).orEmpty())
-    
+            this(
+                context, title.orEmpty(),
+                context?.getString(R.string.app_unlicensed_description).orEmpty()
+            )
+
     constructor(context: Context?, @StringRes title: Int) :
-        this(
-            context,
-            if (title != 0) context?.getString(title).orEmpty() else "")
-    
+            this(
+                context,
+                if (title != 0) context?.getString(title).orEmpty() else ""
+            )
+
     constructor(context: Context?, @StringRes title: Int, @StringRes description: Int) :
-        this(
-            context,
-            if (title != 0) context?.getString(title).orEmpty() else "",
-            if (description != 0) context?.getString(description).orEmpty() else "")
-    
+            this(
+                context,
+                if (title != 0) context?.getString(title).orEmpty() else "",
+                if (description != 0) context?.getString(description).orEmpty() else ""
+            )
+
     fun enableGooglePlayLicensing(licenseKeyBase64: String): PiracyChecker {
         this.enableLVL = true
         this.licenseBase64 = licenseKeyBase64
         return this
     }
-    
+
     @Deprecated(
         "Deprecated in favor of enableSigningCertificates so you can check for multiple signatures",
-        ReplaceWith("enableSigningCertificates(signature)"))
+        ReplaceWith("enableSigningCertificates(signature)")
+    )
     fun enableSigningCertificate(signature: String): PiracyChecker {
         this.enableSigningCertificate = true
         this.signatures = arrayOf(signature)
         return this
     }
-    
+
     fun enableSigningCertificates(vararg signatures: String): PiracyChecker {
         this.enableSigningCertificate = true
         this.signatures = arrayOf(*signatures)
         return this
     }
-    
+
     fun enableSigningCertificates(signatures: List<String>): PiracyChecker {
         this.enableSigningCertificate = true
         this.signatures = signatures.toTypedArray()
         return this
     }
-    
+
     fun enableInstallerId(vararg installerID: InstallerID): PiracyChecker {
         this.installerIDs.addAll(listOf(*installerID))
         return this
     }
-    
+
     fun enableUnauthorizedAppsCheck(): PiracyChecker {
         this.enableUnauthorizedAppsCheck = true
         return this
     }
-    
+
     fun blockIfUnauthorizedAppUninstalled(
         preferences: SharedPreferences,
         preferenceName: String
-                                         ): PiracyChecker {
+    ): PiracyChecker {
         this.blockUnauthorized = true
         this.preferenceBlockUnauthorized = preferenceName
         saveToSharedPreferences(preferences)
         return this
     }
-    
+
     fun blockIfUnauthorizedAppUninstalled(
         preferencesName: String,
         preferenceName: String
-                                         ): PiracyChecker {
+    ): PiracyChecker {
         this.blockUnauthorized = true
         this.preferenceBlockUnauthorized = preferenceName
         saveToSharedPreferences(preferencesName)
         return this
     }
-    
+
     fun enableStoresCheck(): PiracyChecker {
         this.enableStoresCheck = true
         return this
     }
-    
+
     fun enableDebugCheck(): PiracyChecker {
         this.enableDebugCheck = true
         return this
     }
-    
+
     fun enableAPKCheck(): PiracyChecker {
         this.enableAPKCheck = true
         return this
     }
-    
+
     fun enableEmulatorCheck(deepCheck: Boolean): PiracyChecker {
         this.enableEmulatorCheck = true
         this.enableDeepEmulatorCheck = deepCheck
         return this
     }
-    
+
     fun enableFoldersCheck(): PiracyChecker {
         this.enableFoldersCheck = true
         return this
     }
-    
+
     fun addAppToCheck(vararg apps: PirateApp): PiracyChecker {
         this.extraApps.addAll(Arrays.asList(*apps))
         return this
     }
-    
+
     fun addAppToCheck(app: PirateApp): PiracyChecker {
         this.extraApps.add(app)
         return this
     }
-    
+
     fun saveResultToSharedPreferences(
         preferences: SharedPreferences,
         preferenceName: String
-                                     ): PiracyChecker {
+    ): PiracyChecker {
         this.saveToSharedPreferences = true
         this.preferenceSaveResult = preferenceName
         saveToSharedPreferences(preferences)
         return this
     }
-    
+
     fun saveResultToSharedPreferences(
         preferencesName: String,
         preferenceName: String
-                                     ): PiracyChecker {
+    ): PiracyChecker {
         this.saveToSharedPreferences = true
         this.preferenceSaveResult = preferenceName
         saveToSharedPreferences(preferencesName)
         return this
     }
-    
+
     private fun saveToSharedPreferences(preferences: SharedPreferences?) {
         if (preferences != null) {
             this.preferences = preferences
@@ -239,7 +244,7 @@ class PiracyChecker(
             }
         }
     }
-    
+
     private fun saveToSharedPreferences(preferencesName: String?) {
         if (preferencesName != null) {
             this.preferences = context?.getSharedPreferences(preferencesName, Context.MODE_PRIVATE)
@@ -252,43 +257,43 @@ class PiracyChecker(
             }
         }
     }
-    
+
     fun display(display: Display): PiracyChecker {
         this.display = display
         return this
     }
-    
+
     fun withActivityColors(
         @ColorRes colorPrimary: Int,
         @ColorRes colorPrimaryDark: Int,
         withLightStatusBar: Boolean
-                          ): PiracyChecker {
+    ): PiracyChecker {
         this.colorPrimary = colorPrimary
         this.colorPrimaryDark = colorPrimaryDark
         this.withLightStatusBar = withLightStatusBar
         return this
     }
-    
+
     fun withActivityLayout(@LayoutRes layout: Int): PiracyChecker {
         this.layoutXML = layout
         return this
     }
-    
+
     fun allowCallback(allowCallback: AllowCallback): PiracyChecker {
         this.allowCallback = allowCallback
         return this
     }
-    
+
     fun doNotAllowCallback(doNotAllowCallback: DoNotAllowCallback): PiracyChecker {
         this.doNotAllowCallback = doNotAllowCallback
         return this
     }
-    
+
     fun onErrorCallback(errorCallback: OnErrorCallback): PiracyChecker {
         this.onErrorCallback = errorCallback
         return this
     }
-    
+
     fun callback(callback: PiracyCheckerCallback): PiracyChecker {
         this.allowCallback = object : AllowCallback {
             override fun allow() {
@@ -308,42 +313,45 @@ class PiracyChecker(
         }
         return this
     }
-    
+
     fun destroy() {
         dismissDialog()
         destroyLVLChecker()
         context = null
     }
-    
+
     fun start() {
         if (allowCallback == null && doNotAllowCallback == null) {
             callback(object : PiracyCheckerCallback() {
                 override fun allow() {}
-                
+
                 override fun doNotAllow(error: PiracyCheckerError, app: PirateApp?) {
                     if (context is Activity && (context as Activity).isFinishing) {
                         return
                     }
-                    
+
                     val dialogContent = when {
                         app != null ->
                             context?.getString(R.string.unauthorized_app_found, app.name).orEmpty()
+
                         error == PiracyCheckerError.BLOCK_PIRATE_APP ->
                             context?.getString(R.string.unauthorized_app_blocked).orEmpty()
+
                         else -> unlicensedDialogDescription
                     }
-                    
+
                     if (display == Display.DIALOG) {
                         dismissDialog()
                         dialog = PiracyCheckerDialog.newInstance(
                             unlicensedDialogTitle.orEmpty(), dialogContent.orEmpty()
                         )
-                        
+
                         context?.let {
                             dialog?.show(it) ?: {
                                 Log.e(
                                     "PiracyChecker",
-                                    "Unlicensed dialog was not built properly. Make sure your context is an instance of Activity")
+                                    "Unlicensed dialog was not built properly. Make sure your context is an instance of Activity"
+                                )
                             }()
                         }
                     } else {
@@ -362,7 +370,7 @@ class PiracyChecker(
         }
         verify()
     }
-    
+
     private fun verify() {
         // Library will check first the non-LVL methods since LVL is asynchronous and could take
         // some seconds to give a result
@@ -383,21 +391,24 @@ class PiracyChecker(
                         ServerManagedPolicy(
                             context,
                             AESObfuscator(
-                                SaltUtils.getSalt(context), context?.packageName, deviceId)
+                                SaltUtils.getSalt(context), context?.packageName, deviceId
+                            )
                         ),
-                        licenseBase64)
+                        licenseBase64
+                    )
                 libraryLVLChecker?.checkAccess(object : LibraryCheckerCallback {
                     override fun allow(reason: Int) {
                         doExtraVerification(true)
                     }
-                    
+
                     override fun dontAllow(reason: Int) {
                         doExtraVerification(false)
                     }
-                    
+
                     override fun applicationError(errorCode: Int) {
                         onErrorCallback?.onError(
-                            PiracyCheckerError.getCheckerErrorFromCode(errorCode))
+                            PiracyCheckerError.getCheckerErrorFromCode(errorCode)
+                        )
                     }
                 })
             } else {
@@ -405,26 +416,27 @@ class PiracyChecker(
             }
         }
     }
-    
+
     private fun verifySigningCertificate(): Boolean {
         return !enableSigningCertificate || (context?.verifySigningCertificates(signatures) == true)
     }
-    
+
     private fun verifyInstallerId(): Boolean {
         return installerIDs.isEmpty() || (context?.verifyInstallerId(installerIDs) == true)
     }
-    
+
     private fun verifyUnauthorizedApp(): Boolean {
         return !blockUnauthorized ||
-            !(preferences?.getBoolean(preferenceBlockUnauthorized, false) ?: false)
+                !(preferences?.getBoolean(preferenceBlockUnauthorized, false) ?: false)
     }
-    
+
     private fun doExtraVerification(
         possibleSuccess: Boolean
-                                   ) {
+    ) {
         val app = context?.getPirateApp(
             enableUnauthorizedAppsCheck, enableStoresCheck, enableFoldersCheck, enableAPKCheck,
-            extraApps)
+            extraApps
+        )
         if (possibleSuccess) {
             if (enableDebugCheck && (context?.isDebug() == true)) {
                 if (saveToSharedPreferences)
@@ -443,7 +455,8 @@ class PiracyChecker(
                     if (app.type == AppType.STORE)
                         PiracyCheckerError.THIRD_PARTY_STORE_INSTALLED
                     else
-                        PiracyCheckerError.PIRATE_APP_INSTALLED, app)
+                        PiracyCheckerError.PIRATE_APP_INSTALLED, app
+                )
             } else {
                 if (saveToSharedPreferences)
                     preferences?.edit()?.putBoolean(preferenceSaveResult, true)?.apply()
@@ -459,7 +472,8 @@ class PiracyChecker(
                     if (app.type == AppType.STORE)
                         PiracyCheckerError.THIRD_PARTY_STORE_INSTALLED
                     else
-                        PiracyCheckerError.PIRATE_APP_INSTALLED, app)
+                        PiracyCheckerError.PIRATE_APP_INSTALLED, app
+                )
             } else {
                 if (saveToSharedPreferences)
                     preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
@@ -467,18 +481,18 @@ class PiracyChecker(
             }
         }
     }
-    
+
     private fun dismissDialog() {
         dialog?.dismiss()
         dialog = null
     }
-    
+
     private fun destroyLVLChecker() {
         libraryLVLChecker?.finishAllChecks()
         libraryLVLChecker?.onDestroy()
         libraryLVLChecker = null
     }
-    
+
     companion object {
         private const val LIBRARY_PREFERENCES_NAME = "license_check"
     }

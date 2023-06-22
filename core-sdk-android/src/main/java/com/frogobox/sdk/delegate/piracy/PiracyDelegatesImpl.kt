@@ -205,7 +205,8 @@ class PiracyDelegatesImpl : PiracyDelegates {
                     InstallerID.GOOGLE_PLAY,
                     InstallerID.AMAZON_APP_STORE,
                     InstallerID.GALAXY_APPS,
-                    InstallerID.HUAWEI_APP_GALLERY
+                    InstallerID.HUAWEI_APP_GALLERY,
+                    InstallerID.XIAOMI_GET_APPS
                 )
                 callback {
                     doNotAllow { _, _ ->
@@ -218,7 +219,8 @@ class PiracyDelegatesImpl : PiracyDelegates {
                     InstallerID.GOOGLE_PLAY,
                     InstallerID.AMAZON_APP_STORE,
                     InstallerID.GALAXY_APPS,
-                    InstallerID.HUAWEI_APP_GALLERY
+                    InstallerID.HUAWEI_APP_GALLERY,
+                    InstallerID.XIAOMI_GET_APPS
                 )
             }
         }.start()
