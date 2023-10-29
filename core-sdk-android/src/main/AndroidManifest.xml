@@ -15,10 +15,13 @@
         <activity
             android:name=".ui.FrogoCustomCrashActivity"
             android:exported="false"
-            android:theme="@style/FrogoAppTheme.HideStatusBarUI"
-            android:process=":error_activity"/>
+            android:process=":error_activity"
+            android:theme="@style/FrogoAppTheme.HideStatusBarUI" />
         <activity
             android:name=".ui.FrogoAboutUsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.FrogoImageViewActivity"
             android:exported="true" />
     </application>
 
