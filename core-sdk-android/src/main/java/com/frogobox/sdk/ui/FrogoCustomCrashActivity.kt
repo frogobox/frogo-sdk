@@ -4,6 +4,8 @@ import android.os.Bundle
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash
 import com.frogobox.sdk.R
 import com.frogobox.sdk.databinding.ActivityFrogoCustomCrashBinding
+import com.frogobox.sdk.ext.copyToClipboard
+import com.frogobox.sdk.ext.showToast
 import com.frogobox.sdk.view.FrogoBindActivity
 
 open class FrogoCustomCrashActivity : FrogoBindActivity<ActivityFrogoCustomCrashBinding>() {
@@ -20,6 +22,12 @@ open class FrogoCustomCrashActivity : FrogoBindActivity<ActivityFrogoCustomCrash
         if (config == null) {
             finish()
             return
+        }
+
+        binding.errorDetails.setOnLongClickListener {
+            binding.errorDetails.copyToClipboard()
+            showToast("Copied to clipboard")
+            true
         }
 
         binding.apply {

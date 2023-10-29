@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
+import android.os.Build
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -154,4 +155,12 @@ fun Context.openPlayStore(packageName: String) {
 
 fun Context.shareApp(packageName: String, text: String) {
     startActivityExtShareApp(packageName, text)
+}
+
+fun Context.getColorExt(resId: Int): Int {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        this.getColor(resId)
+    } else {
+        ContextCompat.getColor(this, resId)
+    }
 }

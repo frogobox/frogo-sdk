@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.frogobox.sdk.ui.FrogoImageViewActivity
 import com.google.gson.Gson
 
 
@@ -61,6 +62,12 @@ inline fun <reified Model> Activity.getExtraExt(extraKey: String): Model {
 
 fun Activity.hasExtraExt(extraKey: String): Boolean {
     return intent.hasExtra(extraKey)
+}
+
+fun Activity.openDetailImageUri(uri: String) {
+    startActivityExt<FrogoImageViewActivity> {
+        it.putExtra(FrogoImageViewActivity.IMAGE_URI, uri)
+    }
 }
 
 fun Context.startActivityExtShareApp(subject: String, text: String) {
