@@ -11,9 +11,9 @@ import com.bumptech.glide.request.target.Target
 import com.frogobox.sdk.databinding.ActivityFrogoImageViewBinding
 import com.frogobox.sdk.view.FrogoBindActivity
 
-class FrogoImageViewActivity : FrogoBindActivity<ActivityFrogoImageViewBinding>(){
+class FrogoImageViewActivity : FrogoBindActivity<ActivityFrogoImageViewBinding>() {
 
-    companion object{
+    companion object {
         const val IMAGE_VIEW_ID = "image_view_id"
         const val IMAGE_BITMAP = "image_bitmap"
         const val IMAGE_DRAWABLE = "image_drawable"
