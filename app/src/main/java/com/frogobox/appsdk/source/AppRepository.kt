@@ -1,10 +1,13 @@
 package com.frogobox.appsdk.source
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.Article
+import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
+import com.frogobox.coresdk.source.FrogoResult
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.source.FrogoRepository
 import com.frogobox.sdk.util.FrogoFunc
@@ -28,7 +31,7 @@ class AppRepository(
     private val context: Context,
     private val remoteDataSource: AppRemoteDataSource,
     private val localDataSource: AppLocalDataSource
-) : FrogoRepository(remoteDataSource, localDataSource), AppDataSource {
+) : FrogoRepository(remoteDataSource, localDataSource), AppDataSource, AppDataSourceResult {
 
     fun handlingNetworkTopHeadLine(
         q: String?,
@@ -207,4 +210,44 @@ class AppRepository(
     override fun deleteArticles(callback: FrogoStateResponse) {
         localDataSource.deleteArticles(callback)
     }
+
+    override fun getTopHeadlineResult(
+        q: String?,
+        sources: String?,
+        category: String?,
+        country: String?,
+        pageSize: Int?,
+        page: Int?,
+        result: MutableLiveData<FrogoResult<ArticleResponse>>
+    ) {
+        remoteDataSource.getTopHeadlineResult(q, sources, category, country, pageSize, page, result)
+    }
+
+    override fun getEverythingsResult(
+        q: String?,
+        from: String?,
+        to: String?,
+        qInTitle: String?,
+        sources: String?,
+        domains: String?,
+        excludeDomains: String?,
+        language: String?,
+        sortBy: String?,
+        pageSize: Int?,
+        page: Int?,
+        result: MutableLiveData<FrogoResult<ArticleResponse>>
+    ) {
+        remoteDataSource.getEverythingsResult(q, from, to, qInTitle, sources, domains, excludeDomains, language, sortBy, pageSize, page, result)
+    }
+
+    override fun getSourcesResult(
+        language: String,
+        country: String,
+        category: String,
+        result: MutableLiveData<FrogoResult<SourceResponse>>
+    ) {
+        remoteDataSource.getSourcesResult(language, country, category, result)
+    }
+
+
 }

@@ -13,26 +13,24 @@ package com.frogobox.coresdk.source
 
 sealed class FrogoResult<T> {
 
-    data class Success<T>(
-        val result: T,
-    ) : FrogoResult<T>()
+    class Success<T>(val result: T) : FrogoResult<T>()
 
-    data class Error<T>(
-        val code: Int? = 500,
-        val message: String? = "",
-        val t: Throwable? = null,
-    ) : FrogoResult<T>()
+    class Error<T>(val code: Int? = 500, val message: String? = "") : FrogoResult<T>()
 
-    data class ShowLoading<T>(
-        val isLoading: Boolean = true,
-    ) : FrogoResult<T>()
+    class Loading<T>(val isLoading: Boolean = true) : FrogoResult<T>()
 
-    data class HideLoading<T>(
-        val isLoading: Boolean = false,
-    ) : FrogoResult<T>()
+    class Finish<T> : FrogoResult<T>()
 
-    data class Finish<T>(
-        val isFinish: Boolean = true,
-    ) : FrogoResult<T>()
+}
+
+sealed class FrogoResultState {
+
+    class Success : FrogoResultState()
+
+    class Error(val code: Int? = 500, val message: String? = "") : FrogoResultState()
+
+    class Loading(val isLoading: Boolean = true) : FrogoResultState()
+
+    class Finish : FrogoResultState()
 
 }

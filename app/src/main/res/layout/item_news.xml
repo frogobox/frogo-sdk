@@ -35,12 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:maxLines="1"
-        android:textColor="@color/black" />
+        android:textColor="@color/colorText" />
 
     <TextView
         android:id="@+id/tv_news_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
         android:maxLines="3" />
 
 </LinearLayout>

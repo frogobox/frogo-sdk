@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.frogobox.appsdk.databinding.ActivityMainBinding
 import com.frogobox.appsdk.log.LogActivity
 import com.frogobox.appsdk.news.NewsActivity
+import com.frogobox.appsdk.news.result.NewsResultActivity
 import com.frogobox.appsdk.notification.simple.MainNotifActivity
 import com.frogobox.appsdk.piracy.KotlinActivity
 import com.frogobox.appsdk.piracy.PiracyMainActivity
@@ -42,6 +43,10 @@ class MainActivity : CoreMainActivity<ActivityMainBinding>() {
 
             btnMenuNews.setOnClickListener {
                 startActivityExt<NewsActivity>()
+            }
+
+            btnMenuNewsResult.setOnClickListener {
+                startActivityExt<NewsResultActivity>()
             }
 
             btnMenuJavaActivity.setOnClickListener {

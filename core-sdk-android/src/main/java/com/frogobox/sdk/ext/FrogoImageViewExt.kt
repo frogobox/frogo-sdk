@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -21,51 +21,38 @@ private const val TAG = "FrogoImageViewExt"
 
 // -------------------------------------------------------------------------------------------------
 
-fun ImageView.glideLoad(data: Any?) {
-    when (data) {
-        is String -> {
-            Glide.with(context)
-              .load(data)
-              .into(this)
-        }
-        is Int -> {
-            Glide.with(context)
-              .load(data)
-              .into(this)
-        }
-        is ByteArray -> {
-            Glide.with(context)
-              .load(data)
-              .into(this)
-        }
-        else -> {
-            throw Exception("Error Data Type")
+fun ImageView.setImageExt(uri: Any?) {
+    uri?.let { url ->
+        when (url) {
+            is String,
+            is Int,
+            is ByteArray -> {
+                Glide.with(context)
+                    .load(url)
+                    .into(this)
+            }
+
+            else -> {}
         }
     }
 }
 
-fun ImageView.glideLoad(data: Any?, placeHolder: Int) {
-    when (data) {
-        is String -> {
-            Glide.with(context)
-             .load(data)
-             .placeholder(placeHolder)
-             .into(this)
+fun ImageView.setImageExt(uri: Any?, placeHolder: Int) {
+    if (uri != null) {
+        when (uri) {
+            is String,
+            is Int,
+            is ByteArray -> {
+                Glide.with(context)
+                    .load(uri)
+                    .placeholder(placeHolder)
+                    .into(this)
+            }
         }
-        is Int -> {
-            Glide.with(context)
-             .load(data)
-             .placeholder(placeHolder)
-             .into(this)
-        }
-        is ByteArray -> {
-            Glide.with(context)
-             .load(data)
-             .placeholder(placeHolder)
-             .into(this)
-        }
-        else -> {
-            throw Exception("Error Data Type")
-        }
+    } else {
+        Glide.with(context)
+            .load("")
+            .placeholder(placeHolder)
+            .into(this)
     }
 }

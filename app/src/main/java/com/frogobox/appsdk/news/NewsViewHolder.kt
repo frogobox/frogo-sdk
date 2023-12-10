@@ -3,7 +3,7 @@ package com.frogobox.appsdk.news
 import androidx.recyclerview.widget.RecyclerView
 import com.frogobox.appsdk.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
-import com.frogobox.sdk.ext.glideLoad
+import com.frogobox.sdk.ext.setImageExt
 import com.frogobox.sdk.ext.startActivityExt
 
 
@@ -24,7 +24,7 @@ class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHo
 
     fun bind(data: Article) {
         binding.apply {
-            ivNewsImage.glideLoad(data.urlToImage)
+            ivNewsImage.setImageExt(data.urlToImage)
             tvNewsTitle.text = data.title
             tvNewsDescription.text = data.description
             root.setOnClickListener {
