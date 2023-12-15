@@ -36,7 +36,7 @@
 
 This Is Latest Release
 
-    $version_release = 2.2.4
+    $version_release = 2.2.5
 
 What's New??
 
