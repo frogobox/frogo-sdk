@@ -1,13 +1,18 @@
 package com.frogobox.appsdk.notification.simple
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import com.frogobox.appsdk.FrogoApp
 import com.frogobox.appsdk.R
 import com.frogobox.appsdk.core.BaseActivity
@@ -30,8 +35,7 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
         return ActivityMainNotifBinding.inflate(layoutInflater)
     }
 
-    override fun setupViewModel() {
-    }
+    override fun setupViewModel() {}
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
         super.onCreateExt(savedInstanceState)
@@ -74,6 +78,8 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
             .setContentText(resources.getString(R.string.content_text)) // Initialize for Content Text
             .setSubText(resources.getString(R.string.subtext)) // Initialize for Sub Text
             .setupAutoCancel() // Initialize for Auto Cancel
+            .setCallCategory()
+            .setPriorityHigh()
             .build() // Build the Frogo Notification
             .launch(NOTIFICATION_ID) // Notify the Frogo Notification
 
@@ -127,6 +133,37 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
 
     private fun intentToStack() {
         startActivity(Intent(this, StackNotifActivity::class.java))
+    }
+
+    private fun showNotification() {
+
+    }
+
+    private fun createNotificationChannel(channelId: String, channelName: String): String{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val chan = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+            chan.lightColor = Color.BLUE
+            chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+            val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            service.createNotificationChannel(chan)
+        }
+        return channelId
+    }
+
+    private fun createNotificationCall() {
+        // Create a notification channel for Android O and above
+        val channelId = createNotificationChannel("my_service", "My Background Service")
+
+        // Build the notification for foreground service
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        val notification = notificationBuilder.setOngoing(true)
+            .setSmallIcon(R.drawable.ic_android)
+            .setContentTitle("Incoming Call")
+            .setContentText("Tap to answer")
+            // Priority settings for heads-up notification
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .build()
     }
 
 }

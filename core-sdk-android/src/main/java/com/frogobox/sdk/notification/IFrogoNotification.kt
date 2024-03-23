@@ -71,6 +71,12 @@ interface IFrogoNotification {
     // Setup Big Custom Content View
     fun setCustomBigContentView(listener: FrogoNotifCustomContentViewListener): FrogoNotification.Inject
 
+    // Setup Priority Categories
+    fun setPriorityHigh(): FrogoNotification.Inject
+
+    // Setup Call Cateory
+    fun setCallCategory(): FrogoNotification.Inject
+
     // Setup Frogo Simple Style Notification
     fun setupWithFrogoStyle(): FrogoNotification.Inject
 

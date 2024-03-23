@@ -63,6 +63,8 @@ class FrogoNotification {
         private var isGroupSummary = false
         private var isCustomContentView = false
         private var isBigCustomContentView = false
+        private var isPriorityHigh = false
+        private var isCallCategory = false
 
         private var notificationID: Int = FROGO_NOTIFICATION_ID
         private var channelID: String = FROGO_CHANNEL_ID
@@ -234,6 +236,16 @@ class FrogoNotification {
             return this
         }
 
+        override fun setCallCategory(): Inject {
+            this.isCallCategory = true
+            return this
+        }
+
+        override fun setPriorityHigh(): Inject {
+            this.isPriorityHigh = true
+            return this
+        }
+
         override fun build(): Inject {
 
             val notificationBuilder = NotificationCompat.Builder(context, channelID)
@@ -295,6 +307,14 @@ class FrogoNotification {
                 notificationBuilder.setAutoCancel(isAutoCancel)
             }
 
+            if (isPriorityHigh) {
+                notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH)
+            }
+
+            if (isCallCategory) {
+                notificationBuilder.setCategory(NotificationCompat.CATEGORY_CALL)
+            }
+
             /*
                 Android oreo version need add notification channel
             */
@@ -306,9 +326,10 @@ class FrogoNotification {
                 val channel = NotificationChannel(
                     channelID,
                     channelName,
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
                 )
                 channel.description = channelName
+
 
                 if (isVibration) {
                     channel.enableVibration(true)
