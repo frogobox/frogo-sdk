@@ -4,6 +4,9 @@ import android.app.Activity
 import android.app.Application
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.frogobox.sdk.ui.FrogoCustomCrashActivity
+import org.acra.config.mailSender
+import org.acra.data.StringFormat
+import org.acra.ktx.initAcra
 
 
 /**
@@ -23,10 +26,6 @@ abstract class FrogoApplication : Application() {
 
     open fun onCreateExt() {}
 
-    open fun customErrorActivity(): Class<out Activity> {
-        return FrogoCustomCrashActivity::class.java
-    }
-
     open fun isDebugMode(): Boolean {
         return true
     }
@@ -45,10 +44,31 @@ abstract class FrogoApplication : Application() {
         }
     }
 
+    open fun customErrorActivity(): Class<out Activity> {
+        return FrogoCustomCrashActivity::class.java
+    }
+
+    open fun setupACRA() {
+        initAcra {
+            buildConfigClass = BuildConfig::class.java
+            reportFormat = StringFormat.JSON
+            alsoReportToAndroidFramework = true
+            mailSender {
+                //required
+                mailTo = "faisalamircs.work@gmail.com"
+                //defaults to true
+                reportAsFile = true
+                //defaults to ACRA-report.stacktrace
+                reportFileName = "Crash.txt"
+            }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         onCreateExt()
         setupCAOC()
+        setupACRA()
     }
 
 }
