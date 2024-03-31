@@ -1,5 +1,6 @@
-package com.frogobox.sdk
+package com.frogobox.appsdk
 
+import com.frogobox.sdk.FrogoApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication

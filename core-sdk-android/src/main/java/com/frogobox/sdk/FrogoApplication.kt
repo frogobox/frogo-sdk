@@ -31,17 +31,15 @@ abstract class FrogoApplication : Application() {
     }
 
     open fun setupCAOC() {
-        if (isDebugMode()) {
-            CaocConfig.Builder.create()
-                .enabled(true) // default: true
-                .showErrorDetails(true) // default: true
-                .showRestartButton(true) // default: true
-                .logErrorOnRestart(true) // default: true
-                .trackActivities(true) // default: false
-                .minTimeBetweenCrashesMs(3000) //default: 3000
-                .errorActivity(customErrorActivity()) //default: null (default error activity)
-                .apply()
-        }
+        CaocConfig.Builder.create()
+            .enabled(true) // default: true
+            .showErrorDetails(true) // default: true
+            .showRestartButton(true) // default: true
+            .logErrorOnRestart(true) // default: true
+            .trackActivities(true) // default: false
+            .minTimeBetweenCrashesMs(3000) //default: 3000
+            .errorActivity(customErrorActivity()) //default: null (default error activity)
+            .apply()
     }
 
     open fun customErrorActivity(): Class<out Activity> {
@@ -67,8 +65,11 @@ abstract class FrogoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         onCreateExt()
-        setupCAOC()
-        setupACRA()
+        if (isDebugMode()) {
+            setupCAOC()
+        } else {
+            setupACRA()
+        }
     }
 
 }

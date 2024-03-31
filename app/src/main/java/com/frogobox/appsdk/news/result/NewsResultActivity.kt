@@ -52,7 +52,7 @@ class NewsResultActivity : BaseActivity<ActivityNewsBinding>() {
     private fun setupRecyclerView(data: List<Article>) {
         binding.recyclerView.apply {
             adapter = NewsViewAdapter().apply {
-                setupData(data)
+                setItems(data)
             }
             layoutManager = LinearLayoutManager(context).apply {
                 orientation = LinearLayoutManager.VERTICAL

@@ -31,8 +31,6 @@ dependencies {
     api(Square.Retrofit2.converterGson)
     api(Square.Retrofit2.adapterRxJava3)
 
-    api(Koin.core)
-
     api(Reactivex.rxJava3)
 }
 

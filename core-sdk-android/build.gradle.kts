@@ -12,7 +12,6 @@ android {
 
     defaultConfig {
         minSdk = ProjectSetting.PROJECT_MIN_SDK
-        targetSdk = ProjectSetting.PROJECT_TARGET_SDK
 
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
@@ -61,10 +60,6 @@ dependencies {
 
     api(Reactivex.rxAndroid3)
 
-    api(Koin.android)
-    api(Koin.androidCompat)
-    api(Koin.androidxWorkManager)
-
     api(GitHub.chucker)
     api(GitHub.glide)
 
@@ -73,10 +68,10 @@ dependencies {
     ksp(Androidx.Lifecycle.compiler)
     ksp(Androidx.Room.compiler)
     ksp(GitHub.glideCompiler)
-    api("ch.acra:acra-mail:5.11.3")
+    api(Util.Acra.mail)
 
-    ksp("com.google.auto.service:auto-service:1.1.1")
-    compileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
+    ksp(Google.autoService)
+    compileOnly(Google.autoServiceAnnotation)
 
 }
 

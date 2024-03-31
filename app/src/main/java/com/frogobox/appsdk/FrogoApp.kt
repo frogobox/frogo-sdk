@@ -9,7 +9,6 @@ import com.frogobox.appsdk.di.viewModelModule
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
 import com.frogobox.sdk.FrogoApplication
-import com.frogobox.sdk.FrogoKoinApplication
 import java.util.*
 
 /**

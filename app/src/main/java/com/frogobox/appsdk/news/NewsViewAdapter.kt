@@ -2,12 +2,14 @@ package com.frogobox.appsdk.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.frogobox.appsdk.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
 
 
-/*
+/**
  * Created by faisalamir on 11/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -22,11 +24,26 @@ import com.frogobox.appsdk.model.Article
 
 class NewsViewAdapter : RecyclerView.Adapter<NewsViewHolder>() {
 
-    private val listData = mutableListOf<Article>()
+    private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    fun setupData(data: List<Article>) {
-        listData.clear()
-        listData.addAll(data)
+        override fun areContentsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    private val asyncListDiffer = AsyncListDiffer(this, diffUtil)
+
+    fun setItems(data: List<Article>) {
+        asyncListDiffer.submitList(data)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -40,11 +57,11 @@ class NewsViewAdapter : RecyclerView.Adapter<NewsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.bind(listData[position])
+        holder.bind(asyncListDiffer.currentList[position])
     }
 
     override fun getItemCount(): Int {
-        return listData.size
+        return asyncListDiffer.currentList.size
     }
 
 }
