@@ -1,8 +1,7 @@
 package com.frogobox.sdk.notification
 
-/*
+/**
  * Created by Faisal Amir on 28/12/2020
- * Notification Source Code
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
@@ -12,6 +11,7 @@ package com.frogobox.sdk.notification
  * All rights reserved
  *
  */
+
 interface FrogoNotifInboxStyleListener {
 
     // Initialize for Inbox Style Add Line
