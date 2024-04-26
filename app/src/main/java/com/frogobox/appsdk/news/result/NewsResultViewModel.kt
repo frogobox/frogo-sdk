@@ -10,7 +10,7 @@ import com.frogobox.coresdk.source.FrogoResult
 import com.frogobox.sdk.view.FrogoViewModel2
 
 
-/*
+/**
  * Created by faisalamir on 08/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -43,13 +43,7 @@ class NewsResultViewModel(
     }
 
     private fun getPref() {
-        repository.getPrefString("KEY_PREF", object : FrogoDataResponse<String> {
-            override fun onFailed(statusCode: Int, errorMessage: String) {}
-            override fun onFinish() {}
-            override fun onHideProgress() {}
-            override fun onShowProgress() {}
-            override fun onSuccess(data: String) {}
-        })
+        repository.getPrefString("KEY_PREF")
     }
 
     override fun onStart() {

@@ -3,7 +3,7 @@ package com.frogobox.sdk.ext
 import android.util.Log
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.util.*
+import java.util.Locale
 
 
 /**

@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,8 +17,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.frogobox.sdk.R
-import com.frogobox.sdk.ext.getResColor
-import com.frogobox.sdk.ext.getResDrawable
+import com.frogobox.sdk.ext.getColorExt
+import com.frogobox.sdk.ext.getDrawableExt
 import java.util.*
 
 
@@ -78,14 +79,24 @@ abstract class FrogoActivity : AppCompatActivity() {
 
 
     open fun setupDoOnBackPressedExt() {
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_DEFAULT
+            ) {
                 // Back is pressed... Finishing the activity
                 doOnBackPressedExt()
             }
-        })
+        } else {
+            onBackPressedDispatcher.addCallback(
+                this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        // Back is pressed... Finishing the activity
+                        doOnBackPressedExt()
+                    }
+                })
+        }
     }
-
     // ---------------------------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,10 +142,10 @@ abstract class FrogoActivity : AppCompatActivity() {
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if (actionBackIcon != null) {
-            supportActionBar?.setHomeAsUpIndicator(getResDrawable(actionBackIcon))
+            supportActionBar?.setHomeAsUpIndicator(getDrawableExt(actionBackIcon))
         }
         if (backgroundColor != null) {
-            supportActionBar?.setBackgroundDrawable(ColorDrawable(getResColor(backgroundColor)))
+            supportActionBar?.setBackgroundDrawable(ColorDrawable(getColorExt(backgroundColor)))
         }
     }
 

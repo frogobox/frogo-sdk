@@ -17,7 +17,7 @@ import com.frogobox.sdk.ui.FrogoWebViewActivity
 class MainActivity : CoreMainActivity<ActivityMainBinding>() {
 
     private val tes: String by lazy {
-        singlePref.loadPrefString("test")
+        singlePref.getPrefString("test")
     }
 
     override fun setupViewBinding(): ActivityMainBinding {

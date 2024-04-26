@@ -1,7 +1,6 @@
 package com.frogobox.sdk.ext
 
 import android.util.Patterns
-import androidx.annotation.StringRes
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

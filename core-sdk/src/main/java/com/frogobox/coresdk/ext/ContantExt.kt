@@ -14,10 +14,8 @@ package com.frogobox.coresdk.ext
  *
  */
 
-const val FROGO_CORE_SDK_TAG = "FrogoCoreSDK"
-
 fun showPrintLog(message: String) {
-    println("$FROGO_CORE_SDK_TAG : $message")
+    println("FrogoCoreSDK : $message")
 }
 
 fun Any?.println() {

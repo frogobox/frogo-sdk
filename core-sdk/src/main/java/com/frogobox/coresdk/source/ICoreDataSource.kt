@@ -33,19 +33,11 @@ interface ICoreDataSource {
     fun savePrefInt(key: String, value: Int)
     fun savePrefBoolean(key: String, value: Boolean)
 
-    fun savePrefString(key: String, value: String, callback: FrogoStateResponse)
-    fun savePrefLong(key: String, value: Long, callback: FrogoStateResponse)
-    fun savePrefFloat(key: String, value: Float, callback: FrogoStateResponse)
-    fun savePrefInt(key: String, value: Int, callback: FrogoStateResponse)
-    fun savePrefBoolean(key: String, value: Boolean, callback: FrogoStateResponse)
-
     // Delete
     fun deletePref(key: String)
-    fun deletePref(key: String, callback: FrogoStateResponse)
 
     // Nuke
     fun nukePref()
-    fun nukePref(callback: FrogoStateResponse)
 
     // Get
     fun getPrefString(key: String): String
@@ -59,18 +51,5 @@ interface ICoreDataSource {
     fun getPrefFloat(key: String, defaultValue: Float): Float
     fun getPrefInt(key: String, defaultValue: Int): Int
     fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean
-
-    fun getPrefString(key: String, callback: FrogoDataResponse<String>)
-    fun getPrefLong(key: String, callback: FrogoDataResponse<Long>)
-    fun getPrefFloat(key: String, callback: FrogoDataResponse<Float>)
-    fun getPrefInt(key: String, callback: FrogoDataResponse<Int>)
-    fun getPrefBoolean(key: String, callback: FrogoDataResponse<Boolean>)
-
-    fun getPrefString(key: String, defaultValue: String, callback: FrogoDataResponse<String>)
-    fun getPrefLong(key: String, defaultValue: Long, callback: FrogoDataResponse<Long>)
-    fun getPrefFloat(key: String, defaultValue: Float, callback: FrogoDataResponse<Float>)
-    fun getPrefInt(key: String, defaultValue: Int, callback: FrogoDataResponse<Int>)
-    fun getPrefBoolean(key: String, defaultValue: Boolean, callback: FrogoDataResponse<Boolean>)
-
 
 }

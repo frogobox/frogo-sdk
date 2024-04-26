@@ -9,6 +9,7 @@ import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoResult
 import com.frogobox.sdk.ext.showLogDebug
+import com.frogobox.sdk.ext.toJson
 import com.frogobox.sdk.source.FrogoRepository
 import com.frogobox.sdk.util.FrogoFunc
 import com.google.gson.Gson
@@ -107,31 +108,7 @@ class AppRepository(
                                                     callback.onShowProgress()
                                                 }
                                             })
-
-                                            savePrefString(
-                                                "KEY_PREF",
-                                                Gson().toJson(data[0]),
-                                                object : FrogoStateResponse {
-                                                    override fun onSuccess() {
-                                                        showLogDebug("PREFERENCE >>>>>> SUCCESS CREATED")
-                                                    }
-
-                                                    override fun onFailed(
-                                                        statusCode: Int,
-                                                        errorMessage: String
-                                                    ) {
-                                                    }
-
-                                                    override fun onFinish() {}
-                                                    override fun onHideProgress() {
-                                                        callback.onHideProgress()
-                                                    }
-
-                                                    override fun onShowProgress() {
-                                                        callback.onShowProgress()
-                                                    }
-                                                })
-
+                                            savePrefString("KEY_PREF", data[0].toJson())
                                         }
                                     })
                             }

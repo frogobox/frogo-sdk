@@ -52,7 +52,7 @@ fun Context.getAppVersionCode(): Int? {
 
 fun Context.showToast(
     message: String,
-    duration: Int = Toast.LENGTH_SHORT
+    duration: Int = Toast.LENGTH_SHORT,
 ) {
     Toast.makeText(this, message, duration).show()
 }
@@ -127,16 +127,6 @@ fun Context.isNetworkConnected(): Boolean {
 
 // -------------------------------------------------------------------------------------------------
 
-fun Context.getResColor(@ColorRes color: Int): Int {
-    return ContextCompat.getColor(this, color)
-}
-
-// -------------------------------------------------------------------------------------------------
-
-fun Context.getResDrawable(@DrawableRes drawable: Int): Drawable? {
-    return ContextCompat.getDrawable(this, drawable)
-}
-
 fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
     return getSharedPreferences(name, Context.MODE_PRIVATE)
 }
@@ -157,10 +147,26 @@ fun Context.shareApp(packageName: String, text: String) {
     startActivityExtShareApp(packageName, text)
 }
 
-fun Context.getColorExt(resId: Int): Int {
+fun Context.getDrawableExt(@DrawableRes drawable: Int): Drawable? {
+    return ContextCompat.getDrawable(this, drawable)
+}
+
+fun Context.getColorExt(@ColorRes resId: Int): Int {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         this.getColor(resId)
     } else {
         ContextCompat.getColor(this, resId)
     }
+}
+
+fun Context.getResStringExt(type: String, res: String): Int {
+    return resources.getIdentifier(res, type, packageName)
+}
+
+fun Context.getDrawableStringExt(resName: String): Int {
+    return resources.getIdentifier(resName, "drawable", packageName)
+}
+
+fun Context.getRawStringExt(resName: String): Int {
+    return resources.getIdentifier(resName, "raw", packageName)
 }

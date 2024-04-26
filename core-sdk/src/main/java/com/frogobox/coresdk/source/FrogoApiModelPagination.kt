@@ -1,6 +1,6 @@
 package com.frogobox.coresdk.source
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -12,6 +12,7 @@ package com.frogobox.coresdk.source
  * All rights reserved
  *
  */
+
 data class FrogoApiModelPagination<T>(
     val limit: Int,
     val page: Int,

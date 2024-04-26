@@ -3,7 +3,13 @@ package com.frogobox.sdk.ext
 import android.annotation.SuppressLint
 import android.os.Build
 import android.view.View
-import android.webkit.*
+import android.webkit.CookieManager
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.frogobox.sdk.widget.webview.WebViewCallback
 
 

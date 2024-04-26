@@ -1,6 +1,5 @@
 package com.frogobox.sdk.ext
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,7 +22,7 @@ import com.google.gson.Gson
 private const val TAG = "FrogoContextFragmentExt"
 
 fun <Model> Fragment.newInstanceExt(argsKey: String, data: Model) {
-    val argsData = Gson().toJson(data)
+    val argsData = data.toJson()
     val bundleArgs = Bundle().apply {
         putString(argsKey, argsData)
     }

@@ -33,21 +33,6 @@ inline fun <reified ClassActivity> Context.startActivityExt(onIntent: (intent: I
     })
 }
 
-inline fun <reified ClassActivity, reified Model> Context.startActivityExt(
-    extraKey: String,
-    data: Model
-) {
-    val intent = Intent(this, ClassActivity::class.java)
-    val extraData = Gson().toJson(data)
-    intent.putExtra(extraKey, extraData)
-    startActivity(intent)
-}
-
-inline fun <reified Model> Activity.getExtraDataExt(extraKey: String): Model {
-    val extraIntent = intent.getStringExtra(extraKey)
-    return Gson().fromJson(extraIntent, Model::class.java)
-}
-
 inline fun <reified Model> Activity.getExtraExt(extraKey: String): Model {
     return when (Model::class) {
         String::class -> intent.getStringExtra(extraKey) as Model
@@ -56,6 +41,7 @@ inline fun <reified Model> Activity.getExtraExt(extraKey: String): Model {
         Double::class -> intent.getDoubleExtra(extraKey, 0.0) as Model
         Float::class -> intent.getFloatExtra(extraKey, 0.0f) as Model
         Long::class -> intent.getLongExtra(extraKey, 0L) as Model
+        Model::class -> Gson().fromJson(intent.getStringExtra(extraKey), Model::class.java)
         else -> throw Exception("Type not found")
     }
 }

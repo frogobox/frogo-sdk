@@ -11,7 +11,7 @@ import com.frogobox.sdk.ext.showLogError
 import com.frogobox.sdk.view.FrogoViewModel2
 
 
-/*
+/**
  * Created by faisalamir on 08/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -27,6 +27,30 @@ import com.frogobox.sdk.view.FrogoViewModel2
 class NewsViewModel(
     private val repository: AppRepository,
 ) : FrogoViewModel2() {
+
+    protected var _eventFailed = MutableLiveData<String>()
+    var eventFailed: LiveData<String> = _eventFailed
+
+    protected var _eventSuccess = MutableLiveData<String>()
+    var eventSuccess: LiveData<String> = _eventSuccess
+
+    protected var _eventEmptyState = MutableLiveData<Boolean>()
+    var eventEmptyState: LiveData<Boolean> = _eventEmptyState
+
+    protected var _eventFailedState = MutableLiveData<Boolean>()
+    var eventFailedState: LiveData<Boolean> = _eventFailedState
+
+    protected var _eventFinishState = MutableLiveData<Boolean>()
+    var eventFinishState: LiveData<Boolean> = _eventFinishState
+
+    protected var _eventSuccessState = MutableLiveData<Boolean>()
+    var eventSuccessState: LiveData<Boolean> = _eventSuccessState
+
+    protected var _eventNoInternetState = MutableLiveData<Boolean>()
+    var eventNoInternetState: LiveData<Boolean> = _eventNoInternetState
+
+    protected var _eventShowProgressState = MutableLiveData<Boolean>()
+    var eventShowProgressState: LiveData<Boolean> = _eventShowProgressState
 
     private var _articles = MutableLiveData<List<Article>>()
     var articles: LiveData<List<Article>> = _articles
@@ -66,13 +90,7 @@ class NewsViewModel(
     }
 
     private fun getPref() {
-        repository.getPrefString("KEY_PREF", object : FrogoDataResponse<String> {
-            override fun onFailed(statusCode: Int, errorMessage: String) {}
-            override fun onFinish() {}
-            override fun onHideProgress() {}
-            override fun onShowProgress() {}
-            override fun onSuccess(data: String) {}
-        })
+        repository.getPrefString("KEY_PREF")
     }
 
     override fun onStart() {

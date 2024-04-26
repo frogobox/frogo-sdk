@@ -9,6 +9,7 @@ import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.ext.getInstallerId
 import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.util.FrogoFunc
+import com.frogobox.sdk.util.SimpleDialogUtil
 import com.frogobox.sdkutil.piracychecker.callback
 import com.frogobox.sdkutil.piracychecker.doNotAllow
 import com.frogobox.sdkutil.piracychecker.enums.Display
@@ -102,14 +103,21 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback?) {
-        FrogoFunc.createDialogDefault(
+        SimpleDialogUtil.create(
             piracyDelegateContext,
             message.title,
             message.description,
-        ) {
-            callback?.doOnPirated(message)
-            piracyDelegateActivity.finishAffinity()
-        }
+            object : SimpleDialogUtil.OnDialogClickListener {
+                override fun positiveButton() {
+                    callback?.doOnPirated(message)
+                    piracyDelegateActivity.finishAffinity()
+                }
+
+                override fun negativeButton() {
+                   // TODO
+                }
+            }
+        )
     }
 
     override fun checkRootMethod1(): Boolean {

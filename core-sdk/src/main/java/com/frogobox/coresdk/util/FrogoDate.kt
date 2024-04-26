@@ -4,7 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -16,9 +16,8 @@ import java.util.*
  * All rights reserved
  *
  */
-object FrogoDate : IFrogoDate {
 
-    val TAG: String = FrogoDate::class.java.simpleName
+object FrogoDate : IFrogoDate {
 
     // Format Second
     const val SECOND_MILLIS = 1000
@@ -42,10 +41,8 @@ object FrogoDate : IFrogoDate {
     // Format Day
     const val DAY_WITH_DATE_TIME_ENGLISH = "EEE, MMM dd yyyy HH:mm" // Mon, Aug 12 2018 12:12
     const val DAY_WITH_DATE_TIME_LOCALE = "EEE, dd MMM yyyy HH:mm" // Sen, 12 Agt 2019 12:12
-    const val DAY_WITH_DATE_TIME_ENGLISH_FULL =
-        "EEEE, MMMM dd yyyy HH:mm" // Monday, August 12 2018 12:12
-    const val DAY_WITH_DATE_TIME_LOCALE_FULL =
-        "EEEE, dd MMMM yyyy HH:mm" // Senin, 12 Agustus 2018 12:12
+    const val DAY_WITH_DATE_TIME_ENGLISH_FULL = "EEEE, MMMM dd yyyy HH:mm" // Monday, August 12 2018 12:12
+    const val DAY_WITH_DATE_TIME_LOCALE_FULL = "EEEE, dd MMMM yyyy HH:mm" // Senin, 12 Agustus 2018 12:12
 
     override fun getTimeStamp(): String {
         val simpleDateFormat = SimpleDateFormat(DATE_TIME_STANDARD, Locale.getDefault())

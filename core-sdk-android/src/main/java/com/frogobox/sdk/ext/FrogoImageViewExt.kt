@@ -2,6 +2,8 @@ package com.frogobox.sdk.ext
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
 
 /**
@@ -17,42 +19,85 @@ import com.bumptech.glide.Glide
  *
  */
 
-private const val TAG = "FrogoImageViewExt"
-
 // -------------------------------------------------------------------------------------------------
 
-fun ImageView.setImageExt(uri: Any?) {
-    uri?.let { url ->
-        when (url) {
-            is String,
-            is Int,
-            is ByteArray -> {
-                Glide.with(context)
-                    .load(url)
-                    .into(this)
-            }
-
-            else -> {}
-        }
-    }
-}
-
-fun ImageView.setImageExt(uri: Any?, placeHolder: Int) {
+fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
     if (uri != null) {
         when (uri) {
             is String,
             is Int,
-            is ByteArray -> {
+            is ByteArray,
+            -> {
+                if (placeHolder != null) {
+                    Glide.with(context)
+                        .load(uri)
+                        .placeholder(placeHolder)
+                        .into(this)
+                } else {
+                    Glide.with(context)
+                        .load(uri)
+                        .into(this)
+                }
+            }
+        }
+    } else {
+        if (placeHolder != null) {
+            Glide.with(context)
+                .load("")
+                .placeholder(placeHolder)
+                .into(this)
+        } else {
+            Glide.with(context)
+                .load("")
+                .into(this)
+        }
+    }
+}
+
+fun ImageView.setImageCompressExt(uri: Any?, placeHolder: Int? = null) {
+    if (uri != null) {
+        when (uri) {
+            is String,
+            is Int,
+            is ByteArray,
+            -> {
+                val option = RequestOptions()
+                    .override(this.width, this.height)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+
+                if (placeHolder != null) {
+                    Glide.with(context)
+                        .asBitmap()
+                        .apply(option)
+                        .placeholder(placeHolder)
+                        .load(uri)
+                        .into(this)
+                } else {
+                    Glide.with(context)
+                        .asBitmap()
+                        .apply(option)
+                        .load(uri)
+                        .into(this)
+                }
+            }
+
+            else -> {
                 Glide.with(context)
-                    .load(uri)
-                    .placeholder(placeHolder)
+                    .asBitmap()
+                    .load("")
                     .into(this)
             }
         }
     } else {
-        Glide.with(context)
-            .load("")
-            .placeholder(placeHolder)
-            .into(this)
+        if (placeHolder != null) {
+            Glide.with(context)
+                .load("")
+                .placeholder(placeHolder)
+                .into(this)
+        } else {
+            Glide.with(context)
+                .load("")
+                .into(this)
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.frogobox.coresdk.util
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -12,6 +12,7 @@ package com.frogobox.coresdk.util
  * All rights reserved
  *
  */
+
 object FrogoConstant {
 
     val TAG: String = FrogoConstant::class.java.simpleName

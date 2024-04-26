@@ -68,10 +68,6 @@ dependencies {
     ksp(Androidx.Lifecycle.compiler)
     ksp(Androidx.Room.compiler)
     ksp(GitHub.glideCompiler)
-    api(Util.Acra.mail)
-
-    ksp(Google.autoService)
-    compileOnly(Google.autoServiceAnnotation)
 
 }
 

@@ -16,8 +16,6 @@ import android.view.View
  *
  */
 
-private const val TAG = "FrogoViewExt"
-
 // -------------------------------------------------------------------------------------------------
 
 fun View.visible() {

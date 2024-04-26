@@ -1,5 +1,11 @@
 package com.frogobox.sdk.ext
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.lang.reflect.Type
+
+const val FROGO_SDK_TAG = "FrogoSDK"
+
 fun Any?.showLogD(tag: String = FROGO_SDK_TAG) {
     if (this != null) {
         android.util.Log.d(tag, this.toString())
@@ -63,5 +69,18 @@ fun Any?.showLogV(message: String, tag: String = FROGO_SDK_TAG) {
 fun Any?.showLogW(message: String, tag: String = FROGO_SDK_TAG) {
     if (this != null) {
         android.util.Log.w(tag, "$message : $this")
+    }
+}
+
+fun Any?.toJson() : String {
+    return Gson().toJson(this)
+}
+
+inline fun <reified T> String.toModel(typeToken: Type? = null): T {
+    val gson = GsonBuilder().create()
+    return if (typeToken == null) {
+        gson.fromJson(this, T::class.java)
+    } else {
+        gson.fromJson(this, typeToken)
     }
 }

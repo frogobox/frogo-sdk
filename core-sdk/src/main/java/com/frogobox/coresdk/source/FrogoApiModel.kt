@@ -2,7 +2,7 @@ package com.frogobox.coresdk.source
 
 import com.google.gson.annotations.SerializedName
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -14,6 +14,7 @@ import com.google.gson.annotations.SerializedName
  * All rights reserved
  *
  */
+
 data class FrogoApiModel<T>(
 
     @SerializedName("code")
