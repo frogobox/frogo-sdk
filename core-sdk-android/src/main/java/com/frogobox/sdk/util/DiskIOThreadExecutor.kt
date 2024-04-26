@@ -18,10 +18,6 @@ import java.util.concurrent.Executors
 
 class DiskIOThreadExecutor : Executor {
 
-    companion object {
-        val TAG: String = DiskIOThreadExecutor::class.java.simpleName
-    }
-
     private val diskIO = Executors.newSingleThreadExecutor()
 
     override fun execute(command: Runnable) {

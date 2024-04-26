@@ -23,8 +23,6 @@ import java.util.concurrent.TimeUnit
 
 object FrogoApiClient {
 
-    val TAG: String = FrogoApiClient::class.java.simpleName
-
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }

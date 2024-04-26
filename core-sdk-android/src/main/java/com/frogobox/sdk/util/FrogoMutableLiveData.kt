@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.frogobox.sdk.ext.showLogError
 import java.util.concurrent.atomic.AtomicBoolean
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------
@@ -23,17 +23,13 @@ import java.util.concurrent.atomic.AtomicBoolean
 @Deprecated("Use MutableLiveData From AndroidX Lifecycle KTX instead")
 class FrogoMutableLiveData<T> : MutableLiveData<T>() {
 
-    companion object {
-        val TAG: String = FrogoMutableLiveData::class.java.simpleName
-    }
-
     private val pending = AtomicBoolean(false)
 
     @MainThread
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
 
         if (hasActiveObservers()) {
-            showLogError("$TAG : Multiple observers registered but only one will be notified of changes.")
+            showLogError("FrogoMutableLiveData : Multiple observers registered but only one will be notified of changes.")
         }
 
         // Observe the internal MutableLiveData

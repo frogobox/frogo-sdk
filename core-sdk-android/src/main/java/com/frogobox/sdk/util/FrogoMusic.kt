@@ -20,10 +20,6 @@ class FrogoMusic(
     private val musicFile: Int
 ) : IFrogoMusic {
 
-    companion object {
-        val TAG: String = FrogoMusic::class.java.simpleName
-    }
-
     private val musicPlayer: MediaPlayer = MediaPlayer.create(context, musicFile)
 
     override fun getMusicPlayer(): MediaPlayer {

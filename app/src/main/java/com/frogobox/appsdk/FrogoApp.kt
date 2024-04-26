@@ -27,7 +27,6 @@ import java.util.*
 class FrogoApp : FrogoKoinApplication() {
 
     companion object {
-        val TAG: String = FrogoApplication::class.java.simpleName
 
         lateinit var instance: FrogoApplication
 

@@ -21,8 +21,6 @@ import com.google.gson.Gson
  *
  */
 
-private const val TAG = "FrogoContextActivityExt"
-
 inline fun <reified ClassActivity> Context.startActivityExt() {
     startActivity(Intent(this, ClassActivity::class.java))
 }
