@@ -90,15 +90,16 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
 
-    implementation(Androidx.Work.runtimeKtx)
-    implementation(Google.material)
 
-    implementation(Koin.core)
-    implementation(Koin.android)
-    implementation(Koin.androidCompat)
-    implementation(Koin.androidxWorkManager)
+    implementation(libs.androidx.work.ktx)
+    implementation(libs.material)
 
-    ksp(Androidx.Lifecycle.compiler)
-    ksp(Androidx.Room.compiler)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.compat)
+    implementation(libs.koin.androidx.workmanager)
+
+    ksp(libs.androidx.lifecycle.compiler)
+    ksp(libs.androidx.room.compiler)
 
 }

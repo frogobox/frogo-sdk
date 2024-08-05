@@ -22,16 +22,16 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
 
-    api(Google.gson)
+    api(libs.gson)
 
-    api(Square.OkHttp.okhttp)
-    api(Square.OkHttp.loggingInterceptor)
+    api(libs.square.okhttp)
+    api(libs.square.logging.interceptor)
 
-    api(Square.Retrofit2.retrofit)
-    api(Square.Retrofit2.converterGson)
-    api(Square.Retrofit2.adapterRxJava3)
+    api(libs.square.retrofit)
+    api(libs.square.retrofit.converter.gson)
+    api(libs.square.retrofit.adapter.rxjava3)
 
-    api(Reactivex.rxJava3)
+    api(libs.reactivex.rxjava3)
 }
 
 publishing {
@@ -59,7 +59,7 @@ publishing {
     }
 
     repositories {
-        maven(Util.jitpackUrl)
+        maven("https://jitpack.io")
     }
 
 }

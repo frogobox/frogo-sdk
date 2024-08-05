@@ -54,20 +54,19 @@ dependencies {
     api(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     api(project(DependencyGradle.FROGO_PATH_SDK_UTIL))
 
-    api(Androidx.Room.ktx)
-    api(Androidx.Room.runtime)
-    api(Androidx.Room.rxJava3)
+    api(libs.androidx.room.ktx)
+    api(libs.androidx.room.runtime)
+    api(libs.androidx.room.rxjava3)
 
-    api(Reactivex.rxAndroid3)
+    api(libs.reactivex.rxandroid3)
 
-    api(GitHub.chucker)
-    api(GitHub.glide)
+    api(libs.github.chucker)
+    api(libs.github.glide)
+    api(libs.github.customactivityoncrash)
 
-    api(GitHub.customActivityOnCrash)
-
-    ksp(Androidx.Lifecycle.compiler)
-    ksp(Androidx.Room.compiler)
-    ksp(GitHub.glideCompiler)
+    ksp(libs.androidx.lifecycle.compiler)
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.github.glide.compiler)
 
 }
 

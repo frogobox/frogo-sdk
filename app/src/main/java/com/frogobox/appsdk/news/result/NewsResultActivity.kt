@@ -7,7 +7,9 @@ import com.frogobox.appsdk.databinding.ActivityNewsBinding
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.news.NewsViewAdapter
 import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.progressViewHandle
+import com.frogobox.sdk.ext.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsResultActivity : BaseActivity<ActivityNewsBinding>() {
@@ -24,12 +26,14 @@ class NewsResultActivity : BaseActivity<ActivityNewsBinding>() {
 
             articles.observe(this@NewsResultActivity) {
                 when (it) {
-                    is FrogoResult.Error -> {}
-                    is FrogoResult.Finish -> {}
+                    is FrogoResult.Error -> {
+                        binding.progressCircular.gone()
+                    }
                     is FrogoResult.Loading -> {
-                        binding.progressCircular.progressViewHandle(it.isLoading)
+                        binding.progressCircular.visible()
                     }
                     is FrogoResult.Success -> {
+                        binding.progressCircular.gone()
                         it.result.articles?.let { list ->
                             setupRecyclerView(list)
                         }

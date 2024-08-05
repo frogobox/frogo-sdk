@@ -17,9 +17,7 @@ sealed class FrogoResult<T> {
 
     class Error<T>(val code: Int? = 500, val message: String? = "") : FrogoResult<T>()
 
-    class Loading<T>(val isLoading: Boolean = true) : FrogoResult<T>()
-
-    class Finish<T> : FrogoResult<T>()
+    class Loading<T> : FrogoResult<T>()
 
 }
 
@@ -29,8 +27,6 @@ sealed class FrogoResultState {
 
     class Error(val code: Int? = 500, val message: String? = "") : FrogoResultState()
 
-    class Loading(val isLoading: Boolean = true) : FrogoResultState()
-
-    class Finish : FrogoResultState()
+    class Loading : FrogoResultState()
 
 }

@@ -10,7 +10,10 @@ import com.frogobox.coresdk.source.FrogoResultState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.SingleObserver
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -27,6 +30,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * All rights reserved
  *
  */
+
 
 fun <T : Any> Observable<T>.doApiRequest(
     callback: FrogoDataResponse<T>,
@@ -61,32 +65,29 @@ fun <T : Any> Observable<T>.doApiRequest(
 
 fun <T : Any> Observable<T>.doApiRequestResult(
     result: MutableLiveData<FrogoResult<T>>,
-    addCallbackSubscribe: (d: Disposable) -> Unit
+    addCallbackSubscribe: (d: Disposable) -> Unit,
 ) {
-    doApiRequest(object : FrogoDataResponse<T> {
-        override fun onShowProgress() {
-            result.value = FrogoResult.Loading(true)
+    subscribeOn(Schedulers.io())
+        .doOnSubscribe {
+            result.value = FrogoResult.Loading()
         }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(object : Observer<T>{
+            override fun onSubscribe(d: Disposable) {
+                addCallbackSubscribe(d)
+            }
 
-        override fun onHideProgress() {
-            result.value = FrogoResult.Loading(false)
-        }
+            override fun onError(e: Throwable) {
+                result.value = FrogoResult.Error(message = e.message)
+            }
 
-        override fun onSuccess(data: T) {
-            result.value = FrogoResult.Success(data)
-        }
+            override fun onComplete() {}
 
-        override fun onFailed(statusCode: Int, errorMessage: String) {
-            result.value = FrogoResult.Error(statusCode, errorMessage)
-        }
+            override fun onNext(t: T) {
+                result.value = FrogoResult.Success(t)
+            }
+        })
 
-        override fun onFinish() {
-            result.value = FrogoResult.Finish()
-        }
-
-    }) {
-        addCallbackSubscribe(it)
-    }
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -130,29 +131,24 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
     result: MutableLiveData<FrogoResult<T>>,
     addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
-    fetchRoomDB(object : FrogoDataResponse<T> {
-        override fun onShowProgress() {
-            result.value = FrogoResult.Loading(true)
+    subscribeOn(Schedulers.io())
+        .doOnSubscribe {
+            result.value = FrogoResult.Loading()
         }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(object : SingleObserver<T>{
+            override fun onSubscribe(d: Disposable) {
+                addCallbackSubscribe(d)
+            }
 
-        override fun onHideProgress() {
-            result.value = FrogoResult.Loading(false)
-        }
+            override fun onError(e: Throwable) {
+                result.value = FrogoResult.Error(message = e.message)
+            }
 
-        override fun onSuccess(data: T) {
-            result.value = FrogoResult.Success(data)
-        }
-
-        override fun onFailed(statusCode: Int, errorMessage: String) {
-            result.value = FrogoResult.Error(statusCode, errorMessage)
-        }
-
-        override fun onFinish() {
-            result.value = FrogoResult.Finish()
-        }
-    }) {
-        addCallbackSubscribe(it)
-    }
+            override fun onSuccess(t: T) {
+                result.value = FrogoResult.Success(t)
+            }
+        })
 }
 
 fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
@@ -179,8 +175,8 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
     subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
-            callback.onSuccess()
             callback.onHideProgress()
+            callback.onSuccess()
             callback.onFinish()
         }) {
             it.message?.let { it1 -> callback.onFailed(200, it1) }
@@ -190,28 +186,16 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
 }
 
 fun Completable.executeRoomDBResult(result: MutableLiveData<FrogoResultState>) {
-    executeRoomDB(object : FrogoStateResponse {
-        override fun onSuccess() {
+    subscribeOn(Schedulers.io())
+        .doOnSubscribe {
+            result.value = FrogoResultState.Loading()
+        }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
             result.value = FrogoResultState.Success()
+        }) {
+            it.message?.let { it1 ->result.value = FrogoResultState.Error(message = it1) }
         }
-
-        override fun onFailed(statusCode: Int, errorMessage: String) {
-            result.value = FrogoResultState.Error(statusCode, errorMessage)
-        }
-
-        override fun onFinish() {
-            result.value = FrogoResultState.Finish()
-        }
-
-        override fun onHideProgress() {
-            result.value = FrogoResultState.Loading(false)
-        }
-
-        override fun onShowProgress() {
-            result.value = FrogoResultState.Loading(true)
-        }
-    })
-    
 }
 
 fun Completable.executePreference(callback: FrogoStateResponse) {

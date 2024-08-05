@@ -54,22 +54,22 @@ android {
 dependencies {
     api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    api(Androidx.appCompat)
+    api(libs.androidx.appcompat)
 
-    api(Androidx.activityKtx)
-    api(Androidx.fragmentKtx)
+    api(libs.androidx.activity.ktx)
+    api(libs.androidx.fragment.ktx)
 
-    api(Androidx.constraintLayout)
-    api(Androidx.viewPager2)
+    api(libs.androidx.constraintlayout)
+    api(libs.androidx.viewpager2)
 
-    api(Androidx.Core.ktx)
+    api(libs.androidx.core.ktx)
 
-    api(Androidx.Lifecycle.runtimeKtx)
-    api(Androidx.Lifecycle.viewmodelKtx)
-    api(Androidx.Lifecycle.livedataKtx)
+    api(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.androidx.lifecycle.livedata.ktx)
+    api(libs.androidx.preference)
 
-    api(Androidx.preference)
-    api(Google.material)
+    api(libs.material)
     
 }
 
