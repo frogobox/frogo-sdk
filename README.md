@@ -75,7 +75,7 @@ allprojects {
 
 ### Step 2. Add the dependency (build.gradle : Module)
 
-    #### <Option 1> Groovy Gradle
+#### <Option 1> Groovy Gradle
 
         dependencies {
             // library frogo-sdk
@@ -85,7 +85,7 @@ allprojects {
             implementation 'com.github.frogobox.frogo-sdk:core-sdk:2.2.8'
         }
 
-    #### <Option 2> Kotlin DSL Gradle
+#### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
@@ -95,7 +95,7 @@ allprojects {
             implementation("com.github.frogobox.frogo-sdk:core-sdk:2.2.8")
         }
 
-    #### <Option 3> libs.versions.toml
+#### <Option 3> libs.versions.toml
 
         [versions]
         frogosdk = "2.2.8"
