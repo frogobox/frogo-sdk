@@ -36,13 +36,13 @@
 
 This Is Latest Release
 
-    $version_release = 2.2.7
+    $version_release = 2.2.8
 
 What's New??
 
     * SDK Android and Desktop *
     * Update latest version library *
-    * Renaming Module : frogocoresdk to core-sdk *
+    * Migrate to libs.version.toml *
     
 
 ## Download this project
@@ -79,20 +79,37 @@ allprojects {
 
         dependencies {
             // library frogo-sdk
-            implementation 'com.github.frogobox:frogo-sdk:2.2.7'
+            implementation 'com.github.frogobox:frogo-sdk:2.2.8'
 
             // library frogo-sdk for desktop
-            implementation 'com.github.frogobox.frogo-sdk:core-sdk:2.2.7'
+            implementation 'com.github.frogobox.frogo-sdk:core-sdk:2.2.8'
         }
 
     #### <Option 2> Kotlin DSL Gradle
 
         dependencies {
             // library frogo-sdk
-            implementation("com.github.frogobox:frogo-sdk:2.2.7")
+            implementation("com.github.frogobox:frogo-sdk:2.2.8")
 
             // library frogo-sdk for desktop
-            implementation("com.github.frogobox.frogo-sdk:core-sdk:2.2.7")
+            implementation("com.github.frogobox.frogo-sdk:core-sdk:2.2.8")
+        }
+
+    #### <Option 3> libs.versions.toml
+
+        [versions]
+        frogosdk = "2.2.8"
+
+        [libraries]
+        frogo-sdk = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogosdk" }
+        frogo-sdk-core = { group = "com.github.frogobox.frogo-sdk", name = "core-sdk", version.ref = "frogosdk" }
+
+        dependencies {
+            // library frogo-sdk
+            implementation(libs.frogo.sdk)
+
+            // library frogo-sdk for desktop
+            implementation(libs.frogo.sdk.core)
         }
 
 ### Step 3. Function from this SDK

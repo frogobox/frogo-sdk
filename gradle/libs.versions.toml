@@ -12,7 +12,7 @@ liveCycle = "2.8.4"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.6.1"
-work = "2.9.0"
+work = "2.9.1"
 
 material = "1.12.0"
 gson = "2.10.1"
