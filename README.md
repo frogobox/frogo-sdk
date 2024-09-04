@@ -36,7 +36,7 @@
 
 This Is Latest Release
 
-    $version_release = 2.2.8
+    $version_release = 2.2.9
 
 What's New??
 
@@ -80,10 +80,10 @@ allprojects {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.2.8'
+    implementation 'com.github.frogobox:frogo-sdk:2.2.9'
 
     // library frogo-sdk for desktop
-    implementation 'com.github.frogobox.frogo-sdk:core-sdk:2.2.8'
+    implementation 'com.github.frogobox.frogo-sdk:core-sdk:2.2.9'
 }
 ```
 
@@ -92,17 +92,17 @@ dependencies {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.2.8")
+    implementation("com.github.frogobox:frogo-sdk:2.2.9")
 
     // library frogo-sdk for desktop
-    implementation("com.github.frogobox.frogo-sdk:core-sdk:2.2.8")
+    implementation("com.github.frogobox.frogo-sdk:core-sdk:2.2.9")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-frogosdk = "2.2.8"
+frogosdk = "2.2.9"
 
 [libraries]
 frogo-sdk = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogosdk" }
