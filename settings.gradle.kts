@@ -22,10 +22,12 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FrogoSDK"
+rootProject.name = "Deltadox Android"
 include(
     ":app",
     ":core-sdk",
     ":core-sdk-android",
-    ":core-sdk-android-util"
+    ":core-sdk-android-util",
+    ":core-ui",
+    ":core-ui-android"
 )

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * Created by Faisal Amir
+ *
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ *
+ * Copyright (C) 2022 Frogobox Inc.
+ * All rights reserved
+ *
+ -->
+
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@android:integer/config_longAnimTime"
+    android:fromXDelta="-1000"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:toXDelta="0" />
