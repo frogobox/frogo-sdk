@@ -2,7 +2,7 @@ package com.frogobox.appsdk.source
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.frogobox.appsdk.BuildConfig
+import com.frogobox.BuildConfig
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse

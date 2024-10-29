@@ -14,9 +14,9 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.frogobox.appsdk.FrogoApp
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityMainNotifBinding
+import com.frogobox.databinding.ActivityMainNotifBinding
 import com.frogobox.appsdk.notification.custom.CustomNotifActivity
 import com.frogobox.appsdk.notification.stack.StackNotifActivity
 import com.frogobox.sdk.notification.FrogoNotifCustomContentViewListener

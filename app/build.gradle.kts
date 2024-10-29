@@ -7,7 +7,7 @@ plugins {
 android {
 
     compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
-    namespace = ProjectSetting.PROJECT_APP_ID
+    namespace = ProjectSetting.PROJECT_NAME_SPACE
 
     defaultConfig {
         applicationId = ProjectSetting.PROJECT_APP_ID
@@ -90,6 +90,7 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
 
+    implementation(project(DependencyGradle.FROGO_PATH_UI))
 
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
@@ -101,5 +102,25 @@ dependencies {
 
     ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui)
+
+    implementation(libs.material)
+    implementation(libs.gson)
+
+    implementation(libs.frogo.recyclerview)
+
+    implementation(libs.material)
+
+    api(libs.github.circleimageview)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 }

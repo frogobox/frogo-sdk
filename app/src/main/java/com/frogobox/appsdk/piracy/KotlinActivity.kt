@@ -5,9 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityPiracyBinding
+import com.frogobox.databinding.ActivityPiracyBinding
 import com.frogobox.sdkutil.piracychecker.allow
 import com.frogobox.sdkutil.piracychecker.callback
 import com.frogobox.sdkutil.piracychecker.doNotAllow

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.frogobox.appsdk.core.BaseActivity;
-import com.frogobox.appsdk.databinding.ActivityMainJavaBinding;
+import com.frogobox.databinding.ActivityMainJavaBinding;
 
 public class MainJavaActivity extends BaseActivity<ActivityMainJavaBinding> {
 

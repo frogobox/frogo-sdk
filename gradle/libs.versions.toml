@@ -26,12 +26,26 @@ rxjava3 = "3.1.8"
 chucker = "4.0.0"
 glide = "4.16.0"
 customactivityoncrash = "2.4.0"
+circleimageview = "3.1.0"
+
+frogorecylerview = "4.4.1"
 
 koin = "3.5.6"
 
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+
+# Compose Version
+composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
+composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
+composeActivity = "1.9.1" # https://androidx.tech/artifacts/activity/activity-compose/
+compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose
+composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
+composeHiltNavigation = "1.2.0" # https://developer.android.com/jetpack/androidx/releases/hilt
 
 [libraries]
 # Android Kit
@@ -55,6 +69,15 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
+
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity"}
+androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial"}
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3"}
+androidx-compose-animation = { group = "androidx.compose.animation", name = "animation", version.ref = "compose"}
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose"}
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose"}
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose"}
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose"}
 
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
@@ -83,11 +106,14 @@ github-chucker = { group = "com.github.chuckerteam.chucker", name = "library", v
 github-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 github-customactivityoncrash = { group = "cat.ereza", name = "customactivityoncrash", version.ref = "customactivityoncrash" }
+github-circleimageview =  { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
 koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
+
+frogo-recyclerview = { group = "com.github.amirisback", name = "frogo-recycler-view", version.ref = "frogorecylerview" }
 
 # --------------------------------------------------------------------------------------------------
 

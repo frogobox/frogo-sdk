@@ -10,9 +10,9 @@ import android.widget.RemoteViews
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityManualBinding
+import com.frogobox.databinding.ActivityManualBinding
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.NOTIFICATION_ID
 

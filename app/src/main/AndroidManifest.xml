@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".FrogoApp"
+        android:name=".appsdk.FrogoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,63 +17,96 @@
         tools:targetApi="tiramisu">
 
         <activity
-            android:name=".viewpager.VPagerActivity"
+            android:name=".appsdk.viewpager.VPagerActivity"
             android:exported="false" />
 
         <activity
-            android:name=".news.NewsDetailActivity"
+            android:name=".appsdk.news.NewsDetailActivity"
             android:exported="false" />
 
         <activity
-            android:name=".news.NewsActivity"
+            android:name=".appsdk.news.NewsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".news.result.NewsResultActivity"
+            android:name=".appsdk.news.result.NewsResultActivity"
             android:exported="false" />
 
         <activity
-            android:name=".main.MainJavaActivity"
+            android:name=".appsdk.main.MainJavaActivity"
             android:exported="false" />
 
         <activity
-            android:name=".log.LogActivity"
+            android:name=".appsdk.log.LogActivity"
             android:exported="false" />
 
         <activity
-            android:name=".notification.simple.ManualActivity"
+            android:name=".appsdk.notification.simple.ManualActivity"
             android:exported="false" />
 
         <activity
-            android:name=".notification.stack.StackNotifActivity"
+            android:name=".appsdk.notification.stack.StackNotifActivity"
             android:exported="false" />
 
         <activity
-            android:name=".notification.custom.ReplyActivity"
+            android:name=".appsdk.notification.custom.ReplyActivity"
             android:exported="false" />
 
         <activity
-            android:name=".notification.custom.CustomNotifActivity"
+            android:name=".appsdk.notification.custom.CustomNotifActivity"
             android:exported="false" />
 
         <activity
-            android:name=".notification.simple.MainNotifActivity"
+            android:name=".appsdk.notification.simple.MainNotifActivity"
             android:exported="false" />
 
         <activity
-            android:name=".piracy.KotlinActivity"
+            android:name=".appsdk.piracy.KotlinActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".piracy.PiracyMainActivity"
+            android:name=".appsdk.piracy.PiracyMainActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".appsdk.main.MainSDKActivity"
+            android:exported="false"
+            android:theme="@style/ThemeSdk.HideStatusBarUI" />
+
+        <activity
+            android:name=".appuikit.animation.SampleFrogoAnimationTransitionActivity"
+            android:exported="false"
+            android:theme="@style/ThemeUI.Transition" />
+
+        <activity
+            android:name=".appuikit.animation.SampleFrogoAnimationActivity"
+            android:exported="false"
+            android:theme="@style/ThemeUI.Transition" />
+
+        <activity
+            android:name=".appuikit.compose.ComposeActivity"
             android:exported="true"
-            android:theme="@style/ThemeSdk.HideStatusBarUI"
+            android:theme="@style/ThemeUI" />
+
+        <activity android:name=".appuikit.recycler.RecyclerViewDetailActivity" />
+
+        <activity android:name=".appuikit.recycler.RecyclerViewActivity" />
+
+        <activity android:name=".appuikit.MainUIActivity" />
+
+        <activity
+            android:name=".appuikit.loadingindicator.SampleFrogoLoadingIndicatorViewActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".appuikit.loadingindicator.DetailLoadingIndicatorActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
