@@ -5,9 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.frogobox.appsdk.R;
+import com.frogobox.R;
 import com.frogobox.appsdk.core.BaseActivity;
-import com.frogobox.appsdk.databinding.ActivityPiracyBinding;
+import com.frogobox.databinding.ActivityPiracyBinding;
 import com.frogobox.sdkutil.piracychecker.PiracyChecker;
 import com.frogobox.sdkutil.piracychecker.enums.Display;
 import com.frogobox.sdkutil.piracychecker.enums.InstallerID;

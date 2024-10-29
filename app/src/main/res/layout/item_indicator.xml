@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minHeight="80dp"
+    android:orientation="vertical">
+
+    <com.frogobox.ui.loadingindicator.FrogoLoadingIndicatorView
+        android:id="@+id/indicator"
+        style="@style/FrogoLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorName="BallPulseIndicator" />
+
+</LinearLayout>

@@ -25,7 +25,7 @@ abstract class CoreMainActivity<VB : ViewBinding> : BaseActivity<VB>(),
     }
 
     override fun setupDebugMode(): Boolean {
-        return com.frogobox.appsdk.BuildConfig.DEBUG
+        return com.frogobox.BuildConfig.DEBUG
     }
 
     override fun setupPiracyMode() {
