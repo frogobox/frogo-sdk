@@ -28,7 +28,7 @@ import com.frogobox.sdk.util.AppExecutors
 class AppLocalDataSource(
     private val appExecutors: AppExecutors,
     private val preferences: PreferenceDelegatesImpl,
-    private val articleDao: ArticleDao
+    private val articleDao: ArticleDao,
 ) : FrogoLocalDataSource(appExecutors, preferences), AppDataSource {
 
     override fun getTopHeadline(
@@ -38,7 +38,7 @@ class AppLocalDataSource(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         articleDao.getArticles().fetchRoomDB(callback) {
             addSubscribe(it)
@@ -57,7 +57,7 @@ class AppLocalDataSource(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         articleDao.getArticles().fetchRoomDB(callback) {
             addSubscribe(it)
@@ -68,7 +68,7 @@ class AppLocalDataSource(
         language: String,
         country: String,
         category: String,
-        callback: FrogoDataResponse<SourceResponse>
+        callback: FrogoDataResponse<SourceResponse>,
     ) {
 
     }

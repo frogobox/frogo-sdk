@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.frogobox.R
-import com.frogobox.appuikit.model.Main
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
 
@@ -33,7 +32,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -41,7 +40,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -49,7 +48,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_1_tv_title).text =
                             context.getString(
@@ -73,7 +72,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -81,7 +80,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -89,7 +88,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_2_tv_title).text =
                             context.getString(
@@ -117,7 +116,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -125,7 +124,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -133,7 +132,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_3_tv_title).text =
                             context.getString(
@@ -165,7 +164,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -173,7 +172,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -181,7 +180,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_4_tv_title).text =
                             context.getString(
@@ -209,7 +208,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -217,7 +216,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -225,7 +224,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_5_tv_title).text =
                             context.getString(
@@ -257,7 +256,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -265,7 +264,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -273,7 +272,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_6_tv_title).text =
                             context.getString(
@@ -309,7 +308,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -317,7 +316,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -325,7 +324,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_7_tv_title).text =
                             context.getString(
@@ -353,7 +352,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -361,7 +360,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -369,7 +368,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_8_tv_title).text =
                             context.getString(
@@ -401,7 +400,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -409,7 +408,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -417,7 +416,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_9_tv_title).text =
                             context.getString(
@@ -445,7 +444,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -453,7 +452,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -461,7 +460,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_10_tv_title).text =
                             context.getString(
@@ -476,6 +475,7 @@ object FrogoRvAdapter {
                                 R.drawable.ic_artist
                             )
                     }
+
                     override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
                         return oldItem == newItem
                     }
@@ -492,7 +492,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -500,7 +500,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -508,7 +508,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_11_tv_title).text =
                             context.getString(
@@ -544,7 +544,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -552,7 +552,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -560,7 +560,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_list_type_12_tv_title).text =
                             context.getString(
@@ -584,7 +584,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -592,7 +592,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -600,7 +600,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_1_tv_title).text =
                             context.getString(
@@ -628,7 +628,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -636,7 +636,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -644,7 +644,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_2_tv_title).text =
                             context.getString(
@@ -676,7 +676,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -684,7 +684,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -692,7 +692,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_3_tv_title).text =
                             context.getString(
@@ -728,7 +728,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -736,7 +736,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -744,7 +744,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_4_tv_title).text =
                             context.getString(
@@ -772,7 +772,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -780,7 +780,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -788,7 +788,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_5_tv_title).text =
                             context.getString(
@@ -820,7 +820,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -828,7 +828,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -836,7 +836,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<TextView>(R.id.frogo_rv_grid_type_6_tv_title).text =
                             context.getString(
@@ -872,7 +872,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -880,7 +880,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -888,7 +888,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_7_iv_poster)
                             .setImageResource(
@@ -912,7 +912,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -920,7 +920,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
                     }
 
@@ -928,7 +928,7 @@ object FrogoRvAdapter {
                         view: View,
                         data: String,
                         position: Int,
-                        notifyListener: FrogoRecyclerNotifyListener<String>
+                        notifyListener: FrogoRecyclerNotifyListener<String>,
                     ) {
 
                     }

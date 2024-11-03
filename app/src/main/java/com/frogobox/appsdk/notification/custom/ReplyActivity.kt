@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.databinding.ActivityReplyBinding
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.CHANNEL_ID
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.CHANNEL_NAME
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.REPLY_ACTION
+import com.frogobox.databinding.ActivityReplyBinding
 import com.frogobox.sdk.notification.FrogoNotification
 
 class ReplyActivity : BaseActivity<ActivityReplyBinding>() {

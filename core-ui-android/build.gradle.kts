@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.compose.compiler)
     `maven-publish`
 }
 
@@ -48,9 +47,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "17"
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of("17"))
         }
     }
 

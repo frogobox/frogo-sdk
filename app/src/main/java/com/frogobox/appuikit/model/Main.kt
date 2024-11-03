@@ -16,5 +16,5 @@ import android.content.Intent
  */
 data class Main(
     val name: String,
-    val intent: Intent
+    val intent: Intent,
 )

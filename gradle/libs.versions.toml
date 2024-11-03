@@ -1,51 +1,48 @@
 [versions]
-agp = "8.5.1"
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
-
-coreKtx = "1.13.1"
+agp = "8.7.2"
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.25"
+coreKtx = "1.15.0"
 appcompat = "1.7.0"
-activity = "1.9.2"
-fragment = "1.8.3"
-constraintlayout = "2.1.4"
-liveCycle = "2.8.5"
+activity = "1.9.3"
+fragment = "1.8.5"
+constraintlayout = "2.2.0"
+liveCycle = "2.8.7"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.6.1"
-work = "2.9.1"
-
+work = "2.10.0"
+googleAdmob = "23.5.0" # https://developers.google.com/admob/android/quick-start
+unityAd = "4.12.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+startIo = "4.11.5" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
+recyclerview = "1.3.2"
+flexbox = "3.0.0"
 material = "1.12.0"
 gson = "2.10.1"
-
 okhttp = "4.12.0"
 retrofit = "2.11.0"
-
 rxandroid3 = "3.0.2"
 rxjava3 = "3.1.8"
-
 chucker = "4.0.0"
 glide = "4.16.0"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-
-frogorecylerview = "4.4.1"
-
 koin = "3.5.6"
-
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 
 # Compose Version
+composePlugin = "1.7.0"
 composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
 composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
-composeActivity = "1.9.1" # https://androidx.tech/artifacts/activity/activity-compose/
-compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeActivity = "1.9.3" # https://androidx.tech/artifacts/activity/activity-compose/
+compose = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
 composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial3 = "1.3.1" # https://developer.android.com/jetpack/androidx/releases/compose
 composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
-composeHiltNavigation = "1.2.0" # https://developer.android.com/jetpack/androidx/releases/hilt
+composeHiltNavigation = "1.2.0"
 
 [libraries]
 # Android Kit
@@ -55,6 +52,13 @@ androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", ve
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
 
+# Android Kit
+androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "liveCycle" }
+
+ads-google-admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAdmob" }
+ads-google-admob-lite = { group = "com.google.android.gms", name = "play-services-ads-lite", version.ref = "googleAdmob" }
+ads-unityAd = { group = "com.unity3d.ads", name = "unity-ads", version.ref = "unityAd" }
+ads-startIo = { group = "com.startapp", name = "inapp-sdk", version.ref = "startIo" }
 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "liveCycle" }
@@ -79,8 +83,12 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose"}
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose"}
 
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 
 # --------------------------------------------------------------------------------------------------
 # Test Library
@@ -113,14 +121,15 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
 koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
 
-frogo-recyclerview = { group = "com.github.amirisback", name = "frogo-recycler-view", version.ref = "frogorecylerview" }
-
 # --------------------------------------------------------------------------------------------------
 
 
 [plugins]
-#android-application = { id = "com.android.application", version.ref = "agp" }
-#android.library = { id = "com.android.library", version.ref = "agp"}
-#jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-#jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
-#google-devtools-ksp = { id = "org.google.devtools.ksp", version.ref = "ksp"}
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp"}
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "composePlugin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

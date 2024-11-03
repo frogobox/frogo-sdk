@@ -30,7 +30,8 @@ import com.frogobox.sdk.source.FrogoRemoteDataSource
  *
  */
 
-class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(), AppDataSource, AppDataSourceResult {
+class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(), AppDataSource,
+    AppDataSourceResult {
 
     override fun getTopHeadline(
         q: String?,
@@ -39,7 +40,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -86,7 +87,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -138,7 +139,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         language: String,
         country: String,
         category: String,
-        callback: FrogoDataResponse<SourceResponse>
+        callback: FrogoDataResponse<SourceResponse>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -162,7 +163,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -188,7 +189,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -219,7 +220,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>
+        result: MutableLiveData<FrogoResult<SourceResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(

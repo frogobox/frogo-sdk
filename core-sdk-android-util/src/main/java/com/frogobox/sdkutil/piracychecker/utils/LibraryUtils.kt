@@ -50,7 +50,6 @@ val Context.apkSignature: Array<String>
 val Context.apkSignatures: Array<String>
     get() = currentSignatures
 
-@Suppress("DEPRECATION", "RemoveExplicitTypeArguments")
 private val Context.currentSignatures: Array<String>
     get() {
         val actualSignatures = ArrayList<String>()
@@ -62,12 +61,12 @@ private val Context.currentSignatures: Array<String>
                         PackageManager.GET_SIGNING_CERTIFICATES
                     else PackageManager.GET_SIGNATURES)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                if (packageInfo.signingInfo.hasMultipleSigners())
-                    packageInfo.signingInfo.apkContentsSigners
-                else packageInfo.signingInfo.signingCertificateHistory
-            } else packageInfo.signatures
+                if (packageInfo.signingInfo!!.hasMultipleSigners())
+                    packageInfo.signingInfo!!.apkContentsSigners
+                else packageInfo.signingInfo!!.signingCertificateHistory
+            } else packageInfo.signatures!!
         } catch (e: Exception) {
-            arrayOf<Signature>()
+            arrayOf()
         }
         signatures.forEach { signature ->
             val messageDigest = MessageDigest.getInstance("SHA")

@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
 import com.frogobox.R;
 import com.frogobox.appsdk.core.BaseActivity;
 import com.frogobox.databinding.ActivityPiracyBinding;
@@ -13,18 +16,15 @@ import com.frogobox.sdkutil.piracychecker.enums.Display;
 import com.frogobox.sdkutil.piracychecker.enums.InstallerID;
 import com.frogobox.sdkutil.piracychecker.utils.LibraryUtilsKt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-
 public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
+
+    private Display piracyCheckerDisplay = Display.DIALOG;
 
     @NonNull
     @Override
     public ActivityPiracyBinding setupViewBinding() {
         return ActivityPiracyBinding.inflate(getLayoutInflater());
     }
-
-    private Display piracyCheckerDisplay = Display.DIALOG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +65,10 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
 
     public void verifySignature() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
-            //.enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
+                //.enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
+                .start();
     }
 
     public void readSignature() {
@@ -78,45 +78,45 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
             dialogMessage.append("* ").append(signature).append("\n");
         }
         new AlertDialog.Builder(PiracyMainActivity.this)
-            .setTitle("APK Signatures:")
-            .setMessage(dialogMessage.toString())
-            .show();
+                .setTitle("APK Signatures:")
+                .setMessage(dialogMessage.toString())
+                .show();
     }
 
     public void verifyInstallerId() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableInstallerId(InstallerID.GOOGLE_PLAY)
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableInstallerId(InstallerID.GOOGLE_PLAY)
+                .start();
     }
 
     public void verifyUnauthorizedApps() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableUnauthorizedAppsCheck()
-            //.blockIfUnauthorizedAppUninstalled("license_checker", "block")
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableUnauthorizedAppsCheck()
+                //.blockIfUnauthorizedAppUninstalled("license_checker", "block")
+                .start();
     }
 
     public void verifyStores() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableStoresCheck()
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableStoresCheck()
+                .start();
     }
 
     public void verifyDebug() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableDebugCheck()
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableDebugCheck()
+                .start();
     }
 
     public void verifyEmulator() {
         new PiracyChecker(PiracyMainActivity.this)
-            .display(piracyCheckerDisplay)
-            .enableEmulatorCheck(false)
-            .start();
+                .display(piracyCheckerDisplay)
+                .enableEmulatorCheck(false)
+                .start();
     }
 
 }

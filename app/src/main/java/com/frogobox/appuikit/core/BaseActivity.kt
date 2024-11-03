@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  */
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
-    abstract fun setupViewBinding() : VB
+    abstract fun setupViewBinding(): VB
 
     protected val binding: VB by lazy {
         setupViewBinding()
@@ -54,6 +54,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
                 finish()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -61,7 +62,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     protected fun setupTabTitles(
         tabLayout: TabLayout,
         viewPager2: ViewPager2,
-        titles: MutableList<String>
+        titles: MutableList<String>,
     ) {
         TabLayoutMediator(tabLayout, viewPager2) { tab: TabLayout.Tab, position: Int ->
             tab.text = titles[position]

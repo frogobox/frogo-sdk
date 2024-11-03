@@ -54,5 +54,5 @@ data class Article(
 
     @ColumnInfo(name = "content")
     @SerializedName("content")
-    var content: String? = null
+    var content: String? = null,
 )

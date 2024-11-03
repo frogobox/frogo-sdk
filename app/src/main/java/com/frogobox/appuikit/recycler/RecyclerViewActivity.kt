@@ -20,7 +20,7 @@ class RecyclerViewActivity : BaseActivity<ActivityRecyclerViewBinding>() {
     private fun setupViewPager() {
         val pagerAdapter = BasePagerAdapter(this).apply {
             setupPagerFragment(RecyclerListFragment(), "List")
-            setupPagerFragment(RecyclerGridFragment(),"Grid")
+            setupPagerFragment(RecyclerGridFragment(), "Grid")
         }
 
         binding.apply {

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/frogoColorWhite">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/frogoColorWhite"
+        android:padding="@dimen/frogo_dimen_16dp">
+
+        <Button
+            android:id="@+id/btn_with_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_primary_dark_32dp"
+            android:text="With Data (Kotlin Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_1" />
+
+        <Button
+            android:id="@+id/btn_empty_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_primary_dark_32dp"
+            android:text="Empty Data (Java Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_with_data" />
+
+        <Button
+            android:id="@+id/btn_kotlin_no_adapter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_green_32dp"
+            android:text="With Data (Kotlin Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_2" />
+
+        <Button
+            android:id="@+id/btn_java_no_adapter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_green_32dp"
+            android:text="Empty Data (Java Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_kotlin_no_adapter" />
+
+        <TextView
+            android:id="@+id/tv_title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="With Adapter"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="No Adapter"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_empty_data" />
+
+        <TextView
+            android:id="@+id/tv_title_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="No Adapter (Multi-View)"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_java_no_adapter" />
+
+        <Button
+            android:id="@+id/btn_kotlin_multiview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/frogo_bg_orange_32dp"
+            android:text="Multi View (Kotlin Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_3" />
+
+        <Button
+            android:id="@+id/btn_java_multiview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/frogo_bg_orange_32dp"
+            android:text="Multi View (Java Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_kotlin_multiview" />
+
+        <TextView
+            android:id="@+id/tv_title_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Custom Recycler View"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_java_multiview" />
+
+        <Button
+            android:id="@+id/btn_kotlin_shimmer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_pink_32dp"
+            android:text="Shimmer Recyclerview (Kotlin Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_4" />
+
+        <Button
+            android:id="@+id/btn_kotlin_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_pink_32dp"
+            android:text="Progress Recyclerview (Kotlin Sample)"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_kotlin_shimmer" />
+
+        <Button
+            android:id="@+id/btn_rv_ext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_pink_32dp"
+            android:text="RecyclerView Extensions"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_kotlin_progress" />
+
+        <TextView
+            android:id="@+id/tv_title_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Nested Recycler View"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_rv_ext" />
+
+        <Button
+            android:id="@+id/btn_nested_simple"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_amber_32dp"
+            android:text="Simple Nested Recycler View"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_5" />
+
+
+        <Button
+            android:id="@+id/btn_nested"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_amber_32dp"
+            android:text="Nested Recycler View"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_nested_simple" />
+
+        <TextView
+            android:id="@+id/tv_title_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Solving Issue"
+            android:textColor="@color/frogoColorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_nested" />
+
+        <Button
+            android:id="@+id/btn_answer_issue_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/frogo_dimen_8dp"
+            android:background="@drawable/frogo_bg_blue_32dp"
+            android:text="Issue #01"
+            android:textColor="@color/frogoColorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
