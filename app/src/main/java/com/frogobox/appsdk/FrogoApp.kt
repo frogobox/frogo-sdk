@@ -4,12 +4,15 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.frogobox.appapi.di.consumeApiModule
+import com.frogobox.appapi.di.repositoryApiModule
+import com.frogobox.appapi.di.viewModelApiModule
 import com.frogobox.appsdk.di.repositoryModule
 import com.frogobox.appsdk.di.viewModelModule
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
 import com.frogobox.sdk.FrogoApplication
-import java.util.*
+import java.util.Locale
 
 /**
  * Created by faisalamir on 19/08/21
@@ -43,7 +46,15 @@ class FrogoApp : FrogoKoinApplication() {
     }
 
     override fun setupKoinModule(koinApplication: org.koin.core.KoinApplication) {
-        koinApplication.modules(listOf(repositoryModule, viewModelModule))
+        koinApplication.modules(
+            listOf(
+                repositoryModule,
+                viewModelModule,
+                repositoryApiModule,
+                viewModelApiModule,
+                consumeApiModule
+            )
+        )
     }
 
     override fun onCreateExt() {

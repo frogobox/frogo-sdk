@@ -37,4 +37,11 @@
     <string name="verify_stores">Verify third-party stores: Aptoide, BlackMart, 1Mobile, GetApk, etc</string>
     <string name="verify_debug">Verify if app is a debug build</string>
     <string name="verify_emulator">Verify if app is being run in an emulator</string>
+
+    <string name="title_tv">TV Show</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_person">Person</string>
+
+    <string name="title_day">Day</string>
+    <string name="title_week">Week</string>
 </resources>

@@ -27,12 +27,19 @@ object ProjectSetting {
     const val MODULE_NAME_SDK = "core-sdk-android"
     const val MODULE_NAME_SDK_UTIL = "core-sdk-android-util"
 
-
     const val LIBRARY_NAME_UI = "ui"
     const val LIBRARY_NAME_CORE_UI = "coreui"
 
     const val MODULE_NAME_UI = "core-ui"
     const val MODULE_NAME_CORE_UI = "core-ui-android"
+
+    const val LIBRARY_NAME_API = "api"
+    const val LIBRARY_NAME_CORE_API = "coreapi"
+    const val LIBRARY_NAME_CORE_UTIL = "coreutil"
+
+    const val MODULE_NAME_CORE_UTIL = "core-util"
+    const val MODULE_NAME_CORE_API = "core-api"
+    const val MODULE_NAME_API = "core-api-android"
 
     // ---------------------------------------------------------------------------------------------
 
@@ -56,6 +63,10 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
+
+    const val PROJECT_LIB_ID_API = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_API"
+    const val PROJECT_LIB_ID_CORE_API = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_API"
+    const val PROJECT_LIB_ID_CORE_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_UTIL"
 
     const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
     const val PROJECT_LIB_ID_CORE_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_UI"

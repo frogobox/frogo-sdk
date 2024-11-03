@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * Created by 
+ * FrogoBox Inc License
+ * =========================================
+ * 
+ * Copyright (C) .      
+ * All rights reserved
+ * 
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ * LinkedIn : linkedin.com/in/faisalamircs
+ * 
+ * FrogoBox Software Industries
+ * 
+ -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_menu_tv"
+        android:icon="@drawable/ic_tv"
+        android:title="@string/title_tv"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/bottom_menu_movie"
+        android:icon="@drawable/ic_movie"
+        android:title="@string/title_movie"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/bottom_menu_person"
+        android:icon="@drawable/ic_person"
+        android:title="@string/title_person"
+        app:showAsAction="ifRoom"/>
+
+</menu>

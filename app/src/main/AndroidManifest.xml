@@ -104,6 +104,14 @@
             android:name=".appuikit.loadingindicator.DetailLoadingIndicatorActivity"
             android:exported="true" />
 
+        <activity android:name=".appapi.mvvm.news.NewsDetailFrogoApiActivity"/>
+        <activity android:name=".appapi.mvvm.pixabay.PixabayActivity" />
+        <activity android:name=".appapi.mvvm.sport.SportActivity" />
+        <activity android:name=".appapi.mvvm.movies.MoviesActivity" />
+        <activity android:name=".appapi.mvvm.meal.MealActivity" />
+        <activity android:name=".appapi.mvvm.news.NewsFrogoApiActivity" />
+        <activity android:name=".appapi.mvvm.main.MainFrogoApiActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

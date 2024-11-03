@@ -92,6 +92,9 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_UI))
 
+    implementation(project(DependencyGradle.FROGO_PATH_CORE_ANDROID_API))
+    implementation(project(DependencyGradle.FROGO_PATH_CORE_API))
+
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
 

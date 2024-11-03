@@ -29,5 +29,8 @@ include(
     ":core-sdk-android",
     ":core-sdk-android-util",
     ":core-ui",
-    ":core-ui-android"
+    ":core-ui-android",
+    ":core-util"
 )
+include(":core-api")
+include(":core-api-android")

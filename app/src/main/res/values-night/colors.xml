@@ -4,4 +4,9 @@
     <color name="colorBackground">@color/black</color>
     <color name="colorText">@color/white</color>
 
+    <color name="text_color">@color/white</color>
+    <color name="bg_card_color">@color/black</color>
+
+    <color name="tab_layout">@color/black</color>
+
 </resources>

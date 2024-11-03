@@ -24,4 +24,8 @@ object DependencyGradle {
     const val FROGO_PATH_CORE_UI = ":${ProjectSetting.MODULE_NAME_UI}"
     const val FROGO_PATH_UI = ":${ProjectSetting.MODULE_NAME_CORE_UI}"
 
+    const val FROGO_PATH_CORE_UTIL = ":${ProjectSetting.MODULE_NAME_CORE_UTIL}"
+    const val FROGO_PATH_CORE_API = ":${ProjectSetting.MODULE_NAME_CORE_API}"
+    const val FROGO_PATH_CORE_ANDROID_API = ":${ProjectSetting.MODULE_NAME_API}"
+
 }
