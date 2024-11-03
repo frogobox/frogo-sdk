@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.util.NewsConstant
-import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.source.FrogoResult
 import com.frogobox.sdk.view.FrogoViewModel2
 
@@ -18,7 +17,7 @@ import com.frogobox.sdk.view.FrogoViewModel2
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */

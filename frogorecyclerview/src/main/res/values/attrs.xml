@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * Created by Muhammad Faisal Amir
+ * Project Source Code
+ * =========================================
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ * =========================================
+ * Copyright (C) FrogoBox Inc.      
+ * All rights reserved
+ *
+ -->
+
+<resources>
+
+    <!-- frogo_recycler_view attrs -->
+    <declare-styleable name="frogo_recycler_view">
+        <attr name="frvPaddingTop" format="dimension" />
+        <attr name="frvPaddingRight" format="dimension" />
+        <attr name="frvPaddingBottom" format="dimension" />
+        <attr name="frvPaddingLeft" format="dimension" />
+        <attr name="frvClipToPadding" format="boolean" />
+        <attr name="frvlayoutManager" format="string" />
+    </declare-styleable>
+
+    <!-- frogo_recycler_view attrs -->
+    <declare-styleable name="frogo_empty_view">
+        <attr name="frv_empty_image_width" format="dimension" />
+        <attr name="frv_empty_image_height" format="dimension" />
+        <attr name="frv_empty_image_src" format="reference|color" />
+        <attr name="frv_empty_title_text" format="string" />
+        <attr name="frv_empty_title_color" format="reference|color" />
+        <attr name="frv_empty_subtitle_text" format="string" />
+        <attr name="frv_empty_subtitle_color" format="reference|color" />
+    </declare-styleable>
+
+    <!-- frogo_recycler_view attrs -->
+    <declare-styleable name="frogo_progress_bar">
+        <attr name="frvProgressHeight" format="dimension" />
+        <attr name="frvProgressWidth" format="dimension" />
+        <attr name="frvProgressVisibility" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ShimmerFrameLayout">
+        <attr name="shimmer_clip_to_children" format="boolean" />
+        <attr name="shimmer_colored" format="boolean" />
+        <attr name="shimmer_base_color" format="color" />
+        <attr name="shimmer_highlight_color" format="color" />
+        <attr name="shimmer_base_alpha" format="float" />
+        <attr name="shimmer_highlight_alpha" format="float" />
+        <attr name="shimmer_auto_start" format="boolean" />
+        <attr name="shimmer_duration" format="integer" />
+        <attr name="shimmer_repeat_count" format="integer" />
+        <attr name="shimmer_repeat_delay" format="integer" />
+        <attr name="shimmer_repeat_mode" format="enum">
+            <enum name="restart" value="1" />
+            <enum name="reverse" value="2" />
+        </attr>
+        <attr name="shimmer_start_delay" format="integer" />
+        <attr name="shimmer_direction" format="enum">
+            <enum name="left_to_right" value="0" />
+            <enum name="top_to_bottom" value="1" />
+            <enum name="right_to_left" value="2" />
+            <enum name="bottom_to_top" value="3" />
+        </attr>
+        <attr name="shimmer_dropoff" format="float" />
+        <attr name="shimmer_fixed_width" format="dimension" />
+        <attr name="shimmer_fixed_height" format="dimension" />
+        <attr name="shimmer_intensity" format="float" />
+        <attr name="shimmer_width_ratio" format="float" />
+        <attr name="shimmer_height_ratio" format="float" />
+        <attr name="shimmer_shape" format="enum">
+            <enum name="linear" value="0" />
+            <enum name="radial" value="1" />
+        </attr>
+        <attr name="shimmer_tilt" format="float" />
+    </declare-styleable>
+
+</resources>

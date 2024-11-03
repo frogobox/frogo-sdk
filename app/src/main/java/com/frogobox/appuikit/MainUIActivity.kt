@@ -31,7 +31,12 @@ class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
         data.add(Main("RecyclerView Layout", Intent(this, RecyclerViewActivity::class.java)))
         data.add(Main("Compose (Experimental)", Intent(this, ComposeActivity::class.java)))
         data.add(Main("Frogo Animation", Intent(this, SampleFrogoAnimationActivity::class.java)))
-        data.add(Main("Frogo Loading Indicator", Intent(this, SampleFrogoLoadingIndicatorViewActivity::class.java)))
+        data.add(
+            Main(
+                "Frogo Loading Indicator",
+                Intent(this, SampleFrogoLoadingIndicatorViewActivity::class.java)
+            )
+        )
         return data
     }
 
@@ -44,7 +49,7 @@ class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
                     view: View,
                     data: Main,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Main>
+                    notifyListener: FrogoRecyclerNotifyListener<Main>,
                 ) {
                     startActivity(data.intent)
                 }
@@ -53,7 +58,7 @@ class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
                     view: View,
                     data: Main,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Main>
+                    notifyListener: FrogoRecyclerNotifyListener<Main>,
                 ) {
                 }
 
@@ -61,7 +66,7 @@ class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
                     view: View,
                     data: Main,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Main>
+                    notifyListener: FrogoRecyclerNotifyListener<Main>,
                 ) {
                     view.findViewById<TextView>(R.id.frogo_rv_list_type_1_tv_title).text = data.name
                 }

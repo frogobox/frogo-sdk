@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Deltadox Android"
+rootProject.name = "DeltadoxAndroid"
 include(
     ":app",
     ":core-sdk",
@@ -30,7 +30,8 @@ include(
     ":core-sdk-android-util",
     ":core-ui",
     ":core-ui-android",
-    ":core-util"
+    ":core-util",
+    ":core-api",
+    ":core-api-android",
+    ":frogorecyclerview",
 )
-include(":core-api")
-include(":core-api-android")

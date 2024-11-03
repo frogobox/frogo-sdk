@@ -1,18 +1,21 @@
 [versions]
 agp = "8.5.1"
-kotlin = "1.9.23"
+kotlin = "2.0.21"
 ksp = "1.9.23-1.0.19"
 
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 appcompat = "1.7.0"
-activity = "1.9.2"
-fragment = "1.8.3"
-constraintlayout = "2.1.4"
-liveCycle = "2.8.5"
+activity = "1.9.3"
+fragment = "1.8.5"
+constraintlayout = "2.2.0"
+liveCycle = "2.8.7"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.6.1"
-work = "2.9.1"
+work = "2.10.0"
+
+recyclerview = "1.3.2"
+flexbox = "3.0.0"
 
 material = "1.12.0"
 gson = "2.10.1"
@@ -27,8 +30,7 @@ chucker = "4.0.0"
 glide = "4.16.0"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-
-frogorecylerview = "4.4.1"
+compose-plugin = "1.7.0"
 
 koin = "3.5.6"
 
@@ -39,13 +41,14 @@ espressoCore = "3.6.1"
 # Compose Version
 composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
 composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
-composeActivity = "1.9.1" # https://androidx.tech/artifacts/activity/activity-compose/
-compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeActivity = "1.9.3" # https://androidx.tech/artifacts/activity/activity-compose/
+compose = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
 composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial3 = "1.3.1" # https://developer.android.com/jetpack/androidx/releases/compose
 composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
-composeHiltNavigation = "1.2.0" # https://developer.android.com/jetpack/androidx/releases/hilt
+composeHiltNavigation = "1.2.0"
+kotlinVersion = "2.0.21" # https://developer.android.com/jetpack/androidx/releases/hilt
 
 [libraries]
 # Android Kit
@@ -79,8 +82,12 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose"}
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose"}
 
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 
 # --------------------------------------------------------------------------------------------------
 # Test Library
@@ -113,8 +120,6 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
 koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
 
-frogo-recyclerview = { group = "com.github.amirisback", name = "frogo-recycler-view", version.ref = "frogorecylerview" }
-
 # --------------------------------------------------------------------------------------------------
 
 
@@ -124,3 +129,7 @@ frogo-recyclerview = { group = "com.github.amirisback", name = "frogo-recycler-v
 #jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 #jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 #google-devtools-ksp = { id = "org.google.devtools.ksp", version.ref = "ksp"}
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+

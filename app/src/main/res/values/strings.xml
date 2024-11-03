@@ -44,4 +44,6 @@
 
     <string name="title_day">Day</string>
     <string name="title_week">Week</string>
+
+    <string name="title_activity_recycler_compose">RecyclerComposeActivity</string>
 </resources>

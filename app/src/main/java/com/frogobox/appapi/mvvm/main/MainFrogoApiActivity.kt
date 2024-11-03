@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.frogobox.databinding.ActivityMainFrogoApiBinding
-import com.frogobox.databinding.ItemMainFrogoApiBinding
 import com.frogobox.appapi.mvvm.meal.MealActivity
 import com.frogobox.appapi.mvvm.movies.MoviesActivity
 import com.frogobox.appapi.mvvm.news.NewsFrogoApiActivity
@@ -13,6 +11,8 @@ import com.frogobox.appapi.mvvm.pixabay.PixabayActivity
 import com.frogobox.appapi.mvvm.sport.SportActivity
 import com.frogobox.appapi.util.Constant
 import com.frogobox.appapi.util.Helper
+import com.frogobox.databinding.ActivityMainFrogoApiBinding
+import com.frogobox.databinding.ItemMainFrogoApiBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.startActivityExt
@@ -57,7 +57,11 @@ class MainFrogoApiActivity : FrogoBindActivity<ActivityMainFrogoApiBinding>() {
             }
 
             override fun setViewBinding(parent: ViewGroup): ItemMainFrogoApiBinding {
-                return ItemMainFrogoApiBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return ItemMainFrogoApiBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             }
 
             override fun setupInitComponent(

@@ -20,14 +20,15 @@ import com.frogobox.sdk.util.FrogoMutableLiveData
  */
 class TvViewModel(
     private val context: Application,
-    private val repository: ApiRepository
+    private val repository: ApiRepository,
 ) : BaseMovieApiViewModel(context, repository) {
 
     val listDataDay = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingTv>>()
     val listDataWeek = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingTv>>()
 
     fun getTrendingTvDay() {
-        movieApi.getTrendingTvDay(object : ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>> {
+        movieApi.getTrendingTvDay(object :
+            ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>> {
             override fun onSuccess(data: com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>) {
                 // On Success
                 data.results?.let { listDataDay.postValue(it) }
@@ -55,7 +56,8 @@ class TvViewModel(
     }
 
     fun getTrendingTvWeek() {
-        movieApi.getTrendingTvWeek(object : ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>> {
+        movieApi.getTrendingTvWeek(object :
+            ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>> {
             override fun onSuccess(data: com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingTv>) {
                 // On Success
                 data.results?.let { listDataWeek.postValue(it) }

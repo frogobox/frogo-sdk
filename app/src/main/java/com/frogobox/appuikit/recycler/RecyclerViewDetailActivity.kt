@@ -2,12 +2,12 @@ package com.frogobox.appuikit.recycler
 
 import android.os.Bundle
 import androidx.core.view.updatePadding
+import com.frogobox.appuikit.core.BaseActivity
+import com.frogobox.appuikit.model.Layout
+import com.frogobox.appuikit.recycler.FrogoRvAdapter.frogoRvAdaper
 import com.frogobox.appuikit.recycler.FrogoRvConstant.TYPE_GRID
 import com.frogobox.appuikit.recycler.FrogoRvConstant.dummyData
-import com.frogobox.appuikit.recycler.FrogoRvAdapter.frogoRvAdaper
-import com.frogobox.appuikit.core.BaseActivity
 import com.frogobox.databinding.ActivityRecyclerViewDetailBinding
-import com.frogobox.appuikit.model.Layout
 import com.frogobox.recycler.core.IFrogoViewAdapter
 import com.google.gson.Gson
 
@@ -23,15 +23,15 @@ class RecyclerViewDetailActivity : BaseActivity<ActivityRecyclerViewDetailBindin
         setupRecyclerView(frogoRv())
     }
 
-    private fun extraData() : Layout {
+    private fun extraData(): Layout {
         val extra = intent.getStringExtra("EXTRA_DATA")
         return Gson().fromJson(extra, Layout::class.java)
     }
 
-    private fun frogoRv() : IFrogoViewAdapter<String>{
+    private fun frogoRv(): IFrogoViewAdapter<String> {
         return frogoRvAdaper(extraData().name, this)
     }
-    
+
     private fun setupRecyclerView(adapter: IFrogoViewAdapter<String>) {
 
         val scale = resources.displayMetrics.density

@@ -30,7 +30,7 @@ interface AppDataSource : ICoreDataSource {
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     )
 
     // Get Everythings
@@ -46,7 +46,7 @@ interface AppDataSource : ICoreDataSource {
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     )
 
     // Get Sources
@@ -54,7 +54,7 @@ interface AppDataSource : ICoreDataSource {
         language: String,
         country: String,
         category: String,
-        callback: FrogoDataResponse<SourceResponse>
+        callback: FrogoDataResponse<SourceResponse>,
     )
 
     fun saveArticles(data: List<Article>, callback: FrogoStateResponse)

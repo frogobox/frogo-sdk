@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.frogobox.R
 import com.frogobox.appuikit.core.BaseFragment
-import com.frogobox.databinding.FragmentRecyclerListBinding
 import com.frogobox.appuikit.model.Layout
+import com.frogobox.databinding.FragmentRecyclerListBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
 import com.google.gson.Gson
@@ -19,7 +19,7 @@ class RecyclerListFragment : BaseFragment<FragmentRecyclerListBinding>() {
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentRecyclerListBinding {
         return FragmentRecyclerListBinding.inflate(inflater, container, false)
     }
@@ -45,7 +45,7 @@ class RecyclerListFragment : BaseFragment<FragmentRecyclerListBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                     intentToLayoutSample(data)
                 }
@@ -54,7 +54,7 @@ class RecyclerListFragment : BaseFragment<FragmentRecyclerListBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                 }
 
@@ -62,7 +62,7 @@ class RecyclerListFragment : BaseFragment<FragmentRecyclerListBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                     view.findViewById<TextView>(R.id.frogo_rv_list_type_1_tv_title).text = data.name
                 }

@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.frogobox.coreutil.pixabay.model.PixabayImage
 import com.frogobox.databinding.ActivityPixabayBinding
 import com.frogobox.databinding.ItemGridImageBinding
-import com.frogobox.coreutil.news.model.Article
-import com.frogobox.coreutil.pixabay.model.PixabayImage
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.progressViewHandle
@@ -54,7 +53,7 @@ class PixabayActivity : FrogoBindActivity<ActivityPixabayBinding>() {
                 binding: ItemGridImageBinding,
                 data: PixabayImage,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<PixabayImage>
+                notifyListener: FrogoRecyclerNotifyListener<PixabayImage>,
             ) {
             }
 
@@ -78,7 +77,7 @@ class PixabayActivity : FrogoBindActivity<ActivityPixabayBinding>() {
                 binding: ItemGridImageBinding,
                 data: PixabayImage,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<PixabayImage>
+                notifyListener: FrogoRecyclerNotifyListener<PixabayImage>,
             ) {
                 val totalLikes = "${data.likes} likes"
                 binding.apply {

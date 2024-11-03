@@ -24,7 +24,7 @@ import com.frogobox.sdk.view.FrogoBindFragment
 class VPagerFragment : FrogoBindFragment<FragmentVpagerBinding>() {
     override fun setupViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentVpagerBinding {
         return FragmentVpagerBinding.inflate(inflater, container, false)
     }

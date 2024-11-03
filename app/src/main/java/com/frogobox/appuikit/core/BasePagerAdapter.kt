@@ -23,7 +23,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
  *
  */
 
-class BasePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class BasePagerAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
 
     val fragments = ArrayList<Fragment>()
     val titles = ArrayList<String>()

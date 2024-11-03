@@ -5,11 +5,6 @@ import com.frogobox.api.movie.ConsumeMovieApi
 import com.frogobox.api.news.ConsumeNewsApi
 import com.frogobox.api.pixabay.ConsumePixabayApi
 import com.frogobox.api.sport.ConsumeTheSportDbApi
-import com.frogobox.coreutil.meal.MealUrl
-import com.frogobox.coreutil.movie.MovieUrl
-import com.frogobox.coreutil.news.NewsUrl
-import com.frogobox.coreutil.pixabay.PixabayUrl
-import com.frogobox.coreutil.sport.SportUrl
 import org.koin.dsl.module
 
 

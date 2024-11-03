@@ -13,12 +13,11 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import com.frogobox.appsdk.FrogoApp
 import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.databinding.ActivityMainNotifBinding
 import com.frogobox.appsdk.notification.custom.CustomNotifActivity
 import com.frogobox.appsdk.notification.stack.StackNotifActivity
+import com.frogobox.databinding.ActivityMainNotifBinding
 import com.frogobox.sdk.notification.FrogoNotifCustomContentViewListener
 import com.frogobox.sdk.notification.FrogoNotification
 
@@ -139,9 +138,10 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
 
     }
 
-    private fun createNotificationChannel(channelId: String, channelName: String): String{
+    private fun createNotificationChannel(channelId: String, channelName: String): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val chan = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+            val chan =
+                NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
             chan.lightColor = Color.BLUE
             chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
             val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.frogobox.R
 import com.frogobox.appuikit.core.BaseFragment
-import com.frogobox.databinding.FragmentRecyclerGridBinding
 import com.frogobox.appuikit.model.Layout
+import com.frogobox.databinding.FragmentRecyclerGridBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
 import com.google.gson.Gson
@@ -19,7 +19,7 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentRecyclerGridBinding {
         return FragmentRecyclerGridBinding.inflate(inflater, container, false)
     }
@@ -45,7 +45,7 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                     intentToLayoutSample(data)
                 }
@@ -54,7 +54,7 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                 }
 
@@ -62,7 +62,7 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
                     view: View,
                     data: Layout,
                     position: Int,
-                    notifyListener: FrogoRecyclerNotifyListener<Layout>
+                    notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
                     view.findViewById<TextView>(R.id.frogo_rv_grid_type_1_tv_title).text = data.name
                     view.findViewById<ImageView>(R.id.frogo_rv_grid_type_1_iv_poster)

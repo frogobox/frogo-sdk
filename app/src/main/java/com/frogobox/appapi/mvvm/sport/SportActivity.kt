@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.frogobox.databinding.ActivitySportBinding
-import com.frogobox.coreutil.news.model.Article
 import com.frogobox.coreutil.sport.model.Team
+import com.frogobox.databinding.ActivitySportBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.progressViewHandle
@@ -54,7 +53,7 @@ class SportActivity : FrogoBindActivity<ActivitySportBinding>() {
                 binding: FrogoRvGridType3Binding,
                 data: Team,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Team>
+                notifyListener: FrogoRecyclerNotifyListener<Team>,
             ) {
             }
 
@@ -78,7 +77,7 @@ class SportActivity : FrogoBindActivity<ActivitySportBinding>() {
                 binding: FrogoRvGridType3Binding,
                 data: Team,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Team>
+                notifyListener: FrogoRecyclerNotifyListener<Team>,
             ) {
                 binding.apply {
                     frogoRvGridType3TvTitle.text = data.strTeam

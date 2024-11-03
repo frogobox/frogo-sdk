@@ -2,10 +2,10 @@ package com.frogobox.appapi.mvvm.movies
 
 import android.os.Bundle
 import com.frogobox.R
-import com.frogobox.databinding.ActivityMovieBinding
 import com.frogobox.appapi.mvvm.movies.core.MovieFragment
 import com.frogobox.appapi.mvvm.movies.core.PersonFragment
 import com.frogobox.appapi.mvvm.movies.core.TvFragment
+import com.frogobox.databinding.ActivityMovieBinding
 import com.frogobox.sdk.view.FrogoBindActivity
 
 class MoviesActivity : FrogoBindActivity<ActivityMovieBinding>() {

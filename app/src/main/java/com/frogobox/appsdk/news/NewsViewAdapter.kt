@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.frogobox.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
+import com.frogobox.databinding.ItemNewsBinding
 
 
 /**
@@ -17,7 +17,7 @@ import com.frogobox.appsdk.model.Article
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -27,14 +27,14 @@ class NewsViewAdapter : RecyclerView.Adapter<NewsViewHolder>() {
     private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(
             oldItem: Article,
-            newItem: Article
+            newItem: Article,
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
             oldItem: Article,
-            newItem: Article
+            newItem: Article,
         ): Boolean {
             return oldItem == newItem
         }

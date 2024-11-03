@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.frogobox.databinding.ContentItemBinding
-import com.frogobox.databinding.FragmentTrendingChildBinding
-import com.frogobox.appapi.mvvm.main.MainModel
 import com.frogobox.coreutil.movie.MovieUrl
 import com.frogobox.coreutil.movie.model.TrendingMovie
+import com.frogobox.databinding.ContentItemBinding
+import com.frogobox.databinding.FragmentTrendingChildBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.openDetailImageUri
@@ -28,7 +27,7 @@ class MovieDayFragment : FrogoBindFragment<FragmentTrendingChildBinding>() {
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentTrendingChildBinding {
         return FragmentTrendingChildBinding.inflate(inflater, container, false)
     }
@@ -54,14 +53,15 @@ class MovieDayFragment : FrogoBindFragment<FragmentTrendingChildBinding>() {
     override fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {
     }
 
-    private fun setupRV(data: List<com.frogobox.coreutil.movie.model.TrendingMovie>) {
+    private fun setupRV(data: List<TrendingMovie>) {
 
-        val adapterCallback = object : IFrogoBindingAdapter<com.frogobox.coreutil.movie.model.TrendingMovie, ContentItemBinding> {
+        val adapterCallback = object :
+            IFrogoBindingAdapter<TrendingMovie, ContentItemBinding> {
             override fun onItemClicked(
                 binding: ContentItemBinding,
-                data: com.frogobox.coreutil.movie.model.TrendingMovie,
+                data: TrendingMovie,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<com.frogobox.coreutil.movie.model.TrendingMovie>
+                notifyListener: FrogoRecyclerNotifyListener<TrendingMovie>,
             ) {
                 requireActivity().openDetailImageUri("${MovieUrl.BASE_URL_IMAGE_ORIGNAL}${data.poster_path}")
             }
@@ -72,7 +72,7 @@ class MovieDayFragment : FrogoBindFragment<FragmentTrendingChildBinding>() {
 
             override fun areContentsTheSame(
                 oldItem: TrendingMovie,
-                newItem: TrendingMovie
+                newItem: TrendingMovie,
             ): Boolean {
                 return oldItem == newItem
             }
@@ -87,21 +87,21 @@ class MovieDayFragment : FrogoBindFragment<FragmentTrendingChildBinding>() {
 
             override fun setupInitComponent(
                 binding: ContentItemBinding,
-                data: com.frogobox.coreutil.movie.model.TrendingMovie,
+                data: TrendingMovie,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<com.frogobox.coreutil.movie.model.TrendingMovie>
+                notifyListener: FrogoRecyclerNotifyListener<TrendingMovie>,
             ) {
                 binding.apply {
                     tvTitle.text = data.title
                     tvOverview.text = data.overview
                     Glide.with(root.context)
-                        .load("${com.frogobox.coreutil.movie.MovieUrl.BASE_URL_IMAGE_ORIGNAL}${data.poster_path}")
+                        .load("${MovieUrl.BASE_URL_IMAGE_ORIGNAL}${data.poster_path}")
                         .into(ivPoster)
                 }
             }
         }
 
-        binding.frogoRecyclerView.injectorBinding<com.frogobox.coreutil.movie.model.TrendingMovie, ContentItemBinding>()
+        binding.frogoRecyclerView.injectorBinding<TrendingMovie, ContentItemBinding>()
             .addData(data)
             .addCallback(adapterCallback)
             .createLayoutGrid(2)

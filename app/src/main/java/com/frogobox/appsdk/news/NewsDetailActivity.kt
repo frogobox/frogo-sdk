@@ -3,8 +3,8 @@ package com.frogobox.appsdk.news
 import android.os.Bundle
 import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.databinding.ActivityNewsDetailBinding
 import com.frogobox.appsdk.model.Article
+import com.frogobox.databinding.ActivityNewsDetailBinding
 import com.frogobox.sdk.ext.getExtraExt
 import com.frogobox.sdk.ext.setImageExt
 

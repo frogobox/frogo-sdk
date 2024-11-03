@@ -19,5 +19,5 @@ data class MainModel(
     val image: String,
     val name: String,
     val api: String,
-    val code: Int
+    val code: Int,
 )

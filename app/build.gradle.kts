@@ -95,6 +95,8 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_CORE_ANDROID_API))
     implementation(project(DependencyGradle.FROGO_PATH_CORE_API))
 
+    implementation(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
+
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
 
@@ -115,8 +117,6 @@ dependencies {
 
     implementation(libs.material)
     implementation(libs.gson)
-
-    implementation(libs.frogo.recyclerview)
 
     implementation(libs.material)
 

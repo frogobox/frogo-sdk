@@ -34,6 +34,6 @@ data class ArticleResponse(
     var message: String? = null,
 
     @SerializedName("articles")
-    var articles: List<Article>? = null
+    var articles: List<Article>? = null,
 
-)
+    )

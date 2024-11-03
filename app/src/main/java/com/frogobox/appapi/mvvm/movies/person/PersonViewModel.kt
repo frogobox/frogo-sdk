@@ -20,11 +20,12 @@ import com.frogobox.sdk.util.FrogoMutableLiveData
  */
 class PersonViewModel(
     private val context: Application,
-    private val repository: ApiRepository
+    private val repository: ApiRepository,
 ) : BaseMovieApiViewModel(context, repository) {
 
     val listDataDay = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingPerson>>()
-    val listDataWeek = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingPerson>>()
+    val listDataWeek =
+        FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingPerson>>()
 
     fun getTrendingPersonDay() {
         movieApi.getTrendingPersonDay(object :

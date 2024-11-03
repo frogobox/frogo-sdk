@@ -28,4 +28,6 @@ object DependencyGradle {
     const val FROGO_PATH_CORE_API = ":${ProjectSetting.MODULE_NAME_CORE_API}"
     const val FROGO_PATH_CORE_ANDROID_API = ":${ProjectSetting.MODULE_NAME_API}"
 
+    const val FROGO_PATH_RECYCLER_VIEW = ":frogorecyclerview"
+
 }

@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.frogobox.coreutil.news.NewsConstant
+import com.frogobox.coreutil.news.model.Article
 import com.frogobox.databinding.ActivityNewsFrogoApiBinding
 import com.frogobox.databinding.ContentArticleHorizontalBinding
 import com.frogobox.databinding.ContentArticleVerticalBinding
 import com.frogobox.databinding.ContentCategoryBinding
-import com.frogobox.coreutil.news.NewsConstant
-import com.frogobox.coreutil.news.model.Article
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.progressViewHandle
@@ -69,7 +69,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentCategoryBinding,
                 data: String,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<String>
+                notifyListener: FrogoRecyclerNotifyListener<String>,
             ) {
                 binding.tvCategory.text = "category $data"
                 newsViewModel.getTopHeadline(data)
@@ -82,6 +82,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
             override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
                 return oldItem == newItem
             }
+
             override fun setViewBinding(parent: ViewGroup): ContentCategoryBinding {
                 return ContentCategoryBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -94,7 +95,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentCategoryBinding,
                 data: String,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<String>
+                notifyListener: FrogoRecyclerNotifyListener<String>,
             ) {
                 binding.tvCategory.text = data
             }
@@ -114,7 +115,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleHorizontalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 startActivityExt<NewsDetailFrogoApiActivity> {
                     it.putExtra(NewsDetailFrogoApiActivity.EXTRA_DATA, data.toJson())
@@ -125,7 +126,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleHorizontalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 data.description?.let { showToast(it) }
             }
@@ -150,7 +151,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleHorizontalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 binding.apply {
                     tvTitle.text = data.title
@@ -176,7 +177,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleVerticalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 startActivityExt<NewsDetailFrogoApiActivity> {
                     it.putExtra(NewsDetailFrogoApiActivity.EXTRA_DATA, data.toJson())
@@ -187,7 +188,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleVerticalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 data.description?.let { showToast(it) }
             }
@@ -212,7 +213,7 @@ class NewsFrogoApiActivity : FrogoBindActivity<ActivityNewsFrogoApiBinding>() {
                 binding: ContentArticleVerticalBinding,
                 data: Article,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Article>
+                notifyListener: FrogoRecyclerNotifyListener<Article>,
             ) {
                 binding.apply {
                     tvTitle.text = data.title

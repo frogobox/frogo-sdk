@@ -8,11 +8,9 @@ import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoResult
-import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.toJson
 import com.frogobox.sdk.source.FrogoRepository
 import com.frogobox.sdk.util.FrogoFunc
-import com.google.gson.Gson
 
 
 /**
@@ -23,7 +21,7 @@ import com.google.gson.Gson
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -31,7 +29,7 @@ import com.google.gson.Gson
 class AppRepository(
     private val context: Context,
     private val remoteDataSource: AppRemoteDataSource,
-    private val localDataSource: AppLocalDataSource
+    private val localDataSource: AppLocalDataSource,
 ) : FrogoRepository(remoteDataSource, localDataSource), AppDataSource, AppDataSourceResult {
 
     fun handlingNetworkTopHeadLine(
@@ -41,7 +39,7 @@ class AppRepository(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         localDataSource.getTopHeadline(q, sources, category, country, pageSize, page,
             object : FrogoDataResponse<List<Article>> {
@@ -76,7 +74,7 @@ class AppRepository(
                                     object : FrogoDataResponse<List<Article>> {
                                         override fun onFailed(
                                             statusCode: Int,
-                                            errorMessage: String
+                                            errorMessage: String,
                                         ) {
                                         }
 
@@ -95,7 +93,7 @@ class AppRepository(
                                                 override fun onSuccess() {}
                                                 override fun onFailed(
                                                     statusCode: Int,
-                                                    errorMessage: String
+                                                    errorMessage: String,
                                                 ) {
                                                 }
 
@@ -136,7 +134,7 @@ class AppRepository(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         remoteDataSource.getTopHeadline(q, sources, category, country, pageSize, page, callback)
     }
@@ -153,7 +151,7 @@ class AppRepository(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        callback: FrogoDataResponse<List<Article>>
+        callback: FrogoDataResponse<List<Article>>,
     ) {
         remoteDataSource.getEverythings(
             q,
@@ -175,7 +173,7 @@ class AppRepository(
         language: String,
         country: String,
         category: String,
-        callback: FrogoDataResponse<SourceResponse>
+        callback: FrogoDataResponse<SourceResponse>,
     ) {
         remoteDataSource.getSources(language, country, category, callback)
     }
@@ -195,7 +193,7 @@ class AppRepository(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     ) {
         remoteDataSource.getTopHeadlineResult(q, sources, category, country, pageSize, page, result)
     }
@@ -212,16 +210,29 @@ class AppRepository(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     ) {
-        remoteDataSource.getEverythingsResult(q, from, to, qInTitle, sources, domains, excludeDomains, language, sortBy, pageSize, page, result)
+        remoteDataSource.getEverythingsResult(
+            q,
+            from,
+            to,
+            qInTitle,
+            sources,
+            domains,
+            excludeDomains,
+            language,
+            sortBy,
+            pageSize,
+            page,
+            result
+        )
     }
 
     override fun getSourcesResult(
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>
+        result: MutableLiveData<FrogoResult<SourceResponse>>,
     ) {
         remoteDataSource.getSourcesResult(language, country, category, result)
     }

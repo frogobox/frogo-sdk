@@ -8,6 +8,7 @@ import com.frogobox.appapi.source.ApiRepository
 import com.frogobox.appapi.util.isDebug
 import com.frogobox.coreapi.ConsumeApiResponse
 import com.frogobox.coreutil.meal.model.Meal
+
 /**
  * Created by faisalamir on 28/07/21
  * Consumable
@@ -16,12 +17,12 @@ import com.frogobox.coreutil.meal.model.Meal
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.      
+ * Copyright (C) 2021 FrogoBox Inc.
  * All rights reserved
  *
  */
 class MealViewModel(
-    private val repository: ApiRepository
+    private val repository: ApiRepository,
 ) : BaseViewModel() {
 
     val _listData = MutableLiveData<List<Meal>>()

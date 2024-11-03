@@ -20,14 +20,15 @@ import com.frogobox.sdk.util.FrogoMutableLiveData
  */
 class MovieViewModel(
     private val context: Application,
-    private val repository: ApiRepository
+    private val repository: ApiRepository,
 ) : BaseMovieApiViewModel(context, repository) {
 
     val listDataDay = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingMovie>>()
     val listDataWeek = FrogoMutableLiveData<List<com.frogobox.coreutil.movie.model.TrendingMovie>>()
 
     fun getTrendingMovieDay() {
-        movieApi.getTrendingMovieDay(object : ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingMovie>> {
+        movieApi.getTrendingMovieDay(object :
+            ConsumeApiResponse<com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingMovie>> {
             override fun onSuccess(data: com.frogobox.coreutil.movie.response.Trending<com.frogobox.coreutil.movie.model.TrendingMovie>) {
                 data.results?.let { listDataDay.postValue(it) }
             }

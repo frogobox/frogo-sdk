@@ -7,8 +7,6 @@ import com.frogobox.appapi.core.BaseViewModel
 import com.frogobox.appapi.source.ApiRepository
 import com.frogobox.appapi.util.isDebug
 import com.frogobox.coreapi.ConsumeApiResponse
-import com.frogobox.coreutil.sport.model.Team
-import com.frogobox.coreutil.sport.response.Teams
 
 /*
  * Created by faisalamir on 28/07/21

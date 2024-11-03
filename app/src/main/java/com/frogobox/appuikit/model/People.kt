@@ -14,5 +14,5 @@ package com.frogobox.appuikit.model
  */
 data class People(
     val name: String,
-    val role: String
+    val role: String,
 )

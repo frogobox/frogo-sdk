@@ -16,7 +16,7 @@ import com.frogobox.appuikit.model.Layout
  *
  */
 object FrogoRvConstant {
-    
+
     const val TYPE_LIST = "List"
     const val TYPE_GRID = "Grid"
 
@@ -27,8 +27,8 @@ object FrogoRvConstant {
         }
         return data
     }
-    
-    fun dataRvList() : MutableList<Layout> {
+
+    fun dataRvList(): MutableList<Layout> {
         val data = mutableListOf<Layout>()
         data.add(Layout("frogo_rv_list_type_1", TYPE_LIST, R.layout.frogo_rv_list_type_1))
         data.add(Layout("frogo_rv_list_type_2", TYPE_LIST, R.layout.frogo_rv_list_type_2))
@@ -45,7 +45,7 @@ object FrogoRvConstant {
         return data
     }
 
-    fun dataRvGrid() : MutableList<Layout> {
+    fun dataRvGrid(): MutableList<Layout> {
         val data = mutableListOf<Layout>()
         data.add(Layout("frogo_rv_grid_type_1", TYPE_GRID, R.layout.frogo_rv_grid_type_1))
         data.add(Layout("frogo_rv_grid_type_2", TYPE_GRID, R.layout.frogo_rv_grid_type_2))

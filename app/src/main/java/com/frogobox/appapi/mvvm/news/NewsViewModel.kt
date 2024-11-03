@@ -15,8 +15,6 @@ import com.frogobox.coreutil.news.NewsConstant.CATEGORY_SCIENCE
 import com.frogobox.coreutil.news.NewsConstant.CATEGORY_SPORTS
 import com.frogobox.coreutil.news.NewsConstant.CATEGORY_TECHNOLOGY
 import com.frogobox.coreutil.news.NewsConstant.COUNTRY_ID
-import com.frogobox.coreutil.news.model.Article
-import com.frogobox.coreutil.news.response.ArticleResponse
 import com.frogobox.sdk.ext.showLogDebug
 
 /*
@@ -36,14 +34,16 @@ class NewsViewModel(
     private val repository: ApiRepository,
 ) : BaseViewModel() {
 
-    private var _listDataCategory = MutableLiveData<List<com.frogobox.coreutil.news.model.Article>>()
-    var listDataCategory: LiveData<List<com.frogobox.coreutil.news.model.Article>> = _listDataCategory
+    private var _listDataCategory =
+        MutableLiveData<List<com.frogobox.coreutil.news.model.Article>>()
+    var listDataCategory: LiveData<List<com.frogobox.coreutil.news.model.Article>> =
+        _listDataCategory
 
     private var _listData = MutableLiveData<List<com.frogobox.coreutil.news.model.Article>>()
     var listData: LiveData<List<com.frogobox.coreutil.news.model.Article>> = _listData
 
     private var _listCategory = MutableLiveData<List<String>>()
-    var listCategory : LiveData<List<String>> = _listCategory
+    var listCategory: LiveData<List<String>> = _listCategory
 
     val newsApi = repository.consumeNewsApi().usingChuckInterceptor(isDebug, context)
 

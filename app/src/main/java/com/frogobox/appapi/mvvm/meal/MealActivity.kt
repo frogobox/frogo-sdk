@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.frogobox.coreutil.meal.model.Meal
 import com.frogobox.databinding.ActivityMealBinding
 import com.frogobox.databinding.ItemGridImageBinding
-import com.frogobox.coreutil.meal.model.Meal
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.sdk.ext.openDetailImageUri
@@ -70,7 +70,7 @@ class MealActivity : FrogoBindActivity<ActivityMealBinding>() {
                 binding: ItemGridImageBinding,
                 data: Meal,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Meal>
+                notifyListener: FrogoRecyclerNotifyListener<Meal>,
             ) {
                 binding.apply {
                     Glide.with(root.context).load(data.strMealThumb).into(ivIcon)
@@ -83,7 +83,7 @@ class MealActivity : FrogoBindActivity<ActivityMealBinding>() {
                 binding: ItemGridImageBinding,
                 data: Meal,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Meal>
+                notifyListener: FrogoRecyclerNotifyListener<Meal>,
             ) {
                 openDetailImageUri(data.strMealThumb ?: "")
             }
@@ -92,7 +92,7 @@ class MealActivity : FrogoBindActivity<ActivityMealBinding>() {
                 binding: ItemGridImageBinding,
                 data: Meal,
                 position: Int,
-                notifyListener: FrogoRecyclerNotifyListener<Meal>
+                notifyListener: FrogoRecyclerNotifyListener<Meal>,
             ) {
                 data.strMeal?.let { showToast(it) }
             }

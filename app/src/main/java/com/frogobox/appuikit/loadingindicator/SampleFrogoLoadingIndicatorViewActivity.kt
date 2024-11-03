@@ -62,7 +62,7 @@ class SampleFrogoLoadingIndicatorViewActivity :
             adapter = object : RecyclerView.Adapter<IndicatorHolder>() {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
-                    viewType: Int
+                    viewType: Int,
                 ): IndicatorHolder {
                     return IndicatorHolder(
                         ItemIndicatorBinding.inflate(
@@ -75,7 +75,7 @@ class SampleFrogoLoadingIndicatorViewActivity :
 
                 override fun onBindViewHolder(
                     holder: IndicatorHolder,
-                    @SuppressLint("RecyclerView") position: Int
+                    @SuppressLint("RecyclerView") position: Int,
                 ) {
                     holder.setData(dataIndicators[position])
                 }

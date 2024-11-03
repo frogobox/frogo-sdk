@@ -25,7 +25,7 @@ class ApiRepository(
     private val consumePixabayApi: ConsumePixabayApi,
     private val consumeMovieApi: ConsumeMovieApi,
     private val consumeTheSportDbApi: ConsumeTheSportDbApi,
-    private val consumeTheMealDbApi: ConsumeTheMealDbApi
+    private val consumeTheMealDbApi: ConsumeTheMealDbApi,
 ) : ApiDataSource {
 
     override fun consumeNewsApi(): ConsumeNewsApi {

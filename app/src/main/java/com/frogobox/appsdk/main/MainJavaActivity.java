@@ -10,7 +10,7 @@ import com.frogobox.databinding.ActivityMainJavaBinding;
 
 public class MainJavaActivity extends BaseActivity<ActivityMainJavaBinding> {
 
-    private boolean isEmpty = false;
+    private final boolean isEmpty = false;
 
     @NonNull
     @Override
