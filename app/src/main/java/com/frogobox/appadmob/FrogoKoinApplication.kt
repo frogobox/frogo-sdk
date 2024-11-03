@@ -1,4 +1,4 @@
-package com.frogobox.appsdk
+package com.frogobox.appadmob
 
 import com.frogobox.sdk.FrogoApplication
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +16,7 @@ import org.koin.core.logger.Level
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.
+ * Copyright (C) 2021 FrogoBox Inc.      
  * All rights reserved
  *
  */

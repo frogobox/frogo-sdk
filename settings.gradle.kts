@@ -23,6 +23,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "DeltadoxAndroid"
+
 include(
     ":app",
     ":core-sdk",
@@ -34,4 +35,8 @@ include(
     ":core-api",
     ":core-api-android",
     ":frogorecyclerview",
+    ":ad-core",
+    ":ad-general",
+    ":ad-unityad",
+    ":ad-admob"
 )

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".appsdk.FrogoApp"
+        android:name=".FrogoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -151,6 +151,44 @@
         <activity android:name=".apprecycler.MainFrogoRvActivity"/>
 
         <activity
+            android:name=".appadmob.mvvm.banner.BannerActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.rewarded.RewardedActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.interstitial.InterstitialActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.appopenad.AppOpenAdActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.main.MainJavaAdmobActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true"/>
+        <activity
+            android:name=".appadmob.mvvm.movie.MovieAdsActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.news.NewsAdsActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".appadmob.mvvm.main.AboutUsActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+
+        <activity
+            android:name=".appadmob.mvvm.main.MainAdmobActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
@@ -160,6 +198,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
 
     </application>
 

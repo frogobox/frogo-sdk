@@ -1,9 +1,13 @@
-package com.frogobox.appsdk
+package com.frogobox
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.frogobox.appadmob.FrogoAdmobKoinApplication
+import com.frogobox.appadmob.di.repositoryAdsModule
+import com.frogobox.appadmob.di.viewModelAdsModule
+import com.frogobox.appadmob.util.AdHelper
 import com.frogobox.appapi.di.consumeApiModule
 import com.frogobox.appapi.di.repositoryApiModule
 import com.frogobox.appapi.di.viewModelApiModule
@@ -27,7 +31,7 @@ import java.util.Locale
  *
  */
 
-class FrogoApp : FrogoKoinApplication() {
+class FrogoApp : FrogoAdmobKoinApplication() {
 
     companion object {
 
@@ -52,7 +56,9 @@ class FrogoApp : FrogoKoinApplication() {
                 viewModelModule,
                 repositoryApiModule,
                 viewModelApiModule,
-                consumeApiModule
+                consumeApiModule,
+                viewModelAdsModule,
+                repositoryAdsModule
             )
         )
     }
@@ -72,6 +78,10 @@ class FrogoApp : FrogoKoinApplication() {
             )
             getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
         }
+    }
+
+    override fun getAdOpenAppUnitId(context: Context?): String {
+        return AdHelper.getAdOpenAppUnitId(context)
     }
 
 }
