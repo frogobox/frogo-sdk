@@ -1,9 +1,9 @@
 ## About This Project (release 👷🔧️👷‍♀️⛏)
 
-[![](https://jitpack.io/v/deltadox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#deltadox/frogo-sdk)
-[![Android CI](https://github.com/deltadox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/deltadox/frogo-sdk/actions/workflows/android-ci.yml)
-[![Scan with Detekt](https://github.com/deltadox/frogo-sdk/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/deltadox/frogo-sdk/actions/workflows/detekt-analysis.yml)
-[![pages-build-deployment](https://github.com/deltadox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/deltadox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
+[![](https://jitpack.io/v/deltadox/deltadox-android.svg?style=flat-square)](https://jitpack.io/#deltadox/deltadox-android)
+[![Android CI](https://github.com/deltadox/deltadox-android/actions/workflows/android-ci.yml/badge.svg)](https://github.com/deltadox/deltadox-android/actions/workflows/android-ci.yml)
+[![Scan with Detekt](https://github.com/deltadox/deltadox-android/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/deltadox/deltadox-android/actions/workflows/detekt-analysis.yml)
+[![pages-build-deployment](https://github.com/deltadox/deltadox-android/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/deltadox/deltadox-android/actions/workflows/pages/pages-build-deployment)
 
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
