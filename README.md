@@ -13,7 +13,7 @@
 
 This Is Latest Release
 
-    $version_release = 1.0.0
+    $version_release = 1.0.1
 
 What's New??
 
@@ -55,7 +55,7 @@ allprojects {
 ```groovy
 dependencies {
     // library deltadox-android
-    implementation 'com.github.deltadox:deltadox-android:1.0.0'
+    implementation 'com.github.deltadox:deltadox-android:1.0.1'
 }
 ```
 
@@ -64,14 +64,14 @@ dependencies {
 ```groovy
 dependencies {
     // library deltadox-android
-    implementation("com.github.deltadox:deltadox-android:1.0.0")
+    implementation("com.github.deltadox:deltadox-android:1.0.1")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-deltadoxAndroid = "1.0.0"
+deltadoxAndroid = "1.0.1"
 
 [libraries]
 deltadox-android = { group = "com.github.deltadox", name = "deltadox-android", version.ref = "deltadoxAndroid" }
