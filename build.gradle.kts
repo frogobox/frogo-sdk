@@ -11,7 +11,7 @@ plugins {
 
 buildscript {
     dependencies {
-        classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
+        classpath(libs.android.maven.gradle.plugin)
     }
 }
 
