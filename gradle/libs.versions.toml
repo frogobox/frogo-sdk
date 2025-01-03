@@ -1,5 +1,6 @@
 [versions]
-agp = "8.7.2"
+agp = "8.7.3"
+androidMavenGradlePlugin = "2.1"
 kotlin = "2.0.21"
 ksp = "2.0.21-1.0.25"
 coreKtx = "1.15.0"
@@ -12,7 +13,7 @@ viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.6.1"
 work = "2.10.0"
-googleAdmob = "23.5.0" # https://developers.google.com/admob/android/quick-start
+googleAdmob = "23.6.0" # https://developers.google.com/admob/android/quick-start
 unityAd = "4.12.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 startIo = "4.11.5" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
 recyclerview = "1.3.2"
@@ -37,8 +38,8 @@ composePlugin = "1.7.0"
 composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
 composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
 composeActivity = "1.9.3" # https://androidx.tech/artifacts/activity/activity-compose/
-compose = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial = "1.7.5" # https://developer.android.com/jetpack/androidx/releases/compose
+compose = "1.7.6" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial = "1.7.6" # https://developer.android.com/jetpack/androidx/releases/compose
 composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
 composeMaterial3 = "1.3.1" # https://developer.android.com/jetpack/androidx/releases/compose
 composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
@@ -46,6 +47,7 @@ composeHiltNavigation = "1.2.0"
 
 [libraries]
 # Android Kit
+android-maven-gradle-plugin = { module = "com.github.dcendents:android-maven-gradle-plugin", version.ref = "androidMavenGradlePlugin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
