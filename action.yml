@@ -1,9 +1,9 @@
-name: 'Frogo-SDK'
+name: 'Deltadox-Android'
 description: 'SDK for anything your problem to make easier developing android apps'
-author: 'Frogobox'
+author: 'deltadox'
 branding:
   icon: archive
-  color: green
+  color: blue
 inputs:
   myInput:
     description: 'Input to use'
