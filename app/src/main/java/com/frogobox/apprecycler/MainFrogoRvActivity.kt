@@ -8,7 +8,6 @@ import com.frogobox.apprecycler.sample.issue.AnswerIssueActivity
 import com.frogobox.apprecycler.sample.java.noadapter.multiview.JavaNoAdapterMultiViewActivity
 import com.frogobox.apprecycler.sample.java.noadapter.simple.JavaNoAdapterActivity
 import com.frogobox.apprecycler.sample.java.usingadapter.JavaSampleActivity
-import com.frogobox.apprecycler.sample.kotlin.FrogoRvExtActivity
 import com.frogobox.apprecycler.sample.kotlin.noadapter.multiview.KotlinNoAdapterMultiVewActivity
 import com.frogobox.apprecycler.sample.kotlin.noadapter.progress.KotlinProgressActivity
 import com.frogobox.apprecycler.sample.kotlin.noadapter.shimmer.KotlinShimmerActivity
@@ -78,10 +77,6 @@ class MainFrogoRvActivity : BaseActivity<ActivityMainFrogoRvBinding>() {
 
             btnAnswerIssue1.setOnClickListener {
                 startActivity(Intent(this@MainFrogoRvActivity, AnswerIssueActivity::class.java))
-            }
-
-            btnRvExt.setOnClickListener {
-                startActivity(Intent(this@MainFrogoRvActivity, FrogoRvExtActivity::class.java))
             }
         }
 

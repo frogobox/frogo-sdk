@@ -6,7 +6,7 @@ ksp = "2.0.21-1.0.25"
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
 activity = "1.10.0"
-fragment = "1.8.5"
+fragment = "1.8.6"
 constraintlayout = "2.2.0"
 liveCycle = "2.8.7"
 viewPager2 = "1.1.0"
@@ -14,7 +14,7 @@ preference = "1.2.1"
 roomKtx = "2.6.1"
 work = "2.10.0"
 googleAdmob = "23.6.0" # https://developers.google.com/admob/android/quick-start
-unityAd = "4.13.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+unityAd = "4.13.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 startIo = "5.1.0" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
@@ -38,8 +38,8 @@ composePlugin = "1.7.3"
 composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
 composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
 composeActivity = "1.10.0" # https://androidx.tech/artifacts/activity/activity-compose/
-compose = "1.7.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial = "1.7.7" # https://developer.android.com/jetpack/androidx/releases/compose
+compose = "1.7.8" # https://developer.android.com/jetpack/androidx/releases/compose
+composeMaterial = "1.7.8" # https://developer.android.com/jetpack/androidx/releases/compose
 composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
 composeMaterial3 = "1.3.1" # https://developer.android.com/jetpack/androidx/releases/compose
 composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
@@ -113,6 +113,8 @@ reactivex-rxjava3 = { group = "io.reactivex.rxjava3", name = "rxjava", version.r
 reactivex-rxandroid3 = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid3" }
 
 github-chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+github-chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
+
 github-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 github-customactivityoncrash = { group = "cat.ereza", name = "customactivityoncrash", version.ref = "customactivityoncrash" }

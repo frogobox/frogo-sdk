@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".mvvm.main.MainAdmobActivity">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,19 +36,19 @@
                 android:text="App Open Ad"
                 android:textColor="@color/colorText" />
 
-            <Button
-                android:id="@+id/btn_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RecyclerView With Banner (1)"
-                android:textColor="@color/colorText" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_recycler_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="RecyclerView With Banner (1)"-->
+<!--                android:textColor="@color/colorText" />-->
 
-            <Button
-                android:id="@+id/btn_recycler_view_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RecyclerView With Banner (2)"
-                android:textColor="@color/colorText" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_recycler_view_2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="RecyclerView With Banner (2)"-->
+<!--                android:textColor="@color/colorText" />-->
 
             <Button
                 android:id="@+id/btn_java_sample_activity"
