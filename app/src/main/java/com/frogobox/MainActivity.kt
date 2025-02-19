@@ -2,7 +2,6 @@ package com.frogobox
 
 import android.os.Bundle
 import com.frogobox.appadmob.mvvm.main.MainAdmobActivity
-import com.frogobox.appapi.mvvm.main.MainFrogoApiActivity
 import com.frogobox.apprecycler.MainFrogoRvActivity
 import com.frogobox.appsdk.main.MainSDKActivity
 import com.frogobox.appuikit.MainUIActivity
@@ -42,12 +41,6 @@ class MainActivity : FrogoBindActivity<ActivityMainBinding>() {
 
             btnUi.setOnClickListener {
                 startActivityExt<MainUIActivity> {
-
-                }
-            }
-
-            btnApi.setOnClickListener {
-                startActivityExt<MainFrogoApiActivity> {
 
                 }
             }

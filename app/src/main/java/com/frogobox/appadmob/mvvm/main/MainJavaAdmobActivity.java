@@ -32,8 +32,6 @@ public class MainJavaAdmobActivity extends BaseActivity<ActivityMainAdmobBinding
     }
 
     private void hideButton() {
-        getBinding().btnRecyclerView.setVisibility(View.GONE);
-        getBinding().btnRecyclerView2.setVisibility(View.GONE);
         getBinding().btnJavaSampleActivity.setVisibility(View.GONE);
     }
 

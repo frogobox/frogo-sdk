@@ -4,16 +4,14 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.frogobox.admob.core.IFrogoAdConsent
 import com.frogobox.BuildConfig
 import com.frogobox.R
+import com.frogobox.admob.core.IFrogoAdConsent
 import com.frogobox.appadmob.base.BaseActivity
-import com.frogobox.databinding.ActivityMainAdmobBinding
 import com.frogobox.appadmob.mvvm.appopenad.AppOpenAdActivity
 import com.frogobox.appadmob.mvvm.interstitial.InterstitialActivity
-import com.frogobox.appadmob.mvvm.movie.MovieAdsActivity
-import com.frogobox.appadmob.mvvm.news.NewsAdsActivity
 import com.frogobox.appadmob.mvvm.rewarded.RewardedActivity
+import com.frogobox.databinding.ActivityMainAdmobBinding
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.startActivityExt
 import com.google.android.gms.ads.AdSize
@@ -81,14 +79,6 @@ class MainAdmobActivity : BaseActivity<ActivityMainAdmobBinding>() {
 
             btnRewarded.setOnClickListener {
                 startActivityExt<RewardedActivity>()
-            }
-
-            btnRecyclerView.setOnClickListener {
-                startActivityExt<NewsAdsActivity>()
-            }
-
-            btnRecyclerView2.setOnClickListener {
-                startActivityExt<MovieAdsActivity>()
             }
 
             btnJavaSampleActivity.setOnClickListener {

@@ -17,7 +17,7 @@ import com.frogobox.sdk.ext.usingChuck
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.      
+ * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
  *
  */
@@ -25,7 +25,7 @@ import com.frogobox.sdk.ext.usingChuck
 
 class FrogoAdmobRepository(
     private val isDebug: Boolean,
-    private val baseUrl: String
+    private val baseUrl: String,
 ) : FrogoAdmobDataSource {
 
     companion object {
@@ -35,26 +35,31 @@ class FrogoAdmobRepository(
     private var frogoAdmobApiService = FrogoApiClient.create<FrogoAdmobApiService>(baseUrl, isDebug)
 
     override fun usingClient(context: Context) {
-        frogoAdmobApiService = FrogoApiClient.create(baseUrl, isDebug, context.usingChuck())
+        frogoAdmobApiService =
+            FrogoApiClient.create(
+                url = baseUrl,
+                isDebug = isDebug,
+                chuckInterceptor = context.usingChuck()
+            )
     }
 
     override fun getFrogoAdmobId(
         jsonFileName: String,
-        callback: FrogoAdmobApiResponse<FrogoAdmobId>
+        callback: FrogoAdmobApiResponse<FrogoAdmobId>,
     ) {
         frogoAdmobApiService.getFrogoAdmobId(jsonFileName).doApiRequest(callback) {}
     }
 
     override fun getFrogoMonetizeId(
         jsonFileName: String,
-        callback: FrogoAdmobApiResponse<FrogoMonetizeId>
+        callback: FrogoAdmobApiResponse<FrogoMonetizeId>,
     ) {
         frogoAdmobApiService.getMonetizeId(jsonFileName).doApiRequest(callback) {}
     }
 
     override fun getFrogoUnityId(
         jsonFileName: String,
-        callback: FrogoAdmobApiResponse<FrogoUnityId>
+        callback: FrogoAdmobApiResponse<FrogoUnityId>,
     ) {
         frogoAdmobApiService.getUnityId(jsonFileName).doApiRequest(callback) {}
     }

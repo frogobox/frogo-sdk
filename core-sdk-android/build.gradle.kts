@@ -60,7 +60,9 @@ dependencies {
 
     api(libs.reactivex.rxandroid3)
 
-    api(libs.github.chucker)
+    debugApi(libs.github.chucker)
+    releaseApi(libs.github.chucker.no.op)
+
     api(libs.github.glide)
     api(libs.github.customactivityoncrash)
 

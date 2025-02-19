@@ -23,13 +23,6 @@
             android:text="Frogo UI" />.
 
         <Button
-            android:id="@+id/btn_api"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Frogo Consume API" />
-
-        <Button
             android:id="@+id/btn_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

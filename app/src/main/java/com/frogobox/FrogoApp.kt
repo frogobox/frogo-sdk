@@ -8,9 +8,6 @@ import com.frogobox.appadmob.FrogoAdmobKoinApplication
 import com.frogobox.appadmob.di.repositoryAdsModule
 import com.frogobox.appadmob.di.viewModelAdsModule
 import com.frogobox.appadmob.util.AdHelper
-import com.frogobox.appapi.di.consumeApiModule
-import com.frogobox.appapi.di.repositoryApiModule
-import com.frogobox.appapi.di.viewModelApiModule
 import com.frogobox.appsdk.di.repositoryModule
 import com.frogobox.appsdk.di.viewModelModule
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
@@ -54,9 +51,6 @@ class FrogoApp : FrogoAdmobKoinApplication() {
             listOf(
                 repositoryModule,
                 viewModelModule,
-                repositoryApiModule,
-                viewModelApiModule,
-                consumeApiModule,
                 viewModelAdsModule,
                 repositoryAdsModule
             )
