@@ -17,8 +17,7 @@ This Is Latest Release
 
 What's New??
 
-    * Android Code Helper *
-    * Extension Helper From Frogo Sdk Tools * 
+    * Feature Drop, Delete Feature fetch public API *
 
 ## Download this project
 
