@@ -39,7 +39,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = DependencyGradle.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = libs.versions.compose.toString()
     }
 
     compileOptions {
@@ -89,7 +89,7 @@ afterEvaluate {
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
-                artifactId = ProjectSetting.MODULE_NAME_UI
+                artifactId = ProjectSetting.MODULE_NAME_CORE_UI
 
                 // Version Library Name (Example : "1.0.0")
                 version = ProjectSetting.PROJECT_VERSION_NAME

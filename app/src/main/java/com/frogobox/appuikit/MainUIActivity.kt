@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import com.frogobox.R
 import com.frogobox.appuikit.animation.SampleFrogoAnimationActivity
-import com.frogobox.appuikit.compose.ComposeActivity
 import com.frogobox.appuikit.core.BaseActivity
 import com.frogobox.appuikit.loadingindicator.SampleFrogoLoadingIndicatorViewActivity
 import com.frogobox.appuikit.model.Main
@@ -29,7 +28,6 @@ class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
     private fun data(): MutableList<Main> {
         val data = mutableListOf<Main>()
         data.add(Main("RecyclerView Layout", Intent(this, RecyclerViewActivity::class.java)))
-        data.add(Main("Compose (Experimental)", Intent(this, ComposeActivity::class.java)))
         data.add(Main("Frogo Animation", Intent(this, SampleFrogoAnimationActivity::class.java)))
         data.add(
             Main(

@@ -119,9 +119,6 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_UI))
 
-    implementation(project(DependencyGradle.FROGO_PATH_CORE_ANDROID_API))
-    implementation(project(DependencyGradle.FROGO_PATH_CORE_API))
-
     implementation(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
 
     implementation(project(DependencyGradle.MODULE_LIB_FROGO_AD))

@@ -44,9 +44,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
             .doApiRequest(object : FrogoDataResponse<ArticleResponse> {
@@ -91,9 +91,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getEverythings(
                 NewsUrl.API_KEY,
@@ -143,9 +143,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getSources(NewsUrl.API_KEY, language, country, category)
             .doApiRequest(callback) {
@@ -167,9 +167,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
             .doApiRequestResult(result) {
@@ -193,9 +193,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getEverythings(
                 NewsUrl.API_KEY,
@@ -224,9 +224,9 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
     ) {
         FrogoApiClient
             .create<AppApiService>(
-                NewsUrl.BASE_URL,
-                BuildConfig.DEBUG,
-                context.usingChuck()
+                url = NewsUrl.BASE_URL,
+                isDebug = BuildConfig.DEBUG,
+                chuckInterceptor = context.usingChuck()
             )
             .getSources(NewsUrl.API_KEY, language, country, category)
             .doApiRequestResult(result) {
