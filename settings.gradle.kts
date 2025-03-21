@@ -26,13 +26,10 @@ rootProject.name = "DeltadoxAndroid"
 
 include(
     ":app",
+    ":frogorecyclerview",
     ":core-sdk",
     ":core-sdk-android",
     ":core-sdk-android-util",
     ":core-ui-android",
-    ":frogorecyclerview",
-    ":ad-core",
-    ":ad-general",
-    ":ad-unityad",
-    ":ad-admob"
+    ":core-ads",
 )

@@ -85,11 +85,6 @@
             android:exported="false"
             android:theme="@style/ThemeUI.Transition" />
 
-        <activity
-            android:name=".appuikit.compose.ComposeActivity"
-            android:exported="true"
-            android:theme="@style/ThemeUI" />
-
         <activity android:name=".appuikit.recycler.RecyclerViewDetailActivity" />
 
         <activity android:name=".appuikit.recycler.RecyclerViewActivity" />
@@ -104,17 +99,6 @@
             android:name=".appuikit.loadingindicator.DetailLoadingIndicatorActivity"
             android:exported="true" />
 
-        <activity android:name=".appapi.mvvm.news.NewsDetailFrogoApiActivity"/>
-        <activity android:name=".appapi.mvvm.pixabay.PixabayActivity" />
-        <activity android:name=".appapi.mvvm.sport.SportActivity" />
-        <activity android:name=".appapi.mvvm.movies.MoviesActivity" />
-        <activity android:name=".appapi.mvvm.meal.MealActivity" />
-        <activity android:name=".appapi.mvvm.news.NewsFrogoApiActivity" />
-        <activity android:name=".appapi.mvvm.main.MainFrogoApiActivity" />
-
-        <activity
-            android:name=".apprecycler.sample.kotlin.FrogoRvExtActivity"
-            android:exported="false" />
         <activity
             android:name=".apprecycler.sample.issue.AnswerIssueActivity"
             android:exported="true" />
@@ -170,14 +154,7 @@
             android:name=".appadmob.mvvm.main.MainJavaAdmobActivity"
             android:exported="false"
             android:hardwareAccelerated="true"/>
-        <activity
-            android:name=".appadmob.mvvm.movie.MovieAdsActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-        <activity
-            android:name=".appadmob.mvvm.news.NewsAdsActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
+
         <activity
             android:name=".appadmob.mvvm.main.AboutUsActivity"
             android:exported="false"

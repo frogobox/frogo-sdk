@@ -13,12 +13,11 @@
 
 This Is Latest Release
 
-    $version_release = 1.0.2
+    $version_release = 1.1.0
 
 What's New??
 
-    * Android Code Helper *
-    * Extension Helper From Frogo Sdk Tools * 
+    * Feature Drop, Delete Feature fetch public API *
 
 ## Download this project
 
@@ -55,7 +54,7 @@ allprojects {
 ```groovy
 dependencies {
     // library deltadox-android
-    implementation 'com.github.deltadox:deltadox-android:1.0.2'
+    implementation 'com.github.deltadox:deltadox-android:1.1.0'
 }
 ```
 
@@ -64,14 +63,14 @@ dependencies {
 ```groovy
 dependencies {
     // library deltadox-android
-    implementation("com.github.deltadox:deltadox-android:1.0.2")
+    implementation("com.github.deltadox:deltadox-android:1.1.0")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-deltadoxAndroid = "1.0.2"
+deltadoxAndroid = "1.1.0"
 
 [libraries]
 deltadox-android = { group = "com.github.deltadox", name = "deltadox-android", version.ref = "deltadoxAndroid" }

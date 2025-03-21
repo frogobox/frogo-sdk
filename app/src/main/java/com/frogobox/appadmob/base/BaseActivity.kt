@@ -4,10 +4,10 @@ import android.content.SharedPreferences
 import android.view.Menu
 import android.view.MenuItem
 import androidx.viewbinding.ViewBinding
-import com.frogobox.ad.ui.FrogoAdActivity
-import com.frogobox.adcore.model.FrogoAdmobId
-import com.frogobox.adcore.source.FrogoAdmobApiResponse
-import com.frogobox.adcore.source.FrogoAdmobRepository
+import com.frogobox.ads.ui.FrogoAdActivity
+import com.frogobox.ads.model.FrogoAdmobId
+import com.frogobox.ads.source.FrogoAdmobApiResponse
+import com.frogobox.ads.source.FrogoAdmobRepository
 import com.frogobox.BuildConfig
 import com.frogobox.R
 import com.frogobox.sdk.ext.showLogDebug

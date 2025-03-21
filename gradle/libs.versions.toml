@@ -1,25 +1,25 @@
 [versions]
-agp = "8.7.3"
+agp = "8.9.0"
 androidMavenGradlePlugin = "2.1"
 kotlin = "2.0.21"
 ksp = "2.0.21-1.0.25"
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
-activity = "1.10.0"
+activity = "1.10.1"
 fragment = "1.8.6"
-constraintlayout = "2.2.0"
+constraintlayout = "2.2.1"
 liveCycle = "2.8.7"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.6.1"
 work = "2.10.0"
-googleAdmob = "23.6.0" # https://developers.google.com/admob/android/quick-start
-unityAd = "4.13.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+googleAdmob = "24.1.0" # https://developers.google.com/admob/android/quick-start
+unityAd = "4.14.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 startIo = "5.1.0" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
 material = "1.12.0"
-gson = "2.10.1"
+gson = "2.12.1"
 okhttp = "4.12.0"
 retrofit = "2.11.0"
 rxandroid3 = "3.0.2"
@@ -32,18 +32,6 @@ koin = "3.5.6"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-
-# Compose Version
-composePlugin = "1.7.3"
-composeCompiler = "1.5.15" # https://developer.android.com/jetpack/androidx/releases/compose
-composeAnimation = "1.6.7"# https://developer.android.com/jetpack/androidx/releases/compose
-composeActivity = "1.10.0" # https://androidx.tech/artifacts/activity/activity-compose/
-compose = "1.7.8" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial = "1.7.8" # https://developer.android.com/jetpack/androidx/releases/compose
-composeFoundation = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeMaterial3 = "1.3.1" # https://developer.android.com/jetpack/androidx/releases/compose
-composeNavigation = "2.7.7" # https://androidx.tech/artifacts/navigation/navigation-compose/
-composeHiltNavigation = "1.2.0"
 
 [libraries]
 # Android Kit
@@ -58,7 +46,6 @@ androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", versio
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "liveCycle" }
 
 ads-google-admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAdmob" }
-ads-google-admob-lite = { group = "com.google.android.gms", name = "play-services-ads-lite", version.ref = "googleAdmob" }
 ads-unityAd = { group = "com.unity3d.ads", name = "unity-ads", version.ref = "unityAd" }
 ads-startIo = { group = "com.startapp", name = "inapp-sdk", version.ref = "startIo" }
 
@@ -75,15 +62,6 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
-
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity"}
-androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial"}
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3"}
-androidx-compose-animation = { group = "androidx.compose.animation", name = "animation", version.ref = "compose"}
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose"}
-androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose"}
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose"}
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose"}
 
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
@@ -134,6 +112,4 @@ android-library = { id = "com.android.library", version.ref = "agp"}
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "composePlugin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
