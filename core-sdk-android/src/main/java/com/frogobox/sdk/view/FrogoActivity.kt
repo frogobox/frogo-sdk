@@ -20,6 +20,7 @@ import com.frogobox.sdk.R
 import com.frogobox.sdk.ext.getColorExt
 import com.frogobox.sdk.ext.getDrawableExt
 import java.util.*
+import androidx.core.graphics.drawable.toDrawable
 
 
 /**
@@ -137,7 +138,7 @@ abstract class FrogoActivity : AppCompatActivity() {
     open fun setupDetailActivity(
         title: String,
         @DrawableRes actionBackIcon: Int?,
-        @ColorRes backgroundColor: Int?
+        @ColorRes backgroundColor: Int?,
     ) {
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -145,7 +146,7 @@ abstract class FrogoActivity : AppCompatActivity() {
             supportActionBar?.setHomeAsUpIndicator(getDrawableExt(actionBackIcon))
         }
         if (backgroundColor != null) {
-            supportActionBar?.setBackgroundDrawable(ColorDrawable(getColorExt(backgroundColor)))
+            supportActionBar?.setBackgroundDrawable(getColorExt(backgroundColor).toDrawable())
         }
     }
 

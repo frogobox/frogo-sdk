@@ -4,6 +4,9 @@ import androidx.viewbinding.ViewBinding
 import com.frogobox.admob.delegate.AdmobDelegates
 import com.frogobox.admob.delegate.AdmobDelegatesImpl
 import com.frogobox.sdk.view.FrogoBindActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
@@ -30,7 +33,11 @@ abstract class FrogoAdmobBindActivity<VB : ViewBinding> : FrogoBindActivity<VB>(
     override fun setupMonetized() {
         super.setupMonetized()
         setupAdmobDelegates(this)
-        setupAdmobApp()
+        val backgroundScope = CoroutineScope(Dispatchers.IO)
+        backgroundScope.launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            setupAdmobApp()
+        }
     }
 
 }

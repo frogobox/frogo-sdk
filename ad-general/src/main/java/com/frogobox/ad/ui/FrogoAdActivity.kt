@@ -7,6 +7,9 @@ import com.frogobox.admob.delegate.AdmobDelegatesImpl
 import com.frogobox.sdk.view.FrogoActivity
 import com.frogobox.unityad.delegate.UnityAdDelegates
 import com.frogobox.unityad.delegate.UnityAdDelegatesImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Created by Faisal Amir
@@ -45,7 +48,11 @@ abstract class FrogoAdActivity : FrogoActivity(),
 
     override fun setupMonetized() {
         super.setupMonetized()
-        setupAdmobApp()
+        val backgroundScope = CoroutineScope(Dispatchers.IO)
+        backgroundScope.launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            setupAdmobApp()
+        }
     }
 
 }

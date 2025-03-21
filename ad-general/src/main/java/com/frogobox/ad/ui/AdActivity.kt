@@ -8,6 +8,9 @@ import com.frogobox.admob.delegate.AdmobDelegates
 import com.frogobox.admob.delegate.AdmobDelegatesImpl
 import com.frogobox.unityad.delegate.UnityAdDelegates
 import com.frogobox.unityad.delegate.UnityAdDelegatesImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Created by Faisal Amir on 07/02/23
@@ -26,7 +29,10 @@ abstract class AdActivity : AppCompatActivity(),
 
     open fun setupMonetized() {
         setupAdmobDelegates(this)
-        setupAdmobApp()
+        CoroutineScope(Dispatchers.IO).launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            setupAdmobApp()
+        }
     }
 
     open fun setupContentView() {}

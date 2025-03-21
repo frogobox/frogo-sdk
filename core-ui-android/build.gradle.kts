@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    alias(libs.plugins.compose.compiler)
     `maven-publish`
 }
 
@@ -34,12 +33,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.toString()
     }
 
     compileOptions {
@@ -58,18 +52,9 @@ android {
 dependencies {
 
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.ui)
-
     implementation(libs.material)
 
     api(libs.github.circleimageview)
-
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-
 }
 
 afterEvaluate {
