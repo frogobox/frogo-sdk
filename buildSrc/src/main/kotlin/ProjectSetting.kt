@@ -17,7 +17,6 @@ object ProjectSetting {
 
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
-    const val APP_NAME = "appsdk"
 
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
@@ -36,7 +35,7 @@ object ProjectSetting {
     // ---------------------------------------------------------------------------------------------
 
     const val VERSION_MAJOR = 1
-    const val VERSION_MINOR = 1
+    const val VERSION_MINOR = 2
     const val VERSION_PATCH = 0
 
     // ---------------------------------------------------------------------------------------------
