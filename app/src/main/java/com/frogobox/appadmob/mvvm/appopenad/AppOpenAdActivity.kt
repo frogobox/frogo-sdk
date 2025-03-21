@@ -3,8 +3,8 @@ package com.frogobox.appadmob.mvvm.appopenad
 import android.os.Bundle
 import android.util.Log
 import com.frogobox.FrogoApp
-import com.frogobox.ad.ui.FrogoAdBindActivity
-import com.frogobox.admob.callback.FrogoAdmobAppOpenAdCallback
+import com.frogobox.ads.ui.FrogoAdBindActivity
+import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.databinding.ActivityAppOpenAdBinding
 import com.frogobox.appadmob.util.AdHelper
 import com.frogobox.sdk.ext.gone
@@ -22,7 +22,8 @@ import com.frogobox.sdk.ext.visible
  */
 
 
-class AppOpenAdActivity : FrogoAdBindActivity<ActivityAppOpenAdBinding>(), FrogoAdmobAppOpenAdCallback {
+class AppOpenAdActivity : FrogoAdBindActivity<ActivityAppOpenAdBinding>(),
+    FrogoAdmobAppOpenAdCallback {
 
     companion object {
         const val TAG = "AppOpenAdActivity"
