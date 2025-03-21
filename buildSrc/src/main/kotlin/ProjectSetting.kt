@@ -30,16 +30,8 @@ object ProjectSetting {
     const val LIBRARY_NAME_UI = "ui"
     const val MODULE_NAME_CORE_UI = "core-ui-android"
 
-    const val LIBRARY_NAME_AD = "ad"
-    const val LIBRARY_NAME_AD_CORE = "adcore"
-    const val LIBRARY_NAME_ADMOB = "admob"
-    const val LIBRARY_NAME_UNITY_AD = "unityad"
-    const val LIBRARY_NAME_START_IO_AD = "startioad"
-
-    const val MODULE_NAME_AD = "ad-general"
-    const val MODULE_NAME_AD_CORE = "ad-core"
-    const val MODULE_NAME_ADMOB = "ad-admob"
-    const val MODULE_NAME_UNITY_AD = "ad-unityad"
+    const val LIBRARY_NAME_AD = "ads"
+    const val MODULE_NAME_AD = "core-ads"
 
     // ---------------------------------------------------------------------------------------------
 
@@ -69,11 +61,6 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
 
     const val PROJECT_LIB_ID_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_AD"
-    const val PROJECT_LIB_ID_ADMOB = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_ADMOB"
-    const val PROJECT_LIB_ID_AD_CORE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_AD_CORE"
-
-    const val PROJECT_LIB_ID_UNITY_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UNITY_AD"
-    const val PROJECT_LIB_ID_START_IO_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_START_IO_AD"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

@@ -1,7 +1,7 @@
 package com.frogobox.appadmob.mvvm.main
 
 import android.os.Bundle
-import com.frogobox.ad.ui.FrogoAdBindActivity
+import com.frogobox.ads.ui.FrogoAdBindActivity
 import com.frogobox.sdk.databinding.ActivityFrogoAboutUsBinding
 
 class AboutUsActivity : FrogoAdBindActivity<ActivityFrogoAboutUsBinding>() {

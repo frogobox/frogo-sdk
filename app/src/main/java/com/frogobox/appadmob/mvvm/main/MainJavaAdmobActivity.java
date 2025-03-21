@@ -5,8 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.frogobox.admob.callback.FrogoAdmobInterstitialCallback;
-import com.frogobox.admob.callback.FrogoAdmobRewardedCallback;
+import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback;
+import com.frogobox.ads.callback.FrogoAdmobRewardedCallback;
 import com.frogobox.R;
 import com.frogobox.appadmob.base.BaseActivity;
 import com.frogobox.databinding.ActivityMainAdmobBinding;

@@ -1,4 +1,4 @@
-package com.frogobox.appadmob
+package com.frogobox.ads
 
 import android.app.Activity
 import android.app.Application
@@ -11,6 +11,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.core.FrogoAppOpenAdManager
+import com.frogobox.sdk.FrogoApplication
 import com.google.android.gms.ads.MobileAds
 
 /**
@@ -24,7 +25,7 @@ import com.google.android.gms.ads.MobileAds
  */
 
 
-open class FrogoAdmobKoinApplication : FrogoKoinApplication(),
+open class FrogoAdmobApplication : FrogoApplication(),
     Application.ActivityLifecycleCallbacks, LifecycleObserver {
 
     companion object {
