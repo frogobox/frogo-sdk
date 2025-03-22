@@ -1,8 +1,8 @@
 package com.frogobox.appadmob.source
 
 import android.content.Context
-import com.frogobox.adcore.util.FrogoAdFunc
-import com.frogobox.admob.core.FrogoAdmob
+import com.frogobox.ads.util.FrogoAdFunc
+import com.frogobox.ads.core.FrogoAdmob
 import com.frogobox.R
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.ext.showLogDebug
