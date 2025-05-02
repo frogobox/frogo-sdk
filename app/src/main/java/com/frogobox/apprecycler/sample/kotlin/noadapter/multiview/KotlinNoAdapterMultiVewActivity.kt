@@ -6,11 +6,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.frogobox.apprecycler.core.BaseActivity
-import com.frogobox.ui.R
-import com.frogobox.recycler.core.*
-import com.frogobox.recycler.core.FrogoHolder
-import com.frogobox.databinding.ActivityFrogoRvGridBinding
 import com.frogobox.apprecycler.model.ExampleModel
+import com.frogobox.databinding.ActivityFrogoRvGridBinding
+import com.frogobox.recycler.core.FrogoHolder
+import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
+import com.frogobox.recycler.core.FrogoRecyclerViewListener
+import com.frogobox.recycler.core.FrogoRvConstant
+import com.frogobox.recycler.core.IFrogoViewHolder
+import com.frogobox.ui.R
 
 class KotlinNoAdapterMultiVewActivity : BaseActivity<ActivityFrogoRvGridBinding>() {
 

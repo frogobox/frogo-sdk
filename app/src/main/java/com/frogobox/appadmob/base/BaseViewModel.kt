@@ -2,7 +2,6 @@ package com.frogobox.appadmob.base
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.frogobox.ads.util.FrogoAdFunc
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.core.FrogoAdmob
 import com.frogobox.appadmob.source.AdmobRepository
@@ -58,10 +57,6 @@ open class BaseViewModel(
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            FrogoAdFunc.getInitializedState(
-                                FrogoAdmob.initializationName,
-                                FrogoAdmob.initializationCode
-                            )
                             com.frogobox.sdk.ext.showLogError("${FrogoAdmob.TAG} [Interstitial] >> Run - IFrogoAdInterstitial [callback] : onAdFailedToShow()")
                             com.frogobox.sdk.ext.showLogError("${FrogoAdmob.TAG} [Interstitial] >> Error - onAdFailedToShowFullScreenContent [unit id] : $")
                             com.frogobox.sdk.ext.showLogError("${FrogoAdmob.TAG} [Interstitial] >> Error - onAdFailedToShowFullScreenContent [code] : ${adError.code}")

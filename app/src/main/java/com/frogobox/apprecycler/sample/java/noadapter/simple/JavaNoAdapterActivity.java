@@ -8,10 +8,10 @@ import androidx.annotation.NonNull;
 
 import com.frogobox.apprecycler.core.BaseJavaActivity;
 import com.frogobox.apprecycler.model.ExampleModel;
-import com.frogobox.ui.R;
+import com.frogobox.databinding.ActivityFrogoRvListBinding;
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener;
 import com.frogobox.recycler.core.IFrogoViewAdapter;
-import com.frogobox.databinding.ActivityFrogoRvListBinding;
+import com.frogobox.ui.R;
 
 import org.jetbrains.annotations.NotNull;
 

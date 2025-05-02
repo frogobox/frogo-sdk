@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.frogobox.apprecycler.core.BaseActivity
-import com.frogobox.databinding.ActivityAnswerIssueBinding
-import com.frogobox.databinding.ItemAnswerIssueBinding
 import com.frogobox.apprecycler.model.ExampleModel
 import com.frogobox.apprecycler.util.Constant
+import com.frogobox.databinding.ActivityAnswerIssueBinding
+import com.frogobox.databinding.ItemAnswerIssueBinding
 import com.frogobox.recycler.core.FrogoLayoutManager
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBuilderRvBinding

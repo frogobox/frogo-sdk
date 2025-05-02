@@ -3,10 +3,10 @@ package com.frogobox.appadmob.mvvm.appopenad
 import android.os.Bundle
 import android.util.Log
 import com.frogobox.FrogoApp
-import com.frogobox.ads.ui.FrogoAdBindActivity
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
-import com.frogobox.databinding.ActivityAppOpenAdBinding
+import com.frogobox.ads.ui.FrogoAdBindActivity
 import com.frogobox.appadmob.util.AdHelper
+import com.frogobox.databinding.ActivityAppOpenAdBinding
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.showToast
 import com.frogobox.sdk.ext.visible

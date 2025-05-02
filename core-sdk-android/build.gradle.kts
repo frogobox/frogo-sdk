@@ -33,6 +33,7 @@ android {
     }
 
     buildFeatures {
+        aidl = true
         viewBinding = true
         buildConfig = true
     }
@@ -50,9 +51,23 @@ android {
 }
 
 dependencies {
-
+    api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     api(project(DependencyGradle.FROGO_PATH_CORE_SDK))
-    api(project(DependencyGradle.FROGO_PATH_SDK_UTIL))
+
+    api(libs.androidx.appcompat)
+
+    api(libs.androidx.activity.ktx)
+    api(libs.androidx.fragment.ktx)
+
+    api(libs.androidx.constraintlayout)
+    api(libs.androidx.viewpager2)
+
+    api(libs.androidx.core.ktx)
+
+    api(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.androidx.lifecycle.livedata.ktx)
+    api(libs.androidx.preference)
 
     api(libs.androidx.room.ktx)
     api(libs.androidx.room.runtime)
@@ -69,6 +84,8 @@ dependencies {
     ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)
     ksp(libs.github.glide.compiler)
+
+    api(libs.material)
 
 }
 
