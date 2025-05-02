@@ -4,7 +4,6 @@ import android.content.Context
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.ext.showLogDebug
-import com.frogobox.sdk.ext.toModel
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
 import com.google.android.gms.ads.interstitial.InterstitialAd

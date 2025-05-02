@@ -3,13 +3,13 @@ package com.frogobox.apprecycler.sample.kotlin.usingadapter.simple
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.frogobox.ui.R
 import com.frogobox.apprecycler.core.BaseActivity
-import com.frogobox.recycler.core.FrogoRecyclerViewListener
-import com.frogobox.databinding.ActivityFrogoRvListBinding
 import com.frogobox.apprecycler.model.ExampleModel
 import com.frogobox.apprecycler.util.Constant
+import com.frogobox.databinding.ActivityFrogoRvListBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
+import com.frogobox.recycler.core.FrogoRecyclerViewListener
+import com.frogobox.ui.R
 
 class KotlinSampleActivity : BaseActivity<ActivityFrogoRvListBinding>() {
 

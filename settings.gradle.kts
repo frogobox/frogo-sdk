@@ -29,7 +29,6 @@ include(
     ":frogorecyclerview",
     ":core-sdk",
     ":core-sdk-android",
-    ":core-sdk-android-util",
     ":core-ui-android",
     ":core-ads",
 )

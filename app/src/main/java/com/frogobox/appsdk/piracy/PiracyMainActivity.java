@@ -11,10 +11,10 @@ import androidx.appcompat.app.AlertDialog;
 import com.frogobox.R;
 import com.frogobox.appsdk.core.BaseActivity;
 import com.frogobox.databinding.ActivityPiracyBinding;
-import com.frogobox.sdkutil.piracychecker.PiracyChecker;
-import com.frogobox.sdkutil.piracychecker.enums.Display;
-import com.frogobox.sdkutil.piracychecker.enums.InstallerID;
-import com.frogobox.sdkutil.piracychecker.utils.LibraryUtilsKt;
+import com.frogobox.sdk.piracychecker.PiracyChecker;
+import com.frogobox.sdk.piracychecker.enums.Display;
+import com.frogobox.sdk.piracychecker.enums.InstallerID;
+import com.frogobox.sdk.piracychecker.utils.LibraryUtilsKt;
 
 public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
 

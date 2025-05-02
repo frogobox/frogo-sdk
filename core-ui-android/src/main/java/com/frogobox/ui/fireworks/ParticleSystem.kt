@@ -19,14 +19,14 @@ import androidx.core.content.ContextCompat
 import com.frogobox.ui.fireworks.initializers.*
 import com.frogobox.ui.fireworks.modifiers.AlphaModifier
 import com.frogobox.ui.fireworks.modifiers.ParticleModifier
-import com.frogobox.ui.fireworks.initializers.AccelerationInitializer
 import java.lang.ref.WeakReference
 import java.util.*
+import androidx.core.graphics.createBitmap
 
 class ParticleSystem private constructor(
     parentView: ViewGroup,
     maxParticles: Int,
-    timeToLive: Long
+    timeToLive: Long,
 ) {
     private var mParentView: ViewGroup? = null
     private val mMaxParticles: Int
@@ -93,7 +93,7 @@ class ParticleSystem private constructor(
         parentView: ViewGroup,
         maxParticles: Int,
         drawable: Drawable,
-        timeToLive: Long
+        timeToLive: Long,
     ) : this(parentView, maxParticles, timeToLive) {
         if (drawable is AnimationDrawable) {
             for (i in 0 until mMaxParticles) {
@@ -104,8 +104,7 @@ class ParticleSystem private constructor(
             if (drawable is BitmapDrawable) {
                 bitmap = drawable.bitmap
             } else {
-                bitmap = Bitmap.createBitmap(drawable.intrinsicWidth,
-                    drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+                bitmap = createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
                 val canvas = Canvas(bitmap)
                 drawable.setBounds(0, 0, canvas.width, canvas.height)
                 drawable.draw(canvas)
@@ -145,7 +144,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         drawableRedId: Int,
         timeToLive: Long,
-        parentViewId: Int
+        parentViewId: Int,
     ) : this(a, maxParticles, ContextCompat.getDrawable(a, drawableRedId)!!, timeToLive, parentViewId) {
     }
     /**
@@ -171,7 +170,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         drawable: Drawable,
         timeToLive: Long,
-        parentViewId: Int = R.id.content
+        parentViewId: Int = R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, drawable, timeToLive) {
     }
 
@@ -201,7 +200,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         bitmap: Bitmap?,
         timeToLive: Long,
-        parentViewId: Int = R.id.content
+        parentViewId: Int = R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
         for (i in 0 until mMaxParticles) {
             mParticles.add(Particle(bitmap))
@@ -230,7 +229,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         animation: AnimationDrawable?,
         timeToLive: Long,
-        parentViewId: Int = R.id.content
+        parentViewId: Int = R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
         // Create the particles
         for (i in 0 until mMaxParticles) {
@@ -272,7 +271,7 @@ class ParticleSystem private constructor(
         speedMin: Float,
         speedMax: Float,
         minAngle: Int,
-        maxAngle: Int
+        maxAngle: Int,
     ): ParticleSystem {
         // else emitting from top (270°) to bottom (90°) range would not be possible if someone
         // entered minAngle = 270 and maxAngle=90 since the module would swap the values
@@ -301,7 +300,7 @@ class ParticleSystem private constructor(
         speedMinX: Float,
         speedMaxX: Float,
         speedMinY: Float,
-        speedMaxY: Float
+        speedMaxY: Float,
     ): ParticleSystem {
         mInitializers.add(SpeeddByComponentsInitializer(dpToPx(speedMinX), dpToPx(speedMaxX),
             dpToPx(speedMinY), dpToPx(speedMaxY)))
@@ -375,7 +374,7 @@ class ParticleSystem private constructor(
         minAcceleration: Float,
         maxAcceleration: Float,
         minAngle: Int,
-        maxAngle: Int
+        maxAngle: Int,
     ): ParticleSystem {
         mInitializers.add(
             AccelerationInitializer(dpToPx(minAcceleration), dpToPx(maxAcceleration),
@@ -578,7 +577,7 @@ class ParticleSystem private constructor(
     fun oneShot(
         emitter: View,
         numParticles: Int,
-        interpolator: Interpolator = LinearInterpolator()
+        interpolator: Interpolator = LinearInterpolator(),
     ) {
         configureEmitter(emitter, Gravity.CENTER)
         mActivatedParticles = 0

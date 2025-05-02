@@ -4,7 +4,11 @@ import android.app.Activity
 import android.content.Context
 import com.frogobox.ads.callback.FrogoUnityAdInitializationCallback
 import com.frogobox.ads.callback.FrogoUnityAdInterstitialCallback
-import com.unity3d.ads.*
+import com.unity3d.ads.IUnityAdsInitializationListener
+import com.unity3d.ads.IUnityAdsLoadListener
+import com.unity3d.ads.IUnityAdsShowListener
+import com.unity3d.ads.UnityAds
+import com.unity3d.ads.UnityAdsShowOptions
 
 
 /**

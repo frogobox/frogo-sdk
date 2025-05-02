@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_unlicensed">Táto aplikácia nie je licencovaná</string>
-    <string name="app_unlicensed_description">Táto aplikácia nie je licencovaná alebo platná. Prosím, stiahnite aplikáciu z dôveryhodného zdroja.</string>
-    <string name="app_unlicensed_close">Zavrieť</string>
-</resources>

@@ -7,10 +7,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.frogobox.apprecycler.model.ExampleModel;
-import com.frogobox.ui.R;
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener;
 import com.frogobox.recycler.core.FrogoRecyclerViewAdapter;
 import com.frogobox.recycler.core.FrogoRecyclerViewHolder;
+import com.frogobox.ui.R;
 
 import org.jetbrains.annotations.NotNull;
 

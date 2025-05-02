@@ -1,9 +1,9 @@
 [versions]
-agp = "8.9.0"
+agp = "8.9.2"
 androidMavenGradlePlugin = "2.1"
 kotlin = "2.0.21"
 ksp = "2.0.21-1.0.25"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 appcompat = "1.7.0"
 activity = "1.10.1"
 fragment = "1.8.6"
@@ -11,10 +11,10 @@ constraintlayout = "2.2.1"
 liveCycle = "2.8.7"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
-roomKtx = "2.6.1"
-work = "2.10.0"
-googleAdmob = "24.1.0" # https://developers.google.com/admob/android/quick-start
-unityAd = "4.14.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+roomKtx = "2.7.1"
+work = "2.10.1"
+googleAdmob = "24.2.0" # https://developers.google.com/admob/android/quick-start
+unityAd = "4.14.2" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 startIo = "5.1.0" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
 recyclerview = "1.4.0"
 flexbox = "3.0.0"

@@ -2,9 +2,9 @@ package com.frogobox.appadmob.base
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.frogobox.ads.util.FrogoAdFunc
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.core.FrogoAdmob
+import com.frogobox.ads.util.FrogoAdFunc
 import com.frogobox.appadmob.source.AdmobRepository
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.view.FrogoViewModel2
