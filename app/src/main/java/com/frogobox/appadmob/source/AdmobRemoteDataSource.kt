@@ -3,7 +3,6 @@ package com.frogobox.appadmob.source
 import android.content.Context
 import com.frogobox.R
 import com.frogobox.ads.core.FrogoAdmob
-import com.frogobox.ads.util.FrogoAdFunc
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.showLogError
@@ -38,10 +37,6 @@ class AdmobRemoteDataSource : FrogoRemoteDataSource(), AdmobDataSource {
             AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    FrogoAdFunc.getInitializedState(
-                        FrogoAdmob.initializationName,
-                        FrogoAdmob.initializationCode
-                    )
                     showLogError("${FrogoAdmob.TAG} [Interstitial] >> Run - IFrogoAdInterstitial [callback] : onAdFailedToLoad()")
                     showLogError("${FrogoAdmob.TAG} [Interstitial] >> Error - onAdFailedToLoad [code] : ${adError.code}")
                     showLogError("${FrogoAdmob.TAG} [Interstitial] >> Error - onAdFailedToLoad [domain] : ${adError.domain}")

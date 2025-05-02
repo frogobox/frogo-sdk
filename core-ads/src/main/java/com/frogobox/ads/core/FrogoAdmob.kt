@@ -24,6 +24,9 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
@@ -52,19 +55,13 @@ object FrogoAdmob : IFrogoAdmob,
 
     val TAG: String = FrogoAdmob::class.java.simpleName
 
-    private lateinit var adapterStatus: AdapterStatus
-
-    var initializationCode = 0
-
-    var initializationName = ""
-
     // ---------------------------------------------------------------------------------------------
 
     override fun setupAdmobApp(context: Context) {
-        MobileAds.initialize(context) {
-            adapterStatus = it.adapterStatusMap[ADMOB_MOBILE_ADS_KEY]!!
-            initializationCode = adapterStatus.initializationState.ordinal
-            initializationName = adapterStatus.initializationState.name
+        val backgroundScope = CoroutineScope(Dispatchers.IO)
+        backgroundScope.launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            MobileAds.initialize(context) {}
         }
     }
 
