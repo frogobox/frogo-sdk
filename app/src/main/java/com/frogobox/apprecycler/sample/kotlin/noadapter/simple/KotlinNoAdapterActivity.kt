@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.frogobox.apprecycler.core.BaseActivity
-import com.frogobox.databinding.ActivityBaseBinding
 import com.frogobox.apprecycler.model.ExampleModel
 import com.frogobox.apprecycler.util.Constant
 import com.frogobox.apprecycler.util.FLog
+import com.frogobox.databinding.ActivityBaseBinding
 import com.frogobox.recycler.core.FrogoLayoutManager
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter

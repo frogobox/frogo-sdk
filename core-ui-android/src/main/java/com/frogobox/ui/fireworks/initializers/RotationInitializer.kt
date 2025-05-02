@@ -1,7 +1,7 @@
 package com.frogobox.ui.fireworks.initializers
 
 import com.frogobox.ui.fireworks.Particle
-import java.util.*
+import java.util.Random
 
 class RotationInitializer(
     private val mMinAngle: Int,

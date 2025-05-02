@@ -4,12 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.frogobox.ads.util.FrogoAdConstant
-import com.frogobox.ads.util.FrogoAdConstant.ADMOB_MOBILE_ADS_KEY
 import com.frogobox.ads.callback.FrogoAdmobBannerCallback
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
-import com.google.android.gms.ads.*
+import com.frogobox.ads.util.FrogoAdConstant
+import com.frogobox.ads.util.FrogoAdConstant.ADMOB_MOBILE_ADS_KEY
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -17,6 +24,9 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
@@ -45,19 +55,13 @@ object FrogoAdmob : IFrogoAdmob,
 
     val TAG: String = FrogoAdmob::class.java.simpleName
 
-    private lateinit var adapterStatus: AdapterStatus
-
-    var initializationCode = 0
-
-    var initializationName = ""
-
     // ---------------------------------------------------------------------------------------------
 
     override fun setupAdmobApp(context: Context) {
-        MobileAds.initialize(context) {
-            adapterStatus = it.adapterStatusMap[ADMOB_MOBILE_ADS_KEY]!!
-            initializationCode = adapterStatus.initializationState.ordinal
-            initializationName = adapterStatus.initializationState.name
+        val backgroundScope = CoroutineScope(Dispatchers.IO)
+        backgroundScope.launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            MobileAds.initialize(context) {}
         }
     }
 

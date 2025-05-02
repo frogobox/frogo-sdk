@@ -8,8 +8,8 @@ import android.widget.RelativeLayout
 import com.frogobox.recycler.R
 import com.frogobox.recycler.core.FrogoSingleRv
 import com.frogobox.recycler.core.FrogoSingleSrv
-import com.frogobox.recycler.widget.FrogoStyleComponent.setupComponentFrogoRecyclerView
 import com.frogobox.recycler.databinding.WidgetFrogoShimmerRecyclerviewBinding
+import com.frogobox.recycler.widget.FrogoStyleComponent.setupComponentFrogoRecyclerView
 
 /**
  * Created by Faisal Amir on 02/06/2020

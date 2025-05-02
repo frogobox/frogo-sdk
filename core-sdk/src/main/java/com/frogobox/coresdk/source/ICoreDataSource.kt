@@ -1,7 +1,5 @@
 package com.frogobox.coresdk.source
 
-import com.frogobox.coresdk.response.FrogoDataResponse
-import com.frogobox.coresdk.response.FrogoStateResponse
 import io.reactivex.rxjava3.disposables.Disposable
 
 
