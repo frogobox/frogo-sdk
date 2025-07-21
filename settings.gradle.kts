@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DeltadoxAndroid"
+rootProject.name = "FrogoAndroid"
 
 include(
     ":app",
