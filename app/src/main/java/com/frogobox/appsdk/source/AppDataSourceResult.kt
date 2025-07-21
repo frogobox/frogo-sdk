@@ -30,7 +30,7 @@ interface AppDataSourceResult : ICoreDataSource {
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     )
 
     // Get Everythings
@@ -46,7 +46,7 @@ interface AppDataSourceResult : ICoreDataSource {
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>
+        result: MutableLiveData<FrogoResult<ArticleResponse>>,
     )
 
     // Get Sources
@@ -54,7 +54,7 @@ interface AppDataSourceResult : ICoreDataSource {
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>
+        result: MutableLiveData<FrogoResult<SourceResponse>>,
     )
 
 }

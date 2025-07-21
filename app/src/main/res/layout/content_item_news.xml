@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * Created by 
+ * FrogoBox Inc License
+ * =========================================
+ * 
+ * Copyright (C) .      
+ * All rights reserved
+ * 
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ * LinkedIn : linkedin.com/in/faisalamircs
+ * 
+ * FrogoBox Software Industries
+ * 
+ -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimen_big_16dp"
+    android:layout_marginTop="@dimen/dimen_big_16dp"
+    android:layout_marginEnd="@dimen/dimen_big_16dp"
+    android:background="@drawable/frogo_bg_card_16dp"
+    android:elevation="@dimen/dimen_small_4dp"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_big_16dp">
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/frogo_dimen_8dp"
+        android:layout_height="@dimen/frogo_dimen_150dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_medium_8dp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        tools:text="@string/dummy" />
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        tools:text="@string/dummyLong" />
+
+</LinearLayout>

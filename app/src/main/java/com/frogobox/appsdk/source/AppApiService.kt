@@ -33,7 +33,7 @@ interface AppApiService {
         @Query(NewsConstant.QUERY_CATEGORY) category: String?,
         @Query(NewsConstant.QUERY_COUNTRY) country: String?,
         @Query(NewsConstant.QUERY_PAGE_SIZE) pageSize: Int?,
-        @Query(NewsConstant.QUERY_PAGE) page: Int?
+        @Query(NewsConstant.QUERY_PAGE) page: Int?,
     ): Observable<ArticleResponse>
 
     // Get Everythings
@@ -50,7 +50,7 @@ interface AppApiService {
         @Query(NewsConstant.QUERY_LANGUAGE) language: String?,
         @Query(NewsConstant.QUERY_SORT_BY) sortBy: String?,
         @Query(NewsConstant.QUERY_PAGE_SIZE) pageSize: Int?,
-        @Query(NewsConstant.QUERY_PAGE) page: Int?
+        @Query(NewsConstant.QUERY_PAGE) page: Int?,
     ): Observable<ArticleResponse>
 
     // Get Sources
@@ -59,7 +59,7 @@ interface AppApiService {
         @Query(NewsConstant.QUERY_API_KEY) apiKey: String,
         @Query(NewsConstant.QUERY_LANGUAGE) language: String,
         @Query(NewsConstant.QUERY_COUNTRY) country: String,
-        @Query(NewsConstant.QUERY_CATEGORY) category: String
+        @Query(NewsConstant.QUERY_CATEGORY) category: String,
     ): Observable<SourceResponse>
 
 }

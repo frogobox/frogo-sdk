@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.CHANNEL_ID
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.CHANNEL_NAME
 import com.frogobox.appsdk.notification.custom.NotificationService.Companion.REPLY_ACTION

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.frogobox.appsdk.BuildConfig
+import com.frogobox.BuildConfig
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.source.dao.ArticleDao
 

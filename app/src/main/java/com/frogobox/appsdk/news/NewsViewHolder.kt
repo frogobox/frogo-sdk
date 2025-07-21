@@ -1,8 +1,8 @@
 package com.frogobox.appsdk.news
 
 import androidx.recyclerview.widget.RecyclerView
-import com.frogobox.appsdk.databinding.ItemNewsBinding
 import com.frogobox.appsdk.model.Article
+import com.frogobox.databinding.ItemNewsBinding
 import com.frogobox.sdk.ext.setImageExt
 import com.frogobox.sdk.ext.startActivityExt
 import com.frogobox.sdk.ext.toJson

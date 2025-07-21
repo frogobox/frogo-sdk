@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * Created by Faisal Amir
+ *
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ *
+ * Copyright (C) 2022 Frogobox Inc.
+ * All rights reserved
+ *
+ -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="false">
+
+    <translate
+        android:duration="100"
+        android:toXDelta="5%p" />
+
+    <translate
+        android:duration="100"
+        android:startOffset="100"
+        android:toXDelta="-10%p" />
+
+    <translate
+        android:duration="100"
+        android:startOffset="200"
+        android:toXDelta="8%p" />
+
+    <translate
+        android:duration="100"
+        android:startOffset="300"
+        android:toXDelta="-6%p" />
+
+    <translate
+        android:duration="100"
+        android:startOffset="400"
+        android:toXDelta="3%p" />
+
+    <translate
+        android:duration="100"
+        android:startOffset="500"
+        android:toXDelta="-2%p" />
+
+</set>

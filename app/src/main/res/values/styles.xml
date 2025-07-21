@@ -26,5 +26,8 @@
         <item name="android:textColor">@android:color/transparent</item>
     </style>
 
+    <style name="ThemeUI.Transition" parent="ThemeUI">
+        <item name="android:windowAnimationStyle">@style/FrogoFlyWindowAnimations</item>
+    </style>
 
 </resources>

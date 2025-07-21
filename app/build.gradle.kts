@@ -7,7 +7,7 @@ plugins {
 android {
 
     compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
-    namespace = ProjectSetting.PROJECT_APP_ID
+    namespace = ProjectSetting.PROJECT_NAME_SPACE
 
     defaultConfig {
         applicationId = ProjectSetting.PROJECT_APP_ID
@@ -34,6 +34,20 @@ android {
 
         // Inject app name for debug
         resValue("string", "app_name", nameAppDebug)
+
+
+        // Inject admob id for debug
+        resValue("string", "admob_app_id", AdValue.debugAdmobAppId)
+        resValue("string", "admob_banner", AdValue.debugAdmobBanner)
+        resValue("string", "admob_interstitial", AdValue.debugAdmobInterstitial)
+        resValue("string", "admob_interstitial_video", AdValue.debugAdmobInterstitialVideo)
+        resValue("string", "admob_rewarded", AdValue.debugAdmobRewarded)
+        resValue("string", "admob_rewarded_interstitial", AdValue.debugAdmobRewardedInterstitial)
+        resValue("string", "admob_native_advanced", AdValue.debugAdmobNativeAdvanced)
+        resValue("string", "admob_native_advanced_video", AdValue.debugAdmobNativeAdvancedVideo)
+
+        resValue("string", "unity_ad_game_id", AdValue.debugUnityAdGameId)
+        resValue("string", "unity_ad_interstitial", AdValue.debugUnityAdInterstitial)
 
     }
 
@@ -62,7 +76,20 @@ android {
             signingConfig = signingConfigs.getByName("release")
 
             // Inject app name for release
-            resValue("string", "app_name", ProjectSetting.APP_NAME)
+            resValue("string", "app_name", ProjectSetting.NAME_APP)
+
+            // Inject admob id for release
+            resValue("string", "admob_app_id", AdValue.releaseAdmobAppId)
+            resValue("string", "admob_banner", AdValue.releaseAdmobBanner)
+            resValue("string", "admob_interstitial", AdValue.releaseAdmobInterstitial)
+            resValue("string", "admob_interstitial_video", AdValue.releaseAdmobInterstitialVideo)
+            resValue("string", "admob_rewarded", AdValue.releaseAdmobRewarded)
+            resValue("string", "admob_rewarded_interstitial", AdValue.releaseAdmobRewardedInterstitial)
+            resValue("string", "admob_native_advanced", AdValue.releaseAdmobNativeAdvanced)
+            resValue("string", "admob_native_advanced_video", AdValue.releaseAdmobNativeAdvancedVideo)
+
+            resValue("string", "unity_ad_game_id", AdValue.releaseUnityAdGameId)
+            resValue("string", "unity_ad_interstitial", AdValue.releaseUnityAdInterstitial)
 
         }
     }
@@ -90,6 +117,11 @@ dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
 
+    implementation(project(DependencyGradle.FROGO_PATH_UI))
+
+    implementation(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
+
+    implementation(project(DependencyGradle.MODULE_LIB_FROGO_AD))
 
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
@@ -102,4 +134,14 @@ dependencies {
     ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation(libs.material)
+    implementation(libs.gson)
+
+    implementation(libs.material)
+
+    api(libs.github.circleimageview)
+    
 }

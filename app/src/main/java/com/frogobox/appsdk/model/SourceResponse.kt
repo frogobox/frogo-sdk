@@ -25,6 +25,6 @@ data class SourceResponse(
     var status: String? = null,
 
     @SerializedName("sources")
-    var sources: List<Source>? = null
+    var sources: List<Source>? = null,
 
-)
+    )

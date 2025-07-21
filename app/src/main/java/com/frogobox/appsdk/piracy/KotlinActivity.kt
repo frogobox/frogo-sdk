@@ -5,17 +5,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityPiracyBinding
-import com.frogobox.sdkutil.piracychecker.allow
-import com.frogobox.sdkutil.piracychecker.callback
-import com.frogobox.sdkutil.piracychecker.doNotAllow
-import com.frogobox.sdkutil.piracychecker.enums.Display
-import com.frogobox.sdkutil.piracychecker.enums.InstallerID
-import com.frogobox.sdkutil.piracychecker.onError
-import com.frogobox.sdkutil.piracychecker.piracyChecker
-import com.frogobox.sdkutil.piracychecker.utils.apkSignatures
+import com.frogobox.databinding.ActivityPiracyBinding
+import com.frogobox.sdk.piracychecker.allow
+import com.frogobox.sdk.piracychecker.callback
+import com.frogobox.sdk.piracychecker.doNotAllow
+import com.frogobox.sdk.piracychecker.enums.Display
+import com.frogobox.sdk.piracychecker.enums.InstallerID
+import com.frogobox.sdk.piracychecker.onError
+import com.frogobox.sdk.piracychecker.piracyChecker
+import com.frogobox.sdk.piracychecker.utils.apkSignatures
+import androidx.core.net.toUri
 
 class KotlinActivity : BaseActivity<ActivityPiracyBinding>() {
 
@@ -65,7 +66,7 @@ class KotlinActivity : BaseActivity<ActivityPiracyBinding>() {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/frogobox/frogo-sdk")
+                "https://github.com/frogobox/frogo-sdk".toUri()
             )
         )
     }

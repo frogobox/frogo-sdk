@@ -2,8 +2,8 @@ package com.frogobox.appsdk.viewpager
 
 import android.os.Bundle
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityVpagerBinding
 import com.frogobox.appsdk.news.NewsMainFragment
+import com.frogobox.databinding.ActivityVpagerBinding
 import com.frogobox.sdk.ext.getViewPager2Adapter
 import com.frogobox.sdk.ext.setupWithViewPager2
 

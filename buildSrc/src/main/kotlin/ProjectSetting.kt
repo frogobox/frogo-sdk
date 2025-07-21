@@ -17,7 +17,6 @@ object ProjectSetting {
 
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
-    const val APP_NAME = "appsdk"
 
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
@@ -27,26 +26,40 @@ object ProjectSetting {
     const val MODULE_NAME_SDK = "core-sdk-android"
     const val MODULE_NAME_SDK_UTIL = "core-sdk-android-util"
 
+    const val LIBRARY_NAME_UI = "ui"
+    const val MODULE_NAME_CORE_UI = "core-ui-android"
+
+    const val LIBRARY_NAME_AD = "ads"
+    const val MODULE_NAME_AD = "core-ads"
+
     // ---------------------------------------------------------------------------------------------
 
-    const val VERSION_MAJOR = 2
+    const val VERSION_MAJOR = 1
     const val VERSION_MINOR = 2
-    const val VERSION_PATCH = 9
+    const val VERSION_PATCH = 1
 
     // ---------------------------------------------------------------------------------------------
 
-    const val PROJECT_MIN_SDK = 21
-    const val PROJECT_COMPILE_SDK = 34
+    const val PROJECT_MIN_SDK = 23
+    const val PROJECT_COMPILE_SDK = 35
     const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
 
     // ---------------------------------------------------------------------------------------------
 
+    val URI_PACKAGE_LIB = "https://maven.pkg.github.com/amirisback/frogo-admob"
+
     const val BASE_PACAKGE_NAME = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
 
-    const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.$APP_NAME"
+    const val PROJECT_NAME_SPACE = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
+
+    const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.deltadox"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
+
+    const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
+
+    const val PROJECT_LIB_ID_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_AD"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

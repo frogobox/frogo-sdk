@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 fun <T : Any> Observable<T>.doApiRequest(
     scheduler: Scheduler?,
     callback: FrogoDataResponse<T>,
-    addCallbackSubcribe: (d: Disposable) -> Unit
+    addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
     if (scheduler != null) {
         subscribeOn(Schedulers.io())
@@ -50,7 +50,7 @@ fun <T : Any> Observable<T>.doApiRequest(
                 }
 
                 override fun onApiStartObserver(disposable: Disposable) {
-                    addCallbackSubcribe(disposable)
+                    addCallbackSubscribe(disposable)
                 }
 
             })
@@ -75,7 +75,7 @@ fun <T : Any> Observable<T>.doApiRequest(
                 }
 
                 override fun onApiStartObserver(disposable: Disposable) {
-                    addCallbackSubcribe(disposable)
+                    addCallbackSubscribe(disposable)
                 }
 
             })

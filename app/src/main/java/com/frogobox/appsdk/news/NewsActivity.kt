@@ -3,8 +3,8 @@ package com.frogobox.appsdk.news
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.appsdk.core.BaseActivity
-import com.frogobox.appsdk.databinding.ActivityNewsBinding
 import com.frogobox.appsdk.model.Article
+import com.frogobox.databinding.ActivityNewsBinding
 import com.frogobox.sdk.ext.progressViewHandle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

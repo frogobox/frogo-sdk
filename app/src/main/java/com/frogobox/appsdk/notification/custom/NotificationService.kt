@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.RemoteInput
-import com.frogobox.appsdk.R
+import com.frogobox.R
 import com.frogobox.sdk.notification.FrogoNotifActionRemoteInputListener
 import com.frogobox.sdk.notification.FrogoNotification
 

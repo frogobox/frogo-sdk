@@ -40,6 +40,6 @@ data class Source(
     var language: String? = null,
 
     @SerializedName("country")
-    var country: String? = null
+    var country: String? = null,
 
-)
+    )

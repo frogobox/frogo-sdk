@@ -22,10 +22,13 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FrogoSDK"
+rootProject.name = "DeltadoxAndroid"
+
 include(
     ":app",
+    ":frogorecyclerview",
     ":core-sdk",
     ":core-sdk-android",
-    ":core-sdk-android-util"
+    ":core-ui-android",
+    ":core-ads",
 )
