@@ -1,7 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -34,7 +36,6 @@ android {
 
         // Inject app name for debug
         resValue("string", "app_name", nameAppDebug)
-
 
         // Inject admob id for debug
         resValue("string", "admob_app_id", AdValue.debugAdmobAppId)
@@ -104,12 +105,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin {
-        jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of("17"))
-        }
-    }
+}
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    }
 }
 
 dependencies {
