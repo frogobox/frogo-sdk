@@ -1,23 +1,25 @@
 ## About This Project (release 👷🔧️👷‍♀️⛏)
 
-[![](https://jitpack.io/v/deltadox/deltadox-android.svg?style=flat-square)](https://jitpack.io/#deltadox/deltadox-android)
-[![Android CI](https://github.com/deltadox/deltadox-android/actions/workflows/android-ci.yml/badge.svg)](https://github.com/deltadox/deltadox-android/actions/workflows/android-ci.yml)
-[![pages-build-deployment](https://github.com/deltadox/deltadox-android/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/deltadox/deltadox-android/actions/workflows/pages/pages-build-deployment)
+[![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
+[![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
+[![pages-build-deployment](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
 
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
-- Privacy Policy [Click Here](https://github.com/deltadox/deltadox-android/blob/master/PRIVACY-POLICY.md)
-- License [Click Here](https://github.com/deltadox/deltadox-android/blob/master/LICENSE)
+- Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
+- License [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
 
 ## Version Release
 
 This Is Latest Release
 
-    $version_release = 1.2.1
+    $version_release = 2.3.0
 
 What's New??
 
-    * Feature Drop, Delete Feature fetch public API *
+    * Fresh Release *
+    * All Frogo Libs *
+    * Simple Implementation *
 
 ## Download this project
 
@@ -53,8 +55,8 @@ allprojects {
 
 ```groovy
 dependencies {
-    // library deltadox-android
-    implementation 'com.github.deltadox:deltadox-android:1.2.1'
+    // library frogo-sdk
+    implementation 'com.github.frogobox:frogo-sdk:2.3.0'
 }
 ```
 
@@ -62,22 +64,22 @@ dependencies {
 
 ```groovy
 dependencies {
-    // library deltadox-android
-    implementation("com.github.deltadox:deltadox-android:1.2.1")
+    // library frogo-sdk
+    implementation("com.github.frogobox:frogo-sdk:2.3.0")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-deltadoxAndroid = "1.2.1"
+frogoAndroid = "2.3.0"
 
 [libraries]
-deltadox-android = { group = "com.github.deltadox", name = "deltadox-android", version.ref = "deltadoxAndroid" }
+frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }
 
 dependencies {
-    // library deltadox-android
-    implementation(libs.deltadox.android)
+    // library frogo-android
+    implementation(libs.frogobox.android)
 }
 ```
 

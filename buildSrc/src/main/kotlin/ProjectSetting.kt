@@ -34,9 +34,9 @@ object ProjectSetting {
 
     // ---------------------------------------------------------------------------------------------
 
-    const val VERSION_MAJOR = 1
-    const val VERSION_MINOR = 2
-    const val VERSION_PATCH = 1
+    const val VERSION_MAJOR = 2
+    const val VERSION_MINOR = 3
+    const val VERSION_PATCH = 0
 
     // ---------------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ object ProjectSetting {
 
     const val PROJECT_NAME_SPACE = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
 
-    const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.deltadox"
+    const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.app"
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
