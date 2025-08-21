@@ -34,7 +34,7 @@ import java.util.Calendar
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.      
+ * Copyright (C) 2021 FrogoBox Inc.
  * All rights reserved
  *
  */
@@ -53,9 +53,10 @@ abstract class FrogoActivity : AppCompatActivity() {
         }"
     }
 
-    private var activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        setupActivityResultExt(result)
-    }
+    private var activityResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            setupActivityResultExt(result)
+        }
 
     // ---------------------------------------------------------------------------------------------
 
@@ -73,6 +74,8 @@ abstract class FrogoActivity : AppCompatActivity() {
 
     // ---------------------------------------------------------------------------------------------
 
+    open fun setupEnableEdgeToEdge() {}
+    open fun setupSetOnApplyWindowInsetsListener() {}
     open fun setupPiracyMode() {}
     open fun setupDelegates() {}
     open fun setupViewModel() {}
@@ -105,7 +108,9 @@ abstract class FrogoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupEnableEdgeToEdge()
         setupContentView()
+        setupSetOnApplyWindowInsetsListener()
         setupDoOnBackPressedExt()
         setupDelegates()
         setupPiracyMode()
@@ -124,6 +129,7 @@ abstract class FrogoActivity : AppCompatActivity() {
                 finish()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
