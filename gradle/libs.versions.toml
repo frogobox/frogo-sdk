@@ -1,21 +1,20 @@
 [versions]
-agp = "8.11.1"
+agp = "8.12.1"
 androidMavenGradlePlugin = "2.1"
-kotlin = "2.2.0"
-ksp = "2.2.0-2.0.2"
-coreKtx = "1.16.0"
+kotlin = "2.2.10"
+ksp = "2.2.10-2.0.2"
+coreKtx = "1.17.0"
 appcompat = "1.7.1"
 activity = "1.10.1"
-fragment = "1.8.8"
+fragment = "1.8.9"
 constraintlayout = "2.2.1"
 liveCycle = "2.9.2"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.7.2"
-work = "2.10.2"
-googleAdmob = "24.4.0" # https://developers.google.com/admob/android/quick-start
-unityAd = "4.15.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
-startIo = "5.2.3" # https://support.start.io/hc/en-us/articles/360014774799-Integration-via-Maven
+work = "2.10.3"
+googleAdmob = "24.5.0" # https://developers.google.com/admob/android/quick-start
+unityAd = "4.16.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
 material = "1.12.0"
@@ -29,9 +28,6 @@ glide = "4.16.0"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
 koin = "4.1.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
 
 [libraries]
 # Android Kit
@@ -47,7 +43,6 @@ androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-p
 
 ads-google-admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAdmob" }
 ads-unityAd = { group = "com.unity3d.ads", name = "unity-ads", version.ref = "unityAd" }
-ads-startIo = { group = "com.startapp", name = "inapp-sdk", version.ref = "startIo" }
 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "liveCycle" }
@@ -69,13 +64,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
-
-# --------------------------------------------------------------------------------------------------
-# Test Library
-
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 # --------------------------------------------------------------------------------------------------
 # Library
