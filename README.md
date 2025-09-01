@@ -13,7 +13,7 @@
 
 This Is Latest Release
 
-Rel    $version_release = 2.3.2
+    $version_release = 2.3.2
 
 What's New??
 
