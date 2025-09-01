@@ -25,6 +25,7 @@ rxandroid3 = "3.0.2"
 rxjava3 = "3.1.11"
 chucker = "4.2.0"
 glide = "5.0.3"
+glideCompiler = "4.16.0"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
 koin = "4.1.0"
@@ -82,7 +83,7 @@ github-chucker = { group = "com.github.chuckerteam.chucker", name = "library", v
 github-chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
 
 github-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glideCompiler" }
 github-customactivityoncrash = { group = "cat.ereza", name = "customactivityoncrash", version.ref = "customactivityoncrash" }
 github-circleimageview =  { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 
