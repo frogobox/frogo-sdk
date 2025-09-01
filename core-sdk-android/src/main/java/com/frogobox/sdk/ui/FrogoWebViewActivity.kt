@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.frogobox.sdk.databinding.ActivityFrogoWebViewBinding
 import com.frogobox.sdk.ext.gone
-import com.frogobox.sdk.ext.loadUrlExt
+import com.frogobox.sdk.ext.loadUrlFrogoExt
 import com.frogobox.sdk.ext.visible
 import com.frogobox.sdk.view.FrogoBindActivity
 import com.frogobox.sdk.widget.webview.WebViewCallback
@@ -39,7 +39,7 @@ open class FrogoWebViewActivity : FrogoBindActivity<ActivityFrogoWebViewBinding>
 
     private fun initView() {
         binding.apply {
-            webView.loadUrlExt(url, object : WebViewCallback {
+            webView.loadUrlFrogoExt(url = url, callback = object : WebViewCallback {
                 override fun onShowProgress() {
                     progressBar.visible()
                 }
