@@ -13,13 +13,12 @@
 
 This Is Latest Release
 
-    $version_release = 2.3.0
+    $version_release = 2.3.1
 
 What's New??
 
-    * Fresh Release *
-    * All Frogo Libs *
-    * Simple Implementation *
+    * Open Function Enable Edge To Edge *
+    * Library Update Latest Version *
 
 ## Download this project
 
@@ -56,7 +55,7 @@ allprojects {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.0'
+    implementation 'com.github.frogobox:frogo-sdk:2.3.1'
 }
 ```
 
@@ -65,14 +64,14 @@ dependencies {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.0")
+    implementation("com.github.frogobox:frogo-sdk:2.3.1")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-frogoAndroid = "2.3.0"
+frogoAndroid = "2.3.1"
 
 [libraries]
 frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }
