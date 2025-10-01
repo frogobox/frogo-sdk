@@ -13,7 +13,7 @@
 
 This Is Latest Release
 
-    $version_release = 2.3.2
+    $version_release = 2.3.3
 
 What's New??
 
@@ -54,7 +54,7 @@ allprojects {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.2'
+    implementation 'com.github.frogobox:frogo-sdk:2.3.3'
 }
 ```
 
@@ -63,14 +63,14 @@ dependencies {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.2")
+    implementation("com.github.frogobox:frogo-sdk:2.3.3")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-frogoAndroid = "2.3.2"
+frogoAndroid = "2.3.3"
 
 [libraries]
 frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }
