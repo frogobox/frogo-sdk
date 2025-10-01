@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.appsdk.core.BaseActivity
 import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.news.NewsViewAdapter
-import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.coresdk.source.Resource
 import com.frogobox.databinding.ActivityNewsBinding
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.visible
@@ -25,15 +25,15 @@ class NewsResultActivity : BaseActivity<ActivityNewsBinding>() {
 
             articles.observe(this@NewsResultActivity) {
                 when (it) {
-                    is FrogoResult.Error -> {
+                    is Resource.Error -> {
                         binding.progressCircular.gone()
                     }
 
-                    is FrogoResult.Loading -> {
+                    is Resource.Loading -> {
                         binding.progressCircular.visible()
                     }
 
-                    is FrogoResult.Success -> {
+                    is Resource.Success -> {
                         binding.progressCircular.gone()
                         it.result.articles?.let { list ->
                             setupRecyclerView(list)

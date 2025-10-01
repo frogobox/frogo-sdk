@@ -7,7 +7,7 @@ import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.coresdk.source.Resource
 import com.frogobox.sdk.ext.toJson
 import com.frogobox.sdk.source.FrogoRepository
 import com.frogobox.sdk.util.FrogoFunc
@@ -193,7 +193,7 @@ class AppRepository(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
         remoteDataSource.getTopHeadlineResult(q, sources, category, country, pageSize, page, result)
     }
@@ -210,7 +210,7 @@ class AppRepository(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
         remoteDataSource.getEverythingsResult(
             q,
@@ -232,7 +232,7 @@ class AppRepository(
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>,
+        result: MutableLiveData<Resource<SourceResponse>>,
     ) {
         remoteDataSource.getSourcesResult(language, country, category, result)
     }

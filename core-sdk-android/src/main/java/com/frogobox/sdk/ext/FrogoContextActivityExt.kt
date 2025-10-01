@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.sdk.ui.FrogoImageViewActivity
 import com.google.gson.Gson
+import androidx.core.net.toUri
 
 
 /**
@@ -31,21 +34,29 @@ inline fun <reified ClassActivity> Context.startActivityExt(onIntent: (intent: I
     })
 }
 
-inline fun <reified Model> Activity.getExtraExt(extraKey: String): Model {
-    return when (Model::class) {
-        String::class -> intent.getStringExtra(extraKey) as Model
-        Int::class -> intent.getIntExtra(extraKey, 0) as Model
-        Boolean::class -> intent.getBooleanExtra(extraKey, false) as Model
-        Double::class -> intent.getDoubleExtra(extraKey, 0.0) as Model
-        Float::class -> intent.getFloatExtra(extraKey, 0.0f) as Model
-        Long::class -> intent.getLongExtra(extraKey, 0L) as Model
-        Model::class -> Gson().fromJson(intent.getStringExtra(extraKey), Model::class.java)
-        else -> throw Exception("Type not found")
-    }
-}
-
 fun Activity.hasExtraExt(extraKey: String): Boolean {
     return intent.hasExtra(extraKey)
+}
+
+inline fun <reified T> Activity.getExtraExt(params: String): T? {
+    return intent.getExtraExt(params)
+}
+
+inline fun <reified T> Intent.getExtraExt(params: String): T? {
+    return if (this.hasExtra(params)) {
+        return when (T::class) {
+            String::class -> getStringExtra(params) as T
+            Int::class -> getIntExtra(params, 0) as T
+            Boolean::class -> getBooleanExtra(params, false) as T
+            Double::class -> getDoubleExtra(params, 0.0) as T
+            Float::class -> getFloatExtra(params, 0.0f) as T
+            Long::class -> getLongExtra(params, 0L) as T
+            T::class -> @Suppress("DEPRECATION") this.getParcelableExtra(params)
+            else -> throw Exception("Type not found")
+        }
+    } else {
+        null
+    }
 }
 
 fun Activity.openDetailImageUri(uri: String) {
@@ -64,7 +75,7 @@ fun Context.startActivityExtShareApp(subject: String, text: String) {
 }
 
 fun Context.startActivityExtOpenApp(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
 }
 
 // -------------------------------------------------------------------------------------------------

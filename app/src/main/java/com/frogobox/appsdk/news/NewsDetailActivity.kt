@@ -10,7 +10,7 @@ import com.frogobox.sdk.ext.setImageExt
 
 class NewsDetailActivity : BaseActivity<ActivityNewsDetailBinding>() {
 
-    private val extraData: Article by lazy {
+    private val extraData: Article? by lazy {
         getExtraExt("EXTRA_NEWS_DETAIL")
     }
 
@@ -22,9 +22,9 @@ class NewsDetailActivity : BaseActivity<ActivityNewsDetailBinding>() {
         super.onCreateExt(savedInstanceState)
         setupDetailActivity("Detail News")
         binding.apply {
-            ivNewsDetailImage.setImageExt(extraData.urlToImage, R.drawable.ic_frogobox)
-            newsDetailTitle.text = extraData.title
-            newsDetailDescription.text = extraData.description
+            ivNewsDetailImage.setImageExt(extraData?.urlToImage, R.drawable.ic_frogobox)
+            newsDetailTitle.text = extraData?.title
+            newsDetailDescription.text = extraData?.description
         }
     }
 }

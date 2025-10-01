@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.util.NewsConstant
-import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.coresdk.source.Resource
 import com.frogobox.sdk.view.FrogoViewModel2
 
 
@@ -26,8 +26,8 @@ class NewsResultViewModel(
     private val repository: AppRepository,
 ) : FrogoViewModel2() {
 
-    private var _articles = MutableLiveData<FrogoResult<ArticleResponse>>()
-    var articles: LiveData<FrogoResult<ArticleResponse>> = _articles
+    private var _articles = MutableLiveData<Resource<ArticleResponse>>()
+    var articles: LiveData<Resource<ArticleResponse>> = _articles
 
     private fun getData() {
         repository.getTopHeadlineResult(
