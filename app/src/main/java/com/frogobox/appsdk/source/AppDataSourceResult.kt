@@ -3,7 +3,7 @@ package com.frogobox.appsdk.source
 import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
-import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.coresdk.source.Resource
 import com.frogobox.coresdk.source.ICoreDataSource
 
 
@@ -30,7 +30,7 @@ interface AppDataSourceResult : ICoreDataSource {
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     )
 
     // Get Everythings
@@ -46,7 +46,7 @@ interface AppDataSourceResult : ICoreDataSource {
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     )
 
     // Get Sources
@@ -54,7 +54,7 @@ interface AppDataSourceResult : ICoreDataSource {
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>,
+        result: MutableLiveData<Resource<SourceResponse>>,
     )
 
 }

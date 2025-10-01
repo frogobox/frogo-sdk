@@ -1,10 +1,24 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.text.SimpleDateFormat
+import java.util.Date
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
 }
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas") // If Using Ksp
+}
+
+base {
+    // Naming APK // AAB
+    val timestamp = SimpleDateFormat("dd-MM-yyyy_hh-mm").format(Date())
+    archivesName = "${ProjectSetting.NAME_APK}-[${ProjectSetting.PROJECT_VERSION_NAME}]-$timestamp"
+}
+
 
 android {
 
@@ -25,9 +39,6 @@ android {
 
         // Declaration build config
         buildConfigField("String", "DATABASE_NAME", ProjectSetting.DB)
-
-        // Naming APK // AAB
-        setProperty("archivesBaseName", "${ProjectSetting.NAME_APK}(${versionName})")
 
         // Declaration apps name debug mode
         val debugAttribute = "Development"
