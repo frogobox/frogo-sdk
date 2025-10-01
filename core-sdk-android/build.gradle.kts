@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
     `maven-publish`
 }
 
@@ -84,6 +85,7 @@ dependencies {
 
     api(libs.github.glide)
     api(libs.github.customactivityoncrash)
+    api(libs.kotlinx.coroutines.android)
 
     ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)

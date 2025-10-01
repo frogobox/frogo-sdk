@@ -5,8 +5,8 @@ import com.frogobox.coresdk.observer.FrogoApiObserver
 import com.frogobox.coresdk.observer.FrogoLocalObserver
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.coresdk.source.FrogoResult
-import com.frogobox.coresdk.source.FrogoResultState
+import com.frogobox.coresdk.source.Resource
+import com.frogobox.coresdk.source.ResourceState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -63,12 +63,12 @@ fun <T : Any> Observable<T>.doApiRequest(
 }
 
 fun <T : Any> Observable<T>.doApiRequestResult(
-    result: MutableLiveData<FrogoResult<T>>,
+    result: MutableLiveData<Resource<T>>,
     addCallbackSubscribe: (d: Disposable) -> Unit,
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = FrogoResult.Loading()
+            result.value = Resource.Loading()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : Observer<T>{
@@ -77,13 +77,13 @@ fun <T : Any> Observable<T>.doApiRequestResult(
             }
 
             override fun onError(e: Throwable) {
-                result.value = FrogoResult.Error(message = e.message)
+                result.value = Resource.Error(message = e.message)
             }
 
             override fun onComplete() {}
 
             override fun onNext(t: T) {
-                result.value = FrogoResult.Success(t)
+                result.value = Resource.Success(t)
             }
         })
 
@@ -127,12 +127,12 @@ fun <T : Any> Single<T>.fetchRoomDB(
 
 
 fun <T : Any> Single<T>.fetchRoomDBResult(
-    result: MutableLiveData<FrogoResult<T>>,
+    result: MutableLiveData<Resource<T>>,
     addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = FrogoResult.Loading()
+            result.value = Resource.Loading()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : SingleObserver<T>{
@@ -141,11 +141,11 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
             }
 
             override fun onError(e: Throwable) {
-                result.value = FrogoResult.Error(message = e.message)
+                result.value = Resource.Error(message = e.message)
             }
 
             override fun onSuccess(t: T) {
-                result.value = FrogoResult.Success(t)
+                result.value = Resource.Success(t)
             }
         })
 }
@@ -184,16 +184,16 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
         }
 }
 
-fun Completable.executeRoomDBResult(result: MutableLiveData<FrogoResultState>) {
+fun Completable.executeRoomDBResult(result: MutableLiveData<ResourceState>) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = FrogoResultState.Loading()
+            result.value = ResourceState.Loading()
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
-            result.value = FrogoResultState.Success()
+            result.value = ResourceState.Success()
         }) {
-            it.message?.let { it1 ->result.value = FrogoResultState.Error(message = it1) }
+            it.message?.let { it1 ->result.value = ResourceState.Error(message = it1) }
         }
 }
 

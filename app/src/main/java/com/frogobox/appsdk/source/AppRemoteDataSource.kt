@@ -10,7 +10,7 @@ import com.frogobox.appsdk.util.NewsUrl
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoApiClient
-import com.frogobox.coresdk.source.FrogoResult
+import com.frogobox.coresdk.source.Resource
 import com.frogobox.sdk.ext.doApiRequest
 import com.frogobox.sdk.ext.doApiRequestResult
 import com.frogobox.sdk.ext.usingChuck
@@ -163,7 +163,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         country: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -189,7 +189,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         sortBy: String?,
         pageSize: Int?,
         page: Int?,
-        result: MutableLiveData<FrogoResult<ArticleResponse>>,
+        result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(
@@ -220,7 +220,7 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         language: String,
         country: String,
         category: String,
-        result: MutableLiveData<FrogoResult<SourceResponse>>,
+        result: MutableLiveData<Resource<SourceResponse>>,
     ) {
         FrogoApiClient
             .create<AppApiService>(

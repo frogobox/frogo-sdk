@@ -1,34 +1,38 @@
 [versions]
-agp = "8.12.2"
+agp = "8.13.0"
 androidMavenGradlePlugin = "2.1"
-kotlin = "2.2.10"
-ksp = "2.2.10-2.0.2"
+kotlin = "2.2.20"
+ksp = "2.2.20-2.0.3"
 coreKtx = "1.17.0"
 appcompat = "1.7.1"
-activity = "1.10.1"
+activity = "1.11.0"
 fragment = "1.8.9"
 constraintlayout = "2.2.1"
-liveCycle = "2.9.3"
+liveCycle = "2.9.4"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
-roomKtx = "2.7.2"
-work = "2.10.3"
-googleAdmob = "24.5.0" # https://developers.google.com/admob/android/quick-start
+roomKtx = "2.8.1"
+work = "2.10.5"
+googleAdmob = "24.6.0" # https://developers.google.com/admob/android/quick-start
 unityAd = "4.16.1" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
-material = "1.12.0"
-gson = "2.13.1"
+material = "1.13.0"
+gson = "2.13.2"
 okhttp = "5.1.0"
 retrofit = "3.0.0"
 rxandroid3 = "3.0.2"
-rxjava3 = "3.1.11"
+rxjava3 = "3.1.12"
 chucker = "4.2.0"
-glide = "5.0.3"
-glideCompiler = "4.16.0"
+glide = "5.0.5"
+glideCompiler = "5.0.5"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-koin = "4.1.0"
+koin = "4.1.1"
+
+kotlinxCoroutinesCore = "1.10.2"
+kotlinxCoroutinesAndroid = "1.10.2"
+kotlinxCoroutinesTest = "1.10.2"
 
 [libraries]
 # Android Kit
@@ -58,6 +62,10 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
+
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 

@@ -1,9 +1,11 @@
 package com.frogobox.appsdk.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 /**
  * Created by Faisal Amir
@@ -22,6 +24,8 @@ import com.google.gson.annotations.SerializedName
  * com.frogobox.frogoconsumeapi.news.data.model
  *
  */
+
+@Parcelize
 @Entity(tableName = "article")
 data class Article(
 
@@ -55,4 +59,4 @@ data class Article(
     @ColumnInfo(name = "content")
     @SerializedName("content")
     var content: String? = null,
-)
+) : Parcelable
