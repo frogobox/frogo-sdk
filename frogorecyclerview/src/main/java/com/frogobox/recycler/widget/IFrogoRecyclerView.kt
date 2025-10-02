@@ -54,10 +54,14 @@ interface IFrogoRecyclerView {
 
     fun <T> getAdapterExt(): FrogoViewAdapter<T>
 
-    fun <T> setupData(data: List<T>)
+    fun <T> setItem(data: List<T>)
+
+    fun <T> getItem(): List<T>
 
     fun <T, VB : ViewBinding> getAdapterBindingExt(): FrogoBindingAdapter<T, VB>
 
-    fun <T, VB : ViewBinding> setupDataBinding(data: List<T>)
+    fun <T, VB : ViewBinding> setItemBinding(data: List<T>)
+
+    fun <T, VB : ViewBinding> getItemBinding(): List<T>
 
 }

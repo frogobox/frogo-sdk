@@ -45,12 +45,13 @@ abstract class FrogoRecyclerBindingAdapter<T, VB : ViewBinding> :
         )
     }
 
-    open fun setupData(data: List<T>?) {
-        this.asyncListDiffer.currentList.clear()
+    open fun getItem(): MutableList<T> = asyncListDiffer.currentList.toMutableList()
 
-        if (data != null) {
-            listData.addAll(data)
-            this.asyncListDiffer.submitList(listData)
+    open fun setItem(data: List<T>) {
+        if (data.isEmpty()) {
+            asyncListDiffer.submitList(listOf())
+        } else {
+            asyncListDiffer.submitList(data.map { it })
         }
     }
 
@@ -61,11 +62,11 @@ abstract class FrogoRecyclerBindingAdapter<T, VB : ViewBinding> :
     }
 
     open fun setupRequirement(
-        data: List<T>?,
+        data: List<T>,
         bindingListener: FrogoRecyclerBindingListener<T, VB>?
     ) {
         setupListener(bindingListener)
-        setupData(data)
+        setItem(data)
     }
 
 }

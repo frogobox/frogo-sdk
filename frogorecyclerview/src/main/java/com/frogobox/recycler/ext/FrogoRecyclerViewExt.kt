@@ -47,16 +47,24 @@ fun <T> RecyclerView.getAdapterExt(): FrogoViewAdapter<T> {
     return this.adapter as FrogoViewAdapter<T>
 }
 
-fun <T> RecyclerView.setupData(data: List<T>) {
-    this.getAdapterExt<T>().setupData(data)
+fun <T> RecyclerView.setItem(data: List<T>) {
+    this.getAdapterExt<T>().setItem(data)
+}
+
+fun <T> RecyclerView.getItem(): List<T> {
+    return this.getAdapterExt<T>().getItem()
 }
 
 fun <T, VB : ViewBinding> RecyclerView.getAdapterBindingExt(): FrogoBindingAdapter<T, VB> {
     return this.adapter as FrogoBindingAdapter<T, VB>
 }
 
-fun <T, VB : ViewBinding> RecyclerView.setupDataBinding(data: List<T>) {
-    this.getAdapterBindingExt<T, VB>().setupData(data)
+fun <T, VB : ViewBinding> RecyclerView.setItemBinding(data: List<T>) {
+    this.getAdapterBindingExt<T, VB>().setItem(data)
+}
+
+fun <T, VB : ViewBinding> RecyclerView.getItemBinding(): List<T> {
+    return this.getAdapterBindingExt<T, VB>().getItem()
 }
 
 fun RecyclerView.addOnBottomScrollListener(onBottomReached: () -> Unit = {}) {
