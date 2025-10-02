@@ -62,7 +62,7 @@ abstract class FrogoRecyclerViewAdapter<T> :
         } else {
             if (hasMultiHolder) {
                 if (hasEmptyView) {
-                    listCount = if (frogoHolder.size == 0) {
+                    listCount = if (frogoHolder.isEmpty()) {
                         1
                     } else {
                         frogoHolder.size
@@ -73,7 +73,7 @@ abstract class FrogoRecyclerViewAdapter<T> :
                 }
             } else {
                 if (hasEmptyView) {
-                    listCount = if (asyncListDiffer.currentList.size == 0) {
+                    listCount = if (asyncListDiffer.currentList.isEmpty()) {
                         1
                     } else {
                         asyncListDiffer.currentList.size
@@ -92,7 +92,7 @@ abstract class FrogoRecyclerViewAdapter<T> :
         } else {
             if (hasMultiHolder) {
                 if (hasEmptyView) {
-                    if (frogoHolder.size != 0) {
+                    if (frogoHolder.isNotEmpty()) {
                         holder.bindItem(
                             data = frogoHolder[position].data,
                             position = position,
@@ -110,7 +110,7 @@ abstract class FrogoRecyclerViewAdapter<T> :
                 }
             } else {
                 if (hasEmptyView) {
-                    if (asyncListDiffer.currentList.size != 0) {
+                    if (asyncListDiffer.currentList.isNotEmpty()) {
                         holder.bindItem(
                             data = asyncListDiffer.currentList[position],
                             position = position,
@@ -206,12 +206,13 @@ abstract class FrogoRecyclerViewAdapter<T> :
         }
     }
 
-    open fun setupData(data: List<T>?) {
-        this.asyncListDiffer.currentList.clear()
+    open fun getItem(): MutableList<T> = asyncListDiffer.currentList.toMutableList()
 
-        if (data != null) {
-            listData.addAll(data)
-            this.asyncListDiffer.submitList(listData)
+    open fun setItem(data: List<T>) {
+        if (data.isEmpty()) {
+            asyncListDiffer.submitList(listOf())
+        } else {
+            asyncListDiffer.submitList(data.map { it })
         }
     }
 
@@ -227,11 +228,11 @@ abstract class FrogoRecyclerViewAdapter<T> :
 
     open fun setupRequirement(
         customViewId: Int,
-        data: List<T>?,
+        data: List<T>,
         listener: FrogoRecyclerViewListener<T>?
     ) {
         setupListener(listener)
-        setupData(data)
+        setItem(data)
         setupCustomLayout(customViewId)
         layoutHandling()
     }

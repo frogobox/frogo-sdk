@@ -96,17 +96,24 @@ class FrogoRecyclerView : RecyclerView,
         return this.adapter as FrogoViewAdapter<T>
     }
 
-    override fun <T> setupData(data: List<T>) {
-        this.getAdapterExt<T>().setupData(data)
+    override fun <T> setItem(data: List<T>) {
+        this.getAdapterExt<T>().setItem(data)
+    }
+
+    override fun <T> getItem(): List<T> {
+        return this.getAdapterExt<T>().getItem()
     }
 
     override fun <T, VB : ViewBinding> getAdapterBindingExt(): FrogoBindingAdapter<T, VB> {
         return this.adapter as FrogoBindingAdapter<T, VB>
     }
 
-    override fun <T, VB : ViewBinding> setupDataBinding(data: List<T>) {
-        this.getAdapterBindingExt<T, VB>().setupData(data)
+    override fun <T, VB : ViewBinding> setItemBinding(data: List<T>) {
+        this.getAdapterBindingExt<T, VB>().setItem(data)
     }
 
+    override fun <T, VB : ViewBinding> getItemBinding(): List<T> {
+        return this.getAdapterBindingExt<T, VB>().getItem()
+    }
 
 }
