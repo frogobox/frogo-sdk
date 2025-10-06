@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.frogobox.coresdk.util.FrogoConstant
 import com.frogobox.sdk.log.FLog
 import com.frogobox.sdk.util.FrogoFunc
 import okhttp3.Interceptor
@@ -140,7 +139,7 @@ fun Context.createMediaPlayer(resId: Int): MediaPlayer {
 }
 
 fun Context.openPlayStore(packageName: String) {
-    startActivityExtOpenApp("${FrogoConstant.Url.BASE_PLAY_STORE_URL}$packageName")
+    startActivityExtOpenApp("https://play.google.com/store/apps/details?id=$packageName")
 }
 
 fun Context.shareApp(packageName: String, text: String) {

@@ -2,7 +2,6 @@ package com.frogobox.appadmob.source
 
 import android.content.Context
 import com.frogobox.coresdk.response.FrogoDataResponse
-import com.frogobox.coresdk.source.ICoreDataSource
 import com.google.android.gms.ads.interstitial.InterstitialAd
 
 
@@ -19,7 +18,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
  *
  */
 
-interface AdmobDataSource : ICoreDataSource {
+interface AdmobDataSource {
 
     fun getInterstitial(context: Context, callback: FrogoDataResponse<InterstitialAd>)
 

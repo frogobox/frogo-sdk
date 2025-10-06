@@ -11,12 +11,9 @@ import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
-import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_CHANNEL_ID
-import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_CHANNEL_NAME
-import com.frogobox.coresdk.util.FrogoConstant.Notification.FROGO_NOTIFICATION_ID
 import com.frogobox.sdk.R
 
-/*
+/**
  * Created by Faisal Amir on 26/12/2020
  * Notification Source Code
  * -----------------------------------------
@@ -28,7 +25,14 @@ import com.frogobox.sdk.R
  * All rights reserved
  *
  */
+
 class FrogoNotification {
+
+    companion object {
+        const val FROGO_NOTIFICATION_ID = 0
+        const val FROGO_CHANNEL_ID = "FROGO_CHANNEL_ID"
+        const val FROGO_CHANNEL_NAME = "FROGO_CHANNEL_NAME"
+    }
 
     class Inject(val context: Context) : IFrogoNotification {
 

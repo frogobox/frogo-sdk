@@ -28,7 +28,7 @@ public class MainJavaAdmobActivity extends BaseActivity<ActivityMainAdmobBinding
         showAdBanner(getBinding().adsXml.adsPhoneTabSpecialSmartBanner);
         hideButton();
         setupButtonClick();
-        setupDetailActivity("Java Sample");
+        setupDetailActivity("Java Sample", null, null);
     }
 
     private void hideButton() {

@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.disposables.Disposable
  *
  */
 
-abstract class CoreDataSource : ICoreDataSource {
+abstract class CoreDataSource {
 
     companion object {
         val TAG: String = CoreDataSource::class.java.simpleName
@@ -25,11 +25,11 @@ abstract class CoreDataSource : ICoreDataSource {
 
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
-    override fun onClearDisposables() {
+    fun onClearDisposables() {
         compositeDisposable.clear()
     }
 
-    override fun addSubscribe(disposable: Disposable) {
+    fun addSubscribe(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
 }
