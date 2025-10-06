@@ -1,6 +1,6 @@
-package com.frogobox.sdk.delegate.piracy.util
+package com.frogobox.sdk.delegate.piracy
 
-/*
+/**
  * Created by faisalamir on 01/07/22
  * FrogoSDK
  * -----------------------------------------
@@ -13,7 +13,8 @@ package com.frogobox.sdk.delegate.piracy.util
  *
  */
 
-data class PiracyMessage(
-    val title: String,
-    val description: String
-)
+interface PiracyCallback {
+
+    fun doOnPirated(message: PiracyMessage)
+
+}

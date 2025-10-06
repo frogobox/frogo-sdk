@@ -65,3 +65,20 @@ object FrogoApiClient {
     }
 
 }
+
+/**
+
+interface SampleApiService {
+
+    /**
+     *     @GET(URL_SEARCH_MEAL)
+     *     suspend fun searchMeal(
+     *         @Path(PATH_API_KEY) apiKey: String,
+     *         @Query(QUERY_NAME) nameMeal: String,
+     *     ): Response<MealResponse<MealModel>>
+     */
+
+}
+
+ *
+ */

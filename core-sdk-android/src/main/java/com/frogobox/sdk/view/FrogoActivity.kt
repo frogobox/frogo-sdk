@@ -25,18 +25,14 @@ import com.frogobox.sdk.ext.getColorExt
 import com.frogobox.sdk.ext.getDrawableExt
 import java.util.Calendar
 
-
 /**
- * Created by faisalamir on 28/07/21
- * FrogoSDK
- * -----------------------------------------
- * Name     : Muhammad Faisal Amir
- * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
- * -----------------------------------------
- * Copyright (C) 2021 FrogoBox Inc.
- * All rights reserved
+ * Base Activity Class for FrogoSDK
  *
+ * Provides lifecycle hooks, result handling, UI system controls,
+ * and standard extension points for ViewModel, EdgeToEdge, and delegates.
+ *
+ * Created by Muhammad Faisal Amir
+ * github.com/amirisback
  */
 
 abstract class FrogoActivity : AppCompatActivity() {
@@ -45,67 +41,24 @@ abstract class FrogoActivity : AppCompatActivity() {
         val TAG: String = FrogoActivity::class.java.simpleName
     }
 
-    protected val frogoActivity by lazy { this }
+    protected val frogoActivity: FrogoActivity by lazy { this }
 
     protected val textCopyright: String by lazy {
-        "${getString(R.string.about_all_right_reserved)} ${getString(R.string.about_copyright)} ${
-            Calendar.getInstance().get(Calendar.YEAR)
-        }"
+        "${getString(R.string.about_all_right_reserved)} " +
+                "${getString(R.string.about_copyright)} ${Calendar.getInstance().get(Calendar.YEAR)}"
     }
 
-    private var activityResult =
+    // ---------------------------------------------------------------------------------------------
+    // Activity Result API (modern replacement for onActivityResult)
+    // ---------------------------------------------------------------------------------------------
+    private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             setupActivityResultExt(result)
         }
 
     // ---------------------------------------------------------------------------------------------
-
-    open fun doOnBackPressedExt() {
-        finish()
-    }
-
-    open fun onBackPressedExt() {
-        onBackPressedDispatcher.onBackPressed()
-    }
-
-    open fun setupDebugMode(): Boolean {
-        return true
-    }
-
+    // Lifecycle
     // ---------------------------------------------------------------------------------------------
-
-    open fun setupEnableEdgeToEdge() {}
-    open fun setupSetOnApplyWindowInsetsListener() {}
-    open fun setupPiracyMode() {}
-    open fun setupDelegates() {}
-    open fun setupViewModel() {}
-    open fun setupMonetized() {}
-    open fun setupContentView() {}
-    open fun setupActivityResultExt(result: ActivityResult) {}
-    open fun onCreateExt(savedInstanceState: Bundle?) {}
-
-
-    open fun setupDoOnBackPressedExt() {
-        if (Build.VERSION.SDK_INT >= 33) {
-            onBackInvokedDispatcher.registerOnBackInvokedCallback(
-                OnBackInvokedDispatcher.PRIORITY_DEFAULT
-            ) {
-                // Back is pressed... Finishing the activity
-                doOnBackPressedExt()
-            }
-        } else {
-            onBackPressedDispatcher.addCallback(
-                this,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        // Back is pressed... Finishing the activity
-                        doOnBackPressedExt()
-                    }
-                })
-        }
-    }
-    // ---------------------------------------------------------------------------------------------
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupEnableEdgeToEdge()
@@ -119,77 +72,126 @@ abstract class FrogoActivity : AppCompatActivity() {
         onCreateExt(savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        return true
+    // ---------------------------------------------------------------------------------------------
+    // Back Press Handling
+    // ---------------------------------------------------------------------------------------------
+
+    /** Called when back button pressed — default behavior is [finish] */
+    open fun doOnBackPressedExt() {
+        finish()
     }
+
+    /** Allows manual trigger of back press from child fragments or components */
+    open fun onBackPressedExt() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    /** Setup modern back press listener for all Android versions */
+    open fun setupDoOnBackPressedExt() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_DEFAULT
+            ) {
+                doOnBackPressedExt()
+            }
+        } else {
+            onBackPressedDispatcher.addCallback(
+                this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() = doOnBackPressedExt()
+                }
+            )
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // Setup Hooks — override freely in subclasses
+    // ---------------------------------------------------------------------------------------------
+    open fun setupDebugMode(): Boolean = true
+    open fun setupEnableEdgeToEdge() {}
+    open fun setupSetOnApplyWindowInsetsListener() {}
+    open fun setupPiracyMode() {}
+    open fun setupDelegates() {}
+    open fun setupViewModel() {}
+    open fun setupMonetized() {}
+    open fun setupContentView() {}
+    open fun setupActivityResultExt(result: ActivityResult) {}
+    open fun onCreateExt(savedInstanceState: Bundle?) {}
+
+    // ---------------------------------------------------------------------------------------------
+    // Toolbar / ActionBar Utility
+    // ---------------------------------------------------------------------------------------------
+    open fun setupDetailActivity(
+        title: String,
+        @DrawableRes actionBackIcon: Int? = null,
+        @ColorRes backgroundColor: Int? = null
+    ) {
+        supportActionBar?.apply {
+            this.title = title
+            setDisplayHomeAsUpEnabled(true)
+
+            actionBackIcon?.let { setHomeAsUpIndicator(getDrawableExt(it)) }
+            backgroundColor?.let { setBackgroundDrawable(getColorExt(it).toDrawable()) }
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // Menu Handling
+    // ---------------------------------------------------------------------------------------------
+    override fun onCreateOptionsMenu(menu: Menu): Boolean = true
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                doOnBackPressedExt()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     // ---------------------------------------------------------------------------------------------
-
-    open fun setupDetailActivity(title: String) {
-        setupDetailActivity(title, null, null)
-    }
-
-    open fun setupDetailActivity(title: String, actionBackIcon: Int?) {
-        setupDetailActivity(title, actionBackIcon, null)
-    }
-
-    open fun setupDetailActivity(
-        title: String,
-        @DrawableRes actionBackIcon: Int?,
-        @ColorRes backgroundColor: Int?,
-    ) {
-        supportActionBar?.title = title
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        if (actionBackIcon != null) {
-            supportActionBar?.setHomeAsUpIndicator(getDrawableExt(actionBackIcon))
-        }
-        if (backgroundColor != null) {
-            supportActionBar?.setBackgroundDrawable(getColorExt(backgroundColor).toDrawable())
-        }
-    }
-
-    open fun startActivityResultExt(intent: Intent) {
-        activityResult.launch(intent)
-    }
-
-    open fun setupChildFragment(frameId: Int, fragment: Fragment) {
+    // Fragment Handling
+    // ---------------------------------------------------------------------------------------------
+    open fun setupChildFragment(frameId: Int, fragment: Fragment, addToBackStack: Boolean = false) {
         supportFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
+            if (addToBackStack) addToBackStack(fragment::class.java.simpleName)
             commit()
         }
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // Activity Result Helpers
+    // ---------------------------------------------------------------------------------------------
+    open fun startActivityResultExt(intent: Intent) {
+        activityResultLauncher.launch(intent)
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // System UI Controls
+    // ---------------------------------------------------------------------------------------------
+    /** Force fullscreen mode */
     open fun setupFullScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val controller = window.insetsController
-            if (controller != null) {
+            window.insetsController?.let { controller ->
                 controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 controller.systemBarsBehavior =
                     WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
         } else {
+            @Suppress("DEPRECATION")
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
     }
 
+    /** Hide system bars (immersive mode) */
     open fun setupHideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
-            controller.hide(WindowInsetsCompat.Type.systemBars())
-            controller.systemBarsBehavior =
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.systemBars())
+            systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
-
 }

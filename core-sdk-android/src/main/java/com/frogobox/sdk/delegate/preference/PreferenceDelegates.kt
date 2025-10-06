@@ -50,4 +50,8 @@ interface PreferenceDelegates {
 
     fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean
 
+    fun <T> save(key: String, value: T)
+
+    fun <T> get(key: String, defaultValue: T): T
+
 }

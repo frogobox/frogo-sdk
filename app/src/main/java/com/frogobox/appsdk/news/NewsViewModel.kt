@@ -8,7 +8,7 @@ import com.frogobox.appsdk.util.NewsConstant
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.showLogError
-import com.frogobox.sdk.view.FrogoViewModel2
+import com.frogobox.sdk.view.FrogoViewModel
 
 
 /**
@@ -26,7 +26,7 @@ import com.frogobox.sdk.view.FrogoViewModel2
 
 class NewsViewModel(
     private val repository: AppRepository,
-) : FrogoViewModel2() {
+) : FrogoViewModel() {
 
     protected var _eventFailed = MutableLiveData<String>()
     var eventFailed: LiveData<String> = _eventFailed

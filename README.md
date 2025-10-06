@@ -13,11 +13,12 @@
 
 This Is Latest Release
 
-    $version_release = 2.3.4
+    $version_release = 2.3.5
 
 What's New??
 
     * Library Update Latest Version *
+    * LTS (Long Term Service) *
 
 ## Download this project
 
@@ -54,7 +55,7 @@ allprojects {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.4'
+    implementation 'com.github.frogobox:frogo-sdk:2.3.5'
 }
 ```
 
@@ -63,14 +64,14 @@ dependencies {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.4")
+    implementation("com.github.frogobox:frogo-sdk:2.3.5")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-frogoAndroid = "2.3.4"
+frogoAndroid = "2.3.5"
 
 [libraries]
 frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }

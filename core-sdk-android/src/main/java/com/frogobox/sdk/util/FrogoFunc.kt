@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Environment
 import android.os.Handler
-import com.frogobox.coresdk.util.FrogoConstant
 
 /**
  * Created by faisalamir on 26/07/21
@@ -27,7 +26,7 @@ object FrogoFunc : IFrogoFunc {
     private const val BASE_DIR_NAME = "BaseMusicPlayer"
 
     val DIR_NAME = "${Environment.DIRECTORY_PICTURES}/$BASE_DIR_NAME"
-    val VIDEO_FILE_NAME = "$BASE_FILE_NAME${System.currentTimeMillis()}${FrogoConstant.Ext.MP4}"
+    val VIDEO_FILE_NAME = "$BASE_FILE_NAME${System.currentTimeMillis()}.mp4"
 
     override fun createFolderPictureVideo() {
         val videoFolder = Environment.getExternalStoragePublicDirectory(DIR_NAME)

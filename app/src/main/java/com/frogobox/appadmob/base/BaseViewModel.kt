@@ -6,7 +6,7 @@ import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.core.FrogoAdmob
 import com.frogobox.appadmob.source.AdmobRepository
 import com.frogobox.coresdk.response.FrogoDataResponse
-import com.frogobox.sdk.view.FrogoViewModel2
+import com.frogobox.sdk.view.FrogoViewModel
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -28,7 +28,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 open class BaseViewModel(
     private val context: Context,
     private val repository: AdmobRepository
-) : FrogoViewModel2() {
+) : FrogoViewModel() {
 
     fun showInterstitial(activity: AppCompatActivity, callback: FrogoAdmobInterstitialCallback?) {
         repository.getInterstitial(context, object : FrogoDataResponse<InterstitialAd> {
