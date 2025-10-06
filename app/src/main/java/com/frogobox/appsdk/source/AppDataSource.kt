@@ -4,10 +4,9 @@ import com.frogobox.appsdk.model.Article
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.coresdk.source.ICoreDataSource
 
 
-/*
+/**
  * Created by faisalamir on 08/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -20,7 +19,7 @@ import com.frogobox.coresdk.source.ICoreDataSource
  *
  */
 
-interface AppDataSource : ICoreDataSource {
+interface AppDataSource {
 
     // Get Top Headline
     fun getTopHeadline(

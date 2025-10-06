@@ -4,10 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.coresdk.source.Resource
-import com.frogobox.coresdk.source.ICoreDataSource
 
 
-/*
+/**
  * Created by faisalamir on 08/04/22
  * FrogoSDK
  * -----------------------------------------
@@ -20,7 +19,7 @@ import com.frogobox.coresdk.source.ICoreDataSource
  *
  */
 
-interface AppDataSourceResult : ICoreDataSource {
+interface AppDataSourceResult {
 
     // Get Top Headline
     fun getTopHeadlineResult(

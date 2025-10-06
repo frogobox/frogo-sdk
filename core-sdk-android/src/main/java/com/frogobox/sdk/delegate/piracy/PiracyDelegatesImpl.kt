@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.sdk.R
-import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
 import com.frogobox.sdk.ext.getInstallerId
 import com.frogobox.sdk.ext.showLogD
 import com.frogobox.sdk.piracychecker.callback
@@ -64,7 +63,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }
     }
 
-    override fun connectPiracyChecker(callback: FrogoPiracyCallback?) {
+    override fun connectPiracyChecker(callback: PiracyCallback?) {
 
         if (callback != null) {
             if (piracyCheckerIsDebug) {
@@ -101,7 +100,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
 
     }
 
-    override fun showPiracedDialog(message: PiracyMessage, callback: FrogoPiracyDialogCallback?) {
+    override fun showPiracedDialog(message: PiracyMessage, callback: PiracyCallback?) {
         SimpleDialogUtil.create(
             piracyDelegateContext,
             message.title,
@@ -180,7 +179,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
             .show()
     }
 
-    override fun verifySignature(callback: FrogoPiracyCallback?) {
+    override fun verifySignature(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
@@ -205,7 +204,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }
     }
 
-    override fun verifyInstallerId(callback: FrogoPiracyCallback?) {
+    override fun verifyInstallerId(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableInstallerId(
@@ -233,7 +232,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }.start()
     }
 
-    override fun verifyUnauthorizedApps(callback: FrogoPiracyCallback?) {
+    override fun verifyUnauthorizedApps(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableUnauthorizedAppsCheck()
@@ -253,7 +252,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }.start()
     }
 
-    override fun verifyStores(callback: FrogoPiracyCallback?) {
+    override fun verifyStores(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableStoresCheck()
@@ -269,7 +268,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }.start()
     }
 
-    override fun verifyDebug(callback: FrogoPiracyCallback?) {
+    override fun verifyDebug(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableDebugCheck()
@@ -285,7 +284,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
         }.start()
     }
 
-    override fun verifyEmulator(callback: FrogoPiracyCallback?) {
+    override fun verifyEmulator(callback: PiracyCallback?) {
         piracyDelegateContext.piracyChecker {
             if (callback != null) {
                 enableEmulatorCheck(true)

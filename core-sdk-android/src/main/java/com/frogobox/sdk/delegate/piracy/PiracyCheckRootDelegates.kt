@@ -1,22 +1,24 @@
 package com.frogobox.sdk.delegate.piracy
 
-import com.frogobox.sdk.delegate.piracy.util.PiracyMessage
-
 /**
- * Created by faisalamir on 01/07/22
+ * Created by faisalamir on 19/07/22
  * FrogoSDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Frogobox Media Inc.
+ * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
  *
  */
 
-interface FrogoPiracyDialogCallback {
+interface PiracyCheckRootDelegates {
 
-    fun doOnPirated(message: PiracyMessage)
+    fun checkRootMethod1(): Boolean
+
+    fun checkRootMethod2(): Boolean
+
+    fun checkRootMethod3(): Boolean
 
 }

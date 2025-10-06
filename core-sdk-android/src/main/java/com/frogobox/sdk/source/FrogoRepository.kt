@@ -17,75 +17,75 @@ import com.frogobox.coresdk.source.CoreDataSource
  */
 
 open class FrogoRepository(
-    private val remoteDataSource: CoreDataSource,
-    private val localDataSource: CoreDataSource
+    private val remoteDataSource: FrogoRemoteDataSource,
+    private val localDataSource: FrogoLocalDataSource
 ) : CoreDataSource() {
 
-    override fun savePrefString(key: String, value: String) {
+     fun savePrefString(key: String, value: String) {
         localDataSource.savePrefString(key, value)
     }
 
-    override fun savePrefLong(key: String, value: Long) {
+     fun savePrefLong(key: String, value: Long) {
         localDataSource.savePrefLong(key, value)
     }
 
-    override fun savePrefFloat(key: String, value: Float) {
+     fun savePrefFloat(key: String, value: Float) {
         localDataSource.savePrefFloat(key, value)
     }
 
-    override fun savePrefInt(key: String, value: Int) {
+     fun savePrefInt(key: String, value: Int) {
         localDataSource.savePrefInt(key, value)
     }
 
-    override fun savePrefBoolean(key: String, value: Boolean) {
+     fun savePrefBoolean(key: String, value: Boolean) {
         localDataSource.savePrefBoolean(key, value)
     }
 
-    override fun deletePref(key: String) {
+     fun deletePref(key: String) {
         localDataSource.deletePref(key)
     }
 
-    override fun nukePref() {
+     fun nukePref() {
         localDataSource.nukePref()
     }
 
-    override fun getPrefString(key: String): String {
+     fun getPrefString(key: String): String {
         return localDataSource.getPrefString(key)
     }
 
-    override fun getPrefLong(key: String): Long {
+     fun getPrefLong(key: String): Long {
         return localDataSource.getPrefLong(key)
     }
 
-    override fun getPrefFloat(key: String): Float {
+     fun getPrefFloat(key: String): Float {
         return localDataSource.getPrefFloat(key)
     }
 
-    override fun getPrefInt(key: String): Int {
+     fun getPrefInt(key: String): Int {
         return localDataSource.getPrefInt(key)
     }
 
-    override fun getPrefBoolean(key: String): Boolean {
+     fun getPrefBoolean(key: String): Boolean {
         return localDataSource.getPrefBoolean(key)
     }
 
-    override fun getPrefString(key: String, defaultValue: String): String {
+     fun getPrefString(key: String, defaultValue: String): String {
         return localDataSource.getPrefString(key, defaultValue)
     }
 
-    override fun getPrefLong(key: String, defaultValue: Long): Long {
+     fun getPrefLong(key: String, defaultValue: Long): Long {
         return localDataSource.getPrefLong(key, defaultValue)
     }
 
-    override fun getPrefFloat(key: String, defaultValue: Float): Float {
+     fun getPrefFloat(key: String, defaultValue: Float): Float {
         return localDataSource.getPrefFloat(key, defaultValue)
     }
 
-    override fun getPrefInt(key: String, defaultValue: Int): Int {
+     fun getPrefInt(key: String, defaultValue: Int): Int {
         return localDataSource.getPrefInt(key, defaultValue)
     }
 
-    override fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean {
+     fun getPrefBoolean(key: String, defaultValue: Boolean): Boolean {
         return localDataSource.getPrefBoolean(key, defaultValue)
     }
 
