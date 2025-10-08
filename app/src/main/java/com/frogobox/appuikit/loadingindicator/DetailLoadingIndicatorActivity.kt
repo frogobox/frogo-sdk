@@ -17,6 +17,7 @@ class DetailLoadingIndicatorActivity : BaseActivity<ActivityDetailLoadingIndicat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val indicator = intent.getStringExtra("indicator")
+        binding.tvTitle.text = indicator
         binding.fli.setIndicator(indicator)
     }
 
