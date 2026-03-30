@@ -4,9 +4,8 @@ import java.util.Date
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
-    id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 ksp {
@@ -110,6 +109,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        resValues = true
     }
 
     compileOptions {

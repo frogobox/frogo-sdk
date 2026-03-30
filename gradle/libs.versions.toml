@@ -1,34 +1,34 @@
 [versions]
-agp = "8.13.0"
+agp = "9.1.0"
+kotlin = "2.3.20"
+ksp = "2.3.6"
 androidMavenGradlePlugin = "2.1"
-kotlin = "2.2.21"
-ksp = "2.2.21-2.0.4"
-coreKtx = "1.17.0"
+coreKtx = "1.18.0"
 appcompat = "1.7.1"
-activity = "1.11.0"
+activity = "1.13.0"
 fragment = "1.8.9"
 constraintlayout = "2.2.1"
-liveCycle = "2.9.4"
+liveCycle = "2.10.0"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
-roomKtx = "2.8.3"
-work = "2.11.0"
-googleAdmob = "24.7.0" # https://developers.google.com/admob/android/quick-start
-unityAd = "4.16.3" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+roomKtx = "2.8.4"
+work = "2.11.2"
+googleAdmob = "25.1.0" # https://developers.google.com/admob/android/quick-start
+unityAd = "4.17.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
 material = "1.13.0"
 gson = "2.13.2"
-okhttp = "5.3.0"
+okhttp = "5.3.2"
 retrofit = "3.0.0"
 rxandroid3 = "3.0.2"
 rxjava3 = "3.1.12"
-chucker = "4.2.0"
+chucker = "4.3.1"
 glide = "5.0.5"
 glideCompiler = "5.0.5"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-koin = "4.1.1"
+koin = "4.2.0"
 
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxCoroutinesAndroid = "1.10.2"
@@ -106,7 +106,7 @@ koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-wo
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp"}
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
