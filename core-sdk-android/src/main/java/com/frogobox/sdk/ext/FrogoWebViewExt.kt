@@ -89,7 +89,8 @@ fun WebView.loadUrlFrogoExt(
         if (url.contains("</html>")) {
             loadDataWithBaseURL(null, url, "text/html", "utf-8", null)
         } else {
-            if (!url.contains("http") || !url.contains("https")) {
+            val isValidUrl = url.startsWith("http://") || url.startsWith("https://")
+            if (!isValidUrl) {
                 callback?.onHideProgress()
                 callback?.onFailed()
             } else {

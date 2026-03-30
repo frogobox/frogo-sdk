@@ -62,13 +62,9 @@ abstract class FrogoActivity : AppCompatActivity() {
     // ---------------------------------------------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
-            setupEnableEdgeToEdge()
-        }
+        setupEnableEdgeToEdge()
         setupContentView()
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
-            setupSetOnApplyWindowInsetsListener()
-        }
+        setupSetOnApplyWindowInsetsListener()
         setupDoOnBackPressedExt()
         setupDelegates()
         setupPiracyMode()

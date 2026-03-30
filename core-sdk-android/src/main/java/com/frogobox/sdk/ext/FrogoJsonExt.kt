@@ -16,21 +16,22 @@ import java.io.InputStreamReader
  */
 
 
-fun <T> Context.fetchRawData(
+fun Context.fetchRawData(
     sourceRaw: Int,
     shuffle: Boolean = false,
-): MutableList<T> {
-    val data = mutableListOf<T>()
+): MutableList<String> {
+    val data = mutableListOf<String>()
     val rawDict = resources.openRawResource(sourceRaw)
     val reader = BufferedReader(InputStreamReader(rawDict))
     try {
-        var column: T
-        while (reader.readLine().also { column = it as T } != null) {
-            data.add(column)
+        var line: String?
+        while (reader.readLine().also { line = it } != null) {
+            line?.let { data.add(it) }
         }
-        reader.close()
     } catch (e: Exception) {
         e.printStackTrace()
+    } finally {
+        try { reader.close() } catch (e: IOException) { e.printStackTrace() }
     }
     if (shuffle) {
         data.shuffle()
@@ -39,17 +40,17 @@ fun <T> Context.fetchRawData(
 }
 
 fun Context.getStringJsonFromAsset(filename: String): String {
-    var jsonString = ""
-    try {
-        jsonString = assets.open(filename).bufferedReader().use { it.readText() }
+    return try {
+        assets.open(filename).bufferedReader().use { it.readText() }
     } catch (ioException: IOException) {
         ioException.printStackTrace()
-        return ""
+        ""
     }
-    return jsonString
 }
 
 inline fun <reified T> Context.getDataFromJsonAsset(fileName: String): List<T> {
+    val json = getStringJsonFromAsset(fileName)
+    if (json.isBlank()) return emptyList()
     val typeToken = object : TypeToken<List<T>>() {}.type
-    return getStringJsonFromAsset(fileName).toModel(typeToken)
+    return runCatching { json.toModel<List<T>>(typeToken) }.getOrDefault(emptyList())
 }

@@ -43,13 +43,10 @@ fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
     } else {
         if (placeHolder != null) {
             Glide.with(context)
-                .load("")
-                .placeholder(placeHolder)
+                .load(placeHolder)
                 .into(this)
         } else {
-            Glide.with(context)
-                .load("")
-                .into(this)
+            Glide.with(context).clear(this)
         }
     }
 }

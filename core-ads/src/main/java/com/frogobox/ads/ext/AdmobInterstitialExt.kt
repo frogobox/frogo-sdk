@@ -2,8 +2,6 @@ package com.frogobox.ads.ext
 
 import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
-import com.frogobox.sdk.ext.showLogDebug
-import com.frogobox.sdk.ext.showLogError
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -37,8 +35,6 @@ fun InterstitialAd.showAd(
     callback: FrogoAdmobInterstitialCallback?
 ) {
 
-    showLogDebug("$TAG Interstitial Id : $interstitialAdUnitId")
-
     if (interstitialAdUnitId != "") {
 
         callback?.onShowAdRequestProgress(
@@ -49,13 +45,11 @@ fun InterstitialAd.showAd(
         val adRequest = AdRequest.Builder()
 
         if (timeoutMilliSecond != null) {
-            showLogDebug("$TAG Interstitial HttpTimeOut Millisecond : $timeoutMilliSecond")
             adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
         }
 
         if (keyword != null) {
             for (i in keyword.indices) {
-                showLogDebug("$TAG Interstitial Keyworad Ads [$i] : ${keyword[i]}")
                 adRequest.addKeyword(keyword[i])
             }
         }
@@ -66,31 +60,19 @@ fun InterstitialAd.showAd(
             adRequest.build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    showLogError("$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onAdFailedToLoad()")
-                    showLogError("$TAG [Interstitial] >> Error - onAdFailedToLoad [unit id] : $interstitialAdUnitId")
-                    showLogError("$TAG [Interstitial] >> Error - onAdFailedToLoad [code] : ${adError.code}")
-                    showLogError("$TAG [Interstitial] >> Error - onAdFailedToLoad [domain] : ${adError.domain}")
-                    showLogError("$TAG [Interstitial] >> Error - onAdFailedToLoad [message] : ${adError.message}")
                     callback?.onHideAdRequestProgress(
                         TAG,
-                        "$TAG [Interstitial] >> Error - onHideAdRequestProgress [message] : ${adError.message}"
+                        "$TAG [Interstitial] >> Error - onAdFailedToLoad [message] : ${adError.message}"
                     )
                     callback?.onAdFailed(TAG, "Interstitial ${adError.message}")
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    showLogDebug("$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onAdLoaded()")
-                    showLogDebug("$TAG [Interstitial] >> Succes - onAdLoaded [message] : Ad was loaded")
-                    showLogDebug("$TAG [Interstitial] >> Succes - onAdLoaded [unit id] : ${interstitialAd.adUnitId}")
-                    showLogDebug("$TAG [Interstitial] >> Succes - onAdLoaded [response Info] : ${interstitialAd.responseInfo}")
-                    showLogDebug("$TAG [Interstitial] >> Suggest : You Can Give Your Reward Here")
                     callback?.onAdLoaded(TAG, "Interstitial Ad was loaded")
 
                     interstitialAd.fullScreenContentCallback =
                         object : FullScreenContentCallback() {
                             override fun onAdDismissedFullScreenContent() {
-                                showLogDebug("$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onAdDismissed()")
-                                showLogDebug("$TAG [Interstitial] >> Succes - onAdDismissedFullScreenContent [message] : Ad was dismissed")
                                 callback?.onAdDismissed(
                                     TAG,
                                     "Interstitial Ad was dismissed"
@@ -98,15 +80,9 @@ fun InterstitialAd.showAd(
                             }
 
                             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                                showLogError("$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onAdFailedToShow()")
-                                showLogDebug("$TAG [Interstitial] >> Error - onAdFailedToShowFullScreenContent [unit id] : $interstitialAdUnitId")
-                                showLogError("$TAG [Interstitial] >> Error - onAdFailedToShowFullScreenContent [code] : ${adError.code}")
-                                showLogError("$TAG [Interstitial] >> Error - onAdFailedToShowFullScreenContent [domain] : ${adError.domain}")
-                                showLogError("$TAG [Interstitial] >> Error - onAdFailedToShowFullScreenContent [message] : ${adError.message}")
-                                showLogError("$TAG [Interstitial] >> Error : Ad failed to show")
                                 callback?.onHideAdRequestProgress(
                                     TAG,
-                                    "$TAG [Interstitial] >> Error - onHideAdRequestProgress [message] : onAdFailedToShowFullScreenContent"
+                                    "$TAG [Interstitial] >> Error - onAdFailedToShowFullScreenContent"
                                 )
                                 callback?.onAdFailed(
                                     TAG,
@@ -115,11 +91,9 @@ fun InterstitialAd.showAd(
                             }
 
                             override fun onAdShowedFullScreenContent() {
-                                showLogDebug("$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onAdShowed()")
-                                showLogDebug("$TAG [Interstitial] >> Succes - onAdShowedFullScreenContent [message] : Ad showed fullscreen content")
                                 callback?.onHideAdRequestProgress(
                                     TAG,
-                                    "$TAG [Interstitial] >> Succes - onHideAdRequestProgress [message] : Ad showed fullscreen content"
+                                    "Interstitial Ad showed fullscreen content"
                                 )
                                 callback?.onAdShowed(
                                     TAG,
@@ -132,7 +106,6 @@ fun InterstitialAd.showAd(
             }
         )
     } else {
-        showLogError("$TAG Interstitial ID is Empty")
         callback?.onAdFailed(TAG, "$TAG Interstitial ID is Empty")
     }
 

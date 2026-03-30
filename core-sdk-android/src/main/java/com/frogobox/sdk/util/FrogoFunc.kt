@@ -26,7 +26,8 @@ object FrogoFunc : IFrogoFunc {
     private const val BASE_DIR_NAME = "BaseMusicPlayer"
 
     val DIR_NAME = "${Environment.DIRECTORY_PICTURES}/$BASE_DIR_NAME"
-    val VIDEO_FILE_NAME = "$BASE_FILE_NAME${System.currentTimeMillis()}.mp4"
+
+    fun generateVideoFileName(): String = "$BASE_FILE_NAME${System.currentTimeMillis()}.mp4"
 
     override fun createFolderPictureVideo() {
         val videoFolder = Environment.getExternalStoragePublicDirectory(DIR_NAME)
@@ -36,11 +37,12 @@ object FrogoFunc : IFrogoFunc {
     }
 
     override fun getVideoFilePath(): String {
+        val fileName = generateVideoFileName()
         val dir = Environment.getExternalStoragePublicDirectory(DIR_NAME)
         return if (dir == null) {
-            VIDEO_FILE_NAME
+            fileName
         } else {
-            "${dir.absoluteFile}/$VIDEO_FILE_NAME"
+            "${dir.absoluteFile}/$fileName"
         }
     }
 
@@ -50,7 +52,7 @@ object FrogoFunc : IFrogoFunc {
     }
 
     override fun waitingMoment(delay: Long, listener: () -> Unit) {
-        Handler().postDelayed({ listener() }, delay)
+        Handler(android.os.Looper.getMainLooper()).postDelayed({ listener() }, delay)
     }
 
     override fun isNetworkConnected(context: Context): Boolean {
@@ -79,6 +81,9 @@ object FrogoFunc : IFrogoFunc {
                 // Indicates this network uses a Cellular transport. or
                 // Cellular has network connectivity
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // Indicates this network uses an Ethernet transport
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
 
                 // else return false
                 else -> false
