@@ -8,7 +8,6 @@ import com.frogobox.ads.callback.FrogoAdmobBannerCallback
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
 import com.frogobox.ads.util.FrogoAdConstant
-import com.frogobox.ads.util.FrogoAdConstant.ADMOB_MOBILE_ADS_KEY
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -463,8 +462,8 @@ object FrogoAdmob : IFrogoAdmob,
                                 }
 
                                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                                    callback.onHideAdRequestProgress(TAG, "$TAG [RewardedAd] >> Error - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdFailedToShowFullScreenContent")
-                                    callback.onAdFailed(TAG, "Interstitial Ad failed to show")
+                                    callback.onHideAdRequestProgress(TAG, "$TAG [RewardedAd] >> Error - onAdFailedToShowFullScreenContent")
+                                    callback.onAdFailed(TAG, "Rewarded Ad failed to show")
                                 }
 
                                 override fun onAdShowedFullScreenContent() {
@@ -538,7 +537,7 @@ object FrogoAdmob : IFrogoAdmob,
             RewardedInterstitialAd.load(
                 activity,
                 mAdUnitIdRewardedInterstitial,
-                AdRequest.Builder().build(),
+                adRequest.build(),
                 object : RewardedInterstitialAdLoadCallback() {
                     override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                         callback.onHideAdRequestProgress(TAG, "$TAG [RewardedInterstitial] >> Error - onHideAdRequestProgress [message] : ${loadAdError.message}")

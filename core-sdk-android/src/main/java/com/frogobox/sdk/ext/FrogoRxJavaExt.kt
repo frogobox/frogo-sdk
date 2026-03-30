@@ -118,7 +118,6 @@ fun <T : Any> Single<T>.fetchRoomDB(
             }
 
             override fun onLocalStartObserver(disposable: Disposable) {
-                callback.onHideProgress()
                 addCallbackSubscribe(disposable)
             }
 
@@ -161,7 +160,7 @@ fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
             callback.onHideProgress()
             callback.onFinish()
         }, {
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFailed(500, it.message ?: "Unknown error")
             callback.onHideProgress()
             callback.onFinish()
         })
@@ -178,7 +177,7 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
             callback.onSuccess()
             callback.onFinish()
         }) {
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFailed(500, it.message ?: "Unknown error")
             callback.onHideProgress()
             callback.onFinish()
         }
@@ -193,7 +192,7 @@ fun Completable.executeRoomDBResult(result: MutableLiveData<ResourceState>) {
         .subscribe({
             result.value = ResourceState.Success()
         }) {
-            it.message?.let { it1 ->result.value = ResourceState.Error(message = it1) }
+            result.value = ResourceState.Error(message = it.message ?: "Unknown error")
         }
 }
 
@@ -206,7 +205,7 @@ fun Completable.executePreference(callback: FrogoStateResponse) {
             callback.onHideProgress()
             callback.onFinish()
         }) {
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFailed(500, it.message ?: "Unknown error")
             callback.onHideProgress()
             callback.onFinish()
         }
@@ -221,7 +220,7 @@ fun Completable.executeAction(callback: FrogoStateResponse) {
             callback.onHideProgress()
             callback.onFinish()
         }) {
-            it.message?.let { it1 -> callback.onFailed(200, it1) }
+            callback.onFailed(500, it.message ?: "Unknown error")
             callback.onHideProgress()
             callback.onFinish()
         }

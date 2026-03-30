@@ -2,9 +2,7 @@ package com.frogobox.ads.core
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
-import com.frogobox.sdk.ext.showToast
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -64,8 +62,6 @@ class FrogoAppOpenAdManager {
                     appOpenAd = ad
                     isLoadingAd = false
                     loadTime = Date().time
-                    Log.d(LOG_TAG, "onAdLoaded.")
-                    context.showToast("onAdLoaded")
                 }
 
                 /**
@@ -75,8 +71,6 @@ class FrogoAppOpenAdManager {
                  */
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                     isLoadingAd = false
-                    Log.d(LOG_TAG, "onAdFailedToLoad: " + loadAdError.message)
-                    context.showToast("onAdFailedToLoad")
                 }
             }
         )
@@ -150,21 +144,18 @@ class FrogoAppOpenAdManager {
 
         // If the app open ad is already showing, do not show the ad again.
         if (isShowingAd) {
-            Log.d(LOG_TAG, "The app open ad is already showing.")
-            callback.onHideAdRequestProgress(LOG_TAG, "onAdShowedFullScreenContent")
+            callback.onHideAdRequestProgress(LOG_TAG, "The app open ad is already showing.")
             return
         }
 
         // If the app open ad is not available yet, invoke the callback then load the ad.
         if (!isAdAvailable()) {
-            Log.d(LOG_TAG, "The app open ad is not ready yet.")
             callback.onAdDismissed(LOG_TAG, "The app open ad is not ready yet.")
-            callback.onHideAdRequestProgress(LOG_TAG, "onAdShowedFullScreenContent")
+            callback.onHideAdRequestProgress(LOG_TAG, "The app open ad is not ready yet.")
             loadAd(activity, appOpenAdUnitId)
             return
         }
 
-        Log.d(LOG_TAG, "Will show ad.")
 
         appOpenAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
             /** Called when full screen content is dismissed. */
@@ -172,9 +163,7 @@ class FrogoAppOpenAdManager {
                 // Set the reference to null so isAdAvailable() returns false.
                 appOpenAd = null
                 isShowingAd = false
-                Log.d(LOG_TAG, "onAdDismissedFullScreenContent.")
-                activity.showToast("onAdDismissedFullScreenContent")
-                callback.onHideAdRequestProgress(LOG_TAG, "onAdShowedFullScreenContent")
+                callback.onHideAdRequestProgress(LOG_TAG, "onAdDismissedFullScreenContent")
                 callback.onAdDismissed(LOG_TAG, "onAdDismissedFullScreenContent")
                 loadAd(activity, appOpenAdUnitId)
             }
@@ -183,10 +172,8 @@ class FrogoAppOpenAdManager {
             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                 appOpenAd = null
                 isShowingAd = false
-                Log.d(LOG_TAG, "onAdFailedToShowFullScreenContent: " + adError.message)
-                activity.showToast("onAdFailedToShowFullScreenContent: " + adError.message)
-                callback.onHideAdRequestProgress(LOG_TAG, "onAdShowedFullScreenContent")
-                callback.onAdDismissed(LOG_TAG, "onAdFailedToShowFullScreenContent: " + adError.message)
+                callback.onHideAdRequestProgress(LOG_TAG, "onAdFailedToShowFullScreenContent")
+                callback.onAdFailed(LOG_TAG, "onAdFailedToShowFullScreenContent: ${adError.message}")
                 loadAd(activity, appOpenAdUnitId)
             }
 
@@ -194,8 +181,6 @@ class FrogoAppOpenAdManager {
             override fun onAdShowedFullScreenContent() {
                 callback.onHideAdRequestProgress(LOG_TAG, "onAdShowedFullScreenContent")
                 callback.onAdShowed(LOG_TAG, "onAdShowedFullScreenContent")
-                Log.d(LOG_TAG, "onAdShowedFullScreenContent.")
-                activity.showToast("onAdShowedFullScreenContent")
             }
         }
         isShowingAd = true

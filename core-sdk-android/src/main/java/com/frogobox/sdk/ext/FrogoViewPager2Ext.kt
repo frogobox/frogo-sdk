@@ -14,8 +14,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 fun ViewPager2.getTitles(): List<String> {
-    val viewPager2Adapter = this.adapter as FrogoPagerHelper2
-    return viewPager2Adapter.getTitles()
+    val adapter = this.adapter
+    check(adapter is FrogoPagerHelper2) {
+        "ViewPager2 adapter must be FrogoPagerHelper2 to use getTitles()"
+    }
+    return adapter.getTitles()
 }
 
 fun TabLayout.setupWithViewPager2(viewPager2: ViewPager2) {

@@ -23,9 +23,8 @@ abstract class FrogoFragment : Fragment() {
         val TAG: String = FrogoFragment::class.java.simpleName
     }
 
-    protected val frogoActivity: FrogoActivity by lazy {
-        (activity as FrogoActivity)
-    }
+    protected val frogoActivity: FrogoActivity?
+        get() = activity as? FrogoActivity
 
     open fun onViewCreatedExt(view: View, savedInstanceState: Bundle?) {}
     open fun setupViewModel() {}
@@ -40,15 +39,16 @@ abstract class FrogoFragment : Fragment() {
 
     // ---------------------------------------------------------------------------------------------
 
-    fun setupChildFragment(frameId: Int, fragment: Fragment) {
+    fun setupChildFragment(frameId: Int, fragment: Fragment, addToBackStack: Boolean = false) {
         childFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
+            if (addToBackStack) addToBackStack(fragment::class.java.simpleName)
             commit()
         }
     }
 
     fun checkArgument(argsKey: String): Boolean {
-        return requireArguments().containsKey(argsKey)
+        return arguments?.containsKey(argsKey) == true
     }
 
 }

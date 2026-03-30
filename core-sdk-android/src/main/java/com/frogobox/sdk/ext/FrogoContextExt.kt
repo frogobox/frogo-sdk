@@ -67,6 +67,8 @@ fun Context.hasCameraPermission(): Boolean =
 // -------------------------------------------------------------------------------------------------
 
 fun Context.hasReadExtStoragePermission(): Boolean {
+    // READ_EXTERNAL_STORAGE deprecated in API 33+ (use READ_MEDIA_* instead)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return true
     return ContextCompat.checkSelfPermission(
         this,
         Manifest.permission.READ_EXTERNAL_STORAGE
@@ -74,6 +76,8 @@ fun Context.hasReadExtStoragePermission(): Boolean {
 }
 
 fun Context.hasWriteExtStoragePermission(): Boolean {
+    // WRITE_EXTERNAL_STORAGE has no effect on API 29+ (scoped storage)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return true
     return ContextCompat.checkSelfPermission(
         this,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -131,7 +135,12 @@ fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
 }
 
 fun Context.getInstallerId(): String? {
-    return packageManager.getInstallerPackageName(packageName)
+    return try {
+        packageManager.getInstallerPackageName(packageName)
+    } catch (e: Exception) {
+        FLog.e("$TAG : getInstallerId failed - ${e.message.orEmpty()}")
+        null
+    }
 }
 
 fun Context.createMediaPlayer(resId: Int): MediaPlayer {
@@ -151,11 +160,7 @@ fun Context.getDrawableExt(@DrawableRes drawable: Int): Drawable? {
 }
 
 fun Context.getColorExt(@ColorRes resId: Int): Int {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        this.getColor(resId)
-    } else {
-        ContextCompat.getColor(this, resId)
-    }
+    return ContextCompat.getColor(this, resId)
 }
 
 fun Context.getResStringExt(type: String, res: String): Int {
