@@ -25,13 +25,18 @@ fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
     callback.onShowProgress()
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
-            response.body()?.let { callback.onSuccess(it) }
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                callback.onSuccess(body)
+            } else {
+                callback.onFailed(response.code(), response.message().ifEmpty { "Unknown error" })
+            }
             callback.onHideProgress()
             callback.onFinish()
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-            t.localizedMessage?.let { callback.onFailed(500, it) }
+            callback.onFailed(500, t.message ?: t.localizedMessage ?: "Network error")
             callback.onHideProgress()
             callback.onFinish()
         }

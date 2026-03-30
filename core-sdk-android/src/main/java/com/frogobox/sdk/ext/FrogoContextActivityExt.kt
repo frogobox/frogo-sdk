@@ -3,11 +3,10 @@ package com.frogobox.sdk.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.sdk.ui.FrogoImageViewActivity
-import com.google.gson.Gson
 import androidx.core.net.toUri
 
 
@@ -43,19 +42,20 @@ inline fun <reified T> Activity.getExtraExt(params: String): T? {
 }
 
 inline fun <reified T> Intent.getExtraExt(params: String): T? {
-    return if (this.hasExtra(params)) {
-        return when (T::class) {
-            String::class -> getStringExtra(params) as T
-            Int::class -> getIntExtra(params, 0) as T
-            Boolean::class -> getBooleanExtra(params, false) as T
-            Double::class -> getDoubleExtra(params, 0.0) as T
-            Float::class -> getFloatExtra(params, 0.0f) as T
-            Long::class -> getLongExtra(params, 0L) as T
-            T::class -> @Suppress("DEPRECATION") this.getParcelableExtra(params)
-            else -> throw Exception("Type not found")
+    if (!this.hasExtra(params)) return null
+    return when (T::class) {
+        String::class -> getStringExtra(params) as? T
+        Int::class -> getIntExtra(params, 0) as? T
+        Boolean::class -> getBooleanExtra(params, false) as? T
+        Double::class -> getDoubleExtra(params, 0.0) as? T
+        Float::class -> getFloatExtra(params, 0.0f) as? T
+        Long::class -> getLongExtra(params, 0L) as? T
+        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getParcelableExtra(params, T::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            getParcelableExtra(params) as? T
         }
-    } else {
-        null
     }
 }
 

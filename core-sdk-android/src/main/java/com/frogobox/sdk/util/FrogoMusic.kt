@@ -20,29 +20,30 @@ class FrogoMusic(
     private val musicFile: Int
 ) : IFrogoMusic {
 
-    private val musicPlayer: MediaPlayer = MediaPlayer.create(context, musicFile)
+    private var musicPlayer: MediaPlayer? = MediaPlayer.create(context, musicFile)
 
     override fun getMusicPlayer(): MediaPlayer {
-        return musicPlayer
+        return musicPlayer ?: throw IllegalStateException("MediaPlayer has been released")
     }
 
     override fun playMusic(isLooping: Boolean) {
-        musicPlayer.apply {
+        musicPlayer?.apply {
             this.isLooping = isLooping
-        }.start()
+        }?.start()
     }
 
     override fun playMusic() {
-        musicPlayer.start()
+        musicPlayer?.start()
     }
 
     override fun stopMusic() {
-        musicPlayer.stop()
-        musicPlayer.release()
+        musicPlayer?.stop()
+        musicPlayer?.release()
+        musicPlayer = null
     }
 
     override fun pauseMusic() {
-        musicPlayer.pause()
+        musicPlayer?.pause()
     }
 
 }
