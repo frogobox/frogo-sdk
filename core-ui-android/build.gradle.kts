@@ -2,8 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize)
     `maven-publish`
 }
 
@@ -23,6 +22,12 @@ android {
         consumerProguardFile("consumer-rules.pro")
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -37,6 +42,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        resValues = true
     }
 
     compileOptions {
@@ -66,7 +72,7 @@ afterEvaluate {
         publications {
 
             // Creates a Maven publication called "release".
-            register("release", MavenPublication::class) {
+            create<MavenPublication>("release") {
 
                 // Applies the component for the release build variant.
                 // NOTE : Delete this line code if you publish Native Java / Kotlin Library

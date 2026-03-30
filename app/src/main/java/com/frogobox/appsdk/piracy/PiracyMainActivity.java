@@ -36,11 +36,13 @@ public class PiracyMainActivity extends BaseActivity<ActivityPiracyBinding> {
     private void setupUI() {
 
         getBinding().layoutContentMain.radioDisplay.setOnCheckedChangeListener((radioGroup, i) -> {
-            switch (i) {
-                case R.id.radio_dialog -> piracyCheckerDisplay = Display.DIALOG;
-                case R.id.radio_activity -> piracyCheckerDisplay = Display.ACTIVITY;
-                default -> piracyCheckerDisplay = Display.DIALOG;
+
+            if (i == R.id.radio_activity) {
+                piracyCheckerDisplay = Display.ACTIVITY;
+            } else {
+                piracyCheckerDisplay = Display.DIALOG;
             }
+
         });
 
         // Show APK signature
