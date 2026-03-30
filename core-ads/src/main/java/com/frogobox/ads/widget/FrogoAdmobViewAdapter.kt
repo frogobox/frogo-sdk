@@ -61,15 +61,17 @@ abstract class FrogoAdmobViewAdapter<T> : RecyclerView.Adapter<FrogoAdmobViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FrogoAdmobViewHolder<T> {
+        val cb = viewCallback
+            ?: throw IllegalStateException("viewCallback must be set before using the adapter")
         return when (viewType) {
             RECYCLER_VIEW_TYPE_MENU_ITEM -> {
-                viewCallback!!.onViewTypeMenuItem(parent)
+                cb.onViewTypeMenuItem(parent)
             }
             RECYCLER_VIEW_TYPE_BANNER_AD -> {
-                viewCallback!!.onViewTypeBannerAds(parent)
+                cb.onViewTypeBannerAds(parent)
             }
             else -> {
-                viewCallback!!.onViewTypeBannerAds(parent)
+                cb.onViewTypeBannerAds(parent)
             }
         }
 

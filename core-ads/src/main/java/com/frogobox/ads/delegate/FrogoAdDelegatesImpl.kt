@@ -266,6 +266,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                         callback.onAdShowed(tag, message)
                     }
                 })
+            return
         }
 
         showUnityAdInterstitial(unityInterstitialId, object : FrogoUnityAdInterstitialCallback {
@@ -363,6 +364,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                         callback.onAdShowed(tag, message)
                     }
                 })
+            return
         }
 
         showUnityAdInterstitial(unityInterstitialId, object : FrogoUnityAdInterstitialCallback {
