@@ -96,7 +96,8 @@ class PreferenceDelegatesImpl(
                 is Boolean -> putBoolean(key, value)
                 is Float -> putFloat(key, value)
                 is Long -> putLong(key, value)
-                else -> error("Unsupported preference type: ${value!!::class.java}")
+                null -> remove(key)
+                else -> error("Unsupported preference type: ${value::class.java}")
             }
         }
     }
@@ -109,7 +110,8 @@ class PreferenceDelegatesImpl(
             is Boolean -> getBoolean(key, defaultValue)
             is Float -> getFloat(key, defaultValue)
             is Long -> getLong(key, defaultValue)
-            else -> error("Unsupported preference type: ${defaultValue!!::class.java}")
+            null -> error("defaultValue must not be null for generic get()")
+            else -> error("Unsupported preference type: ${defaultValue::class.java}")
         }
         return result as T
     }

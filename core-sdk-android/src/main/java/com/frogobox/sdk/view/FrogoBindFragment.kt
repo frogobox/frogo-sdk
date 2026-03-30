@@ -39,8 +39,8 @@ abstract class FrogoBindFragment<VB : ViewBinding> : FrogoFragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

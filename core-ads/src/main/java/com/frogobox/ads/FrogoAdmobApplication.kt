@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -83,8 +82,6 @@ open class FrogoAdmobApplication : FrogoApplication(),
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onMoveToForeground() {
         // Show the ad (if available) when the app moves to foreground.
-        Log.d(LOG_TAG, "onMoveToForeground")
-        Log.d(LOG_TAG, "AmirIsBack")
         currentActivity?.let {
             appOpenAdManager.showAdIfAvailable(
                 it,

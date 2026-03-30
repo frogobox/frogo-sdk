@@ -41,7 +41,7 @@ class FrogoNotification {
         private val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        private lateinit var notification: Notification
+        private var notification: Notification? = null
 
         private var smallIcon: Int = R.drawable.ic_frogo_notif
 
@@ -350,10 +350,12 @@ class FrogoNotification {
         }
 
         override fun launch(notificationId: Int) {
+            val notif = notification
+                ?: throw IllegalStateException("Must call build() before launch()")
             this.notificationID = notificationId
             Log.d(TAG, "Value of Notification_ID : $notificationId")
             Log.d(TAG, "Successfully Notify Frogo Notification")
-            notificationManager.notify(notificationID, notification)
+            notificationManager.notify(notificationID, notif)
         }
 
     }

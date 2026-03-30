@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-/*
+/**
  * Created by faisalamir on 26/07/21
  * FrogoSDK
  * -----------------------------------------

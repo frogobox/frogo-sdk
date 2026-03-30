@@ -18,8 +18,8 @@ import android.util.Patterns
 
 object FrogoValidator {
 
-    fun isValidText(username: String): Boolean {
-        return username.length > 3
+    fun isValidText(text: String, minLength: Int = 3): Boolean {
+        return text.length >= minLength
     }
 
     fun isValidEmail(username: String): Boolean {
@@ -38,9 +38,12 @@ object FrogoValidator {
         return password == password_conf
     }
 
-    fun onlyCharacter(str: String): Boolean {
+    fun containsSymbolOrDigit(str: String): Boolean {
         val symbols = "0123456789/?!:;%()+-@#$%^&*"
         return str.any { it in symbols }
     }
+
+    @Deprecated("Renamed for clarity", ReplaceWith("containsSymbolOrDigit(str)"))
+    fun onlyCharacter(str: String): Boolean = containsSymbolOrDigit(str)
 
 }

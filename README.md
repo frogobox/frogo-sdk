@@ -13,12 +13,13 @@
 
 This Is Latest Release
 
-    $version_release = 2.3.6
+    $version_release = 2.3.7
 
 What's New??
 
     * Library Update Latest Version *
     * LTS (Long Term Service) *
+    * Migrate AGP 9.1.0 *
 
 ## Download this project
 
@@ -55,7 +56,7 @@ allprojects {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.6'
+    implementation 'com.github.frogobox:frogo-sdk:2.3.7'
 }
 ```
 
@@ -64,14 +65,14 @@ dependencies {
 ```groovy
 dependencies {
     // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.6")
+    implementation("com.github.frogobox:frogo-sdk:2.3.7")
 }
 ```
 
 #### <Option 3> libs.versions.toml
 ```yml
 [versions]
-frogoAndroid = "2.3.6"
+frogoAndroid = "2.3.7"
 
 [libraries]
 frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }

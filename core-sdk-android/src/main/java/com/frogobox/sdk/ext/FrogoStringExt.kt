@@ -18,13 +18,13 @@ import java.util.TimeZone
 
 
 val String.isDigitOnly: Boolean
-    get() = matches(Regex("^\\d*\$"))
+    get() = matches(Regex("^\\d+$"))
 
 val String.isAlphabeticOnly: Boolean
-    get() = matches(Regex("^[a-zA-Z]*\$"))
+    get() = matches(Regex("^[a-zA-Z]+$"))
 
 val String.isAlphanumericOnly: Boolean
-    get() = matches(Regex("^[a-zA-Z\\d]*\$"))
+    get() = matches(Regex("^[a-zA-Z\\d]+$"))
 
 fun String.isEmail(): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(this).matches()
@@ -57,21 +57,14 @@ fun String.toDate(
 ): Date {
     val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
     parser.timeZone = timeZone
-    return parser.parse(this) as Date
+    return parser.parse(this)
+        ?: throw IllegalArgumentException("Cannot parse date string: '$this' with format '$dateFormat'")
 }
 
 fun String.getUserMention(mention: String): String? {
-    val arrays = this.split("@").filter {
-        return@filter this.contains("@$it")
-    }
-
-    arrays.forEach {
-        if (it.contains(mention)) {
-            return it
-        }
-    }
-
-    return null
+    val parts = this.split(" ")
+    return parts.firstOrNull { it.startsWith("@") && it.contains(mention, ignoreCase = true) }
+        ?.removePrefix("@")
 }
 
 fun String.removeLastChar(): String {

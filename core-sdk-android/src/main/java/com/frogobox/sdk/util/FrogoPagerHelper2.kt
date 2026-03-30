@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
-/*
+/**
  * Created by faisalamir on 18/04/22
  * FrogoSDK
  * -----------------------------------------

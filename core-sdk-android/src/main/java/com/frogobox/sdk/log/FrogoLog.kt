@@ -26,7 +26,10 @@ object FrogoLog : ILog {
 
     // Function for get line number of code
     private fun lineNumber(): String {
-        return Thread.currentThread().stackTrace[4].let {
+        val stackTrace = Thread.currentThread().stackTrace
+        val index = 4
+        if (index >= stackTrace.size) return "unknown"
+        return stackTrace[index].let {
             "${it.className.substringAfterLast(".")}.${it.methodName}(${it.fileName}:${it.lineNumber})"
         }
     }

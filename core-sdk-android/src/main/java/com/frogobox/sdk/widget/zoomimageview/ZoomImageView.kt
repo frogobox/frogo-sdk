@@ -154,7 +154,7 @@ class ZoomImageView : AppCompatImageView {
         //
         // Rescales image on rotation
         //
-        if (oldMeasuredHeight == viewWidth && oldMeasuredHeight == viewHeight || viewWidth == 0 || viewHeight == 0) return
+        if (oldMeasuredWidth == viewWidth && oldMeasuredHeight == viewHeight || viewWidth == 0 || viewHeight == 0) return
         oldMeasuredHeight = viewHeight
         oldMeasuredWidth = viewWidth
         if (saveScale == 1f) {
