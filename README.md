@@ -24,11 +24,24 @@ This Is Latest Release
 
     $version_release = 3.0.0
 
-What's New??
+What's New?? (v2.3.7 → v3.0.0)
 
-    * Library Update Latest Version *
-    * LTS (Long Term Service) *
-    * Migrate AGP 9.1.0 *
+    * New Module: frogo-compose-android - Jetpack Compose base classes *
+    * New Module: frogo-compose-ui - 60+ reusable Compose widgets & templates *
+    * New Feature: AI Agent Skill for AI-assisted SDK integration *
+    * Refactor: Modular ad management with automated consent & lifecycle-aware delegates *
+    * Refactor: Clean up logging and optimize ad handling logic *
+    * Enhancement: Core SDK utilities for media playback, piracy protection & notifications *
+    * Enhancement: Kotlin extension functions improvements *
+    * Rename: Module naming convention standardized (core/ui/ext/compose layers) *
+    * Upgrade: AGP 9.1.0 → 9.2.0 *
+    * Upgrade: Google AdMob 25.1.0 → 25.2.0 *
+    * Upgrade: Glide 5.0.5 → 5.0.7 *
+    * Upgrade: Koin 4.2.0 → 4.2.1 *
+    * Upgrade: Compile SDK → 36 *
+    * Added: Jetpack Compose BOM 2026.04.01 *
+    * Added: Coil Compose 3.1.0 for image loading *
+    * Added: Glide Compose 1.0.0-beta01 for image loading *
 
 ## 🌟 Key Features
 
