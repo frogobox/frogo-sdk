@@ -8,7 +8,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
-import java.util.Date
 
 /**
  * Created by Faisal Amir on 24/10/22
@@ -61,7 +60,7 @@ class FrogoAppOpenAdManager {
                 override fun onAdLoaded(ad: AppOpenAd) {
                     appOpenAd = ad
                     isLoadingAd = false
-                    loadTime = Date().time
+                    loadTime = System.currentTimeMillis()
                 }
 
                 /**
@@ -78,7 +77,7 @@ class FrogoAppOpenAdManager {
 
     /** Check if ad was loaded more than n hours ago. */
     private fun wasLoadTimeLessThanNHoursAgo(numHours: Long): Boolean {
-        val dateDifference: Long = Date().time - loadTime
+        val dateDifference: Long = System.currentTimeMillis() - loadTime
         val numMilliSecondsPerHour: Long = 3600000
         return dateDifference < numMilliSecondsPerHour * numHours
     }
@@ -156,8 +155,9 @@ class FrogoAppOpenAdManager {
             return
         }
 
+        val ad = appOpenAd ?: return
 
-        appOpenAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
+        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             /** Called when full screen content is dismissed. */
             override fun onAdDismissedFullScreenContent() {
                 // Set the reference to null so isAdAvailable() returns false.
@@ -184,6 +184,6 @@ class FrogoAppOpenAdManager {
             }
         }
         isShowingAd = true
-        appOpenAd!!.show(activity)
+        ad.show(activity)
     }
 }

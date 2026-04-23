@@ -25,8 +25,8 @@ import com.google.android.ump.UserMessagingPlatform
 object FrogoAdConsent {
 
     fun getCountryCode(context: Context): String {
-        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        return tm.networkCountryIso.uppercase()
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        return tm?.networkCountryIso?.uppercase().orEmpty()
     }
 
     fun listEEACountry(): List<String> {
@@ -100,18 +100,30 @@ object FrogoAdConsent {
     private fun loadForm(consentInformation: ConsentInformation, callback: IFrogoAdConsent) {
         // Loads a consent form. Must be called on the main thread.
         UserMessagingPlatform.loadConsentForm(callback.activity(), { consentForm ->
-            if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
-                consentForm.show(callback.activity()) {
-                    if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
-                        // App can start requesting ads.
-                        callback.onConsentSuccess()
+            when (consentInformation.consentStatus) {
+                ConsentInformation.ConsentStatus.REQUIRED -> {
+                    consentForm.show(callback.activity()) {
+                        if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
+                            // App can start requesting ads.
+                            callback.onConsentSuccess()
+                        }
+                        // Only reload if consent is still required (avoid infinite recursion)
+                        if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
+                            loadForm(consentInformation, callback)
+                        }
                     }
-
-                    // Handle dismissal by reloading form.
-                    loadForm(consentInformation, callback)
                 }
-            } else if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.NOT_REQUIRED) {
-                callback.onNotUsingAdConsent()
+                ConsentInformation.ConsentStatus.NOT_REQUIRED -> {
+                    callback.onNotUsingAdConsent()
+                }
+                ConsentInformation.ConsentStatus.OBTAINED -> {
+                    // Consent already obtained, proceed
+                    callback.onConsentSuccess()
+                }
+                else -> {
+                    // Unknown status, treat as not using consent
+                    callback.onNotUsingAdConsent()
+                }
             }
         }, { formError ->
             // Handle the error.

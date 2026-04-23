@@ -200,7 +200,7 @@ abstract class FrogoAdmobViewAdapter<T> : RecyclerView.Adapter<FrogoAdmobViewHol
     // Notify Data Item Range Inserted
     override fun frogoNotifyItemRangeInserted(data: List<T>, positionStart: Int) {
         listData.addAll(positionStart, data)
-        notifyItemRangeChanged(positionStart, data.size)
+        notifyItemRangeInserted(positionStart, data.size)
     }
 
     // Notify Data Item Range Removed
@@ -212,8 +212,10 @@ abstract class FrogoAdmobViewAdapter<T> : RecyclerView.Adapter<FrogoAdmobViewHol
     // Notify Data Item Removed
     override fun frogoNotifyItemRemoved(item: T) {
         val index = listData.indexOf(item)
-        listData.remove(item)
-        notifyItemRemoved(index)
+        if (index != -1) {
+            listData.removeAt(index)
+            notifyItemRemoved(index)
+        }
     }
 
 

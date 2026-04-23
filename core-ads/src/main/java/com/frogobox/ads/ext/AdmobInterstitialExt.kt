@@ -35,7 +35,7 @@ fun InterstitialAd.showAd(
     callback: FrogoAdmobInterstitialCallback?
 ) {
 
-    if (interstitialAdUnitId != "") {
+    if (interstitialAdUnitId.isNotBlank()) {
 
         callback?.onShowAdRequestProgress(
             TAG,
@@ -48,11 +48,7 @@ fun InterstitialAd.showAd(
             adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
         }
 
-        if (keyword != null) {
-            for (i in keyword.indices) {
-                adRequest.addKeyword(keyword[i])
-            }
-        }
+        keyword?.forEach { adRequest.addKeyword(it) }
 
         load(
             activity,

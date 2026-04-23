@@ -34,7 +34,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
         callback: FrogoAdInterstitialCallback
     ) {
 
-        if (admobInterstitialId == "") {
+        if (admobInterstitialId.isBlank()) {
             showUnityAdInterstitial(unityInterstitialId, object : FrogoUnityAdInterstitialCallback {
                 override fun onClicked(tag: String, message: String) {
                     callback.onClicked(tag, message)
@@ -79,7 +79,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                 }
 
                 override fun onAdFailed(tag: String, errorMessage: String) {
-                    if (unityInterstitialId == "") {
+                    if (unityInterstitialId.isBlank()) {
                         callback.onAdFailed(tag, errorMessage)
                     } else {
                         showUnityAdInterstitial(unityInterstitialId,
@@ -135,7 +135,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
         callback: FrogoAdInterstitialCallback
     ) {
 
-        if (admobInterstitialId == "") {
+        if (admobInterstitialId.isBlank()) {
             showUnityAdInterstitial(unityInterstitialId, object : FrogoUnityAdInterstitialCallback {
                 override fun onClicked(tag: String, message: String) {
                     callback.onClicked(tag, message)
@@ -181,7 +181,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                 }
 
                 override fun onAdFailed(tag: String, errorMessage: String) {
-                    if (unityInterstitialId == "") {
+                    if (unityInterstitialId.isBlank()) {
                         callback.onAdFailed(tag, errorMessage)
                     } else {
                         showUnityAdInterstitial(unityInterstitialId,
@@ -239,7 +239,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
         callback: FrogoAdInterstitialCallback
     ) {
 
-        if (unityInterstitialId == "") {
+        if (unityInterstitialId.isBlank()) {
             showAdInterstitial(admobInterstitialId,
                 object : FrogoAdmobInterstitialCallback {
                     override fun onShowAdRequestProgress(tag: String, message: String) {
@@ -275,7 +275,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
             }
 
             override fun onAdFailed(tag: String, errorMessage: String) {
-                if (admobInterstitialId == "") {
+                if (admobInterstitialId.isBlank()) {
                     callback.onAdFailed(tag, errorMessage)
                 } else {
                     showAdInterstitial(admobInterstitialId,
@@ -336,7 +336,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
         callback: FrogoAdInterstitialCallback
     ) {
 
-        if (unityInterstitialId == "") {
+        if (unityInterstitialId.isBlank()) {
             showAdInterstitial(admobInterstitialId,
                 timeout,
                 object : FrogoAdmobInterstitialCallback {
@@ -373,7 +373,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
             }
 
             override fun onAdFailed(tag: String, errorMessage: String) {
-                if (admobInterstitialId == "") {
+                if (admobInterstitialId.isBlank()) {
                     callback.onAdFailed(tag, errorMessage)
                 } else {
                     showAdInterstitial(admobInterstitialId,

@@ -4,9 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.core.FrogoAppOpenAdManager
@@ -28,7 +27,7 @@ import kotlinx.coroutines.launch
 
 
 open class FrogoAdmobApplication : FrogoApplication(),
-    Application.ActivityLifecycleCallbacks, LifecycleObserver {
+    Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
 
     companion object {
         const val LOG_TAG = "FrogoAdmobApplication"
@@ -38,7 +37,7 @@ open class FrogoAdmobApplication : FrogoApplication(),
     private var currentActivity: Activity? = null
 
     override fun onCreate() {
-        super.onCreate()
+        super<FrogoApplication>.onCreate()
         registerActivityLifecycleCallbacks(this)
 
         val backgroundScope = CoroutineScope(Dispatchers.IO)
@@ -72,15 +71,19 @@ open class FrogoAdmobApplication : FrogoApplication(),
 
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
-    override fun onActivityDestroyed(activity: Activity) {}
+    override fun onActivityDestroyed(activity: Activity) {
+        // Clear the reference to avoid Activity memory leak
+        if (currentActivity === activity) {
+            currentActivity = null
+        }
+    }
 
     open fun getAdOpenAppUnitId(context: Context?): String {
         return ""
     }
 
-    /** LifecycleObserver method that shows the app open ad when the app moves to foreground. */
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onMoveToForeground() {
+    /** DefaultLifecycleObserver method that shows the app open ad when the app moves to foreground. */
+    override fun onStart(owner: LifecycleOwner) {
         // Show the ad (if available) when the app moves to foreground.
         currentActivity?.let {
             appOpenAdManager.showAdIfAvailable(

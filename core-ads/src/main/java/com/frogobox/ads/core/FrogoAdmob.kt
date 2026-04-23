@@ -103,16 +103,9 @@ object FrogoAdmob : IFrogoAdmob,
             adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
         }
 
-        if (keyword != null) {
-            for (i in keyword.indices) {
-                adRequest.addKeyword(keyword[i])
-            }
-        }
-        if (callback != null) {
-            mAdView.adListener = frogoAdListener(callback)
-        } else {
-            mAdView.adListener = frogoAdListener(null)
-        }
+        keyword?.forEach { adRequest.addKeyword(it) }
+
+        mAdView.adListener = frogoAdListener(callback)
 
         mAdView.loadAd(adRequest.build())
     }
@@ -163,7 +156,7 @@ object FrogoAdmob : IFrogoAdmob,
         keyword: List<String>?,
         callback: FrogoAdmobBannerCallback?
     ) {
-        if (bannerAdUnitId != "") {
+        if (bannerAdUnitId.isNotBlank()) {
 
             val mAdView = AdView(context)
 
@@ -173,21 +166,12 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
             }
 
-            if (keyword != null) {
-                for (i in keyword.indices) {
-                    adRequest.addKeyword(keyword[i])
-                }
-            }
+            keyword?.forEach { adRequest.addKeyword(it) }
 
             mAdView.apply {
                 adUnitId = bannerAdUnitId
                 setAdSize(mAdsSize)
-
-                adListener = if (callback != null) {
-                    frogoAdListener(callback)
-                } else {
-                    frogoAdListener(null)
-                }
+                adListener = frogoAdListener(callback)
             }
 
             container.addView(mAdView)
@@ -304,7 +288,7 @@ object FrogoAdmob : IFrogoAdmob,
         keyword: List<String>?,
         callback: FrogoAdmobInterstitialCallback?
     ) {
-        if (interstitialAdUnitId != "") {
+        if (interstitialAdUnitId.isNotBlank()) {
 
             callback?.onShowAdRequestProgress(TAG, "$TAG [Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onShowAdRequestProgress()")
 
@@ -314,11 +298,7 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
             }
 
-            if (keyword != null) {
-                for (i in keyword.indices) {
-                    adRequest.addKeyword(keyword[i])
-                }
-            }
+            keyword?.forEach { adRequest.addKeyword(it) }
 
             InterstitialAd.load(
                 activity,
@@ -345,7 +325,7 @@ object FrogoAdmob : IFrogoAdmob,
                                 }
 
                                 override fun onAdShowedFullScreenContent() {
-                                    callback?.onHideAdRequestProgress(TAG, "$TAG [Interstitial] >> Succes - onHideAdRequestProgress [message] : Ad showed fullscreen content")
+                                    callback?.onHideAdRequestProgress(TAG, "$TAG [Interstitial] >> Success - onHideAdRequestProgress [message] : Ad showed fullscreen content")
                                     callback?.onAdShowed(TAG, "Interstitial Ad showed fullscreen content")
                                 }
                             }
@@ -427,7 +407,7 @@ object FrogoAdmob : IFrogoAdmob,
         keyword: List<String>?,
         callback: FrogoAdmobRewardedCallback
     ) {
-        if (mAdUnitIdRewarded != "") {
+        if (mAdUnitIdRewarded.isNotBlank()) {
 
             callback.onShowAdRequestProgress(TAG, "$TAG [RewardedAd] >> Run - FrogoAdmobRewardedCallback [callback] : onShowAdRequestProgress()")
 
@@ -437,11 +417,7 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
             }
 
-            if (keyword != null) {
-                for (i in keyword.indices) {
-                    adRequest.addKeyword(keyword[i])
-                }
-            }
+            keyword?.forEach { adRequest.addKeyword(it) }
 
             RewardedAd.load(
                 activity,
@@ -467,7 +443,7 @@ object FrogoAdmob : IFrogoAdmob,
                                 }
 
                                 override fun onAdShowedFullScreenContent() {
-                                    callback.onHideAdRequestProgress(TAG, "$TAG [RewardedAd] >> Succes - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdShowedFullScreenContent")
+                                    callback.onHideAdRequestProgress(TAG, "$TAG [RewardedAd] >> Success - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdShowedFullScreenContent")
                                     callback.onAdShowed(TAG, "Rewarded Ad showed fullscreen content")
                                 }
                             }
@@ -518,7 +494,7 @@ object FrogoAdmob : IFrogoAdmob,
         keyword: List<String>?,
         callback: FrogoAdmobRewardedCallback
     ) {
-        if (mAdUnitIdRewardedInterstitial != "") {
+        if (mAdUnitIdRewardedInterstitial.isNotBlank()) {
 
             callback.onShowAdRequestProgress(TAG, "$TAG [RewardedInterstitial] >> Run - FrogoAdmobRewardedCallback [callback] : onShowAdRequestProgress()")
 
@@ -528,11 +504,7 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequest.setHttpTimeoutMillis(timeoutMilliSecond)
             }
 
-            if (keyword != null) {
-                for (i in keyword.indices) {
-                    adRequest.addKeyword(keyword[i])
-                }
-            }
+            keyword?.forEach { adRequest.addKeyword(it) }
 
             RewardedInterstitialAd.load(
                 activity,
