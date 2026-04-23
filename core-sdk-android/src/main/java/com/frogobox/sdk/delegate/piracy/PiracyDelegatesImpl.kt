@@ -39,8 +39,18 @@ class PiracyDelegatesImpl : PiracyDelegates {
 
     private var piracyCheckerIsDebug = true
     private var piracyCheckerDisplay = Display.DIALOG
-    private lateinit var piracyDelegateContext: Context
-    private lateinit var piracyDelegateActivity: AppCompatActivity
+    private var piracyDelegateContext: Context? = null
+    private var piracyDelegateActivity: AppCompatActivity? = null
+
+    private fun requireContext(): Context {
+        return piracyDelegateContext
+            ?: error("Must call setupPiracyDelegate() before using piracy checker")
+    }
+
+    private fun requireActivity(): AppCompatActivity {
+        return piracyDelegateActivity
+            ?: error("Must call setupPiracyDelegate() with a non-null activity")
+    }
 
     override fun setupPiracyDelegatesDebug(isDebug: Boolean) {
         piracyCheckerIsDebug = isDebug
@@ -58,17 +68,16 @@ class PiracyDelegatesImpl : PiracyDelegates {
 
     override fun setupPiracyDelegate(context: Context, activity: AppCompatActivity?) {
         piracyDelegateContext = context
-        if (activity != null) {
-            piracyDelegateActivity = activity
-        }
+        piracyDelegateActivity = activity
     }
 
     override fun connectPiracyChecker(callback: PiracyCallback?) {
+        val ctx = requireContext()
 
         if (callback != null) {
             if (piracyCheckerIsDebug) {
                 showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
-                showLogD<PiracyDelegatesImpl>("InstallerId  : ${piracyDelegateContext.getInstallerId()}")
+                showLogD<PiracyDelegatesImpl>("InstallerId  : ${ctx.getInstallerId()}")
                 showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
                 showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
                 showLogD<PiracyDelegatesImpl>("Please setupDebugMode() to false if using FrogoActivity")
@@ -83,11 +92,6 @@ class PiracyDelegatesImpl : PiracyDelegates {
         } else {
             if (piracyCheckerIsDebug) {
                 showLogD<PiracyDelegatesImpl>("Connecting Piracy Checker")
-                showLogD<PiracyDelegatesImpl>("InstallerId  : ${piracyDelegateContext.getInstallerId()}")
-                showLogD<PiracyDelegatesImpl>("Debut State : Is Debug")
-                showLogD<PiracyDelegatesImpl>("Please call setupPiracyDelegateDebug(<Debug Status>) first")
-                showLogD<PiracyDelegatesImpl>("Please call setupDebugMode() set to false if using FrogoActivity")
-                showLogD<PiracyDelegatesImpl>("Please set build variant to release")
             } else {
                 if (isEmulator()) {
                     showPiracedDialog(piracyMessage(true))
@@ -102,13 +106,13 @@ class PiracyDelegatesImpl : PiracyDelegates {
 
     override fun showPiracedDialog(message: PiracyMessage, callback: PiracyCallback?) {
         SimpleDialogUtil.create(
-            piracyDelegateContext,
+            requireContext(),
             message.title,
             message.description,
             object : SimpleDialogUtil.OnDialogClickListener {
                 override fun positiveButton() {
                     callback?.doOnPirated(message)
-                    piracyDelegateActivity.finishAffinity()
+                    requireActivity().finishAffinity()
                 }
 
                 override fun negativeButton() {
@@ -169,18 +173,19 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun readSignature() {
+        val ctx = requireContext()
         val dialogMessage = StringBuilder()
-        piracyDelegateContext.apkSignatures.forEach {
+        ctx.apkSignatures.forEach {
             dialogMessage.append("* ").append(it).append("\n")
         }
-        AlertDialog.Builder(piracyDelegateContext)
+        AlertDialog.Builder(ctx)
             .setTitle("APK")
             .setMessage(dialogMessage.toString())
             .show()
     }
 
     override fun verifySignature(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableSigningCertificates("478yYkKAQF+KST8y4ATKvHkYibo=") // Wrong signature
                 // enableSigningCertificates("VHZs2aiTBiap/F+AYhYeppy0aF0=") // Right signature
@@ -199,13 +204,13 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun showApkSignatures() {
-        piracyDelegateContext.apkSignatures.forEach {
+        requireContext().apkSignatures.forEach {
             showLogD<PiracyDelegatesImpl>("Signature This Apps : $it")
         }
     }
 
     override fun verifyInstallerId(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableInstallerId(
                     InstallerID.GOOGLE_PLAY,
@@ -233,7 +238,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun verifyUnauthorizedApps(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableUnauthorizedAppsCheck()
                 blockIfUnauthorizedAppUninstalled("license_checker", "block")
@@ -253,7 +258,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun verifyStores(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableStoresCheck()
                 callback {
@@ -269,7 +274,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun verifyDebug(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableDebugCheck()
                 callback {
@@ -285,7 +290,7 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun verifyEmulator(callback: PiracyCallback?) {
-        piracyDelegateContext.piracyChecker {
+        requireContext().piracyChecker {
             if (callback != null) {
                 enableEmulatorCheck(true)
                 callback {
@@ -301,15 +306,16 @@ class PiracyDelegatesImpl : PiracyDelegates {
     }
 
     override fun piracyMessage(isEmulator: Boolean): PiracyMessage {
+        val ctx = requireContext()
         return if (isEmulator) {
             PiracyMessage(
-                title = piracyDelegateContext.getString(R.string.piracy_message_emu_title),
-                description = piracyDelegateContext.getString(R.string.piracy_message_emu_desc)
+                title = ctx.getString(R.string.piracy_message_emu_title),
+                description = ctx.getString(R.string.piracy_message_emu_desc)
             )
         } else {
             PiracyMessage(
-                title = piracyDelegateContext.getString(R.string.piracy_message_title),
-                description = piracyDelegateContext.getString(R.string.piracy_message_desc)
+                title = ctx.getString(R.string.piracy_message_title),
+                description = ctx.getString(R.string.piracy_message_desc)
             )
         }
     }

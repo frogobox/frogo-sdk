@@ -7,6 +7,7 @@ import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.Resource
 import com.frogobox.coresdk.source.ResourceState
+import com.frogobox.sdk.log.FLog
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -68,7 +69,8 @@ fun <T : Any> Observable<T>.doApiRequestResult(
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = Resource.Loading()
+            // BUG FIX: doOnSubscribe runs on IO thread, must use postValue
+            result.postValue(Resource.Loading())
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : Observer<T>{
@@ -131,7 +133,8 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = Resource.Loading()
+            // BUG FIX: doOnSubscribe runs on IO thread, must use postValue
+            result.postValue(Resource.Loading())
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : SingleObserver<T>{
@@ -149,8 +152,8 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
         })
 }
 
-fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
-    subscribeOn(Schedulers.io())
+fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>): Disposable {
+    return subscribeOn(Schedulers.io())
         .doOnSubscribe {
             callback.onShowProgress()
         }
@@ -168,9 +171,9 @@ fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>) {
 
 // -------------------------------------------------------------------------------------------------
 
-fun Completable.executeRoomDB(callback: FrogoStateResponse) {
+fun Completable.executeRoomDB(callback: FrogoStateResponse): Disposable {
     callback.onShowProgress()
-    subscribeOn(Schedulers.io())
+    return subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             callback.onHideProgress()
@@ -183,10 +186,11 @@ fun Completable.executeRoomDB(callback: FrogoStateResponse) {
         }
 }
 
-fun Completable.executeRoomDBResult(result: MutableLiveData<ResourceState>) {
-    subscribeOn(Schedulers.io())
+fun Completable.executeRoomDBResult(result: MutableLiveData<ResourceState>): Disposable {
+    return subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            result.value = ResourceState.Loading()
+            // BUG FIX: doOnSubscribe runs on IO thread, must use postValue
+            result.postValue(ResourceState.Loading())
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
@@ -196,9 +200,9 @@ fun Completable.executeRoomDBResult(result: MutableLiveData<ResourceState>) {
         }
 }
 
-fun Completable.executePreference(callback: FrogoStateResponse) {
+fun Completable.executePreference(callback: FrogoStateResponse): Disposable {
     callback.onShowProgress()
-    subscribeOn(Schedulers.io())
+    return subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             callback.onSuccess()
@@ -211,9 +215,9 @@ fun Completable.executePreference(callback: FrogoStateResponse) {
         }
 }
 
-fun Completable.executeAction(callback: FrogoStateResponse) {
+fun Completable.executeAction(callback: FrogoStateResponse): Disposable {
     callback.onShowProgress()
-    subscribeOn(Schedulers.io())
+    return subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             callback.onSuccess()

@@ -136,7 +136,12 @@ fun Context.singleGetSharedPreferences(name: String): SharedPreferences {
 
 fun Context.getInstallerId(): String? {
     return try {
-        packageManager.getInstallerPackageName(packageName)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            packageManager.getInstallSourceInfo(packageName).installingPackageName
+        } else {
+            @Suppress("DEPRECATION")
+            packageManager.getInstallerPackageName(packageName)
+        }
     } catch (e: Exception) {
         FLog.e("$TAG : getInstallerId failed - ${e.message.orEmpty()}")
         null

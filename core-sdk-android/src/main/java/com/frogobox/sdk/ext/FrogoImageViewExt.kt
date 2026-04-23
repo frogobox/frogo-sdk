@@ -4,6 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 
 
 /**
@@ -58,8 +59,10 @@ fun ImageView.setImageCompressExt(uri: Any?, placeHolder: Int? = null) {
             is Int,
             is ByteArray,
             -> {
+                val w = if (this.width > 0) this.width else Target.SIZE_ORIGINAL
+                val h = if (this.height > 0) this.height else Target.SIZE_ORIGINAL
                 val option = RequestOptions()
-                    .override(this.width, this.height)
+                    .override(w, h)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
 
                 if (placeHolder != null) {

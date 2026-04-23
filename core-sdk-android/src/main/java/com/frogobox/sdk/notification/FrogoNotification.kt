@@ -297,9 +297,7 @@ class FrogoNotification {
 
             if (inboxStyle != null) {
                 notificationBuilder.setStyle(inboxStyle)
-            }
-
-            if (style != null) {
+            } else if (style != null) {
                 notificationBuilder.setStyle(style)
             }
 
@@ -310,6 +308,8 @@ class FrogoNotification {
             if (isAutoCancel) {
                 notificationBuilder.setAutoCancel(isAutoCancel)
             }
+
+            notificationBuilder.setShowWhen(isShowWhen)
 
             if (isPriorityHigh) {
                 notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH)

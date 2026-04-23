@@ -22,18 +22,25 @@ class FrogoMusic(
 
     private var musicPlayer: MediaPlayer? = MediaPlayer.create(context, musicFile)
 
+    private fun ensurePlayer(): MediaPlayer {
+        if (musicPlayer == null) {
+            musicPlayer = MediaPlayer.create(context, musicFile)
+        }
+        return musicPlayer ?: throw IllegalStateException("Failed to create MediaPlayer")
+    }
+
     override fun getMusicPlayer(): MediaPlayer {
-        return musicPlayer ?: throw IllegalStateException("MediaPlayer has been released")
+        return ensurePlayer()
     }
 
     override fun playMusic(isLooping: Boolean) {
-        musicPlayer?.apply {
+        ensurePlayer().apply {
             this.isLooping = isLooping
-        }?.start()
+        }.start()
     }
 
     override fun playMusic() {
-        musicPlayer?.start()
+        ensurePlayer().start()
     }
 
     override fun stopMusic() {
