@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.0"
+agp = "9.2.0"
 kotlin = "2.3.20"
 ksp = "2.3.6"
 androidMavenGradlePlugin = "2.1"
@@ -13,7 +13,7 @@ viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.8.4"
 work = "2.11.2"
-googleAdmob = "25.1.0" # https://developers.google.com/admob/android/quick-start
+googleAdmob = "25.2.0" # https://developers.google.com/admob/android/quick-start
 unityAd = "4.17.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
@@ -24,15 +24,18 @@ retrofit = "3.0.0"
 rxandroid3 = "3.0.2"
 rxjava3 = "3.1.12"
 chucker = "4.3.1"
-glide = "5.0.5"
-glideCompiler = "5.0.5"
+glide = "5.0.7"
+glideCompiler = "5.0.7"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-koin = "4.2.0"
+koin = "4.2.1"
 
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxCoroutinesAndroid = "1.10.2"
 kotlinxCoroutinesTest = "1.10.2"
+composeBom = "2026.04.01"
+coil = "3.1.0"
+glideCompose = "1.0.0-beta01"
 
 [libraries]
 # Android Kit
@@ -57,6 +60,17 @@ androidx-lifecycle-compiler = { group = "androidx.lifecycle", name = "lifecycle-
 
 androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewPager2" }
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "liveCycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "liveCycle" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomKtx" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
@@ -94,6 +108,10 @@ github-glide = { group = "com.github.bumptech.glide", name = "glide", version.re
 github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glideCompiler" }
 github-customactivityoncrash = { group = "cat.ereza", name = "customactivityoncrash", version.ref = "customactivityoncrash" }
 github-circleimageview =  { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+glide-compose = { group = "com.github.bumptech.glide", name = "compose", version.ref = "glideCompose" }
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }

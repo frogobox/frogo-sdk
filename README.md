@@ -1,106 +1,111 @@
-## About This Project (release 👷🔧️👷‍♀️⛏)
+# Frogo SDK 🚀
+### The Ultimate Android & Desktop Development Toolkit
 
-[![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
+![Frogo SDK Hero Banner](docs/image/hero_banner.png)
+
+[![JitPack](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 [![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
-[![pages-build-deployment](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
+[![License](https://img.shields.io/github/license/frogobox/frogo-sdk?style=flat-square)](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-- SDK for anything your problem to make easier developing android apps
-- Available for android and desktop
-- Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
-- License [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
+**Frogo SDK** is a comprehensive suite of Android libraries designed to accelerate your development workflow. From stunning Jetpack Compose UIs to seamless AdMob integration, Frogo SDK provides the building blocks you need to create high-quality apps faster.
 
-## Version Release
+---
 
-This Is Latest Release
+## 🌟 Key Features
 
-    $version_release = 2.3.6
+- **🎨 Frogo Compose UI**: 60+ reusable Jetpack Compose widgets and professional templates.
+- **📢 Frogo Ext Ads**: Simplify AdMob integration with easy-to-use wrappers for Banner, Interstitial, and Native ads.
+- **♻️ Frogo UI RecyclerView**: Advanced RecyclerView helpers for painless list management.
+- **🛠️ Frogo Core**: Essential utilities, base classes, and extensions for Kotlin development.
+- **📱 Multi-Platform**: Available for both Android and Desktop environments.
 
-What's New??
+---
 
-    * Library Update Latest Version *
-    * LTS (Long Term Service) *
+## 📸 Screenshots & Mockups
 
-## Download this project
+### Premium Jetpack Compose Components
+![Frogo Compose UI Mockup](docs/image/compose_ui_mockup.png)
+*Beautiful, modern, and highly customizable UI components following Material Design 3.*
 
-### Step 1. Add the JitPack repository to your build file (build.gradle : Project)
+### Seamless Ad Integration
+![Frogo Ads Mockup](docs/image/ads_mockup.png)
+*Monetize your apps effortlessly with optimized ad placements.*
 
-#### <Option 1> Groovy Gradle
+---
 
-    // Add it in your root build.gradle at the end of repositories:
+## 🚀 Quick Start
 
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
-    }
-
-#### <Option 2> Kotlin DSL Gradle
+### Step 1: Add JitPack Repository
+Add it to your `settings.gradle.kts` (or root `build.gradle`):
 
 ```kotlin
-// Add it in your root build.gradle.kts at the end of repositories:
-
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        ...
+        google()
+        mavenCentral()
         maven("https://jitpack.io")
     }
 }
 ```
 
-### Step 2. Add the dependency (build.gradle : Module)
+### Step 2: Add Dependencies
+Latest Version: `2.3.7`
 
-#### <Option 1> Groovy Gradle
-
-```groovy
+```kotlin
 dependencies {
-    // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.6'
+    // Core SDK
+    implementation("com.github.frogobox:frogo-sdk:2.3.7")
+
+    // Or specific modules (recommended)
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:2.3.7")
 }
 ```
 
-#### <Option 2> Kotlin DSL Gradle
+---
 
-```groovy
-dependencies {
-    // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.6")
-}
-```
+## 📦 Modules Overview
 
-#### <Option 3> libs.versions.toml
-```yml
-[versions]
-frogoAndroid = "2.3.6"
+| Module | Description | Key Features |
+| :--- | :--- | :--- |
+| `frogo-compose-ui` | Modern UI Kit | Widgets, Dialogs, Bottom Sheets, Scaffolds |
+| `frogo-ext-ads` | Monetization Kit | Easy AdMob Integration (Banner, Interstitial, Native) |
+| `frogo-ui-recyclerview` | List Management | Multi-view adapters, simplified ViewHolders |
+| `frogo-core-android` | Core Utilities | Extensions, Base Classes, Lifecycle Helpers |
 
-[libraries]
-frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }
+---
 
-dependencies {
-    // library frogo-android
-    implementation(libs.frogobox.android)
-}
-```
+## 🤝 Contributing
 
-## Colaborator
+We welcome contributions! Whether you're fixing a bug or suggesting a new feature, your help is appreciated.
 
-Very open to anyone, I'll write your name under this, please contribute by sending an email to me
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- Mail To faisalamircs@gmail.com
-- Subject : Github _ [Github-Username-Account] _ [Language] _ [Repository-Name]
-- Example : Github_amirisback_kotlin_admob-helper-implementation
+---
 
-Name Of Contribute
+## 📄 License & Privacy
 
-- Muhammad Faisal Amir
-- Waiting List
-- Waiting List
+- **License**: Distributed under the [Apache 2.0 License](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE).
+- **Privacy Policy**: Read our policy [here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md).
 
-Waiting for your contribute
+---
 
-## Attention !!!
+## 📬 Contact
 
-- Please enjoy and don't forget fork and give a star
-- Don't Forget Follow My Github Account
+**Muhammad Faisal Amir** - [faisalamircs@gmail.com](mailto:faisalamircs@gmail.com)
 
-![ScreenShoot Apps](docs/image/mad_score.png?raw=true)
+Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobox/frogo-sdk)
+
+---
+
+<!-- SEO Keywords (Hidden) -->
+<!-- 
+Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, RecyclerView Adapter, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
+-->
+

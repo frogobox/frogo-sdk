@@ -1,0 +1,40 @@
+package com.frogobox.ads.ui
+
+import androidx.viewbinding.ViewBinding
+import com.frogobox.ads.delegate.AdmobDelegates
+import com.frogobox.ads.delegate.AdmobDelegatesImpl
+import com.frogobox.sdk.view.FrogoBindActivity
+import androidx.lifecycle.lifecycleScope
+
+
+/**
+ * Created by faisalamir on 01/03/22
+ * FrogoAdmob
+ * -----------------------------------------
+ * Name     : Muhammad Faisal Amir
+ * E-mail   : faisalamircs@gmail.com
+ * Github   : github.com/amirisback
+ * -----------------------------------------
+ * Copyright (C) 2022 Frogobox Media Inc.      
+ * All rights reserved
+ *
+ */
+
+
+abstract class FrogoAdmobBindActivity<VB : ViewBinding> : FrogoBindActivity<VB>(),
+    AdmobDelegates by AdmobDelegatesImpl() {
+
+    companion object {
+        val TAG: String = FrogoAdmobBindActivity::class.java.simpleName
+    }
+
+    override fun setupMonetized() {
+        super.setupMonetized()
+        setupAdmobDelegates(this)
+        lifecycleScope.launchWhenCreated {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            setupAdmobApp()
+        }
+    }
+
+}

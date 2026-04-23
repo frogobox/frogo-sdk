@@ -18,25 +18,39 @@ object ProjectSetting {
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
 
+    // Layer Prefixes
+    private const val LAYER_CORE = "core"
+    private const val LAYER_UI = "ui"
+    private const val LAYER_EXT = "ext"
+    private const val LAYER_COMPOSE = "compose"
+
+    // Module Names (Directory & Gradle Include)
+    const val MODULE_NAME_CORE_SDK = "frogo-$LAYER_CORE"
+    const val MODULE_NAME_SDK = "frogo-$LAYER_CORE-android"
+    const val MODULE_NAME_SDK_UTIL = "frogo-$LAYER_CORE-android-util"
+    const val MODULE_NAME_COMPOSE = "frogo-$LAYER_COMPOSE-android"
+    const val MODULE_NAME_COMPOSE_UI = "frogo-$LAYER_COMPOSE-ui"
+
+    const val MODULE_NAME_CORE_UI = "frogo-$LAYER_UI-base"
+    const val MODULE_NAME_UI_RECYCLER = "frogo-$LAYER_UI-recyclerview"
+
+    const val MODULE_NAME_AD = "frogo-$LAYER_EXT-ads"
+
+    // Library Names (For Package ID / Namespace)
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
     const val LIBRARY_NAME_SDK_UTIL = "sdkutil"
-
-    const val MODULE_NAME_CORE_SDK = "core-sdk"
-    const val MODULE_NAME_SDK = "core-sdk-android"
-    const val MODULE_NAME_SDK_UTIL = "core-sdk-android-util"
-
     const val LIBRARY_NAME_UI = "ui"
-    const val MODULE_NAME_CORE_UI = "core-ui-android"
-
+    const val LIBRARY_NAME_UI_RECYCLER = "recycler"
     const val LIBRARY_NAME_AD = "ads"
-    const val MODULE_NAME_AD = "core-ads"
+    const val LIBRARY_NAME_COMPOSE = "compose"
+    const val LIBRARY_NAME_COMPOSE_UI = "composeui"
 
     // ---------------------------------------------------------------------------------------------
 
     const val VERSION_MAJOR = 2
     const val VERSION_MINOR = 3
-    const val VERSION_PATCH = 6
+    const val VERSION_PATCH = 7
 
     // ---------------------------------------------------------------------------------------------
 
@@ -56,8 +70,11 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
+    const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE"
+    const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
 
     const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
+    const val PROJECT_LIB_ID_UI_RECYCLER = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI_RECYCLER"
 
     const val PROJECT_LIB_ID_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_AD"
 
