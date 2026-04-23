@@ -9,7 +9,7 @@ plugins {
 android {
 
     compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
-    namespace = LibrarySetting.NAME_SPACE
+    namespace = ProjectSetting.PROJECT_LIB_ID_UI_RECYCLER
 
     defaultConfig {
         minSdk = ProjectSetting.PROJECT_MIN_SDK
@@ -74,8 +74,8 @@ afterEvaluate {
 
             repositories {
                 maven {
-                    name = LibrarySetting.LIB_NAME
-                    url = uri(LibrarySetting.MAVEN_URI)
+                    name = ProjectSetting.MODULE_NAME_UI_RECYCLER
+                    url = uri(ProjectSetting.URI_PACKAGE_LIB)
                     credentials {
                         username = project.findProperty("gpr.user") as String? ?: ""
                         password = project.findProperty("gpr.key") as String? ?: ""
@@ -92,11 +92,11 @@ afterEvaluate {
 
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
-                groupId = LibrarySetting.GROUP_ID
+                groupId = ProjectSetting.BASE_PACAKGE_NAME
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
-                artifactId = LibrarySetting.ARTIFACT_ID
+                artifactId = ProjectSetting.MODULE_NAME_UI_RECYCLER
 
                 // Version Library Name (Example : "1.0.0")
                 version = ProjectSetting.PROJECT_VERSION_NAME

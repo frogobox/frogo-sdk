@@ -20,7 +20,7 @@ object DependencyGradle {
     // dependencies version
     const val FROGO_PATH_UI = ":${ProjectSetting.MODULE_NAME_CORE_UI}"
 
-    const val FROGO_PATH_RECYCLER_VIEW = ":frogorecyclerview"
+    const val FROGO_PATH_RECYCLER_VIEW = ":${ProjectSetting.MODULE_NAME_UI_RECYCLER}"
 
     const val MODULE_LIB_FROGO_AD = ":${ProjectSetting.MODULE_NAME_AD}"
 
