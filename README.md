@@ -129,64 +129,64 @@ Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Co
 
 ## 🤖 AI Agent Skill
 
-Frogo SDK menyediakan **AI Agent Skill** yang memungkinkan AI coding assistant (seperti Antigravity, Gemini, dll.) memahami dan mengintegrasikan seluruh modul Frogo SDK secara otomatis ke project Android kamu.
+Frogo SDK provides an **AI Agent Skill** that enables AI coding assistants (such as Antigravity, Gemini, etc.) to understand and automatically integrate all Frogo SDK modules into your Android project.
 
-### Apa itu AI Agent Skill?
+### What is AI Agent Skill?
 
-AI Agent Skill adalah sebuah folder instruksi, contoh kode, dan referensi API yang memperluas kemampuan AI agent untuk tugas-tugas khusus. Dengan skill ini, AI agent bisa:
+AI Agent Skill is a folder of instructions, code examples, and API references that extends the capabilities of an AI agent for specialized tasks. With this skill, the AI agent can:
 
-- ✅ **Otomatis setup** dependency Frogo SDK ke project baru
-- ✅ **Generate kode** yang benar menggunakan API Frogo SDK
-- ✅ **Memahami arsitektur** multi-modul dan pattern yang digunakan
-- ✅ **Troubleshoot** masalah integrasi dengan solusi yang tepat
+- ✅ **Automatically set up** Frogo SDK dependencies in a new project
+- ✅ **Generate correct code** using the Frogo SDK API
+- ✅ **Understand the architecture** of multi-module structure and design patterns used
+- ✅ **Troubleshoot** integration issues with accurate solutions
 
-### Struktur Skill
+### Skill Structure
 
 ```
 skills/frogo-sdk/
-├── SKILL.md                              # Instruksi utama untuk AI Agent
+├── SKILL.md                              # Main instructions for AI Agent
 └── references/
-    ├── compose-ui-reference.md           # API 60+ Jetpack Compose widgets
+    ├── compose-ui-reference.md           # API for 60+ Jetpack Compose widgets
     ├── core-android-reference.md         # Base classes & extension functions
     ├── ads-reference.md                  # AdMob & Unity Ads integration API
     └── recyclerview-reference.md         # RecyclerView widgets API
 ```
 
-### Cara Install Skill
+### How to Install the Skill
 
-#### Metode 1: Copy Manual
+#### Method 1: Manual Copy
 
-Copy folder `skills/frogo-sdk/` ke direktori skills AI agent kamu:
+Copy the `skills/frogo-sdk/` folder to your AI agent's skills directory:
 
 ```bash
-# Untuk Antigravity Agent
+# For Antigravity Agent
 cp -r skills/frogo-sdk/ ~/.gemini/antigravity/skills/frogo-sdk/
 
-# Untuk custom agent
+# For custom agent
 cp -r skills/frogo-sdk/ <YOUR_AGENT_SKILLS_DIR>/frogo-sdk/
 ```
 
-#### Metode 2: Clone dari Repository
+#### Method 2: Clone from Repository
 
 ```bash
-# Clone repo
+# Clone the repo
 git clone https://github.com/frogobox/frogo-sdk.git
 
-# Copy skill ke agent
+# Copy the skill to the agent
 cp -r frogo-sdk/skills/frogo-sdk/ ~/.gemini/antigravity/skills/frogo-sdk/
 ```
 
-### Cara Menggunakan Skill
+### How to Use the Skill
 
-Setelah skill terinstall, AI agent akan **otomatis mendeteksi** skill ini ketika kamu memberikan prompt terkait Frogo SDK. Berikut contoh prompt yang bisa kamu gunakan:
+Once the skill is installed, the AI agent will **automatically detect** it when you provide prompts related to Frogo SDK. Here are some example prompts you can use:
 
 #### 🎨 Compose UI
 
 ```
-"Buatkan halaman dashboard menggunakan FrogoScaffold dengan TopAppBar dan LazyColumn"
+"Create a dashboard page using FrogoScaffold with TopAppBar and LazyColumn"
 ```
 
-AI agent akan generate kode seperti:
+The AI agent will generate code like:
 
 ```kotlin
 import com.frogobox.composeui.template.scaffold.FrogoScaffold
@@ -206,8 +206,8 @@ fun DashboardScreen(items: List<DashboardItem>) {
             contentPadding = paddingValues,
             emptyContent = {
                 FrogoEmptyState(
-                    title = "Belum Ada Data",
-                    description = "Data akan muncul di sini"
+                    title = "No Data Yet",
+                    description = "Data will appear here"
                 )
             }
         ) { index, item ->
@@ -223,10 +223,10 @@ fun DashboardScreen(items: List<DashboardItem>) {
 #### 📢 AdMob Integration
 
 ```
-"Tambahkan banner ad dan interstitial ad ke Activity menggunakan Frogo Ads"
+"Add a banner ad and interstitial ad to an Activity using Frogo Ads"
 ```
 
-AI agent akan generate kode seperti:
+The AI agent will generate code like:
 
 ```kotlin
 import com.frogobox.ads.delegate.AdmobDelegates
@@ -251,18 +251,18 @@ class MainActivity : AppCompatActivity(),
 #### ♻️ RecyclerView
 
 ```
-"Buatkan list artikel dengan shimmer loading menggunakan FrogoShimmerRecyclerView"
+"Create an article list with shimmer loading using FrogoShimmerRecyclerView"
 ```
 
-AI agent akan generate kode seperti:
+The AI agent will generate code like:
 
 ```kotlin
-// Show shimmer saat loading
+// Show shimmer while loading
 binding.frogoShimmerRv
     .defineShimmerView(R.layout.shimmer_item_article)
     .showShimmer()
 
-// Tampilkan data
+// Display data
 viewModel.articles.observe(this) { articles ->
     binding.frogoShimmerRv.hideShimmer()
     binding.frogoShimmerRv
@@ -281,16 +281,16 @@ viewModel.articles.observe(this) { articles ->
 #### 🛠️ Core Android Utilities
 
 ```
-"Setup base Application class dan Activity dengan ViewBinding menggunakan Frogo SDK"
+"Set up a base Application class and Activity with ViewBinding using Frogo SDK"
 ```
 
-AI agent akan generate kode seperti:
+The AI agent will generate code like:
 
 ```kotlin
 // Application
 class MyApp : FrogoApplication() {
     override fun onCreateExt() {
-        // Init DI, analytics, dll
+        // Init DI, analytics, etc.
     }
     override fun isDebugMode(): Boolean = BuildConfig.DEBUG
 }
@@ -306,11 +306,11 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 }
 ```
 
-### Referensi API Lengkap
+### Complete API Reference
 
-| Dokumen | Deskripsi | Jumlah API |
+| Document | Description | API Count |
 | :--- | :--- | :--- |
-| [SKILL.md](skills/frogo-sdk/SKILL.md) | Instruksi utama & arsitektur | - |
+| [SKILL.md](skills/frogo-sdk/SKILL.md) | Main instructions & architecture | - |
 | [compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md) | Jetpack Compose widgets | 60+ composables |
 | [core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md) | Base classes & extensions | 7 classes, 16 ext files |
 | [ads-reference.md](skills/frogo-sdk/references/ads-reference.md) | AdMob & Unity Ads | 32+ methods |
