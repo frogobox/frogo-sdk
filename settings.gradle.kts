@@ -25,10 +25,12 @@ dependencyResolutionManagement {
 rootProject.name = "FrogoAndroid"
 
 include(
-    ":core-sdk",
     ":app",
-    ":frogorecyclerview",
-    ":core-sdk-android",
-    ":core-ui-android",
-    ":core-ads",
+    ":frogo-core",
+    ":frogo-core-android",
+    ":frogo-compose-android",
+    ":frogo-compose-ui",
+    ":frogo-ui-base",
+    ":frogo-ui-recyclerview",
+    ":frogo-ext-ads",
 )

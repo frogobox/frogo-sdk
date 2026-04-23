@@ -1,19 +1,28 @@
-## About This Project (release 👷🔧️👷‍♀️⛏)
+# Frogo SDK 🚀
 
-[![](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
+### The Ultimate Android & Desktop Development Toolkit
+
+![Frogo SDK Hero Banner](docs/image/hero_banner.png)
+
+[![JitPack](https://jitpack.io/v/frogobox/frogo-sdk.svg?style=flat-square)](https://jitpack.io/#frogobox/frogo-sdk)
 [![Android CI](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/android-ci.yml)
-[![pages-build-deployment](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/frogobox/frogo-sdk/actions/workflows/pages/pages-build-deployment)
+[![License](https://img.shields.io/github/license/frogobox/frogo-sdk?style=flat-square)](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+**Frogo SDK** is a comprehensive suite of Android libraries designed to accelerate your development workflow. From stunning Jetpack Compose UIs to seamless AdMob integration, Frogo SDK provides the building blocks you need to create high-quality apps faster.
 
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
 - Privacy Policy [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md)
 - License [Click Here](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
 
+---
+
 ## Version Release
 
 This Is Latest Release
 
-    $version_release = 2.3.7
+    $version_release = 3.0.0
 
 What's New??
 
@@ -21,67 +30,293 @@ What's New??
     * LTS (Long Term Service) *
     * Migrate AGP 9.1.0 *
 
-## Download this project
+## 🌟 Key Features
 
-### Step 1. Add the JitPack repository to your build file (build.gradle : Project)
+- **🎨 Frogo Compose UI**: 60+ reusable Jetpack Compose widgets and professional templates.
+- **📢 Frogo Ext Ads**: Simplify AdMob integration with easy-to-use wrappers for Banner, Interstitial, and Native ads.
+- **♻️ Frogo UI RecyclerView**: Advanced RecyclerView helpers for painless list management.
+- **🛠️ Frogo Core**: Essential utilities, base classes, and extensions for Kotlin development.
+- **📱 Multi-Platform**: Available for both Android and Desktop environments.
 
-#### <Option 1> Groovy Gradle
+---
 
-    // Add it in your root build.gradle at the end of repositories:
+## 📸 Screenshots & Mockups
 
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
-    }
+### Premium Jetpack Compose Components
+![Frogo Compose UI Mockup](docs/image/compose_ui_mockup.png)
+*Beautiful, modern, and highly customizable UI components following Material Design 3.*
 
-#### <Option 2> Kotlin DSL Gradle
+### Seamless Ad Integration
+![Frogo Ads Mockup](docs/image/ads_mockup.png)
+*Monetize your apps effortlessly with optimized ad placements.*
+
+---
+
+## 🚀 Quick Start
+
+### Step 1: Add JitPack Repository
+Add it to your `settings.gradle.kts` (or root `build.gradle`):
 
 ```kotlin
-// Add it in your root build.gradle.kts at the end of repositories:
-
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        ...
+        google()
+        mavenCentral()
         maven("https://jitpack.io")
     }
 }
 ```
 
-### Step 2. Add the dependency (build.gradle : Module)
+### Step 2: Add Dependencies
+Latest Version: `3.0.0`
 
-#### <Option 1> Groovy Gradle
-
-```groovy
+```kotlin
 dependencies {
-    // library frogo-sdk
-    implementation 'com.github.frogobox:frogo-sdk:2.3.7'
+    // Core SDK
+    implementation("com.github.frogobox:frogo-sdk:3.0.0")
+
+    // Or specific modules (recommended)
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.0")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.0")
 }
 ```
 
-#### <Option 2> Kotlin DSL Gradle
+---
 
-```groovy
-dependencies {
-    // library frogo-sdk
-    implementation("com.github.frogobox:frogo-sdk:2.3.7")
+## 📦 Modules Overview
+
+| Module | Description | Key Features |
+| :--- | :--- | :--- |
+| `frogo-compose-ui` | Modern UI Kit | Widgets, Dialogs, Bottom Sheets, Scaffolds |
+| `frogo-ext-ads` | Monetization Kit | Easy AdMob Integration (Banner, Interstitial, Native) |
+| `frogo-ui-recyclerview` | List Management | Multi-view adapters, simplified ViewHolders |
+| `frogo-core-android` | Core Utilities | Extensions, Base Classes, Lifecycle Helpers |
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Whether you're fixing a bug or suggesting a new feature, your help is appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License & Privacy
+
+- **License**: Distributed under the [Apache 2.0 License](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE).
+- **Privacy Policy**: Read our policy [here](https://github.com/frogobox/frogo-sdk/blob/master/PRIVACY-POLICY.md).
+
+---
+
+## 📬 Contact
+
+**Muhammad Faisal Amir** - [faisalamircs@gmail.com](mailto:faisalamircs@gmail.com)
+
+Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobox/frogo-sdk)
+
+---
+
+<!-- SEO Keywords (Hidden) -->
+<!-- 
+Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, RecyclerView Adapter, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
+-->
+
+## 🤖 AI Agent Skill
+
+Frogo SDK provides an **AI Agent Skill** that enables AI coding assistants (such as Antigravity, Gemini, etc.) to understand and automatically integrate all Frogo SDK modules into your Android project.
+
+### What is AI Agent Skill?
+
+AI Agent Skill is a folder of instructions, code examples, and API references that extends the capabilities of an AI agent for specialized tasks. With this skill, the AI agent can:
+
+- ✅ **Automatically set up** Frogo SDK dependencies in a new project
+- ✅ **Generate correct code** using the Frogo SDK API
+- ✅ **Understand the architecture** of multi-module structure and design patterns used
+- ✅ **Troubleshoot** integration issues with accurate solutions
+
+### Skill Structure
+
+```
+skills/frogo-sdk/
+├── SKILL.md                              # Main instructions for AI Agent
+└── references/
+    ├── compose-ui-reference.md           # API for 60+ Jetpack Compose widgets
+    ├── core-android-reference.md         # Base classes & extension functions
+    ├── ads-reference.md                  # AdMob & Unity Ads integration API
+    └── recyclerview-reference.md         # RecyclerView widgets API
+```
+
+### How to Install the Skill
+
+#### Method 1: Manual Copy
+
+Copy the `skills/frogo-sdk/` folder to your AI agent's skills directory:
+
+```bash
+# For Antigravity Agent
+cp -r skills/frogo-sdk/ ~/.gemini/antigravity/skills/frogo-sdk/
+
+# For custom agent
+cp -r skills/frogo-sdk/ <YOUR_AGENT_SKILLS_DIR>/frogo-sdk/
+```
+
+#### Method 2: Clone from Repository
+
+```bash
+# Clone the repo
+git clone https://github.com/frogobox/frogo-sdk.git
+
+# Copy the skill to the agent
+cp -r frogo-sdk/skills/frogo-sdk/ ~/.gemini/antigravity/skills/frogo-sdk/
+```
+
+### How to Use the Skill
+
+Once the skill is installed, the AI agent will **automatically detect** it when you provide prompts related to Frogo SDK. Here are some example prompts you can use:
+
+#### 🎨 Compose UI
+
+```
+"Create a dashboard page using FrogoScaffold with TopAppBar and LazyColumn"
+```
+
+The AI agent will generate code like:
+
+```kotlin
+import com.frogobox.composeui.template.scaffold.FrogoScaffold
+import com.frogobox.composeui.template.appbar.FrogoTopAppBar
+import com.frogobox.composeui.list.basic.FrogoLazyColumn
+import com.frogobox.composeui.list.basic.FrogoListItem
+
+@Composable
+fun DashboardScreen(items: List<DashboardItem>) {
+    FrogoScaffold(
+        topBar = {
+            FrogoTopAppBar(title = "Dashboard")
+        }
+    ) { paddingValues ->
+        FrogoLazyColumn(
+            data = items,
+            contentPadding = paddingValues,
+            emptyContent = {
+                FrogoEmptyState(
+                    title = "No Data Yet",
+                    description = "Data will appear here"
+                )
+            }
+        ) { index, item ->
+            FrogoListItem(
+                headlineText = item.title,
+                supportingText = item.description
+            )
+        }
+    }
 }
 ```
 
-#### <Option 3> libs.versions.toml
-```yml
-[versions]
-frogoAndroid = "2.3.7"
+#### 📢 AdMob Integration
 
-[libraries]
-frogo-android = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoAndroid" }
+```
+"Add a banner ad and interstitial ad to an Activity using Frogo Ads"
+```
 
-dependencies {
-    // library frogo-android
-    implementation(libs.frogobox.android)
+The AI agent will generate code like:
+
+```kotlin
+import com.frogobox.ads.delegate.AdmobDelegates
+import com.frogobox.ads.delegate.AdmobDelegatesImpl
+
+class MainActivity : AppCompatActivity(),
+    AdmobDelegates by AdmobDelegatesImpl() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupAdmobDelegates(this)
+
+        // Banner Ad
+        showAdBanner(binding.adView)
+
+        // Interstitial Ad
+        showAdInterstitial("ca-app-pub-xxxxx/xxxxx")
+    }
 }
 ```
+
+#### ♻️ RecyclerView
+
+```
+"Create an article list with shimmer loading using FrogoShimmerRecyclerView"
+```
+
+The AI agent will generate code like:
+
+```kotlin
+// Show shimmer while loading
+binding.frogoShimmerRv
+    .defineShimmerView(R.layout.shimmer_item_article)
+    .showShimmer()
+
+// Display data
+viewModel.articles.observe(this) { articles ->
+    binding.frogoShimmerRv.hideShimmer()
+    binding.frogoShimmerRv
+        .injector<Article>()
+        .addData(articles)
+        .addCallback(object : IFrogoViewHolder<Article> {
+            override fun setupInitComponent(view: View, data: Article, position: Int) {
+                view.findViewById<TextView>(R.id.tvTitle).text = data.title
+            }
+        })
+        .createLayoutLinearVertical(false)
+        .build()
+}
+```
+
+#### 🛠️ Core Android Utilities
+
+```
+"Set up a base Application class and Activity with ViewBinding using Frogo SDK"
+```
+
+The AI agent will generate code like:
+
+```kotlin
+// Application
+class MyApp : FrogoApplication() {
+    override fun onCreateExt() {
+        // Init DI, analytics, etc.
+    }
+    override fun isDebugMode(): Boolean = BuildConfig.DEBUG
+}
+
+// Activity with ViewBinding
+class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
+    override fun setupViewBinding(): ActivityMainBinding =
+        ActivityMainBinding.inflate(layoutInflater)
+
+    override fun onCreateExt(savedInstanceState: Bundle?) {
+        binding.textView.text = "Hello Frogo!"
+    }
+}
+```
+
+### Complete API Reference
+
+| Document | Description | API Count |
+| :--- | :--- | :--- |
+| [SKILL.md](skills/frogo-sdk/SKILL.md) | Main instructions & architecture | - |
+| [compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md) | Jetpack Compose widgets | 60+ composables |
+| [core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md) | Base classes & extensions | 7 classes, 16 ext files |
+| [ads-reference.md](skills/frogo-sdk/references/ads-reference.md) | AdMob & Unity Ads | 32+ methods |
+| [recyclerview-reference.md](skills/frogo-sdk/references/recyclerview-reference.md) | RecyclerView widgets | 3 widgets |
+
+---
 
 ## Colaborator
 

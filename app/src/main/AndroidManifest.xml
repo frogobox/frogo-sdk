@@ -166,6 +166,14 @@
             android:hardwareAccelerated="true" />
 
         <activity
+            android:name=".appcompose.MainComposeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".appcomposeui.MainComposeUiActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

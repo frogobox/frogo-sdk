@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.compose.compiler)
 }
 
 ksp {
@@ -110,6 +111,7 @@ android {
         viewBinding = true
         buildConfig = true
         resValues = true
+        compose = true
     }
 
     compileOptions {
@@ -130,6 +132,8 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
+    implementation(project(DependencyGradle.FROGO_PATH_COMPOSE))
+    implementation(project(DependencyGradle.FROGO_PATH_COMPOSE_UI))
 
     implementation(project(DependencyGradle.FROGO_PATH_UI))
 
