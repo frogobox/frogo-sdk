@@ -1,24 +1,23 @@
-# 📋 Issue Planning: Pembuatan Module `frogo-compose-android`
+# 📋 Issue Planning: Pembuatan Module `frogo-compose-ui`
 
 ## 📌 Ringkasan
 
-Buat module library Android baru bernama **`frogo-compose-android`** sebagai padanan dari `frogo-core-android`, namun seluruh base class-nya menggunakan **Jetpack Compose** sebagai UI toolkit, bukan XML View / ViewBinding. Package name utama adalah `com.frogobox.compose`.
+Buat module library Android baru bernama **`frogo-compose-ui`** sebagai padanan dari module UI (seperti `frogo-ui-base`), namun khusus menampung resource dan komponen UI berbasis **Jetpack Compose**. Package name utama adalah `com.frogobox.composeui`.
 
 ---
 
 ## 🎯 Tujuan
 
-- Menyediakan base class Compose (Activity, BottomSheet, ViewModel) yang dapat digunakan kembali di seluruh project yang berbasis Compose.
-- Mengikuti pola dan konvensi modul yang sudah ada (`frogo-core-android`).
+- Menyediakan resource Compose seperti base composable UI, themes, styles, typography, dan komponen UI reusable lainnya.
 - Module ini **kosong saat pertama dibuat** — hanya scaffolding, file konfigurasi, dan struktur package yang disiapkan terlebih dahulu.
-- Base class yang mengisi module ini akan dibuat pada fase selanjutnya.
+- Dokumentasi ini dibuat agar AI agen (eksekutor) dapat menjalankan langkah-langkah setup dengan tepat dan efisien.
 
 ---
 
 ## 📂 Struktur Module Yang Akan Dibuat
 
-```
-frogo-compose-android/
+```text
+frogo-compose-ui/
 ├── .gitignore
 ├── build.gradle.kts
 ├── consumer-rules.pro
@@ -29,27 +28,28 @@ frogo-compose-android/
         └── java/
             └── com/
                 └── frogobox/
-                    └── compose/
-                        └── view/
-                            ├── FrogoComposeActivity.kt      (placeholder kosong)
-                            ├── FrogoComposeBottomSheet.kt   (placeholder kosong)
-                            ├── FrogoComposeViewModel.kt     (placeholder kosong)
-                            └── FrogoComposeScreen.kt        (placeholder kosong / object / interface)
+                    └── composeui/
+                        ├── theme/               (placeholder)
+                        │   ├── Color.kt
+                        │   ├── Theme.kt
+                        │   └── Type.kt
+                        └── widget/              (placeholder)
+                            └── FrogoButton.kt   (placeholder)
 ```
 
-> **Catatan:** File-file di dalam `view/` dibuat sebagai placeholder dengan `abstract class` kosong atau `open class` minimal. Implementasi penuh dilakukan pada fase berikutnya.
+> **Catatan:** File-file di dalam `theme/` dan `widget/` dibuat sebagai file kosong atau file minimal (placeholder). Implementasi penuh akan dilakukan pada tahap selanjutnya.
 
 ---
 
 ## ⚙️ Konfigurasi Gradle (`build.gradle.kts`)
 
-Mengikuti pola `frogo-core-android`, dengan penyesuaian berikut:
+Konfigurasi mirip dengan module Compose sebelumnya, dengan penyesuaian pada penamaan dan ID:
 
 | Item | Value |
 |---|---|
-| `namespace` | `com.frogobox.compose` |
-| `groupId` (publish) | `com.frogobox.compose` |
-| `artifactId` (publish) | `frogo-compose-android` |
+| `namespace` | `com.frogobox.composeui` |
+| `groupId` (publish) | `com.frogobox.composeui` |
+| `artifactId` (publish) | `frogo-compose-ui` |
 | `compileSdk` | `ProjectSetting.PROJECT_COMPILE_SDK` |
 | `minSdk` | `ProjectSetting.PROJECT_MIN_SDK` |
 
@@ -58,7 +58,7 @@ Mengikuti pola `frogo-core-android`, dengan penyesuaian berikut:
 ```kotlin
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)   // <- tambahan untuk Compose
+    alias(libs.plugins.compose.compiler)
     `maven-publish`
 }
 ```
@@ -70,37 +70,30 @@ buildFeatures {
     compose = true
     buildConfig = true
 }
-
-composeOptions {
-    // versi akan mengikuti Compose BOM yang sudah ada di project
-}
 ```
 
 ### Dependencies Inti
 
 ```kotlin
 dependencies {
-    api(project(DependencyGradle.FROGO_PATH_SDK))   // depend ke frogo-core-android
-
+    api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    
+    // Bergantung ke frogo-compose-android jika diperlukan base compose class
+    api(project(DependencyGradle.FROGO_PATH_COMPOSE)) 
+    
     // Jetpack Compose BOM
     api(platform(libs.androidx.compose.bom))
     api(libs.androidx.compose.ui)
     api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.material3)
 
-    // Activity Compose
-    api(libs.androidx.activity.compose)
-
-    // Lifecycle / ViewModel Compose
-    api(libs.androidx.lifecycle.viewmodel.compose)
-    api(libs.androidx.lifecycle.runtime.compose)
-
-    // Navigation Compose (opsional, bisa ditambah nanti)
-    // api(libs.androidx.navigation.compose)
-
     debugApi(libs.androidx.compose.ui.tooling)
 }
 ```
+
+### Publishing Configuration
+
+Jangan lupa tambahkan blok `afterEvaluate` untuk setup `maven-publish` seperti pada module lain (menggunakan `ProjectSetting.PROJECT_VERSION_NAME` dsb).
 
 ---
 
@@ -108,17 +101,14 @@ dependencies {
 
 ### `ProjectSetting.kt`
 
-Tambahkan konstanta baru:
+Tambahkan konstanta baru (misalnya berdekatan dengan `MODULE_NAME_COMPOSE` atau `MODULE_NAME_CORE_UI`):
 
 ```kotlin
-// Layer baru: compose
-private const val LAYER_COMPOSE = "compose"
+const val MODULE_NAME_COMPOSE_UI = "frogo-$LAYER_COMPOSE-ui"
 
-const val MODULE_NAME_COMPOSE = "frogo-$LAYER_COMPOSE-android"
+const val LIBRARY_NAME_COMPOSE_UI = "composeui"
 
-const val LIBRARY_NAME_COMPOSE = "compose"
-
-const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE"
+const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
 ```
 
 ### `DependencyGradle.kt`
@@ -126,7 +116,7 @@ const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE"
 Tambahkan path dependency:
 
 ```kotlin
-const val FROGO_PATH_COMPOSE = ":${ProjectSetting.MODULE_NAME_COMPOSE}"
+const val FROGO_PATH_COMPOSE_UI = ":${ProjectSetting.MODULE_NAME_COMPOSE_UI}"
 ```
 
 ---
@@ -137,120 +127,44 @@ Tambahkan module baru ke dalam daftar `include`:
 
 ```kotlin
 include(
-    ":app",
-    ":frogo-core",
-    ":frogo-core-android",
-    ":frogo-compose-android",   // <- TAMBAH INI
+    // ... module lainnya ...
+    ":frogo-compose-android",
+    ":frogo-compose-ui",   // <- TAMBAH INI
     ":frogo-ui-base",
-    ":frogo-ui-recyclerview",
-    ":frogo-ext-ads",
+    // ...
 )
 ```
 
 ---
 
-## 🗒️ Daftar File Base Class (Isi Awal Minimal / Placeholder)
-
-Berikut deskripsi singkat masing-masing file yang akan dibuat dalam kondisi **kosong / minimal** dahulu:
-
-### 1. `FrogoComposeActivity.kt`
-
-- Extends: `ComponentActivity`
-- Override `onCreate` → panggil `setContent {}`
-- Hook kosong: `setupCompose()`, `setupViewModel()`, `setupDelegates()`
-- Back press handling via `BackHandler` Compose
-
-### 2. `FrogoComposeBottomSheet.kt`
-
-- Berbasis `BottomSheetDialogFragment` (karena interop dengan Fragment masih umum)
-- Atau bisa menggunakan pure Compose `ModalBottomSheet` di dalam `FrogoComposeActivity`
-- **Keputusan:** Saat ini buat dua varian:
-  - `FrogoComposeBottomSheetFragment` — extends `BottomSheetDialogFragment`, isi dengan `ComposeView`
-  - Dokumentasikan opsi `ModalBottomSheet` sebagai alternatif murni Compose
-
-### 3. `FrogoComposeViewModel.kt`
-
-- Extends: `ViewModel()`
-- Sama seperti `FrogoViewModel` — tambahkan hooks `onStart()`, `onClearDisposable()`
-- Siap digunakan dengan `viewModel()` atau `hiltViewModel()` di Compose
-
-### 4. `FrogoComposeScreen.kt` *(Opsional — fase berikutnya)*
-
-- Interface atau abstract marker untuk menandai Composable function sebagai "Screen"
-- Bisa berupa `interface` kosong atau annotation class `@FrogoScreen`
-
----
-
-## 🔄 Perbandingan: `frogo-core-android` vs `frogo-compose-android`
-
-| Aspek | `frogo-core-android` | `frogo-compose-android` |
-|---|---|---|
-| Package | `com.frogobox.sdk` | `com.frogobox.compose` |
-| UI Toolkit | XML View + ViewBinding | Jetpack Compose |
-| Base Activity | `FrogoActivity` / `FrogoBindActivity` | `FrogoComposeActivity` |
-| Base Fragment | `FrogoFragment` / `FrogoBindFragment` | *(tidak ada — Compose menggantikan Fragment)* |
-| Base BottomSheet | `FrogoBottomSheet` / `FrogoBindBottomSheet` | `FrogoComposeBottomSheetFragment` + `ModalBottomSheet` |
-| Base ViewModel | `FrogoViewModel` | `FrogoComposeViewModel` |
-| Build Plugin | `android.library` | `android.library` + `kotlin.compose` |
-
----
-
 ## ✅ Checklist Tugas (untuk AI Eksekutor)
 
-### Phase 1 — Scaffolding Module (Prioritas Utama)
+### Phase 1 — Scaffolding Module
+- [ ] Buat folder `frogo-compose-ui/` di root project.
+- [ ] Buat `frogo-compose-ui/.gitignore` (isinya minimal `/build`).
+- [ ] Buat `frogo-compose-ui/consumer-rules.pro` (bisa kosong).
+- [ ] Buat `frogo-compose-ui/proguard-rules.pro` (copy isi standar dari module lain).
+- [ ] Buat `frogo-compose-ui/build.gradle.kts` sesuai spesifikasi di atas dan tambahkan blok `publishing`.
+- [ ] Buat `frogo-compose-ui/src/main/AndroidManifest.xml` (minimalist `<manifest package="com.frogobox.composeui" />` atau tanpa atribut package karena sudah diset di `namespace` gradle).
+- [ ] Buat struktur direktori package `src/main/java/com/frogobox/composeui/`.
 
-- [ ] Buat folder `frogo-compose-android/` di root project
-- [ ] Buat `frogo-compose-android/.gitignore`
-- [ ] Buat `frogo-compose-android/consumer-rules.pro` (kosong)
-- [ ] Buat `frogo-compose-android/proguard-rules.pro` (copy dari modul lain)
-- [ ] Buat `frogo-compose-android/build.gradle.kts` sesuai spec di atas
-- [ ] Buat `frogo-compose-android/src/main/AndroidManifest.xml`
-- [ ] Buat struktur package `src/main/java/com/frogobox/compose/view/`
+### Phase 2 — Update Konstanta BuildSrc
+- [ ] Tambahkan konfigurasi `MODULE_NAME_COMPOSE_UI`, `LIBRARY_NAME_COMPOSE_UI`, `PROJECT_LIB_ID_COMPOSE_UI` di `buildSrc/src/main/kotlin/ProjectSetting.kt`.
+- [ ] Tambahkan `FROGO_PATH_COMPOSE_UI` di `buildSrc/src/main/kotlin/DependencyGradle.kt`.
 
-### Phase 2 — BuildSrc Update
+### Phase 3 — Update Settings
+- [ ] Tambahkan `include(":frogo-compose-ui")` di file `settings.gradle.kts`.
 
-- [ ] Update `buildSrc/src/main/kotlin/ProjectSetting.kt` — tambah konstanta Compose
-- [ ] Update `buildSrc/src/main/kotlin/DependencyGradle.kt` — tambah `FROGO_PATH_COMPOSE`
+### Phase 4 — File Placeholder Compose
+- [ ] Buat folder `theme/` dan `widget/` di dalam package `com.frogobox.composeui`.
+- [ ] Buat minimal satu file placeholder Kotlin kosong seperti `Theme.kt` atau biarkan package kosong siap diisi nanti.
 
-### Phase 3 — Settings Update
-
-- [ ] Update `settings.gradle.kts` — include `:frogo-compose-android`
-
-### Phase 4 — Base Classes (Placeholder)
-
-- [ ] Buat `FrogoComposeActivity.kt` (minimal, dapat di-extend)
-- [ ] Buat `FrogoComposeBottomSheetFragment.kt` (menggunakan ComposeView)
-- [ ] Buat `FrogoComposeViewModel.kt`
-
-### Phase 5 — Verifikasi
-
-- [ ] Pastikan project dapat di-sync Gradle tanpa error
-- [ ] Pastikan module muncul di Android Studio
-- [ ] Pastikan tidak ada conflict namespace / package
+### Phase 5 — Sinkronisasi dan Verifikasi
+- [ ] Lakukan Gradle Sync dan pastikan build berjalan sukses tanpa error.
+- [ ] Pastikan module dikenali di Android Studio dan tidak ada konflik penamaan.
 
 ---
 
-## ⚠️ Catatan Penting untuk AI Eksekutor
-
-1. **Jangan mengubah module `frogo-core-android`** — module Compose ini berdiri sendiri.
-2. Dependency arah: `frogo-compose-android` → depends on → `frogo-core-android` (opsional), bukan sebaliknya.
-3. Versi Compose BOM gunakan yang sudah ada di `libs.versions.toml` — jangan tambahkan versi baru tanpa cek.
-4. Semua base class dibuat **abstract** agar tidak bisa diinstansiasi langsung.
-5. Jika `libs.plugins.kotlin.compose` belum ada di `libs.versions.toml`, tambahkan terlebih dahulu.
-6. File placeholder boleh berisi hanya deklarasi class + `TODO("Not yet implemented")` di body-nya.
-
----
-
-## 📎 Referensi
-
-- Module referensi: `frogo-core-android/build.gradle.kts`
-- Base class referensi: `frogo-core-android/src/main/java/com/frogobox/sdk/view/`
-  - `FrogoActivity.kt`
-  - `FrogoBindActivity.kt`
-  - `FrogoFragment.kt`
-  - `FrogoBindFragment.kt`
-  - `FrogoBottomSheet.kt`
-  - `FrogoBindBottomSheet.kt`
-  - `FrogoViewModel.kt`
-- BuildSrc referensi: `buildSrc/src/main/kotlin/ProjectSetting.kt`
-- Settings referensi: `settings.gradle.kts`
+## ⚠️ Catatan Tambahan
+- Gunakan versi library Compose dari `libs.versions.toml` (melalui Compose BOM).
+- Modul ini tidak mengganggu modul yang sudah ada. Silakan eksekusi penambahan modul dan file scaffolding secara bertahap.
