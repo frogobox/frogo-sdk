@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.0"
+agp = "9.2.0"
 kotlin = "2.3.20"
 ksp = "2.3.6"
 androidMavenGradlePlugin = "2.1"
@@ -13,7 +13,7 @@ viewPager2 = "1.1.0"
 preference = "1.2.1"
 roomKtx = "2.8.4"
 work = "2.11.2"
-googleAdmob = "25.1.0" # https://developers.google.com/admob/android/quick-start
+googleAdmob = "25.2.0" # https://developers.google.com/admob/android/quick-start
 unityAd = "4.17.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 recyclerview = "1.4.0"
 flexbox = "3.0.0"
@@ -24,11 +24,11 @@ retrofit = "3.0.0"
 rxandroid3 = "3.0.2"
 rxjava3 = "3.1.12"
 chucker = "4.3.1"
-glide = "5.0.5"
-glideCompiler = "5.0.5"
+glide = "5.0.7"
+glideCompiler = "5.0.7"
 customactivityoncrash = "2.4.0"
 circleimageview = "3.1.0"
-koin = "4.2.0"
+koin = "4.2.1"
 
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxCoroutinesAndroid = "1.10.2"
