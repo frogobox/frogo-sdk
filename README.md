@@ -22,7 +22,7 @@
 
 This Is Latest Release
 
-    $version_release = 2.3.7
+    $version_release = 3.0.0
 
 What's New??
 
@@ -69,16 +69,16 @@ dependencyResolutionManagement {
 ```
 
 ### Step 2: Add Dependencies
-Latest Version: `2.3.7`
+Latest Version: `3.0.0`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:2.3.7")
+    implementation("com.github.frogobox:frogo-sdk:3.0.0")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:2.3.7")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.0")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.0")
 }
 ```
 

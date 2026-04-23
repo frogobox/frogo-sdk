@@ -21,7 +21,7 @@ metadata:
 This skill provides comprehensive instructions for integrating and using the **Frogo SDK** suite of Android libraries. Frogo SDK is a multi-module toolkit for accelerating Android (and Desktop) development.
 
 **Repository:** `frogobox/frogo-sdk`  
-**Latest Version:** `2.3.7`  
+**Latest Version:** `3.0.0`  
 **Minimum Requirements:** AGP 9.2.0, Kotlin 2.3.20, Compose BOM 2026.04.01
 
 ## Architecture Overview
@@ -60,7 +60,7 @@ dependencyResolutionManagement {
 ### Option A: Full SDK (all modules)
 ```kotlin
 dependencies {
-    implementation("com.github.frogobox:frogo-sdk:2.3.7")
+    implementation("com.github.frogobox:frogo-sdk:3.0.0")
 }
 ```
 
@@ -68,26 +68,26 @@ dependencies {
 ```kotlin
 dependencies {
     // Jetpack Compose UI Kit (Material Design 3)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.0")
 
     // Core Android utilities, base classes, extensions
-    implementation("com.github.frogobox.frogo-sdk:frogo-core-android:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-core-android:3.0.0")
 
     // AdMob & Unity Ads integration
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.0")
 
     // Advanced RecyclerView with shimmer loading
-    implementation("com.github.frogobox.frogo-sdk:frogo-ui-recyclerview:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ui-recyclerview:3.0.0")
 
     // Compose-specific base classes
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-android:2.3.7")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.0")
 }
 ```
 
 ### Option C: Version Catalog (`libs.versions.toml`)
 ```toml
 [versions]
-frogoSdk = "2.3.7"
+frogoSdk = "3.0.0"
 
 [libraries]
 frogo-sdk = { group = "com.github.frogobox", name = "frogo-sdk", version.ref = "frogoSdk" }
