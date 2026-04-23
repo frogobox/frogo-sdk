@@ -22,11 +22,13 @@ object ProjectSetting {
     private const val LAYER_CORE = "core"
     private const val LAYER_UI = "ui"
     private const val LAYER_EXT = "ext"
+    private const val LAYER_COMPOSE = "compose"
 
     // Module Names (Directory & Gradle Include)
     const val MODULE_NAME_CORE_SDK = "frogo-$LAYER_CORE"
     const val MODULE_NAME_SDK = "frogo-$LAYER_CORE-android"
     const val MODULE_NAME_SDK_UTIL = "frogo-$LAYER_CORE-android-util"
+    const val MODULE_NAME_COMPOSE = "frogo-$LAYER_COMPOSE-android"
 
     const val MODULE_NAME_CORE_UI = "frogo-$LAYER_UI-base"
     const val MODULE_NAME_UI_RECYCLER = "frogo-$LAYER_UI-recyclerview"
@@ -40,6 +42,7 @@ object ProjectSetting {
     const val LIBRARY_NAME_UI = "ui"
     const val LIBRARY_NAME_UI_RECYCLER = "recycler"
     const val LIBRARY_NAME_AD = "ads"
+    const val LIBRARY_NAME_COMPOSE = "compose"
 
     // ---------------------------------------------------------------------------------------------
 
@@ -65,6 +68,7 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
+    const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE"
 
     const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
     const val PROJECT_LIB_ID_UI_RECYCLER = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI_RECYCLER"

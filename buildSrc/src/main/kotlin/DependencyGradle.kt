@@ -16,6 +16,7 @@ object DependencyGradle {
     const val FROGO_PATH_CORE_SDK = ":${ProjectSetting.MODULE_NAME_CORE_SDK}"
     const val FROGO_PATH_SDK = ":${ProjectSetting.MODULE_NAME_SDK}"
     const val FROGO_PATH_SDK_UTIL = ":${ProjectSetting.MODULE_NAME_SDK_UTIL}"
+    const val FROGO_PATH_COMPOSE = ":${ProjectSetting.MODULE_NAME_COMPOSE}"
 
     // dependencies version
     const val FROGO_PATH_UI = ":${ProjectSetting.MODULE_NAME_CORE_UI}"

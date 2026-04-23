@@ -28,6 +28,7 @@ include(
     ":app",
     ":frogo-core",
     ":frogo-core-android",
+    ":frogo-compose-android",
     ":frogo-ui-base",
     ":frogo-ui-recyclerview",
     ":frogo-ext-ads",
