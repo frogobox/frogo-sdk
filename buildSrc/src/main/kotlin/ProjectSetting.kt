@@ -50,12 +50,12 @@ object ProjectSetting {
 
     const val VERSION_MAJOR = 3
     const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 1
+    const val VERSION_PATCH = 2
 
     // ---------------------------------------------------------------------------------------------
 
     const val PROJECT_MIN_SDK = 23
-    const val PROJECT_COMPILE_SDK = 36
+    const val PROJECT_COMPILE_SDK = 37
     const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
 
     // ---------------------------------------------------------------------------------------------

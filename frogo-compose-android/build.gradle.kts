@@ -78,6 +78,9 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel.compose)
     api(libs.androidx.lifecycle.runtime.compose)
 
+    // Navigation Compose
+    api(libs.androidx.navigation.compose)
+
     debugApi(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit)

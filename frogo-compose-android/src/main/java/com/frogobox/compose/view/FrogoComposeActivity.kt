@@ -13,7 +13,23 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -143,8 +159,80 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
         }
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // Compose Entry Point
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Override this in your Activity to provide the root Composable content.
+     * This is called inside [setContent] on [onCreate].
+     */
     @Composable
     abstract fun SetupCompose()
 
+    /**
+     * Override this to provide a lightweight preview-friendly version of [SetupCompose].
+     * Call this from a @Preview function in your concrete Activity class.
+     *
+     * Example usage in a subclass:
+     * ```
+     * @Preview
+     * @Composable
+     * fun PreviewMyActivity() {
+     *     SetupComposePreview()
+     * }
+     *
+     * @Composable
+     * override fun SetupComposePreview() {
+     *     MyActivityContent() // your composable without ViewModel/context deps
+     * }
+     * ```
+     */
+    @Composable
+    open fun SetupComposePreview() {
+        SetupCompose()
+    }
+
 }
 
+// ---------------------------------------------------------------------------------------------
+// Preview
+// ---------------------------------------------------------------------------------------------
+
+@Preview(name = "FrogoComposeActivity", showBackground = true, showSystemUi = true)
+@Composable
+private fun FrogoComposeActivityPreview() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary)
+                        .padding(horizontal = 24.dp, vertical = 12.dp)
+                ) {
+                    Text(
+                        text = "FrogoComposeActivity",
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Text(
+                    text = "Override SetupCompose() to build your screen",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 13.sp,
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
+            }
+        }
+    }
+}

@@ -56,10 +56,10 @@ class FrogoComposeActivityTest {
         assertTrue(activity.setupDelegatesCalled)
         assertTrue(activity.setupComposeCalled)
 
-        // Verify correct order: setupViewModel -> setupDelegates -> SetupCompose
+        // Verify correct order: setupDelegates -> setupViewModel -> SetupCompose
         assertEquals(3, activity.callOrder.size)
-        assertEquals("setupViewModel", activity.callOrder[0])
-        assertEquals("setupDelegates", activity.callOrder[1])
+        assertEquals("setupDelegates", activity.callOrder[0])
+        assertEquals("setupViewModel", activity.callOrder[1])
         assertEquals("SetupCompose", activity.callOrder[2])
     }
 
