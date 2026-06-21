@@ -176,6 +176,14 @@
             android:exported="false" />
 
         <activity
+            android:name=".appcompose.SampleNavComposeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".appcompose.SampleFragmentComposeActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".appcomposeui.MainComposeUiActivity"
             android:exported="false" />
 
