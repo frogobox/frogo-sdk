@@ -2,6 +2,7 @@
 /.gradle
 .gradle
 .idea
+.kotlin
 /local.properties
 /.idea/libraries
 /.idea/modules.xml
