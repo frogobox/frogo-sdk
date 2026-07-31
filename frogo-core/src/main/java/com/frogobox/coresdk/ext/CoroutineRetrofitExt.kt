@@ -18,20 +18,19 @@ import retrofit2.Response
 
 
 /**
- *     // Search meal by name
- *     fun searchMeal(apiKey: String, nameMeal: String): Flow<Resource<MealResponse<MealModel>?>> =
- *         flow {
- *             try {
- *                 emit(Resource.Loading())
- *                 val request = apiService.searchMeal(apiKey, nameMeal)
- *                 val response = request.body()
- *                 if (!request.isSuccessful) {
- *                     emit(Resource.Error(request.message()))
- *                 } else {
- *                     emit(Resource.Success(response))
- *                 }
- *             } catch (e: Exception) {
- *                 emit(Resource.Error(e.message.toString()))
- *             }
- *         }.flowOn(Dispatchers.IO)
+ * Executes a Retrofit suspend call and emits [Resource] states as a [Flow] on [Dispatchers.IO].
  */
+fun <T> fetchAsFlow(call: suspend () -> Response<T>): Flow<Resource<T?>> = flow {
+    try {
+        emit(Resource.Loading())
+        val response = call()
+        if (response.isSuccessful) {
+            emit(Resource.Success(response.body()))
+        } else {
+            val errorMessage = response.message().ifEmpty { "HTTP Error ${response.code()}" }
+            emit(Resource.Error(code = response.code(), message = errorMessage))
+        }
+    } catch (e: Exception) {
+        emit(Resource.Error(code = 500, message = e.localizedMessage ?: "Unknown Error"))
+    }
+}.flowOn(Dispatchers.IO)

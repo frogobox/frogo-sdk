@@ -92,6 +92,7 @@ class FrogoRecyclerView : RecyclerView,
         return FrogoBuilderRvBinding<T, VB>().initBuilder(this).builder(listener)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T> getAdapterExt(): FrogoViewAdapter<T> {
         return this.adapter as FrogoViewAdapter<T>
     }
@@ -104,6 +105,7 @@ class FrogoRecyclerView : RecyclerView,
         return this.getAdapterExt<T>().getItem()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T, VB : ViewBinding> getAdapterBindingExt(): FrogoBindingAdapter<T, VB> {
         return this.adapter as FrogoBindingAdapter<T, VB>
     }

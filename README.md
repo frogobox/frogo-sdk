@@ -22,26 +22,20 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.3
+    $version_release = 3.0.4
 
-What's New?? (v2.3.7 → v3.0.3)
+What's New?? (v3.0.0 → v3.0.4)
 
-    * New Module: frogo-compose-android - Jetpack Compose base classes *
-    * New Module: frogo-compose-ui - 60+ reusable Compose widgets & templates *
-    * New Feature: AI Agent Skill for AI-assisted SDK integration *
-    * Refactor: Modular ad management with automated consent & lifecycle-aware delegates *
-    * Refactor: Clean up logging and optimize ad handling logic *
-    * Enhancement: Core SDK utilities for media playback, piracy protection & notifications *
-    * Enhancement: Kotlin extension functions improvements *
-    * Rename: Module naming convention standardized (core/ui/ext/compose layers) *
-    * Upgrade: AGP 9.1.0 → 9.2.0 *
-    * Upgrade: Google AdMob 25.1.0 → 25.2.0 *
-    * Upgrade: Glide 5.0.5 → 5.0.7 *
-    * Upgrade: Koin 4.2.0 → 4.2.1 *
-    * Upgrade: Compile SDK → 36 *
-    * Added: Jetpack Compose BOM 2026.04.01 *
-    * Added: Coil Compose 3.1.0 for image loading *
-    * Added: Glide Compose 1.0.0-beta01 for image loading *
+    * New Feature: FrogoWebViewActivity for streamlined web view handling *
+    * New Feature: Compose-based ad activities & MVI state management *
+    * New Feature: Base Jetpack Compose screen & ad activity templates *
+    * New Feature: Modern UI widgets, navigation patterns & core networking extensions *
+    * Security: Added standard consumer ProGuard rules across all SDK modules *
+    * Testing: Added Robolectric unit test infrastructure & GitHub Actions CI automation *
+    * Refactor: Introduced ProjectSetting configuration file in buildSrc *
+    * Refactor: Standardized Gradle build scripts & Version Catalog *
+    * Upgrade: Google AdMob 25.2.0 → 25.3.0 *
+    * Maintenance: Code smell fixes, unused code cleanup & build optimizations *
 
 ## 🌟 Key Features
 
@@ -82,16 +76,16 @@ dependencyResolutionManagement {
 ```
 
 ### Step 2: Add Dependencies
-Latest Version: `3.0.3`
+Latest Version: `3.0.4`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.3")
+    implementation("com.github.frogobox:frogo-sdk:3.0.4")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.3")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.3")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.4")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.4")
 }
 ```
 

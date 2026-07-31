@@ -20,21 +20,29 @@ import retrofit2.Response
  *
  */
 
-// Single Api Request
 fun <T : Any> Call<T>.doApiRequest(callback: FrogoDataResponse<T>) {
     callback.onShowProgress()
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
-            response.body()?.let { callback.onSuccess(it) }
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    callback.onSuccess(body)
+                } else {
+                    callback.onFailed(response.code(), "Response body is null")
+                }
+            } else {
+                val errorMessage = response.message().ifEmpty { "HTTP Error ${response.code()}" }
+                callback.onFailed(response.code(), errorMessage)
+            }
             callback.onHideProgress()
             callback.onFinish()
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-            callback.onFailed(500, t.localizedMessage)
+            callback.onFailed(500, t.localizedMessage ?: "Network Request Failed")
             callback.onHideProgress()
             callback.onFinish()
         }
     })
-
 }

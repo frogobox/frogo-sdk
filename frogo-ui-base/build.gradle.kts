@@ -24,7 +24,7 @@ android {
 
     publishing {
         singleVariant("release") {
-            withSourcesJar()
+            // withSourcesJar()
         }
     }
 
@@ -54,6 +54,9 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
+            all {
+                it.systemProperty("robolectric.sdk", "34")
+            }
         }
     }
 
@@ -85,7 +88,7 @@ afterEvaluate {
         publications {
 
             // Creates a Maven publication called "release".
-            create<MavenPublication>("release") {
+            register("release", MavenPublication::class) {
 
                 // Applies the component for the release build variant.
                 // NOTE : Delete this line code if you publish Native Java / Kotlin Library

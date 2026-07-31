@@ -25,7 +25,7 @@ android {
 
     publishing {
         singleVariant("release") {
-            withSourcesJar()
+            // withSourcesJar()
         }
     }
 
@@ -102,29 +102,28 @@ dependencies {
 
 afterEvaluate {
     publishing {
-        publications {
-
-            repositories {
-                maven {
-                    name = ProjectSetting.MODULE_NAME_AD
-                    url = uri(ProjectSetting.URI_PACKAGE_LIB)
-                    credentials {
-                        username = project.findProperty("gpr.user") as String? ?: ""
-                        password = project.findProperty("gpr.key") as String? ?: ""
-                    }
+        repositories {
+            maven {
+                name = ProjectSetting.MODULE_NAME_AD
+                url = uri(ProjectSetting.URI_PACKAGE_LIB)
+                credentials {
+                    username = project.findProperty("gpr.user") as String? ?: ""
+                    password = project.findProperty("gpr.key") as String? ?: ""
                 }
             }
+        }
 
+        publications {
             // Creates a Maven publication called "release".
-            create<MavenPublication>("release") {
+            register("release", MavenPublication::class) {
 
-            // Applies the component for the release build variant.
+                // Applies the component for the release build variant.
                 // NOTE : Delete this line code if you publish Native Java / Kotlin Library
                 from(components["release"])
 
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
-                groupId = ProjectSetting.BASE_PACAKGE_NAME
+                groupId = ProjectSetting.PROJECT_LIB_ID_AD
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten

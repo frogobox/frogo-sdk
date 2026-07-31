@@ -1,6 +1,6 @@
 /**
  * Created by faisalamir on 19/09/21
- * FrogoRecyclerView
+ * Frogo SDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
@@ -15,15 +15,13 @@ object DependencyGradle {
 
     const val FROGO_PATH_CORE_SDK = ":${ProjectSetting.MODULE_NAME_CORE_SDK}"
     const val FROGO_PATH_SDK = ":${ProjectSetting.MODULE_NAME_SDK}"
-    const val FROGO_PATH_SDK_UTIL = ":${ProjectSetting.MODULE_NAME_SDK_UTIL}"
     const val FROGO_PATH_COMPOSE = ":${ProjectSetting.MODULE_NAME_COMPOSE}"
     const val FROGO_PATH_COMPOSE_UI = ":${ProjectSetting.MODULE_NAME_COMPOSE_UI}"
-
-    // dependencies version
     const val FROGO_PATH_UI = ":${ProjectSetting.MODULE_NAME_CORE_UI}"
-
     const val FROGO_PATH_RECYCLER_VIEW = ":${ProjectSetting.MODULE_NAME_UI_RECYCLER}"
+    const val FROGO_PATH_EXT_ADS = ":${ProjectSetting.MODULE_NAME_AD}"
 
-    const val MODULE_LIB_FROGO_AD = ":${ProjectSetting.MODULE_NAME_AD}"
+    @Deprecated("Use FROGO_PATH_EXT_ADS instead", ReplaceWith("FROGO_PATH_EXT_ADS"))
+    const val MODULE_LIB_FROGO_AD = FROGO_PATH_EXT_ADS
 
 }
