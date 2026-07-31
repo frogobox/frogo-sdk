@@ -24,13 +24,13 @@ android {
 
     publishing {
         singleVariant("release") {
-            withSourcesJar()
+            // withSourcesJar()
         }
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
