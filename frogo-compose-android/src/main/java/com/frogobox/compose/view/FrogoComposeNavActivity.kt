@@ -10,8 +10,11 @@ abstract class FrogoComposeNavActivity : FrogoComposeActivity() {
 
     @Composable
     override fun SetupCompose() {
-        navController = rememberNavController()
-        SetupNavigation(navController)
+        val controller = rememberNavController()
+        androidx.compose.runtime.SideEffect {
+            navController = controller
+        }
+        SetupNavigation(controller)
     }
 
     /**

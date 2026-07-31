@@ -1,12 +1,12 @@
 /**
  * Created by faisalamir on 12/02/22
- * FrogoAdmob
+ * Frogo SDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
  * Github   : github.com/amirisback
  * -----------------------------------------
- * Copyright (C) 2022 Mona Primaveras Inc.      
+ * Copyright (C) 2022 FrogoBox Inc.
  * All rights reserved
  *
  */
@@ -35,11 +35,11 @@ object AdValue {
 
     // ---------------------------------------------------------------------------------------------
 
-    // Declaration admob id for debug
+    // Declaration unity ad id for debug
     const val debugUnityAdGameId = "4416083"
     const val debugUnityAdInterstitial = "Interstitial_Android"
 
-    // Declaration admob id for release
+    // Declaration unity ad id for release
     const val releaseUnityAdGameId = "4416083"
     const val releaseUnityAdInterstitial = "Interstitial_Android"
 

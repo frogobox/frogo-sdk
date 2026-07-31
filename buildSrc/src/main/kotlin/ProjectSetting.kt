@@ -1,6 +1,6 @@
 /**
  * Created by faisalamir on 19/09/21
- * FrogoRecyclerView
+ * Frogo SDK
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
@@ -27,7 +27,6 @@ object ProjectSetting {
     // Module Names (Directory & Gradle Include)
     const val MODULE_NAME_CORE_SDK = "frogo-$LAYER_CORE"
     const val MODULE_NAME_SDK = "frogo-$LAYER_CORE-android"
-    const val MODULE_NAME_SDK_UTIL = "frogo-$LAYER_CORE-android-util"
     const val MODULE_NAME_COMPOSE = "frogo-$LAYER_COMPOSE-android"
     const val MODULE_NAME_COMPOSE_UI = "frogo-$LAYER_COMPOSE-ui"
 
@@ -39,7 +38,6 @@ object ProjectSetting {
     // Library Names (For Package ID / Namespace)
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
-    const val LIBRARY_NAME_SDK_UTIL = "sdkutil"
     const val LIBRARY_NAME_UI = "ui"
     const val LIBRARY_NAME_UI_RECYCLER = "recycler"
     const val LIBRARY_NAME_AD = "ads"
@@ -50,7 +48,7 @@ object ProjectSetting {
 
     const val VERSION_MAJOR = 3
     const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 2
+    const val VERSION_PATCH = 3
 
     // ---------------------------------------------------------------------------------------------
 
@@ -60,31 +58,30 @@ object ProjectSetting {
 
     // ---------------------------------------------------------------------------------------------
 
-    val URI_PACKAGE_LIB = "https://maven.pkg.github.com/amirisback/frogo-admob"
+    const val URI_PACKAGE_LIB = "https://maven.pkg.github.com/amirisback/frogo-sdk"
 
-    const val BASE_PACAKGE_NAME = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
+    const val BASE_PACKAGE_NAME = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
 
     const val PROJECT_NAME_SPACE = "$APP_DOMAIN.$APP_PLAY_CONSOLE"
 
-    const val PROJECT_APP_ID = "$BASE_PACAKGE_NAME.app"
-    const val PROJECT_LIB_ID_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK"
-    const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_CORE_SDK"
-    const val PROJECT_LIB_ID_SDK_UTIL = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_SDK_UTIL"
-    const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE"
-    const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
+    const val PROJECT_APP_ID = "$BASE_PACKAGE_NAME.app"
+    const val PROJECT_LIB_ID_SDK = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_SDK"
+    const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_CORE_SDK"
+    const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_COMPOSE"
+    const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
 
-    const val PROJECT_LIB_ID_UI = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI"
-    const val PROJECT_LIB_ID_UI_RECYCLER = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_UI_RECYCLER"
+    const val PROJECT_LIB_ID_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_UI"
+    const val PROJECT_LIB_ID_UI_RECYCLER = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_UI_RECYCLER"
 
-    const val PROJECT_LIB_ID_AD = "$BASE_PACAKGE_NAME.$LIBRARY_NAME_AD"
+    const val PROJECT_LIB_ID_AD = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_AD"
 
-    const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 100) + (VERSION_MINOR * 10) + (VERSION_PATCH * 1)
+    const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 10000) + (VERSION_MINOR * 100) + VERSION_PATCH
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 
-    val NAME_APK = NAME_APP.lowercase().replace(" ", "-")
+    const val NAME_APK = "frogo-sdk"
 
-    val NAME_DB = NAME_APP.lowercase().replace(" ", "_")
-    val DB = "\"$NAME_DB.db\""
+    const val NAME_DB = "frogo_sdk"
+    const val DB = "\"$NAME_DB.db\""
 
     // ---------------------------------------------------------------------------------------------
 

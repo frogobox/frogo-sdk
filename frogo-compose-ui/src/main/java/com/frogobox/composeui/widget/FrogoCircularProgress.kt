@@ -29,7 +29,7 @@ fun FrogoCircularProgress(
     strokeWidth: Dp = 4.dp
 ) {
     CircularProgressIndicator(
-        progress = progress,
+        progress = { progress },
         modifier = modifier,
         color = color,
         strokeWidth = strokeWidth

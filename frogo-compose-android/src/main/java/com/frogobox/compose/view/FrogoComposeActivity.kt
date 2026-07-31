@@ -88,22 +88,14 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
     }
 
-    /** Setup modern back press listener for all Android versions */
+    /** Setup modern back press listener for all Android versions using AndroidX onBackPressedDispatcher */
     open fun setupDoOnBackPressedExt() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            onBackInvokedDispatcher.registerOnBackInvokedCallback(
-                OnBackInvokedDispatcher.PRIORITY_DEFAULT
-            ) {
-                doOnBackPressedExt()
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() = doOnBackPressedExt()
             }
-        } else {
-            onBackPressedDispatcher.addCallback(
-                this,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() = doOnBackPressedExt()
-                }
-            )
-        }
+        )
     }
 
     // ---------------------------------------------------------------------------------------------

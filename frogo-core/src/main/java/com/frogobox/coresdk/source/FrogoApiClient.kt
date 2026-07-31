@@ -23,20 +23,25 @@ import java.util.concurrent.TimeUnit
 
 object FrogoApiClient {
 
-    fun clientWithInterceptor(timeout: Long? = 30L, chuckInterceptor: Interceptor? = null): OkHttpClient {
+    fun clientWithInterceptor(
+        timeout: Long? = 30L,
+        chuckInterceptor: Interceptor? = null,
+        isDebug: Boolean = false
+    ): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = if (isDebug) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        }
+
         val client = OkHttpClient.Builder()
-            .readTimeout(timeout ?:30, TimeUnit.SECONDS)
-            .connectTimeout(timeout ?:30, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
+            .readTimeout(timeout ?: 30L, TimeUnit.SECONDS)
+            .connectTimeout(timeout ?: 30L, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
 
         return if (chuckInterceptor != null) {
             client.addInterceptor(chuckInterceptor).build()
         } else {
             client.build()
         }
-
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -47,21 +52,14 @@ object FrogoApiClient {
         timeout: Long? = 30L,
         chuckInterceptor: Interceptor? = null,
     ): T {
-        return if (isDebug) {
-            Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(clientWithInterceptor(timeout, chuckInterceptor))
-                .build().create(T::class.java)
-        } else {
-            Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(clientWithInterceptor(timeout))
-                .build().create(T::class.java)
-        }
+        val okHttpClient = clientWithInterceptor(timeout, chuckInterceptor, isDebug)
+        return Retrofit.Builder()
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(T::class.java)
     }
 
 }
