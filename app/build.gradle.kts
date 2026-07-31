@@ -15,7 +15,7 @@ ksp {
 
 base {
     // Naming APK // AAB
-    val timestamp = SimpleDateFormat("dd-MM-yyyy_hh-mm").format(Date())
+    val timestamp = SimpleDateFormat("dd-MM-yyyy_HH-mm").format(Date())
     archivesName = "${ProjectSetting.NAME_APK}-[${ProjectSetting.PROJECT_VERSION_NAME}]-$timestamp"
 }
 
@@ -139,7 +139,7 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
 
-    implementation(project(DependencyGradle.MODULE_LIB_FROGO_AD))
+    implementation(project(DependencyGradle.FROGO_PATH_EXT_ADS))
 
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
@@ -154,12 +154,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    implementation(libs.material)
     implementation(libs.gson)
 
-    implementation(libs.material)
-
-    api(libs.github.circleimageview)
-    
+    implementation(libs.github.circleimageview)
 }

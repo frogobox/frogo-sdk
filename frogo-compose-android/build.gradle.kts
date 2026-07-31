@@ -62,7 +62,6 @@ kotlin {
 }
 
 dependencies {
-    api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     api(project(DependencyGradle.FROGO_PATH_SDK))
 
     // Jetpack Compose BOM
@@ -96,8 +95,8 @@ afterEvaluate {
         publications {
             register("release", MavenPublication::class) {
                 from(components["release"])
-                groupId = "com.frogobox.compose"
-                artifactId = "frogo-compose-android"
+                groupId = ProjectSetting.PROJECT_LIB_ID_COMPOSE
+                artifactId = ProjectSetting.MODULE_NAME_COMPOSE
                 version = ProjectSetting.PROJECT_VERSION_NAME
             }
         }

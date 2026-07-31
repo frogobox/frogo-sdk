@@ -62,8 +62,6 @@ kotlin {
 }
 
 dependencies {
-    api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    
     // Bergantung ke frogo-compose-android jika diperlukan base compose class
     api(project(DependencyGradle.FROGO_PATH_COMPOSE)) 
     

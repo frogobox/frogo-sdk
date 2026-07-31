@@ -56,6 +56,9 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
+            all {
+                it.systemProperty("robolectric.sdk", "34")
+            }
         }
     }
 
@@ -69,7 +72,6 @@ kotlin {
 }
 
 dependencies {
-    api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     api(project(DependencyGradle.FROGO_PATH_CORE_SDK))
 
     api(libs.androidx.appcompat)

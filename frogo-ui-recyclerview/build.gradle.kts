@@ -48,16 +48,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    configurations.all {
-        resolutionStrategy {
-            preferProjectModules()
-        }
-    }
-
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
+            all {
+                it.systemProperty("robolectric.sdk", "34")
+            }
         }
     }
 
@@ -83,19 +80,18 @@ dependencies {
 
 afterEvaluate {
     publishing {
-        publications {
-
-            repositories {
-                maven {
-                    name = ProjectSetting.MODULE_NAME_UI_RECYCLER
-                    url = uri(ProjectSetting.URI_PACKAGE_LIB)
-                    credentials {
-                        username = project.findProperty("gpr.user") as String? ?: ""
-                        password = project.findProperty("gpr.key") as String? ?: ""
-                    }
+        repositories {
+            maven {
+                name = ProjectSetting.MODULE_NAME_UI_RECYCLER
+                url = uri(ProjectSetting.URI_PACKAGE_LIB)
+                credentials {
+                    username = project.findProperty("gpr.user") as String? ?: ""
+                    password = project.findProperty("gpr.key") as String? ?: ""
                 }
             }
+        }
 
+        publications {
             // Creates a Maven publication called "release".
             register("release", MavenPublication::class) {
 
@@ -105,7 +101,7 @@ afterEvaluate {
 
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
-                groupId = ProjectSetting.BASE_PACAKGE_NAME
+                groupId = ProjectSetting.PROJECT_LIB_ID_UI_RECYCLER
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
