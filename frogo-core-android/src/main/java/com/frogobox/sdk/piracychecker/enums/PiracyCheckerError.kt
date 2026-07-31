@@ -22,9 +22,6 @@ enum class PiracyCheckerError(private val text: String) {
         "Application misses the \'com.android.vending.CHECK_LICENSE\' " + "permission."),
     UNKNOWN("Unknown error.");
     
-    /* (non-Javadoc)
-     * @see java.lang.Enum#toString()
-     */
     override fun toString(): String = text
     
     companion object {
