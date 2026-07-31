@@ -12,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+import androidx.compose.material3.SearchBarDefaults
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FrogoSearchBar(
@@ -25,21 +27,27 @@ fun FrogoSearchBar(
     content: @Composable () -> Unit
 ) {
     SearchBar(
-        query = query,
-        onQueryChange = onQueryChange,
-        onSearch = onSearch,
-        active = active,
-        onActiveChange = onActiveChange,
-        modifier = modifier,
-        placeholder = { Text(text = placeholder) },
-        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
-        trailingIcon = {
-            if (active && query.isNotEmpty()) {
-                IconButton(onClick = { onQueryChange("") }) {
-                    Icon(Icons.Default.Clear, contentDescription = "Clear Icon")
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = query,
+                onQueryChange = onQueryChange,
+                onSearch = onSearch,
+                expanded = active,
+                onExpandedChange = onActiveChange,
+                placeholder = { Text(text = placeholder) },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
+                trailingIcon = {
+                    if (active && query.isNotEmpty()) {
+                        IconButton(onClick = { onQueryChange("") }) {
+                            Icon(Icons.Default.Clear, contentDescription = "Clear Icon")
+                        }
+                    }
                 }
-            }
-        }
+            )
+        },
+        expanded = active,
+        onExpandedChange = onActiveChange,
+        modifier = modifier
     ) {
         content()
     }

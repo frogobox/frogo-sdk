@@ -302,7 +302,7 @@ class ParticleSystem private constructor(
         speedMinY: Float,
         speedMaxY: Float,
     ): ParticleSystem {
-        mInitializers.add(SpeeddByComponentsInitializer(dpToPx(speedMinX), dpToPx(speedMaxX),
+        mInitializers.add(SpeedByComponentsInitializer(dpToPx(speedMinX), dpToPx(speedMaxX),
             dpToPx(speedMinY), dpToPx(speedMaxY)))
         return this
     }

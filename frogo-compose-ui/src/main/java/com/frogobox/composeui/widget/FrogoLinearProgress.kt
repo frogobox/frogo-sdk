@@ -28,7 +28,7 @@ fun FrogoLinearProgress(
     trackColor: Color = MaterialTheme.colorScheme.surfaceVariant
 ) {
     LinearProgressIndicator(
-        progress = progress,
+        progress = { progress },
         modifier = modifier,
         color = color,
         trackColor = trackColor
