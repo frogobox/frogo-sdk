@@ -22,9 +22,9 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.4
+    $version_release = 3.0.5
 
-What's New?? (v3.0.0 → v3.0.4)
+What's New?? (v3.0.0 → v3.0.5)
 
     * New Feature: FrogoWebViewActivity for streamlined web view handling *
     * New Feature: Compose-based ad activities & MVI state management *
@@ -50,10 +50,12 @@ What's New?? (v3.0.0 → v3.0.4)
 ## 📸 Screenshots & Mockups
 
 ### Premium Jetpack Compose Components
+
 ![Frogo Compose UI Mockup](docs/image/compose_ui_mockup.png)
 *Beautiful, modern, and highly customizable UI components following Material Design 3.*
 
 ### Seamless Ad Integration
+
 ![Frogo Ads Mockup](docs/image/ads_mockup.png)
 *Monetize your apps effortlessly with optimized ad placements.*
 
@@ -62,6 +64,7 @@ What's New?? (v3.0.0 → v3.0.4)
 ## 🚀 Quick Start
 
 ### Step 1: Add JitPack Repository
+
 Add it to your `settings.gradle.kts` (or root `build.gradle`):
 
 ```kotlin
@@ -76,16 +79,17 @@ dependencyResolutionManagement {
 ```
 
 ### Step 2: Add Dependencies
-Latest Version: `3.0.4`
+
+Latest Version: `3.0.5`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.4")
+    implementation("com.github.frogobox:frogo-sdk:3.0.5")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.4")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.4")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.5")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.5")
 }
 ```
 
@@ -130,7 +134,7 @@ Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobo
 ---
 
 <!-- SEO Keywords (Hidden) -->
-<!-- 
+<!--
 Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, RecyclerView Adapter, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
 -->
 
@@ -329,8 +333,8 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 
 Very open to anyone, I'll write your name under this, please contribute by sending an email to me
 
-- Mail To faisalamircs@gmail.com
-- Subject : Github _ [Github-Username-Account] _ [Language] _ [Repository-Name]
+- Mail To <faisalamircs@gmail.com>
+- Subject : Github _[Github-Username-Account]_ [Language] _ [Repository-Name]
 - Example : Github_amirisback_kotlin_admob-helper-implementation
 
 Name Of Contribute
@@ -341,7 +345,7 @@ Name Of Contribute
 
 Waiting for your contribute
 
-## Attention !!!
+## Attention
 
 - Please enjoy and don't forget fork and give a star
 - Don't Forget Follow My Github Account
