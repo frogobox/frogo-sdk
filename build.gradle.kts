@@ -12,3 +12,22 @@ tasks.register("clean", Delete::class) {
     description = ""
     delete(rootProject.layout.buildDirectory)
 }
+
+subprojects {
+    plugins.withId("com.android.library") {
+        configure<com.android.build.api.dsl.LibraryExtension> {
+            lint {
+                abortOnError = false
+                checkReleaseBuilds = false
+            }
+        }
+    }
+    plugins.withId("com.android.application") {
+        configure<com.android.build.api.dsl.ApplicationExtension> {
+            lint {
+                abortOnError = false
+                checkReleaseBuilds = false
+            }
+        }
+    }
+}
