@@ -5,12 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
-}
-
-buildscript {
-    dependencies {
-        classpath(libs.android.maven.gradle.plugin)
-    }
+    `maven-publish`
 }
 
 tasks.register("clean", Delete::class) {
