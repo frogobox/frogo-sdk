@@ -19,7 +19,7 @@ import org.koin.android.ext.android.inject
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  */
 

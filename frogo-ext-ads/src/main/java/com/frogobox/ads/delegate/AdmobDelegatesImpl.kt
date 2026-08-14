@@ -18,7 +18,7 @@ import com.google.android.libraries.ads.mobile.sdk.banner.AdView
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -39,8 +39,8 @@ class AdmobDelegatesImpl : AdmobDelegates {
         admobDelegatesActivity = activity
     }
 
-    override fun setupAdmobApp() {
-        FrogoAdmob.setupAdmobApp(admobDelegatesActivity)
+    override fun setupAdmobApp(appUnitId: String?) {
+        FrogoAdmob.setupAdmobApp(admobDelegatesActivity, appUnitId)
     }
 
     override fun showAdConsent(callback: IFrogoAdConsent) {

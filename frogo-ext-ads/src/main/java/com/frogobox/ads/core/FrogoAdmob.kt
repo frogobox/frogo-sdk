@@ -40,7 +40,7 @@ import kotlinx.coroutines.launch
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * LinkedIn : linkedin.com/in/faisalamircs
  * -----------------------------------------
  * FrogoBox Software Industries
@@ -58,10 +58,10 @@ object FrogoAdmob : IFrogoAdmob,
 
     // ---------------------------------------------------------------------------------------------
 
-    override fun setupAdmobApp(context: Context) {
+    override fun setupAdmobApp(context: Context, appUnitId: String?) {
         val backgroundScope = CoroutineScope(Dispatchers.IO)
         backgroundScope.launch {
-            val appId = try {
+            val appId = appUnitId ?: try {
                 val appInfo = context.packageManager.getApplicationInfo(
                     context.packageName,
                     android.content.pm.PackageManager.GET_META_DATA

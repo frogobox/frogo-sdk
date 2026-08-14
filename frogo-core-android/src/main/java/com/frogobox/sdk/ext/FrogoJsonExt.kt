@@ -11,7 +11,7 @@ import java.io.InputStreamReader
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  */
 

@@ -8,7 +8,7 @@ import android.app.PendingIntent
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2020 FrogoBox Inc.      
  * All rights reserved

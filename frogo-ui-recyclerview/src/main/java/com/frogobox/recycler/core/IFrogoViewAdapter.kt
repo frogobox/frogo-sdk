@@ -11,7 +11,7 @@ import android.view.View
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * FrogoBox Inc
  * com.frogobox.recycler.callback

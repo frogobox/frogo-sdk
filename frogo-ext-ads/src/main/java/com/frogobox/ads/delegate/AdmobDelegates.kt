@@ -16,7 +16,7 @@ import com.google.android.libraries.ads.mobile.sdk.banner.AdView
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
@@ -32,7 +32,7 @@ interface AdmobDelegates {
 
     // ---------------------------------------------------------------------------------------------
 
-    fun setupAdmobApp()
+    fun setupAdmobApp(appUnitId: String? = null)
 
     // Show Banner Ads
     fun showAdBanner(
