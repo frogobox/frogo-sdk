@@ -10,19 +10,17 @@
  * 
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * LinkedIn : linkedin.com/in/faisalamircs
  * 
  * FrogoBox Software Industries
  * 
  -->
 
-<com.google.android.gms.ads.AdView
+<com.google.android.libraries.ads.mobile.sdk.banner.AdView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ads_phone_tab_special_smart_banner"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    ads:adSize="@string/ads_size_smart_banner"
-    ads:adUnitId="@string/admob_banner"/>
+    android:layout_alignParentBottom="true"/>

@@ -10,8 +10,8 @@ import com.frogobox.R;
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback;
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback;
 import com.frogobox.databinding.ActivityMainAdmobBinding;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize;
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem;
 
 public class MainJavaAdmobActivity extends BaseActivity<ActivityMainAdmobBinding> implements FrogoAdmobInterstitialCallback, FrogoAdmobRewardedCallback {
 
@@ -24,8 +24,8 @@ public class MainJavaAdmobActivity extends BaseActivity<ActivityMainAdmobBinding
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showAdBannerContainer(getString(R.string.admob_banner), AdSize.SMART_BANNER, getBinding().includeAdsView.frogoAdsBanner);
-        showAdBanner(getBinding().adsXml.adsPhoneTabSpecialSmartBanner);
+        showAdBannerContainer(getString(R.string.admob_banner), AdSize.BANNER, getBinding().includeAdsView.frogoAdsBanner, null, null,null);
+        showAdBanner(getBinding().adsXml.adsPhoneTabSpecialSmartBanner, null, null,null);
         hideButton();
         setupButtonClick();
         setupDetailActivity("Java Sample", null, null);
@@ -37,11 +37,11 @@ public class MainJavaAdmobActivity extends BaseActivity<ActivityMainAdmobBinding
 
     private void setupButtonClick() {
         getBinding().btnInterstitial.setOnClickListener(view -> {
-            showAdInterstitial(getString(R.string.admob_interstitial), this);
+            showAdInterstitial(getString(R.string.admob_interstitial),  null, null, this);
         });
 
         getBinding().btnRewarded.setOnClickListener(view -> {
-            showAdRewarded(getString(R.string.admob_rewarded), this);
+            showAdRewarded(getString(R.string.admob_rewarded), null, null, this);
         });
     }
 

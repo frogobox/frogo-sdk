@@ -11,7 +11,7 @@ import com.frogobox.ads.callback.FrogoUnityAdInterstitialCallback
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -65,7 +65,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                 }
             })
         } else {
-            showAdInterstitial(admobInterstitialId, object : FrogoAdmobInterstitialCallback {
+            showAdInterstitial(admobInterstitialId, callback = object : FrogoAdmobInterstitialCallback {
                 override fun onShowAdRequestProgress(tag: String, message: String) {
                     callback.onShowAdRequestProgress(tag, message)
                 }
@@ -166,7 +166,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                 }
             })
         } else {
-            showAdInterstitial(admobInterstitialId, timeout, object :
+            showAdInterstitial(admobInterstitialId, timeout, callback = object :
                 FrogoAdmobInterstitialCallback {
                 override fun onShowAdRequestProgress(tag: String, message: String) {
                     callback.onShowAdRequestProgress(tag, message)
@@ -241,7 +241,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
 
         if (unityInterstitialId.isBlank()) {
             showAdInterstitial(admobInterstitialId,
-                object : FrogoAdmobInterstitialCallback {
+                callback = object : FrogoAdmobInterstitialCallback {
                     override fun onShowAdRequestProgress(tag: String, message: String) {
                         callback.onShowAdRequestProgress(tag, message)
                     }
@@ -279,7 +279,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                     callback.onAdFailed(tag, errorMessage)
                 } else {
                     showAdInterstitial(admobInterstitialId,
-                        object : FrogoAdmobInterstitialCallback {
+                        callback = object : FrogoAdmobInterstitialCallback {
                             override fun onShowAdRequestProgress(tag: String, message: String) {
                                 callback.onShowAdRequestProgress(tag, message)
                             }
@@ -339,7 +339,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
         if (unityInterstitialId.isBlank()) {
             showAdInterstitial(admobInterstitialId,
                 timeout,
-                object : FrogoAdmobInterstitialCallback {
+                callback = object : FrogoAdmobInterstitialCallback {
                     override fun onShowAdRequestProgress(tag: String, message: String) {
                         callback.onShowAdRequestProgress(tag, message)
                     }
@@ -378,7 +378,7 @@ class FrogoAdDelegatesImpl : FrogoAdDelegates,
                 } else {
                     showAdInterstitial(admobInterstitialId,
                         timeout,
-                        object : FrogoAdmobInterstitialCallback {
+                        callback = object : FrogoAdmobInterstitialCallback {
                             override fun onShowAdRequestProgress(tag: String, message: String) {
                                 callback.onShowAdRequestProgress(tag, message)
                             }

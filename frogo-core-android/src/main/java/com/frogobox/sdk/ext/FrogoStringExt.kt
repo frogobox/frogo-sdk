@@ -10,21 +10,23 @@ import java.util.TimeZone
  * Created by Faisal Amir on 24/10/22
  * -----------------------------------------
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) Frogobox ID / amirisback
  * All rights reserved
  */
 
 
+private const val PASSWORD_SPECIAL_CHARS = "#?!@$%^&*-"
+
 val String.isDigitOnly: Boolean
-    get() = matches(Regex("^\\d+$"))
+    get() = isNotEmpty() && all { it.isDigit() }
 
 val String.isAlphabeticOnly: Boolean
-    get() = matches(Regex("^[a-zA-Z]+$"))
+    get() = isNotEmpty() && all { it.isLetter() }
 
 val String.isAlphanumericOnly: Boolean
-    get() = matches(Regex("^[a-zA-Z\\d]+$"))
+    get() = isNotEmpty() && all { it.isLetterOrDigit() }
 
 fun String.isEmail(): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(this).matches()
@@ -34,16 +36,16 @@ fun String.isValidPassword(): Pair<Boolean, String?> {
     if (this.length < 8) {
         return false to "The password must be at least 8 characters."
     }
-    if (!this.contains("[a-z]".toRegex())) {
+    if (!this.any { it.isLowerCase() }) {
         return false to "The password must contain at least one lowercase letter."
     }
-    if (!this.contains("[A-Z]".toRegex())) {
+    if (!this.any { it.isUpperCase() }) {
         return false to "The password must contain at least one uppercase letter"
     }
-    if (!this.contains("[0-9]".toRegex())) {
+    if (!this.any { it.isDigit() }) {
         return false to "The password must contain at least one number."
     }
-    if (!this.contains("[#?!@$%^&*-]".toRegex())) {
+    if (!this.any { it in PASSWORD_SPECIAL_CHARS }) {
         return false to "The password must contain at least one special character."
     }
     return true to null
@@ -53,9 +55,10 @@ fun String.isLessThan(count: Int): Boolean = this.length < count
 
 fun String.toDate(
     dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-    timeZone: TimeZone = TimeZone.getTimeZone("UTC")
+    timeZone: TimeZone = TimeZone.getTimeZone("UTC"),
+    locale: Locale = Locale.US
 ): Date {
-    val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+    val parser = SimpleDateFormat(dateFormat, locale)
     parser.timeZone = timeZone
     return parser.parse(this)
         ?: throw IllegalArgumentException("Cannot parse date string: '$this' with format '$dateFormat'")
@@ -67,10 +70,4 @@ fun String.getUserMention(mention: String): String? {
         ?.removePrefix("@")
 }
 
-fun String.removeLastChar(): String {
-    var str = this
-    if (str.isNotEmpty()) {
-        str = str.substring(0, str.length - 1)
-    }
-    return str
-}
+fun String.removeLastChar(): String = dropLast(1)

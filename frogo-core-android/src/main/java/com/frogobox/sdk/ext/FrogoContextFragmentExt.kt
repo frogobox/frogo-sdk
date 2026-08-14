@@ -12,7 +12,7 @@ import com.google.gson.Gson
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -31,7 +31,7 @@ fun <Model> Fragment.newInstanceExt(argsKey: String, data: Model) {
 
 inline fun <reified Model> Fragment.getInstanceExt(argsKey: String): Model? {
     val argsData = this.arguments?.getString(argsKey) ?: return null
-    return runCatching { Gson().fromJson(argsData, Model::class.java) }.getOrNull()
+    return runCatching { FrogoGson.instance.fromJson(argsData, Model::class.java) }.getOrNull()
 }
 
 inline fun <reified ClassActivity> Fragment.startActivityExt() {

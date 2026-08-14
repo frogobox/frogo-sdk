@@ -19,7 +19,7 @@ import com.frogobox.sdk.R
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2020 FrogoBox Inc.      
  * All rights reserved
@@ -34,12 +34,14 @@ class FrogoNotification {
         const val FROGO_CHANNEL_NAME = "FROGO_CHANNEL_NAME"
     }
 
-    class Inject(val context: Context) : IFrogoNotification {
+    class Inject(context: Context) : IFrogoNotification {
+
+        val context: Context = context.applicationContext
 
         private val TAG = FrogoNotification::class.java.simpleName
 
         private val notificationManager: NotificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            this.context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         private var notification: Notification? = null
 
@@ -146,7 +148,7 @@ class FrogoNotification {
 
         override fun setGroup(groupKey: String): Inject {
             this.groupKey = groupKey
-            Log.d(TAG, "Value of Show When : $groupKey")
+            Log.d(TAG, "Value of GroupKey : $groupKey")
             return this
         }
 
@@ -193,18 +195,18 @@ class FrogoNotification {
                 .setBigContentTitle(listener.setBigContentTitle())
                 .setSummaryText(listener.setSummaryText())
 
-            Log.d(TAG, "Using Custom Content View")
-            Log.d(TAG, "Inbox Syle (Add Line) : ${listener.addLine1()}")
-            Log.d(TAG, "Inbox Syle (Add Line) : ${listener.addLine2()}")
-            Log.d(TAG, "Inbox Syle (Big Content Title) : ${listener.setBigContentTitle()}")
-            Log.d(TAG, "Inbox Syle (Summary Text) : ${listener.setSummaryText()}")
+            Log.d(TAG, "Using Inbox Style")
+            Log.d(TAG, "Inbox Style (Add Line) : ${listener.addLine1()}")
+            Log.d(TAG, "Inbox Style (Add Line) : ${listener.addLine2()}")
+            Log.d(TAG, "Inbox Style (Big Content Title) : ${listener.setBigContentTitle()}")
+            Log.d(TAG, "Inbox Style (Summary Text) : ${listener.setSummaryText()}")
             return this
         }
 
         override fun setCustomContentView(listener: FrogoNotifCustomContentViewListener): Inject {
             isCustomContentView = true
             collapsedView = RemoteViews(context.packageName, listener.setupCustomView())
-            listener.setupComponent(context, collapsedView!!)
+            collapsedView?.let { listener.setupComponent(context, it) }
 
             Log.d(TAG, "Using Custom Content View")
             Log.d(TAG, "Custom Content View : $isCustomContentView")
@@ -215,10 +217,10 @@ class FrogoNotification {
         override fun setCustomBigContentView(listener: FrogoNotifCustomContentViewListener): Inject {
             isBigCustomContentView = true
             expandedView = RemoteViews(context.packageName, listener.setupCustomView())
-            listener.setupComponent(context, expandedView!!)
+            expandedView?.let { listener.setupComponent(context, it) }
 
             Log.d(TAG, "Using Big Custom Content View")
-            Log.d(TAG, "Big Custom Content View : $isCustomContentView")
+            Log.d(TAG, "Big Custom Content View : $isBigCustomContentView")
             Log.d(TAG, "Layout Big Custom Content View : ${listener.setupCustomView()}")
             return this
         }
@@ -234,7 +236,7 @@ class FrogoNotification {
             Log.d(TAG, "Using Frogo Notification Template")
             Log.d(TAG, "Value of Content Title : $contentTitle")
             Log.d(TAG, "Value of Content Text : $contentText")
-            Log.d(TAG, "Value of Sub Context : $contentSubText")
+            Log.d(TAG, "Value of Sub Text : $contentSubText")
             Log.d(TAG, "Value of Large Icon : $largeIcon")
             Log.d(TAG, "Value of Auto Cancel : $isAutoCancel")
             return this

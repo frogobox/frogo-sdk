@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "google-mobile-ads-android-migrate-to-next-gen": {
+      "source": "google/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ads/google-mobile-ads-android-migrate-to-next-gen/SKILL.md",
+      "computedHash": "be6663269f5d74ebf1618e4cb534196626925e9ae771561de210512554f5aa40"
+    }
+  }
+}

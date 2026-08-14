@@ -108,8 +108,8 @@ class FrogoLayoutManagerTest {
     // =============================================================================================
 
     @Test
-    @Config(sdk = [23])
-    fun testLayoutManagerCompatibility_API23() {
+    @Config(sdk = [24])
+    fun testLayoutManagerCompatibility_API24() {
         val lm = FrogoLayoutManager.linearLayoutVertical(context)
         assertNotNull(lm)
     }

@@ -13,7 +13,7 @@ import com.bumptech.glide.request.target.Target
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.
  * All rights reserved
@@ -23,24 +23,13 @@ import com.bumptech.glide.request.target.Target
 // -------------------------------------------------------------------------------------------------
 
 fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
-    if (uri != null) {
-        when (uri) {
-            is String,
-            is Int,
-            is ByteArray,
-            -> {
-                if (placeHolder != null) {
-                    Glide.with(context)
-                        .load(uri)
-                        .placeholder(placeHolder)
-                        .into(this)
-                } else {
-                    Glide.with(context)
-                        .load(uri)
-                        .into(this)
-                }
-            }
+    val isValidString = (uri as? String)?.isNotBlank() ?: true
+    if (uri != null && isValidString) {
+        val request = Glide.with(context).load(uri)
+        if (placeHolder != null) {
+            request.placeholder(placeHolder).error(placeHolder)
         }
+        request.into(this)
     } else {
         if (placeHolder != null) {
             Glide.with(context)
@@ -52,52 +41,35 @@ fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
     }
 }
 
-fun ImageView.setImageCompressExt(uri: Any?, placeHolder: Int? = null) {
-    if (uri != null) {
-        when (uri) {
-            is String,
-            is Int,
-            is ByteArray,
-            -> {
-                val w = if (this.width > 0) this.width else Target.SIZE_ORIGINAL
-                val h = if (this.height > 0) this.height else Target.SIZE_ORIGINAL
-                val option = RequestOptions()
-                    .override(w, h)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+fun ImageView.setImageCompressExt(
+    uri: Any?,
+    placeHolder: Int? = null,
+    diskCacheStrategy: DiskCacheStrategy = DiskCacheStrategy.AUTOMATIC
+) {
+    val isValidString = (uri as? String)?.isNotBlank() ?: true
+    if (uri != null && isValidString) {
+        val w = if (this.width > 0) this.width else Target.SIZE_ORIGINAL
+        val h = if (this.height > 0) this.height else Target.SIZE_ORIGINAL
+        val option = RequestOptions()
+            .override(w, h)
+            .diskCacheStrategy(diskCacheStrategy)
 
-                if (placeHolder != null) {
-                    Glide.with(context)
-                        .asBitmap()
-                        .apply(option)
-                        .placeholder(placeHolder)
-                        .load(uri)
-                        .into(this)
-                } else {
-                    Glide.with(context)
-                        .asBitmap()
-                        .apply(option)
-                        .load(uri)
-                        .into(this)
-                }
-            }
+        val request = Glide.with(context)
+            .asBitmap()
+            .apply(option)
+            .load(uri)
 
-            else -> {
-                Glide.with(context)
-                    .asBitmap()
-                    .load("")
-                    .into(this)
-            }
+        if (placeHolder != null) {
+            request.placeholder(placeHolder).error(placeHolder)
         }
+        request.into(this)
     } else {
         if (placeHolder != null) {
             Glide.with(context)
-                .load("")
-                .placeholder(placeHolder)
+                .load(placeHolder)
                 .into(this)
         } else {
-            Glide.with(context)
-                .load("")
-                .into(this)
+            Glide.with(context).clear(this)
         }
     }
 }

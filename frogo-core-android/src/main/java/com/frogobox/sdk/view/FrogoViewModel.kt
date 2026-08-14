@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2021 FrogoBox Inc.      
  * All rights reserved
@@ -63,7 +64,7 @@ abstract class FrogoStateViewModel<STATE, EFFECT>(
      * Updates the UI state atomically.
      */
     protected fun updateState(reducer: STATE.() -> STATE) {
-        _uiState.value = _uiState.value.reducer()
+        _uiState.update { it.reducer() }
     }
 
     /**
@@ -74,4 +75,4 @@ abstract class FrogoStateViewModel<STATE, EFFECT>(
             _uiEffect.emit(effect)
         }
     }
-}
+}

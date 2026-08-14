@@ -22,20 +22,18 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.5
+    $version_release = 3.0.6
 
-What's New?? (v3.0.0 → v3.0.5)
+What's New?? (v3.0.5 → v3.0.6)
 
-    * New Feature: FrogoWebViewActivity for streamlined web view handling *
-    * New Feature: Compose-based ad activities & MVI state management *
-    * New Feature: Base Jetpack Compose screen & ad activity templates *
-    * New Feature: Modern UI widgets, navigation patterns & core networking extensions *
-    * Security: Added standard consumer ProGuard rules across all SDK modules *
-    * Testing: Added Robolectric unit test infrastructure & GitHub Actions CI automation *
-    * Refactor: Introduced ProjectSetting configuration file in buildSrc *
-    * Refactor: Standardized Gradle build scripts & Version Catalog *
-    * Upgrade: Google AdMob 25.2.0 → 25.3.0 *
-    * Maintenance: Code smell fixes, unused code cleanup & build optimizations *
+    * New Feature: Added Unity Ads SDK support & UnityAdDelegates *
+    * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.3.1) *
+    * Refactor: Modernized AdMob core, delegates, callbacks & Compose Ad activities *
+    * Optimization: Cleaned up redundant R8 keep rules & established modular consumer ProGuard configurations *
+    * Enhancement: Added frogo-ui-recyclerview module with ShimmerDrawable & custom RecyclerView widgets *
+    * Upgrade: Target SDK & Compile SDK to 37 (Android 16) with AGP 9.3.1 & Kotlin 2.4.10 *
+    * Testing: Expanded Robolectric unit test coverage for ads, UI widgets & layout managers *
+    * Maintenance: Cleaned up legacy ad APIs, code smells & optimized SDK module architecture *
 
 ## 🌟 Key Features
 
@@ -80,16 +78,16 @@ dependencyResolutionManagement {
 
 ### Step 2: Add Dependencies
 
-Latest Version: `3.0.5`
+Latest Version: `3.0.6`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.5")
+    implementation("com.github.frogobox:frogo-sdk:3.0.6")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.5")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.5")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.6")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.6")
 }
 ```
 

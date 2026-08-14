@@ -34,3 +34,5 @@ app/version.properties
 
 # SonarQube
 .sonar/
+.kotlin
+.kotlin/errors/

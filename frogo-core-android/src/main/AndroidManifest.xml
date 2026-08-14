@@ -9,6 +9,7 @@
 
         <activity
             android:name="com.frogobox.sdk.piracychecker.activities.LicenseActivity"
+            android:exported="false"
             android:theme="@style/PiracyCheckerStyle" />
 
         <activity
@@ -25,10 +26,10 @@
             android:theme="@style/FrogoAppTheme.HideStatusBarUI" />
         <activity
             android:name=".ui.FrogoAboutUsActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.FrogoImageViewActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>

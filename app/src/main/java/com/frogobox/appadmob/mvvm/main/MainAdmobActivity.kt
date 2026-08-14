@@ -14,7 +14,7 @@ import com.frogobox.appadmob.mvvm.rewarded.RewardedActivity
 import com.frogobox.databinding.ActivityMainAdmobBinding
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.startActivityExt
-import com.google.android.gms.ads.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.google.android.ump.FormError
 
 class MainAdmobActivity : BaseActivity<ActivityMainAdmobBinding>() {
@@ -64,7 +64,7 @@ class MainAdmobActivity : BaseActivity<ActivityMainAdmobBinding>() {
         showAdBanner(binding.adsXml.adsPhoneTabSpecialSmartBanner)
         showAdBannerContainer(
             getString(R.string.admob_banner),
-            AdSize.SMART_BANNER,
+            AdSize.BANNER,
             binding.includeAdsView.frogoAdsBanner
         )
     }

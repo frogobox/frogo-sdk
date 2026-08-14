@@ -3,7 +3,7 @@ package com.frogobox.ads.widget
 import android.view.View
 import android.view.ViewGroup
 import com.frogobox.recycler.core.FrogoRecyclerViewHolder
-import com.google.android.gms.ads.AdView
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
 
 /**
  * Created by Faisal Amir
@@ -15,7 +15,7 @@ import com.google.android.gms.ads.AdView
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * LinkedIn : linkedin.com/in/faisalamircs
  * -----------------------------------------
  * FrogoBox Software Industries

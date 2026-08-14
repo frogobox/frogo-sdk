@@ -78,7 +78,11 @@ android {
 
     buildTypes {
         getByName("release") {
+            isDebuggable = false
+            isJniDebuggable = false
+            isPseudoLocalesEnabled = false
             isMinifyEnabled = true
+            isShrinkResources = true
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -126,6 +130,11 @@ kotlin {
         jvmTarget.set(JvmTarget.JVM_17)
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
+}
+
+configurations.configureEach {
+    exclude(group = "com.google.android.gms", module = "play-services-ads")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
 }
 
 dependencies {

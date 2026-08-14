@@ -4,7 +4,7 @@
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2021 FrogoBox Inc.
  * All rights reserved
@@ -48,11 +48,11 @@ object ProjectSetting {
 
     const val VERSION_MAJOR = 3
     const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 5
+    const val VERSION_PATCH = 6
 
     // ---------------------------------------------------------------------------------------------
 
-    const val PROJECT_MIN_SDK = 23
+    const val PROJECT_MIN_SDK = 24
     const val PROJECT_COMPILE_SDK = 37
     const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
 
