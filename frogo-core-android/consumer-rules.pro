@@ -57,7 +57,7 @@
 # --------------------------------------------------
 # 5. Preserve Custom UI Views (XML Inflation)
 # --------------------------------------------------
--keep public class * extends android.view.View {
+-keep public class com.frogobox.** extends android.view.View {
     public <init>(android.content.Context);
     public <init>(android.content.Context, android.util.AttributeSet);
     public <init>(android.content.Context, android.util.AttributeSet, int);

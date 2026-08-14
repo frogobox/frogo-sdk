@@ -16,15 +16,16 @@ import android.media.MediaPlayer
  *
  */
 class FrogoMusic(
-    private val context: Context,
+    context: Context,
     private val musicFile: Int
 ) : IFrogoMusic {
 
-    private var musicPlayer: MediaPlayer? = MediaPlayer.create(context, musicFile)
+    private val appContext: Context = context.applicationContext
+    private var musicPlayer: MediaPlayer? = MediaPlayer.create(appContext, musicFile)
 
     private fun ensurePlayer(): MediaPlayer {
         if (musicPlayer == null) {
-            musicPlayer = MediaPlayer.create(context, musicFile)
+            musicPlayer = MediaPlayer.create(appContext, musicFile)
         }
         return musicPlayer ?: throw IllegalStateException("Failed to create MediaPlayer")
     }

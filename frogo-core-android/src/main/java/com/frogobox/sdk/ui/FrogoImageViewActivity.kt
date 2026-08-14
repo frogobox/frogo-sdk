@@ -27,12 +27,26 @@ class FrogoImageViewActivity : FrogoBindActivity<ActivityFrogoImageViewBinding>(
 
     override fun onCreateExt(savedInstanceState: Bundle?) {
         super.onCreateExt(savedInstanceState)
-        if (intent.hasExtra(IMAGE_URI)) {
-            val uri = intent.getStringExtra(IMAGE_URI).toString()
+        val uri = intent.getStringExtra(IMAGE_URI) ?: intent.getStringExtra(IMAGE_URL)
+        val drawableRes = intent.getIntExtra(IMAGE_DRAWABLE, 0)
+        val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(IMAGE_BITMAP, Bitmap::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(IMAGE_BITMAP)
+        }
 
+        val imageSource: Any? = when {
+            !uri.isNullOrBlank() -> uri
+            bitmap != null -> bitmap
+            drawableRes != 0 -> drawableRes
+            else -> null
+        }
+
+        if (imageSource != null) {
             Glide.with(this)
                 .asBitmap()
-                .load(uri)
+                .load(imageSource)
                 .listener(object : RequestListener<Bitmap> {
                     override fun onLoadFailed(
                         e: GlideException?,
@@ -57,6 +71,8 @@ class FrogoImageViewActivity : FrogoBindActivity<ActivityFrogoImageViewBinding>(
                     }
                 })
                 .into(binding.ivImage)
+        } else {
+            binding.indicator.visibility = View.GONE
         }
     }
 

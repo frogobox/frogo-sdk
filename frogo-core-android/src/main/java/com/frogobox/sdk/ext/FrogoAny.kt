@@ -72,12 +72,16 @@ fun Any?.showLogW(message: String, tag: String = FROGO_SDK_TAG) {
     }
 }
 
-fun Any?.toJson() : String {
-    return Gson().toJson(this)
+object FrogoGson {
+    val instance: Gson by lazy { GsonBuilder().create() }
+}
+
+fun Any?.toJson(): String {
+    return FrogoGson.instance.toJson(this)
 }
 
 inline fun <reified T> String.toModel(typeToken: Type? = null): T {
-    val gson = GsonBuilder().create()
+    val gson = FrogoGson.instance
     return if (typeToken == null) {
         gson.fromJson(this, T::class.java)
     } else {

@@ -17,6 +17,12 @@ package com.frogobox.sdk.log
 object LogConstant {
 
     // Constant Variable Simple Message
-    const val SIMPLE_MESSSAGE = "SIMPLE MESSAGE FROM FROGO-LOG FOR MARK LINE OF CODE"
+    const val SIMPLE_MESSAGE = "SIMPLE MESSAGE FROM FROGO-LOG FOR MARK LINE OF CODE"
+
+    @Deprecated(
+        message = "Typo in constant name, use SIMPLE_MESSAGE instead",
+        replaceWith = ReplaceWith("SIMPLE_MESSAGE")
+    )
+    const val SIMPLE_MESSSAGE = SIMPLE_MESSAGE
 
 }

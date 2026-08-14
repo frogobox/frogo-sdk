@@ -31,7 +31,7 @@ fun <Model> Fragment.newInstanceExt(argsKey: String, data: Model) {
 
 inline fun <reified Model> Fragment.getInstanceExt(argsKey: String): Model? {
     val argsData = this.arguments?.getString(argsKey) ?: return null
-    return runCatching { Gson().fromJson(argsData, Model::class.java) }.getOrNull()
+    return runCatching { FrogoGson.instance.fromJson(argsData, Model::class.java) }.getOrNull()
 }
 
 inline fun <reified ClassActivity> Fragment.startActivityExt() {

@@ -1,9 +1,11 @@
 package com.frogobox.sdk.log
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import com.frogobox.sdk.log.LogConstant.SIMPLE_MESSSAGE
+import com.frogobox.sdk.log.LogConstant.SIMPLE_MESSAGE
 
 /**
  * Created by Faisal Amir on 14/02/2021
@@ -27,7 +29,7 @@ object FLog : ILog {
 
     // Function Log Simple Debug without message params
     override fun d() {
-        Log.d(tag(), SIMPLE_MESSSAGE)
+        Log.d(tag(), SIMPLE_MESSAGE)
     }
 
     // Function Log Debug
@@ -37,7 +39,7 @@ object FLog : ILog {
 
     // Function Log Simple Verbose without message params
     override fun v() {
-        Log.v(tag(), SIMPLE_MESSSAGE)
+        Log.v(tag(), SIMPLE_MESSAGE)
     }
 
     // Function Log Verbose
@@ -47,7 +49,7 @@ object FLog : ILog {
 
     // Function Log Simple Info without message params
     override fun i() {
-        Log.i(tag(), SIMPLE_MESSSAGE)
+        Log.i(tag(), SIMPLE_MESSAGE)
     }
 
     // Function Log Info
@@ -57,7 +59,7 @@ object FLog : ILog {
 
     // Function Log Simple Warn without message params
     override fun w() {
-        Log.w(tag(), SIMPLE_MESSSAGE)
+        Log.w(tag(), SIMPLE_MESSAGE)
     }
 
     // Function Log Warn
@@ -77,7 +79,7 @@ object FLog : ILog {
 
     // Function Log Simple Error without message params
     override fun e() {
-        Log.e(tag(), SIMPLE_MESSSAGE)
+        Log.e(tag(), SIMPLE_MESSAGE)
     }
 
     // Function Log Error
@@ -85,78 +87,86 @@ object FLog : ILog {
         Log.e(tag(), "$msg")
     }
 
-    // ---------------------------------------------------------------------------------------------
+    private fun showToastSafe(context: Context, message: String) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        } else {
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 
     // Function Log Simple Debug without message params
     override fun d(context: Context) {
-        Log.d(tag(), SIMPLE_MESSSAGE)
-        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+        Log.d(tag(), SIMPLE_MESSAGE)
+        showToastSafe(context, SIMPLE_MESSAGE)
     }
 
     // Function Log Debug
     override fun d(msg: String?, context: Context) {
         Log.d(tag(), "$msg")
-        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "$msg")
     }
 
     // Function Log Simple Verbose without message params
     override fun v(context: Context) {
-        Log.v(tag(), SIMPLE_MESSSAGE)
-        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+        Log.v(tag(), SIMPLE_MESSAGE)
+        showToastSafe(context, SIMPLE_MESSAGE)
     }
 
     // Function Log Verbose
     override fun v(msg: String?, context: Context) {
         Log.v(tag(), "$msg")
-        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "$msg")
     }
 
     // Function Log Simple Info without message params
     override fun i(context: Context) {
-        Log.i(tag(), SIMPLE_MESSSAGE)
-        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+        Log.i(tag(), SIMPLE_MESSAGE)
+        showToastSafe(context, SIMPLE_MESSAGE)
     }
 
     // Function Log Info
     override fun i(msg: String?, context: Context) {
         Log.i(tag(), "$msg")
-        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "$msg")
     }
 
     // Function Log Simple Warn without message params
     override fun w(context: Context) {
-        Log.w(tag(), SIMPLE_MESSSAGE)
-        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+        Log.w(tag(), SIMPLE_MESSAGE)
+        showToastSafe(context, SIMPLE_MESSAGE)
     }
 
     // Function Log Warn
     override fun w(msg: String?, context: Context) {
         Log.w(tag(), "$msg")
-        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "$msg")
     }
 
     // Function Log Warn
     override fun w(e: Exception?, context: Context) {
         Log.w(tag(), "${e?.localizedMessage}")
-        Toast.makeText(context, "${e?.localizedMessage}", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "${e?.localizedMessage}")
     }
 
     // Function Log Simple Error without message params
     override fun e(context: Context) {
-        Log.e(tag(), SIMPLE_MESSSAGE)
-        Toast.makeText(context, SIMPLE_MESSSAGE, Toast.LENGTH_LONG).show()
+        Log.e(tag(), SIMPLE_MESSAGE)
+        showToastSafe(context, SIMPLE_MESSAGE)
     }
 
     // Function Log Warn
     override fun w(e: Throwable?, context: Context) {
         Log.w(tag(), "${e?.localizedMessage}")
-        Toast.makeText(context, "${e?.localizedMessage}", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "${e?.localizedMessage}")
     }
 
     // Function Log Error
     override fun e(msg: String?, context: Context) {
         Log.e(tag(), "$msg")
-        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
+        showToastSafe(context, "$msg")
     }
 
 }

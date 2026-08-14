@@ -20,19 +20,12 @@ fun Context.fetchRawData(
     sourceRaw: Int,
     shuffle: Boolean = false,
 ): MutableList<String> {
-    val data = mutableListOf<String>()
-    val rawDict = resources.openRawResource(sourceRaw)
-    val reader = BufferedReader(InputStreamReader(rawDict))
-    try {
-        var line: String?
-        while (reader.readLine().also { line = it } != null) {
-            line?.let { data.add(it) }
+    val data = runCatching {
+        resources.openRawResource(sourceRaw).bufferedReader().use { reader ->
+            reader.readLines().toMutableList()
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
-    } finally {
-        try { reader.close() } catch (e: IOException) { e.printStackTrace() }
-    }
+    }.getOrDefault(mutableListOf())
+
     if (shuffle) {
         data.shuffle()
     }

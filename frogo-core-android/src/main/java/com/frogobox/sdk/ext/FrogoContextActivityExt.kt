@@ -24,13 +24,22 @@ import androidx.core.net.toUri
  */
 
 inline fun <reified ClassActivity> Context.startActivityExt() {
-    startActivity(Intent(this, ClassActivity::class.java))
+    val intent = Intent(this, ClassActivity::class.java).apply {
+        if (this@startActivityExt !is Activity) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+    }
+    startActivity(intent)
 }
 
 inline fun <reified ClassActivity> Context.startActivityExt(onIntent: (intent: Intent) -> Unit) {
-    startActivity(Intent(this, ClassActivity::class.java).apply {
+    val intent = Intent(this, ClassActivity::class.java).apply {
+        if (this@startActivityExt !is Activity) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         onIntent(this)
-    })
+    }
+    startActivity(intent)
 }
 
 fun Activity.hasExtraExt(extraKey: String): Boolean {
@@ -50,11 +59,37 @@ inline fun <reified T> Intent.getExtraExt(params: String): T? {
         Double::class -> getDoubleExtra(params, 0.0) as? T
         Float::class -> getFloatExtra(params, 0.0f) as? T
         Long::class -> getLongExtra(params, 0L) as? T
-        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getParcelableExtra(params, T::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            getParcelableExtra(params) as? T
+        Short::class -> getShortExtra(params, 0) as? T
+        Byte::class -> getByteExtra(params, 0) as? T
+        Char::class -> getCharExtra(params, '\u0000') as? T
+        CharSequence::class -> getCharSequenceExtra(params) as? T
+        android.os.Bundle::class -> getBundleExtra(params) as? T
+        ByteArray::class -> getByteArrayExtra(params) as? T
+        IntArray::class -> getIntArrayExtra(params) as? T
+        LongArray::class -> getLongArrayExtra(params) as? T
+        FloatArray::class -> getFloatArrayExtra(params) as? T
+        DoubleArray::class -> getDoubleArrayExtra(params) as? T
+        BooleanArray::class -> getBooleanArrayExtra(params) as? T
+        else -> {
+            if (Parcelable::class.java.isAssignableFrom(T::class.java)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    @Suppress("UNCHECKED_CAST")
+                    getParcelableExtra(params, T::class.java as Class<out Parcelable>) as? T
+                } else {
+                    @Suppress("DEPRECATION")
+                    getParcelableExtra(params) as? T
+                }
+            } else if (java.io.Serializable::class.java.isAssignableFrom(T::class.java)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    @Suppress("UNCHECKED_CAST")
+                    getSerializableExtra(params, T::class.java as Class<out java.io.Serializable>) as? T
+                } else {
+                    @Suppress("DEPRECATION")
+                    getSerializableExtra(params) as? T
+                }
+            } else {
+                null
+            }
         }
     }
 }
@@ -71,11 +106,21 @@ fun Context.startActivityExtShareApp(subject: String, text: String) {
         putExtra(Intent.EXTRA_SUBJECT, subject)
         putExtra(Intent.EXTRA_TEXT, text)
     }
-    startActivity(Intent.createChooser(intent, subject))
+    val chooser = Intent.createChooser(intent, subject).apply {
+        if (this@startActivityExtShareApp !is Activity) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+    }
+    startActivity(chooser)
 }
 
 fun Context.startActivityExtOpenApp(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+    val intent = Intent(Intent.ACTION_VIEW, url.toUri()).apply {
+        if (this@startActivityExtOpenApp !is Activity) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+    }
+    startActivity(intent)
 }
 
 // -------------------------------------------------------------------------------------------------

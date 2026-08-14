@@ -1,7 +1,7 @@
 package com.frogobox.sdk.util
 
-import android.app.AlertDialog
 import android.content.Context
+import androidx.appcompat.app.AlertDialog
 import com.frogobox.sdk.R
 
 /**
@@ -13,12 +13,10 @@ import com.frogobox.sdk.R
  * -----------------------------------------
  */
 
-
 object SimpleDialogUtil {
 
     interface OnDialogClickListener {
         fun positiveButton()
-
         fun negativeButton()
     }
 
@@ -27,27 +25,34 @@ object SimpleDialogUtil {
         title: String,
         message: String,
         listener: OnDialogClickListener
-    ) {
+    ): AlertDialog {
         val dialogBuilder = AlertDialog.Builder(context)
-        // set message of alert dialog
         dialogBuilder.setMessage(message)
-            // if the dialog is cancelable
             .setCancelable(false)
-            .setPositiveButton(context.getText(R.string.dialog_button_yes)) { dialog, id ->
-                // positive button text and action
+            .setPositiveButton(context.getText(R.string.dialog_button_yes)) { _, _ ->
                 listener.positiveButton()
             }
-            .setNegativeButton(context.getText(R.string.dialog_button_no)) { dialog, id ->
-                // negative button text and action
+            .setNegativeButton(context.getText(R.string.dialog_button_no)) { dialog, _ ->
                 dialog.cancel()
                 listener.negativeButton()
             }
-        // create dialog box
         val alert = dialogBuilder.create()
-        // set title for alert dialog box
         alert.setTitle(title)
-        // show alert dialog
         alert.show()
+        return alert
+    }
+
+    fun create(
+        context: Context,
+        title: String,
+        message: String,
+        onPositive: () -> Unit = {},
+        onNegative: () -> Unit = {}
+    ): AlertDialog {
+        return create(context, title, message, object : OnDialogClickListener {
+            override fun positiveButton() = onPositive()
+            override fun negativeButton() = onNegative()
+        })
     }
 
 }

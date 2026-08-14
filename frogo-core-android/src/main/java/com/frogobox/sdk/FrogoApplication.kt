@@ -45,10 +45,10 @@ abstract class FrogoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        onCreateExt()
         if (isDebugMode()) {
             setupCAOC()
         }
+        onCreateExt()
     }
 
 }
