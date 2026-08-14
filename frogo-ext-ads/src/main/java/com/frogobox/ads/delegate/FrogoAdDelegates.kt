@@ -34,7 +34,6 @@ interface FrogoAdDelegates {
         callback: FrogoAdInterstitialCallback
     )
 
-
     fun showUnityXAdmobAdInterstitial(
         admobInterstitialId: String,
         unityInterstitialId: String,

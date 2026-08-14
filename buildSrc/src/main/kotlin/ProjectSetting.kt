@@ -52,7 +52,7 @@ object ProjectSetting {
 
     // ---------------------------------------------------------------------------------------------
 
-    const val PROJECT_MIN_SDK = 23
+    const val PROJECT_MIN_SDK = 24
     const val PROJECT_COMPILE_SDK = 37
     const val PROJECT_TARGET_SDK = PROJECT_COMPILE_SDK
 

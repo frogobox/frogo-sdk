@@ -8,7 +8,7 @@ import com.frogobox.databinding.ActivityRewardedBinding
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.showToast
 import com.frogobox.sdk.ext.visible
-import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 
 class RewardedActivity : BaseActivity<ActivityRewardedBinding>(), FrogoAdmobRewardedCallback {
 
@@ -37,64 +37,67 @@ class RewardedActivity : BaseActivity<ActivityRewardedBinding>(), FrogoAdmobRewa
     private fun setupUI() {
         binding.apply {
             btnAdmobRewarded.setOnClickListener {
-                showAdRewarded(getString(R.string.admob_rewarded), this@RewardedActivity)
+                showAdRewarded(
+                    mAdUnitIdRewarded = getString(R.string.admob_rewarded),
+                    callback = this@RewardedActivity
+                )
             }
 
             btnAdmobRewardedTimeout.setOnClickListener {
                 showAdRewarded(
-                    getString(R.string.admob_rewarded),
-                    HTTP_TIMEOUT_MILLIS,
-                    this@RewardedActivity
+                    mAdUnitIdRewarded = getString(R.string.admob_rewarded),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    callback = this@RewardedActivity
                 )
             }
 
             btnAdmobRewardedKeyword.setOnClickListener {
                 showAdRewarded(
-                    getString(R.string.admob_rewarded),
-                    getKeyword(),
-                    this@RewardedActivity
+                    mAdUnitIdRewarded = getString(R.string.admob_rewarded),
+                    keyword = getKeyword(),
+                    callback = this@RewardedActivity
                 )
             }
 
             btnAdmobRewardedTimeoutKeyword.setOnClickListener {
                 showAdRewarded(
-                    getString(R.string.admob_rewarded),
-                    HTTP_TIMEOUT_MILLIS,
-                    getKeyword(),
-                    this@RewardedActivity
+                    mAdUnitIdRewarded = getString(R.string.admob_rewarded),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    keyword = getKeyword(),
+                    callback = this@RewardedActivity
                 )
             }
 
 
             btnAdmobRewardedInterstitial.setOnClickListener {
                 showAdRewardedInterstitial(
-                    getString(R.string.admob_rewarded_interstitial),
-                    this@RewardedActivity
+                    mAdUnitIdRewardedInterstitial = getString(R.string.admob_rewarded_interstitial),
+                    callback = this@RewardedActivity
                 )
             }
 
             btnAdmobRewardedInterstitialTimeout.setOnClickListener {
                 showAdRewardedInterstitial(
-                    getString(R.string.admob_rewarded_interstitial),
-                    HTTP_TIMEOUT_MILLIS,
-                    this@RewardedActivity
+                    mAdUnitIdRewardedInterstitial = getString(R.string.admob_rewarded_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    callback = this@RewardedActivity
                 )
             }
 
             btnAdmobRewardedInterstitialKeyword.setOnClickListener {
                 showAdRewardedInterstitial(
-                    getString(R.string.admob_rewarded_interstitial),
-                    getKeyword(),
-                    this@RewardedActivity
+                    mAdUnitIdRewardedInterstitial = getString(R.string.admob_rewarded_interstitial),
+                    keyword = getKeyword(),
+                    callback = this@RewardedActivity
                 )
             }
 
             btnAdmobRewardedInterstitialTimeoutKeyword.setOnClickListener {
                 showAdRewardedInterstitial(
-                    getString(R.string.admob_rewarded_interstitial),
-                    HTTP_TIMEOUT_MILLIS,
-                    getKeyword(),
-                    this@RewardedActivity
+                    mAdUnitIdRewardedInterstitial = getString(R.string.admob_rewarded_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    keyword = getKeyword(),
+                    callback = this@RewardedActivity
                 )
             }
         }

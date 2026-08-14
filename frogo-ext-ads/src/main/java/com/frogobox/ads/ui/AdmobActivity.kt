@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -22,7 +23,7 @@ abstract class AdmobActivity : AppCompatActivity(),
 
     open fun setupMonetized() {
         setupAdmobDelegates(this)
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             setupAdmobApp()
         }

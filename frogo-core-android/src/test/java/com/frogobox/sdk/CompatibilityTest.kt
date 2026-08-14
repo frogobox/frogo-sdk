@@ -25,14 +25,14 @@ class CompatibilityTest {
     }
 
     @Test
-    @Config(sdk = [23]) // Compatibility check on API 23 (Android M - uses NetworkCapabilities branch)
-    fun testIsNetworkConnected_API23_Disconnected() {
+    @Config(sdk = [24]) // Compatibility check on API 24 (Android N - uses NetworkCapabilities branch)
+    fun testIsNetworkConnected_API24_Disconnected() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         setNetworkDisconnected(context)
 
-        // On API 23+ with no active network set, should return false
+        // On API 24+ with no active network set, should return false
         val isConnected = FrogoFunc.isNetworkConnected(context)
-        assertFalse("Should return false when no active network on API 23", isConnected)
+        assertFalse("Should return false when no active network on API 24", isConnected)
     }
 
     @Test

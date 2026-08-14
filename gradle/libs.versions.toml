@@ -7,9 +7,9 @@ androidMavenGradlePlugin = "2.1"
 
 # AndroidX Core & UI
 coreKtx = "1.19.0"
-appcompat = "1.7.1"
+appcompat = "1.8.0"
 activity = "1.13.0"
-fragment = "1.8.9"
+fragment = "1.9.0"
 constraintlayout = "2.2.2"
 liveCycle = "2.11.0"
 viewPager2 = "1.1.0"
@@ -19,7 +19,7 @@ work = "2.11.2"
 roomKtx = "2.8.4"
 
 # AndroidX Compose
-composeBom = "2026.06.01"
+composeBom = "2026.08.00"
 navigationCompose = "2.9.8"
 
 # AndroidX Testing
@@ -30,7 +30,7 @@ androidxTestExtJunit = "1.3.0"
 espressoCore = "3.7.0"
 
 # Google
-googleAdmob = "25.4.0" # https://developers.google.com/admob/android/quick-start
+googleAdmob = "1.3.1" # https://developers.google.com/admob/android/quick-start
 material = "1.14.0"
 gson = "2.14.0"
 flexbox = "3.0.0"
@@ -123,7 +123,7 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
 # Google
-ads-google-admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAdmob" }
+ads-google-admob = { group = "com.google.android.libraries.ads.mobile.sdk", name = "ads-mobile-sdk", version.ref = "googleAdmob" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }

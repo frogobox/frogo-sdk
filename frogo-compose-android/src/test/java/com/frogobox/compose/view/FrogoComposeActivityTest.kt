@@ -68,8 +68,8 @@ class FrogoComposeActivityTest {
     // =============================================================================================
 
     @Test
-    @Config(sdk = [23])
-    fun testLaunchCompatibility_API23() {
+    @Config(sdk = [24])
+    fun testLaunchCompatibility_API24() {
         val controller = Robolectric.buildActivity(TestActivity::class.java).setup()
         assertNotNull(controller.get())
     }

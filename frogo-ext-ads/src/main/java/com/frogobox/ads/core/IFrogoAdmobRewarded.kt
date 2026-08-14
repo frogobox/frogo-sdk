@@ -27,28 +27,8 @@ interface IFrogoAdmobRewarded {
     fun showAdRewarded(
         activity: AppCompatActivity,
         mAdUnitIdRewarded: String,
-        timeoutMilliSecond: Int?,
-        keyword: List<String>?,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewarded(
-        activity: AppCompatActivity,
-        mAdUnitIdRewarded: String,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewarded(
-        activity: AppCompatActivity,
-        mAdUnitIdRewarded: String,
-        timeoutMilliSecond: Int,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewarded(
-        activity: AppCompatActivity,
-        mAdUnitIdRewarded: String,
-        keyword: List<String>,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
         callback: FrogoAdmobRewardedCallback
     )
 
@@ -57,28 +37,8 @@ interface IFrogoAdmobRewarded {
     fun showAdRewardedInterstitial(
         activity: AppCompatActivity,
         mAdUnitIdRewardedInterstitial: String,
-        timeoutMilliSecond: Int?,
-        keyword: List<String>?,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewardedInterstitial(
-        activity: AppCompatActivity,
-        mAdUnitIdRewardedInterstitial: String,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewardedInterstitial(
-        activity: AppCompatActivity,
-        mAdUnitIdRewardedInterstitial: String,
-        timeoutMilliSecond: Int,
-        callback: FrogoAdmobRewardedCallback
-    )
-
-    fun showAdRewardedInterstitial(
-        activity: AppCompatActivity,
-        mAdUnitIdRewardedInterstitial: String,
-        keyword: List<String>,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
         callback: FrogoAdmobRewardedCallback
     )
 

@@ -45,73 +45,79 @@ class InterstitialActivity : BaseActivity<ActivityInterstitialBinding>(),
         binding.apply {
 
             btnAdmobInterstitial.setOnClickListener {
-                showAdInterstitial(getString(R.string.admob_interstitial))
+                showAdInterstitial(interstitialAdUnitId = getString(R.string.admob_interstitial))
             }
 
             btnAdmobInterstitialTimeout.setOnClickListener {
-                showAdInterstitial(getString(R.string.admob_interstitial), HTTP_TIMEOUT_MILLIS)
+                showAdInterstitial(
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS
+                )
             }
 
             btnAdmobInterstitialKeyword.setOnClickListener {
-                showAdInterstitial(getString(R.string.admob_interstitial), getKeyword())
+                showAdInterstitial(
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    keyword = getKeyword()
+                )
             }
 
             btnAdmobInterstitialTimeoutKeyword.setOnClickListener {
                 showAdInterstitial(
-                    getString(R.string.admob_interstitial),
-                    HTTP_TIMEOUT_MILLIS,
-                    getKeyword()
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    keyword = getKeyword()
                 )
             }
 
             btnAdmobInterstitialFailedEmpty.setOnClickListener {
-                showAdInterstitial("")
+                showAdInterstitial(interstitialAdUnitId = "")
             }
 
             btnAdmobInterstitialFailedWrong.setOnClickListener {
-                showAdInterstitial("Wrong")
+                showAdInterstitial(interstitialAdUnitId = "Wrong")
             }
 
             // -------------------------------------------------------------------------------------
 
             btnAdmobInterstitialCallback.setOnClickListener {
                 showAdInterstitial(
-                    getString(R.string.admob_interstitial),
-                    this@InterstitialActivity
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    callback = this@InterstitialActivity
                 )
             }
 
             btnAdmobInterstitialCallbackTimeout.setOnClickListener {
                 showAdInterstitial(
-                    getString(R.string.admob_interstitial),
-                    HTTP_TIMEOUT_MILLIS,
-                    this@InterstitialActivity
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    callback = this@InterstitialActivity
                 )
             }
 
             btnAdmobInterstitialCallbackKeyword.setOnClickListener {
                 showAdInterstitial(
-                    getString(R.string.admob_interstitial),
-                    getKeyword(),
-                    this@InterstitialActivity
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    keyword = getKeyword(),
+                    callback =  this@InterstitialActivity
                 )
             }
 
             btnAdmobInterstitialCallbackTimeoutKeyword.setOnClickListener {
                 showAdInterstitial(
-                    getString(R.string.admob_interstitial),
-                    HTTP_TIMEOUT_MILLIS,
-                    getKeyword(),
-                    this@InterstitialActivity
+                    interstitialAdUnitId = getString(R.string.admob_interstitial),
+                    timeoutMilliSecond = HTTP_TIMEOUT_MILLIS,
+                    keyword = getKeyword(),
+                    callback = this@InterstitialActivity
                 )
             }
 
             btnAdmobInterstitialCallbackFailedEmpty.setOnClickListener {
-                showAdInterstitial("", this@InterstitialActivity)
+                showAdInterstitial(interstitialAdUnitId = "", callback = this@InterstitialActivity)
             }
 
             btnAdmobInterstitialCallbackFailedWrong.setOnClickListener {
-                showAdInterstitial("Wrong", this@InterstitialActivity)
+                showAdInterstitial(interstitialAdUnitId = "Wrong", callback = this@InterstitialActivity)
             }
 
             // -------------------------------------------------------------------------------------
@@ -130,8 +136,8 @@ class InterstitialActivity : BaseActivity<ActivityInterstitialBinding>(),
 
             btnUnityInterstitialCallback.setOnClickListener {
                 showUnityAdInterstitial(
-                    getString(R.string.unity_ad_interstitial),
-                    this@InterstitialActivity
+                    adInterstitialUnitId = getString(R.string.unity_ad_interstitial),
+                    callback = this@InterstitialActivity
                 )
             }
 
@@ -147,9 +153,9 @@ class InterstitialActivity : BaseActivity<ActivityInterstitialBinding>(),
 
             btnAdmobXUnityInterstitial.setOnClickListener {
                 showAdmobXUnityAdInterstitial(
-                    "",
-                    getString(R.string.unity_ad_interstitial),
-                    this@InterstitialActivity
+                    admobInterstitialId = "",
+                    unityInterstitialId = getString(R.string.unity_ad_interstitial),
+                    callback = this@InterstitialActivity
                 )
             }
 
@@ -164,17 +170,17 @@ class InterstitialActivity : BaseActivity<ActivityInterstitialBinding>(),
 
             btnAdmobXUnityInterstitialFailedWrong.setOnClickListener {
                 showAdmobXUnityAdInterstitial(
-                    "",
-                    "Wrong",
-                    this@InterstitialActivity
+                    admobInterstitialId = "",
+                    unityInterstitialId = "Wrong",
+                    callback = this@InterstitialActivity
                 )
             }
 
             btnAdmobXUnityInterstitialFailedEmpty.setOnClickListener {
                 showAdmobXUnityAdInterstitial(
-                    "",
-                    "",
-                    this@InterstitialActivity
+                    admobInterstitialId = "",
+                    unityInterstitialId = "",
+                    callback = this@InterstitialActivity
                 )
             }
 

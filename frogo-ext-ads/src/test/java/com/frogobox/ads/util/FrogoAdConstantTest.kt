@@ -18,7 +18,7 @@ class FrogoAdConstantTest {
         assertEquals(1, FrogoAdConstant.RECYCLER_VIEW_TYPE_BANNER_AD)
         assertEquals("https://raw.githubusercontent.com/", FrogoAdConstant.BASE_URL_SERVER)
         assertEquals("https://github.com/amirisback", FrogoAdConstant.GITHUB_ACCOUNT)
-        assertEquals("com.google.android.gms.ads.MobileAds", FrogoAdConstant.ADMOB_MOBILE_ADS_KEY)
+        assertEquals("com.google.android.libraries.ads.mobile.sdk.MobileAds", FrogoAdConstant.ADMOB_MOBILE_ADS_KEY)
     }
 
     // =============================================================================================

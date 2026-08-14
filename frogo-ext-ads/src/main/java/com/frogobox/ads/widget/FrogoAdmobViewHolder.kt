@@ -3,7 +3,7 @@ package com.frogobox.ads.widget
 import android.view.View
 import android.view.ViewGroup
 import com.frogobox.recycler.core.FrogoRecyclerViewHolder
-import com.google.android.gms.ads.AdView
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
 
 /**
  * Created by Faisal Amir

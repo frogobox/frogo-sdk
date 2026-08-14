@@ -4,6 +4,7 @@ import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import com.frogobox.sdk.view.FrogoActivity
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 /**
  * Created by Faisal Amir
@@ -33,7 +34,7 @@ abstract class FrogoAdmobActivity : FrogoActivity(),
     override fun setupMonetized() {
         super.setupMonetized()
         setupAdmobDelegates(this)
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             setupAdmobApp()
         }

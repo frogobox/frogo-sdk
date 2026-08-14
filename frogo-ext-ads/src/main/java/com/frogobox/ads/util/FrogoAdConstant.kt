@@ -30,6 +30,6 @@ object FrogoAdConstant {
 
     const val LINE = "------------------------------------------------------------------------------------------------"
 
-    const val ADMOB_MOBILE_ADS_KEY = "com.google.android.gms.ads.MobileAds"
+    const val ADMOB_MOBILE_ADS_KEY = "com.google.android.libraries.ads.mobile.sdk.MobileAds"
 
 }

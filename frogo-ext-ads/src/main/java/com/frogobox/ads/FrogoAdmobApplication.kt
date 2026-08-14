@@ -10,7 +10,8 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.core.FrogoAppOpenAdManager
 import com.frogobox.sdk.FrogoApplication
-import com.google.android.gms.ads.MobileAds
+import com.google.android.libraries.ads.mobile.sdk.MobileAds
+import com.google.android.libraries.ads.mobile.sdk.initialization.InitializationConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +44,14 @@ open class FrogoAdmobApplication : FrogoApplication(),
         val backgroundScope = CoroutineScope(Dispatchers.IO)
         backgroundScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
-            MobileAds.initialize(this@FrogoAdmobApplication) {}
+            val appId = try {
+                val appInfo = packageManager.getApplicationInfo(packageName, android.content.pm.PackageManager.GET_META_DATA)
+                appInfo.metaData?.getString("com.google.android.gms.ads.APPLICATION_ID").orEmpty()
+            } catch (e: Exception) {
+                ""
+            }
+            val config = InitializationConfig.Builder(appId).build()
+            MobileAds.initialize(this@FrogoAdmobApplication, config) {}
         }
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)

@@ -35,9 +35,9 @@ import com.frogobox.composeui.widget.FrogoSpacerSmallHeight
 import com.frogobox.composeui.widget.FrogoSpacerMediumHeight
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.showToast
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 import com.google.android.ump.FormError
 
 class MainAdmobComposeActivity : FrogoAdComposeActivity(),
@@ -270,7 +270,7 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                         AdSectionCard(title = "Interstitial Ads") {
                             Button(
                                 onClick = {
-                                    showAdInterstitial(getString(R.string.admob_interstitial), this@MainAdmobComposeActivity)
+                                    showAdInterstitial(getString(R.string.admob_interstitial), callback =this@MainAdmobComposeActivity)
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -279,7 +279,7 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                             FrogoSpacerSmallHeight()
                             Button(
                                 onClick = {
-                                    showAdInterstitial(getString(R.string.admob_interstitial), HTTP_TIMEOUT_MILLIS, this@MainAdmobComposeActivity)
+                                    showAdInterstitial(getString(R.string.admob_interstitial), HTTP_TIMEOUT_MILLIS, callback =this@MainAdmobComposeActivity)
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -293,7 +293,7 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                         AdSectionCard(title = "Rewarded Ads") {
                             Button(
                                 onClick = {
-                                    showAdRewarded(getString(R.string.admob_rewarded), this@MainAdmobComposeActivity)
+                                    showAdRewarded(getString(R.string.admob_rewarded), callback = this@MainAdmobComposeActivity)
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -302,7 +302,7 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                             FrogoSpacerSmallHeight()
                             Button(
                                 onClick = {
-                                    showAdRewardedInterstitial(getString(R.string.admob_rewarded_interstitial), this@MainAdmobComposeActivity)
+                                    showAdRewardedInterstitial(getString(R.string.admob_rewarded_interstitial), callback =this@MainAdmobComposeActivity)
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
@@ -345,8 +345,6 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                                     modifier = Modifier.fillMaxSize(),
                                     factory = { context ->
                                         AdView(context).apply {
-                                            setAdSize(AdSize.BANNER)
-                                            adUnitId = context.getString(R.string.admob_banner)
                                             showAdBanner(this)
                                         }
                                     }

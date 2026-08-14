@@ -27,53 +27,9 @@ interface IFrogoAdmobInterstitial {
     fun showAdInterstitial(
         activity: AppCompatActivity,
         interstitialAdUnitId: String,
-        timeoutMilliSecond: Int?,
-        keyword: List<String>?,
-        callback: FrogoAdmobInterstitialCallback?
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        timeoutMilliSecond: Int,
-        keyword: List<String>
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        timeoutMilliSecond: Int
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        keyword: List<String>
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        timeoutMilliSecond: Int,
-        callback: FrogoAdmobInterstitialCallback
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        keyword: List<String>,
-        callback: FrogoAdmobInterstitialCallback
-    )
-
-    fun showAdInterstitial(
-        activity: AppCompatActivity,
-        interstitialAdUnitId: String,
-        callback: FrogoAdmobInterstitialCallback
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobInterstitialCallback? = null
     )
 
 }

@@ -1,6 +1,6 @@
 package com.frogobox.ads.callback
 
-import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 
 
 /**

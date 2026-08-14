@@ -90,8 +90,8 @@ class FrogoLoadingIndicatorViewTest {
     // =============================================================================================
 
     @Test
-    @Config(sdk = [23])
-    fun testCompatibility_API23() {
+    @Config(sdk = [24])
+    fun testCompatibility_API24() {
         val view = FrogoLoadingIndicatorView(context)
         assertNotNull(view.indicator)
         view.setIndicatorColor(Color.BLUE)
