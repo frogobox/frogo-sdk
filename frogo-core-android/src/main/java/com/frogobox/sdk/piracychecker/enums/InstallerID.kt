@@ -7,9 +7,6 @@ enum class InstallerID(private val text: String) {
     HUAWEI_APP_GALLERY("com.huawei.appmarket"),
     XIAOMI_GET_APPS("com.xiaomi.mipicks");
     
-    /* (non-Javadoc)
-     * @see java.lang.Enum#toString()
-     */
     override fun toString(): String {
         return text
     }

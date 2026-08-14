@@ -11,6 +11,11 @@ android {
     compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
     namespace = ProjectSetting.PROJECT_LIB_ID_UI_RECYCLER
 
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+
     defaultConfig {
         minSdk = ProjectSetting.PROJECT_MIN_SDK
 

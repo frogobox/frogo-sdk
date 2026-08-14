@@ -12,7 +12,7 @@ import com.frogobox.sdk.ui.FrogoCustomCrashActivity
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2021 FrogoBox Inc.      
  * All rights reserved
@@ -45,10 +45,10 @@ abstract class FrogoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        onCreateExt()
         if (isDebugMode()) {
             setupCAOC()
         }
+        onCreateExt()
     }
 
 }

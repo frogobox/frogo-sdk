@@ -9,7 +9,7 @@ package com.frogobox.ads.util
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * FrogoBox Inc
  * com.frogobox.frogoadmobhelper.util
@@ -30,6 +30,6 @@ object FrogoAdConstant {
 
     const val LINE = "------------------------------------------------------------------------------------------------"
 
-    const val ADMOB_MOBILE_ADS_KEY = "com.google.android.gms.ads.MobileAds"
+    const val ADMOB_MOBILE_ADS_KEY = "com.google.android.libraries.ads.mobile.sdk.MobileAds"
 
 }

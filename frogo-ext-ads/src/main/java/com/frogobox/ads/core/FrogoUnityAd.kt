@@ -17,7 +17,7 @@ import com.unity3d.ads.UnityAdsShowOptions
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -81,42 +81,56 @@ object FrogoUnityAd : IFrogoUnityAd {
                         error: UnityAds.UnityAdsLoadError,
                         message: String
                     ) {
-                        callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
-                        callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - UnityAds Error Initialized [status] : ${UnityAds.isInitialized}")
+                        activity.runOnUiThread {
+                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
+                            callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - UnityAds Error Initialized [status] : ${UnityAds.isInitialized}")
+                        }
                     }
 
                     override fun onUnityAdsAdLoaded(placementId: String) {
-                        callback?.onAdLoaded(TAG, "$TAG : onUnityAdsAdLoaded $placementId")
-                        UnityAds.show(
-                            activity,
-                            placementId,
-                            UnityAdsShowOptions(),
-                            object : IUnityAdsShowListener {
-                                override fun onUnityAdsShowFailure(
-                                    placementId: String,
-                                    error: UnityAds.UnityAdsShowError,
-                                    message: String
-                                ) {
-                                    callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
-                                    callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - onUnityAdsShowFailure [message] : $message")
-                                }
+                        activity.runOnUiThread {
+                            callback?.onAdLoaded(TAG, "$TAG : onUnityAdsAdLoaded $placementId")
+                        }
+                        activity.runOnUiThread {
+                            UnityAds.show(
+                                activity,
+                                placementId,
+                                UnityAdsShowOptions(),
+                                object : IUnityAdsShowListener {
+                                    override fun onUnityAdsShowFailure(
+                                        placementId: String,
+                                        error: UnityAds.UnityAdsShowError,
+                                        message: String
+                                    ) {
+                                        activity.runOnUiThread {
+                                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
+                                            callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - onUnityAdsShowFailure [message] : $message")
+                                        }
+                                    }
 
-                                override fun onUnityAdsShowStart(placementId: String) {
-                                    callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowStart")
-                                    callback?.onAdShowed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowStart [placementId] : $placementId")
-                                }
+                                    override fun onUnityAdsShowStart(placementId: String) {
+                                        activity.runOnUiThread {
+                                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowStart")
+                                            callback?.onAdShowed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowStart [placementId] : $placementId")
+                                        }
+                                    }
 
-                                override fun onUnityAdsShowClick(placementId: String) {
-                                    callback?.onClicked(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowClick [placementId] : $placementId")
-                                }
+                                    override fun onUnityAdsShowClick(placementId: String) {
+                                        activity.runOnUiThread {
+                                            callback?.onClicked(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowClick [placementId] : $placementId")
+                                        }
+                                    }
 
-                                override fun onUnityAdsShowComplete(
-                                    placementId: String,
-                                    state: UnityAds.UnityAdsShowCompletionState
-                                ) {
-                                    callback?.onAdDismissed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowComplete [state] : $state, [placement] : $placementId")
-                                }
-                            })
+                                    override fun onUnityAdsShowComplete(
+                                        placementId: String,
+                                        state: UnityAds.UnityAdsShowCompletionState
+                                    ) {
+                                        activity.runOnUiThread {
+                                            callback?.onAdDismissed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowComplete [state] : $state, [placement] : $placementId")
+                                        }
+                                    }
+                                })
+                        }
                     }
                 })
             } else {

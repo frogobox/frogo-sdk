@@ -53,19 +53,22 @@ private val Context.currentSignatures: Array<String>
     get() {
         val actualSignatures = ArrayList<String>()
         val signatures: Array<Signature> = try {
-            val packageInfo =
-                packageManager.getPackageInfo(
-                    packageName,
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-                        PackageManager.GET_SIGNING_CERTIFICATES
-                    else PackageManager.GET_SIGNATURES)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                if (packageInfo.signingInfo!!.hasMultipleSigners())
-                    packageInfo.signingInfo!!.apkContentsSigners
-                else packageInfo.signingInfo!!.signingCertificateHistory
-            } else packageInfo.signatures!!
+                val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+                val signingInfo = packageInfo.signingInfo
+                when {
+                    signingInfo == null -> emptyArray()
+                    signingInfo.hasMultipleSigners() -> signingInfo.apkContentsSigners ?: emptyArray()
+                    else -> signingInfo.signingCertificateHistory ?: emptyArray()
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+                @Suppress("DEPRECATION")
+                packageInfo.signatures ?: emptyArray()
+            }
         } catch (e: Exception) {
-            arrayOf()
+            emptyArray()
         }
         signatures.forEach { signature ->
             val messageDigest = MessageDigest.getInstance("SHA")
@@ -94,6 +97,7 @@ internal fun Context.verifyInstallerId(installerID: List<InstallerID>): Boolean 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             packageManager.getInstallSourceInfo(packageName).installingPackageName
         } else {
+            @Suppress("DEPRECATION")
             packageManager.getInstallerPackageName(packageName)
         }
     } catch (e: Exception) {
@@ -607,10 +611,12 @@ private fun Context.isIntentAvailable(intent: Intent?): Boolean {
 
 private fun Context.hasPermissions(): Boolean {
     return try {
-        Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN ||
-            !shouldAskPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
-            !ActivityCompat.shouldShowRequestPermissionRationale(
-                this as Activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN || !shouldAskPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            true
+        } else {
+            val activity = this as? Activity
+            activity?.let { !ActivityCompat.shouldShowRequestPermissionRationale(it, Manifest.permission.READ_EXTERNAL_STORAGE) } ?: false
+        }
     } catch (e: Exception) {
         false
     }

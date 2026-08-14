@@ -128,6 +128,11 @@ kotlin {
     }
 }
 
+configurations.configureEach {
+    exclude(group = "com.google.android.gms", module = "play-services-ads")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
+}
+
 dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_CORE_SDK))

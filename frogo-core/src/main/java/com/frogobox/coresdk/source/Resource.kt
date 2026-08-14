@@ -6,7 +6,7 @@ import com.google.errorprone.annotations.Keep
  * Created by Faisal Amir on 10/12/22
  * -----------------------------------------
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) Frogobox ID / amirisback
  * All rights reserved

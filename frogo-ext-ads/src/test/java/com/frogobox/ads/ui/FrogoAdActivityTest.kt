@@ -37,8 +37,8 @@ class FrogoAdActivityTest {
     // =============================================================================================
 
     @Test
-    @Config(sdk = [23])
-    fun testActivityCompatibility_API23() {
+    @Config(sdk = [24])
+    fun testActivityCompatibility_API24() {
         val admobController = Robolectric.buildActivity(TestAdmobActivity::class.java).setup()
         assertNotNull(admobController.get())
         

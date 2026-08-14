@@ -3,7 +3,7 @@ package com.frogobox.appadmob.source
 import android.content.Context
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.sdk.source.FrogoRepository
-import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAd
 
 
 /**
@@ -12,7 +12,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved

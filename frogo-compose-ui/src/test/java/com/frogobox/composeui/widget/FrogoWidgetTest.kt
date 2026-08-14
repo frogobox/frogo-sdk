@@ -79,11 +79,11 @@ class FrogoWidgetTest {
     // =============================================================================================
 
     @Test
-    @Config(sdk = [23])
-    fun testWidgetCompatibility_API23() {
-        // Runs on API 23 context
-        val text = "Compatibility Test API 23"
-        assertEquals("Compatibility Test API 23", text)
+    @Config(sdk = [24])
+    fun testWidgetCompatibility_API24() {
+        // Runs on API 24 context
+        val text = "Compatibility Test API 24"
+        assertEquals("Compatibility Test API 24", text)
     }
 
     @Test

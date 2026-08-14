@@ -2,7 +2,7 @@ package com.frogobox.ads.ext
 
 import androidx.appcompat.app.AppCompatActivity
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
-import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAd
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test

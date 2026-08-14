@@ -18,7 +18,7 @@ import com.frogobox.sdk.widget.webview.WebViewCallback
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -28,12 +28,12 @@ import com.frogobox.sdk.widget.webview.WebViewCallback
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlFrogoExt(
     url: String,
-    auth: HashMap<String, String>? = null,
+    auth: Map<String, String>? = null,
     callback: WebViewCallback? = null,
 ) {
     callback?.onShowProgress()
 
-    if (url == "") {
+    if (url.isBlank()) {
         callback?.onHideProgress()
         callback?.onFailed()
     } else {
@@ -49,14 +49,14 @@ fun WebView.loadUrlFrogoExt(
             settings.loadWithOverviewMode = true
 
             settings.useWideViewPort = true
-            settings.allowFileAccess = true
-            settings.allowContentAccess = true
+            settings.allowFileAccess = false
+            settings.allowContentAccess = false
 
             settings.domStorageEnabled = true
             settings.javaScriptCanOpenWindowsAutomatically = true
             settings.javaScriptEnabled = true
 
-            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
 
             settings.setSupportZoom(true)
             settings.builtInZoomControls = true
@@ -79,8 +79,10 @@ fun WebView.loadUrlFrogoExt(
                     error: WebResourceError?,
                 ) {
                     super.onReceivedError(view, request, error)
-                    callback?.onHideProgress()
-                    callback?.onFailed()
+                    if (request == null || request.isForMainFrame) {
+                        callback?.onHideProgress()
+                        callback?.onFailed()
+                    }
                 }
             }
 

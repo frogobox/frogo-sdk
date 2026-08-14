@@ -22,26 +22,20 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.3
+    $version_release = 3.0.5
 
-What's New?? (v2.3.7 → v3.0.3)
+What's New?? (v3.0.0 → v3.0.5)
 
-    * New Module: frogo-compose-android - Jetpack Compose base classes *
-    * New Module: frogo-compose-ui - 60+ reusable Compose widgets & templates *
-    * New Feature: AI Agent Skill for AI-assisted SDK integration *
-    * Refactor: Modular ad management with automated consent & lifecycle-aware delegates *
-    * Refactor: Clean up logging and optimize ad handling logic *
-    * Enhancement: Core SDK utilities for media playback, piracy protection & notifications *
-    * Enhancement: Kotlin extension functions improvements *
-    * Rename: Module naming convention standardized (core/ui/ext/compose layers) *
-    * Upgrade: AGP 9.1.0 → 9.2.0 *
-    * Upgrade: Google AdMob 25.1.0 → 25.2.0 *
-    * Upgrade: Glide 5.0.5 → 5.0.7 *
-    * Upgrade: Koin 4.2.0 → 4.2.1 *
-    * Upgrade: Compile SDK → 36 *
-    * Added: Jetpack Compose BOM 2026.04.01 *
-    * Added: Coil Compose 3.1.0 for image loading *
-    * Added: Glide Compose 1.0.0-beta01 for image loading *
+    * New Feature: FrogoWebViewActivity for streamlined web view handling *
+    * New Feature: Compose-based ad activities & MVI state management *
+    * New Feature: Base Jetpack Compose screen & ad activity templates *
+    * New Feature: Modern UI widgets, navigation patterns & core networking extensions *
+    * Security: Added standard consumer ProGuard rules across all SDK modules *
+    * Testing: Added Robolectric unit test infrastructure & GitHub Actions CI automation *
+    * Refactor: Introduced ProjectSetting configuration file in buildSrc *
+    * Refactor: Standardized Gradle build scripts & Version Catalog *
+    * Upgrade: Google AdMob 25.2.0 → 25.3.0 *
+    * Maintenance: Code smell fixes, unused code cleanup & build optimizations *
 
 ## 🌟 Key Features
 
@@ -56,10 +50,12 @@ What's New?? (v2.3.7 → v3.0.3)
 ## 📸 Screenshots & Mockups
 
 ### Premium Jetpack Compose Components
+
 ![Frogo Compose UI Mockup](docs/image/compose_ui_mockup.png)
 *Beautiful, modern, and highly customizable UI components following Material Design 3.*
 
 ### Seamless Ad Integration
+
 ![Frogo Ads Mockup](docs/image/ads_mockup.png)
 *Monetize your apps effortlessly with optimized ad placements.*
 
@@ -68,6 +64,7 @@ What's New?? (v2.3.7 → v3.0.3)
 ## 🚀 Quick Start
 
 ### Step 1: Add JitPack Repository
+
 Add it to your `settings.gradle.kts` (or root `build.gradle`):
 
 ```kotlin
@@ -82,16 +79,17 @@ dependencyResolutionManagement {
 ```
 
 ### Step 2: Add Dependencies
-Latest Version: `3.0.3`
+
+Latest Version: `3.0.5`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.3")
+    implementation("com.github.frogobox:frogo-sdk:3.0.5")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.3")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.3")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.5")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.5")
 }
 ```
 
@@ -136,7 +134,7 @@ Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobo
 ---
 
 <!-- SEO Keywords (Hidden) -->
-<!-- 
+<!--
 Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, RecyclerView Adapter, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
 -->
 
@@ -335,8 +333,8 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 
 Very open to anyone, I'll write your name under this, please contribute by sending an email to me
 
-- Mail To faisalamircs@gmail.com
-- Subject : Github _ [Github-Username-Account] _ [Language] _ [Repository-Name]
+- Mail To <faisalamircs@gmail.com>
+- Subject : Github _[Github-Username-Account]_ [Language] _ [Repository-Name]
 - Example : Github_amirisback_kotlin_admob-helper-implementation
 
 Name Of Contribute
@@ -347,7 +345,7 @@ Name Of Contribute
 
 Waiting for your contribute
 
-## Attention !!!
+## Attention
 
 - Please enjoy and don't forget fork and give a star
 - Don't Forget Follow My Github Account

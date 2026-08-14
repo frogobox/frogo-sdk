@@ -24,7 +24,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved
@@ -36,10 +36,8 @@ fun <T : Any> Observable<T>.doApiRequest(
     callback: FrogoDataResponse<T>,
     addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
+    callback.onShowProgress()
     subscribeOn(Schedulers.io())
-        .doOnSubscribe {
-            callback.onShowProgress()
-        }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : FrogoApiObserver<T>() {
             override fun onApiSuccess(data: T) {
@@ -69,7 +67,6 @@ fun <T : Any> Observable<T>.doApiRequestResult(
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            // BUG FIX: doOnSubscribe runs on IO thread, must use postValue
             result.postValue(Resource.Loading())
         }
         .observeOn(AndroidSchedulers.mainThread())
@@ -97,10 +94,8 @@ fun <T : Any> Single<T>.fetchRoomDB(
     callback: FrogoDataResponse<T>,
     addCallbackSubscribe: (d: Disposable) -> Unit
 ) {
+    callback.onShowProgress()
     subscribeOn(Schedulers.io())
-        .doOnSubscribe {
-            callback.onShowProgress()
-        }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(object : FrogoLocalObserver<T>() {
 
@@ -133,7 +128,6 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
 ) {
     subscribeOn(Schedulers.io())
         .doOnSubscribe {
-            // BUG FIX: doOnSubscribe runs on IO thread, must use postValue
             result.postValue(Resource.Loading())
         }
         .observeOn(AndroidSchedulers.mainThread())
@@ -153,10 +147,8 @@ fun <T : Any> Single<T>.fetchRoomDBResult(
 }
 
 fun <T : Any> Observable<T>.fetchPreference(callback: FrogoDataResponse<T>): Disposable {
+    callback.onShowProgress()
     return subscribeOn(Schedulers.io())
-        .doOnSubscribe {
-            callback.onShowProgress()
-        }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             callback.onSuccess(it)

@@ -13,7 +13,7 @@ import android.os.Handler
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2021 FrogoBox Inc.      
  * All rights reserved
@@ -29,6 +29,7 @@ object FrogoFunc : IFrogoFunc {
 
     fun generateVideoFileName(): String = "$BASE_FILE_NAME${System.currentTimeMillis()}.mp4"
 
+    @Suppress("DEPRECATION")
     override fun createFolderPictureVideo() {
         val videoFolder = Environment.getExternalStoragePublicDirectory(DIR_NAME)
         if (!videoFolder.exists()) {
@@ -36,6 +37,7 @@ object FrogoFunc : IFrogoFunc {
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun getVideoFilePath(): String {
         val fileName = generateVideoFileName()
         val dir = Environment.getExternalStoragePublicDirectory(DIR_NAME)

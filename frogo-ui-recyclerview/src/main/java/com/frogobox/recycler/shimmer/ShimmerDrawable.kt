@@ -43,27 +43,21 @@ class ShimmerDrawable : Drawable() {
             invalidateSelf()
         }
 
-    /**
-     * Starts the shimmer animation.
-     */
+    // Starts the shimmer animation.
     fun startShimmer() {
         if (mValueAnimator != null && !isShimmerStarted && callback != null) {
             mValueAnimator!!.start()
         }
     }
 
-    /**
-     * Stops the shimmer animation.
-     */
+    // Stops the shimmer animation.
     fun stopShimmer() {
         if (mValueAnimator != null && isShimmerStarted) {
             mValueAnimator!!.cancel()
         }
     }
 
-    /**
-     * Return whether the shimmer animation has been started.
-     */
+    // Return whether the shimmer animation has been started.
     val isShimmerStarted: Boolean
         get() = mValueAnimator != null && mValueAnimator!!.isStarted
 

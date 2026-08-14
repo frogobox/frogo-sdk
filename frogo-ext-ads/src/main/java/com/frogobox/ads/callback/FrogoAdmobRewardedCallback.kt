@@ -1,6 +1,6 @@
 package com.frogobox.ads.callback
 
-import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 
 
 /**
@@ -9,7 +9,7 @@ import com.google.android.gms.ads.rewarded.RewardItem
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2022 Frogobox Media Inc.      
  * All rights reserved

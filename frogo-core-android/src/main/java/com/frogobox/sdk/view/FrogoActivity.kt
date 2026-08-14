@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
@@ -87,22 +86,14 @@ abstract class FrogoActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
     }
 
-    /** Setup modern back press listener for all Android versions */
+    /** Setup modern back press listener with lifecycle handling */
     open fun setupDoOnBackPressedExt() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            onBackInvokedDispatcher.registerOnBackInvokedCallback(
-                OnBackInvokedDispatcher.PRIORITY_DEFAULT
-            ) {
-                doOnBackPressedExt()
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() = doOnBackPressedExt()
             }
-        } else {
-            onBackPressedDispatcher.addCallback(
-                this,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() = doOnBackPressedExt()
-                }
-            )
-        }
+        )
     }
 
     // ---------------------------------------------------------------------------------------------

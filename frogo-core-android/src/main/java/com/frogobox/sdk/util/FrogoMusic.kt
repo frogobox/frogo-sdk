@@ -9,22 +9,23 @@ import android.media.MediaPlayer
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
- * Github   : github.com/amirisback
+ * GitHub   : github.com/amirisback
  * -----------------------------------------
  * Copyright (C) 2021 FrogoBox Inc.      
  * All rights reserved
  *
  */
 class FrogoMusic(
-    private val context: Context,
+    context: Context,
     private val musicFile: Int
 ) : IFrogoMusic {
 
-    private var musicPlayer: MediaPlayer? = MediaPlayer.create(context, musicFile)
+    private val appContext: Context = context.applicationContext
+    private var musicPlayer: MediaPlayer? = MediaPlayer.create(appContext, musicFile)
 
     private fun ensurePlayer(): MediaPlayer {
         if (musicPlayer == null) {
-            musicPlayer = MediaPlayer.create(context, musicFile)
+            musicPlayer = MediaPlayer.create(appContext, musicFile)
         }
         return musicPlayer ?: throw IllegalStateException("Failed to create MediaPlayer")
     }
