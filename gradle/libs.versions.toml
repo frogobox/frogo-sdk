@@ -1,6 +1,6 @@
 [versions]
 # Gradle & Kotlin Plugins / Tools
-agp = "9.3.1"
+agp = "9.3.2"
 kotlin = "2.4.10"
 ksp = "2.3.10"
 androidMavenGradlePlugin = "2.1"
@@ -20,7 +20,7 @@ roomKtx = "2.8.4"
 
 # AndroidX Compose
 composeBom = "2026.08.00"
-navigationCompose = "2.9.8"
+navigationCompose = "2.10.0"
 
 # AndroidX Testing
 androidxTestCore = "1.7.0"
@@ -30,7 +30,7 @@ androidxTestExtJunit = "1.3.0"
 espressoCore = "3.7.0"
 
 # Google
-googleAdmob = "1.3.1" # https://developers.google.com/admob/android/quick-start
+googleAdmob = "1.4.0" # https://developers.google.com/admob/android/quick-start
 material = "1.14.0"
 gson = "2.14.0"
 flexbox = "3.0.0"
@@ -41,16 +41,16 @@ kotlinxCoroutinesAndroid = "1.11.0"
 kotlinxCoroutinesTest = "1.11.0"
 
 # Square
-okhttp = "5.4.0"
+okhttp = "5.5.0"
 retrofit = "3.0.0"
-mockwebserver = "5.4.0"
+mockwebserver = "5.5.0"
 
 # ReactiveX
 rxjava3 = "3.1.12"
 rxandroid3 = "3.0.2"
 
 # Coil
-coil = "3.5.0"
+coil = "3.6.0"
 
 # Bumptech (Glide)
 glide = "5.0.9"
@@ -63,7 +63,7 @@ koin = "4.2.2"
 chucker = "4.3.1"
 
 # Unity
-unityAd = "4.19.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
+unityAd = "4.20.0" # https://developers.google.com/admob/android/mediation/unity#step_3_import_the_unity_ads_sdk_and_adapter
 
 # Other Third-Party Libraries
 customactivityoncrash = "2.4.0"
