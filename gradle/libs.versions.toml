@@ -1,7 +1,7 @@
 [versions]
 # Gradle & Kotlin Plugins / Tools
 agp = "9.4.0"
-kotlin = "2.4.10"
+kotlin = "2.4.20"
 ksp = "2.3.10"
 androidMavenGradlePlugin = "2.1"
 
@@ -16,11 +16,11 @@ viewPager2 = "1.1.0"
 preference = "1.2.1"
 recyclerview = "1.4.0"
 work = "2.11.2"
-roomKtx = "2.8.4"
+roomKtx = "2.8.5"
 
 # AndroidX Compose
-composeBom = "2026.08.00"
-navigationCompose = "2.10.0"
+composeBom = "2026.09.00"
+navigationCompose = "2.10.1"
 
 # AndroidX Testing
 androidxTestCore = "1.7.0"
@@ -50,7 +50,7 @@ rxjava3 = "3.1.12"
 rxandroid3 = "3.0.2"
 
 # Coil
-coil = "3.6.1"
+coil = "3.6.2"
 
 # Bumptech (Glide)
 glide = "5.0.9"
@@ -72,7 +72,7 @@ circleimageview = "3.1.0"
 # Testing
 junit = "4.13.2"
 mockk = "1.14.11"
-robolectric = "4.16.1"
+robolectric = "4.17"
 
 [libraries]
 # Gradle & Kotlin Plugins / Tools
