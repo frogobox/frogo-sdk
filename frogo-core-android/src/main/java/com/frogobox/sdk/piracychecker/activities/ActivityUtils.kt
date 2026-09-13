@@ -1,8 +1,8 @@
 package com.frogobox.sdk.piracychecker.activities
 
 import android.content.Context
-import android.os.Build
-import android.view.View
+import android.view.Window
+import androidx.core.view.WindowInsetsControllerCompat
 
 internal fun Context.getAppName(): String {
     var name: String = try {
@@ -25,10 +25,6 @@ internal fun Context.getAppName(): String {
     return name
 }
 
-internal fun View.setupLightStatusBar(enable: Boolean) {
-    var flags = systemUiVisibility
-    flags =
-        if (enable) flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        else flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-    systemUiVisibility = flags
+internal fun Window.setupLightStatusBar(enable: Boolean) {
+    WindowInsetsControllerCompat(this, decorView).isAppearanceLightStatusBars = enable
 }

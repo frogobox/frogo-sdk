@@ -1,21 +1,60 @@
 package com.frogobox.appcomposeui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.frogobox.composeui.list.basic.*
-import com.frogobox.composeui.list.coil.FrogoCoilListItem
+import com.frogobox.composeui.list.basic.FrogoLazyColumn
+import com.frogobox.composeui.list.basic.FrogoLazyRow
+import com.frogobox.composeui.list.basic.FrogoListItem
+import com.frogobox.composeui.list.basic.FrogoRvGridType1
+import com.frogobox.composeui.list.basic.FrogoRvGridType2
+import com.frogobox.composeui.list.basic.FrogoRvGridType3
+import com.frogobox.composeui.list.basic.FrogoRvGridType4
+import com.frogobox.composeui.list.basic.FrogoRvGridType5
+import com.frogobox.composeui.list.basic.FrogoRvGridType6
+import com.frogobox.composeui.list.basic.FrogoRvGridType7
+import com.frogobox.composeui.list.basic.FrogoRvListType1
+import com.frogobox.composeui.list.basic.FrogoRvListType10
+import com.frogobox.composeui.list.basic.FrogoRvListType11
+import com.frogobox.composeui.list.basic.FrogoRvListType12
+import com.frogobox.composeui.list.basic.FrogoRvListType2
+import com.frogobox.composeui.list.basic.FrogoRvListType3
+import com.frogobox.composeui.list.basic.FrogoRvListType4
+import com.frogobox.composeui.list.basic.FrogoRvListType5
+import com.frogobox.composeui.list.basic.FrogoRvListType6
+import com.frogobox.composeui.list.basic.FrogoRvListType7
+import com.frogobox.composeui.list.basic.FrogoRvListType8
+import com.frogobox.composeui.list.basic.FrogoRvListType9
 import com.frogobox.composeui.list.coil.FrogoCoilLazyColumn
-import com.frogobox.composeui.list.glide.FrogoGlideListItem
-import com.frogobox.composeui.list.glide.FrogoGlideLazyColumn
+import com.frogobox.composeui.list.coil.FrogoCoilListItem
 import com.frogobox.composeui.widget.FrogoDivider
 import com.frogobox.composeui.widget.FrogoSpacerHeight
 
@@ -222,7 +261,7 @@ fun ImageLoadersShowcase() {
             modifier = Modifier.padding(16.dp)
         )
 
-        TabRow(selectedTabIndex = 0) {
+        PrimaryTabRow(selectedTabIndex = 0) {
             Tab(selected = true, onClick = {}, text = { Text("Coil Loader") })
         }
 

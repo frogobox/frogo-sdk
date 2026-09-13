@@ -2,9 +2,7 @@ package com.frogobox.sdk.ext
 
 import android.content.Context
 import com.google.gson.reflect.TypeToken
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 
 /**
  * Created by faisalamircs on 26/04/2024

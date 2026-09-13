@@ -4,10 +4,8 @@ import com.frogobox.appsdk.model.ArticleResponse
 import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.util.NewsConstant
 import com.frogobox.appsdk.util.NewsUrl
-import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
-
 
 /*
  * Created by faisalamir on 08/04/22
@@ -26,7 +24,7 @@ interface AppApiService {
 
     // Get Top Headline
     @GET(NewsUrl.URL_TOP_HEADLINE)
-    fun getTopHeadline(
+    suspend fun getTopHeadline(
         @Query(NewsConstant.QUERY_API_KEY) apiKey: String,
         @Query(NewsConstant.QUERY_Q) q: String?,
         @Query(NewsConstant.QUERY_SOURCES) sources: String?,
@@ -34,11 +32,11 @@ interface AppApiService {
         @Query(NewsConstant.QUERY_COUNTRY) country: String?,
         @Query(NewsConstant.QUERY_PAGE_SIZE) pageSize: Int?,
         @Query(NewsConstant.QUERY_PAGE) page: Int?,
-    ): Observable<ArticleResponse>
+    ): ArticleResponse
 
     // Get Everythings
     @GET(NewsUrl.URL_EVERYTHING)
-    fun getEverythings(
+    suspend fun getEverythings(
         @Query(NewsConstant.QUERY_API_KEY) apiKey: String,
         @Query(NewsConstant.QUERY_Q) q: String?,
         @Query(NewsConstant.QUERY_FROM) from: String?,
@@ -51,15 +49,15 @@ interface AppApiService {
         @Query(NewsConstant.QUERY_SORT_BY) sortBy: String?,
         @Query(NewsConstant.QUERY_PAGE_SIZE) pageSize: Int?,
         @Query(NewsConstant.QUERY_PAGE) page: Int?,
-    ): Observable<ArticleResponse>
+    ): ArticleResponse
 
     // Get Sources
     @GET(NewsUrl.URL_SOURCES)
-    fun getSources(
+    suspend fun getSources(
         @Query(NewsConstant.QUERY_API_KEY) apiKey: String,
         @Query(NewsConstant.QUERY_LANGUAGE) language: String,
         @Query(NewsConstant.QUERY_COUNTRY) country: String,
         @Query(NewsConstant.QUERY_CATEGORY) category: String,
-    ): Observable<SourceResponse>
+    ): SourceResponse
 
 }

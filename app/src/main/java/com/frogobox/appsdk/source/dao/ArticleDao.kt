@@ -5,8 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.frogobox.appsdk.model.Article
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 
 /**
  * Created by Faisal Amir
@@ -29,18 +27,18 @@ import io.reactivex.rxjava3.core.Single
 interface ArticleDao {
 
     @Query("SELECT * FROM article WHERE id = :id")
-    fun getArticleById(id: Int): Single<Article>
+    suspend fun getArticleById(id: Int): Article?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticle(article: Article): Completable
+    suspend fun insertArticle(article: Article)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticles(articles: List<Article>): Completable
+    suspend fun insertArticles(articles: List<Article>)
 
     @Query("DELETE FROM article")
-    fun deleteArticles(): Completable
+    suspend fun deleteArticles()
 
     @Query("SELECT * FROM article")
-    fun getArticles(): Single<List<Article>>
+    suspend fun getArticles(): List<Article>
 
 }

@@ -16,12 +16,20 @@ import android.view.ViewGroup
 import android.view.animation.Interpolator
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
-import com.frogobox.ui.fireworks.initializers.*
+import androidx.core.graphics.createBitmap
+import com.frogobox.ui.fireworks.initializers.AccelerationInitializer
+import com.frogobox.ui.fireworks.initializers.ParticleInitializer
+import com.frogobox.ui.fireworks.initializers.RotationInitializer
+import com.frogobox.ui.fireworks.initializers.RotationSpeedInitializer
+import com.frogobox.ui.fireworks.initializers.ScaleInitializer
+import com.frogobox.ui.fireworks.initializers.SpeedByComponentsInitializer
+import com.frogobox.ui.fireworks.initializers.SpeedModuleAndRangeInitializer
 import com.frogobox.ui.fireworks.modifiers.AlphaModifier
 import com.frogobox.ui.fireworks.modifiers.ParticleModifier
 import java.lang.ref.WeakReference
-import java.util.*
-import androidx.core.graphics.createBitmap
+import java.util.Random
+import java.util.Timer
+import java.util.TimerTask
 
 class ParticleSystem private constructor(
     parentView: ViewGroup,

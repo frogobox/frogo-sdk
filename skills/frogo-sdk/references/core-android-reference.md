@@ -164,10 +164,9 @@ JSON serialization with Gson:
 ### FrogoRetrofitExt.kt
 Retrofit response handling.
 
-### FrogoRxJavaExt.kt
-RxJava3 scheduling and composition helpers:
-- `Observable.applySchedulers()`
-- `Flowable.applySchedulers()`
+### CoroutineRetrofitExt.kt
+Kotlin Coroutine & Flow Retrofit response handling:
+- `fetchAsFlow(call)`
 
 ### FrogoAny.kt
 General `Any` type extensions.

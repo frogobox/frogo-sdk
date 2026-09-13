@@ -3,11 +3,10 @@ package com.frogobox.sdk.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Parcelable
-import androidx.appcompat.app.AppCompatActivity
-import com.frogobox.sdk.ui.FrogoImageViewActivity
+import androidx.core.content.IntentCompat
 import androidx.core.net.toUri
+import com.frogobox.sdk.ui.FrogoImageViewActivity
 
 
 /**
@@ -72,21 +71,11 @@ inline fun <reified T> Intent.getExtraExt(params: String): T? {
         BooleanArray::class -> getBooleanArrayExtra(params) as? T
         else -> {
             if (Parcelable::class.java.isAssignableFrom(T::class.java)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    @Suppress("UNCHECKED_CAST")
-                    getParcelableExtra(params, T::class.java as Class<out Parcelable>) as? T
-                } else {
-                    @Suppress("DEPRECATION")
-                    getParcelableExtra(params) as? T
-                }
+                @Suppress("UNCHECKED_CAST")
+                IntentCompat.getParcelableExtra(this, params, T::class.java as Class<out Parcelable>) as? T
             } else if (java.io.Serializable::class.java.isAssignableFrom(T::class.java)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    @Suppress("UNCHECKED_CAST")
-                    getSerializableExtra(params, T::class.java as Class<out java.io.Serializable>) as? T
-                } else {
-                    @Suppress("DEPRECATION")
-                    getSerializableExtra(params) as? T
-                }
+                @Suppress("UNCHECKED_CAST")
+                IntentCompat.getSerializableExtra(this, params, T::class.java as Class<out java.io.Serializable>) as? T
             } else {
                 null
             }

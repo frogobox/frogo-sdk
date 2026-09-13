@@ -110,7 +110,7 @@ class KotlinProgressActivity : BaseActivity<ActivityKotlinProgressBinding>() {
 //
 //                        override fun onShowProgress() {
 //                            // Your Progress Show
-//                            Log.d("RxJavaShow", "Show Progress")
+//                            Log.d("FrogoProgressShow", "Show Progress")
 //                            runOnUiThread {
 //                                // Stuff that updates the UI
 //                                binding.rvProgress.showProgress()
@@ -119,7 +119,7 @@ class KotlinProgressActivity : BaseActivity<ActivityKotlinProgressBinding>() {
 //
 //                        override fun onHideProgress() {
 //                            // Your Progress Hide
-//                            Log.d("RxJavaHide", "Hide Progress")
+//                            Log.d("FrogoProgressHide", "Hide Progress")
 //                            runOnUiThread {
 //                                // Stuff that updates the UI
 //                                binding.rvProgress.hideProgress()

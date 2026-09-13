@@ -116,6 +116,8 @@ class ShimmerDrawable : Drawable() {
         // No-op, modify the Shimmer object you pass in instead
     }
 
+    @Deprecated("Deprecated in Java")
+    
     override fun getOpacity(): Int {
         return if (mShimmer != null && (mShimmer!!.clipToChildren || mShimmer!!.alphaShimmer)) PixelFormat.TRANSLUCENT else PixelFormat.OPAQUE
     }

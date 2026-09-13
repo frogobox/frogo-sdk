@@ -273,7 +273,7 @@ class MyApp : FrogoApplication() {
 
 #### Extension Functions (16 files):
 
-Extensions are available for: Activity, Context, Fragment, ImageView, Int, JSON, Retrofit, RxJava, String, TextView, View, ViewPager2, WebView, and general `Any` type.
+Extensions are available for: Activity, Context, Fragment, ImageView, Int, JSON, Retrofit, Coroutines, String, TextView, View, ViewPager2, WebView, and general `Any` type.
 
 ```kotlin
 // Context extensions

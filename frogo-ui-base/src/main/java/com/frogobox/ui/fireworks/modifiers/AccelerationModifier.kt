@@ -15,7 +15,9 @@ class AccelerationModifier(velocity: Float, angle: Float) : ParticleModifier {
     }
 
     override fun apply(particle: Particle?, miliseconds: Long) {
-        particle!!.mCurrentX += mVelocityX * miliseconds * miliseconds
-        particle!!.mCurrentY += mVelocityY * miliseconds * miliseconds
+        if (particle != null) {
+            particle.mCurrentX += mVelocityX * miliseconds * miliseconds
+            particle.mCurrentY += mVelocityY * miliseconds * miliseconds
+        }
     }
 }

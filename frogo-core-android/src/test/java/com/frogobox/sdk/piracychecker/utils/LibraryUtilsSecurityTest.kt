@@ -1,12 +1,8 @@
 package com.frogobox.sdk.piracychecker.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider
 import com.frogobox.sdk.piracychecker.enums.InstallerID
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.mockkStatic
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

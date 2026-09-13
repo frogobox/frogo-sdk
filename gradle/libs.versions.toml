@@ -45,10 +45,6 @@ okhttp = "5.5.0"
 retrofit = "3.0.0"
 mockwebserver = "5.5.0"
 
-# ReactiveX
-rxjava3 = "3.1.12"
-rxandroid3 = "3.0.2"
-
 # Coil
 coil = "3.6.2"
 
@@ -56,8 +52,9 @@ coil = "3.6.2"
 glide = "5.0.9"
 glideCompose = "1.0.0-beta10"
 
-# Koin
-koin = "4.2.2"
+# Dagger Hilt
+hilt = "2.60.1"
+
 
 # Chucker Team
 chucker = "4.3.1"
@@ -102,7 +99,6 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 # AndroidX Room
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomKtx" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
-androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
 
 # AndroidX Compose
@@ -138,12 +134,7 @@ square-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref =
 square-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 square-retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-square-retrofit-adapter-rxjava3 = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofit" }
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserver" }
-
-# ReactiveX
-reactivex-rxjava3 = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava3" }
-reactivex-rxandroid3 = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid3" }
 
 # Coil
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
@@ -154,11 +145,9 @@ github-glide = { group = "com.github.bumptech.glide", name = "glide", version.re
 github-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 glide-compose = { group = "com.github.bumptech.glide", name = "compose", version.ref = "glideCompose" }
 
-# Koin
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
-koin-androidx-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
+# Dagger Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
 # Chucker Team
 github-chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
@@ -182,3 +171,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

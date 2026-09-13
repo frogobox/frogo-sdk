@@ -42,8 +42,4 @@ object FrogoValidator {
         val symbols = "0123456789/?!:;%()+-@#$%^&*"
         return str.any { it in symbols }
     }
-
-    @Deprecated("Renamed for clarity", ReplaceWith("containsSymbolOrDigit(str)"))
-    fun onlyCharacter(str: String): Boolean = containsSymbolOrDigit(str)
-
 }

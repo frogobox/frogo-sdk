@@ -4,13 +4,13 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import com.frogobox.appadmob.FrogoAdmobKoinApplication
+import androidx.core.os.ConfigurationCompat
+import com.frogobox.ads.FrogoAdmobApplication
 import com.frogobox.appadmob.util.AdHelper
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
-import com.frogobox.di.repositoryModule
-import com.frogobox.di.viewModelModule
 import com.frogobox.sdk.FrogoApplication
+import dagger.hilt.android.HiltAndroidApp
 import java.util.Locale
 
 /**
@@ -26,7 +26,8 @@ import java.util.Locale
  *
  */
 
-class FrogoApp : FrogoAdmobKoinApplication() {
+@HiltAndroidApp(FrogoAdmobApplication::class)
+class FrogoApp : Hilt_FrogoApp() {
 
     companion object {
 
@@ -35,22 +36,9 @@ class FrogoApp : FrogoAdmobKoinApplication() {
         fun getContext(): Context = instance.applicationContext
 
         fun getCurrentLocale(): Locale? {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                instance.resources.configuration.locales[0]
-            } else {
-                instance.resources.configuration.locale
-            }
+            return ConfigurationCompat.getLocales(instance.resources.configuration)[0]
         }
 
-    }
-
-    override fun setupKoinModule(koinApplication: org.koin.core.KoinApplication) {
-        koinApplication.modules(
-            listOf(
-                repositoryModule,
-                viewModelModule,
-            )
-        )
     }
 
     override fun onCreateExt() {

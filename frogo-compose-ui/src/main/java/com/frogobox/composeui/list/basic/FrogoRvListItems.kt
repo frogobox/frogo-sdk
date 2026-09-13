@@ -54,7 +54,8 @@ private fun FrogoListCardContainer(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    val baseModifier = if (fillWidth) {
+    val cardShape = RoundedCornerShape(8.dp)
+    val widthModifier = if (fillWidth) {
         Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
@@ -64,22 +65,24 @@ private fun FrogoListCardContainer(
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
     }
 
-    val clickableModifier = if (onClick != null) {
-        baseModifier.clickable { onClick() }
-    } else {
-        baseModifier
-    }
+    val boxModifier = widthModifier
+        .shadow(elevation = 2.dp, shape = cardShape)
+        .clip(cardShape)
+        .background(
+            color = MaterialTheme.colorScheme.surface,
+            shape = cardShape
+        )
+        .then(
+            if (onClick != null) {
+                Modifier.clickable { onClick() }
+            } else {
+                Modifier
+            }
+        )
+        .padding(16.dp)
+        .then(modifier)
 
-    Box(
-        modifier = clickableModifier
-            .shadow(elevation = 2.dp, shape = RoundedCornerShape(8.dp))
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .padding(16.dp)
-            .then(modifier)
-    ) {
+    Box(modifier = boxModifier) {
         content()
     }
 }

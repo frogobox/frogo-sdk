@@ -47,7 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java, "db_article.db"
                 ).addMigrations(MIGRATION_2_3)
-                    .fallbackToDestructiveMigration() // FOR DEVELOPMENT ONLY !!!!
+                    .fallbackToDestructiveMigration(dropAllTables = true) // FOR DEVELOPMENT ONLY !!!!
                     .build()
             } else {
                 Room.databaseBuilder(
@@ -59,8 +59,8 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE article ADD COLUMN last_update INTEGER")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE article ADD COLUMN last_update INTEGER")
             }
         }
     }

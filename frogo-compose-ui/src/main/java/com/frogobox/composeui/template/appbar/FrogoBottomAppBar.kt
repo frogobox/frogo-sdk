@@ -1,6 +1,5 @@
 package com.frogobox.composeui.template.appbar
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.runtime.Composable

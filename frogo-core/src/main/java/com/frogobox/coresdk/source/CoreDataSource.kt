@@ -1,8 +1,7 @@
 package com.frogobox.coresdk.source
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-
+import kotlinx.coroutines.Job
+import java.util.Collections
 
 /**
  * Created by faisalamir on 08/04/22
@@ -23,13 +22,16 @@ abstract class CoreDataSource {
         val TAG: String = CoreDataSource::class.java.simpleName
     }
 
-    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
+    private val jobs = Collections.synchronizedList(mutableListOf<Job>())
 
     fun onClearDisposables() {
-        compositeDisposable.clear()
+        synchronized(jobs) {
+            jobs.forEach { it.cancel() }
+            jobs.clear()
+        }
     }
 
-    fun addSubscribe(disposable: Disposable) {
-        compositeDisposable.add(disposable)
+    fun addSubscribe(job: Job) {
+        jobs.add(job)
     }
 }

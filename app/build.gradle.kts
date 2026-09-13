@@ -153,10 +153,8 @@ dependencies {
     implementation(libs.androidx.work.ktx)
     implementation(libs.material)
 
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.koin.android.compat)
-    implementation(libs.koin.androidx.workmanager)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)

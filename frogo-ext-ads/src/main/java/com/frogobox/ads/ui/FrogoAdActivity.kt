@@ -1,5 +1,6 @@
 package com.frogobox.ads.ui
 
+import androidx.lifecycle.lifecycleScope
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import com.frogobox.ads.delegate.FrogoAdDelegates
@@ -7,7 +8,6 @@ import com.frogobox.ads.delegate.FrogoAdDelegatesImpl
 import com.frogobox.ads.delegate.UnityAdDelegates
 import com.frogobox.ads.delegate.UnityAdDelegatesImpl
 import com.frogobox.sdk.view.FrogoActivity
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 /**

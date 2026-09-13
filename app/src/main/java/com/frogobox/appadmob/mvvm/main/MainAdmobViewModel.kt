@@ -3,7 +3,9 @@ package com.frogobox.appadmob.mvvm.main
 import android.content.Context
 import com.frogobox.BaseViewModel
 import com.frogobox.appadmob.source.AdmobRepository
-
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 /**
  * Created by faisalamir on 19/04/22
@@ -18,7 +20,8 @@ import com.frogobox.appadmob.source.AdmobRepository
  *
  */
 
-class MainAdmobViewModel(
-    private val context: Context,
+@HiltViewModel
+class MainAdmobViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val repository: AdmobRepository
 ) : BaseViewModel(context, repository)

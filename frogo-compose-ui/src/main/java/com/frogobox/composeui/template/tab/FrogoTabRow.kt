@@ -1,7 +1,7 @@
 package com.frogobox.composeui.template.tab
 
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +13,7 @@ fun FrogoTabRow(
     onTabSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    TabRow(
+    PrimaryTabRow(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier
     ) {

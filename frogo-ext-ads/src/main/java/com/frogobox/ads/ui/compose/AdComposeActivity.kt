@@ -1,8 +1,8 @@
 package com.frogobox.ads.ui.compose
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,13 +22,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import com.frogobox.ads.delegate.FrogoAdDelegates
 import com.frogobox.ads.delegate.FrogoAdDelegatesImpl
 import com.frogobox.ads.delegate.UnityAdDelegates
 import com.frogobox.ads.delegate.UnityAdDelegatesImpl
+import kotlinx.coroutines.launch
 
 /**
  * Created by Faisal Amir on 07/02/23

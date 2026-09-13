@@ -3,6 +3,7 @@ package com.frogobox.apprecycler.sample.kotlin.usingadapter.simple
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.BaseActivity
 import com.frogobox.apprecycler.model.ExampleModel
 import com.frogobox.apprecycler.util.Constant
@@ -66,7 +67,7 @@ class KotlinSampleActivity : BaseActivity<ActivityFrogoRvListBinding>() {
         )
         adapter.setupEmptyView(R.layout.frogo_container_empty_view) // With Custom View
         binding.frogoRecyclerView.adapter = adapter
-        binding.frogoRecyclerView.isViewLinearVertical(false)
+        binding.frogoRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
 }

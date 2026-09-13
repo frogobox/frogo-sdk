@@ -138,7 +138,9 @@ public class FrogoLoadingIndicatorView extends View {
      */
     public void setIndicatorColor(int color) {
         this.mIndicatorColor = color;
-        mIndicator.setColor(color);
+        if (mIndicator != null) {
+            mIndicator.setColor(color);
+        }
     }
 
 

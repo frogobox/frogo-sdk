@@ -30,9 +30,7 @@ dependencies {
 
     api(libs.square.retrofit)
     api(libs.square.retrofit.converter.gson)
-    api(libs.square.retrofit.adapter.rxjava3)
 
-    api(libs.reactivex.rxjava3)
     api(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.junit)

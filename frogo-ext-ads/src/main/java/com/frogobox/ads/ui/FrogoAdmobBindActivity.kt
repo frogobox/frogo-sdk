@@ -1,10 +1,10 @@
 package com.frogobox.ads.ui
 
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import com.frogobox.sdk.view.FrogoBindActivity
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 
