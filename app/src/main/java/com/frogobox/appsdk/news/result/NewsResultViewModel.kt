@@ -7,7 +7,8 @@ import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.util.NewsConstant
 import com.frogobox.coresdk.source.Resource
 import com.frogobox.sdk.view.FrogoViewModel
-
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * Created by faisalamir on 08/04/22
@@ -22,7 +23,8 @@ import com.frogobox.sdk.view.FrogoViewModel
  *
  */
 
-class NewsResultViewModel(
+@HiltViewModel
+class NewsResultViewModel @Inject constructor(
     private val repository: AppRepository,
 ) : FrogoViewModel() {
 

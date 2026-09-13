@@ -1,9 +1,9 @@
 package com.frogobox.sdk.piracychecker.utils
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import java.util.Random
-import androidx.core.content.edit
 
 /**
  * Credits to Aidan Follestad (afollestad)

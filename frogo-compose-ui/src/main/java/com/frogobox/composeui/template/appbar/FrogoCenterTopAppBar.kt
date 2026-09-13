@@ -16,7 +16,7 @@ fun FrogoCenterTopAppBar(
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
-    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors()
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = title) },

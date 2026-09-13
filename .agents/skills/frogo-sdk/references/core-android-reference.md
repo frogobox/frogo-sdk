@@ -1,183 +1,97 @@
-# Frogo Core Android — Full API Reference
+# Frogo Core Android — Full API Reference (v3.0.8)
 
-Package: `com.frogobox.sdk`
+Package: `com.frogobox.sdk`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.8`
 
-## Application
+---
 
-### FrogoApplication
-Base Application class with crash handling via CAOC (CustomActivityOnCrash).
+## 1. Application Class (`FrogoApplication`)
+
+Base Application class integrating Crash Handling via CustomActivityOnCrash (CAOC):
 
 ```kotlin
-abstract class FrogoApplication : Application() {
-    open fun onCreateExt() {}
-    open fun isDebugMode(): Boolean = true
-    open fun setupCAOC() { /* auto-configured */ }
-    open fun customErrorActivity(): Class<out Activity> = FrogoCustomCrashActivity::class.java
-}
-```
+package com.example.app
 
-**Usage:**
-```kotlin
+import com.frogobox.sdk.FrogoApplication
+
 class MyApp : FrogoApplication() {
     override fun onCreateExt() {
-        // Your init logic (DI, analytics, etc.)
+        // App-wide initialization (DI, logging, analytics)
     }
+
     override fun isDebugMode(): Boolean = BuildConfig.DEBUG
 }
 ```
 
 ---
 
-## View Base Classes (`view/`)
+## 2. Base Activities & Fragments (`com.frogobox.sdk.ui.*` / `com.frogobox.sdk.view.*`)
 
-### FrogoActivity
-Full-featured base Activity with:
-- Toolbar management
-- Permission request handling
-- Navigation helpers (Activity/Fragment launching)
-- Dialog utilities
-- Toast/Snackbar shortcuts
-
-### FrogoBindActivity<VB : ViewBinding>
-Activity with ViewBinding support. Auto-inflates the binding.
+### ViewBinding Base Classes
+- `FrogoBindActivity<VB : ViewBinding>`: Auto-inflates ViewBinding and provides lifecycle hooks.
+- `FrogoBindFragment<VB : ViewBinding>`: ViewBinding support for Fragments.
+- `FrogoBindBottomSheet<VB : ViewBinding>`: ViewBinding for BottomSheetDialogFragment.
 
 ```kotlin
-class MyActivity : FrogoBindActivity<ActivityMyBinding>() {
-    override fun setupViewBinding(): ActivityMyBinding =
-        ActivityMyBinding.inflate(layoutInflater)
-    
+package com.example.app.ui
+
+import android.os.Bundle
+import com.example.app.databinding.ActivityMainBinding
+import com.frogobox.sdk.view.FrogoBindActivity
+
+class MainActivity : FrogoBindActivity<ActivityMainBinding>() {
+
+    override fun setupViewBinding(): ActivityMainBinding =
+        ActivityMainBinding.inflate(layoutInflater)
+
     override fun onCreateExt(savedInstanceState: Bundle?) {
-        binding.textView.text = "Hello"
+        // Access views cleanly via binding
+        binding.tvTitle.text = "Welcome to Frogo SDK"
     }
 }
 ```
 
-### FrogoFragment
-Base Fragment with lifecycle helpers.
+---
 
-### FrogoBindFragment<VB : ViewBinding>
-Fragment with ViewBinding support.
+## 3. UDF / MVI State ViewModel (`FrogoStateViewModel`)
+
+Symmetrical to `FrogoComposeStateViewModel`, designed for XML View architectures:
 
 ```kotlin
-class MyFragment : FrogoBindFragment<FragmentMyBinding>() {
-    override fun setupViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentMyBinding =
-        FragmentMyBinding.inflate(inflater, container, false)
-    
-    override fun onViewCreatedExt(savedInstanceState: Bundle?) {
-        binding.textView.text = "Hello"
+package com.example.app.ui
+
+import com.frogobox.sdk.viewmodel.FrogoStateViewModel
+
+data class UserListState(val isLoading: Boolean = false, val users: List<String> = emptyList())
+sealed interface UserListEffect {
+    data class ShowToast(val message: String) : UserListEffect
+}
+
+class UserListViewModel : FrogoStateViewModel<UserListState, UserListEffect>(UserListState()) {
+
+    fun fetchUsers() {
+        updateState { copy(isLoading = true) }
+        // Background fetch...
+        updateState { copy(isLoading = false, users = listOf("Alice", "Bob")) }
+        emitEffect(UserListEffect.ShowToast("Users loaded"))
     }
 }
 ```
 
-### FrogoBindBottomSheet<VB : ViewBinding>
-BottomSheetDialogFragment with ViewBinding.
-
-### FrogoViewModel
-Base ViewModel with CoroutineScope.
-
 ---
 
-## Extension Functions (`ext/`)
+## 4. Extension Functions (`com.frogobox.sdk.ext.*`)
 
-### FrogoContextExt.kt
-Context-level utilities:
-- `showToast(message)`
-- `copyToClipboard(text)`
-- `openUrl(url)`
-- `shareText(text)`
-- `openPlayStore(packageName)`
-- `getScreenWidth()` / `getScreenHeight()`
-- `hideKeyboard(view)`
-- `showKeyboard(view)`
+Frogo Core Android provides 16 extension categories:
 
-### FrogoContextActivityExt.kt
-Activity launching helpers:
-- `startActivity<T>()`
-- `startActivityForResult<T>(requestCode)`
-- `startActivityWithData<T>(key, value)`
-
-### FrogoContextFragmentExt.kt
-Fragment transaction helpers.
-
-### FrogoActivityExt.kt
-Activity-specific utilities.
-
-### FrogoFragmentExt.kt
-Fragment-specific utilities.
-
-### FrogoImageViewExt.kt
-Glide-powered image loading:
-- `ImageView.loadImage(url)`
-- `ImageView.loadImageCircle(url)`
-- `ImageView.loadImageRounded(url, radius)`
-- `ImageView.loadImageRes(resId)`
-
-### FrogoViewExt.kt
-View utilities:
-- `View.visible()` / `View.gone()` / `View.invisible()`
-- `View.setOnSingleClickListener { }`
-
-### FrogoTextViewExt.kt
-TextView utilities.
-
-### FrogoViewPager2Ext.kt
-ViewPager2 setup helpers.
-
-### FrogoWebViewExt.kt
-WebView configuration:
-- `WebView.loadUrlExt(url)`
-- `WebView.setupWebView()`
-
-### FrogoStringExt.kt
-String utilities:
-- `String.toCapitalize()`
-- `String.toJsonPrettyPrint()`
-
-### FrogoIntExt.kt
-Integer utilities.
-
-### FrogoJsonExt.kt
-JSON serialization with Gson:
-- `String.fromJson<T>()`
-- `Any.toJson()`
-
-### FrogoRetrofitExt.kt
-Retrofit response handling.
-
-### FrogoRxJavaExt.kt
-RxJava3 scheduling and composition helpers:
-- `Observable.applySchedulers()`
-- `Flowable.applySchedulers()`
-
-### FrogoAny.kt
-General `Any` type extensions.
-
----
-
-## Delegate Classes (`delegate/`)
-
-Delegation pattern for cleaner code organization.
-
-## Logging (`log/`)
-
-Built-in logging utilities.
-
-## Notification (`notification/`)
-
-Notification builder helpers.
-
-## Licensing (`licensing/`)
-
-License checking utilities.
-
-## Piracy Checker (`piracychecker/`)
-
-App piracy detection.
-
-## Source (`source/`)
-
-Data source abstractions.
-
-## Utilities (`util/`)
-
-General utility classes.
+| Target | Extension File | Key Capabilities |
+| :--- | :--- | :--- |
+| `Activity` | `FrogoActivityExt.kt` | Intent launchers, fullscreen mode, keyboard toggle |
+| `Context` | `FrogoContextExt.kt` | `showToast()`, `getColorExt()`, `getDrawableExt()` |
+| `Fragment` | `FrogoFragmentExt.kt` | Fragment navigation, parent activity shortcuts |
+| `ImageView` | `FrogoImageViewExt.kt` | `loadImage(url)`, placeholder/error configuration (Glide) |
+| `TextView` | `FrogoTextViewExt.kt` | HTML text, gradient text, strike-through |
+| `View` | `FrogoViewExt.kt` | `show()`, `hide()`, `invisible()`, debounce click listener |
+| `Coroutines` | `FrogoCoroutinesExt.kt` | Dispatchers helpers, safe launches |
+| `JSON` | `FrogoJsonExt.kt` | `toJson()`, `fromJson<T>()` with Gson |
+| `String` | `FrogoStringExt.kt` | Validation, hashing, date parsing |

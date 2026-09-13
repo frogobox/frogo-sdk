@@ -1,18 +1,13 @@
 package com.frogobox.compose.view
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
-import android.window.OnBackInvokedDispatcher
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -78,6 +73,12 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
     // Back Press Handling
     // ---------------------------------------------------------------------------------------------
 
+    /**
+     * Determines whether [setupDoOnBackPressedExt] intercepts back press and invokes [finish].
+     * Defaults to false to allow Compose Navigation (NavHost) and BackHandler to manage the back stack.
+     */
+    open var isBackPressFinishEnabled: Boolean = false
+
     /** Called when back button pressed — default behavior is [finish] */
     open fun doOnBackPressedExt() {
         finish()
@@ -88,14 +89,16 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
     }
 
-    /** Setup modern back press listener for all Android versions using AndroidX onBackPressedDispatcher */
+    /** Setup back press listener using AndroidX onBackPressedDispatcher if enabled */
     open fun setupDoOnBackPressedExt() {
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() = doOnBackPressedExt()
-            }
-        )
+        if (isBackPressFinishEnabled) {
+            onBackPressedDispatcher.addCallback(
+                this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() = doOnBackPressedExt()
+                }
+            )
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -129,15 +132,10 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
     // ---------------------------------------------------------------------------------------------
     /** Force fullscreen mode */
     open fun setupFullScreen() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.let { controller ->
-                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                controller.systemBarsBehavior =
-                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            hide(WindowInsetsCompat.Type.systemBars())
         }
     }
 
@@ -161,6 +159,15 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
      */
     @Composable
     abstract fun SetupCompose()
+
+    /**
+     * Idiomatic camelCase alias for [SetupCompose].
+     * Can be overridden by subclasses that prefer standard Kotlin function naming.
+     */
+    @Composable
+    open fun setupCompose() {
+        SetupCompose()
+    }
 
     /**
      * Override this to provide a lightweight preview-friendly version of [SetupCompose].

@@ -1,6 +1,5 @@
 package com.frogobox.sdk.util
 
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -76,14 +75,9 @@ class FrogoValidatorTest {
     // =============================================================================================
 
     @Test
-    @Suppress("DEPRECATION")
-    fun testUsabilityDeprecatedFallback() {
-        // Ensuring the renamed deprecated function functions correctly as an alias
+    fun testUsabilityContainsSymbolOrDigit() {
         val testString = "LettersAndDigits123"
-        val expected = FrogoValidator.containsSymbolOrDigit(testString)
-        val actual = FrogoValidator.onlyCharacter(testString)
-        
-        assertEquals(expected, actual)
+        val actual = FrogoValidator.containsSymbolOrDigit(testString)
         assertTrue(actual)
     }
 

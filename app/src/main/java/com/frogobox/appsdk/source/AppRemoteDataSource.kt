@@ -11,11 +11,12 @@ import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoApiClient
 import com.frogobox.coresdk.source.Resource
-import com.frogobox.sdk.ext.doApiRequest
-import com.frogobox.sdk.ext.doApiRequestResult
 import com.frogobox.sdk.ext.usingChuck
 import com.frogobox.sdk.source.FrogoRemoteDataSource
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /*
  * Created by faisalamir on 08/04/22
@@ -33,6 +34,14 @@ import com.frogobox.sdk.source.FrogoRemoteDataSource
 class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(), AppDataSource,
     AppDataSourceResult {
 
+    private fun getApiService(): AppApiService {
+        return FrogoApiClient.create(
+            url = NewsUrl.BASE_URL,
+            isDebug = BuildConfig.DEBUG,
+            chuckInterceptor = context.usingChuck()
+        )
+    }
+
     override fun getTopHeadline(
         q: String?,
         sources: String?,
@@ -42,37 +51,26 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
-            .doApiRequest(object : FrogoDataResponse<ArticleResponse> {
-                override fun onFailed(statusCode: Int, errorMessage: String) {
-                    callback.onFailed(statusCode, errorMessage)
-                }
-
-                override fun onFinish() {
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getTopHeadline(
+                    NewsUrl.API_KEY, q, sources, category, country, pageSize, page
+                )
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(response.articles.orEmpty())
                     callback.onFinish()
                 }
-
-                override fun onHideProgress() {
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
                 }
-
-                override fun onShowProgress() {
-                    callback.onShowProgress()
-                }
-
-                override fun onSuccess(data: ArticleResponse) {
-                    data.articles?.let { callback.onSuccess(it) }
-                }
-
-            }) {
-                addSubscribe(it)
             }
+        }
+        addSubscribe(job)
     }
 
     override fun getEverythings(
@@ -89,50 +87,26 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getEverythings(
-                NewsUrl.API_KEY,
-                q,
-                from,
-                to,
-                qInTitle,
-                sources,
-                domains,
-                excludeDomains,
-                language,
-                sortBy,
-                pageSize,
-                page
-            )
-            .doApiRequest(object : FrogoDataResponse<ArticleResponse> {
-                override fun onFailed(statusCode: Int, errorMessage: String) {
-                    callback.onFailed(statusCode, errorMessage)
-                }
-
-                override fun onFinish() {
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getEverythings(
+                    NewsUrl.API_KEY, q, from, to, qInTitle, sources, domains, excludeDomains, language, sortBy, pageSize, page
+                )
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(response.articles.orEmpty())
                     callback.onFinish()
                 }
-
-                override fun onHideProgress() {
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
                 }
-
-                override fun onShowProgress() {
-                    callback.onShowProgress()
-                }
-
-                override fun onSuccess(data: ArticleResponse) {
-                    data.articles?.let { callback.onSuccess(it) }
-                }
-
-            }) {
-                addSubscribe(it)
             }
+        }
+        addSubscribe(job)
     }
 
     override fun getSources(
@@ -141,21 +115,32 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         category: String,
         callback: FrogoDataResponse<SourceResponse>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getSources(NewsUrl.API_KEY, language, country, category)
-            .doApiRequest(callback) {
-                addSubscribe(it)
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getSources(
+                    NewsUrl.API_KEY, language, country, category
+                )
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(response)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
             }
+        }
+        addSubscribe(job)
     }
 
     override fun saveArticles(data: List<Article>, callback: FrogoStateResponse) {}
 
     override fun deleteArticles(callback: FrogoStateResponse) {}
+
     override fun getTopHeadlineResult(
         q: String?,
         sources: String?,
@@ -165,16 +150,18 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         page: Int?,
         result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getTopHeadline(NewsUrl.API_KEY, q, sources, category, country, pageSize, page)
-            .doApiRequestResult(result) {
-                addSubscribe(it)
+        result.postValue(Resource.Loading())
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getTopHeadline(
+                    NewsUrl.API_KEY, q, sources, category, country, pageSize, page
+                )
+                result.postValue(Resource.Success(response))
+            } catch (e: Exception) {
+                result.postValue(Resource.Error(message = e.message ?: "Unknown Error"))
             }
+        }
+        addSubscribe(job)
     }
 
     override fun getEverythingsResult(
@@ -191,29 +178,18 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         page: Int?,
         result: MutableLiveData<Resource<ArticleResponse>>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getEverythings(
-                NewsUrl.API_KEY,
-                q,
-                from,
-                to,
-                qInTitle,
-                sources,
-                domains,
-                excludeDomains,
-                language,
-                sortBy,
-                pageSize,
-                page
-            )
-            .doApiRequestResult(result) {
-                addSubscribe(it)
+        result.postValue(Resource.Loading())
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getEverythings(
+                    NewsUrl.API_KEY, q, from, to, qInTitle, sources, domains, excludeDomains, language, sortBy, pageSize, page
+                )
+                result.postValue(Resource.Success(response))
+            } catch (e: Exception) {
+                result.postValue(Resource.Error(message = e.message ?: "Unknown Error"))
             }
+        }
+        addSubscribe(job)
     }
 
     override fun getSourcesResult(
@@ -222,17 +198,18 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         category: String,
         result: MutableLiveData<Resource<SourceResponse>>,
     ) {
-        FrogoApiClient
-            .create<AppApiService>(
-                url = NewsUrl.BASE_URL,
-                isDebug = BuildConfig.DEBUG,
-                chuckInterceptor = context.usingChuck()
-            )
-            .getSources(NewsUrl.API_KEY, language, country, category)
-            .doApiRequestResult(result) {
-                addSubscribe(it)
+        result.postValue(Resource.Loading())
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = getApiService().getSources(
+                    NewsUrl.API_KEY, language, country, category
+                )
+                result.postValue(Resource.Success(response))
+            } catch (e: Exception) {
+                result.postValue(Resource.Error(message = e.message ?: "Unknown Error"))
             }
+        }
+        addSubscribe(job)
     }
-
 
 }

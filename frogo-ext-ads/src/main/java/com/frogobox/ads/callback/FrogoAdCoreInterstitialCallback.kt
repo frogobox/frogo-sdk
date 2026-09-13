@@ -1,6 +1,6 @@
 package com.frogobox.ads.callback
 
-// Created by KoinWorks (M. Faisal Amir) on 20/06/22.
+// Created by Frogobox (M. Faisal Amir) on 20/06/22.
 
 
 interface FrogoAdCoreInterstitialCallback {

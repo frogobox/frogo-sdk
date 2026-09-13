@@ -2,9 +2,9 @@ package com.frogobox.ads.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 

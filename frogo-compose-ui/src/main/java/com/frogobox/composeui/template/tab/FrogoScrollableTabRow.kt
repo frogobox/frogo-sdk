@@ -1,6 +1,6 @@
 package com.frogobox.composeui.template.tab
 
-import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +14,7 @@ fun FrogoScrollableTabRow(
     onTabSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    ScrollableTabRow(
+    PrimaryScrollableTabRow(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier,
         edgePadding = 16.dp

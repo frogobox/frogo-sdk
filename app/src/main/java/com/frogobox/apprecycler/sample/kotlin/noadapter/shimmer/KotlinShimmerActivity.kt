@@ -113,7 +113,7 @@ class KotlinShimmerActivity : BaseActivity<ActivityKotlinShimmerBinding>() {
 //
 //                        override fun onShowProgress() {
 //                            // Your Progress Show
-//                            Log.d("RxJavaShow", "Show Progress")
+//                            Log.d("FrogoProgressShow", "Show Progress")
 //                            runOnUiThread {
 //                                // Stuff that updates the UI
 //                                binding.rvShimmer.startShimmer()
@@ -122,7 +122,7 @@ class KotlinShimmerActivity : BaseActivity<ActivityKotlinShimmerBinding>() {
 //
 //                        override fun onHideProgress() {
 //                            // Your Progress Hide
-//                            Log.d("RxJavaHide", "Hide Progress")
+//                            Log.d("FrogoProgressHide", "Hide Progress")
 //                            runOnUiThread {
 //                                // Stuff that updates the UI
 //                                binding.rvShimmer.stopShimmer()

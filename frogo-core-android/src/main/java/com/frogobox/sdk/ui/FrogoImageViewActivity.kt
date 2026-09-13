@@ -3,6 +3,7 @@ package com.frogobox.sdk.ui
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.IntentCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -29,12 +30,7 @@ class FrogoImageViewActivity : FrogoBindActivity<ActivityFrogoImageViewBinding>(
         super.onCreateExt(savedInstanceState)
         val uri = intent.getStringExtra(IMAGE_URI) ?: intent.getStringExtra(IMAGE_URL)
         val drawableRes = intent.getIntExtra(IMAGE_DRAWABLE, 0)
-        val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(IMAGE_BITMAP, Bitmap::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            intent.getParcelableExtra(IMAGE_BITMAP)
-        }
+        val bitmap = IntentCompat.getParcelableExtra(intent, IMAGE_BITMAP, Bitmap::class.java)
 
         val imageSource: Any? = when {
             !uri.isNullOrBlank() -> uri

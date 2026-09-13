@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -36,11 +35,11 @@ import com.frogobox.composeui.R
  */
 @Composable
 fun FrogoEmptyView(
-    modifier: Modifier = Modifier.fillMaxSize(),
+    modifier: Modifier = Modifier,
     title: String = "NO DATA FOUND",
     subtitle: String = "Please insert data here !!!",
     iconResId: Int = R.drawable.frogo_ic_empty_view,
-    titleColor: Color = Color.Black
+    titleColor: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Column(
         modifier = modifier,

@@ -2,7 +2,6 @@ package com.frogobox.sdk
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.test.core.app.ApplicationProvider
 import com.frogobox.sdk.util.FrogoFunc
 import org.junit.Assert.assertFalse
@@ -12,9 +11,8 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
-import org.robolectric.shadows.ShadowNetworkInfo
 
-@Suppress("DEPRECATION")
+
 @RunWith(RobolectricTestRunner::class)
 class CompatibilityTest {
 

@@ -32,13 +32,17 @@ fun FrogoLoadingIndicator(
     AndroidView(
         factory = { context ->
             FrogoLoadingIndicatorView(context).apply {
+                tag = indicatorName
                 setIndicator(indicatorName)
                 setIndicatorColor(indicatorColor.toArgb())
             }
         },
         modifier = modifier.size(size),
         update = { view ->
-            view.setIndicator(indicatorName)
+            if (view.tag != indicatorName) {
+                view.tag = indicatorName
+                view.setIndicator(indicatorName)
+            }
             view.setIndicatorColor(indicatorColor.toArgb())
         }
     )

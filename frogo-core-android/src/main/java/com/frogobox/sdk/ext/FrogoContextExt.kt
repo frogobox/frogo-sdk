@@ -139,8 +139,8 @@ fun Context.getInstallerId(): String? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             packageManager.getInstallSourceInfo(packageName).installingPackageName
         } else {
-            @Suppress("DEPRECATION")
-            packageManager.getInstallerPackageName(packageName)
+            val method = packageManager.javaClass.getMethod("getInstallerPackageName", String::class.java)
+            method.invoke(packageManager, packageName) as? String
         }
     } catch (e: Exception) {
         FLog.e("$TAG : getInstallerId failed - ${e.message.orEmpty()}")

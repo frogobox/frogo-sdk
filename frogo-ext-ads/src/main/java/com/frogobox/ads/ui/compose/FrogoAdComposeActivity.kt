@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import com.frogobox.ads.delegate.AdmobDelegates
 import com.frogobox.ads.delegate.AdmobDelegatesImpl
 import com.frogobox.ads.delegate.FrogoAdDelegates
@@ -27,6 +26,7 @@ import com.frogobox.ads.delegate.FrogoAdDelegatesImpl
 import com.frogobox.ads.delegate.UnityAdDelegates
 import com.frogobox.ads.delegate.UnityAdDelegatesImpl
 import com.frogobox.compose.view.FrogoComposeActivity
+import kotlinx.coroutines.launch
 
 /**
  * Created by Faisal Amir

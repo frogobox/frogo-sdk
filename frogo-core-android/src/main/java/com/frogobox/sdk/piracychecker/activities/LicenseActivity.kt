@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -47,15 +48,22 @@ class LicenseActivity : AppCompatActivity() {
         layoutXML = intent?.getIntExtra("layoutXML", -1) ?: -1
     }
     
+    
     private fun setActivityStyle() {
         val toolbar = findViewById<View>(R.id.toolbar) as? Toolbar
         toolbar?.setBackgroundColor(ContextCompat.getColor(this, colorPrimary))
         setSupportActionBar(toolbar)
         supportActionBar?.title = getAppName()
 
-        window.statusBarColor = ContextCompat.getColor(this, colorPrimaryDark)
+        if (Build.VERSION.SDK_INT < 35) {
+            try {
+                Window::class.java.getMethod("setStatusBarColor", Int::class.javaPrimitiveType)
+                    .invoke(window, ContextCompat.getColor(this, colorPrimaryDark))
+            } catch (_: Exception) {
+            }
+        }
 
-        window.decorView.setupLightStatusBar(withLightStatusBar)
+        window.setupLightStatusBar(withLightStatusBar)
     }
     
     @SuppressLint("InflateParams")

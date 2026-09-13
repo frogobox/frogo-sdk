@@ -1,35 +1,71 @@
-# Frogo Ext Ads — Full API Reference
+# Frogo Ext Ads — Full API Reference (v3.0.8)
 
-Package: `com.frogobox.ads`
+Package: `com.frogobox.ads`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.8`
 
-## Application
+> [!IMPORTANT]
+> **Next-Gen Mobile Ads SDK Architecture**:
+> `frogo-ext-ads` exclusively utilizes the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk`).
+> Never import legacy `com.google.android.gms.ads.*`. All legacy artifacts are excluded.
 
-### FrogoAdmobApplication
-Base Application class for AdMob-enabled apps.
+---
+
+## 1. Application Setup
+
+### `FrogoAdmobApplication`
+Location: `com.frogobox.ads.FrogoAdmobApplication`  
+Base application class that initializes the Google Mobile Ads SDK on a background coroutine thread and manages App Open Ads lifecycle via `ProcessLifecycleOwner`.
 
 ```kotlin
+package com.example.app
+
+import com.frogobox.ads.FrogoAdmobApplication
+
 class MyApp : FrogoAdmobApplication() {
-    override fun onCreateExt() {
-        super.onCreateExt()
+    override fun onCreate() {
+        super.onCreate()
+        // InitializationConfig is auto-configured with APPLICATION_ID from AndroidManifest
+    }
+
+    override fun getAdOpenAppUnitId(context: android.content.Context?): String {
+        return "ca-app-pub-3940256099942544/9257395921" // Return your App Open Ad Unit ID
     }
 }
 ```
 
+### AndroidManifest.xml Requirement:
+```xml
+<application
+    android:name=".MyApp" ...>
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-3940256099942544~3347511713" />
+</application>
+```
+
 ---
 
-## Delegate Pattern
-
-The recommended approach uses Kotlin's **delegation pattern** for clean separation of ad logic.
+## 2. Next-Gen AdMob Delegates (`com.frogobox.ads.delegate`)
 
 ### AdmobDelegates Interface
-
 ```kotlin
+package com.frogobox.ads.delegate
+
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.RelativeLayout
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
+import com.frogobox.ads.callback.FrogoAdmobBannerCallback
+import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
+import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
+import com.frogobox.ads.callback.IFrogoAdConsent
+
 interface AdmobDelegates {
     fun setupAdmobDelegates(activity: AppCompatActivity)
     fun showAdConsent(callback: IFrogoAdConsent)
     fun setupAdmobApp()
 
-    // Banner Ads (8 overloads)
+    // Banner Ads
     fun showAdBanner(mAdView: AdView)
     fun showAdBanner(mAdView: AdView, timeoutMilliSecond: Int)
     fun showAdBanner(mAdView: AdView, keyword: List<String>)
@@ -39,88 +75,59 @@ interface AdmobDelegates {
     fun showAdBanner(mAdView: AdView, keyword: List<String>, callback: FrogoAdmobBannerCallback)
     fun showAdBanner(mAdView: AdView, timeoutMilliSecond: Int, keyword: List<String>, callback: FrogoAdmobBannerCallback)
 
-    // Banner Ads with Container (8 overloads)
+    // Banner Ads with RelativeLayout Container
     fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout)
     fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, timeoutMilliSecond: Int)
-    fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, keyword: List<String>)
-    fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, timeoutMilliSecond: Int, keyword: List<String>)
     fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, callback: FrogoAdmobBannerCallback)
-    fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, timeoutMilliSecond: Int, callback: FrogoAdmobBannerCallback)
-    fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, keyword: List<String>, callback: FrogoAdmobBannerCallback)
-    fun showAdBannerContainer(bannerAdUnitId: String, mAdsSize: AdSize, container: RelativeLayout, timeoutMilliSecond: Int, keyword: List<String>, callback: FrogoAdmobBannerCallback)
 
-    // Interstitial Ads (8 overloads)
+    // Interstitial Ads
     fun showAdInterstitial(interstitialAdUnitId: String)
     fun showAdInterstitial(interstitialAdUnitId: String, timeoutMilliSecond: Int)
     fun showAdInterstitial(interstitialAdUnitId: String, keyword: List<String>)
-    fun showAdInterstitial(interstitialAdUnitId: String, timeoutMilliSecond: Int, keyword: List<String>)
     fun showAdInterstitial(interstitialAdUnitId: String, callback: FrogoAdmobInterstitialCallback)
     fun showAdInterstitial(interstitialAdUnitId: String, timeoutMilliSecond: Int, callback: FrogoAdmobInterstitialCallback)
-    fun showAdInterstitial(interstitialAdUnitId: String, keyword: List<String>, callback: FrogoAdmobInterstitialCallback)
-    fun showAdInterstitial(interstitialAdUnitId: String, timeoutMilliSecond: Int, keyword: List<String>, callback: FrogoAdmobInterstitialCallback)
 
-    // Rewarded Ads (4 overloads)
+    // Rewarded Ads
     fun showAdRewarded(mAdUnitIdRewarded: String, callback: FrogoAdmobRewardedCallback)
     fun showAdRewarded(mAdUnitIdRewarded: String, timeoutMilliSecond: Int, callback: FrogoAdmobRewardedCallback)
-    fun showAdRewarded(mAdUnitIdRewarded: String, keyword: List<String>, callback: FrogoAdmobRewardedCallback)
-    fun showAdRewarded(mAdUnitIdRewarded: String, timeoutMilliSecond: Int, keyword: List<String>, callback: FrogoAdmobRewardedCallback)
 
-    // Rewarded Interstitial Ads (4 overloads)
+    // Rewarded Interstitial Ads
     fun showAdRewardedInterstitial(mAdUnitIdRewardedInterstitial: String, callback: FrogoAdmobRewardedCallback)
     fun showAdRewardedInterstitial(mAdUnitIdRewardedInterstitial: String, timeoutMilliSecond: Int, callback: FrogoAdmobRewardedCallback)
-    fun showAdRewardedInterstitial(mAdUnitIdRewardedInterstitial: String, keyword: List<String>, callback: FrogoAdmobRewardedCallback)
-    fun showAdRewardedInterstitial(mAdUnitIdRewardedInterstitial: String, timeoutMilliSecond: Int, keyword: List<String>, callback: FrogoAdmobRewardedCallback)
 }
 ```
 
-### Implementation Class
+### XML Activity Usage (Delegate Pattern):
 ```kotlin
-class AdmobDelegatesImpl : AdmobDelegates { /* full implementation */ }
-```
+package com.example.app.ui
 
-### Usage Example
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.ads.delegate.AdmobDelegates
+import com.frogobox.ads.delegate.AdmobDelegatesImpl
+import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 
-```kotlin
-class MyActivity : AppCompatActivity(), AdmobDelegates by AdmobDelegatesImpl() {
+class MainActivity : AppCompatActivity(), AdmobDelegates by AdmobDelegatesImpl() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupAdmobDelegates(this)
 
-        // Show banner ad using XML AdView
+        // Show Next-Gen banner
         showAdBanner(binding.adView)
 
-        // Show banner ad with timeout and keywords
-        showAdBanner(
-            mAdView = binding.adView,
-            timeoutMilliSecond = 5000,
-            keyword = listOf("games", "apps"),
-            callback = object : FrogoAdmobBannerCallback {
-                override fun onAdLoaded() { }
-                override fun onAdFailedToLoad(error: String) { }
-                override fun onAdOpened() { }
-                override fun onAdClosed() { }
-                override fun onAdClicked() { }
+        // Show Rewarded
+        showAdRewarded("ca-app-pub-3940256099942544/5224354917", object : FrogoAdmobRewardedCallback {
+            override fun onUserEarnedReward(tag: String, rewardItem: RewardItem) {
+                // Reward amount: rewardItem.amount
             }
-        )
-
-        // Show banner in a container programmatically
-        showAdBannerContainer(
-            bannerAdUnitId = "ca-app-pub-xxxxx/xxxxx",
-            mAdsSize = AdSize.BANNER,
-            container = binding.adContainer
-        )
-
-        // Show interstitial ad
-        showAdInterstitial("ca-app-pub-xxxxx/xxxxx")
-
-        // Show rewarded ad
-        showAdRewarded("ca-app-pub-xxxxx/xxxxx", object : FrogoAdmobRewardedCallback {
-            override fun onUserEarnedReward(rewardItem: RewardItem) {
-                // Grant reward
-            }
-            override fun onAdDismissed() { }
-            override fun onAdFailedToLoad() { }
+            override fun onShowAdRequestProgress(tag: String, message: String) {}
+            override fun onHideAdRequestProgress(tag: String, message: String) {}
+            override fun onAdDismissed(tag: String, message: String) {}
+            override fun onAdFailed(tag: String, errorMessage: String) {}
+            override fun onAdLoaded(tag: String, message: String) {}
+            override fun onAdShowed(tag: String, message: String) {}
         })
     }
 }
@@ -128,106 +135,100 @@ class MyActivity : AppCompatActivity(), AdmobDelegates by AdmobDelegatesImpl() {
 
 ---
 
-## FrogoAdDelegates
+## 3. Unity Ads Delegates (`com.frogobox.ads.delegate`)
 
-Higher-level combined delegate that wraps both AdMob and Unity ad functionality.
+### UnityAdDelegates Interface
+```kotlin
+package com.frogobox.ads.delegate
+
+import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.ads.callback.FrogoUnityAdInitializationCallback
+import com.frogobox.ads.callback.FrogoUnityAdInterstitialCallback
+
+interface UnityAdDelegates {
+    fun setupUnityAdDelegates(activity: AppCompatActivity)
+    fun setupUnityAdApp(testMode: Boolean, unityGameId: String, callback: FrogoUnityAdInitializationCallback? = null)
+    fun showUnityAdInterstitial(adInterstitialUnitId: String, callback: FrogoUnityAdInterstitialCallback? = null)
+}
+```
+
+### Implementation Class:
+`UnityAdDelegatesImpl()`
+
+---
+
+## 4. Hybrid Mediation Fallback Delegates (`FrogoAdDelegates`)
+
+Mediation delegates that attempt one network and automatically fallback to the other if loading fails:
+- **AdMob with Unity Ads Fallback**: `showAdmobXUnityAdInterstitial`
+- **Unity Ads with AdMob Fallback**: `showUnityXAdmobAdInterstitial`
 
 ```kotlin
 interface FrogoAdDelegates {
     fun setupFrogoAdDelegates(activity: AppCompatActivity)
-    // ... combined ad methods
+    fun showAdmobXUnityAdInterstitial(admobInterstitialId: String, unityInterstitialId: String, callback: FrogoAdInterstitialCallback)
+    fun showAdmobXUnityAdInterstitial(admobInterstitialId: String, unityInterstitialId: String, timeout: Int, callback: FrogoAdInterstitialCallback)
+    fun showUnityXAdmobAdInterstitial(admobInterstitialId: String, unityInterstitialId: String, callback: FrogoAdInterstitialCallback)
+    fun showUnityXAdmobAdInterstitial(admobInterstitialId: String, unityInterstitialId: String, timeout: Int, callback: FrogoAdInterstitialCallback)
 }
 ```
 
 ---
 
-## Unity Ads
+## 5. Compose Ad Activities (`com.frogobox.ads.ui.compose`)
 
-### UnityAdDelegates Interface
-```kotlin
-interface UnityAdDelegates {
-    fun setupUnityAdDelegates(activity: AppCompatActivity)
-    fun showUnityBanner(adUnitId: String, container: RelativeLayout)
-    fun showUnityInterstitial(adUnitId: String)
-}
-```
+Pre-built Activities combining Jetpack Compose with Ad delegates:
 
-### Usage
+| Activity | Base Class | Features |
+| :--- | :--- | :--- |
+| `FrogoAdComposeActivity` | `FrogoComposeActivity` | Full delegation: AdMob (`AdmobDelegates`), Unity (`UnityAdDelegates`), and Hybrid fallback (`FrogoAdDelegates`) |
+| `FrogoAdmobComposeActivity` | `FrogoComposeActivity` | AdMob delegates only |
+| `FrogoUnityAdComposeActivity` | `FrogoComposeActivity` | Unity Ads delegates only |
+| `FrogoAdBindComposeActivity<VB>` | `FrogoComposeActivity` | Full ad delegates + ViewBinding |
+| `AdComposeActivity` | `AppCompatActivity` | Non-Frogo base with full ad delegates |
+| `AdmobComposeActivity` | `AppCompatActivity` | Non-Frogo base with AdMob delegates |
+| `UnityAdComposeActivity` | `AppCompatActivity` | Non-Frogo base with Unity Ads delegates |
+
+### Example: Compose Screen with Ads
 ```kotlin
-class MyActivity : AppCompatActivity(), UnityAdDelegates by UnityAdDelegatesImpl() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupUnityAdDelegates(this)
-        showUnityBanner("unity-banner-id", binding.adContainer)
+package com.example.app.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.frogobox.ads.ui.compose.FrogoAdmobComposeActivity
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
+
+class MyAdmobScreenActivity : FrogoAdmobComposeActivity() {
+
+    @Composable
+    override fun SetupCompose() {
+        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            Button(onClick = {
+                showAdInterstitial("ca-app-pub-3940256099942544/1033173712")
+            }) {
+                Text("Show Interstitial Ad")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Banner Ad in Compose
+            AndroidView(
+                modifier = Modifier.fillMaxWidth().height(50.dp),
+                factory = { context ->
+                    AdView(context).apply {
+                        setAdSize(AdSize.BANNER)
+                        adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                        showAdBanner(this)
+                    }
+                }
+            )
+        }
     }
 }
-```
-
----
-
-## Callbacks
-
-### FrogoAdmobBannerCallback
-```kotlin
-interface FrogoAdmobBannerCallback {
-    fun onAdLoaded()
-    fun onAdFailedToLoad(error: String)
-    fun onAdOpened()
-    fun onAdClosed()
-    fun onAdClicked()
-}
-```
-
-### FrogoAdmobInterstitialCallback
-```kotlin
-interface FrogoAdmobInterstitialCallback {
-    fun onAdLoaded()
-    fun onAdFailedToLoad(error: String)
-    fun onAdDismissed()
-    fun onShowAdRequestProgress()
-    fun onHideAdRequestProgress()
-}
-```
-
-### FrogoAdmobRewardedCallback
-```kotlin
-interface FrogoAdmobRewardedCallback {
-    fun onUserEarnedReward(rewardItem: RewardItem)
-    fun onAdDismissed()
-    fun onAdFailedToLoad()
-}
-```
-
-### IFrogoAdConsent
-```kotlin
-interface IFrogoAdConsent {
-    fun onConsentSuccess()
-    fun onConsentError(error: String)
-}
-```
-
----
-
-## Required Dependencies (via `libs.versions.toml`)
-
-```toml
-[versions]
-googleAdmob = "25.2.0"
-unityAd = "4.17.0"
-
-[libraries]
-ads-google-admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAdmob" }
-ads-unityAd = { group = "com.unity3d.ads", name = "unity-ads", version.ref = "unityAd" }
-```
-
-## AndroidManifest.xml Setup
-
-```xml
-<manifest>
-    <application>
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-xxxxx~xxxxx"/>
-    </application>
-</manifest>
 ```

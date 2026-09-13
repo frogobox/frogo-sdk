@@ -3,7 +3,6 @@ package com.frogobox.sdk.ext
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
 
 
 /**

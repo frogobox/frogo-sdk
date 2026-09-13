@@ -1,16 +1,20 @@
 package com.frogobox.appsdk.news
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frogobox.BaseActivity
 import com.frogobox.appsdk.model.Article
 import com.frogobox.databinding.ActivityNewsBinding
 import com.frogobox.sdk.ext.progressViewHandle
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class NewsActivity : BaseActivity<ActivityNewsBinding>() {
+abstract class HiltBaseNewsActivity : BaseActivity<ActivityNewsBinding>()
 
-    private val newsViewModel: NewsViewModel by viewModel()
+@AndroidEntryPoint(HiltBaseNewsActivity::class)
+class NewsActivity : Hilt_NewsActivity() {
+
+    private val newsViewModel: NewsViewModel by viewModels()
 
     override fun setupViewBinding(): ActivityNewsBinding {
         return ActivityNewsBinding.inflate(layoutInflater)
@@ -50,11 +54,6 @@ class NewsActivity : BaseActivity<ActivityNewsBinding>() {
                 reverseLayout = false
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        newsViewModel.onClearDisposable()
     }
 
 }

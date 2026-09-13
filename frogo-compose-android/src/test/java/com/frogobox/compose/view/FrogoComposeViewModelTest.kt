@@ -1,25 +1,22 @@
 package com.frogobox.compose.view
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.yield
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.system.measureTimeMillis
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-
 
 
 class FrogoComposeViewModelTest {
@@ -174,6 +171,30 @@ class FrogoComposeViewModelTest {
 
         // Clean up job
         job.cancel()
+    }
+
+    data class CounterState(val count: Int = 0)
+
+    private class CounterViewModel : FrogoComposeStateViewModel<CounterState, TestEffect>(CounterState()) {
+        fun increment() {
+            updateState { copy(count = count + 1) }
+        }
+    }
+
+    @Test
+    fun testConcurrentAtomicStateUpdates() = runBlocking {
+        val viewModel = CounterViewModel()
+        val numCoroutines = 50
+        val incrementsPerCoroutine = 100
+        val jobs = (0 until numCoroutines).map {
+            launch(Dispatchers.Default) {
+                for (i in 0 until incrementsPerCoroutine) {
+                    viewModel.increment()
+                }
+            }
+        }
+        jobs.forEach { it.join() }
+        assertEquals(numCoroutines * incrementsPerCoroutine, viewModel.uiState.value.count)
     }
 }
 

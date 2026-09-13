@@ -50,4 +50,20 @@ class FrogoThemeTest {
         assertNotEquals(FrogoColorPrimary, FrogoColorWhite)
         assertNotEquals(FrogoColorPrimary, FrogoColorBlack)
     }
+
+    @Test
+    fun testFrogoColorSchemes() {
+        assertEquals(FrogoColorPrimary, FrogoLightColorScheme.primary)
+        assertEquals(FrogoColorAccent, FrogoDarkColorScheme.primary)
+        assertNotNull(FrogoLightColorScheme.background)
+        assertNotNull(FrogoDarkColorScheme.background)
+    }
+
+    @Test
+    fun testTypographyDefinition() {
+        assertNotNull(Typography.bodyLarge)
+        assertNotNull(Typography.titleLarge)
+        assertNotNull(Typography.headlineMedium)
+        assertNotNull(Typography.labelSmall)
+    }
 }

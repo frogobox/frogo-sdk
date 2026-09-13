@@ -31,7 +31,7 @@ class FrogoComposeFragmentTest {
 
     @Test
     fun testFragmentLifecycle() {
-        val activity = Robolectric.setupActivity(FragmentActivity::class.java)
+        val activity = Robolectric.buildActivity(FragmentActivity::class.java).setup().get()
         
         // Create a container and add it to the activity's view hierarchy
         val container = android.widget.FrameLayout(activity).apply {
