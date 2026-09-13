@@ -5,9 +5,11 @@ import com.frogobox.ads.model.FrogoAdmobId
 import com.frogobox.ads.model.FrogoMonetizeId
 import com.frogobox.ads.model.FrogoUnityId
 import com.frogobox.coresdk.source.FrogoApiClient
-import com.frogobox.sdk.ext.doApiRequest
 import com.frogobox.sdk.ext.usingChuck
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by faisalamir on 02/03/22
@@ -21,7 +23,6 @@ import com.frogobox.sdk.ext.usingChuck
  * All rights reserved
  *
  */
-
 
 class FrogoAdmobRepository(
     private val isDebug: Boolean,
@@ -47,21 +48,69 @@ class FrogoAdmobRepository(
         jsonFileName: String,
         callback: FrogoAdmobApiResponse<FrogoAdmobId>,
     ) {
-        frogoAdmobApiService.getFrogoAdmobId(jsonFileName).doApiRequest(callback) {}
+        callback.onShowProgress()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val data = frogoAdmobApiService.getFrogoAdmobId(jsonFileName)
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(data)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
+        }
     }
 
     override fun getFrogoMonetizeId(
         jsonFileName: String,
         callback: FrogoAdmobApiResponse<FrogoMonetizeId>,
     ) {
-        frogoAdmobApiService.getMonetizeId(jsonFileName).doApiRequest(callback) {}
+        callback.onShowProgress()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val data = frogoAdmobApiService.getMonetizeId(jsonFileName)
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(data)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
+        }
     }
 
     override fun getFrogoUnityId(
         jsonFileName: String,
         callback: FrogoAdmobApiResponse<FrogoUnityId>,
     ) {
-        frogoAdmobApiService.getUnityId(jsonFileName).doApiRequest(callback) {}
+        callback.onShowProgress()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val data = frogoAdmobApiService.getUnityId(jsonFileName)
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(data)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
+        }
     }
 
 }

@@ -95,9 +95,6 @@ dependencies {
 
     api(libs.androidx.room.ktx)
     api(libs.androidx.room.runtime)
-    api(libs.androidx.room.rxjava3)
-
-    api(libs.reactivex.rxandroid3)
 
     debugApi(libs.github.chucker)
     releaseApi(libs.github.chucker.no.op)

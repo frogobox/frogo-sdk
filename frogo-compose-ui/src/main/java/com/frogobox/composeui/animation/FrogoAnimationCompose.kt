@@ -1,13 +1,17 @@
 package com.frogobox.composeui.animation
 
-import androidx.compose.animation.core.*
-import androidx.compose.runtime.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 enum class FrogoAnimationComposeType {
     Bounce, Flash, Pulse, Rubberband, Shake, Standup, Swing, Tada, Wave, Wobble,
@@ -48,10 +52,9 @@ fun Modifier.frogoAnimationCompose(
         }
     }
 
-    val progress = animProgress.value
-
     this.then(
         Modifier.graphicsLayer {
+            val progress = animProgress.value
             when (type) {
                 FrogoAnimationComposeType.Bounce -> {
                     // Simulates Bounce: translationY bounces up and down

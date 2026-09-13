@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.frogobox.apprecycler.core.BaseJavaActivity;
 import com.frogobox.apprecycler.model.ExampleModel;
@@ -68,7 +69,7 @@ public class JavaSampleActivity extends BaseJavaActivity<ActivityFrogoRvListBind
         adapter.setupEmptyView(null); // Without Custom View
 
         binding.frogoRecyclerView.setAdapter(adapter);
-        binding.frogoRecyclerView.isViewLinearVertical(false);
+        binding.frogoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 

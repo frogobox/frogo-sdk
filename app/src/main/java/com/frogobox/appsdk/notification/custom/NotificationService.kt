@@ -1,16 +1,16 @@
 package com.frogobox.appsdk.notification.custom
 
-import android.app.IntentService
 import android.app.PendingIntent
+import android.app.Service
 import android.content.Intent
 import android.os.Build
+import android.os.IBinder
 import androidx.core.app.RemoteInput
 import com.frogobox.R
 import com.frogobox.sdk.notification.FrogoNotifActionRemoteInputListener
 import com.frogobox.sdk.notification.FrogoNotification
 
-
-class NotificationService : IntentService("NotificationService") {
+class NotificationService : Service() {
 
     companion object {
         private const val KEY_REPLY = "key_reply_message"
@@ -27,11 +27,14 @@ class NotificationService : IntentService("NotificationService") {
     private var mNotificationId: Int = 0
     private var mMessageId: Int = 0
 
-    @Deprecated("Deprecated in Java")
-    override fun onHandleIntent(intent: Intent?) {
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null) {
             showNotification()
         }
+        stopSelf(startId)
+        return START_NOT_STICKY
     }
 
     private fun showNotification() {

@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.test.core.app.ApplicationProvider
-import com.frogobox.recycler.core.FrogoRvConstant
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -15,7 +14,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-@Suppress("DEPRECATION")
+
 class FrogoRecyclerViewWidgetTest {
 
     private val context: Context get() = ApplicationProvider.getApplicationContext()

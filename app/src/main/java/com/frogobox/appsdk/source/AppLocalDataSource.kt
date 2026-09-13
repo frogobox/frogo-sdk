@@ -6,11 +6,12 @@ import com.frogobox.appsdk.source.dao.ArticleDao
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
-import com.frogobox.sdk.ext.executeRoomDB
-import com.frogobox.sdk.ext.fetchRoomDB
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /*
  * Created by faisalamir on 08/04/22
@@ -40,9 +41,24 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>,
     ) {
-        articleDao.getArticles().fetchRoomDB(callback) {
-            addSubscribe(it)
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val data = articleDao.getArticles()
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(data)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
         }
+        addSubscribe(job)
     }
 
     override fun getEverythings(
@@ -59,9 +75,24 @@ class AppLocalDataSource(
         page: Int?,
         callback: FrogoDataResponse<List<Article>>,
     ) {
-        articleDao.getArticles().fetchRoomDB(callback) {
-            addSubscribe(it)
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val data = articleDao.getArticles()
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess(data)
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
         }
+        addSubscribe(job)
     }
 
     override fun getSources(
@@ -74,10 +105,44 @@ class AppLocalDataSource(
     }
 
     override fun saveArticles(data: List<Article>, callback: FrogoStateResponse) {
-        articleDao.insertArticles(data).executeRoomDB(callback)
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                articleDao.insertArticles(data)
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess()
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
+        }
+        addSubscribe(job)
     }
 
     override fun deleteArticles(callback: FrogoStateResponse) {
-        articleDao.deleteArticles().executeRoomDB(callback)
+        callback.onShowProgress()
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                articleDao.deleteArticles()
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onSuccess()
+                    callback.onFinish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback.onHideProgress()
+                    callback.onFailed(500, e.message ?: "Unknown Error")
+                    callback.onFinish()
+                }
+            }
+        }
+        addSubscribe(job)
     }
 }

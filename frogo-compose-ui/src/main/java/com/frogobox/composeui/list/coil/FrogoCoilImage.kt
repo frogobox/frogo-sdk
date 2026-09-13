@@ -2,12 +2,12 @@ package com.frogobox.composeui.list.coil
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.draw.clip
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -28,15 +28,17 @@ fun FrogoCoilImage(
     onError: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
-    val request = ImageRequest.Builder(context)
-        .data(imageUrl)
-        .crossfade(crossfadeEnabled)
-        .apply {
-            if (crossfadeEnabled) {
-                crossfade(crossfadeDuration)
+    val request = androidx.compose.runtime.remember(context, imageUrl, crossfadeEnabled, crossfadeDuration) {
+        ImageRequest.Builder(context)
+            .data(imageUrl)
+            .crossfade(crossfadeEnabled)
+            .apply {
+                if (crossfadeEnabled) {
+                    crossfade(crossfadeDuration)
+                }
             }
-        }
-        .build()
+            .build()
+    }
 
     AsyncImage(
         model = request,

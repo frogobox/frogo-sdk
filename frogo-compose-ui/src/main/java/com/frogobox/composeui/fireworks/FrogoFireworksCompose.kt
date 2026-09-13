@@ -1,7 +1,11 @@
 package com.frogobox.composeui.fireworks
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.withFrameMillis
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -139,7 +143,7 @@ fun rememberFrogoFireworksStateCompose(): FrogoFireworksStateCompose {
         var lastTime = withFrameMillis { it }
         while (true) {
             withFrameMillis { time ->
-                val elapsed = (time - lastTime) / 1_000_000L
+                val elapsed = time - lastTime
                 lastTime = time
                 if (elapsed > 0) {
                     // Cap elapsed at 50ms to prevent huge physics jumps on frame drop

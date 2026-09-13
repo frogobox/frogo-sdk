@@ -1,6 +1,5 @@
 package com.frogobox
 
-import android.content.SharedPreferences
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.frogobox.ads.model.FrogoAdmobId
@@ -12,7 +11,10 @@ import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.ext.showLogDebug
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.android.ext.android.inject
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
 /**
  * Created by faisalamircs on 02/11/2025
@@ -26,9 +28,19 @@ import org.koin.android.ext.android.inject
 
 abstract class BaseActivity<VB : ViewBinding> : FrogoAdBindActivity<VB>() {
 
-    protected val singlePref: PreferenceDelegates by inject<PreferenceDelegatesImpl>()
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface BaseActivityEntryPoint {
+        fun singlePref(): PreferenceDelegatesImpl
+    }
 
-    protected val frogoSharedPreferences: SharedPreferences by inject()
+    protected val singlePref: PreferenceDelegates by lazy {
+        val entryPoint = EntryPointAccessors.fromApplication(
+            applicationContext,
+            BaseActivityEntryPoint::class.java
+        )
+        entryPoint.singlePref()
+    }
 
     override fun setupDebugMode(): Boolean {
         return BuildConfig.DEBUG

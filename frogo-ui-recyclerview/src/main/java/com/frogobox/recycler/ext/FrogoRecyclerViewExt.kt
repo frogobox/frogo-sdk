@@ -43,6 +43,7 @@ fun <T, VB : ViewBinding> RecyclerView.builderBinding(listener: IFrogoBuilderRvB
     return FrogoBuilderRvBinding<T, VB>().initBuilder(this).builder(listener)
 }
 
+@Suppress("UNCHECKED_CAST")
 fun <T> RecyclerView.getAdapterExt(): FrogoViewAdapter<T> {
     return this.adapter as FrogoViewAdapter<T>
 }
@@ -55,6 +56,7 @@ fun <T> RecyclerView.getItem(): List<T> {
     return this.getAdapterExt<T>().getItem()
 }
 
+@Suppress("UNCHECKED_CAST")
 fun <T, VB : ViewBinding> RecyclerView.getAdapterBindingExt(): FrogoBindingAdapter<T, VB> {
     return this.adapter as FrogoBindingAdapter<T, VB>
 }

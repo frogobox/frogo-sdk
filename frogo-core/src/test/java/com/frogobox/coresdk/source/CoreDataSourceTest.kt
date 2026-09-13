@@ -1,43 +1,25 @@
 package com.frogobox.coresdk.source
 
-import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.Job
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicInteger
 
 class CoreDataSourceTest {
 
-    // Concrete subclass to test the abstract CoreDataSource
-    class TestDataSource : CoreDataSource() {
-        fun getCompositeDisposableSize(): Int {
-            // We can't access compositeDisposable directly because it's private in CoreDataSource.
-            // But we can check if it is active or verify by adding disposables and clearing them.
-            return 0
-        }
-    }
+    class TestDataSource : CoreDataSource()
 
     @Test
-    fun testAddAndClearDisposable() {
+    fun testAddAndClearJobs() {
         val dataSource = TestDataSource()
-        val clearedCount = AtomicInteger(0)
-        
-        val disposable = object : Disposable {
-            private var disposed = false
-            override fun dispose() {
-                disposed = true
-                clearedCount.incrementAndGet()
-            }
-            override fun isDisposed(): Boolean = disposed
-        }
+        val job = Job()
 
-        dataSource.addSubscribe(disposable)
+        dataSource.addSubscribe(job)
         dataSource.onClearDisposables()
 
-        assertEquals(1, clearedCount.get())
-        assertTrue(disposable.isDisposed)
+        assertTrue(job.isCancelled)
     }
 
     @Test
@@ -46,22 +28,16 @@ class CoreDataSourceTest {
         val numThreads = 20
         val subscriptionsPerThread = 50
         val executor = Executors.newFixedThreadPool(numThreads)
-        
-        val disposedCount = AtomicInteger(0)
+        val jobs = mutableListOf<Job>()
 
-        // Stress/Load testing: Spawn multiple threads adding disposables concurrently
         for (i in 0 until numThreads) {
             executor.submit {
                 for (j in 0 until subscriptionsPerThread) {
-                    val disposable = object : Disposable {
-                        private var disposed = false
-                        override fun dispose() {
-                            disposed = true
-                            disposedCount.incrementAndGet()
-                        }
-                        override fun isDisposed(): Boolean = disposed
+                    val job = Job()
+                    synchronized(jobs) {
+                        jobs.add(job)
                     }
-                    dataSource.addSubscribe(disposable)
+                    dataSource.addSubscribe(job)
                 }
             }
         }
@@ -69,12 +45,8 @@ class CoreDataSourceTest {
         executor.shutdown()
         executor.awaitTermination(5, TimeUnit.SECONDS)
 
-        // Clear everything and verify
         dataSource.onClearDisposables()
-        assertEquals(numThreads * subscriptionsPerThread, disposedCount.get())
-    }
-
-    private fun assertTrue(value: Boolean) {
-        org.junit.Assert.assertTrue(value)
+        assertEquals(numThreads * subscriptionsPerThread, jobs.size)
+        assertTrue(jobs.all { it.isCancelled })
     }
 }

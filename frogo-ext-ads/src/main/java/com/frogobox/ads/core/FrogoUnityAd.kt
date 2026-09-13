@@ -4,12 +4,16 @@ import android.app.Activity
 import android.content.Context
 import com.frogobox.ads.callback.FrogoUnityAdInitializationCallback
 import com.frogobox.ads.callback.FrogoUnityAdInterstitialCallback
-import com.unity3d.ads.IUnityAdsInitializationListener
-import com.unity3d.ads.IUnityAdsLoadListener
-import com.unity3d.ads.IUnityAdsShowListener
+import com.unity3d.ads.InitializationConfiguration
+import com.unity3d.ads.InitializationListener
+import com.unity3d.ads.InterstitialAd
+import com.unity3d.ads.InterstitialShowListener
+import com.unity3d.ads.LoadConfiguration
+import com.unity3d.ads.LoadListener
+import com.unity3d.ads.ShowConfiguration
+import com.unity3d.ads.ShowFinishState
 import com.unity3d.ads.UnityAds
-import com.unity3d.ads.UnityAdsShowOptions
-
+import com.unity3d.ads.UnityAdsError
 
 /**
  * Created by faisalamir on 22/03/22
@@ -24,7 +28,6 @@ import com.unity3d.ads.UnityAdsShowOptions
  *
  */
 
-
 object FrogoUnityAd : IFrogoUnityAd {
 
     val TAG: String = FrogoUnityAd::class.java.simpleName
@@ -35,32 +38,28 @@ object FrogoUnityAd : IFrogoUnityAd {
         unityGameId: String,
         callback: FrogoUnityAdInitializationCallback?
     ) {
-
         if (unityGameId.isNotBlank()) {
             if (!UnityAds.isInitialized) {
-                UnityAds.initialize(
-                    context,
-                    unityGameId,
-                    testMode,
-                    object : IUnityAdsInitializationListener {
+                val config = InitializationConfiguration.Builder(unityGameId)
+                    .withTestMode(testMode)
+                    .build()
 
-                        override fun onInitializationComplete() {
+                UnityAds.initialize(config, object : InitializationListener {
+                    override fun onInitializationComplete(error: UnityAdsError?) {
+                        if (error == null) {
                             callback?.onInitializationComplete(TAG, "$TAG : onInitializationComplete")
+                        } else {
+                            callback?.onInitializationFailed(
+                                TAG,
+                                "$TAG: onInitializationFailed with error message : ${error.message}"
+                            )
                         }
-
-                        override fun onInitializationFailed(
-                            error: UnityAds.UnityAdsInitializationError?,
-                            message: String?
-                        ) {
-                            callback?.onInitializationFailed(TAG, "$TAG: onInitializationFailed with error message : $message")
-                        }
-
-                    })
+                    }
+                })
             }
         } else {
             callback?.onInitializationFailed(TAG, "$TAG : Unity Game Id is Empty")
         }
-
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -70,66 +69,51 @@ object FrogoUnityAd : IFrogoUnityAd {
         adInterstitialUnitId: String,
         callback: FrogoUnityAdInterstitialCallback?
     ) {
-
         if (adInterstitialUnitId.isNotBlank()) {
             if (UnityAds.isInitialized) {
                 callback?.onShowAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onShowAdRequestProgress")
-                UnityAds.load(adInterstitialUnitId, object : IUnityAdsLoadListener {
-
-                    override fun onUnityAdsFailedToLoad(
-                        placementId: String,
-                        error: UnityAds.UnityAdsLoadError,
-                        message: String
-                    ) {
-                        activity.runOnUiThread {
-                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
-                            callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - UnityAds Error Initialized [status] : ${UnityAds.isInitialized}")
-                        }
-                    }
-
-                    override fun onUnityAdsAdLoaded(placementId: String) {
-                        activity.runOnUiThread {
-                            callback?.onAdLoaded(TAG, "$TAG : onUnityAdsAdLoaded $placementId")
-                        }
-                        activity.runOnUiThread {
-                            UnityAds.show(
-                                activity,
-                                placementId,
-                                UnityAdsShowOptions(),
-                                object : IUnityAdsShowListener {
-                                    override fun onUnityAdsShowFailure(
-                                        placementId: String,
-                                        error: UnityAds.UnityAdsShowError,
-                                        message: String
-                                    ) {
-                                        activity.runOnUiThread {
-                                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
-                                            callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - onUnityAdsShowFailure [message] : $message")
-                                        }
-                                    }
-
-                                    override fun onUnityAdsShowStart(placementId: String) {
+                val loadConfig = LoadConfiguration.Builder(adInterstitialUnitId).build()
+                InterstitialAd.load(loadConfig, object : LoadListener<InterstitialAd> {
+                    override fun onAdLoaded(unityAd: InterstitialAd?, error: UnityAdsError?) {
+                        if (unityAd != null) {
+                            activity.runOnUiThread {
+                                callback?.onAdLoaded(TAG, "$TAG : onUnityAdsAdLoaded $adInterstitialUnitId")
+                            }
+                            activity.runOnUiThread {
+                                val showConfig = ShowConfiguration.Builder().build()
+                                unityAd.show(activity, showConfig, object : InterstitialShowListener {
+                                    override fun onStarted(unityAd: InterstitialAd) {
                                         activity.runOnUiThread {
                                             callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowStart")
-                                            callback?.onAdShowed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowStart [placementId] : $placementId")
+                                            callback?.onAdShowed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowStart [placementId] : $adInterstitialUnitId")
                                         }
                                     }
 
-                                    override fun onUnityAdsShowClick(placementId: String) {
+                                    override fun onClicked(unityAd: InterstitialAd) {
                                         activity.runOnUiThread {
-                                            callback?.onClicked(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowClick [placementId] : $placementId")
+                                            callback?.onClicked(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowClick [placementId] : $adInterstitialUnitId")
                                         }
                                     }
 
-                                    override fun onUnityAdsShowComplete(
-                                        placementId: String,
-                                        state: UnityAds.UnityAdsShowCompletionState
-                                    ) {
+                                    override fun onCompleted(unityAd: InterstitialAd, state: ShowFinishState) {
                                         activity.runOnUiThread {
-                                            callback?.onAdDismissed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowComplete [state] : $state, [placement] : $placementId")
+                                            callback?.onAdDismissed(TAG, "$TAG [Unity showAdInterstitial] >> Succes - onUnityAdsShowComplete [state] : $state, [placement] : $adInterstitialUnitId")
+                                        }
+                                    }
+
+                                    override fun onFailed(unityAd: InterstitialAd, error: UnityAdsError) {
+                                        activity.runOnUiThread {
+                                            callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
+                                            callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - onUnityAdsShowFailure [message] : ${error.message}")
                                         }
                                     }
                                 })
+                            }
+                        } else {
+                            activity.runOnUiThread {
+                                callback?.onHideAdRequestProgress(TAG, "$TAG [Unity showAdInterstitial] >> Run - onHideAdRequestProgress : onUnityAdsShowFailure")
+                                callback?.onAdFailed(TAG, "$TAG [Unity showAdInterstitial] >> Error - load failed : ${error?.message}")
+                            }
                         }
                     }
                 })

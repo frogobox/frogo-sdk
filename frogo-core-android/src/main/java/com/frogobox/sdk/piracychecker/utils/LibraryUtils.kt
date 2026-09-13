@@ -15,6 +15,7 @@ import android.os.Environment
 import android.util.Base64
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.pm.PackageInfoCompat
 import com.frogobox.sdk.R
 import com.frogobox.sdk.piracychecker.enums.AppType
 import com.frogobox.sdk.piracychecker.enums.InstallerID
@@ -53,20 +54,7 @@ private val Context.currentSignatures: Array<String>
     get() {
         val actualSignatures = ArrayList<String>()
         val signatures: Array<Signature> = try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
-                val signingInfo = packageInfo.signingInfo
-                when {
-                    signingInfo == null -> emptyArray()
-                    signingInfo.hasMultipleSigners() -> signingInfo.apkContentsSigners ?: emptyArray()
-                    else -> signingInfo.signingCertificateHistory ?: emptyArray()
-                }
-            } else {
-                @Suppress("DEPRECATION")
-                val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-                @Suppress("DEPRECATION")
-                packageInfo.signatures ?: emptyArray()
-            }
+            PackageInfoCompat.getSignatures(packageManager, packageName).toTypedArray()
         } catch (e: Exception) {
             emptyArray()
         }
@@ -97,8 +85,8 @@ internal fun Context.verifyInstallerId(installerID: List<InstallerID>): Boolean 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             packageManager.getInstallSourceInfo(packageName).installingPackageName
         } else {
-            @Suppress("DEPRECATION")
-            packageManager.getInstallerPackageName(packageName)
+            val method = packageManager.javaClass.getMethod("getInstallerPackageName", String::class.java)
+            method.invoke(packageManager, packageName) as? String
         }
     } catch (e: Exception) {
         null
@@ -109,7 +97,7 @@ internal fun Context.verifyInstallerId(installerID: List<InstallerID>): Boolean 
     return installer != null && validInstallers.contains(installer)
 }
 
-@Suppress("DEPRECATION")
+
 @SuppressLint("SdCardPath")
 internal fun Context.getPirateApp(
     lpf: Boolean,
@@ -206,7 +194,7 @@ internal fun Context.getPirateApp(
  *
  * Copyright (C) 2013, Vladislav Gingo Skoumal (http://www.skoumal.net)
  */
-@Suppress("DEPRECATION")
+
 internal fun isInEmulator(deepCheck: Boolean = false): Boolean {
     var ratingCheckEmulator = 0
     

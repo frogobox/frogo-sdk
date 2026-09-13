@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
-import com.frogobox.ui.loadingindicator.indicators.BallPulseIndicator
 import com.frogobox.ui.loadingindicator.indicators.BallClipRotateIndicator
+import com.frogobox.ui.loadingindicator.indicators.BallPulseIndicator
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
