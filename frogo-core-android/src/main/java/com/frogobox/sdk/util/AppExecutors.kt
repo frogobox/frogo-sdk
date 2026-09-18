@@ -18,6 +18,12 @@ import java.util.concurrent.Executors
  *
  */
 
+/**
+ * Utility for background/main thread execution using Java Executors.
+ *
+ * Consider migrating to Kotlin Coroutines with `Dispatchers.IO`, `Dispatchers.Default`,
+ * and `Dispatchers.Main` for modern, non-blocking asynchronous execution.
+ */
 class AppExecutors constructor(
     val diskIO: Executor = DiskIOThreadExecutor(),
     val networkIO: Executor = Executors.newFixedThreadPool(3),

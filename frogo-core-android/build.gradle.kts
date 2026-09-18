@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
     `maven-publish`
 }
@@ -92,6 +91,7 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel.ktx)
     api(libs.androidx.lifecycle.livedata.ktx)
     api(libs.androidx.preference)
+    api(libs.androidx.datastore.preferences)
 
     api(libs.androidx.room.ktx)
     api(libs.androidx.room.runtime)
@@ -103,11 +103,10 @@ dependencies {
     api(libs.github.customactivityoncrash)
     api(libs.kotlinx.coroutines.android)
 
-    ksp(libs.androidx.lifecycle.compiler)
-    ksp(libs.androidx.room.compiler)
-    ksp(libs.github.glide.compiler)
-
     api(libs.material)
+
+    compileOnly(libs.junit)
+    compileOnly(libs.kotlinx.coroutines.test)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

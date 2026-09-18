@@ -1,7 +1,7 @@
 package com.frogobox.appuikit.recycler
 
-import com.frogobox.R
 import com.frogobox.appuikit.model.Layout
+import com.frogobox.ui.R
 
 /*
  * Created by faisalamir on 21/05/21

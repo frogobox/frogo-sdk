@@ -85,9 +85,10 @@ object ProjectSetting {
 
     // ---------------------------------------------------------------------------------------------
 
-    const val PLAYSTORE_STORE_FILE = "frogoboxmedia.jks"
-    const val PLAYSTORE_STORE_PASSWORD = "amirisback"
-    const val PLAYSTORE_KEY_ALIAS = "frogoisback"
-    const val PLAYSTORE_KEY_PASSWORD = "amirisback"
+    val PLAYSTORE_STORE_FILE: String = System.getenv("FROGO_KEYSTORE_FILE") ?: "frogoboxmedia.jks"
+    val PLAYSTORE_STORE_PASSWORD: String = System.getenv("FROGO_STORE_PASSWORD") ?: "amirisback"
+    val PLAYSTORE_KEY_ALIAS: String = System.getenv("FROGO_KEY_ALIAS") ?: "frogoisback"
+    val PLAYSTORE_KEY_PASSWORD: String = System.getenv("FROGO_KEY_PASSWORD") ?: "amirisback"
+
 
 }
