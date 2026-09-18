@@ -22,9 +22,9 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.9
+    $version_release = 3.0.10
 
-What's New?? (v3.0.5 → v3.0.9)
+What's New?? (v3.0.5 → v3.0.10)
 
     * New Feature: Added Unity Ads SDK support & UnityAdDelegates *
     * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.3.1) *
@@ -78,16 +78,16 @@ dependencyResolutionManagement {
 
 ### Step 2: Add Dependencies
 
-Latest Version: `3.0.9`
+Latest Version: `3.0.10`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.9")
+    implementation("com.github.frogobox:frogo-sdk:3.0.10")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.9")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.9")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.10")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.10")
 }
 ```
 
