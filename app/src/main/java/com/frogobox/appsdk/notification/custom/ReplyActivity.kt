@@ -61,7 +61,7 @@ class ReplyActivity : BaseActivity<ActivityReplyBinding>() {
         FrogoNotification.Inject(this)
             .setChannelId(CHANNEL_ID)
             .setChannelName(CHANNEL_NAME as String)
-            .setSmallIcon(R.drawable.ic_frogo_notif)
+            .setSmallIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif)
             .setContentTitle(getString(R.string.notif_title_sent))
             .setContentText(getString(R.string.notif_content_sent))
             .setupWithVibration()

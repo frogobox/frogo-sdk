@@ -39,7 +39,7 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
         FrogoNotification.Inject(context)
             .setChannelId(CHANNEL_ID)
             .setChannelName(CHANNEL_NAME as String)
-            .setSmallIcon(R.drawable.ic_frogo_notif)
+            .setSmallIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif)
             .setContentTitle(context.getString(R.string.notif_title_sent))
             .setContentText(context.getString(R.string.notif_content_sent))
             .build()
