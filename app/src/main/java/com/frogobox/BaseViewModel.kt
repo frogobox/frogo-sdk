@@ -28,12 +28,14 @@ import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAdEv
  */
 
 open class BaseViewModel(
-    private val context: Context,
+    context: Context,
     private val repository: AdmobRepository
 ) : FrogoViewModel() {
 
+    private val appContext: Context = context.applicationContext
+
     fun showInterstitial(activity: AppCompatActivity, callback: FrogoAdmobInterstitialCallback?) {
-        repository.getInterstitial(context, object : FrogoDataResponse<InterstitialAd> {
+        repository.getInterstitial(appContext, object : FrogoDataResponse<InterstitialAd> {
             override fun onFinish() {}
 
             override fun onFailed(statusCode: Int, errorMessage: String) {

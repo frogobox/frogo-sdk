@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.frogobox.BaseActivity
-import com.frogobox.R
 import com.frogobox.databinding.ActivityStackNotifBinding
 import com.frogobox.sdk.notification.FrogoNotifInboxStyleListener
 import com.frogobox.sdk.notification.FrogoNotification
@@ -53,7 +52,7 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
 
                     //tutup keyboard ketika tombol diklik
                     val methodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     methodManager.hideSoftInputFromWindow(edtMessage.windowToken, 0)
                 }
             }
@@ -79,7 +78,7 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
         val frogoNotification = FrogoNotification.Inject(this)
             .setChannelId(CHANNEL_ID)
             .setChannelName(CHANNEL_NAME)
-            .setSmallIcon(R.drawable.ic_frogo_email)
+            .setSmallIcon(com.frogobox.sdk.R.drawable.ic_frogo_email)
             .setGroup(GROUP_KEY_EMAILS)
             .setContentIntent(pendingIntent)
             .setupAutoCancel()
@@ -91,7 +90,7 @@ class StackNotifActivity : BaseActivity<ActivityStackNotifBinding>() {
                 frogoNotification
                     .setContentTitle("New Email from " + stackNotif[idNotification].sender)
                     .setContentText(it)
-                    .setLargeIcon(R.drawable.ic_frogo_notif)
+                    .setLargeIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif)
             }
 
         } else {

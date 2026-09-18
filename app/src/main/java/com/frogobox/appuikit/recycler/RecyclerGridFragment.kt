@@ -14,6 +14,7 @@ import com.frogobox.databinding.FragmentRecyclerGridBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
 import com.google.gson.Gson
+import com.frogobox.ui.R as FrogoUiR
 
 class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
 
@@ -38,7 +39,7 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
 
     private fun setupRecyclerView() {
         binding.frogoRv.injector<Layout>()
-            .addCustomView(R.layout.frogo_rv_grid_type_1)
+            .addCustomView(FrogoUiR.layout.frogo_rv_grid_type_1)
             .addData(FrogoRvConstant.dataRvGrid())
             .addCallback(object : IFrogoViewAdapter<Layout> {
                 override fun onItemClicked(
@@ -64,8 +65,8 @@ class RecyclerGridFragment : BaseFragment<FragmentRecyclerGridBinding>() {
                     position: Int,
                     notifyListener: FrogoRecyclerNotifyListener<Layout>,
                 ) {
-                    view.findViewById<TextView>(R.id.frogo_rv_grid_type_1_tv_title).text = data.name
-                    view.findViewById<ImageView>(R.id.frogo_rv_grid_type_1_iv_poster)
+                    view.findViewById<TextView>(FrogoUiR.id.frogo_rv_grid_type_1_tv_title).text = data.name
+                    view.findViewById<ImageView>(FrogoUiR.id.frogo_rv_grid_type_1_iv_poster)
                         .setImageResource(R.drawable.ic_artist)
                 }
 

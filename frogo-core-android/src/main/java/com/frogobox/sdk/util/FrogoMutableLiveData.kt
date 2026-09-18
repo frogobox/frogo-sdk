@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  */
 
-@Deprecated("Use MutableLiveData From AndroidX Lifecycle KTX instead")
+@Deprecated("Use StateFlow or SharedFlow from kotlinx.coroutines.flow instead for modern UDF/MVI reactive state management.")
 class FrogoMutableLiveData<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)

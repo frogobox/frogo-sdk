@@ -44,7 +44,7 @@ class NotificationService : Service() {
         FrogoNotification.Inject(this)
             .setChannelId(CHANNEL_ID)
             .setChannelName(CHANNEL_NAME as String)
-            .setSmallIcon(R.drawable.ic_frogo_notif)
+            .setSmallIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif)
             .setContentTitle(getString(R.string.notif_title))
             .setContentText(getString(R.string.notif_content))
             .setupShowWhen()
@@ -58,7 +58,7 @@ class NotificationService : Service() {
                 }
 
                 override fun setActionIcon(): Int {
-                    return R.drawable.ic_frogo_send
+                    return com.frogobox.sdk.R.drawable.ic_frogo_send
                 }
 
                 override fun setActionTitle(): String {

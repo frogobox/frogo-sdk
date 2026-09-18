@@ -1,6 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.text.SimpleDateFormat
-import java.util.Date
 
 plugins {
     alias(libs.plugins.android.application)
@@ -15,8 +13,7 @@ ksp {
 
 base {
     // Naming APK // AAB
-    val timestamp = SimpleDateFormat("dd-MM-yyyy_HH-mm").format(Date())
-    archivesName = "${ProjectSetting.NAME_APK}-[${ProjectSetting.PROJECT_VERSION_NAME}]-$timestamp"
+    archivesName = "${ProjectSetting.NAME_APK}-[${ProjectSetting.PROJECT_VERSION_NAME}]"
 }
 
 
@@ -156,7 +153,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    ksp(libs.androidx.lifecycle.compiler)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.core.ktx)

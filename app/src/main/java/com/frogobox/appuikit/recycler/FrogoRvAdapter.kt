@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.frogobox.R
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
+import com.frogobox.ui.R
+import com.frogobox.R as AppR
 
 /*
  * Created by faisalamir on 22/05/21
@@ -188,7 +189,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_4_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -236,7 +237,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_5_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -288,7 +289,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_6_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -332,7 +333,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_7_civ_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -380,7 +381,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_8_civ_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -424,7 +425,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_9_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -472,7 +473,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_10_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -524,7 +525,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_list_type_11_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -608,7 +609,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_1_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -656,7 +657,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_2_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -708,7 +709,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_3_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -752,7 +753,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_4_civ_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -800,7 +801,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_5_civ_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -852,7 +853,7 @@ object FrogoRvAdapter {
                             )
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_6_civ_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 
@@ -892,7 +893,7 @@ object FrogoRvAdapter {
                     ) {
                         view.findViewById<ImageView>(R.id.frogo_rv_grid_type_7_iv_poster)
                             .setImageResource(
-                                R.drawable.ic_artist
+                                AppR.drawable.ic_artist
                             )
                     }
 

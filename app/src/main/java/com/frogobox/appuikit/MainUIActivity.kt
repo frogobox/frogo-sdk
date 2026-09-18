@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.frogobox.BaseActivity
-import com.frogobox.R
 import com.frogobox.appuikit.animation.SampleFrogoAnimationActivity
-
 import com.frogobox.appuikit.loadingindicator.SampleFrogoLoadingIndicatorViewActivity
 import com.frogobox.appuikit.model.Main
 import com.frogobox.appuikit.recycler.RecyclerViewActivity
 import com.frogobox.databinding.ActivityMainFrogoUiBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
+import com.frogobox.ui.R
 
 class MainUIActivity : BaseActivity<ActivityMainFrogoUiBinding>() {
 

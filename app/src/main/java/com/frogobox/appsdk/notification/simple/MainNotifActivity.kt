@@ -20,6 +20,7 @@ import com.frogobox.appsdk.notification.stack.StackNotifActivity
 import com.frogobox.databinding.ActivityMainNotifBinding
 import com.frogobox.sdk.notification.FrogoNotifCustomContentViewListener
 import com.frogobox.sdk.notification.FrogoNotification
+import androidx.core.net.toUri
 
 
 class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
@@ -54,9 +55,7 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
             }
 
             btnShowExpanded.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    sendNotificationCustom()
-                }
+                sendNotificationCustom()
             }
 
         }
@@ -64,15 +63,15 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
 
     private fun sendNotification() {
 
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/amirisback"))
+        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/amirisback".toUri())
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         FrogoNotification.Inject(this) // Intialize for Context
             .setChannelId(CHANNEL_ID) // Intialize for Channel ID
             .setChannelName(CHANNEL_NAME) // Initialize for Channel Name
             .setContentIntent(pendingIntent) // Initialize for Content Intent
-            .setSmallIcon(R.drawable.ic_frogo_notif) // Initialize for Small Icon
-            .setLargeIcon(R.drawable.ic_frogo_notif) // Initialize for Large Icon
+            .setSmallIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif) // Initialize for Small Icon
+            .setLargeIcon(com.frogobox.sdk.R.drawable.ic_frogo_notif) // Initialize for Large Icon
             .setContentTitle(resources.getString(R.string.content_title)) // Initialize for Content Title
             .setContentText(resources.getString(R.string.content_text)) // Initialize for Content Text
             .setSubText(resources.getString(R.string.subtext)) // Initialize for Sub Text
@@ -84,7 +83,6 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun sendNotificationCustom() {
         val clickIntent = Intent(this, MainNotifReceiver::class.java)
         val clickPendingIntent =
@@ -144,7 +142,7 @@ class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {
                 NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
             chan.lightColor = Color.BLUE
             chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-            val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val service = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             service.createNotificationChannel(chan)
         }
         return channelId

@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.frogobox.BaseFragment
-import com.frogobox.R
 import com.frogobox.appuikit.model.Layout
 import com.frogobox.databinding.FragmentRecyclerListBinding
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoViewAdapter
+import com.frogobox.ui.R
 import com.google.gson.Gson
 
 
