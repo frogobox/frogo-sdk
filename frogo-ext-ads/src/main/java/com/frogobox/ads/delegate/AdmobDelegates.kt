@@ -84,4 +84,25 @@ interface AdmobDelegates {
         callback: FrogoAdmobRewardedCallback
     )
 
+    fun loadAdInterstitial(
+        interstitialAdUnitId: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobInterstitialCallback? = null
+    )
+
+    fun loadAdRewarded(
+        mAdUnitIdRewarded: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobRewardedCallback
+    )
+
+    fun loadAdRewardedInterstitial(
+        mAdUnitIdRewardedInterstitial: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobRewardedCallback
+    )
+
 }

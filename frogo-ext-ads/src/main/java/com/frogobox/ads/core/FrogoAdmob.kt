@@ -55,6 +55,9 @@ object FrogoAdmob : IFrogoAdmob,
     IFrogoAdmobRewarded {
 
     val TAG: String = FrogoAdmob::class.java.simpleName
+    private var mInterstitialAd: InterstitialAd? = null
+    private var mRewardedAd: RewardedAd? = null
+    private var mRewardedInterstitialAd: RewardedInterstitialAd? = null
 
     // ---------------------------------------------------------------------------------------------
 
@@ -67,7 +70,7 @@ object FrogoAdmob : IFrogoAdmob,
                     android.content.pm.PackageManager.GET_META_DATA
                 )
                 appInfo.metaData?.getString("com.google.android.gms.ads.APPLICATION_ID").orEmpty()
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 ""
             }
             val config = InitializationConfig.Builder(appId).build()
@@ -191,7 +194,9 @@ object FrogoAdmob : IFrogoAdmob,
 
     // ---------------------------------------------------------------------------------------------
 
-    override fun showAdInterstitial(
+    
+    
+    override fun loadAdInterstitial(
         activity: AppCompatActivity,
         interstitialAdUnitId: String,
         timeoutMilliSecond: Int?,
@@ -199,8 +204,7 @@ object FrogoAdmob : IFrogoAdmob,
         callback: FrogoAdmobInterstitialCallback?
     ) {
         if (interstitialAdUnitId.isNotBlank()) {
-            callback?.onShowAdRequestProgress(TAG, "[Interstitial] >> Run - FrogoAdmobInterstitialCallback [callback] : onShowAdRequestProgress()")
-
+            callback?.onShowAdRequestProgress(TAG, "[Interstitial] >> Run - loadAdInterstitial")
             val adRequestBuilder = AdRequest.Builder(interstitialAdUnitId)
             keyword?.forEach { adRequestBuilder.putCustomTargeting("keyword", it) }
 
@@ -208,41 +212,39 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequestBuilder.build(),
                 object : AdLoadCallback<InterstitialAd> {
                     override fun onAdFailedToLoad(adError: LoadAdError) {
+                        mInterstitialAd = null
                         runOnMainThread {
-                            callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Error - onHideAdRequestProgress [message] : ${adError.message}")
+                            callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Error - onAdFailedToLoad : ${adError.message}")
                             callback?.onAdFailed(TAG, "Interstitial ${adError.message}")
                         }
                     }
 
                     override fun onAdLoaded(ad: InterstitialAd) {
+                        mInterstitialAd = ad
                         runOnMainThread {
                             callback?.onAdLoaded(TAG, "Interstitial Ad was loaded")
                         }
-
-                        ad.adEventCallback =
-                            object : InterstitialAdEventCallback {
-                                override fun onAdDismissedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback?.onAdDismissed(TAG, "Interstitial Ad was dismissed")
-                                    }
-                                }
-
-                                override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
-                                    runOnMainThread {
-                                        callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Error - onHideAdRequestProgress [message] : onAdFailedToShowFullScreenContent: ${fullScreenContentError.message}")
-                                        callback?.onAdFailed(TAG, "Interstitial Ad failed to show: ${fullScreenContentError.message}")
-                                    }
-                                }
-
-                                override fun onAdShowedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Success - onHideAdRequestProgress [message] : Ad showed fullscreen content")
-                                        callback?.onAdShowed(TAG, "Interstitial Ad showed fullscreen content")
-                                    }
+                        
+                        mInterstitialAd?.adEventCallback = object : InterstitialAdEventCallback {
+                            override fun onAdDismissedFullScreenContent() {
+                                mInterstitialAd = null
+                                runOnMainThread {
+                                    callback?.onAdDismissed(TAG, "Interstitial Ad was dismissed")
                                 }
                             }
-                        runOnMainThread {
-                            ad.show(activity)
+
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                                mInterstitialAd = null
+                                runOnMainThread {
+                                    callback?.onAdFailed(TAG, "Interstitial Ad failed to show: ${fullScreenContentError.message}")
+                                }
+                            }
+
+                            override fun onAdShowedFullScreenContent() {
+                                runOnMainThread {
+                                    callback?.onAdShowed(TAG, "Interstitial Ad showed fullscreen content")
+                                }
+                            }
                         }
                     }
                 }
@@ -252,9 +254,38 @@ object FrogoAdmob : IFrogoAdmob,
         }
     }
 
+    override fun showAdInterstitial(
+        activity: AppCompatActivity,
+        interstitialAdUnitId: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobInterstitialCallback?
+    ) {
+        if (mInterstitialAd != null) {
+            runOnMainThread {
+                mInterstitialAd?.show(activity)
+            }
+        } else {
+            // Fallback for backward compatibility
+            loadAdInterstitial(activity, interstitialAdUnitId, timeoutMilliSecond, keyword, object : FrogoAdmobInterstitialCallback {
+                override fun onShowAdRequestProgress(tag: String, message: String) { callback?.onShowAdRequestProgress(tag, message) }
+                override fun onHideAdRequestProgress(tag: String, message: String) { callback?.onHideAdRequestProgress(tag, message) }
+                override fun onAdLoaded(tag: String, message: String) {
+                    callback?.onAdLoaded(tag, message)
+                    runOnMainThread { mInterstitialAd?.show(activity) }
+                }
+                override fun onAdFailed(tag: String, errorMessage: String) { callback?.onAdFailed(tag, errorMessage) }
+                override fun onAdDismissed(tag: String, message: String) { callback?.onAdDismissed(tag, message) }
+                override fun onAdShowed(tag: String, message: String) { callback?.onAdShowed(tag, message) }
+            })
+        }
+    }
+
     // ---------------------------------------------------------------------------------------------
 
-    override fun showAdRewarded(
+    
+    
+    override fun loadAdRewarded(
         activity: AppCompatActivity,
         mAdUnitIdRewarded: String,
         timeoutMilliSecond: Int?,
@@ -262,8 +293,7 @@ object FrogoAdmob : IFrogoAdmob,
         callback: FrogoAdmobRewardedCallback
     ) {
         if (mAdUnitIdRewarded.isNotBlank()) {
-            callback.onShowAdRequestProgress(TAG, "[RewardedAd] >> Run - FrogoAdmobRewardedCallback [callback] : onShowAdRequestProgress()")
-
+            callback.onShowAdRequestProgress(TAG, "[RewardedAd] >> Run - loadAdRewarded")
             val adRequestBuilder = AdRequest.Builder(mAdUnitIdRewarded)
             keyword?.forEach { adRequestBuilder.putCustomTargeting("keyword", it) }
 
@@ -271,46 +301,34 @@ object FrogoAdmob : IFrogoAdmob,
                 adRequestBuilder.build(),
                 object : AdLoadCallback<RewardedAd> {
                     override fun onAdFailedToLoad(adError: LoadAdError) {
+                        mRewardedAd = null
                         runOnMainThread {
-                            callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Error - onHideAdRequestProgress [message] : ${adError.message}")
+                            callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Error - onAdFailedToLoad: ${adError.message}")
                             callback.onAdFailed(TAG, "RewardedAd ${adError.message}")
                         }
                     }
 
                     override fun onAdLoaded(ad: RewardedAd) {
+                        mRewardedAd = ad
                         runOnMainThread {
                             callback.onAdLoaded(TAG, "RewardedAd was loaded")
                         }
-                        ad.adEventCallback =
-                            object : RewardedAdEventCallback {
-                                override fun onAdDismissedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback.onAdDismissed(TAG, "Rewarded Ad was dismissed")
-                                    }
-                                }
-
-                                override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
-                                    runOnMainThread {
-                                        callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Error - onAdFailedToShowFullScreenContent: ${fullScreenContentError.message}")
-                                        callback.onAdFailed(TAG, "Rewarded Ad failed to show: ${fullScreenContentError.message}")
-                                    }
-                                }
-
-                                override fun onAdShowedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback.onHideAdRequestProgress(
-                                            TAG,
-                                            "[RewardedAd] >> Success - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdShowedFullScreenContent"
-                                        )
-                                        callback.onAdShowed(TAG, "Rewarded Ad showed fullscreen content")
-                                    }
+                        mRewardedAd?.adEventCallback = object : RewardedAdEventCallback {
+                            override fun onAdDismissedFullScreenContent() {
+                                mRewardedAd = null
+                                runOnMainThread {
+                                    callback.onAdDismissed(TAG, "Rewarded Ad was dismissed")
                                 }
                             }
-
-                        runOnMainThread {
-                            ad.show(activity) { rewardItem ->
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                                mRewardedAd = null
                                 runOnMainThread {
-                                    callback.onUserEarnedReward(TAG, rewardItem)
+                                    callback.onAdFailed(TAG, "Rewarded Ad failed to show: ${fullScreenContentError.message}")
+                                }
+                            }
+                            override fun onAdShowedFullScreenContent() {
+                                runOnMainThread {
+                                    callback.onAdShowed(TAG, "Rewarded Ad showed fullscreen content")
                                 }
                             }
                         }
@@ -322,7 +340,96 @@ object FrogoAdmob : IFrogoAdmob,
         }
     }
 
+    override fun showAdRewarded(
+        activity: AppCompatActivity,
+        mAdUnitIdRewarded: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobRewardedCallback
+    ) {
+        if (mRewardedAd != null) {
+            runOnMainThread {
+                mRewardedAd?.show(activity) { rewardItem ->
+                    runOnMainThread { callback.onUserEarnedReward(TAG, rewardItem) }
+                }
+            }
+        } else {
+            // Fallback
+            loadAdRewarded(activity, mAdUnitIdRewarded, timeoutMilliSecond, keyword, object : FrogoAdmobRewardedCallback {
+                override fun onUserEarnedReward(tag: String, rewardItem: com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem) { callback.onUserEarnedReward(tag, rewardItem) }
+                override fun onShowAdRequestProgress(tag: String, message: String) { callback.onShowAdRequestProgress(tag, message) }
+                override fun onHideAdRequestProgress(tag: String, message: String) { callback.onHideAdRequestProgress(tag, message) }
+                override fun onAdLoaded(tag: String, message: String) {
+                    callback.onAdLoaded(tag, message)
+                    runOnMainThread {
+                        mRewardedAd?.show(activity) { item -> runOnMainThread { callback.onUserEarnedReward(TAG, item) } }
+                    }
+                }
+                override fun onAdFailed(tag: String, errorMessage: String) { callback.onAdFailed(tag, errorMessage) }
+                override fun onAdDismissed(tag: String, message: String) { callback.onAdDismissed(tag, message) }
+                override fun onAdShowed(tag: String, message: String) { callback.onAdShowed(tag, message) }
+            })
+        }
+    }
+
     // ---------------------------------------------------------------------------------------------
+
+    
+    
+    override fun loadAdRewardedInterstitial(
+        activity: AppCompatActivity,
+        mAdUnitIdRewardedInterstitial: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobRewardedCallback
+    ) {
+        if (mAdUnitIdRewardedInterstitial.isNotBlank()) {
+            callback.onShowAdRequestProgress(TAG, "[RewardedInterstitial] >> Run - loadAdRewardedInterstitial")
+            val adRequestBuilder = AdRequest.Builder(mAdUnitIdRewardedInterstitial)
+            keyword?.forEach { adRequestBuilder.putCustomTargeting("keyword", it) }
+
+            RewardedInterstitialAd.load(
+                adRequestBuilder.build(),
+                object : AdLoadCallback<RewardedInterstitialAd> {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        mRewardedInterstitialAd = null
+                        runOnMainThread {
+                            callback.onHideAdRequestProgress(TAG, "[RewardedInterstitial] >> Error - ${adError.message}")
+                            callback.onAdFailed(TAG, "RewardedInterstitial ${adError.message}")
+                        }
+                    }
+
+                    override fun onAdLoaded(ad: RewardedInterstitialAd) {
+                        mRewardedInterstitialAd = ad
+                        runOnMainThread {
+                            callback.onAdLoaded(TAG, "RewardedInterstitial Ad was loaded")
+                        }
+                        mRewardedInterstitialAd?.adEventCallback = object : RewardedInterstitialAdEventCallback {
+                            override fun onAdDismissedFullScreenContent() {
+                                mRewardedInterstitialAd = null
+                                runOnMainThread {
+                                    callback.onAdDismissed(TAG, "RewardedInterstitial Ad was dismissed")
+                                }
+                            }
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                                mRewardedInterstitialAd = null
+                                runOnMainThread {
+                                    callback.onAdFailed(TAG, "RewardedInterstitial Ad failed to show: ${fullScreenContentError.message}")
+                                }
+                            }
+                            override fun onAdShowedFullScreenContent() {
+                                runOnMainThread {
+                                    callback.onAdShowed(TAG, "RewardedInterstitial Ad showed fullscreen content")
+                                }
+                            }
+                        }
+                    }
+                }
+            )
+        } else {
+            callback.onAdFailed(TAG, "Rewarded Interstitial Id Is Empty")
+        }
+    }
 
     override fun showAdRewardedInterstitial(
         activity: AppCompatActivity,
@@ -331,62 +438,28 @@ object FrogoAdmob : IFrogoAdmob,
         keyword: List<String>?,
         callback: FrogoAdmobRewardedCallback
     ) {
-        if (mAdUnitIdRewardedInterstitial.isNotBlank()) {
-            callback.onShowAdRequestProgress(TAG, "[RewardedInterstitial] >> Run - FrogoAdmobRewardedCallback [callback] : onShowAdRequestProgress()")
-
-            val adRequestBuilder = AdRequest.Builder(mAdUnitIdRewardedInterstitial)
-            keyword?.forEach { adRequestBuilder.putCustomTargeting("keyword", it) }
-
-            RewardedInterstitialAd.load(
-                adRequestBuilder.build(),
-                object : AdLoadCallback<RewardedInterstitialAd> {
-                    override fun onAdFailedToLoad(adError: LoadAdError) {
-                        runOnMainThread {
-                            callback.onHideAdRequestProgress(TAG, "[RewardedInterstitial] >> Error - onHideAdRequestProgress [message] : ${adError.message}")
-                            callback.onAdFailed(TAG, "RewardedInterstitial ${adError.message}")
-                        }
-                    }
-
-                    override fun onAdLoaded(ad: RewardedInterstitialAd) {
-                        runOnMainThread {
-                            callback.onAdLoaded(TAG, "RewardedInterstitial Ad was loaded")
-                        }
-                        ad.adEventCallback =
-                            object : RewardedInterstitialAdEventCallback {
-                                override fun onAdDismissedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback.onAdDismissed(TAG, "RewardedInterstitial Ad was dismissed")
-                                    }
-                                }
-
-                                override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
-                                    runOnMainThread {
-                                        callback.onHideAdRequestProgress(TAG, "[RewardedInterstitial] >> Error - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdFailedToShowFullScreenContent: ${fullScreenContentError.message}")
-                                        callback.onAdFailed(TAG, "RewardedInterstitial Ad failed to show: ${fullScreenContentError.message}")
-                                    }
-                                }
-
-                                override fun onAdShowedFullScreenContent() {
-                                    runOnMainThread {
-                                        callback.onHideAdRequestProgress(TAG, "[RewardedInterstitial] >> Run - FrogoAdmobRewardedCallback [callback] : onHideAdRequestProgress() : onAdShowedFullScreenContent")
-                                        callback.onAdShowed(TAG, "RewardedInterstitial Ad showed fullscreen content")
-                                    }
-                                }
-                            }
-
-                        runOnMainThread {
-                            ad.show(activity) { rewardItem ->
-                                runOnMainThread {
-                                    callback.onUserEarnedReward(TAG, rewardItem)
-                                }
-                            }
-                        }
-
+        if (mRewardedInterstitialAd != null) {
+            runOnMainThread {
+                mRewardedInterstitialAd?.show(activity) { rewardItem ->
+                    runOnMainThread { callback.onUserEarnedReward(TAG, rewardItem) }
+                }
+            }
+        } else {
+            // Fallback
+            loadAdRewardedInterstitial(activity, mAdUnitIdRewardedInterstitial, timeoutMilliSecond, keyword, object : FrogoAdmobRewardedCallback {
+                override fun onUserEarnedReward(tag: String, rewardItem: com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem) { callback.onUserEarnedReward(tag, rewardItem) }
+                override fun onShowAdRequestProgress(tag: String, message: String) { callback.onShowAdRequestProgress(tag, message) }
+                override fun onHideAdRequestProgress(tag: String, message: String) { callback.onHideAdRequestProgress(tag, message) }
+                override fun onAdLoaded(tag: String, message: String) {
+                    callback.onAdLoaded(tag, message)
+                    runOnMainThread {
+                        mRewardedInterstitialAd?.show(activity) { item -> runOnMainThread { callback.onUserEarnedReward(TAG, item) } }
                     }
                 }
-            )
-        } else {
-            callback.onAdFailed(TAG, "Rewarded Interstitial Id Is Empty")
+                override fun onAdFailed(tag: String, errorMessage: String) { callback.onAdFailed(tag, errorMessage) }
+                override fun onAdDismissed(tag: String, message: String) { callback.onAdDismissed(tag, message) }
+                override fun onAdShowed(tag: String, message: String) { callback.onAdShowed(tag, message) }
+            })
         }
     }
 

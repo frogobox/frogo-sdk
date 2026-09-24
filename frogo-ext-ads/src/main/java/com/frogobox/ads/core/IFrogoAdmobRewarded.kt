@@ -42,4 +42,20 @@ interface IFrogoAdmobRewarded {
         callback: FrogoAdmobRewardedCallback
     )
 
+    fun loadAdRewarded(
+        activity: AppCompatActivity,
+        mAdUnitIdRewarded: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobRewardedCallback
+    )
+
+    fun loadAdRewardedInterstitial(
+        activity: AppCompatActivity,
+        mAdUnitIdRewardedInterstitial: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobRewardedCallback
+    )
+
 }

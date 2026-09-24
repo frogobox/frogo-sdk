@@ -127,4 +127,31 @@ class AdmobDelegatesImpl : AdmobDelegates {
             callback = callback
         )
     }
+
+    override fun loadAdInterstitial(
+        interstitialAdUnitId: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobInterstitialCallback?
+    ) {
+        FrogoAdmob.loadAdInterstitial(admobDelegatesActivity, interstitialAdUnitId, timeoutMilliSecond, keyword, callback)
+    }
+
+    override fun loadAdRewarded(
+        mAdUnitIdRewarded: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobRewardedCallback
+    ) {
+        FrogoAdmob.loadAdRewarded(admobDelegatesActivity, mAdUnitIdRewarded, timeoutMilliSecond, keyword, callback)
+    }
+
+    override fun loadAdRewardedInterstitial(
+        mAdUnitIdRewardedInterstitial: String,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobRewardedCallback
+    ) {
+        FrogoAdmob.loadAdRewardedInterstitial(admobDelegatesActivity, mAdUnitIdRewardedInterstitial, timeoutMilliSecond, keyword, callback)
+    }
 }

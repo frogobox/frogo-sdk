@@ -32,4 +32,12 @@ interface IFrogoAdmobInterstitial {
         callback: FrogoAdmobInterstitialCallback? = null
     )
 
+    fun loadAdInterstitial(
+        activity: AppCompatActivity,
+        interstitialAdUnitId: String,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobInterstitialCallback? = null
+    )
+
 }
