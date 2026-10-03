@@ -31,6 +31,5 @@ include(
     ":frogo-compose-android",
     ":frogo-compose-ui",
     ":frogo-ui-base",
-    ":frogo-ui-recyclerview",
     ":frogo-ext-ads",
 )

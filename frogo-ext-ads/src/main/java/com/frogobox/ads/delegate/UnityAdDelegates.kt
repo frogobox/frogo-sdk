@@ -22,6 +22,8 @@ interface UnityAdDelegates {
 
     fun setupUnityAdDelegates(activity: AppCompatActivity)
 
+    fun setUnityAdConsent(userConsent: Boolean, userOptOut: Boolean = false)
+
     fun setupUnityAdApp(
         testMode: Boolean,
         unityGameId: String,

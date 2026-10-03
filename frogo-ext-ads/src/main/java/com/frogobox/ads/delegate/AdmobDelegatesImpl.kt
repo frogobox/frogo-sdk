@@ -51,6 +51,17 @@ class AdmobDelegatesImpl : AdmobDelegates {
 
     override fun showAdBanner(
         mAdView: AdView,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?
+    ) {
+        FrogoAdmob.showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback)
+    }
+
+    override fun showAdBanner(
+        mAdView: AdView,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
         callback: FrogoAdmobBannerCallback?

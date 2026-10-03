@@ -2,12 +2,12 @@ package com.frogobox.sdk.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -37,7 +37,7 @@ abstract class FrogoViewModel : ViewModel() {
 
 /**
  * Template ViewModel implementing Unidirectional Data Flow (UDF) / MVI pattern
- * using StateFlow (for UI State) and SharedFlow (for UI Effects/one-off events).
+ * using StateFlow (for UI State) and Channel/Flow (for UI Effects/one-off events).
  *
  * Symmetrical implementation to FrogoComposeStateViewModel.
  *
@@ -51,8 +51,8 @@ abstract class FrogoStateViewModel<STATE, EFFECT>(
     private val _uiState = MutableStateFlow(initialState)
     val uiState: StateFlow<STATE> = _uiState.asStateFlow()
 
-    private val _uiEffect = MutableSharedFlow<EFFECT>()
-    val uiEffect: SharedFlow<EFFECT> = _uiEffect.asSharedFlow()
+    private val _uiEffect = Channel<EFFECT>(Channel.BUFFERED)
+    val uiEffect: Flow<EFFECT> = _uiEffect.receiveAsFlow()
 
     /**
      * Retrieves the current UI state.
@@ -72,7 +72,7 @@ abstract class FrogoStateViewModel<STATE, EFFECT>(
      */
     protected fun emitEffect(effect: EFFECT) {
         viewModelScope.launch {
-            _uiEffect.emit(effect)
+            _uiEffect.send(effect)
         }
     }
 }

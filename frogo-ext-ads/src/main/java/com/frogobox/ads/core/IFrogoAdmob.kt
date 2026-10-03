@@ -25,22 +25,4 @@ interface IFrogoAdmob {
 
     fun setupAdmobApp(context: Context, appUnitId: String? = null)
 
-    // ---------------------------------------------------------------------------------------------
-
-    fun loadRecyclerBannerAds(
-        bannerAdUnitId: String,
-        context: Context,
-        recyclerViewDataList: MutableList<Any>
-    )
-
-    fun addBannerAds(
-        bannerAdUnitId: String,
-        context: Context,
-        recyclerViewDataList: MutableList<Any>
-    )
-
-    fun loadBannerAd(recyclerViewDataList: MutableList<Any>, index: Int)
-
-    // ---------------------------------------------------------------------------------------------
-
 }

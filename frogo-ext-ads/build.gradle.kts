@@ -75,7 +75,6 @@ configurations.configureEach {
 
 dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
-    api(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
     api(libs.ads.google.admob)
     api(libs.androidx.lifecycle.process)
     api(libs.ads.unityAd)

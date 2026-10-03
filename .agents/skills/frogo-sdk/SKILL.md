@@ -1,13 +1,13 @@
 ---
 name: frogo-sdk
 description: >-
-  Comprehensive guide and runbook for integrating and developing with the Frogo SDK Android suite (v3.0.8).
-  Covers Jetpack Compose UI (Material 3), Google Mobile Ads SDK (Next-Gen 1.4.0) & Unity Ads (4.20.0),
-  Advanced RecyclerView helpers, core Android utilities, UDF/MVI State ViewModels, and edge-to-edge Compose activities.
+  Comprehensive guide and runbook for integrating and developing with the Frogo SDK Android suite (v3.0.10).
+  Covers Jetpack Compose UI (Material 3), Google Mobile Ads SDK (Next-Gen 1.5.0) & Unity Ads (4.21.0),
+  core Android utilities, UDF/MVI State ViewModels, and edge-to-edge Compose activities.
   Use this skill whenever building Android features, generating screens, integrating ads, or working with Frogo SDK libraries.
 metadata:
   author: Frogobox (Muhammad Faisal Amir)
-  version: "3.0.8"
+  version: "3.0.10"
   keywords:
   - Frogo SDK
   - Android SDK
@@ -15,7 +15,6 @@ metadata:
   - Android UI Components
   - AdMob Next-Gen Integration
   - Unity Ads
-  - RecyclerView Adapter
   - Android Development Tools
   - Kotlin Android Library
   - Material Design 3
@@ -25,35 +24,34 @@ metadata:
 
 # Frogo SDK Integration & Development Specialist
 
-This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v3.0.8).
+This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v3.0.10).
 
 **Repository:** `frogobox/frogo-sdk`  
-**Latest Stable Version:** `3.0.8`  
+**Latest Stable Version:** `3.0.10`  
 **Core Tech Stack:**
-- **AGP:** `9.4.0`
+- **AGP:** `9.4.1`
 - **Kotlin:** `2.4.20`
 - **Compile / Target SDK:** `37` (Min SDK: `24`)
 - **Compose BOM:** `2026.09.00` (Material 3)
-- **Google Mobile Ads SDK (Next-Gen):** `1.4.0` (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.4.0`)
-- **Unity Ads:** `4.20.0`
-- **Coil:** `3.6.2` (Coil 3 multiplatform/compose: `io.coil-kt.coil3:coil-compose:3.6.2`)
+- **Google Mobile Ads SDK (Next-Gen):** `1.5.0` (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0`)
+- **Unity Ads:** `4.21.0`
+- **Coil:** `3.6.3` (Coil 3 multiplatform/compose: `io.coil-kt.coil3:coil-compose:3.6.3`)
 - **Glide Compose:** `1.0.0-beta10`
 
 ---
 
 ## 🏛️ Architecture Overview
 
-Frogo SDK is organized into 7 modular Android/Kotlin libraries:
+Frogo SDK is organized into 6 modular Android/Kotlin libraries:
 
 | Module | Package / Namespace | Artifact Coordinates (JitPack) | Purpose |
 | :--- | :--- | :--- | :--- |
 | `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin (no Android dependency) | Cross-platform utilities, string, date, math helpers |
-| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.8` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 16+ extension files |
-| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.8` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
-| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.8` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
-| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:3.0.8` | XML-based UI utilities and view helpers |
-| `frogo-ui-recyclerview` | `com.frogobox.recycler` | `com.github.frogobox.frogo-sdk:frogo-ui-recyclerview:3.0.8` | High-performance RecyclerView with builder pattern, shimmer loading, progress states |
-| `frogo-ext-ads` | `com.frogobox.ads` | `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.8` | Google Mobile Ads SDK (Next-Gen) & Unity Ads delegates, App Open Ads, hybrid fallback, Compose ad activities |
+| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.10` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 16+ extension files |
+| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.10` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
+| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.10` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
+| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:3.0.10` | XML-based UI utilities and view helpers |
+| `frogo-ext-ads` | `com.frogobox.ads` | `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.10` | Google Mobile Ads SDK (Next-Gen) & Unity Ads delegates, App Open Ads, hybrid fallback, Compose ad activities |
 
 ---
 
@@ -80,11 +78,11 @@ dependencyResolutionManagement {
 
 ```toml
 [versions]
-frogoSdk = "3.0.8"
+frogoSdk = "3.0.10"
 composeBom = "2026.09.00"
-googleAdmob = "1.4.0"
-unityAd = "4.20.0"
-coil = "3.6.2"
+googleAdmob = "1.5.0"
+unityAd = "4.21.0"
+coil = "3.6.3"
 
 [libraries]
 # Frogo SDK Modular Suite
@@ -92,7 +90,6 @@ frogo-compose-ui = { group = "com.github.frogobox.frogo-sdk", name = "frogo-comp
 frogo-compose-android = { group = "com.github.frogobox.frogo-sdk", name = "frogo-compose-android", version.ref = "frogoSdk" }
 frogo-core-android = { group = "com.github.frogobox.frogo-sdk", name = "frogo-core-android", version.ref = "frogoSdk" }
 frogo-ext-ads = { group = "com.github.frogobox.frogo-sdk", name = "frogo-ext-ads", version.ref = "frogoSdk" }
-frogo-ui-recyclerview = { group = "com.github.frogobox.frogo-sdk", name = "frogo-ui-recyclerview", version.ref = "frogoSdk" }
 
 # Compose BOM & Coil 3
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -114,9 +111,6 @@ dependencies {
     // Next-Gen Ads & Monetization
     implementation(libs.frogo.ext.ads)
 
-    // Advanced RecyclerView
-    implementation(libs.frogo.ui.recyclerview)
-
     // Coil 3 Image Loading
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
@@ -124,7 +118,7 @@ dependencies {
 ```
 
 > [!WARNING]
-> **AdMob Dependency Conflict Prevention:** `frogo-ext-ads` uses the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.4.0`). Ensure legacy `com.google.android.gms:play-services-ads` is excluded to prevent runtime duplicate class errors:
+> **AdMob Dependency Conflict Prevention:** `frogo-ext-ads` uses the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0`). Ensure legacy `com.google.android.gms:play-services-ads` is excluded to prevent runtime duplicate class errors:
 > ```kotlin
 > configurations.configureEach {
 >     exclude(group = "com.google.android.gms", module = "play-services-ads")
@@ -337,6 +331,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.frogobox.ads.ui.compose.FrogoAdComposeActivity
+import com.frogobox.ads.ui.compose.FrogoBannerAdCompose
 import com.frogobox.ads.callback.FrogoAdInterstitialCallback
 import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.google.android.libraries.ads.mobile.sdk.banner.AdView
@@ -364,43 +359,14 @@ class AdScreenActivity : FrogoAdComposeActivity() {
                 Text("Show Interstitial Ad (Hybrid Fallback)")
             }
 
-            // 2. Next-Gen Banner Ad via AndroidView
-            AndroidView(
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                factory = { context ->
-                    AdView(context).apply {
-                        setAdSize(AdSize.BANNER)
-                        adUnitId = "ca-app-pub-3940256099942544/6300978111"
-                        showAdBanner(this)
-                    }
-                }
+            // 2. Next-Gen Banner Ad via FrogoBannerAdCompose (with automatic lifecycle & disposal)
+            FrogoBannerAdCompose(
+                adUnitId = "ca-app-pub-3940256099942544/6300978111",
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
-```
-
----
-
-### 4. `frogo-ui-recyclerview` — High-Performance Recycler Kit
-
-Detailed builder API: [RecyclerView Reference](references/recyclerview-reference.md)
-
-```kotlin
-import com.frogobox.recycler.core.IFrogoViewHolder
-import com.frogobox.recycler.widget.FrogoRecyclerView
-
-binding.frogoRecyclerView
-    .injector<NewsItem>()
-    .addData(newsList)
-    .addCallback(object : IFrogoViewHolder<NewsItem> {
-        override fun setupInitComponent(view: View, data: NewsItem, position: Int) {
-            val itemBinding = ItemNewsBinding.bind(view)
-            itemBinding.tvTitle.text = data.title
-        }
-    })
-    .createLayoutLinearVertical(false)
-    .build()
 ```
 
 ---

@@ -17,9 +17,22 @@ import android.content.Context
 
 interface IFrogoFunc {
 
+    @Deprecated(
+        "Direct access to public external storage is restricted on Android 10+ (API 29+). Use createAppSpecificFolderPictureVideo(context).",
+        ReplaceWith("createAppSpecificFolderPictureVideo(context)")
+    )
     fun createFolderPictureVideo()
 
+    @Deprecated(
+        "Direct access to public external storage is restricted on Android 10+ (API 29+). Use getAppSpecificVideoFilePath(context).",
+        ReplaceWith("getAppSpecificVideoFilePath(context)")
+    )
     fun getVideoFilePath(): String
+
+    fun createAppSpecificFolderPictureVideo(context: Context)
+
+    fun getAppSpecificVideoFilePath(context: Context): String
+
 
     fun randomNumber(start: Int, end: Int): Int
 

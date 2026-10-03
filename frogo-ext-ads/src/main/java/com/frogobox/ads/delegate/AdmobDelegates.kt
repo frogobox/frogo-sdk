@@ -37,6 +37,15 @@ interface AdmobDelegates {
     // Show Banner Ads
     fun showAdBanner(
         mAdView: AdView,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize = AdSize.BANNER,
+        timeoutMilliSecond: Int? = null,
+        keyword: List<String>? = null,
+        callback: FrogoAdmobBannerCallback? = null
+    )
+
+    fun showAdBanner(
+        mAdView: AdView,
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobBannerCallback? = null

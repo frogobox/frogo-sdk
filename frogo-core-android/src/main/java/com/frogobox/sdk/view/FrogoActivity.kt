@@ -72,9 +72,19 @@ abstract class FrogoActivity : AppCompatActivity() {
     // Back Press Handling
     // ---------------------------------------------------------------------------------------------
 
-    /** Called when back button pressed — default behavior is [finish] */
+    /**
+     * Determines whether [setupDoOnBackPressedExt] intercepts back press and invokes [finish].
+     * Defaults to false to allow FragmentManager backstack and child components to manage the back stack.
+     */
+    open var isBackPressFinishEnabled: Boolean = false
+
+    /** Called when back button pressed — default behavior respects fragment backstack, else finishes */
     open fun doOnBackPressedExt() {
-        finish()
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            finish()
+        }
     }
 
     /** Allows manual trigger of back press from child fragments or components */
@@ -84,13 +94,16 @@ abstract class FrogoActivity : AppCompatActivity() {
 
     /** Setup modern back press listener with lifecycle handling */
     open fun setupDoOnBackPressedExt() {
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() = doOnBackPressedExt()
-            }
-        )
+        if (isBackPressFinishEnabled) {
+            onBackPressedDispatcher.addCallback(
+                this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() = doOnBackPressedExt()
+                }
+            )
+        }
     }
+
 
     // ---------------------------------------------------------------------------------------------
     // Enable Edge To Edge

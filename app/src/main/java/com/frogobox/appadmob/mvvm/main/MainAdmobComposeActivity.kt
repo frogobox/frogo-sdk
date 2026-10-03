@@ -45,6 +45,7 @@ import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
 import com.frogobox.ads.core.IFrogoAdConsent
 import com.frogobox.ads.ui.compose.FrogoAdComposeActivity
+import com.frogobox.ads.ui.compose.FrogoBannerAdCompose
 import com.frogobox.appadmob.util.AdHelper
 import com.frogobox.composeui.template.appbar.FrogoTopAppBar
 import com.frogobox.composeui.template.scaffold.FrogoScaffold
@@ -345,27 +346,15 @@ class MainAdmobComposeActivity : FrogoAdComposeActivity(),
                         // Banner Section
                         AdSectionCard(title = "Banner Ad") {
                             Text(
-                                text = "Banner will be shown below in real-time",
+                                text = "Rendered via FrogoBannerAdCompose with automatic lifecycle management",
                                 fontSize = 12.sp,
                                 color = Color.Gray,
                                 modifier = Modifier.padding(bottom = 8.dp)
                             )
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(60.dp)
-                                    .background(Color.Black, RoundedCornerShape(8.dp)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                AndroidView(
-                                    modifier = Modifier.fillMaxSize(),
-                                    factory = { context ->
-                                        AdView(context).apply {
-                                            showAdBanner(this)
-                                        }
-                                    }
-                                )
-                            }
+                            FrogoBannerAdCompose(
+                                adUnitId = getString(R.string.admob_banner),
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
 
                         // Extra space at bottom to avoid overlapping with anything

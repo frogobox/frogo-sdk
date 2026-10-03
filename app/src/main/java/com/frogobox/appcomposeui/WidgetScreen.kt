@@ -48,6 +48,7 @@ import com.frogobox.composeui.fireworks.rememberFrogoFireworksStateCompose
 import com.frogobox.composeui.loadingindicator.FrogoLoadingIndicatorCompose
 import com.frogobox.composeui.widget.FrogoAvatar
 import com.frogobox.composeui.widget.FrogoBadge
+import com.frogobox.composeui.widget.FrogoCoilAvatar
 import com.frogobox.composeui.widget.FrogoButton
 import com.frogobox.composeui.widget.FrogoCheckbox
 import com.frogobox.composeui.widget.FrogoChip
@@ -136,6 +137,13 @@ fun WidgetScreen() {
                 initialText = "A",
                 backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                 contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                size = 40.dp
+            )
+
+            // Coil 3 Network Avatar with fallback
+            FrogoCoilAvatar(
+                imageUrl = "https://raw.githubusercontent.com/frogobox/frogo-sdk/master/docs/image/frogo_logo.png",
+                initialText = "C",
                 size = 40.dp
             )
         }

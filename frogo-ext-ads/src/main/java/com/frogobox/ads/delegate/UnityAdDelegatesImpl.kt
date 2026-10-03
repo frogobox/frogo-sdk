@@ -29,8 +29,12 @@ class UnityAdDelegatesImpl : UnityAdDelegates {
 
     override fun setupUnityAdDelegates(activity: AppCompatActivity) {
         unityAdDelegatesActivity = activity
-        UnityAds.userConsent = true
-        UnityAds.userOptOut = false
+        setUnityAdConsent(userConsent = true, userOptOut = false)
+    }
+
+    override fun setUnityAdConsent(userConsent: Boolean, userOptOut: Boolean) {
+        UnityAds.userConsent = userConsent
+        UnityAds.userOptOut = userOptOut
     }
 
     // ---------------------------------------------------------------------------------------------

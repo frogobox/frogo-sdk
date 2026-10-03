@@ -26,12 +26,13 @@ This Is Latest Release
 
 What's New?? (v3.0.5 → v3.0.10)
 
-    * New Feature: Added Unity Ads SDK support & UnityAdDelegates *
-    * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.3.1) *
+    * New Feature: Added Unity Ads SDK support & UnityAdDelegates (v4.21.0) *
+    * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.5.0) *
+    * New Feature: Added FrogoBannerAdCompose for declarative Jetpack Compose banner ads with lifecycle auto-cleanup *
     * Refactor: Modernized AdMob core, delegates, callbacks & Compose Ad activities *
     * Optimization: Cleaned up redundant R8 keep rules & established modular consumer ProGuard configurations *
-    * Enhancement: Added frogo-ui-recyclerview module with ShimmerDrawable & custom RecyclerView widgets *
-    * Upgrade: Target SDK & Compile SDK to 37 (Android 16) with AGP 9.3.1 & Kotlin 2.4.10 *
+    * Refactor: Decommissioned legacy frogo-ui-recyclerview in favor of Jetpack Compose UI & AndroidX primitives *
+    * Upgrade: Target SDK & Compile SDK to 37 (Android 16) with AGP 9.4.1 & Kotlin 2.4.20 *
     * Testing: Expanded Robolectric unit test coverage for ads, UI widgets & layout managers *
     * Maintenance: Cleaned up legacy ad APIs, code smells & optimized SDK module architecture *
 
@@ -39,7 +40,6 @@ What's New?? (v3.0.5 → v3.0.10)
 
 - **🎨 Frogo Compose UI**: 60+ reusable Jetpack Compose widgets and professional templates.
 - **📢 Frogo Ext Ads**: Simplify AdMob integration with easy-to-use wrappers for Banner, Interstitial, and Native ads.
-- **♻️ Frogo UI RecyclerView**: Advanced RecyclerView helpers for painless list management.
 - **🛠️ Frogo Core**: Essential utilities, base classes, and extensions for Kotlin development.
 - **📱 Multi-Platform**: Available for both Android and Desktop environments.
 
@@ -97,10 +97,12 @@ dependencies {
 
 | Module | Description | Key Features |
 | :--- | :--- | :--- |
-| `frogo-compose-ui` | Modern UI Kit | Widgets, Dialogs, Bottom Sheets, Scaffolds |
-| `frogo-ext-ads` | Monetization Kit | Easy AdMob Integration (Banner, Interstitial, Native) |
-| `frogo-ui-recyclerview` | List Management | Multi-view adapters, simplified ViewHolders |
-| `frogo-core-android` | Core Utilities | Extensions, Base Classes, Lifecycle Helpers |
+| `frogo-core` | Pure Kotlin Toolkit | Cross-platform utilities, string, date & math helpers |
+| `frogo-core-android` | Core Android Toolkit | ViewBinding Base Activities, UDF `FrogoStateViewModel`, 16+ Extensions |
+| `frogo-compose-android` | Compose Architecture | `FrogoComposeActivity`, Edge-to-Edge System UI, UDF `FrogoComposeStateViewModel` |
+| `frogo-compose-ui` | Modern UI Kit | 70+ Widgets, Dialogs, Bottom Sheets, Scaffolds, Coil 3 & Glide Lists |
+| `frogo-ui-base` | XML UI Base | ViewBinding helpers and XML-based view utilities |
+| `frogo-ext-ads` | Monetization Kit | GMA Next-Gen & Unity Ads Delegates, `FrogoBannerAdCompose`, App Open Ads |
 
 ---
 
@@ -133,7 +135,7 @@ Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobo
 
 <!-- SEO Keywords (Hidden) -->
 <!--
-Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, RecyclerView Adapter, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
+Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
 -->
 
 ## 🤖 AI Agent Skill
@@ -157,8 +159,7 @@ skills/frogo-sdk/
 └── references/
     ├── compose-ui-reference.md           # API for 60+ Jetpack Compose widgets
     ├── core-android-reference.md         # Base classes & extension functions
-    ├── ads-reference.md                  # AdMob & Unity Ads integration API
-    └── recyclerview-reference.md         # RecyclerView widgets API
+    └── ads-reference.md                  # AdMob & Unity Ads integration API
 ```
 
 ### How to Install the Skill
@@ -257,36 +258,6 @@ class MainActivity : AppCompatActivity(),
 }
 ```
 
-#### ♻️ RecyclerView
-
-```
-"Create an article list with shimmer loading using FrogoShimmerRecyclerView"
-```
-
-The AI agent will generate code like:
-
-```kotlin
-// Show shimmer while loading
-binding.frogoShimmerRv
-    .defineShimmerView(R.layout.shimmer_item_article)
-    .showShimmer()
-
-// Display data
-viewModel.articles.observe(this) { articles ->
-    binding.frogoShimmerRv.hideShimmer()
-    binding.frogoShimmerRv
-        .injector<Article>()
-        .addData(articles)
-        .addCallback(object : IFrogoViewHolder<Article> {
-            override fun setupInitComponent(view: View, data: Article, position: Int) {
-                view.findViewById<TextView>(R.id.tvTitle).text = data.title
-            }
-        })
-        .createLayoutLinearVertical(false)
-        .build()
-}
-```
-
 #### 🛠️ Core Android Utilities
 
 ```
@@ -323,7 +294,6 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 | [compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md) | Jetpack Compose widgets | 60+ composables |
 | [core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md) | Base classes & extensions | 7 classes, 16 ext files |
 | [ads-reference.md](skills/frogo-sdk/references/ads-reference.md) | AdMob & Unity Ads | 32+ methods |
-| [recyclerview-reference.md](skills/frogo-sdk/references/recyclerview-reference.md) | RecyclerView widgets | 3 widgets |
 
 ---
 

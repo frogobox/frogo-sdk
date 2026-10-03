@@ -25,6 +25,9 @@ import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAd
 import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAdEventCallback
 import com.google.android.libraries.ads.mobile.sdk.rewardedinterstitial.RewardedInterstitialAd
 import com.google.android.libraries.ads.mobile.sdk.rewardedinterstitial.RewardedInterstitialAdEventCallback
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import com.frogobox.ads.model.FrogoAdmobId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,11 +92,14 @@ object FrogoAdmob : IFrogoAdmob,
     @SuppressLint("MissingPermission")
     override fun showAdBanner(
         mAdView: AdView,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
         callback: FrogoAdmobBannerCallback?
     ) {
-        val bannerAdRequestBuilder = BannerAdRequest.Builder("", AdSize.BANNER)
+        val actualAdUnitId = bannerAdUnitId.ifBlank { FrogoAdmobId().testAdmobBanner }
+        val bannerAdRequestBuilder = BannerAdRequest.Builder(actualAdUnitId, mAdsSize)
         keyword?.forEach { bannerAdRequestBuilder.putCustomTargeting("keyword", it) }
 
         mAdView.loadAd(
@@ -134,6 +140,22 @@ object FrogoAdmob : IFrogoAdmob,
     }
 
     @SuppressLint("MissingPermission")
+    override fun showAdBanner(
+        mAdView: AdView,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?
+    ) {
+        showAdBanner(
+            mAdView = mAdView,
+            bannerAdUnitId = FrogoAdmobId().testAdmobBanner,
+            timeoutMilliSecond = timeoutMilliSecond,
+            keyword = keyword,
+            callback = callback
+        )
+    }
+
+    @SuppressLint("MissingPermission")
     override fun showAdBannerContainer(
         context: Context,
         bannerAdUnitId: String,
@@ -145,6 +167,13 @@ object FrogoAdmob : IFrogoAdmob,
     ) {
         if (bannerAdUnitId.isNotBlank()) {
             val mAdView = AdView(context)
+            if (context is LifecycleOwner) {
+                context.lifecycle.addObserver(object : DefaultLifecycleObserver {
+                    override fun onDestroy(owner: LifecycleOwner) {
+                        mAdView.destroy()
+                    }
+                })
+            }
             val bannerAdRequestBuilder = BannerAdRequest.Builder(bannerAdUnitId, mAdsSize)
             keyword?.forEach { bannerAdRequestBuilder.putCustomTargeting("keyword", it) }
 
@@ -461,75 +490,6 @@ object FrogoAdmob : IFrogoAdmob,
                 override fun onAdShowed(tag: String, message: String) { callback.onAdShowed(tag, message) }
             })
         }
-    }
-
-    // ---------------------------------------------------------------------------------------------
-
-    override fun loadRecyclerBannerAds(
-        bannerAdUnitId: String,
-        context: Context,
-        recyclerViewDataList: MutableList<Any>
-    ) {
-        // Load the first banner ad in the items list (subsequent ads will be loaded automatically in sequence).
-        addBannerAds(bannerAdUnitId, context, recyclerViewDataList)
-        loadBannerAd(bannerAdUnitId, recyclerViewDataList, 0)
-    }
-
-    override fun addBannerAds(
-        bannerAdUnitId: String,
-        context: Context,
-        recyclerViewDataList: MutableList<Any>
-    ) {
-        // Loop through the items array and place a new banner ad in every ith position in the items List.
-        var i = 0
-        while (i <= recyclerViewDataList.size) {
-            val adView = AdView(context)
-            recyclerViewDataList.add(i, adView)
-            i += FrogoAdConstant.RECYCLER_VIEW_ITEMS_PER_AD
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    fun loadBannerAd(bannerAdUnitId: String, recyclerViewDataList: MutableList<Any>, index: Int) {
-        if (index >= recyclerViewDataList.size) {
-            return
-        }
-        val item: Any = recyclerViewDataList[index] as? AdView
-            ?: throw ClassCastException(
-                "Expected item at index " + index + " to be a banner ad"
-                        + " ad."
-            )
-        val adView = item as AdView
-        val bannerAdRequest = BannerAdRequest.Builder(bannerAdUnitId, AdSize.BANNER).build()
-        adView.loadAd(bannerAdRequest, object : AdLoadCallback<BannerAd> {
-            override fun onAdLoaded(ad: BannerAd) {
-                // The previous banner ad loaded successfully, call this method again to
-                // load the next ad in the items list.
-                runOnMainThread {
-                    loadBannerAd(
-                        bannerAdUnitId,
-                        recyclerViewDataList,
-                        index + FrogoAdConstant.RECYCLER_VIEW_ITEMS_PER_AD
-                    )
-                }
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                // The previous banner ad failed to load. Call this method again to load the next ad in the items list.
-                runOnMainThread {
-                    loadBannerAd(
-                        bannerAdUnitId,
-                        recyclerViewDataList,
-                        index + FrogoAdConstant.RECYCLER_VIEW_ITEMS_PER_AD
-                    )
-                }
-            }
-        })
-    }
-
-    @SuppressLint("MissingPermission")
-    override fun loadBannerAd(recyclerViewDataList: MutableList<Any>, index: Int) {
-        loadBannerAd("", recyclerViewDataList, index)
     }
 
 }
