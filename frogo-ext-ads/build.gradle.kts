@@ -25,7 +25,7 @@ android {
 
     publishing {
         singleVariant("release") {
-            // withSourcesJar()
+            withSourcesJar()
         }
     }
 
@@ -75,9 +75,9 @@ configurations.configureEach {
 
 dependencies {
     implementation(project(DependencyGradle.FROGO_PATH_SDK))
-    api(libs.ads.google.admob)
-    api(libs.androidx.lifecycle.process)
-    api(libs.ads.unityAd)
+    api(project(DependencyGradle.FROGO_PATH_ADS_CORE))
+    api(project(DependencyGradle.FROGO_PATH_ADS_ADMOB))
+    api(project(DependencyGradle.FROGO_PATH_ADS_UNITY))
 
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))

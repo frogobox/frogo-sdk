@@ -73,7 +73,6 @@ public class FrogoLoadingIndicatorView extends View {
         init(context, attrs, defStyleAttr, R.style.FrogoLoadingIndicatorView);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public FrogoLoadingIndicatorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, R.style.FrogoLoadingIndicatorView);
@@ -377,7 +376,6 @@ public class FrogoLoadingIndicatorView extends View {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void drawableHotspotChanged(float x, float y) {
         super.drawableHotspotChanged(x, y);

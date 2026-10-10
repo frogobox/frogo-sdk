@@ -15,6 +15,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:contentDescription="@string/about_frogobox"
             android:src="@drawable/ic_frogobox" />
 
         <TextView

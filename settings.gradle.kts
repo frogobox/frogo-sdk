@@ -31,5 +31,8 @@ include(
     ":frogo-compose-android",
     ":frogo-compose-ui",
     ":frogo-ui-base",
+    ":frogo-ads-core",
+    ":frogo-ads-admob",
+    ":frogo-ads-unity",
     ":frogo-ext-ads",
 )

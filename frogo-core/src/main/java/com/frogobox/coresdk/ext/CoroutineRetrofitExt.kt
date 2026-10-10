@@ -30,8 +30,9 @@ fun <T> fetchAsFlow(call: suspend () -> Response<T>): Flow<Resource<T?>> = flow 
             val errorMessage = response.message().ifEmpty { "HTTP Error ${response.code()}" }
             emit(Resource.Error(code = response.code(), message = errorMessage))
         }
+    } catch (e: kotlinx.coroutines.CancellationException) {
+        throw e
     } catch (e: Exception) {
-        if (e is kotlin.coroutines.cancellation.CancellationException) throw e
         emit(Resource.Error(code = 500, message = e.localizedMessage ?: "Unknown Error"))
     }
 }.flowOn(Dispatchers.IO)

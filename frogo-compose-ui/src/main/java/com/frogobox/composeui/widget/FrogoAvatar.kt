@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun FrogoAvatar(
+    modifier: Modifier = Modifier,
     painter: Painter? = null,
     initialText: String = "?",
-    modifier: Modifier = Modifier,
     size: Dp = 40.dp,
     backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     contentColor: Color = MaterialTheme.colorScheme.onPrimaryContainer

@@ -1,7 +1,5 @@
 package com.frogobox.composeui.widget
 
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.VerticalDivider
@@ -12,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun FrogoDivider(
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
     thickness: Dp = DividerDefaults.Thickness,
     color: Color = DividerDefaults.color
 ) {
@@ -25,7 +23,7 @@ fun FrogoDivider(
 
 @Composable
 fun FrogoVerticalDivider(
-    modifier: Modifier = Modifier.fillMaxHeight(),
+    modifier: Modifier = Modifier,
     thickness: Dp = DividerDefaults.Thickness,
     color: Color = DividerDefaults.color
 ) {

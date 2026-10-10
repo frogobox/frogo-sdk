@@ -161,15 +161,6 @@ abstract class FrogoComposeActivity : AppCompatActivity() {
     abstract fun SetupCompose()
 
     /**
-     * Idiomatic camelCase alias for [SetupCompose].
-     * Can be overridden by subclasses that prefer standard Kotlin function naming.
-     */
-    @Composable
-    open fun setupCompose() {
-        SetupCompose()
-    }
-
-    /**
      * Override this to provide a lightweight preview-friendly version of [SetupCompose].
      * Call this from a @Preview function in your concrete Activity class.
      *

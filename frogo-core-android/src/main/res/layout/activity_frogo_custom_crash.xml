@@ -11,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/error_occurred"
         android:src="@drawable/ic_frogo_cracked" />
 
     <TextView
@@ -61,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/unknown_exception"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
         </ScrollView>
     </LinearLayout>

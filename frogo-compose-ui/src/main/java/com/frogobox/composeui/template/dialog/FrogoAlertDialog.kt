@@ -14,10 +14,10 @@ fun FrogoAlertDialog(
     onConfirmation: () -> Unit,
     dialogTitle: String,
     dialogText: String,
+    modifier: Modifier = Modifier,
     icon: ImageVector? = null,
     confirmButtonText: String = "OK",
-    dismissButtonText: String = "Cancel",
-    modifier: Modifier = Modifier
+    dismissButtonText: String = "Cancel"
 ) {
     AlertDialog(
         icon = {

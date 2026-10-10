@@ -37,7 +37,7 @@ abstract class FrogoComposeBottomSheetFragment : BottomSheetDialogFragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner))
             setContent {
-                setupCompose()
+                SetupCompose()
             }
         }
     }
@@ -53,10 +53,10 @@ abstract class FrogoComposeBottomSheetFragment : BottomSheetDialogFragment() {
      * Override this in your BottomSheetFragment to provide the root Composable content.
      */
     @Composable
-    abstract fun setupCompose()
+    abstract fun SetupCompose()
 
     /**
-     * Override this to provide a preview-friendly version of [setupCompose].
+     * Override this to provide a preview-friendly version of [SetupCompose].
      * Call this from a @Preview function in your concrete BottomSheetFragment class.
      *
      * Example usage in a subclass:
@@ -64,18 +64,18 @@ abstract class FrogoComposeBottomSheetFragment : BottomSheetDialogFragment() {
      * @Preview
      * @Composable
      * fun PreviewMyBottomSheet() {
-     *     setupComposePreview()
+     *     SetupComposePreview()
      * }
      *
      * @Composable
-     * override fun setupComposePreview() {
+     * override fun SetupComposePreview() {
      *     MyBottomSheetContent() // your composable without Fragment/ViewModel deps
      * }
      * ```
      */
     @Composable
-    open fun setupComposePreview() {
-        setupCompose()
+    open fun SetupComposePreview() {
+        SetupCompose()
     }
 
 }
@@ -119,7 +119,7 @@ private fun FrogoComposeBottomSheetFragmentPreview() {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Override setupCompose() to build your bottom sheet",
+                text = "Override SetupCompose() to build your bottom sheet",
                 fontSize = 13.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 32.dp)

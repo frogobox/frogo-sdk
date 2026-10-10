@@ -35,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.frogobox.BuildConfig
 import com.frogobox.FrogoApp
 import com.frogobox.R
@@ -53,7 +52,6 @@ import com.frogobox.composeui.widget.FrogoSpacerMediumHeight
 import com.frogobox.composeui.widget.FrogoSpacerSmallHeight
 import com.frogobox.sdk.ext.showLogDebug
 import com.frogobox.sdk.ext.showToast
-import com.google.android.libraries.ads.mobile.sdk.banner.AdView
 import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardItem
 import com.google.android.ump.FormError
 

@@ -45,8 +45,14 @@ abstract class AdComposeActivity : AppCompatActivity(),
         val TAG: String = AdComposeActivity::class.java.simpleName
     }
 
-    open fun setupMonetized() {
+    open fun setupDelegates() {
         setupAdmobDelegates(this)
+        setupUnityAdDelegates(this)
+        setupFrogoAdDelegates(this)
+    }
+
+    open fun setupMonetized() {
+        setupDelegates()
         lifecycleScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             setupAdmobApp()

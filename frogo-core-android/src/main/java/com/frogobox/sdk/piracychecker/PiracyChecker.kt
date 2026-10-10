@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import android.provider.Settings
 import android.util.Log
 import androidx.annotation.ColorRes
@@ -439,17 +440,17 @@ class PiracyChecker(
         if (possibleSuccess) {
             if (enableDebugCheck && (context?.isDebug() == true)) {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, false) }
                 doNotAllowCallback?.doNotAllow(PiracyCheckerError.USING_DEBUG_APP, null)
             } else if (enableEmulatorCheck && isInEmulator(enableDeepEmulatorCheck)) {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, false) }
                 doNotAllowCallback?.doNotAllow(PiracyCheckerError.USING_APP_IN_EMULATOR, null)
             } else if (app != null) {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, false) }
                 if (blockUnauthorized && app.type == AppType.PIRATE)
-                    preferences?.edit()?.putBoolean(preferenceBlockUnauthorized, true)?.apply()
+                    preferences?.edit { putBoolean(preferenceBlockUnauthorized, true) }
                 doNotAllowCallback?.doNotAllow(
                     if (app.type == AppType.STORE)
                         PiracyCheckerError.THIRD_PARTY_STORE_INSTALLED
@@ -458,15 +459,15 @@ class PiracyChecker(
                 )
             } else {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, true)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, true) }
                 allowCallback?.allow()
             }
         } else {
             if (app != null) {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, false) }
                 if (blockUnauthorized && app.type == AppType.PIRATE)
-                    preferences?.edit()?.putBoolean(preferenceBlockUnauthorized, true)?.apply()
+                    preferences?.edit { putBoolean(preferenceBlockUnauthorized, true) }
                 doNotAllowCallback?.doNotAllow(
                     if (app.type == AppType.STORE)
                         PiracyCheckerError.THIRD_PARTY_STORE_INSTALLED
@@ -475,7 +476,7 @@ class PiracyChecker(
                 )
             } else {
                 if (saveToSharedPreferences)
-                    preferences?.edit()?.putBoolean(preferenceSaveResult, false)?.apply()
+                    preferences?.edit { putBoolean(preferenceSaveResult, false) }
                 doNotAllowCallback?.doNotAllow(PiracyCheckerError.NOT_LICENSED, null)
             }
         }

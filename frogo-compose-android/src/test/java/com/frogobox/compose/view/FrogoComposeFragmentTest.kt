@@ -23,7 +23,7 @@ class FrogoComposeFragmentTest {
         }
 
         @Composable
-        override fun setupCompose() {
+        override fun SetupCompose() {
             setupComposeCalled = true
             Text(text = "Hello Test Fragment Compose")
         }

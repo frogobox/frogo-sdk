@@ -24,7 +24,7 @@ android {
 
     publishing {
         singleVariant("release") {
-            // withSourcesJar()
+            withSourcesJar()
         }
     }
 

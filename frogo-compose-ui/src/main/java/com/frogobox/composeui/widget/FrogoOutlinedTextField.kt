@@ -1,6 +1,5 @@
 package com.frogobox.composeui.widget
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -14,7 +13,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 fun FrogoOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
     label: String? = null,
     placeholder: String? = null,
     leadingIcon: ImageVector? = null,

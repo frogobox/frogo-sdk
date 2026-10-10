@@ -20,7 +20,7 @@ import com.frogobox.compose.view.FrogoComposeBottomSheetFragment
 class SampleBottomSheetFragment : FrogoComposeBottomSheetFragment() {
 
     @Composable
-    override fun setupCompose() {
+    override fun SetupCompose() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

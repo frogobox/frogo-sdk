@@ -15,8 +15,8 @@ import androidx.compose.ui.layout.ContentScale
 fun FrogoImageDialog(
     onDismissRequest: () -> Unit,
     imagePainter: Painter,
-    dialogTitle: String? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dialogTitle: String? = null
 ) {
     AlertDialog(
         onDismissRequest = { onDismissRequest() },

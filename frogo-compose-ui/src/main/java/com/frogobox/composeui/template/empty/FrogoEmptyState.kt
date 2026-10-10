@@ -3,7 +3,6 @@ package com.frogobox.composeui.template.empty
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -20,7 +19,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun FrogoEmptyState(
     title: String,
-    modifier: Modifier = Modifier.fillMaxSize(),
+    modifier: Modifier = Modifier,
     subtitle: String? = null,
     icon: ImageVector? = null,
     actionButtonText: String? = null,

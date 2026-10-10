@@ -323,8 +323,8 @@ fun FrogoRvGridType6(
 @Composable
 fun FrogoRvGridType7(
     image: Painter,
-    contentDescription: String = "",
     modifier: Modifier = Modifier,
+    contentDescription: String = "",
     onClick: (() -> Unit)? = null
 ) {
     FrogoGridCardContainer(onClick = onClick, modifier = modifier) {
