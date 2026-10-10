@@ -1,7 +1,7 @@
-# Frogo Core Android — Full API Reference (v3.0.8)
+# Frogo Core Android — Full API Reference (v3.0.10)
 
 Package: `com.frogobox.sdk`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.8`
+Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.10`
 
 ---
 
@@ -51,16 +51,21 @@ class MainActivity : FrogoBindActivity<ActivityMainBinding>() {
 }
 ```
 
+### Modern Back Press Handling (`FrogoActivity`)
+- `isBackPressFinishEnabled`: Defaults to `false` so child fragments or FragmentManager can handle back stack transitions naturally.
+- `doOnBackPressedExt()`: Pops `supportFragmentManager` backstack when entries exist, otherwise calls `finish()`.
+
 ---
 
 ## 3. UDF / MVI State ViewModel (`FrogoStateViewModel`)
 
-Symmetrical to `FrogoComposeStateViewModel`, designed for XML View architectures:
+Symmetrical to `FrogoComposeStateViewModel`, designed for XML View architectures.
+Backed by `StateFlow` for persistent UI state and a buffered `Channel` (`receiveAsFlow()`) for single-shot UI effects (navigation, toasts, snackbars):
 
 ```kotlin
 package com.example.app.ui
 
-import com.frogobox.sdk.viewmodel.FrogoStateViewModel
+import com.frogobox.sdk.view.FrogoStateViewModel
 
 data class UserListState(val isLoading: Boolean = false, val users: List<String> = emptyList())
 sealed interface UserListEffect {
@@ -80,7 +85,32 @@ class UserListViewModel : FrogoStateViewModel<UserListState, UserListEffect>(Use
 
 ---
 
-## 4. Extension Functions (`com.frogobox.sdk.ext.*`)
+## 4. Scoped Storage File Helpers (`FrogoFunc`)
+
+Modern Scoped Storage (API 29+) compatible helpers:
+```kotlin
+import com.frogobox.sdk.util.FrogoFunc
+
+// Create app-specific pictures/video directory without WRITE_EXTERNAL_STORAGE permission
+FrogoFunc.createAppSpecificFolderPictureVideo(context)
+
+// Generate app-specific video file path under getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+val videoPath = FrogoFunc.getAppSpecificVideoFilePath(context)
+```
+
+---
+
+## 5. Custom Views
+
+### `ZoomImageView` (`com.frogobox.sdk.widget.zoomimageview`)
+Pinch-to-zoom and pan ImageView with modern matrix property:
+```kotlin
+binding.zoomImageView.zoomMatrix = matrix // Replaces typo property 'matri'
+```
+
+---
+
+## 6. Extension Functions (`com.frogobox.sdk.ext.*`)
 
 Frogo Core Android provides 16 extension categories:
 

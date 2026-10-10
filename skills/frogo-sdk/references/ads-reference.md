@@ -1,7 +1,7 @@
-# Frogo Ext Ads — Full API Reference (v3.0.8)
+# Frogo Ext Ads — Full API Reference (v3.0.10)
 
 Package: `com.frogobox.ads`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.8`
+Artifact: `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.10`
 
 > [!IMPORTANT]
 > **Next-Gen Mobile Ads SDK Architecture**:
@@ -189,7 +189,31 @@ Pre-built Activities combining Jetpack Compose with Ad delegates:
 | `AdmobComposeActivity` | `AppCompatActivity` | Non-Frogo base with AdMob delegates |
 | `UnityAdComposeActivity` | `AppCompatActivity` | Non-Frogo base with Unity Ads delegates |
 
-### Example: Compose Screen with Ads
+---
+
+## 6. FrogoBannerAdCompose (Jetpack Compose Banner)
+
+Location: `com.frogobox.ads.ui.compose.FrogoBannerAdCompose`
+
+A modern, declarative Jetpack Compose wrapper for Google Mobile Ads Next-Gen Banner Ads ([AdView]):
+- **Automatic Lifecycle Management:** Calls `adView.destroy()` on `DisposableEffect.onDispose` when leaving composition, preventing memory leaks.
+- **Preview Support:** Renders a surface placeholder in `@Preview` and `LocalInspectionMode`.
+- **Targeting & Customization:** Supports custom `AdSize`, timeout, keyword targeting, and callbacks.
+
+### Composable Signature:
+```kotlin
+@Composable
+fun FrogoBannerAdCompose(
+    adUnitId: String,
+    modifier: Modifier = Modifier,
+    adSize: AdSize = AdSize.BANNER,
+    timeoutMilliSecond: Int? = null,
+    keyword: List<String>? = null,
+    callback: FrogoAdmobBannerCallback? = null
+)
+```
+
+### Example: Compose Screen with Ads & Banner
 ```kotlin
 package com.example.app.ui
 
@@ -199,10 +223,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.frogobox.ads.ui.compose.FrogoAdmobComposeActivity
+import com.frogobox.ads.ui.compose.FrogoBannerAdCompose
 import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
-import com.google.android.libraries.ads.mobile.sdk.banner.AdView
 
 class MyAdmobScreenActivity : FrogoAdmobComposeActivity() {
 
@@ -217,16 +240,11 @@ class MyAdmobScreenActivity : FrogoAdmobComposeActivity() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Banner Ad in Compose
-            AndroidView(
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                factory = { context ->
-                    AdView(context).apply {
-                        setAdSize(AdSize.BANNER)
-                        adUnitId = "ca-app-pub-3940256099942544/6300978111"
-                        showAdBanner(this)
-                    }
-                }
+            // Modern Banner Ad in Compose with auto-lifecycle disposal
+            FrogoBannerAdCompose(
+                adUnitId = "ca-app-pub-3940256099942544/6300978111",
+                modifier = Modifier.fillMaxWidth(),
+                adSize = AdSize.BANNER
             )
         }
     }

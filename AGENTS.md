@@ -13,13 +13,12 @@ Frogo SDK is a production-grade multi-module Android and Kotlin library suite de
 | `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin utilities (platform-agnostic) | Kotlin 2.4.20 |
 | `frogo-core-android` | `com.frogobox.sdk` | Base Activity/Fragment/BottomSheet, `FrogoStateViewModel` (UDF/MVI), 16+ extension files | Android SDK 37, ViewBinding |
 | `frogo-compose-android` | `com.frogobox.compose` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) | Activity Compose, Lifecycle Compose |
-| `frogo-compose-ui` | `com.frogobox.composeui` | 70+ ready-to-use Compose widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.2, Glide Compose |
+| `frogo-compose-ui` | `com.frogobox.composeui` | 70+ ready-to-use Compose widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.3, Glide Compose |
 | `frogo-ui-base` | `com.frogobox.ui` | XML-based UI utilities and view helpers | Android Views |
-| `frogo-ui-recyclerview` | `com.frogobox.recycler` | High-performance RecyclerView with `injector()` builder, shimmer & progress states | RecyclerView 1.4.0 |
-| `frogo-ext-ads` | `com.frogobox.ads` | Google Mobile Ads SDK (Next-Gen 1.4.0), Unity Ads (4.20.0), App Open Ads, Compose Ad Activities | Next-Gen Ads Mobile SDK, Unity Ads |
+| `frogo-ext-ads` | `com.frogobox.ads` | Google Mobile Ads SDK (Next-Gen 1.5.0), Unity Ads (4.21.0), App Open Ads, Compose Ad Activities, FrogoBannerAdCompose | Next-Gen Ads Mobile SDK, Unity Ads |
 | `app` | `com.frogobox.app` | Showcase application demonstrating all modules | Hilt, Compose, Navigation |
 
-**Current Version:** `3.0.8` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
+**Current Version:** `3.0.10` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
 
 ---
 
@@ -38,7 +37,6 @@ When generating code or resolving issues for specific domains, consult the refer
 1. **Google Mobile Ads Next-Gen & Unity Ads:** [skills/frogo-sdk/references/ads-reference.md](skills/frogo-sdk/references/ads-reference.md)
 2. **Jetpack Compose UI (Material 3) & Coil 3:** [skills/frogo-sdk/references/compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md)
 3. **Core Android Utilities, Extensions & UDF ViewModel:** [skills/frogo-sdk/references/core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md)
-4. **Advanced RecyclerView & Shimmer Builders:** [skills/frogo-sdk/references/recyclerview-reference.md](skills/frogo-sdk/references/recyclerview-reference.md)
 
 ---
 

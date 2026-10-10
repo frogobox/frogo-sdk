@@ -17,7 +17,6 @@ abstract class FrogoComposeViewModel : ViewModel() {
     open fun onClearDisposable() {}
 
     override fun onCleared() {
-        super.onCleared()
         onClearDisposable()
     }
 

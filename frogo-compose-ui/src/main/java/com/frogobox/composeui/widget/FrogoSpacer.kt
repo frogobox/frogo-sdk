@@ -17,7 +17,14 @@ fun FrogoSpacer(
 
 @Composable
 fun FrogoSpacerHeight(
-    height: Dp = 16.dp,
+    modifier: Modifier = Modifier
+) {
+    Spacer(modifier = modifier.height(16.dp))
+}
+
+@Composable
+fun FrogoSpacerHeight(
+    height: Dp,
     modifier: Modifier = Modifier
 ) {
     Spacer(modifier = modifier.height(height))
@@ -25,7 +32,14 @@ fun FrogoSpacerHeight(
 
 @Composable
 fun FrogoSpacerWidth(
-    width: Dp = 16.dp,
+    modifier: Modifier = Modifier
+) {
+    Spacer(modifier = modifier.width(16.dp))
+}
+
+@Composable
+fun FrogoSpacerWidth(
+    width: Dp,
     modifier: Modifier = Modifier
 ) {
     Spacer(modifier = modifier.width(width))

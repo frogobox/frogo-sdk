@@ -17,12 +17,23 @@ class ZoomImageView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : AppCompatImageView(context, attrs) {
 
-    var matri: Matrix? = null
+    var zoomMatrix: Matrix
         get() = currentMatrix
         set(value) {
-            field = value
-            currentMatrix = value ?: Matrix()
+            currentMatrix = value
+            imageMatrix = currentMatrix
+            invalidate()
         }
+
+    @Deprecated("Typo in property name. Use zoomMatrix instead.", ReplaceWith("zoomMatrix"))
+    var matri: Matrix?
+        get() = currentMatrix
+        set(value) {
+            currentMatrix = value ?: Matrix()
+            imageMatrix = currentMatrix
+            invalidate()
+        }
+
 
     private var currentMatrix = Matrix()
     private var mode = NONE

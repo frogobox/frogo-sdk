@@ -54,7 +54,6 @@ public class FrogoShimmerFrameLayout extends FrameLayout {
         init(context, attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public FrogoShimmerFrameLayout(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -70,11 +69,11 @@ public class FrogoShimmerFrameLayout extends FrameLayout {
             return;
         }
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShimmerFrameLayout, 0, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FrogoShimmerFrameLayout, 0, 0);
         try {
             FrogoShimmer.Builder shimmerBuilder =
-                    a.hasValue(R.styleable.ShimmerFrameLayout_shimmer_colored)
-                            && a.getBoolean(R.styleable.ShimmerFrameLayout_shimmer_colored, false)
+                    a.hasValue(R.styleable.FrogoShimmerFrameLayout_shimmer_colored)
+                            && a.getBoolean(R.styleable.FrogoShimmerFrameLayout_shimmer_colored, false)
                             ? new FrogoShimmer.ColorHighlightBuilder()
                             : new FrogoShimmer.AlphaHighlightBuilder();
             setShimmer(shimmerBuilder.consumeAttributes(a).build());

@@ -50,4 +50,28 @@
         <attr name="shimmer_tilt" format="float" />
     </declare-styleable>
 
+    <declare-styleable name="FrogoShimmerFrameLayout">
+        <attr name="shimmer_clip_to_children" />
+        <attr name="shimmer_colored" />
+        <attr name="shimmer_base_color" />
+        <attr name="shimmer_highlight_color" />
+        <attr name="shimmer_base_alpha" />
+        <attr name="shimmer_highlight_alpha" />
+        <attr name="shimmer_auto_start" />
+        <attr name="shimmer_duration" />
+        <attr name="shimmer_repeat_count" />
+        <attr name="shimmer_repeat_delay" />
+        <attr name="shimmer_repeat_mode" />
+        <attr name="shimmer_start_delay" />
+        <attr name="shimmer_direction" />
+        <attr name="shimmer_dropoff" />
+        <attr name="shimmer_fixed_width" />
+        <attr name="shimmer_fixed_height" />
+        <attr name="shimmer_intensity" />
+        <attr name="shimmer_width_ratio" />
+        <attr name="shimmer_height_ratio" />
+        <attr name="shimmer_shape" />
+        <attr name="shimmer_tilt" />
+    </declare-styleable>
+
 </resources>

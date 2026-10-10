@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
+                android:contentDescription="@string/close_app"
                 android:src="@drawable/ic_cracked"
                 app:tint="@android:color/white" />
         </LinearLayout>
@@ -45,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
+        android:contentDescription="@null"
         android:src="@drawable/ic_frogobox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
