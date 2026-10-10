@@ -2,6 +2,7 @@ package com.frogobox.ads.ui.compose
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -44,8 +45,14 @@ abstract class AdComposeActivity : AppCompatActivity(),
         val TAG: String = AdComposeActivity::class.java.simpleName
     }
 
-    open fun setupMonetized() {
+    open fun setupDelegates() {
         setupAdmobDelegates(this)
+        setupUnityAdDelegates(this)
+        setupFrogoAdDelegates(this)
+    }
+
+    open fun setupMonetized() {
+        setupDelegates()
         lifecycleScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             setupAdmobApp()
@@ -53,6 +60,7 @@ abstract class AdComposeActivity : AppCompatActivity(),
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             SetupCompose()

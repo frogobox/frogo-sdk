@@ -84,7 +84,18 @@ fun Context.hasWriteExtStoragePermission(): Boolean {
     ) == PackageManager.PERMISSION_GRANTED
 }
 
+fun Context.hasNotificationPermission(): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+    return true
+}
+
 // -------------------------------------------------------------------------------------------------
+
 
 fun Context.usingChuck(): Interceptor {
     return ChuckerInterceptor.Builder(this)
@@ -168,14 +179,26 @@ fun Context.getColorExt(@ColorRes resId: Int): Int {
     return ContextCompat.getColor(this, resId)
 }
 
+@Deprecated(
+    "Using resources.getIdentifier uses reflection and breaks R8 resource shrinking. Use direct R.string / R.* references instead.",
+    level = DeprecationLevel.WARNING
+)
 fun Context.getResStringExt(type: String, res: String): Int {
     return resources.getIdentifier(res, type, packageName)
 }
 
+@Deprecated(
+    "Using resources.getIdentifier uses reflection and breaks R8 resource shrinking. Use direct R.drawable references instead.",
+    level = DeprecationLevel.WARNING
+)
 fun Context.getDrawableStringExt(resName: String): Int {
     return resources.getIdentifier(resName, "drawable", packageName)
 }
 
+@Deprecated(
+    "Using resources.getIdentifier uses reflection and breaks R8 resource shrinking. Use direct R.raw references instead.",
+    level = DeprecationLevel.WARNING
+)
 fun Context.getRawStringExt(resName: String): Int {
     return resources.getIdentifier(resName, "raw", packageName)
 }

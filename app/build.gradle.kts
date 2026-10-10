@@ -143,8 +143,6 @@ dependencies {
 
     implementation(project(DependencyGradle.FROGO_PATH_UI))
 
-    implementation(project(DependencyGradle.FROGO_PATH_RECYCLER_VIEW))
-
     implementation(project(DependencyGradle.FROGO_PATH_EXT_ADS))
 
     implementation(libs.androidx.work.ktx)

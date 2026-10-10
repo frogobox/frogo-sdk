@@ -25,6 +25,7 @@ object FrogoApiClient {
     fun clientWithInterceptor(
         timeout: Long? = 30L,
         chuckInterceptor: Interceptor? = null,
+        interceptors: List<Interceptor> = emptyList(),
         isDebug: Boolean = false
     ): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -33,14 +34,18 @@ object FrogoApiClient {
 
         val client = OkHttpClient.Builder()
             .readTimeout(timeout ?: 30L, TimeUnit.SECONDS)
+            .writeTimeout(timeout ?: 30L, TimeUnit.SECONDS)
             .connectTimeout(timeout ?: 30L, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
 
-        return if (chuckInterceptor != null) {
-            client.addInterceptor(chuckInterceptor).build()
-        } else {
-            client.build()
+        if (chuckInterceptor != null) {
+            client.addInterceptor(chuckInterceptor)
         }
+        for (interceptor in interceptors) {
+            client.addInterceptor(interceptor)
+        }
+
+        return client.build()
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -50,8 +55,14 @@ object FrogoApiClient {
         isDebug: Boolean = false,
         timeout: Long? = 30L,
         chuckInterceptor: Interceptor? = null,
+        interceptors: List<Interceptor> = emptyList(),
     ): T {
-        val okHttpClient = clientWithInterceptor(timeout, chuckInterceptor, isDebug)
+        val okHttpClient = clientWithInterceptor(
+            timeout = timeout,
+            chuckInterceptor = chuckInterceptor,
+            interceptors = interceptors,
+            isDebug = isDebug
+        )
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
@@ -61,20 +72,3 @@ object FrogoApiClient {
     }
 
 }
-
-/**
-
-interface SampleApiService {
-
-    /**
-     *     @GET(URL_SEARCH_MEAL)
-     *     suspend fun searchMeal(
-     *         @Path(PATH_API_KEY) apiKey: String,
-     *         @Query(QUERY_NAME) nameMeal: String,
-     *     ): Response<MealResponse<MealModel>>
-     */
-
-}
-
- *
- */

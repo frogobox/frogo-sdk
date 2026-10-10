@@ -99,6 +99,14 @@ class FrogoWidgetTest {
                     title = "Empty State",
                     subtitle = "No data here"
                 )
+                FrogoAvatar(
+                    initialText = "T"
+                )
+                FrogoCoilAvatar(
+                    imageUrl = "",
+                    initialText = "C"
+                )
+                com.frogobox.composeui.loadingindicator.FrogoLoadingIndicatorCompose()
                 FrogoSpacerHeight()
             }
         }

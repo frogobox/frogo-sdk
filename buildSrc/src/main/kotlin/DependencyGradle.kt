@@ -18,8 +18,10 @@ object DependencyGradle {
     const val FROGO_PATH_COMPOSE = ":${ProjectSetting.MODULE_NAME_COMPOSE}"
     const val FROGO_PATH_COMPOSE_UI = ":${ProjectSetting.MODULE_NAME_COMPOSE_UI}"
     const val FROGO_PATH_UI = ":${ProjectSetting.MODULE_NAME_CORE_UI}"
-    const val FROGO_PATH_RECYCLER_VIEW = ":${ProjectSetting.MODULE_NAME_UI_RECYCLER}"
     const val FROGO_PATH_EXT_ADS = ":${ProjectSetting.MODULE_NAME_AD}"
+    const val FROGO_PATH_ADS_CORE = ":${ProjectSetting.MODULE_NAME_ADS_CORE}"
+    const val FROGO_PATH_ADS_ADMOB = ":${ProjectSetting.MODULE_NAME_ADS_ADMOB}"
+    const val FROGO_PATH_ADS_UNITY = ":${ProjectSetting.MODULE_NAME_ADS_UNITY}"
 
     @Deprecated("Use FROGO_PATH_EXT_ADS instead", ReplaceWith("FROGO_PATH_EXT_ADS"))
     const val MODULE_LIB_FROGO_AD = FROGO_PATH_EXT_ADS

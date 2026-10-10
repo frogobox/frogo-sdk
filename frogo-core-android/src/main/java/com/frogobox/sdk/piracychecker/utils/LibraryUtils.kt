@@ -599,7 +599,7 @@ private fun Context.isIntentAvailable(intent: Intent?): Boolean {
 
 private fun Context.hasPermissions(): Boolean {
     return try {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN || !shouldAskPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (!shouldAskPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             true
         } else {
             val activity = this as? Activity
@@ -610,14 +610,9 @@ private fun Context.hasPermissions(): Boolean {
     }
 }
 
-private fun shouldAskPermission(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-
 private fun Context.shouldAskPermission(permission: String): Boolean {
-    if (shouldAskPermission()) {
-        val permissionResult = ActivityCompat.checkSelfPermission(this, permission)
-        return permissionResult != PackageManager.PERMISSION_GRANTED
-    }
-    return false
+    val permissionResult = ActivityCompat.checkSelfPermission(this, permission)
+    return permissionResult != PackageManager.PERMISSION_GRANTED
 }
 
 private fun String.equalsIgnoreCase(other: String) = this.equals(other, true)

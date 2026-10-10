@@ -19,7 +19,7 @@ abstract class FrogoComposeFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner))
             setContent {
-                setupCompose()
+                SetupCompose()
             }
         }
     }
@@ -35,10 +35,10 @@ abstract class FrogoComposeFragment : Fragment() {
      * Override this in your Fragment to provide the root Composable content.
      */
     @Composable
-    abstract fun setupCompose()
+    abstract fun SetupCompose()
 
     /**
-     * Override this to provide a preview-friendly version of [setupCompose].
+     * Override this to provide a preview-friendly version of [SetupCompose].
      * Call this from a @Preview function in your concrete Fragment class.
      *
      * Example usage in a subclass:
@@ -46,18 +46,18 @@ abstract class FrogoComposeFragment : Fragment() {
      * @Preview
      * @Composable
      * fun PreviewMyFragment() {
-     *     setupComposePreview()
+     *     SetupComposePreview()
      * }
      *
      * @Composable
-     * override fun setupComposePreview() {
+     * override fun SetupComposePreview() {
      *     MyFragmentContent() // your composable without Fragment/ViewModel deps
      * }
      * ```
      */
     @Composable
-    open fun setupComposePreview() {
-        setupCompose()
+    open fun SetupComposePreview() {
+        SetupCompose()
     }
 
 }

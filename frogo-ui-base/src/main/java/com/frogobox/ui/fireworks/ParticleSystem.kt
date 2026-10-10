@@ -1,6 +1,5 @@
 package com.frogobox.ui.fireworks
 
-import android.R
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.app.Activity
@@ -135,7 +134,7 @@ class ParticleSystem private constructor(
         maxParticles,
         ContextCompat.getDrawable(a, drawableRedId)!!,
         timeToLive,
-        R.id.content) {
+        android.R.id.content) {
     }
 
     /**
@@ -178,7 +177,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         drawable: Drawable,
         timeToLive: Long,
-        parentViewId: Int = R.id.content,
+        parentViewId: Int = android.R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, drawable, timeToLive) {
     }
 
@@ -208,7 +207,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         bitmap: Bitmap?,
         timeToLive: Long,
-        parentViewId: Int = R.id.content,
+        parentViewId: Int = android.R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
         for (i in 0 until mMaxParticles) {
             mParticles.add(Particle(bitmap))
@@ -237,7 +236,7 @@ class ParticleSystem private constructor(
         maxParticles: Int,
         animation: AnimationDrawable?,
         timeToLive: Long,
-        parentViewId: Int = R.id.content,
+        parentViewId: Int = android.R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
         // Create the particles
         for (i in 0 until mMaxParticles) {

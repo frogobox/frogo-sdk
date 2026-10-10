@@ -1,10 +1,10 @@
-# Frogo Compose UI — Full API Reference (v3.0.8)
+# Frogo Compose UI — Full API Reference (v3.0.10)
 
 Package: `com.frogobox.composeui`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.8`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.10`  
 Dependencies:
 - `androidx.compose:compose-bom:2026.09.00` (Material Design 3)
-- `io.coil-kt.coil3:coil-compose:3.6.2` & `io.coil-kt.coil3:coil-network-okhttp:3.6.2`
+- `io.coil-kt.coil3:coil-compose:3.6.3` & `io.coil-kt.coil3:coil-network-okhttp:3.6.3`
 - `com.github.bumptech.glide:compose:1.0.0-beta10`
 
 ---
@@ -81,7 +81,8 @@ import com.frogobox.composeui.widget.switch.FrogoSwitch
 import com.frogobox.composeui.widget.chip.FrogoChip
 import com.frogobox.composeui.widget.chip.FrogoFilterChip
 import com.frogobox.composeui.widget.badge.FrogoBadge
-import com.frogobox.composeui.widget.avatar.FrogoAvatar
+import com.frogobox.composeui.widget.FrogoAvatar
+import com.frogobox.composeui.widget.FrogoCoilAvatar
 import com.frogobox.composeui.widget.divider.FrogoDivider
 import com.frogobox.composeui.widget.spacer.FrogoSpacer
 import com.frogobox.composeui.widget.icon.FrogoIcon
@@ -91,6 +92,22 @@ import com.frogobox.composeui.widget.fab.FrogoFloatingActionButton
 import com.frogobox.composeui.widget.progress.FrogoCircularProgress
 import com.frogobox.composeui.widget.progress.FrogoLinearProgress
 import com.frogobox.composeui.widget.searchbar.FrogoSearchBar
+```
+
+### FrogoAvatar & FrogoCoilAvatar
+```kotlin
+// Text Initials Avatar
+FrogoAvatar(
+    initialText = "Faisal Amir",
+    size = 40.dp
+)
+
+// Network Image Avatar (Coil 3) with automatic fallback to initials
+FrogoCoilAvatar(
+    imageUrl = "https://example.com/avatar.jpg",
+    initialText = "Faisal",
+    size = 48.dp
+)
 ```
 
 ---

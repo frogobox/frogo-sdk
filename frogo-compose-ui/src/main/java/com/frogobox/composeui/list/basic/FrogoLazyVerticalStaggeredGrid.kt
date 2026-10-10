@@ -2,7 +2,6 @@ package com.frogobox.composeui.list.basic
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
@@ -14,7 +13,7 @@ import androidx.compose.ui.unit.dp
 fun <T> FrogoLazyVerticalStaggeredGrid(
     data: List<T>,
     spanCount: Int,
-    modifier: Modifier = Modifier.fillMaxSize(),
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     verticalItemSpacing: androidx.compose.ui.unit.Dp = 0.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,

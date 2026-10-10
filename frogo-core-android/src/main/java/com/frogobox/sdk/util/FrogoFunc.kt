@@ -29,6 +29,10 @@ object FrogoFunc : IFrogoFunc {
     fun generateVideoFileName(): String = "$BASE_FILE_NAME${System.currentTimeMillis()}.mp4"
 
     
+    @Deprecated(
+        "Direct access to public external storage is restricted on Android 10+ (API 29+). Use createAppSpecificFolderPictureVideo(context).",
+        ReplaceWith("createAppSpecificFolderPictureVideo(context)")
+    )
     override fun createFolderPictureVideo() {
         val videoFolder = Environment.getExternalStoragePublicDirectory(DIR_NAME)
         if (!videoFolder.exists()) {
@@ -36,7 +40,10 @@ object FrogoFunc : IFrogoFunc {
         }
     }
 
-    
+    @Deprecated(
+        "Direct access to public external storage is restricted on Android 10+ (API 29+). Use getAppSpecificVideoFilePath(context).",
+        ReplaceWith("getAppSpecificVideoFilePath(context)")
+    )
     override fun getVideoFilePath(): String {
         val fileName = generateVideoFileName()
         val dir = Environment.getExternalStoragePublicDirectory(DIR_NAME)
@@ -46,6 +53,23 @@ object FrogoFunc : IFrogoFunc {
             "${dir.absoluteFile}/$fileName"
         }
     }
+
+    override fun createAppSpecificFolderPictureVideo(context: Context) {
+        val videoFolder = java.io.File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), BASE_DIR_NAME)
+        if (!videoFolder.exists()) {
+            videoFolder.mkdirs()
+        }
+    }
+
+    override fun getAppSpecificVideoFilePath(context: Context): String {
+        val fileName = generateVideoFileName()
+        val dir = java.io.File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), BASE_DIR_NAME)
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+        return "${dir.absolutePath}/$fileName"
+    }
+
 
     override fun randomNumber(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.frogobox.composeui.animation.FrogoAnimation
 import com.frogobox.composeui.animation.core.Attention
 import com.frogobox.composeui.fireworks.ParticleSystem
@@ -36,7 +37,7 @@ fun View.setEmitFireWorks(activity: Activity, @DrawableRes drawableRes: Int) {
 }
 
 fun View.setEmitFireWorks(viewGroup: ViewGroup, @DrawableRes drawableRes: Int) {
-    viewGroup.context.getDrawable(drawableRes)?.let {
+    ContextCompat.getDrawable(viewGroup.context, drawableRes)?.let {
         ParticleSystem(
             viewGroup,
             50,

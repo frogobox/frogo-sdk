@@ -25,9 +25,9 @@ import com.bumptech.glide.request.target.Target
 fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
     val isValidString = (uri as? String)?.isNotBlank() ?: true
     if (uri != null && isValidString) {
-        val request = Glide.with(context).load(uri)
+        var request = Glide.with(context).load(uri)
         if (placeHolder != null) {
-            request.placeholder(placeHolder).error(placeHolder)
+            request = request.placeholder(placeHolder).error(placeHolder)
         }
         request.into(this)
     } else {
@@ -54,13 +54,13 @@ fun ImageView.setImageCompressExt(
             .override(w, h)
             .diskCacheStrategy(diskCacheStrategy)
 
-        val request = Glide.with(context)
+        var request = Glide.with(context)
             .asBitmap()
             .apply(option)
             .load(uri)
 
         if (placeHolder != null) {
-            request.placeholder(placeHolder).error(placeHolder)
+            request = request.placeholder(placeHolder).error(placeHolder)
         }
         request.into(this)
     } else {

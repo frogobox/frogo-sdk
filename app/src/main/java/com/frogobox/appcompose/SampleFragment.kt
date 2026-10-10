@@ -29,7 +29,7 @@ class SampleFragment : FrogoComposeFragment() {
     }
 
     @Composable
-    override fun setupCompose() {
+    override fun SetupCompose() {
         val vm: SampleViewModel = viewModel()
         val state by vm.uiState.collectAsState()
 

@@ -143,12 +143,4 @@ abstract class FrogoComponentActivity : ComponentActivity() {
      */
     @Composable
     abstract fun SetupCompose()
-
-    /**
-     * Idiomatic camelCase alias for [SetupCompose].
-     */
-    @Composable
-    open fun setupCompose() {
-        SetupCompose()
-    }
 }

@@ -13,16 +13,27 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+
 fun Modifier.frogoShimmerEffect(
     showShimmer: Boolean = true,
-    targetValue: Float = 1000f
+    targetValue: Float = 1000f,
+    colors: List<Color>? = null
 ): Modifier = composed {
     if (!showShimmer) return@composed this
 
-    val shimmerColors = listOf(
-        Color.LightGray.copy(alpha = 0.6f),
-        Color.LightGray.copy(alpha = 0.2f),
-        Color.LightGray.copy(alpha = 0.6f),
+    val isDark = isSystemInDarkTheme()
+    val defaultBaseColor = if (isDark) {
+        MaterialTheme.colorScheme.surfaceVariant
+    } else {
+        Color.LightGray
+    }
+
+    val shimmerColors = colors ?: listOf(
+        defaultBaseColor.copy(alpha = 0.6f),
+        defaultBaseColor.copy(alpha = 0.2f),
+        defaultBaseColor.copy(alpha = 0.6f),
     )
 
     val transition = rememberInfiniteTransition(label = "ShimmerTransition")
