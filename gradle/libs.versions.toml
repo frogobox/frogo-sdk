@@ -1,7 +1,7 @@
 [versions]
 # Gradle & Kotlin Plugins / Tools
 agp = "9.4.1"
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 ksp = "2.3.10"
 
 # AndroidX Core & UI

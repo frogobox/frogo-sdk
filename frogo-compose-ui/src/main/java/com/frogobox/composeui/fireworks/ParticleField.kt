@@ -23,9 +23,10 @@ internal class ParticleField : View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // Draw all the particles
-        synchronized(mParticles!!) {
-            for (i in mParticles!!.indices) {
-                mParticles!![i].draw(canvas)
+        val particles = mParticles ?: return
+        synchronized(particles) {
+            for (i in particles.indices) {
+                particles[i].draw(canvas)
             }
         }
     }

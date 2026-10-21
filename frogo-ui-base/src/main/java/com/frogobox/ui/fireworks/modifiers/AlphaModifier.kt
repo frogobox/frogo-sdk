@@ -21,14 +21,15 @@ class AlphaModifier @JvmOverloads constructor(
     }
 
     override fun apply(particle: Particle?, miliseconds: Long) {
+        if (particle == null) return
         if (miliseconds < mStartTime) {
-            particle!!.mAlpha = mInitialValue
+            particle.mAlpha = mInitialValue
         } else if (miliseconds > mEndTime) {
-            particle!!.mAlpha = mFinalValue
+            particle.mAlpha = mFinalValue
         } else {
             val interpolaterdValue = mInterpolator.getInterpolation((miliseconds - mStartTime) * 1f / mDuration)
             val newAlphaValue = (mInitialValue + mValueIncrement * interpolaterdValue).toInt()
-            particle!!.mAlpha = newAlphaValue
+            particle.mAlpha = newAlphaValue
         }
     }
 }

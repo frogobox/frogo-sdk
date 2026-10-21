@@ -114,8 +114,12 @@ class FrogoAdmobManager(
             } catch (_: Exception) {
                 ""
             }
-            val config = InitializationConfig.Builder(appId).build()
-            MobileAds.initialize(context, config) {}
+            try {
+                val config = InitializationConfig.Builder(appId).build()
+                MobileAds.initialize(context, config) {}
+            } catch (e: Throwable) {
+                android.util.Log.e(TAG, "MobileAds initialization encountered error: ${e.message}")
+            }
         }
     }
 
@@ -216,14 +220,16 @@ class FrogoAdmobManager(
             container.removeAllViews()
             container.addView(mAdView)
 
-            showAdBanner(
-                mAdView = mAdView,
-                bannerAdUnitId = bannerAdUnitId,
-                mAdsSize = mAdsSize,
-                timeoutMilliSecond = timeoutMilliSecond,
-                keyword = keyword,
-                callback = callback
-            )
+            mAdView.post {
+                showAdBanner(
+                    mAdView = mAdView,
+                    bannerAdUnitId = bannerAdUnitId,
+                    mAdsSize = mAdsSize,
+                    timeoutMilliSecond = timeoutMilliSecond,
+                    keyword = keyword,
+                    callback = callback
+                )
+            }
         } else {
             runOnMainThread {
                 callback?.onAdFailedToLoad(TAG, "000", ": Banner Unit Id is Empty")

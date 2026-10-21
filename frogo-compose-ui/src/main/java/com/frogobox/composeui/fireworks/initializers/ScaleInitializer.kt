@@ -9,8 +9,9 @@ class ScaleInitializer(
 ) : ParticleInitializer {
 
     override fun initParticle(p: Particle?, r: Random?) {
-        val scale = r!!.nextFloat() * (mMaxScale - mMinScale) + mMinScale
-        p!!.mScale = scale
+        if (p == null || r == null) return
+        val scale = r.nextFloat() * (mMaxScale - mMinScale) + mMinScale
+        p.mScale = scale
     }
 
 }

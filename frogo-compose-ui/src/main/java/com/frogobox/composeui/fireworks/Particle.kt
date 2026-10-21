@@ -45,8 +45,9 @@ open class Particle protected constructor() {
     }
 
     fun configure(timeToLive: Long, emiterX: Float, emiterY: Float) {
-        mBitmapHalfWidth = mImage!!.width / 2
-        mBitmapHalfHeight = mImage!!.height / 2
+        val img = mImage ?: return
+        mBitmapHalfWidth = img.width / 2
+        mBitmapHalfHeight = img.height / 2
         mInitialX = emiterX - mBitmapHalfWidth
         mInitialY = emiterY - mBitmapHalfHeight
         mCurrentX = mInitialX
@@ -64,8 +65,10 @@ open class Particle protected constructor() {
         mCurrentY =
             mInitialY + mSpeedY * realMiliseconds + mAccelerationY * realMiliseconds * realMiliseconds
         mRotation = mInitialRotation + mRotationSpeed * realMiliseconds / 1000
-        for (i in mModifiers!!.indices) {
-            mModifiers!![i].apply(this, realMiliseconds)
+        mModifiers?.let { list ->
+            for (i in list.indices) {
+                list[i].apply(this, realMiliseconds)
+            }
         }
         return true
     }
@@ -76,7 +79,7 @@ open class Particle protected constructor() {
         mMatrix.postScale(mScale, mScale, mBitmapHalfWidth.toFloat(), mBitmapHalfHeight.toFloat())
         mMatrix.postTranslate(mCurrentX, mCurrentY)
         mPaint.alpha = mAlpha
-        c.drawBitmap(mImage!!, mMatrix, mPaint)
+        mImage?.let { c.drawBitmap(it, mMatrix, mPaint) }
     }
 
     fun activate(startingMilisecond: Long, modifiers: List<ParticleModifier>?): Particle {

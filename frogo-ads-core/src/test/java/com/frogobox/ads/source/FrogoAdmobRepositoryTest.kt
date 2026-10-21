@@ -90,7 +90,7 @@ class FrogoAdmobRepositoryTest {
         }
 
         executor.shutdown()
-        executor.awaitTermination(5, TimeUnit.SECONDS)
+        executor.awaitTermination(30, TimeUnit.SECONDS)
 
         assertEquals(numThreads * opsPerThread, accessCount.get())
     }

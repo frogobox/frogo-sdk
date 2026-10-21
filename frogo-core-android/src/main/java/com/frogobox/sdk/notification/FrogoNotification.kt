@@ -257,9 +257,9 @@ class FrogoNotification {
             val notificationBuilder = NotificationCompat.Builder(context, channelID)
                 .setSmallIcon(smallIcon)
 
-            if (largeIcon != null) {
+            largeIcon?.let {
                 notificationBuilder.setLargeIcon(
-                    BitmapFactory.decodeResource(context.resources, largeIcon!!)
+                    BitmapFactory.decodeResource(context.resources, it)
                 )
             }
 
