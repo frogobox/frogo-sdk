@@ -1,5 +1,4 @@
 package com.frogobox.ui.loadingindicator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -7,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -164,14 +162,12 @@ public class FrogoLoadingIndicatorView extends View {
         drawableClassName.append(indicatorName);
         try {
             Class<?> drawableClass = Class.forName(drawableClassName.toString());
-            Indicator indicator = (Indicator) drawableClass.newInstance();
+            Indicator indicator = (Indicator) drawableClass.getDeclaredConstructor().newInstance();
             setIndicator(indicator);
         } catch (ClassNotFoundException e) {
             Log.e(TAG, "Didn't find your class , check the name again !");
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ReflectiveOperationException e) {
+            Log.e(TAG, "Failed to instantiate indicator: " + indicatorName, e);
         }
     }
 

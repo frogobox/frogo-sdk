@@ -34,4 +34,26 @@ class FrogoBannerAdComposeTest {
 
         assertNotNull(composeView)
     }
+
+    @Test
+    fun testFrogoBannerAdCompose_rendersWithoutCrashing() {
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).setup().get()
+        val composeView = ComposeView(activity)
+
+        composeView.setContent {
+            FrogoBannerAdCompose(
+                adUnitId = "ca-app-pub-3940256099942544/6300978111"
+            )
+        }
+
+        activity.setContentView(composeView)
+        composeView.measure(
+            View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(1920, View.MeasureSpec.EXACTLY)
+        )
+        composeView.layout(0, 0, 1080, 1920)
+
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
+        assertNotNull(composeView)
+    }
 }

@@ -13,7 +13,7 @@ package com.frogobox.appadmob.util
 
 object Constant {
 
-    const val AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294"
+    const val AD_UNIT_ID = "ca-app-pub-3940256099942544/9257395921"
     const val COUNTER_TIME = 5L
 
     // Preference

@@ -9,8 +9,9 @@ class RotationInitializer(
 ) : ParticleInitializer {
 
     override fun initParticle(p: Particle?, r: Random?) {
-        p!!.mInitialRotation =
-            if (mMinAngle == mMaxAngle) mMinAngle.toFloat() else r!!.nextInt(mMaxAngle - mMinAngle) + mMinAngle.toFloat()
+        if (p == null || r == null) return
+        p.mInitialRotation =
+            if (mMinAngle == mMaxAngle) mMinAngle.toFloat() else (r.nextInt(mMaxAngle - mMinAngle) + mMinAngle).toFloat()
     }
 
 }

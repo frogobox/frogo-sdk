@@ -1,6 +1,9 @@
 package com.frogobox.sdk.ext
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
@@ -107,3 +110,35 @@ fun WebView.loadUrlFrogoExt(
     }
 
 }
+
+/**
+ * Pre-warms the Android Chromium WebView engine asynchronously when the main looper is idle.
+ * This shifts heavy Chromium class loading and device capability checks away from critical
+ * layout passes, preventing InputDispatch ANRs during cold start or ad rendering.
+ */
+fun prewarmWebView(context: Context) {
+    val appContext = context.applicationContext
+    val runnable = Runnable {
+        Looper.myQueue().addIdleHandler {
+            try {
+                WebView(appContext)
+            } catch (_: Throwable) {
+                // Silently ignore on devices without WebView or with disabled webview package
+            }
+            false
+        }
+    }
+
+    if (Looper.myLooper() == Looper.getMainLooper()) {
+        runnable.run()
+    } else {
+        Handler(Looper.getMainLooper()).post(runnable)
+    }
+}
+
+/**
+ * Extension on [Context] to pre-warm the Android Chromium WebView engine.
+ */
+fun Context.prewarmWebViewExt() {
+    prewarmWebView(this)
+}

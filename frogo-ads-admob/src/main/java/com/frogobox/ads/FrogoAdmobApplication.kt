@@ -5,11 +5,14 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
+import android.webkit.WebView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.core.FrogoAppOpenAdManager
+import com.frogobox.ads.core.IFrogoAppOpenAdOptOut
 import com.frogobox.sdk.FrogoApplication
 import com.google.android.libraries.ads.mobile.sdk.MobileAds
 import com.google.android.libraries.ads.mobile.sdk.initialization.InitializationConfig
@@ -28,7 +31,6 @@ import kotlinx.coroutines.launch
  * All rights reserved
  */
 
-
 open class FrogoAdmobApplication : FrogoApplication(),
     Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
 
@@ -39,9 +41,15 @@ open class FrogoAdmobApplication : FrogoApplication(),
     private lateinit var appOpenAdManager: FrogoAppOpenAdManager
     private var currentActivity: Activity? = null
 
+    open fun getCurrentActivity(): Activity? = currentActivity
+
     override fun onCreate() {
         super<FrogoApplication>.onCreate()
         registerActivityLifecycleCallbacks(this)
+
+        prewarmWebView()
+
+        appOpenAdManager = FrogoAppOpenAdManager()
 
         val backgroundScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
         backgroundScope.launch {
@@ -64,22 +72,30 @@ open class FrogoAdmobApplication : FrogoApplication(),
             } catch (e: Exception) {
                 ""
             }
-            val config = InitializationConfig.Builder(appId).build()
-            MobileAds.initialize(this@FrogoAdmobApplication, config) {}
+            try {
+                val config = InitializationConfig.Builder(appId).build()
+                MobileAds.initialize(this@FrogoAdmobApplication, config) {}
+            } catch (e: Throwable) {
+                android.util.Log.e(LOG_TAG, "MobileAds initialization encountered error: ${e.message}")
+            }
+
+            // Proactively preload App Open Ad on cold start
+            if (isAppOpenAdEnabled() && isOpenAppAdEnabled()) {
+                val adUnitId = getAdOpenAppUnitId(this@FrogoAdmobApplication)
+                if (adUnitId.isNotBlank()) {
+                    appOpenAdManager.loadAd(this@FrogoAdmobApplication, adUnitId)
+                }
+            }
         }
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-        appOpenAdManager = FrogoAppOpenAdManager()
     }
 
     /** ActivityLifecycleCallback methods. */
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
 
     override fun onActivityStarted(activity: Activity) {
-        // An ad activity is started when an ad is showing, which could be AdActivity class from Google
-        // SDK or another activity class implemented by a third party mediation partner. Updating the
-        // currentActivity only when an ad is not showing will ensure it is not an ad activity, but the
-        // one that shows the ad.
+        // Update currentActivity only when an ad is not showing to prevent caching third-party ad activities
         if (!appOpenAdManager.isShowingAd) {
             currentActivity = activity
         }
@@ -100,35 +116,112 @@ open class FrogoAdmobApplication : FrogoApplication(),
         }
     }
 
+    /** App Open Ad unit ID provider. Override this in your Application subclass. */
     open fun getAdOpenAppUnitId(context: Context?): String {
         return ""
     }
 
+    /** Global toggle for App Open Ad monetisation (e.g., VIP/ad-free users). */
+    open fun isAppOpenAdEnabled(): Boolean = true
+
+    /** Alias for backward compatibility with older v3.0 APIs. */
+    open fun isOpenAppAdEnabled(): Boolean = isAppOpenAdEnabled()
+
+    /** Determines whether the app should automatically show App Open Ad upon foregrounding. */
+    open fun isAutoShowAppOpenAdOnForegroundEnabled(): Boolean = true
+
+    /**
+     * Inspects the target foreground activity to decide if an App Open Ad should be shown.
+     * Checks global toggles, opt-out marker interfaces, and activity validity.
+     */
+    open fun shouldShowAppOpenAd(activity: Activity): Boolean {
+        if (!isAppOpenAdEnabled() || !isOpenAppAdEnabled()) return false
+        if (!isAutoShowAppOpenAdOnForegroundEnabled()) return false
+        if (activity is IFrogoAppOpenAdOptOut && activity.isAppOpenAdOptedOut()) return false
+        if (activity.isFinishing || activity.isDestroyed) return false
+        return true
+    }
+
     /** DefaultLifecycleObserver method that shows the app open ad when the app moves to foreground. */
     override fun onStart(owner: LifecycleOwner) {
-        // Show the ad (if available) when the app moves to foreground.
-        val adUnitId = getAdOpenAppUnitId(currentActivity)
+        val activity = currentActivity ?: return
+        if (!shouldShowAppOpenAd(activity)) {
+            return
+        }
+
+        val adUnitId = getAdOpenAppUnitId(activity)
         if (adUnitId.isNotBlank()) {
-            currentActivity?.let {
-                appOpenAdManager.showAdIfAvailable(it, adUnitId)
-            }
+            appOpenAdManager.showAdIfAvailable(activity, adUnitId)
         }
     }
 
-    /**
-     * Shows an app open ad.
-     *
-     * @param activity the activity that shows the app open ad
-     * @param callback the listener to be notified when an app open ad is complete
-     */
+    // =============================================================================================
+    // Public App Open Ad Accessors
+    // =============================================================================================
+
+    fun isAppOpenAdAvailable(): Boolean = appOpenAdManager.isAdAvailable()
+
+    fun isAppOpenAdLoading(): Boolean = appOpenAdManager.isLoadingAd
+
+    fun isAppOpenAdShowing(): Boolean = appOpenAdManager.isShowingAd
+
+    fun getAppOpenAdLoadTime(): Long = appOpenAdManager.loadTimeMillis
+
+    fun getAppOpenAdManager(): FrogoAppOpenAdManager = appOpenAdManager
+
+    internal fun setAppOpenAdManager(manager: FrogoAppOpenAdManager) {
+        this.appOpenAdManager = manager
+    }
+
+    fun loadAppOpenAd(
+        context: Context,
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    ) {
+        appOpenAdManager.loadAd(context, appOpenAdUnitId, callback)
+    }
+
+    fun showAppOpenAdIfAvailable(
+        activity: Activity,
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    ) {
+        appOpenAdManager.showAdIfAvailable(activity, appOpenAdUnitId, callback)
+    }
+
     fun showAdIfAvailable(
         activity: Activity,
         appOpenAdUnitId: String,
         callback: FrogoAdmobAppOpenAdCallback
     ) {
-        // We wrap the showAdIfAvailable to enforce that other classes only interact with MyApplication
-        // class.
         appOpenAdManager.showAdIfAvailable(activity, appOpenAdUnitId, callback)
+    }
+
+    fun loadAndShowAppOpenAd(
+        activity: Activity,
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    ) {
+        appOpenAdManager.loadAndShowAd(activity, appOpenAdUnitId, callback)
+    }
+
+    fun clearAppOpenAd() {
+        appOpenAdManager.clearAd()
+    }
+
+    /**
+     * Pre-warms the Chromium WebView engine on an idle main looper pass.
+     * Prevents synchronous Binder IPC / InputDispatch ANRs when the first ad (WebView) is loaded.
+     */
+    open fun prewarmWebView() {
+        Looper.myQueue().addIdleHandler {
+            try {
+                WebView(this@FrogoAdmobApplication)
+            } catch (_: Throwable) {
+                // Silently ignore if WebView is disabled or unavailable on device
+            }
+            false
+        }
     }
 
 }

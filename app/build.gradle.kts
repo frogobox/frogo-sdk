@@ -55,6 +55,7 @@ android {
         resValue("string", "admob_rewarded_interstitial", AdValue.debugAdmobRewardedInterstitial)
         resValue("string", "admob_native_advanced", AdValue.debugAdmobNativeAdvanced)
         resValue("string", "admob_native_advanced_video", AdValue.debugAdmobNativeAdvancedVideo)
+        resValue("string", "admob_app_open", AdValue.debugAdmobAppOpen)
 
         resValue("string", "unity_ad_game_id", AdValue.debugUnityAdGameId)
         resValue("string", "unity_ad_interstitial", AdValue.debugUnityAdInterstitial)
@@ -101,6 +102,7 @@ android {
             resValue("string", "admob_rewarded_interstitial", AdValue.releaseAdmobRewardedInterstitial)
             resValue("string", "admob_native_advanced", AdValue.releaseAdmobNativeAdvanced)
             resValue("string", "admob_native_advanced_video", AdValue.releaseAdmobNativeAdvancedVideo)
+            resValue("string", "admob_app_open", AdValue.releaseAdmobAppOpen)
 
             resValue("string", "unity_ad_game_id", AdValue.releaseUnityAdGameId)
             resValue("string", "unity_ad_interstitial", AdValue.releaseUnityAdInterstitial)
@@ -118,6 +120,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
 }
@@ -158,4 +166,14 @@ dependencies {
     implementation(libs.gson)
 
     implementation(libs.github.circleimageview)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.runner)
+    testImplementation(libs.androidx.test.rules)
+    testImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.espresso.core)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

@@ -11,7 +11,8 @@ class SpeeddByComponentsInitializer(
 ) : ParticleInitializer {
 
     override fun initParticle(p: Particle?, r: Random?) {
-        p!!.mSpeedX = r!!.nextFloat() * (mMaxSpeedX - mMinSpeedX) + mMinSpeedX
+        if (p == null || r == null) return
+        p.mSpeedX = r.nextFloat() * (mMaxSpeedX - mMinSpeedX) + mMinSpeedX
         p.mSpeedY = r.nextFloat() * (mMaxSpeedY - mMinSpeedY) + mMinSpeedY
     }
 

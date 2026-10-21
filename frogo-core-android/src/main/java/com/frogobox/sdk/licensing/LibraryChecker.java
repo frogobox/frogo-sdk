@@ -140,8 +140,8 @@ public class LibraryChecker implements ServiceConnection {
      */
     private static String getVersionCode(Context context, String packageName) {
         try {
-            return String.valueOf(
-                context.getPackageManager().getPackageInfo(packageName, 0).versionCode);
+            android.content.pm.PackageInfo pInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+            return String.valueOf(androidx.core.content.pm.PackageInfoCompat.getLongVersionCode(pInfo));
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Package not found. could not get version code.");
             return "";
@@ -207,7 +207,7 @@ public class LibraryChecker implements ServiceConnection {
                 } catch (SecurityException e) {
                     callback.applicationError(LibraryCheckerCallback.ERROR_MISSING_PERMISSION);
                 } catch (Base64DecoderException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Base64 decoder error while binding licensing service", e);
                 }
             } else {
                 mPendingChecks.offer(validator);

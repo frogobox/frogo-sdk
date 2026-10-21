@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import com.frogobox.BaseActivity
 import com.frogobox.R
 import com.frogobox.appsdk.notification.custom.CustomNotifActivity
@@ -18,7 +19,6 @@ import com.frogobox.appsdk.notification.stack.StackNotifActivity
 import com.frogobox.databinding.ActivityMainNotifBinding
 import com.frogobox.sdk.notification.FrogoNotifCustomContentViewListener
 import com.frogobox.sdk.notification.FrogoNotification
-import androidx.core.net.toUri
 
 
 class MainNotifActivity : BaseActivity<ActivityMainNotifBinding>() {

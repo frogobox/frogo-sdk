@@ -22,9 +22,9 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.11
+    $version_release = 3.0.12
 
-What's New?? (v3.0.5 → v3.0.11)
+What's New?? (v3.0.5 → v3.0.12)
 
     * New Feature: Added Unity Ads SDK support & UnityAdDelegates (v4.21.0) *
     * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.5.0) *
@@ -78,16 +78,16 @@ dependencyResolutionManagement {
 
 ### Step 2: Add Dependencies
 
-Latest Version: `3.0.11`
+Latest Version: `3.0.12`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.11")
+    implementation("com.github.frogobox:frogo-sdk:3.0.12")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.11")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.11")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.12")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.12")
 }
 ```
 
@@ -302,7 +302,7 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 Very open to anyone, I'll write your name under this, please contribute by sending an email to me
 
 - Mail To <faisalamircs@gmail.com>
-- Subject : Github _[Github-Username-Account]_ [Language] _ [Repository-Name]
+- Subject : Github *[Github-Username-Account]* [Language] _ [Repository-Name]
 - Example : Github_amirisback_kotlin_admob-helper-implementation
 
 Name Of Contribute
