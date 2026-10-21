@@ -2,13 +2,13 @@ package com.frogobox.ads.delegate
 
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.callback.FrogoAdmobBannerCallback
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
 import com.frogobox.ads.core.IFrogoAdConsent
 import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.google.android.libraries.ads.mobile.sdk.banner.AdView
-
 
 /**
  * Created by faisalamir on 03/07/22
@@ -112,6 +112,27 @@ interface AdmobDelegates {
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobRewardedCallback
+    )
+
+    // ---------------------------------------------------------------------------------------------
+    // App Open Ads
+    // ---------------------------------------------------------------------------------------------
+
+    fun isAppOpenAdAvailable(): Boolean
+
+    fun loadAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    )
+
+    fun showAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    )
+
+    fun loadAndShowAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
     )
 
 }

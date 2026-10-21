@@ -27,14 +27,15 @@ class SpeedModuleAndRangeInitializer(
     }
 
     override fun initParticle(p: Particle?, r: Random?) {
-        val speed = r!!.nextFloat() * (mSpeedMax - mSpeedMin) + mSpeedMin
+        if (p == null || r == null) return
+        val speed = r.nextFloat() * (mSpeedMax - mSpeedMin) + mSpeedMin
         val angle: Int = if (mMaxAngle == mMinAngle) {
             mMinAngle
         } else {
             r.nextInt(mMaxAngle - mMinAngle) + mMinAngle
         }
         val angleInRads = Math.toRadians(angle.toDouble())
-        p!!.mSpeedX = (speed * Math.cos(angleInRads)).toFloat()
+        p.mSpeedX = (speed * Math.cos(angleInRads)).toFloat()
         p.mSpeedY = (speed * Math.sin(angleInRads)).toFloat()
         p.mInitialRotation = (angle + 90).toFloat()
     }

@@ -2,7 +2,6 @@ package com.frogobox.appadmob.mvvm.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.frogobox.BaseFragment
 import com.frogobox.databinding.FragmentMainAdmobBinding
 

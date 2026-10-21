@@ -18,7 +18,14 @@ object AdHelper {
 
     fun getAdOpenAppUnitId(context: Context?): String {
         return if (context != null) {
-            PreferenceDelegatesImpl(context, Constant.PREFERENCE_NAME).getPrefString(Constant.PREF_AD_UNIT_ID, Constant.AD_UNIT_ID)
+            val pref = PreferenceDelegatesImpl(context, Constant.PREFERENCE_NAME)
+            val current = pref.getPrefString(Constant.PREF_AD_UNIT_ID, Constant.AD_UNIT_ID)
+            if (current.contains("3419835294") || current.isBlank()) {
+                pref.savePrefString(Constant.PREF_AD_UNIT_ID, Constant.AD_UNIT_ID)
+                Constant.AD_UNIT_ID
+            } else {
+                current
+            }
         } else {
             Constant.AD_UNIT_ID
         }

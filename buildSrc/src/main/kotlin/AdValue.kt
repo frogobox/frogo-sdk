@@ -22,6 +22,7 @@ object AdValue {
     const val debugAdmobRewardedInterstitial = "ca-app-pub-3940256099942544/5354046379"
     const val debugAdmobNativeAdvanced = "ca-app-pub-3940256099942544/2247696110"
     const val debugAdmobNativeAdvancedVideo = "ca-app-pub-3940256099942544/1044960115"
+    const val debugAdmobAppOpen = "ca-app-pub-3940256099942544/9257395921"
 
     // Declaration admob id for release
     const val releaseAdmobAppId = "ca-app-pub-3940256099942544~3347511713"
@@ -32,6 +33,7 @@ object AdValue {
     const val releaseAdmobRewardedInterstitial = "ca-app-pub-3940256099942544/5354046379"
     const val releaseAdmobNativeAdvanced = "ca-app-pub-3940256099942544/2247696110"
     const val releaseAdmobNativeAdvancedVideo = "ca-app-pub-3940256099942544/1044960115"
+    const val releaseAdmobAppOpen = "ca-app-pub-3940256099942544/9257395921"
 
     // ---------------------------------------------------------------------------------------------
 

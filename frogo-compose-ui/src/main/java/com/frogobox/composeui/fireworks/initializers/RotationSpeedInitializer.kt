@@ -9,9 +9,10 @@ class RotationSpeedInitializer(
 ) : ParticleInitializer {
 
     override fun initParticle(p: Particle?, r: Random?) {
+        if (p == null || r == null) return
         val rotationSpeed =
-            r!!.nextFloat() * (mMaxRotationSpeed - mMinRotationSpeed) + mMinRotationSpeed
-        p!!.mRotationSpeed = rotationSpeed
+            r.nextFloat() * (mMaxRotationSpeed - mMinRotationSpeed) + mMinRotationSpeed
+        p.mRotationSpeed = rotationSpeed
     }
 
 }

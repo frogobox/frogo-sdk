@@ -2,11 +2,14 @@ package com.frogobox.ads.delegate
 
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.frogobox.ads.FrogoAdmobApplication
+import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.callback.FrogoAdmobBannerCallback
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
 import com.frogobox.ads.core.FrogoAdConsent
 import com.frogobox.ads.core.FrogoAdmobManager
+import com.frogobox.ads.core.FrogoAppOpenAdManager
 import com.frogobox.ads.core.IFrogoAdConsent
 import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.google.android.libraries.ads.mobile.sdk.banner.AdView
@@ -20,6 +23,10 @@ class AdmobDelegatesImpl : AdmobDelegates {
     private lateinit var admobDelegatesActivity: AppCompatActivity
     private lateinit var admobManager: FrogoAdmobManager
     private val adConsent = FrogoAdConsent
+
+    private val fallbackAppOpenAdManager: FrogoAppOpenAdManager by lazy {
+        FrogoAppOpenAdManager()
+    }
 
     override fun setupAdmobDelegates(activity: AppCompatActivity) {
         admobDelegatesActivity = activity
@@ -143,5 +150,66 @@ class AdmobDelegatesImpl : AdmobDelegates {
         callback: FrogoAdmobRewardedCallback
     ) {
         admobManager.loadAdRewardedInterstitial(admobDelegatesActivity, mAdUnitIdRewardedInterstitial, timeoutMilliSecond, keyword, callback)
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // App Open Ads
+    // ---------------------------------------------------------------------------------------------
+
+    override fun isAppOpenAdAvailable(): Boolean {
+        val app = if (::admobDelegatesActivity.isInitialized) {
+            admobDelegatesActivity.application as? FrogoAdmobApplication
+        } else {
+            null
+        }
+        return app?.isAppOpenAdAvailable() ?: fallbackAppOpenAdManager.isAdAvailable()
+    }
+
+    override fun loadAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback?
+    ) {
+        val app = if (::admobDelegatesActivity.isInitialized) {
+            admobDelegatesActivity.application as? FrogoAdmobApplication
+        } else {
+            null
+        }
+        if (app != null) {
+            app.loadAppOpenAd(admobDelegatesActivity, appOpenAdUnitId, callback)
+        } else if (::admobDelegatesActivity.isInitialized) {
+            fallbackAppOpenAdManager.loadAd(admobDelegatesActivity, appOpenAdUnitId, callback)
+        }
+    }
+
+    override fun showAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback?
+    ) {
+        val app = if (::admobDelegatesActivity.isInitialized) {
+            admobDelegatesActivity.application as? FrogoAdmobApplication
+        } else {
+            null
+        }
+        if (app != null) {
+            app.showAppOpenAdIfAvailable(admobDelegatesActivity, appOpenAdUnitId, callback)
+        } else if (::admobDelegatesActivity.isInitialized) {
+            fallbackAppOpenAdManager.showAdIfAvailable(admobDelegatesActivity, appOpenAdUnitId, callback)
+        }
+    }
+
+    override fun loadAndShowAppOpenAd(
+        appOpenAdUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback?
+    ) {
+        val app = if (::admobDelegatesActivity.isInitialized) {
+            admobDelegatesActivity.application as? FrogoAdmobApplication
+        } else {
+            null
+        }
+        if (app != null) {
+            app.loadAndShowAppOpenAd(admobDelegatesActivity, appOpenAdUnitId, callback)
+        } else if (::admobDelegatesActivity.isInitialized) {
+            fallbackAppOpenAdManager.loadAndShowAd(admobDelegatesActivity, appOpenAdUnitId, callback)
+        }
     }
 }

@@ -21,15 +21,16 @@ class ScaleModifier @JvmOverloads constructor(
     }
 
     override fun apply(particle: Particle?, miliseconds: Long) {
+        if (particle == null) return
         if (miliseconds < mStartTime) {
-            particle!!.mScale = mInitialValue
+            particle.mScale = mInitialValue
         } else if (miliseconds > mEndTime) {
-            particle!!.mScale = mFinalValue
+            particle.mScale = mFinalValue
         } else {
             val interpolaterdValue =
                 mInterpolator.getInterpolation((miliseconds - mStartTime) * 1f / mDuration)
             val newScale = mInitialValue + mValueIncrement * interpolaterdValue
-            particle!!.mScale = newScale
+            particle.mScale = newScale
         }
     }
 }

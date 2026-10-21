@@ -34,7 +34,7 @@ fun Context.getStringJsonFromAsset(filename: String): String {
     return try {
         assets.open(filename).bufferedReader().use { it.readText() }
     } catch (ioException: IOException) {
-        ioException.printStackTrace()
+        com.frogobox.sdk.log.FLog.e("FrogoJsonExt: failed to read asset $filename - ${ioException.message.orEmpty()}")
         ""
     }
 }

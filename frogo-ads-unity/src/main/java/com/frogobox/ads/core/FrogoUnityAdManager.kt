@@ -73,18 +73,25 @@ class FrogoUnityAdManager(
                 .withTestMode(testMode)
                 .build()
 
-            UnityAds.initialize(config, object : InitializationListener {
-                override fun onInitializationComplete(error: UnityAdsError?) {
-                    if (error == null) {
-                        callback?.onInitializationComplete(TAG, "$TAG : onInitializationComplete")
-                    } else {
-                        callback?.onInitializationFailed(
-                            TAG,
-                            "$TAG: onInitializationFailed with error message : ${error.message}"
-                        )
+            try {
+                UnityAds.initialize(config, object : InitializationListener {
+                    override fun onInitializationComplete(error: UnityAdsError?) {
+                        if (error == null) {
+                            callback?.onInitializationComplete(TAG, "$TAG : onInitializationComplete")
+                        } else {
+                            callback?.onInitializationFailed(
+                                TAG,
+                                "$TAG: onInitializationFailed with error message : ${error.message}"
+                            )
+                        }
                     }
-                }
-            })
+                })
+            } catch (e: Throwable) {
+                callback?.onInitializationFailed(
+                    TAG,
+                    "$TAG: onInitializationFailed with error message : ${e.message}"
+                )
+            }
         } else {
             callback?.onInitializationFailed(TAG, "$TAG : Unity Game Id is Empty")
         }

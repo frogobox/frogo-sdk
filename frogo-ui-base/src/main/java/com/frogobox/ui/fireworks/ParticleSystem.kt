@@ -66,11 +66,9 @@ class ParticleSystem private constructor(
         }
 
         override fun run() {
-            if (mPs.get() != null) {
-                val ps = mPs.get()
-                ps!!.onUpdate(ps.mCurrentTime)
-                ps.mCurrentTime += TIMER_TASK_INTERVAL
-            }
+            val ps = mPs.get() ?: return
+            ps.onUpdate(ps.mCurrentTime)
+            ps.mCurrentTime += TIMER_TASK_INTERVAL
         }
     }
 
@@ -132,7 +130,7 @@ class ParticleSystem private constructor(
      */
     constructor(a: Activity, maxParticles: Int, drawableRedId: Int, timeToLive: Long) : this(a,
         maxParticles,
-        ContextCompat.getDrawable(a, drawableRedId)!!,
+        requireNotNull(ContextCompat.getDrawable(a, drawableRedId)) { "Drawable resource $drawableRedId not found" },
         timeToLive,
         android.R.id.content) {
     }
@@ -152,7 +150,13 @@ class ParticleSystem private constructor(
         drawableRedId: Int,
         timeToLive: Long,
         parentViewId: Int,
-    ) : this(a, maxParticles, ContextCompat.getDrawable(a, drawableRedId)!!, timeToLive, parentViewId) {
+    ) : this(
+        a,
+        maxParticles,
+        requireNotNull(ContextCompat.getDrawable(a, drawableRedId)) { "Drawable resource $drawableRedId not found" },
+        timeToLive,
+        parentViewId
+    ) {
     }
     /**
      * Utility constructor that receives a Drawable
@@ -239,8 +243,10 @@ class ParticleSystem private constructor(
         parentViewId: Int = android.R.id.content,
     ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
         // Create the particles
-        for (i in 0 until mMaxParticles) {
-            mParticles.add(AnimatedParticle(animation!!))
+        animation?.let { anim ->
+            for (i in 0 until mMaxParticles) {
+                mParticles.add(AnimatedParticle(anim))
+            }
         }
     }
 
@@ -429,9 +435,7 @@ class ParticleSystem private constructor(
      */
     fun setParentViewGroup(viewGroup: ViewGroup?): ParticleSystem {
         mParentView = viewGroup
-        if (mParentView != null) {
-            mParentView!!.getLocationInWindow(mParentLocation)
-        }
+        mParentView?.getLocationInWindow(mParentLocation)
         return this
     }
 
@@ -451,7 +455,7 @@ class ParticleSystem private constructor(
             0,
             mTimeToLive - milisecondsBeforeEnd,
             mTimeToLive,
-            interpolator!!))
+            interpolator ?: LinearInterpolator()))
         return this
     }
 
@@ -521,13 +525,16 @@ class ParticleSystem private constructor(
         mActivatedParticles = 0
         mParticlesPerMillisecond = particlesPerSecond / 1000f
         // Add a full size view to the parent view
-        mDrawingView = ParticleField(mParentView!!.context)
-        mParentView!!.addView(mDrawingView)
+        val parent = mParentView ?: return
+        val drawingView = ParticleField(parent.context)
+        mDrawingView = drawingView
+        parent.addView(drawingView)
         mEmittingTime = -1 // Meaning infinite
-        mDrawingView!!.setParticles(mActiveParticles)
+        drawingView.setParticles(mActiveParticles)
         updateParticlesBeforeStartTime(particlesPerSecond)
-        mTimer = Timer()
-        mTimer!!.schedule(mTimerTask, 0, TIMER_TASK_INTERVAL)
+        val timer = Timer()
+        mTimer = timer
+        timer.schedule(mTimerTask, 0, TIMER_TASK_INTERVAL)
     }
 
     fun emit(emitterX: Int, emitterY: Int, particlesPerSecond: Int, emittingTime: Int) {
@@ -547,9 +554,11 @@ class ParticleSystem private constructor(
         mActivatedParticles = 0
         mParticlesPerMillisecond = particlesPerSecond / 1000f
         // Add a full size view to the parent view
-        mDrawingView = ParticleField(mParentView!!.context)
-        mParentView!!.addView(mDrawingView)
-        mDrawingView!!.setParticles(mActiveParticles)
+        val parent = mParentView ?: return
+        val drawingView = ParticleField(parent.context)
+        mDrawingView = drawingView
+        parent.addView(drawingView)
+        drawingView.setParticles(mActiveParticles)
         updateParticlesBeforeStartTime(particlesPerSecond)
         mEmittingTime = emittingTime.toLong()
         startAnimator(LinearInterpolator(), emittingTime + mTimeToLive)
@@ -596,9 +605,11 @@ class ParticleSystem private constructor(
             i++
         }
         // Add a full size view to the parent view
-        mDrawingView = ParticleField(mParentView!!.context)
-        mParentView!!.addView(mDrawingView)
-        mDrawingView!!.setParticles(mActiveParticles)
+        val parent = mParentView ?: return
+        val drawingView = ParticleField(parent.context)
+        mDrawingView = drawingView
+        parent.addView(drawingView)
+        drawingView.setParticles(mActiveParticles)
         // We start a property animator that will call us to do the update
         // Animate from 0 to timeToLiveMax
         startAnimator(interpolator, mTimeToLive)
@@ -624,7 +635,7 @@ class ParticleSystem private constructor(
             })
             setInterpolator(interpolator)
         }
-        mAnimator!!.start()
+        mAnimator?.start()
     }
 
     private fun configureEmitter(emitter: View, gravity: Int) {
@@ -715,13 +726,15 @@ class ParticleSystem private constructor(
                 i++
             }
         }
-        mDrawingView!!.postInvalidate()
+        mDrawingView?.postInvalidate()
     }
 
     private fun cleanupAnimation() {
-        mParentView!!.removeView(mDrawingView)
+        mDrawingView?.let { view ->
+            mParentView?.removeView(view)
+        }
         mDrawingView = null
-        mParentView!!.postInvalidate()
+        mParentView?.postInvalidate()
         mParticles.addAll(mActiveParticles)
     }
 
@@ -739,12 +752,10 @@ class ParticleSystem private constructor(
      * To stop emitting but animate until the end, use stopEmitting instead.
      */
     fun cancel() {
-        if (mAnimator != null && mAnimator!!.isRunning) {
-            mAnimator!!.cancel()
-        }
-        if (mTimer != null) {
-            mTimer!!.cancel()
-            mTimer!!.purge()
+        mAnimator?.takeIf { it.isRunning }?.cancel()
+        mTimer?.let {
+            it.cancel()
+            it.purge()
             cleanupAnimation()
         }
     }
