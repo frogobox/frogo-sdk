@@ -170,9 +170,20 @@ class FrogoAdConsentTest {
         every { mockContext.resources } returns mockResources
         every { mockResources.configuration } returns config
 
-        // Must return default locale or empty without crashing with IndexOutOfBoundsException
-        val country = FrogoAdConsent.getCountryCode(mockContext)
-        assertTrue(country.isNotEmpty())
+        val previousLocale = java.util.Locale.getDefault()
+        try {
+            // When default locale has a country, returns that country
+            java.util.Locale.setDefault(java.util.Locale.US)
+            val country = FrogoAdConsent.getCountryCode(mockContext)
+            assertEquals("US", country)
+
+            // When default locale has no country (e.g. CI headless Linux runner), safely returns empty string
+            java.util.Locale.setDefault(java.util.Locale.ROOT)
+            val emptyCountry = FrogoAdConsent.getCountryCode(mockContext)
+            assertEquals("", emptyCountry)
+        } finally {
+            java.util.Locale.setDefault(previousLocale)
+        }
     }
 
     @Test
