@@ -5,6 +5,7 @@ import android.telephony.TelephonyManager
 import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
+import com.google.android.ump.FormError
 import com.google.android.ump.UserMessagingPlatform
 
 
@@ -33,7 +34,10 @@ object FrogoAdConsent {
         val localeCountry = runCatching {
             val config = context.resources?.configuration
             if (config != null) {
-                androidx.core.os.ConfigurationCompat.getLocales(config)[0]?.country?.uppercase().orEmpty()
+                val locales = androidx.core.os.ConfigurationCompat.getLocales(config)
+                if (!locales.isEmpty) {
+                    locales[0]?.country?.uppercase().orEmpty()
+                } else ""
             } else ""
         }.getOrDefault("")
         return localeCountry.ifBlank { java.util.Locale.getDefault().country.uppercase() }
@@ -58,6 +62,79 @@ object FrogoAdConsent {
         return listAdConsentCountry().contains(getCountryCode(context))
     }
 
+    /**
+     * Helper method to call UMP SDK to request consent information and load/show consent form if required.
+     * Aligns with official GoogleMobileAdsConsentManager from GMA Next-Gen SDK examples.
+     */
+    fun gatherConsent(
+        activity: android.app.Activity,
+        testDeviceHashedId: String? = null,
+        tagForUnderAgeOfConsent: Boolean = false,
+        onConsentGatheringComplete: (FormError?) -> Unit
+    ) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            onConsentGatheringComplete(null)
+            return
+        }
+
+        val consentInformation: ConsentInformation =
+            UserMessagingPlatform.getConsentInformation(activity)
+
+        val paramsBuilder = ConsentRequestParameters.Builder()
+            .setTagForUnderAgeOfConsent(tagForUnderAgeOfConsent)
+
+        if (!testDeviceHashedId.isNullOrBlank()) {
+            val debugSettings = ConsentDebugSettings.Builder(activity)
+                .addTestDeviceHashedId(testDeviceHashedId)
+                .build()
+            paramsBuilder.setConsentDebugSettings(debugSettings)
+        }
+
+        consentInformation.requestConsentInfoUpdate(
+            activity,
+            paramsBuilder.build(),
+            {
+                if (activity.isFinishing || activity.isDestroyed) {
+                    onConsentGatheringComplete(null)
+                    return@requestConsentInfoUpdate
+                }
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) { formError ->
+                    onConsentGatheringComplete(formError)
+                }
+            },
+            { requestConsentError ->
+                onConsentGatheringComplete(requestConsentError)
+            }
+        )
+    }
+
+    /** Helper variable to determine if the app can request ads based on obtained consent. */
+    fun canRequestAds(context: Context): Boolean {
+        return UserMessagingPlatform.getConsentInformation(context).canRequestAds()
+    }
+
+    /** Helper variable to determine if the GDPR / privacy options form is required. */
+    fun isPrivacyOptionsRequired(context: Context): Boolean {
+        return UserMessagingPlatform.getConsentInformation(context).privacyOptionsRequirementStatus ==
+            ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+    }
+
+    /**
+     * Helper method to call UMP SDK to show the privacy options form on demand.
+     */
+    fun showPrivacyOptionsForm(
+        activity: android.app.Activity,
+        onDismissListener: (FormError?) -> Unit
+    ) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            onDismissListener(null)
+            return
+        }
+        UserMessagingPlatform.showPrivacyOptionsForm(activity) { formError ->
+            onDismissListener(formError)
+        }
+    }
+
     fun showConsent(callback: IFrogoAdConsent) {
         if (isAdConsentCountry(callback.activity())) {
             setupConsent(callback)
@@ -67,78 +144,51 @@ object FrogoAdConsent {
     }
 
     private fun setupConsent(callback: IFrogoAdConsent) {
+        val act = callback.activity()
+        if (act.isFinishing || act.isDestroyed) {
+            return
+        }
 
         val consentInformation: ConsentInformation =
-            UserMessagingPlatform.getConsentInformation(callback.activity())
+            UserMessagingPlatform.getConsentInformation(act)
 
-        // Set tag for underage of consent. false means users are not underage.
         val params = if (callback.isDebug()) {
-
-            val debugSettings = ConsentDebugSettings.Builder(callback.activity())
+            val debugSettings = ConsentDebugSettings.Builder(act)
                 .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
                 .addTestDeviceHashedId("TEST-DEVICE-HASHED-ID")
-                .setForceTesting(true)
                 .build()
 
             ConsentRequestParameters.Builder()
                 .setTagForUnderAgeOfConsent(callback.isUnderAgeAd())
                 .setConsentDebugSettings(debugSettings)
                 .build()
-
         } else {
             ConsentRequestParameters.Builder()
                 .setTagForUnderAgeOfConsent(callback.isUnderAgeAd())
                 .build()
         }
 
-        consentInformation.requestConsentInfoUpdate(callback.activity(), params,
+        consentInformation.requestConsentInfoUpdate(
+            act,
+            params,
             {
-                // The consent information state was updated.
-                // You are now ready to check if a form is available.
-                if (consentInformation.isConsentFormAvailable) {
-                    loadForm(consentInformation, callback)
-                } else {
-                    callback.onNotUsingAdConsent()
+                if (act.isFinishing || act.isDestroyed) {
+                    return@requestConsentInfoUpdate
+                }
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(act) { formError ->
+                    if (formError != null) {
+                        callback.onConsentError(formError)
+                    } else if (consentInformation.canRequestAds()) {
+                        callback.onConsentSuccess()
+                    } else {
+                        callback.onNotUsingAdConsent()
+                    }
                 }
             },
             { formError ->
-                // Handle the error.
                 callback.onConsentError(formError)
-            })
-    }
-
-    private fun loadForm(consentInformation: ConsentInformation, callback: IFrogoAdConsent) {
-        // Loads a consent form. Must be called on the main thread.
-        UserMessagingPlatform.loadConsentForm(callback.activity(), { consentForm ->
-            when (consentInformation.consentStatus) {
-                ConsentInformation.ConsentStatus.REQUIRED -> {
-                    consentForm.show(callback.activity()) {
-                        if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
-                            // App can start requesting ads.
-                            callback.onConsentSuccess()
-                        }
-                        // Only reload if consent is still required (avoid infinite recursion)
-                        if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
-                            loadForm(consentInformation, callback)
-                        }
-                    }
-                }
-                ConsentInformation.ConsentStatus.NOT_REQUIRED -> {
-                    callback.onNotUsingAdConsent()
-                }
-                ConsentInformation.ConsentStatus.OBTAINED -> {
-                    // Consent already obtained, proceed
-                    callback.onConsentSuccess()
-                }
-                else -> {
-                    // Unknown status, treat as not using consent
-                    callback.onNotUsingAdConsent()
-                }
             }
-        }, { formError ->
-            // Handle the error.
-            callback.onConsentError(formError)
-        })
+        )
     }
 
-}
+}

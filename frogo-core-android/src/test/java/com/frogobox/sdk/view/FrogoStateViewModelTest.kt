@@ -21,6 +21,10 @@ class SampleStateViewModel : FrogoStateViewModel<TestState, TestEffect>(TestStat
     fun triggerEffect(message: String) {
         emitEffect(TestEffect.ShowToast(message))
     }
+
+    fun triggerTryEffect(message: String): Boolean {
+        return tryEmitEffect(TestEffect.ShowToast(message))
+    }
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -52,5 +56,12 @@ class FrogoStateViewModelTest {
         deferreds.awaitAll()
 
         assertEquals(totalUpdates, viewModel.uiState.value.count)
+    }
+
+    @Test
+    fun testTryEmitEffect() {
+        val viewModel = SampleStateViewModel()
+        val success = viewModel.triggerTryEffect("Hello")
+        org.junit.Assert.assertTrue(success)
     }
 }

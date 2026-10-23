@@ -41,7 +41,8 @@ class FrogoNotification {
         private val TAG = FrogoNotification::class.java.simpleName
 
         private val notificationManager: NotificationManager =
-            this.context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            this.context.getSystemService(NotificationManager::class.java)
+                ?: (this.context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
 
         private var notification: Notification? = null
 
@@ -357,7 +358,11 @@ class FrogoNotification {
             this.notificationID = notificationId
             Log.d(TAG, "Value of Notification_ID : $notificationId")
             Log.d(TAG, "Successfully Notify Frogo Notification")
-            notificationManager.notify(notificationID, notif)
+            try {
+                notificationManager.notify(notificationID, notif)
+            } catch (e: SecurityException) {
+                Log.e(TAG, "SecurityException: Missing POST_NOTIFICATIONS permission on Android 13+", e)
+            }
         }
 
     }

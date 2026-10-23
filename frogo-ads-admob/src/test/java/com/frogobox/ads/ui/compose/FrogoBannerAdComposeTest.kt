@@ -56,4 +56,35 @@ class FrogoBannerAdComposeTest {
         org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
         assertNotNull(composeView)
     }
+
+    @Test
+    fun testFrogoBannerAdCompose_withCollapsible_rendersWithoutCrashing() {
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).setup().get()
+        val composeView = ComposeView(activity)
+
+        composeView.setContent {
+            FrogoBannerAdCompose(
+                adUnitId = "ca-app-pub-3940256099942544/6300978111",
+                collapsible = "bottom"
+            )
+        }
+
+        activity.setContentView(composeView)
+        composeView.measure(
+            View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(1920, View.MeasureSpec.EXACTLY)
+        )
+        composeView.layout(0, 0, 1080, 1920)
+
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
+        assertNotNull(composeView)
+    }
+
+    @Test
+    fun testFrogoAdmobBannerAdaptive_createsAdSizes() {
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).setup().get()
+        assertNotNull(FrogoAdmobBannerAdaptive.anchored(activity, 360))
+        assertNotNull(FrogoAdmobBannerAdaptive.largeAnchored(activity, 360))
+        assertNotNull(FrogoAdmobBannerAdaptive.inline(activity, 320))
+    }
 }

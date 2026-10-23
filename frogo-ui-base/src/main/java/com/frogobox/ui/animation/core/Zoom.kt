@@ -96,8 +96,8 @@ object Zoom : IZoom {
 
     override fun InUp(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.height - view.top).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.height - view.top).toFloat() } ?: (view.height.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f, 1f)
         val object2 = ObjectAnimator.ofFloat(view, "scaleX", 0.1f, 0.475f, 1f)
@@ -127,8 +127,8 @@ object Zoom : IZoom {
 
     override fun OutDown(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.height - view.top).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.height - view.top).toFloat() } ?: (view.height.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 1f, 0f)
         val object2 = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0.475f, 0.1f)
@@ -159,8 +159,8 @@ object Zoom : IZoom {
 
     override fun OutRight(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.width - parent.left).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.width - view.left).toFloat() } ?: (view.width.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 1f, 0f)
         val object2 = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0.475f, 0.1f)

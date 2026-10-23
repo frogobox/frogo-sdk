@@ -1,7 +1,7 @@
-# Frogo Compose UI — Full API Reference (v3.0.10)
+# Frogo Compose UI — Full API Reference (v3.0.13)
 
 Package: `com.frogobox.composeui`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.10`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13`  
 Dependencies:
 - `androidx.compose:compose-bom:2026.09.00` (Material Design 3)
 - `io.coil-kt.coil3:coil-compose:3.6.3` & `io.coil-kt.coil3:coil-network-okhttp:3.6.3`

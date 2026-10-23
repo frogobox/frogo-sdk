@@ -16,7 +16,6 @@
 
 package com.frogobox.sdk.licensing;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -28,7 +27,7 @@ public class PreferenceObfuscator {
     private static final String TAG = "PreferenceObfuscator";
 
     private final SharedPreferences mPreferences;
-    private final com.frogobox.sdk.licensing.Obfuscator mObfuscator;
+    private final Obfuscator mObfuscator;
     private SharedPreferences.Editor mEditor;
 
     /**
@@ -45,13 +44,9 @@ public class PreferenceObfuscator {
         mEditor = null;
     }
 
-    @SuppressLint("CommitPrefEdits")
     public void putString(String key, String value) {
-        if (mEditor == null) {
-            mEditor = mPreferences.edit();
-        }
         String obfuscatedValue = mObfuscator.obfuscate(value, key);
-        mEditor.putString(key, obfuscatedValue);
+        mPreferences.edit().putString(key, obfuscatedValue).apply();
     }
 
     public String getString(String key, String defValue) {
@@ -74,7 +69,7 @@ public class PreferenceObfuscator {
 
     public void commit() {
         if (mEditor != null) {
-            mEditor.commit();
+            mEditor.apply();
             mEditor = null;
         }
     }

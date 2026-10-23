@@ -1,6 +1,6 @@
 package com.frogobox.ads.core
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Handler
@@ -18,6 +18,7 @@ import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.google.android.libraries.ads.mobile.sdk.banner.AdView
 import com.google.android.libraries.ads.mobile.sdk.banner.BannerAd
 import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdRefreshCallback
 import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdRequest
 import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
 import com.google.android.libraries.ads.mobile.sdk.common.AdRequest
@@ -127,23 +128,48 @@ class FrogoAdmobManager(
     // Banner Ads
     // ---------------------------------------------------------------------------------------------
 
-    @SuppressLint("MissingPermission")
     override fun showAdBanner(
         mAdView: AdView,
         bannerAdUnitId: String,
         mAdsSize: AdSize,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
         val actualAdUnitId = bannerAdUnitId.ifBlank { FrogoAdmobId().testAdmobBanner }
         val bannerAdRequestBuilder = BannerAdRequest.Builder(actualAdUnitId, mAdsSize)
         keyword?.forEach { bannerAdRequestBuilder.putCustomTargeting("keyword", it) }
 
+        if (!collapsible.isNullOrBlank()) {
+            val extras = android.os.Bundle().apply {
+                putString("collapsible", collapsible)
+            }
+            bannerAdRequestBuilder.setGoogleExtrasBundle(extras)
+        }
+
         mAdView.loadAd(
             bannerAdRequestBuilder.build(),
             object : AdLoadCallback<BannerAd> {
                 override fun onAdLoaded(ad: BannerAd) {
+                    ad.bannerAdRefreshCallback = object : BannerAdRefreshCallback {
+                        override fun onAdRefreshed() {
+                            runOnMainThread {
+                                callback?.onAdRefreshed(TAG, "Ad Banner onAdRefreshed")
+                            }
+                        }
+
+                        override fun onAdFailedToRefresh(adError: LoadAdError) {
+                            runOnMainThread {
+                                callback?.onAdFailedToRefresh(
+                                    TAG,
+                                    adError.code.toString(),
+                                    adError.message
+                                )
+                            }
+                        }
+                    }
+
                     ad.adEventCallback = object : BannerAdEventCallback {
                         override fun onAdShowedFullScreenContent() {
                             runOnMainThread {
@@ -181,7 +207,6 @@ class FrogoAdmobManager(
         )
     }
 
-    @SuppressLint("MissingPermission")
     override fun showAdBanner(
         mAdView: AdView,
         timeoutMilliSecond: Int?,
@@ -194,11 +219,11 @@ class FrogoAdmobManager(
             mAdsSize = AdSize.BANNER,
             timeoutMilliSecond = timeoutMilliSecond,
             keyword = keyword,
-            callback = callback
+            callback = callback,
+            collapsible = null
         )
     }
 
-    @SuppressLint("MissingPermission")
     override fun showAdBannerContainer(
         context: Context,
         bannerAdUnitId: String,
@@ -206,7 +231,8 @@ class FrogoAdmobManager(
         container: RelativeLayout,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
         if (bannerAdUnitId.isNotBlank()) {
             val mAdView = AdView(context)
@@ -227,7 +253,8 @@ class FrogoAdmobManager(
                     mAdsSize = mAdsSize,
                     timeoutMilliSecond = timeoutMilliSecond,
                     keyword = keyword,
-                    callback = callback
+                    callback = callback,
+                    collapsible = collapsible
                 )
             }
         } else {
@@ -267,6 +294,7 @@ class FrogoAdmobManager(
                     override fun onAdLoaded(ad: InterstitialAd) {
                         mInterstitialAd = ad
                         runOnMainThread {
+                            callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Success - onAdLoaded")
                             callback?.onAdLoaded(TAG, "Interstitial Ad was loaded")
                         }
 
@@ -274,6 +302,7 @@ class FrogoAdmobManager(
                             override fun onAdDismissedFullScreenContent() {
                                 mInterstitialAd = null
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdDismissed(TAG, "Interstitial Ad was dismissed")
                                 }
                             }
@@ -281,12 +310,14 @@ class FrogoAdmobManager(
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 mInterstitialAd = null
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdFailed(TAG, "Interstitial Ad failed to show: ${fullScreenContentError.message}")
                                 }
                             }
 
                             override fun onAdShowedFullScreenContent() {
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdShowed(TAG, "Interstitial Ad showed fullscreen content")
                                 }
                             }
@@ -355,23 +386,27 @@ class FrogoAdmobManager(
                     override fun onAdLoaded(ad: RewardedAd) {
                         mRewardedAd = ad
                         runOnMainThread {
+                            callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                             callback.onAdLoaded(TAG, "RewardedAd was loaded")
                         }
                         mRewardedAd?.adEventCallback = object : RewardedAdEventCallback {
                             override fun onAdDismissedFullScreenContent() {
                                 mRewardedAd = null
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdDismissed(TAG, "Rewarded Ad was dismissed")
                                 }
                             }
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 mRewardedAd = null
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdFailed(TAG, "Rewarded Ad failed to show: ${fullScreenContentError.message}")
                                 }
                             }
                             override fun onAdShowedFullScreenContent() {
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdShowed(TAG, "Rewarded Ad showed fullscreen content")
                                 }
                             }
@@ -504,4 +539,57 @@ class FrogoAdmobManager(
             })
         }
     }
+
+    // ---------------------------------------------------------------------------------------------
+    // Next-Gen Preloaders
+    // ---------------------------------------------------------------------------------------------
+
+    fun startInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    ) {
+        FrogoAdmobPreloader.startInterstitialPreload(adUnitId, bufferSize, callback)
+    }
+
+    fun pollAndShowInterstitialPreload(
+        activity: Activity,
+        adUnitId: String,
+        callback: FrogoAdmobInterstitialCallback? = null
+    ): Boolean {
+        return FrogoAdmobPreloader.pollAndShowInterstitial(activity, adUnitId, callback)
+    }
+
+    fun startRewardedPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    ) {
+        FrogoAdmobPreloader.startRewardedPreload(adUnitId, bufferSize, callback)
+    }
+
+    fun pollAndShowRewardedPreload(
+        activity: Activity,
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean {
+        return FrogoAdmobPreloader.pollAndShowRewarded(activity, adUnitId, callback)
+    }
+
+    fun startRewardedInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    ) {
+        FrogoAdmobPreloader.startRewardedInterstitialPreload(adUnitId, bufferSize, callback)
+    }
+
+    fun pollAndShowRewardedInterstitialPreload(
+        activity: Activity,
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean {
+        return FrogoAdmobPreloader.pollAndShowRewardedInterstitial(activity, adUnitId, callback)
+    }
 }
+

@@ -102,7 +102,6 @@ class PreferenceDelegatesImpl(
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun <T> get(key: String, defaultValue: T): T = with(sharedPreferences) {
         val result: Any? = when (defaultValue) {
             is String -> getString(key, defaultValue)

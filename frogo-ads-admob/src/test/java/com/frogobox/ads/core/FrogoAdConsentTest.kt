@@ -134,4 +134,72 @@ class FrogoAdConsentTest {
         assertFalse(consentCallback.onConsentSuccessCalled)
         assertFalse(consentCallback.onConsentErrorCalled)
     }
+
+    @Test
+    fun testCanRequestAdsAndPrivacyOptionsRequiredWithMockedUmp() {
+        io.mockk.mockkStatic(com.google.android.ump.UserMessagingPlatform::class)
+        try {
+            val mockContext = mockk<Context>(relaxed = true)
+            val mockConsentInfo = mockk<com.google.android.ump.ConsentInformation>()
+
+            every { com.google.android.ump.UserMessagingPlatform.getConsentInformation(mockContext) } returns mockConsentInfo
+            every { mockConsentInfo.canRequestAds() } returns true
+            every { mockConsentInfo.privacyOptionsRequirementStatus } returns
+                com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+
+            assertTrue(FrogoAdConsent.canRequestAds(mockContext))
+            assertTrue(FrogoAdConsent.isPrivacyOptionsRequired(mockContext))
+
+            every { mockConsentInfo.canRequestAds() } returns false
+            every { mockConsentInfo.privacyOptionsRequirementStatus } returns
+                com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus.NOT_REQUIRED
+
+            assertFalse(FrogoAdConsent.canRequestAds(mockContext))
+            assertFalse(FrogoAdConsent.isPrivacyOptionsRequired(mockContext))
+        } finally {
+            io.mockk.unmockkStatic(com.google.android.ump.UserMessagingPlatform::class)
+        }
+    }
+
+    @Test
+    fun testEmptyConfigLocalesDoesNotThrowIndexOutOfBoundsException() {
+        val mockContext = mockk<Context>(relaxed = true)
+        val mockResources = mockk<android.content.res.Resources>(relaxed = true)
+        val config = android.content.res.Configuration()
+        // Empty locales
+        every { mockContext.resources } returns mockResources
+        every { mockResources.configuration } returns config
+
+        // Must return default locale or empty without crashing with IndexOutOfBoundsException
+        val country = FrogoAdConsent.getCountryCode(mockContext)
+        assertTrue(country.isNotEmpty())
+    }
+
+    @Test
+    fun testGatherConsentOnFinishingActivityAbortsGracefully() {
+        val mockActivity = mockk<Activity>()
+        every { mockActivity.isFinishing } returns true
+        every { mockActivity.isDestroyed } returns false
+
+        var callbackCalled = false
+        FrogoAdConsent.gatherConsent(mockActivity) { error ->
+            callbackCalled = true
+            org.junit.Assert.assertNull(error)
+        }
+        assertTrue(callbackCalled)
+    }
+
+    @Test
+    fun testShowPrivacyOptionsOnFinishingActivityAbortsGracefully() {
+        val mockActivity = mockk<Activity>()
+        every { mockActivity.isFinishing } returns false
+        every { mockActivity.isDestroyed } returns true
+
+        var callbackCalled = false
+        FrogoAdConsent.showPrivacyOptionsForm(mockActivity) { error ->
+            callbackCalled = true
+            org.junit.Assert.assertNull(error)
+        }
+        assertTrue(callbackCalled)
+    }
 }

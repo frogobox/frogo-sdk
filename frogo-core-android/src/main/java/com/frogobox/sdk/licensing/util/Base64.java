@@ -31,7 +31,7 @@ package com.frogobox.sdk.licensing.util;
  * @version 1.3
  */
 
-import android.annotation.SuppressLint;
+
 
 public class Base64 {
     /**
@@ -330,7 +330,6 @@ public class Base64 {
      *
      * @return the BASE64-encoded byte array
      */
-    @SuppressLint("Assert")
     public static byte[] encode(byte[] source, int off, int len, byte[] alphabet,
                                 int maxLineLength) {
         int lenDiv3 = (len + 2) / 3; // ceil(len / 3)
@@ -376,7 +375,9 @@ public class Base64 {
             e += 4;
         }
 
-        assert (e == outBuff.length);
+        if (e != outBuff.length) {
+            throw new AssertionError();
+        }
         return outBuff;
     }
 
@@ -552,7 +553,6 @@ public class Base64 {
      *
      * @return decoded data
      */
-    @SuppressWarnings("UnusedAssignment")
     public static byte[] decode(byte[] source, int off, int len, byte[] decodabet)
             throws Base64DecoderException {
         int len34 = len * 3 / 4;
@@ -613,7 +613,7 @@ public class Base64 {
                 throw new Base64DecoderException("single trailing character at offset "
                                                          + (len - 1));
             }
-            b4[b4Posn++] = EQUALS_SIGN;
+            b4[b4Posn] = EQUALS_SIGN;
             outBuffPosn += decode4to3(b4, 0, outBuff, outBuffPosn, decodabet);
         }
 

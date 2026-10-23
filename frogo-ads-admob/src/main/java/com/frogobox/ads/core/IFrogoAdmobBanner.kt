@@ -34,6 +34,18 @@ interface IFrogoAdmobBanner {
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobBannerCallback? = null
+    ) {
+        showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback, null)
+    }
+
+    fun showAdBanner(
+        mAdView: AdView,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     )
 
     fun showAdBanner(
@@ -53,6 +65,19 @@ interface IFrogoAdmobBanner {
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobBannerCallback? = null
+    ) {
+        showAdBannerContainer(context, bannerAdUnitId, mAdsSize, container, timeoutMilliSecond, keyword, callback, null)
+    }
+
+    fun showAdBannerContainer(
+        context: Context,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
+        container: RelativeLayout,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     )
 
 }

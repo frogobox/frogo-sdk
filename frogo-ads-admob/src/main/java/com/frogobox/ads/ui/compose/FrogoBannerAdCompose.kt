@@ -47,7 +47,8 @@ fun FrogoBannerAdCompose(
     adSize: AdSize = AdSize.BANNER,
     timeoutMilliSecond: Int? = null,
     keyword: List<String>? = null,
-    callback: FrogoAdmobBannerCallback? = null
+    callback: FrogoAdmobBannerCallback? = null,
+    collapsible: String? = null
 ) {
     val isInspectionMode = LocalInspectionMode.current
     if (isInspectionMode) {
@@ -78,7 +79,8 @@ fun FrogoBannerAdCompose(
                         mAdsSize = adSize,
                         timeoutMilliSecond = timeoutMilliSecond,
                         keyword = keyword,
-                        callback = callback
+                        callback = callback,
+                        collapsible = collapsible
                     )
                 }
             }
@@ -89,3 +91,31 @@ fun FrogoBannerAdCompose(
         }
     )
 }
+
+/**
+ * Convenience helper to compute adaptive banner sizes matching official Next-Gen SDK guidance.
+ */
+object FrogoAdmobBannerAdaptive {
+    /**
+     * Anchored adaptive banner for current device orientation and target container width in dp.
+     * Uses official recommended getLargeAnchoredAdaptiveBannerAdSize.
+     */
+    fun anchored(context: android.content.Context, widthDp: Int): AdSize {
+        return AdSize.getLargeAnchoredAdaptiveBannerAdSize(context, widthDp)
+    }
+
+    /**
+     * Large anchored adaptive banner matching official Compose examples.
+     */
+    fun largeAnchored(context: android.content.Context, widthDp: Int): AdSize {
+        return AdSize.getLargeAnchoredAdaptiveBannerAdSize(context, widthDp)
+    }
+
+    /**
+     * Inline adaptive banner for scrolling lists / lazy columns.
+     */
+    fun inline(context: android.content.Context, widthDp: Int): AdSize {
+        return AdSize.getCurrentOrientationInlineAdaptiveBannerAdSize(context, widthDp)
+    }
+}
+

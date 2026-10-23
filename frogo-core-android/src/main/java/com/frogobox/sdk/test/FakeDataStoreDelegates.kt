@@ -2,6 +2,7 @@ package com.frogobox.sdk.test
 
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
@@ -21,38 +22,36 @@ import kotlinx.coroutines.flow.map
  */
 class FakeDataStoreDelegates : DataStoreDelegates {
 
-    private val inMemoryStorage = MutableStateFlow<Map<String, Any>>(emptyMap())
+    private val inMemoryStorage = MutableStateFlow<Preferences>(emptyPreferences())
 
-    @Suppress("UNCHECKED_CAST")
     override fun <T> getPreferenceFlow(key: Preferences.Key<T>, defaultValue: T): Flow<T> {
-        return inMemoryStorage.map { map ->
-            (map[key.name] as? T) ?: defaultValue
+        return inMemoryStorage.map { preferences ->
+            preferences[key] ?: defaultValue
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     override suspend fun <T> getPreference(key: Preferences.Key<T>, defaultValue: T): T {
-        return (inMemoryStorage.value[key.name] as? T) ?: defaultValue
+        return inMemoryStorage.value[key] ?: defaultValue
     }
 
     override suspend fun <T> savePreference(key: Preferences.Key<T>, value: T) {
-        val updated = inMemoryStorage.value.toMutableMap()
+        val updated = inMemoryStorage.value.toMutablePreferences()
         if (value != null) {
-            updated[key.name] = value as Any
+            updated[key] = value
         } else {
-            updated.remove(key.name)
+            updated.remove(key)
         }
-        inMemoryStorage.value = updated
+        inMemoryStorage.value = updated.toPreferences()
     }
 
     override suspend fun <T> removePreference(key: Preferences.Key<T>) {
-        val updated = inMemoryStorage.value.toMutableMap()
-        updated.remove(key.name)
-        inMemoryStorage.value = updated
+        val updated = inMemoryStorage.value.toMutablePreferences()
+        updated.remove(key)
+        inMemoryStorage.value = updated.toPreferences()
     }
 
     override suspend fun clearAllPreferences() {
-        inMemoryStorage.value = emptyMap()
+        inMemoryStorage.value = emptyPreferences()
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -105,8 +104,11 @@ class FakeDataStoreDelegates : DataStoreDelegates {
         savePreference(longPreferencesKey(key), value)
 
     override suspend fun remove(key: String) {
-        val updated = inMemoryStorage.value.toMutableMap()
-        updated.remove(key)
-        inMemoryStorage.value = updated
+        val updated = inMemoryStorage.value.toMutablePreferences()
+        val matchingKey = updated.asMap().keys.find { it.name == key }
+        if (matchingKey != null) {
+            updated.remove(matchingKey)
+        }
+        inMemoryStorage.value = updated.toPreferences()
     }
 }

@@ -15,10 +15,10 @@ Frogo SDK is a production-grade multi-module Android and Kotlin library suite de
 | `frogo-compose-android` | `com.frogobox.compose` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) | Activity Compose, Lifecycle Compose |
 | `frogo-compose-ui` | `com.frogobox.composeui` | 70+ ready-to-use Compose widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.3, Glide Compose |
 | `frogo-ui-base` | `com.frogobox.ui` | XML-based UI utilities and view helpers | Android Views |
-| `frogo-ext-ads` | `com.frogobox.ads` | Google Mobile Ads SDK (Next-Gen 1.5.0), Unity Ads (4.21.0), App Open Ads, Compose Ad Activities, FrogoBannerAdCompose | Next-Gen Ads Mobile SDK, Unity Ads |
+| `frogo-ext-ads` | `com.frogobox.ads` | Google Mobile Ads SDK (Next-Gen 1.6.0), Unity Ads (4.21.0), App Open Ads, Compose Ad Activities, FrogoBannerAdCompose | Next-Gen Ads Mobile SDK, Unity Ads |
 | `app` | `com.frogobox.app` | Showcase application demonstrating all modules | Hilt, Compose, Navigation |
 
-**Current Version:** `3.0.10` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
+**Current Version:** `3.0.13` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
 
 ---
 
@@ -32,11 +32,31 @@ This repository provides standardized agent skills to teach any AI agent how to 
   - **Mirrored Discovery Path:** [.agents/skills/frogo-sdk/SKILL.md](.agents/skills/frogo-sdk/SKILL.md)
   - **Registration Config:** [.agents/skills.json](.agents/skills.json)
 
-### Specialized Reference Runbooks
-When generating code or resolving issues for specific domains, consult the reference guides:
+### Specialized Reference Runbooks & Starter Templates
+When generating code or resolving issues for specific domains, consult the reference guides and starter templates:
 1. **Google Mobile Ads Next-Gen & Unity Ads:** [skills/frogo-sdk/references/ads-reference.md](skills/frogo-sdk/references/ads-reference.md)
 2. **Jetpack Compose UI (Material 3) & Coil 3:** [skills/frogo-sdk/references/compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md)
 3. **Core Android Utilities, Extensions & UDF ViewModel:** [skills/frogo-sdk/references/core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md)
+4. **Starter Templates:** [skills/frogo-sdk/templates/](skills/frogo-sdk/templates/) (`libs.versions.toml`, `settings.gradle.kts`, Compose activities)
+
+### 🚀 Using this Skill in Other Projects
+To install this skill so other Android projects and AI coding agents (Antigravity, Gemini CLI, Claude Code, Cursor, Copilot, Codex) can use it:
+
+**Global Installation (All Agents on Machine):**
+```powershell
+.\scripts\install-skill.ps1 -Global
+```
+*(Installs to `~/.gemini/config/skills/frogo-sdk`, `~/.claude/skills/frogo-sdk`, and `~/.agents/skills/frogo-sdk`)*
+
+**Project-Specific Installation:**
+```powershell
+.\scripts\install-skill.ps1 -TargetProject "d:\AndroidProject\MyOtherApp"
+```
+
+**Linux / macOS / WSL:**
+```bash
+./scripts/install-skill.sh -t /path/to/my-other-app
+```
 
 ---
 

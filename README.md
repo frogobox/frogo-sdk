@@ -22,9 +22,9 @@
 
 This Is Latest Release
 
-    $version_release = 3.0.12
+    $version_release = 3.0.13
 
-What's New?? (v3.0.5 → v3.0.12)
+What's New?? (v3.0.5 → v3.0.13)
 
     * New Feature: Added Unity Ads SDK support & UnityAdDelegates (v4.21.0) *
     * Migration: Migrated to Google Mobile Ads Next-Gen SDK (ads-mobile-sdk:1.5.0) *
@@ -78,16 +78,16 @@ dependencyResolutionManagement {
 
 ### Step 2: Add Dependencies
 
-Latest Version: `3.0.12`
+Latest Version: `3.0.13`
 
 ```kotlin
 dependencies {
     // Core SDK
-    implementation("com.github.frogobox:frogo-sdk:3.0.12")
+    implementation("com.github.frogobox:frogo-sdk:3.0.13")
 
     // Or specific modules (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.12")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.12")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13")
+    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.13")
 }
 ```
 
@@ -294,6 +294,31 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 | [compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md) | Jetpack Compose widgets | 60+ composables |
 | [core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md) | Base classes & extensions | 7 classes, 16 ext files |
 | [ads-reference.md](skills/frogo-sdk/references/ads-reference.md) | AdMob & Unity Ads | 32+ methods |
+| [templates/](skills/frogo-sdk/templates/) | Version catalog, settings & activity starters | 4 templates |
+
+---
+
+### 🤖 AI Agent Skill Integration (`frogo-sdk`)
+
+Frogo SDK includes a standardized skill bundle compatible with modern AI coding agents (**Antigravity**, **Gemini CLI**, **Claude Code**, **Cursor**, **GitHub Copilot**, **Codex**).
+
+Installing this skill gives AI agents accurate context on Frogo SDK v3.0.13 APIs, Compose components, Next-Gen AdMob delegates, and prevents hallucination of outdated APIs.
+
+#### Install Globally (Available for All Projects on Machine):
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install-skill.ps1 -Global
+```
+*(Automatically registers into `~/.gemini/config/skills/frogo-sdk`, `~/.claude/skills/frogo-sdk`, and `~/.agents/skills/frogo-sdk`)*
+
+#### Install Directly into Another Project:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install-skill.ps1 -TargetProject "D:\AndroidProject\MyAwesomeApp"
+```
+
+#### Linux / macOS / WSL:
+```bash
+./scripts/install-skill.sh -t /path/to/my-awesome-app
+```
 
 ---
 

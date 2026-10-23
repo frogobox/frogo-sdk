@@ -25,7 +25,8 @@ class FrogoNetworkConnectivityObserver(
 
     private val appContext: Context = context.applicationContext
     private val connectivityManager: ConnectivityManager =
-        appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        appContext.getSystemService(ConnectivityManager::class.java)
+            ?: (appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
 
     override val isConnected: Boolean
         get() {
@@ -70,10 +71,18 @@ class FrogoNetworkConnectivityObserver(
                 trySend(FrogoConnectivityObserver.FrogoConnectivityStatus.Unavailable)
             }
 
-            connectivityManager.registerNetworkCallback(request, callback)
+            try {
+                connectivityManager.registerNetworkCallback(request, callback)
+            } catch (e: Exception) {
+                close(e)
+                return@callbackFlow
+            }
 
             awaitClose {
-                connectivityManager.unregisterNetworkCallback(callback)
+                try {
+                    connectivityManager.unregisterNetworkCallback(callback)
+                } catch (_: Exception) {
+                }
             }
         }.distinctUntilChanged()
     }

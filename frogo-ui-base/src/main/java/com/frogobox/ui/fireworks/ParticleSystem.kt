@@ -182,29 +182,13 @@ class ParticleSystem private constructor(
         drawable: Drawable,
         timeToLive: Long,
         parentViewId: Int = android.R.id.content,
-    ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, drawable, timeToLive) {
+    ) : this(resolveParentViewGroup(a, parentViewId), maxParticles, drawable, timeToLive) {
     }
 
     fun dpToPx(dp: Float): Float {
         return dp * mDpToPxScale
     }
-    /**
-     * Utility constructor that receives a Bitmap
-     *
-     * @param a            The parent activity
-     * @param maxParticles The maximum number of particles
-     * @param bitmap       The bitmap to use as particle
-     * @param timeToLive   The time to live for the particles
-     * @param parentViewId The view Id for the parent of the particle system
-     */
-    /**
-     * Utility constructor that receives a Bitmap
-     *
-     * @param a            The parent activity
-     * @param maxParticles The maximum number of particles
-     * @param bitmap       The bitmap to use as particle
-     * @param timeToLive   The time to live for the particles
-     */
+
     @JvmOverloads
     constructor(
         a: Activity,
@@ -212,28 +196,12 @@ class ParticleSystem private constructor(
         bitmap: Bitmap?,
         timeToLive: Long,
         parentViewId: Int = android.R.id.content,
-    ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
+    ) : this(resolveParentViewGroup(a, parentViewId), maxParticles, timeToLive) {
         for (i in 0 until mMaxParticles) {
             mParticles.add(Particle(bitmap))
         }
     }
-    /**
-     * Utility constructor that receives an AnimationDrawable
-     *
-     * @param a            The parent activity
-     * @param maxParticles The maximum number of particles
-     * @param animation    The animation to use as particle
-     * @param timeToLive   The time to live for the particles
-     * @param parentViewId The view Id for the parent of the particle system
-     */
-    /**
-     * Utility constructor that receives an AnimationDrawable
-     *
-     * @param a            The parent activity
-     * @param maxParticles The maximum number of particles
-     * @param animation    The animation to use as particle
-     * @param timeToLive   The time to live for the particles
-     */
+
     @JvmOverloads
     constructor(
         a: Activity,
@@ -241,7 +209,7 @@ class ParticleSystem private constructor(
         animation: AnimationDrawable?,
         timeToLive: Long,
         parentViewId: Int = android.R.id.content,
-    ) : this(a.findViewById<View>(parentViewId) as ViewGroup, maxParticles, timeToLive) {
+    ) : this(resolveParentViewGroup(a, parentViewId), maxParticles, timeToLive) {
         // Create the particles
         animation?.let { anim ->
             for (i in 0 until mMaxParticles) {
@@ -619,7 +587,7 @@ class ParticleSystem private constructor(
         mAnimator = ValueAnimator.ofInt(0, animnationTime.toInt()).apply {
             duration = animnationTime
             addUpdateListener { animation ->
-                val miliseconds = animation.animatedValue as Int
+                val miliseconds = (animation.animatedValue as? Number)?.toInt() ?: 0
                 onUpdate(miliseconds.toLong())
             }
             addListener(object : Animator.AnimatorListener {
@@ -785,6 +753,13 @@ class ParticleSystem private constructor(
          */
         fun setFPS(fps: Double) {
             TIMER_TASK_INTERVAL = Math.round(1000 / fps)
+        }
+
+        internal fun resolveParentViewGroup(a: Activity, parentViewId: Int): ViewGroup {
+            return (a.findViewById<View>(parentViewId) as? ViewGroup)
+                ?: (a.findViewById<View>(android.R.id.content) as? ViewGroup)
+                ?: (a.window.decorView as? ViewGroup)
+                ?: throw IllegalStateException("Cannot resolve a valid ViewGroup from Activity")
         }
     }
 }

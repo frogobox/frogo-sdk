@@ -39,6 +39,7 @@ package com.frogobox.ui.animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.view.animation.LinearInterpolator
 
 class FrogoAnimation : IFrogoAnimation {
@@ -82,7 +83,7 @@ class FrogoAnimation : IFrogoAnimation {
             duration = du
             interpolator = LinearInterpolator()
             childAnimations.forEach {
-                val animator = it as ObjectAnimator
+                val animator = it as? ValueAnimator ?: return@forEach
                 if (isRepeated) {
                     animator.repeatCount = mRepeatCount
                 }

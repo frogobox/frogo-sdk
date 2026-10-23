@@ -71,11 +71,9 @@ inline fun <reified T> Intent.getExtraExt(params: String): T? {
         BooleanArray::class -> getBooleanArrayExtra(params) as? T
         else -> {
             if (Parcelable::class.java.isAssignableFrom(T::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                IntentCompat.getParcelableExtra(this, params, T::class.java as Class<out Parcelable>) as? T
+                IntentCompat.getParcelableExtra(this, params, T::class.java.asSubclass(Parcelable::class.java)) as? T
             } else if (java.io.Serializable::class.java.isAssignableFrom(T::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                IntentCompat.getSerializableExtra(this, params, T::class.java as Class<out java.io.Serializable>) as? T
+                IntentCompat.getSerializableExtra(this, params, T::class.java.asSubclass(java.io.Serializable::class.java)) as? T
             } else {
                 null
             }
