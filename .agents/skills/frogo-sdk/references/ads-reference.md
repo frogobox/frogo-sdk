@@ -240,13 +240,150 @@ class MyAdmobScreenActivity : FrogoAdmobComposeActivity() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Modern Banner Ad in Compose with auto-lifecycle disposal
+            // Modern Banner Ad in Compose with auto-lifecycle disposal & collapsible support
             FrogoBannerAdCompose(
                 adUnitId = "ca-app-pub-3940256099942544/6300978111",
                 modifier = Modifier.fillMaxWidth(),
-                adSize = AdSize.BANNER
+                adSize = FrogoAdmobBannerAdaptive.largeAnchored(this, 360),
+                collapsible = "bottom"
             )
         }
+    }
+}
+```
+
+---
+
+## 7. Modern UMP Consent Management (`FrogoAdConsent`)
+
+Location: `com.frogobox.ads.core.FrogoAdConsent`
+
+Adheres directly to official Google `GoogleMobileAdsConsentManager` patterns:
+
+```kotlin
+// 1. Gather consent upon app startup
+FrogoAdConsent.gatherConsent(
+    activity = this,
+    testDeviceHashedId = if (BuildConfig.DEBUG) "TEST_DEVICE_HASHED_ID" else null
+) { formError ->
+    if (formError != null) {
+        Log.e("Consent", "Error: ${formError.message}")
+    }
+    // 2. Check if ads can be requested
+    if (FrogoAdConsent.canRequestAds(this)) {
+        initializeMobileAds()
+    }
+}
+
+// 3. Privacy Options Form (GDPR settings button in Settings / About screen)
+if (FrogoAdConsent.isPrivacyOptionsRequired(this)) {
+    privacyOptionsButton.visibility = View.VISIBLE
+    privacyOptionsButton.setOnClickListener {
+        FrogoAdConsent.showPrivacyOptionsForm(this) { formError ->
+            if (formError != null) Log.e("Consent", "Error: ${formError.message}")
+        }
+    }
+}
+```
+
+---
+
+## 8. Next-Gen Preloaders (`FrogoAdmobPreloader`)
+
+Location: `com.frogobox.ads.core.FrogoAdmobPreloader`
+
+Google Mobile Ads SDK Next-Gen introduces official Preloaders to manage background ad memory buffers without manual caching logic:
+
+```kotlin
+// 1. Start preloading ads with specified buffer size
+FrogoAdmobPreloader.startInterstitialPreload(adUnitId = "ca-app-pub-3940256099942544/1033173712", bufferSize = 2)
+FrogoAdmobPreloader.startRewardedPreload(adUnitId = "ca-app-pub-3940256099942544/5224354917", bufferSize = 2)
+FrogoAdmobPreloader.startAppOpenPreload(adUnitId = "ca-app-pub-3940256099942544/9257395921", bufferSize = 1)
+
+// 2. Check availability
+if (FrogoAdmobPreloader.isInterstitialAvailable(adUnitId)) {
+    // 3. Poll and show immediately
+    FrogoAdmobPreloader.pollAndShowInterstitial(activity, adUnitId, callback)
+}
+
+// Also accessible directly via instance manager:
+admobManager.pollAndShowInterstitialPreload(activity, adUnitId, callback)
+admobManager.pollAndShowRewardedPreload(activity, adUnitId, callback)
+```
+
+---
+
+## 9. Collapsible Banners & Adaptive Sizing
+
+### Adaptive Banner Sizing:
+```kotlin
+// Large anchored adaptive banner (recommended for phone/tablet screens):
+val adSize = FrogoAdmobBannerAdaptive.largeAnchored(context, containerWidthDp)
+
+// Inline adaptive banner (ideal for LazyColumn / RecyclerView):
+val inlineSize = FrogoAdmobBannerAdaptive.inline(context, containerWidthDp)
+```
+
+### Collapsible Banner Configuration:
+Pass `collapsible = "bottom"` or `collapsible = "top"` to request an expandable overlay banner that automatically collapses to standard height after interaction:
+```kotlin
+FrogoBannerAdCompose(
+    adUnitId = "ca-app-pub-3940256099942544/6300978111",
+    adSize = FrogoAdmobBannerAdaptive.largeAnchored(LocalContext.current, 360),
+    collapsible = "bottom",
+    callback = object : FrogoAdmobBannerCallback {
+        override fun onAdRefreshed(tag: String, message: String) {
+            Log.d("Banner", "Auto-refreshed: $message")
+        }
+    }
+)
+```
+
+---
+
+## 10. Jetpack Compose Native Ads (`FrogoNativeAdCompose`)
+
+Location: `com.frogobox.ads.ui.compose.FrogoNativeAdCompose`
+
+Declarative Compose wrapper around Next-Gen `NativeAdView` and `MediaView` providing full Material 3 styling and attribution badge compliance:
+
+### Ready-to-Use Lifecycle Managed Native Ad:
+```kotlin
+FrogoNativeAdCompose(
+    adUnitId = "ca-app-pub-3940256099942544/2247696110",
+    modifier = Modifier.fillMaxWidth().padding(16.dp)
+)
+```
+
+### Fully Custom Component Layout:
+```kotlin
+FrogoNativeAdView(
+    nativeAd = loadedNativeAd,
+    modifier = Modifier.fillMaxWidth().cardStyle()
+) {
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            FrogoNativeAdIconView(modifier = Modifier.size(48.dp))
+            Column {
+                FrogoNativeAdHeadlineView {
+                    Text(text = it, style = MaterialTheme.typography.titleMedium)
+                }
+                FrogoNativeAdAttribution() // Official "Ad" badge
+            }
+        }
+
+        FrogoNativeAdMediaView(
+            modifier = Modifier.fillMaxWidth().height(180.dp)
+        )
+
+        FrogoNativeAdBodyView {
+            Text(text = it, style = MaterialTheme.typography.bodyMedium)
+        }
+
+        FrogoNativeAdButton(
+            text = "Install Now",
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 ```

@@ -27,8 +27,19 @@ interface AdmobDelegates {
 
     fun setupAdmobDelegates(activity: AppCompatActivity)
 
-    // Show Ad Consent
+    // Show Ad Consent (Legacy)
     fun showAdConsent(callback: IFrogoAdConsent)
+
+    // Modern UMP Consent
+    fun gatherConsent(
+        testDeviceHashedId: String? = null,
+        tagForUnderAgeOfConsent: Boolean = false,
+        onComplete: (com.google.android.ump.FormError?) -> Unit
+    )
+
+    fun showPrivacyOptionsForm(
+        onDismiss: (com.google.android.ump.FormError?) -> Unit
+    )
 
     // ---------------------------------------------------------------------------------------------
 
@@ -42,6 +53,18 @@ interface AdmobDelegates {
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobBannerCallback? = null
+    ) {
+        showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback, null)
+    }
+
+    fun showAdBanner(
+        mAdView: AdView,
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     )
 
     fun showAdBanner(
@@ -61,6 +84,18 @@ interface AdmobDelegates {
         timeoutMilliSecond: Int? = null,
         keyword: List<String>? = null,
         callback: FrogoAdmobBannerCallback? = null
+    ) {
+        showAdBannerContainer(bannerAdUnitId, mAdsSize, container, timeoutMilliSecond, keyword, callback, null)
+    }
+
+    fun showAdBannerContainer(
+        bannerAdUnitId: String,
+        mAdsSize: AdSize,
+        container: RelativeLayout,
+        timeoutMilliSecond: Int?,
+        keyword: List<String>?,
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     )
 
     // ---------------------------------------------------------------------------------------------
@@ -113,6 +148,54 @@ interface AdmobDelegates {
         keyword: List<String>? = null,
         callback: FrogoAdmobRewardedCallback
     )
+
+    // ---------------------------------------------------------------------------------------------
+    // Next-Gen Preloaders
+    // ---------------------------------------------------------------------------------------------
+
+    fun startInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    )
+
+    fun pollAndShowInterstitialPreload(
+        adUnitId: String,
+        callback: FrogoAdmobInterstitialCallback? = null
+    ): Boolean
+
+    fun startRewardedPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    )
+
+    fun pollAndShowRewardedPreload(
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean
+
+    fun startRewardedInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    )
+
+    fun pollAndShowRewardedInterstitialPreload(
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean
+
+    fun startAppOpenPreload(
+        adUnitId: String,
+        bufferSize: Int = 1,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback? = null
+    )
+
+    fun pollAndShowAppOpenPreload(
+        adUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback? = null
+    ): Boolean
 
     // ---------------------------------------------------------------------------------------------
     // App Open Ads

@@ -42,9 +42,10 @@ object FrogoAdmob : IFrogoAdmob,
         mAdsSize: AdSize,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
-        defaultManager.showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback)
+        defaultManager.showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback, collapsible)
     }
 
     override fun showAdBanner(
@@ -63,9 +64,10 @@ object FrogoAdmob : IFrogoAdmob,
         container: RelativeLayout,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
-        defaultManager.showAdBannerContainer(context, bannerAdUnitId, mAdsSize, container, timeoutMilliSecond, keyword, callback)
+        defaultManager.showAdBannerContainer(context, bannerAdUnitId, mAdsSize, container, timeoutMilliSecond, keyword, callback, collapsible)
     }
 
     override fun loadAdInterstitial(

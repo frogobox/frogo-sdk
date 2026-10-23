@@ -134,4 +134,30 @@ class FrogoAdConsentTest {
         assertFalse(consentCallback.onConsentSuccessCalled)
         assertFalse(consentCallback.onConsentErrorCalled)
     }
+
+    @Test
+    fun testCanRequestAdsAndPrivacyOptionsRequiredWithMockedUmp() {
+        io.mockk.mockkStatic(com.google.android.ump.UserMessagingPlatform::class)
+        try {
+            val mockContext = mockk<Context>(relaxed = true)
+            val mockConsentInfo = mockk<com.google.android.ump.ConsentInformation>()
+
+            every { com.google.android.ump.UserMessagingPlatform.getConsentInformation(mockContext) } returns mockConsentInfo
+            every { mockConsentInfo.canRequestAds() } returns true
+            every { mockConsentInfo.privacyOptionsRequirementStatus } returns
+                com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+
+            assertTrue(FrogoAdConsent.canRequestAds(mockContext))
+            assertTrue(FrogoAdConsent.isPrivacyOptionsRequired(mockContext))
+
+            every { mockConsentInfo.canRequestAds() } returns false
+            every { mockConsentInfo.privacyOptionsRequirementStatus } returns
+                com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus.NOT_REQUIRED
+
+            assertFalse(FrogoAdConsent.canRequestAds(mockContext))
+            assertFalse(FrogoAdConsent.isPrivacyOptionsRequired(mockContext))
+        } finally {
+            io.mockk.unmockkStatic(com.google.android.ump.UserMessagingPlatform::class)
+        }
+    }
 }

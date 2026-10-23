@@ -36,6 +36,12 @@ interface FrogoAdmobBannerCallback {
     // Code to be executed when the user clicks on an ad.
     fun onAdClicked(tag: String, message: String)
 
+    // Code to be executed when a banner ad is automatically refreshed.
+    fun onAdRefreshed(tag: String, message: String) {}
+
+    // Code to be executed when a banner ad fails to refresh.
+    fun onAdFailedToRefresh(tag: String, errorCode: String, errorMessage: String) {}
+
     // Code to be executed when the user is about to return
     // to the app after tapping on an ad.
     // When a user returns to the app after viewing an ad's destination URL, this method is invoked.

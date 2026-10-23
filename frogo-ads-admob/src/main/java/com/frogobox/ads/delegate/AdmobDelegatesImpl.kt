@@ -41,15 +41,37 @@ class AdmobDelegatesImpl : AdmobDelegates {
         adConsent.showConsent(callback)
     }
 
+    override fun gatherConsent(
+        testDeviceHashedId: String?,
+        tagForUnderAgeOfConsent: Boolean,
+        onComplete: (com.google.android.ump.FormError?) -> Unit
+    ) {
+        if (::admobDelegatesActivity.isInitialized) {
+            adConsent.gatherConsent(
+                activity = admobDelegatesActivity,
+                testDeviceHashedId = testDeviceHashedId,
+                tagForUnderAgeOfConsent = tagForUnderAgeOfConsent,
+                onConsentGatheringComplete = onComplete
+            )
+        }
+    }
+
+    override fun showPrivacyOptionsForm(onDismiss: (com.google.android.ump.FormError?) -> Unit) {
+        if (::admobDelegatesActivity.isInitialized) {
+            adConsent.showPrivacyOptionsForm(admobDelegatesActivity, onDismiss)
+        }
+    }
+
     override fun showAdBanner(
         mAdView: AdView,
         bannerAdUnitId: String,
         mAdsSize: AdSize,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
-        admobManager.showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback)
+        admobManager.showAdBanner(mAdView, bannerAdUnitId, mAdsSize, timeoutMilliSecond, keyword, callback, collapsible)
     }
 
     override fun showAdBanner(
@@ -67,7 +89,8 @@ class AdmobDelegatesImpl : AdmobDelegates {
         container: RelativeLayout,
         timeoutMilliSecond: Int?,
         keyword: List<String>?,
-        callback: FrogoAdmobBannerCallback?
+        callback: FrogoAdmobBannerCallback?,
+        collapsible: String?
     ) {
         admobManager.showAdBannerContainer(
             context = admobDelegatesActivity,
@@ -76,7 +99,8 @@ class AdmobDelegatesImpl : AdmobDelegates {
             container = container,
             timeoutMilliSecond = timeoutMilliSecond,
             keyword = keyword,
-            callback = callback
+            callback = callback,
+            collapsible = collapsible
         )
     }
 
@@ -150,6 +174,86 @@ class AdmobDelegatesImpl : AdmobDelegates {
         callback: FrogoAdmobRewardedCallback
     ) {
         admobManager.loadAdRewardedInterstitial(admobDelegatesActivity, mAdUnitIdRewardedInterstitial, timeoutMilliSecond, keyword, callback)
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // Next-Gen Preloaders
+    // ---------------------------------------------------------------------------------------------
+
+    override fun startInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback?
+    ) {
+        com.frogobox.ads.core.FrogoAdmobPreloader.startInterstitialPreload(adUnitId, bufferSize, callback)
+    }
+
+    override fun pollAndShowInterstitialPreload(
+        adUnitId: String,
+        callback: FrogoAdmobInterstitialCallback?
+    ): Boolean {
+        return if (::admobDelegatesActivity.isInitialized) {
+            com.frogobox.ads.core.FrogoAdmobPreloader.pollAndShowInterstitial(admobDelegatesActivity, adUnitId, callback)
+        } else {
+            false
+        }
+    }
+
+    override fun startRewardedPreload(
+        adUnitId: String,
+        bufferSize: Int,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback?
+    ) {
+        com.frogobox.ads.core.FrogoAdmobPreloader.startRewardedPreload(adUnitId, bufferSize, callback)
+    }
+
+    override fun pollAndShowRewardedPreload(
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean {
+        return if (::admobDelegatesActivity.isInitialized) {
+            com.frogobox.ads.core.FrogoAdmobPreloader.pollAndShowRewarded(admobDelegatesActivity, adUnitId, callback)
+        } else {
+            false
+        }
+    }
+
+    override fun startRewardedInterstitialPreload(
+        adUnitId: String,
+        bufferSize: Int,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback?
+    ) {
+        com.frogobox.ads.core.FrogoAdmobPreloader.startRewardedInterstitialPreload(adUnitId, bufferSize, callback)
+    }
+
+    override fun pollAndShowRewardedInterstitialPreload(
+        adUnitId: String,
+        callback: FrogoAdmobRewardedCallback
+    ): Boolean {
+        return if (::admobDelegatesActivity.isInitialized) {
+            com.frogobox.ads.core.FrogoAdmobPreloader.pollAndShowRewardedInterstitial(admobDelegatesActivity, adUnitId, callback)
+        } else {
+            false
+        }
+    }
+
+    override fun startAppOpenPreload(
+        adUnitId: String,
+        bufferSize: Int,
+        callback: com.google.android.libraries.ads.mobile.sdk.common.PreloadCallback?
+    ) {
+        com.frogobox.ads.core.FrogoAdmobPreloader.startAppOpenPreload(adUnitId, bufferSize, callback)
+    }
+
+    override fun pollAndShowAppOpenPreload(
+        adUnitId: String,
+        callback: FrogoAdmobAppOpenAdCallback?
+    ): Boolean {
+        return if (::admobDelegatesActivity.isInitialized) {
+            com.frogobox.ads.core.FrogoAdmobPreloader.pollAndShowAppOpen(admobDelegatesActivity, adUnitId, callback)
+        } else {
+            false
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
