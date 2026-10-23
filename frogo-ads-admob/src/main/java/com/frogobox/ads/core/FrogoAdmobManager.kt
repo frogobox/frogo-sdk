@@ -298,6 +298,7 @@ class FrogoAdmobManager(
                     override fun onAdLoaded(ad: InterstitialAd) {
                         mInterstitialAd = ad
                         runOnMainThread {
+                            callback?.onHideAdRequestProgress(TAG, "[Interstitial] >> Success - onAdLoaded")
                             callback?.onAdLoaded(TAG, "Interstitial Ad was loaded")
                         }
 
@@ -305,6 +306,7 @@ class FrogoAdmobManager(
                             override fun onAdDismissedFullScreenContent() {
                                 mInterstitialAd = null
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdDismissed(TAG, "Interstitial Ad was dismissed")
                                 }
                             }
@@ -312,12 +314,14 @@ class FrogoAdmobManager(
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 mInterstitialAd = null
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdFailed(TAG, "Interstitial Ad failed to show: ${fullScreenContentError.message}")
                                 }
                             }
 
                             override fun onAdShowedFullScreenContent() {
                                 runOnMainThread {
+                                    callback?.onHideAdRequestProgress(TAG, "[Interstitial]")
                                     callback?.onAdShowed(TAG, "Interstitial Ad showed fullscreen content")
                                 }
                             }
@@ -386,23 +390,27 @@ class FrogoAdmobManager(
                     override fun onAdLoaded(ad: RewardedAd) {
                         mRewardedAd = ad
                         runOnMainThread {
+                            callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                             callback.onAdLoaded(TAG, "RewardedAd was loaded")
                         }
                         mRewardedAd?.adEventCallback = object : RewardedAdEventCallback {
                             override fun onAdDismissedFullScreenContent() {
                                 mRewardedAd = null
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdDismissed(TAG, "Rewarded Ad was dismissed")
                                 }
                             }
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 mRewardedAd = null
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdFailed(TAG, "Rewarded Ad failed to show: ${fullScreenContentError.message}")
                                 }
                             }
                             override fun onAdShowedFullScreenContent() {
                                 runOnMainThread {
+                                    callback.onHideAdRequestProgress(TAG, "[RewardedAd] >> Success - onAdLoaded")
                                     callback.onAdShowed(TAG, "Rewarded Ad showed fullscreen content")
                                 }
                             }
