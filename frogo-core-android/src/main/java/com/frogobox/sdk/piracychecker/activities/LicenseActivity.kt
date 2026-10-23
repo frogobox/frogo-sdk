@@ -1,6 +1,5 @@
 package com.frogobox.sdk.piracychecker.activities
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -66,18 +65,18 @@ class LicenseActivity : AppCompatActivity() {
         window.setupLightStatusBar(withLightStatusBar)
     }
     
-    @SuppressLint("InflateParams")
     private fun setActivityData() {
         val frameLayout = findViewById<FrameLayout?>(R.id.mainContainer)
         
         val factory = LayoutInflater.from(this)
-        val inflateView: View?
-        if (layoutXML == -1) {
-            inflateView = factory.inflate(R.layout.activity_license_default, null)
-            val activityDescription =
-                inflateView.findViewById<TextView?>(R.id.piracy_checker_description)
-            activityDescription?.text = description
-        } else inflateView = factory.inflate(layoutXML, null)
+        val inflateView: View? = if (layoutXML == -1) {
+            factory.inflate(R.layout.activity_license_default, frameLayout, false).also { view ->
+                val activityDescription = view.findViewById<TextView?>(R.id.piracy_checker_description)
+                activityDescription?.text = description
+            }
+        } else {
+            factory.inflate(layoutXML, frameLayout, false)
+        }
         
         inflateView?.let { frameLayout?.addView(it) }
     }

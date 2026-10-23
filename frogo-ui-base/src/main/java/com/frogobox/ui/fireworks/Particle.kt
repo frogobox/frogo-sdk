@@ -9,6 +9,8 @@ import com.frogobox.ui.fireworks.modifiers.ParticleModifier
 open class Particle protected constructor() {
 
     protected var mImage: Bitmap? = null
+    val image: Bitmap?
+        get() = mImage
     var mCurrentX = 0f
     var mCurrentY = 0f
     var mScale = 1f

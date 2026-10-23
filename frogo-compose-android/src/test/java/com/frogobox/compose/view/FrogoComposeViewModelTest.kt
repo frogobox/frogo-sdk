@@ -131,7 +131,7 @@ class FrogoComposeViewModelTest {
 
     data class TestState(val data: String = "initial")
     sealed interface TestEffect {
-        object Navigate : TestEffect
+        data object Navigate : TestEffect
     }
 
     private class TestStateViewModel : FrogoComposeStateViewModel<TestState, TestEffect>(TestState()) {
@@ -141,6 +141,10 @@ class FrogoComposeViewModelTest {
 
         fun triggerEffect() {
             emitEffect(TestEffect.Navigate)
+        }
+
+        fun triggerTryEffect(): Boolean {
+            return tryEmitEffect(TestEffect.Navigate)
         }
     }
 
@@ -168,6 +172,10 @@ class FrogoComposeViewModelTest {
         viewModel.triggerEffect()
         assertEquals(1, effects.size)
         assertEquals(TestEffect.Navigate, effects[0])
+
+        // Test tryEmitEffect non-suspending
+        val success = viewModel.triggerTryEffect()
+        assertTrue(success)
 
         // Clean up job
         job.cancel()

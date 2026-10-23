@@ -16,7 +16,6 @@
 
 package com.frogobox.sdk.licensing;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +25,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.provider.Settings.Secure;
 import android.util.Log;
 
 import com.android.vending.licensing.ILicenseResultListener;
@@ -56,7 +54,6 @@ import java.util.Set;
  * the Base64-encoded RSA public key associated with your developer account. The public key is
  * obtainable from the publisher site.
  */
-@SuppressLint({"SimpleDateFormat", "HardwareIds"})
 public class LibraryChecker implements ServiceConnection {
     private static final String TAG = "LibraryChecker";
 
@@ -368,12 +365,9 @@ public class LibraryChecker implements ServiceConnection {
                         }
 
                         if (logResponse) {
-                            String android_id = Secure.getString(mContext.getContentResolver(),
-                                                                 Secure.ANDROID_ID);
                             Date date = new Date();
                             Log.d(TAG, "Server Failure: " + stringError);
-                            Log.d(TAG, "Android ID: " + android_id);
-                            SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+                            SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", java.util.Locale.US);
                             String asGmt = df.format(date) + " GMT";
                             Log.d(TAG, "Time: " + asGmt);
                         }

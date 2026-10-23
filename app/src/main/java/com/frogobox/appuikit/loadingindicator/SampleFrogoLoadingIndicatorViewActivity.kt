@@ -1,6 +1,5 @@
 package com.frogobox.appuikit.loadingindicator
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -76,7 +75,7 @@ class SampleFrogoLoadingIndicatorViewActivity :
 
                 override fun onBindViewHolder(
                     holder: IndicatorHolder,
-                    @SuppressLint("RecyclerView") position: Int,
+                    position: Int,
                 ) {
                     holder.setData(dataIndicators[position])
                 }

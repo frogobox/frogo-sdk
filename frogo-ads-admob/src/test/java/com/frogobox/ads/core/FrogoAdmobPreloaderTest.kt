@@ -4,9 +4,9 @@ import android.app.Activity
 import com.frogobox.ads.callback.FrogoAdmobAppOpenAdCallback
 import com.frogobox.ads.callback.FrogoAdmobInterstitialCallback
 import com.frogobox.ads.callback.FrogoAdmobRewardedCallback
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -138,5 +138,40 @@ class FrogoAdmobPreloaderTest {
 
         FrogoAdmobPreloader.startAppOpenPreload("", bufferSize = 1)
         FrogoAdmobPreloader.startAppOpenPreload("test-id", bufferSize = 1)
+    }
+
+    @Test
+    fun testPollAndShowOnFinishingActivity_failsSafely() {
+        val mockActivity = mockk<Activity>()
+        every { mockActivity.isFinishing } returns true
+        every { mockActivity.isDestroyed } returns false
+
+        val interstitialCb = mockk<FrogoAdmobInterstitialCallback>(relaxed = true)
+        val interstitialResult = FrogoAdmobPreloader.pollAndShowInterstitial(mockActivity, "test-unit", interstitialCb)
+        assertFalse(interstitialResult)
+        verify(exactly = 1) {
+            interstitialCb.onAdFailed("FrogoAdmobPreloader", "Activity is finishing or destroyed")
+        }
+
+        val rewardedCb = mockk<FrogoAdmobRewardedCallback>(relaxed = true)
+        val rewardedResult = FrogoAdmobPreloader.pollAndShowRewarded(mockActivity, "test-unit", rewardedCb)
+        assertFalse(rewardedResult)
+        verify(exactly = 1) {
+            rewardedCb.onAdFailed("FrogoAdmobPreloader", "Activity is finishing or destroyed")
+        }
+
+        val rewardedInterCb = mockk<FrogoAdmobRewardedCallback>(relaxed = true)
+        val rewardedInterResult = FrogoAdmobPreloader.pollAndShowRewardedInterstitial(mockActivity, "test-unit", rewardedInterCb)
+        assertFalse(rewardedInterResult)
+        verify(exactly = 1) {
+            rewardedInterCb.onAdFailed("FrogoAdmobPreloader", "Activity is finishing or destroyed")
+        }
+
+        val appOpenCb = mockk<FrogoAdmobAppOpenAdCallback>(relaxed = true)
+        val appOpenResult = FrogoAdmobPreloader.pollAndShowAppOpen(mockActivity, "test-unit", appOpenCb)
+        assertFalse(appOpenResult)
+        verify(exactly = 1) {
+            appOpenCb.onAdFailed("FrogoAdmobPreloader", "Activity is finishing or destroyed")
+        }
     }
 }

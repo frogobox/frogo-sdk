@@ -51,8 +51,8 @@ object Slide : ISlide {
 
     override fun InLeft(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.width - view.left).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.width - view.left).toFloat() } ?: (view.width.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
         val object2 = ObjectAnimator.ofFloat(view, "translationX", -distance, 0f)
@@ -65,8 +65,8 @@ object Slide : ISlide {
 
     override fun InRight(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.width - view.left).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.width - view.left).toFloat() } ?: (view.width.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
         val object2 = ObjectAnimator.ofFloat(view, "translationX", distance, 0f)
@@ -79,8 +79,8 @@ object Slide : ISlide {
 
     override fun InUp(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.height - view.top).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.height - view.top).toFloat() } ?: (view.height.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
         val object2 = ObjectAnimator.ofFloat(view, "translationY", distance, 0f)
@@ -93,8 +93,8 @@ object Slide : ISlide {
 
     override fun OutDown(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.height - view.top).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.height - view.top).toFloat() } ?: (view.height.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f)
         val object2 = ObjectAnimator.ofFloat(view, "translationY", 0f, distance)
@@ -120,8 +120,8 @@ object Slide : ISlide {
 
     override fun OutRight(view: View): AnimatorSet {
 
-        val parent = view.parent as ViewGroup
-        val distance = (parent.width - view.left).toFloat()
+        val parent = view.parent as? ViewGroup
+        val distance = parent?.let { (it.width - view.left).toFloat() } ?: (view.width.toFloat().takeIf { it > 0f } ?: 1000f)
 
         val object1 = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f)
         val object2 = ObjectAnimator.ofFloat(view, "translationX", 0f, distance)

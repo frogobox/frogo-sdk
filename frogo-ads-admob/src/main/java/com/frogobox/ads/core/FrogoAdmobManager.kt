@@ -1,6 +1,5 @@
 package com.frogobox.ads.core
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Build
@@ -129,7 +128,6 @@ class FrogoAdmobManager(
     // Banner Ads
     // ---------------------------------------------------------------------------------------------
 
-    @SuppressLint("MissingPermission")
     override fun showAdBanner(
         mAdView: AdView,
         bannerAdUnitId: String,
@@ -209,7 +207,6 @@ class FrogoAdmobManager(
         )
     }
 
-    @SuppressLint("MissingPermission")
     override fun showAdBanner(
         mAdView: AdView,
         timeoutMilliSecond: Int?,
@@ -227,7 +224,6 @@ class FrogoAdmobManager(
         )
     }
 
-    @SuppressLint("MissingPermission")
     override fun showAdBannerContainer(
         context: Context,
         bannerAdUnitId: String,

@@ -35,8 +35,6 @@ import com.frogobox.sdk.piracychecker.utils.verifySigningCertificates
 import java.util.Arrays
 
 // Library configuration/customizations
-@Suppress("unused")
-@SuppressLint("HardwareIds")
 class PiracyChecker(
     private var context: Context?,
     var unlicensedDialogTitle: String? =
@@ -326,7 +324,8 @@ class PiracyChecker(
                 override fun allow() {}
 
                 override fun doNotAllow(error: PiracyCheckerError, app: PirateApp?) {
-                    if (context is Activity && (context as Activity).isFinishing) {
+                    val activity = context as? Activity
+                    if (activity != null && (activity.isFinishing || activity.isDestroyed)) {
                         return
                     }
 

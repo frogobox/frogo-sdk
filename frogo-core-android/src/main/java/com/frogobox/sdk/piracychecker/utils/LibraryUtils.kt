@@ -1,7 +1,6 @@
 package com.frogobox.sdk.piracychecker.utils
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
@@ -98,7 +97,6 @@ internal fun Context.verifyInstallerId(installerID: List<InstallerID>): Boolean 
 }
 
 
-@SuppressLint("SdCardPath")
 internal fun Context.getPirateApp(
     lpf: Boolean,
     stores: Boolean,

@@ -402,7 +402,8 @@ fun FrogoNativeAdCompose(
         )
     }
 
-    DisposableEffect(Unit) {
+    DisposableEffect(adUnitId) {
+        isDisposed = false
         onDispose {
             isDisposed = true
             nativeAdState?.destroy()

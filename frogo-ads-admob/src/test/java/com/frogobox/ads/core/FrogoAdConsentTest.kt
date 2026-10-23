@@ -160,4 +160,46 @@ class FrogoAdConsentTest {
             io.mockk.unmockkStatic(com.google.android.ump.UserMessagingPlatform::class)
         }
     }
+
+    @Test
+    fun testEmptyConfigLocalesDoesNotThrowIndexOutOfBoundsException() {
+        val mockContext = mockk<Context>(relaxed = true)
+        val mockResources = mockk<android.content.res.Resources>(relaxed = true)
+        val config = android.content.res.Configuration()
+        // Empty locales
+        every { mockContext.resources } returns mockResources
+        every { mockResources.configuration } returns config
+
+        // Must return default locale or empty without crashing with IndexOutOfBoundsException
+        val country = FrogoAdConsent.getCountryCode(mockContext)
+        assertTrue(country.isNotEmpty())
+    }
+
+    @Test
+    fun testGatherConsentOnFinishingActivityAbortsGracefully() {
+        val mockActivity = mockk<Activity>()
+        every { mockActivity.isFinishing } returns true
+        every { mockActivity.isDestroyed } returns false
+
+        var callbackCalled = false
+        FrogoAdConsent.gatherConsent(mockActivity) { error ->
+            callbackCalled = true
+            org.junit.Assert.assertNull(error)
+        }
+        assertTrue(callbackCalled)
+    }
+
+    @Test
+    fun testShowPrivacyOptionsOnFinishingActivityAbortsGracefully() {
+        val mockActivity = mockk<Activity>()
+        every { mockActivity.isFinishing } returns false
+        every { mockActivity.isDestroyed } returns true
+
+        var callbackCalled = false
+        FrogoAdConsent.showPrivacyOptionsForm(mockActivity) { error ->
+            callbackCalled = true
+            org.junit.Assert.assertNull(error)
+        }
+        assertTrue(callbackCalled)
+    }
 }

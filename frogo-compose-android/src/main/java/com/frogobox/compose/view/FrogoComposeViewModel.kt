@@ -61,5 +61,13 @@ abstract class FrogoComposeStateViewModel<STATE, EFFECT>(
             _uiEffect.send(effect)
         }
     }
+
+    /**
+     * Non-suspending attempt to emit a one-off UI effect immediately.
+     * Returns true if successfully delivered into buffer, false otherwise.
+     */
+    protected fun tryEmitEffect(effect: EFFECT): Boolean {
+        return _uiEffect.trySend(effect).isSuccess
+    }
 }
 

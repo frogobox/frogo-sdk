@@ -1,6 +1,5 @@
 package com.frogobox.sdk.widget.zoomimageview
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Matrix
 import android.graphics.PointF
@@ -57,48 +56,53 @@ class ZoomImageView @JvmOverloads constructor(
         sharedConstructing(context)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun sharedConstructing(context: Context) {
         super.setClickable(true)
         mScaleDetector = ScaleGestureDetector(context, ScaleListener())
         currentMatrix = Matrix()
         imageMatrix = currentMatrix
         scaleType = ScaleType.MATRIX
-        setOnTouchListener { _, event ->
-            mScaleDetector?.onTouchEvent(event)
-            val curr = PointF(event.x, event.y)
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN -> {
-                    last.set(curr)
-                    start.set(last)
-                    mode = DRAG
-                }
+    }
 
-                MotionEvent.ACTION_MOVE -> if (mode == DRAG) {
-                    val deltaX = curr.x - last.x
-                    val deltaY = curr.y - last.y
-                    val fixTransX =
-                        getFixDragTrans(deltaX, viewWidth.toFloat(), origWidth * saveScale)
-                    val fixTransY =
-                        getFixDragTrans(deltaY, viewHeight.toFloat(), origHeight * saveScale)
-                    currentMatrix.postTranslate(fixTransX, fixTransY)
-                    fixTrans()
-                    last.set(curr.x, curr.y)
-                }
-
-                MotionEvent.ACTION_UP -> {
-                    mode = NONE
-                    val xDiff = abs(curr.x - start.x).toInt()
-                    val yDiff = abs(curr.y - start.y).toInt()
-                    if (xDiff < CLICK && yDiff < CLICK) performClick()
-                }
-
-                MotionEvent.ACTION_POINTER_UP -> mode = NONE
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        mScaleDetector?.onTouchEvent(event)
+        val curr = PointF(event.x, event.y)
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                last.set(curr)
+                start.set(last)
+                mode = DRAG
             }
-            imageMatrix = currentMatrix
-            invalidate()
-            true // indicate event was handled
+
+            MotionEvent.ACTION_MOVE -> if (mode == DRAG) {
+                val deltaX = curr.x - last.x
+                val deltaY = curr.y - last.y
+                val fixTransX =
+                    getFixDragTrans(deltaX, viewWidth.toFloat(), origWidth * saveScale)
+                val fixTransY =
+                    getFixDragTrans(deltaY, viewHeight.toFloat(), origHeight * saveScale)
+                currentMatrix.postTranslate(fixTransX, fixTransY)
+                fixTrans()
+                last.set(curr.x, curr.y)
+            }
+
+            MotionEvent.ACTION_UP -> {
+                mode = NONE
+                val xDiff = abs(curr.x - start.x).toInt()
+                val yDiff = abs(curr.y - start.y).toInt()
+                if (xDiff < CLICK && yDiff < CLICK) performClick()
+            }
+
+            MotionEvent.ACTION_POINTER_UP -> mode = NONE
         }
+        imageMatrix = currentMatrix
+        invalidate()
+        return true
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
     }
 
     fun setMaxZoom(x: Float) {

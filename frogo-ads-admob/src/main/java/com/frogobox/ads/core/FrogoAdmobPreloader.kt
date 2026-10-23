@@ -100,6 +100,10 @@ object FrogoAdmobPreloader {
         adUnitId: String,
         callback: FrogoAdmobInterstitialCallback? = null
     ): Boolean {
+        if (activity.isFinishing || activity.isDestroyed) {
+            callback?.onAdFailed(TAG, "Activity is finishing or destroyed")
+            return false
+        }
         val ad = pollInterstitial(adUnitId)
         if (ad == null) {
             callback?.onAdFailed(TAG, "Interstitial ad is not available in preloader buffer.")
@@ -192,6 +196,10 @@ object FrogoAdmobPreloader {
         adUnitId: String,
         callback: FrogoAdmobRewardedCallback
     ): Boolean {
+        if (activity.isFinishing || activity.isDestroyed) {
+            callback.onAdFailed(TAG, "Activity is finishing or destroyed")
+            return false
+        }
         val ad = pollRewarded(adUnitId)
         if (ad == null) {
             callback.onAdFailed(TAG, "Rewarded ad is not available in preloader buffer.")
@@ -288,6 +296,10 @@ object FrogoAdmobPreloader {
         adUnitId: String,
         callback: FrogoAdmobRewardedCallback
     ): Boolean {
+        if (activity.isFinishing || activity.isDestroyed) {
+            callback.onAdFailed(TAG, "Activity is finishing or destroyed")
+            return false
+        }
         val ad = pollRewardedInterstitial(adUnitId)
         if (ad == null) {
             callback.onAdFailed(TAG, "Rewarded Interstitial ad is not available in preloader buffer.")
@@ -384,6 +396,10 @@ object FrogoAdmobPreloader {
         adUnitId: String,
         callback: FrogoAdmobAppOpenAdCallback? = null
     ): Boolean {
+        if (activity.isFinishing || activity.isDestroyed) {
+            callback?.onAdFailed(TAG, "Activity is finishing or destroyed")
+            return false
+        }
         val ad = pollAppOpen(adUnitId)
         if (ad == null) {
             callback?.onAdFailed(TAG, "App Open ad is not available in preloader buffer.")

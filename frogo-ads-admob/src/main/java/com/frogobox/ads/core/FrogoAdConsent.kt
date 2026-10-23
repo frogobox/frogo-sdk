@@ -34,7 +34,10 @@ object FrogoAdConsent {
         val localeCountry = runCatching {
             val config = context.resources?.configuration
             if (config != null) {
-                androidx.core.os.ConfigurationCompat.getLocales(config)[0]?.country?.uppercase().orEmpty()
+                val locales = androidx.core.os.ConfigurationCompat.getLocales(config)
+                if (!locales.isEmpty) {
+                    locales[0]?.country?.uppercase().orEmpty()
+                } else ""
             } else ""
         }.getOrDefault("")
         return localeCountry.ifBlank { java.util.Locale.getDefault().country.uppercase() }
@@ -69,6 +72,11 @@ object FrogoAdConsent {
         tagForUnderAgeOfConsent: Boolean = false,
         onConsentGatheringComplete: (FormError?) -> Unit
     ) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            onConsentGatheringComplete(null)
+            return
+        }
+
         val consentInformation: ConsentInformation =
             UserMessagingPlatform.getConsentInformation(activity)
 
@@ -86,6 +94,10 @@ object FrogoAdConsent {
             activity,
             paramsBuilder.build(),
             {
+                if (activity.isFinishing || activity.isDestroyed) {
+                    onConsentGatheringComplete(null)
+                    return@requestConsentInfoUpdate
+                }
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) { formError ->
                     onConsentGatheringComplete(formError)
                 }
@@ -114,6 +126,10 @@ object FrogoAdConsent {
         activity: android.app.Activity,
         onDismissListener: (FormError?) -> Unit
     ) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            onDismissListener(null)
+            return
+        }
         UserMessagingPlatform.showPrivacyOptionsForm(activity) { formError ->
             onDismissListener(formError)
         }
@@ -128,11 +144,16 @@ object FrogoAdConsent {
     }
 
     private fun setupConsent(callback: IFrogoAdConsent) {
+        val act = callback.activity()
+        if (act.isFinishing || act.isDestroyed) {
+            return
+        }
+
         val consentInformation: ConsentInformation =
-            UserMessagingPlatform.getConsentInformation(callback.activity())
+            UserMessagingPlatform.getConsentInformation(act)
 
         val params = if (callback.isDebug()) {
-            val debugSettings = ConsentDebugSettings.Builder(callback.activity())
+            val debugSettings = ConsentDebugSettings.Builder(act)
                 .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
                 .addTestDeviceHashedId("TEST-DEVICE-HASHED-ID")
                 .build()
@@ -148,10 +169,13 @@ object FrogoAdConsent {
         }
 
         consentInformation.requestConsentInfoUpdate(
-            callback.activity(),
+            act,
             params,
             {
-                UserMessagingPlatform.loadAndShowConsentFormIfRequired(callback.activity()) { formError ->
+                if (act.isFinishing || act.isDestroyed) {
+                    return@requestConsentInfoUpdate
+                }
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(act) { formError ->
                     if (formError != null) {
                         callback.onConsentError(formError)
                     } else if (consentInformation.canRequestAds()) {
@@ -167,4 +191,4 @@ object FrogoAdConsent {
         )
     }
 
-}
+}

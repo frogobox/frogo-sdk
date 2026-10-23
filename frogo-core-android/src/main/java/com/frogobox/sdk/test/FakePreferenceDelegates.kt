@@ -75,7 +75,6 @@ class FakePreferenceDelegates : PreferenceDelegates {
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun <T> get(key: String, defaultValue: T): T =
         (storage[key] as? T) ?: defaultValue
 }

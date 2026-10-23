@@ -1,6 +1,5 @@
 package com.frogobox.sdk.ext
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -28,7 +27,6 @@ import com.frogobox.sdk.widget.webview.WebViewCallback
  *
  */
 
-@SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadUrlFrogoExt(
     url: String,
     auth: Map<String, String>? = null,
