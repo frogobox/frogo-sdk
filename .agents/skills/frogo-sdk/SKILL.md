@@ -1,13 +1,13 @@
 ---
 name: frogo-sdk
 description: >-
-  Comprehensive guide and runbook for integrating and developing with the Frogo SDK Android suite (v3.0.10).
-  Covers Jetpack Compose UI (Material 3), Google Mobile Ads SDK (Next-Gen 1.5.0) & Unity Ads (4.21.0),
-  core Android utilities, UDF/MVI State ViewModels, and edge-to-edge Compose activities.
-  Use this skill whenever building Android features, generating screens, integrating ads, or working with Frogo SDK libraries.
+  Use when developing Android apps or libraries integrating Frogo SDK (v3.0.13),
+  implementing Jetpack Compose UI with Material Design 3, integrating Google Mobile Ads SDK Next-Gen
+  or Unity Ads, building edge-to-edge Compose activities with UDF/MVI State ViewModels,
+  or using Frogo core Android utilities and extensions.
 metadata:
   author: Frogobox (Muhammad Faisal Amir)
-  version: "3.0.10"
+  version: "3.0.13"
   keywords:
   - Frogo SDK
   - Android SDK
@@ -24,16 +24,16 @@ metadata:
 
 # Frogo SDK Integration & Development Specialist
 
-This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v3.0.10).
+This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v3.0.13).
 
 **Repository:** `frogobox/frogo-sdk`  
-**Latest Stable Version:** `3.0.10`  
+**Latest Stable Version:** `3.0.13`  
 **Core Tech Stack:**
 - **AGP:** `9.4.1`
-- **Kotlin:** `2.4.20`
+- **Kotlin:** `2.4.21`
 - **Compile / Target SDK:** `37` (Min SDK: `24`)
 - **Compose BOM:** `2026.09.00` (Material 3)
-- **Google Mobile Ads SDK (Next-Gen):** `1.5.0` (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0`)
+- **Google Mobile Ads SDK (Next-Gen):** `1.6.0` (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.6.0`)
 - **Unity Ads:** `4.21.0`
 - **Coil:** `3.6.3` (Coil 3 multiplatform/compose: `io.coil-kt.coil3:coil-compose:3.6.3`)
 - **Glide Compose:** `1.0.0-beta10`
@@ -47,11 +47,11 @@ Frogo SDK is organized into 6 modular Android/Kotlin libraries:
 | Module | Package / Namespace | Artifact Coordinates (JitPack) | Purpose |
 | :--- | :--- | :--- | :--- |
 | `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin (no Android dependency) | Cross-platform utilities, string, date, math helpers |
-| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.10` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 16+ extension files |
-| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.10` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
-| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.10` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
-| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:3.0.10` | XML-based UI utilities and view helpers |
-| `frogo-ext-ads` | `com.frogobox.ads` | `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.10` | Google Mobile Ads SDK (Next-Gen) & Unity Ads delegates, App Open Ads, hybrid fallback, Compose ad activities |
+| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.13` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 16+ extension files |
+| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.13` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
+| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
+| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:3.0.13` | XML-based UI utilities and view helpers |
+| `frogo-ext-ads` | `com.frogobox.ads` | `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.13` | Google Mobile Ads SDK (Next-Gen) & Unity Ads delegates, App Open Ads, hybrid fallback, Compose ad activities |
 
 ---
 
@@ -78,9 +78,9 @@ dependencyResolutionManagement {
 
 ```toml
 [versions]
-frogoSdk = "3.0.10"
+frogoSdk = "3.0.13"
 composeBom = "2026.09.00"
-googleAdmob = "1.5.0"
+googleAdmob = "1.6.0"
 unityAd = "4.21.0"
 coil = "3.6.3"
 
@@ -118,13 +118,26 @@ dependencies {
 ```
 
 > [!WARNING]
-> **AdMob Dependency Conflict Prevention:** `frogo-ext-ads` uses the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0`). Ensure legacy `com.google.android.gms:play-services-ads` is excluded to prevent runtime duplicate class errors:
+> **AdMob Dependency Conflict Prevention:** `frogo-ext-ads` uses the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.6.0`). Ensure legacy `com.google.android.gms:play-services-ads` is excluded to prevent runtime duplicate class errors:
 > ```kotlin
 > configurations.configureEach {
 >     exclude(group = "com.google.android.gms", module = "play-services-ads")
 >     exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
 > }
 > ```
+
+---
+
+## 📋 Starter Templates & References
+
+The skill bundle provides ready-to-copy templates and deep reference runbooks:
+- **`templates/libs.versions.toml`**: Ready-to-use Gradle Version Catalog snippet.
+- **`templates/settings.gradle.kts`**: Repository configuration snippet.
+- **`templates/FrogoComposeActivityTemplate.kt`**: Edge-to-edge Compose screen with UDF/MVI State ViewModel.
+- **`templates/FrogoAdComposeActivityTemplate.kt`**: Compose Activity with Next-Gen AdMob & Unity Ads.
+- **`references/ads-reference.md`**: Complete Ads API documentation (Next-Gen 1.6.0, Unity Ads 4.21.0, Compose banners, Native ads, Preloaders).
+- **`references/compose-ui-reference.md`**: 70+ Material Design 3 Compose widgets, Coil 3 & Glide lists, fireworks canvas, animations.
+- **`references/core-android-reference.md`**: Base classes, ViewBinding, extensions, UDF ViewModel, and Scoped Storage file helpers.
 
 ---
 
@@ -368,6 +381,14 @@ class AdScreenActivity : FrogoAdComposeActivity() {
     }
 }
 ```
+
+#### C. Official GMA Next-Gen Best Practices Alignment
+`frogo-ext-ads` strictly implements the architecture patterns from [Google's official Next-Gen SDK Examples](https://github.com/googleads/gma-next-gen-sdk-android-examples):
+1. **Official Next-Gen Namespace**: Uses `com.google.android.libraries.ads.mobile.sdk.*` (v1.6.0). Excludes legacy `com.google.android.gms:play-services-ads`.
+2. **Modern UMP Consent (`FrogoAdConsent`)**: Implements `gatherConsent` via `loadAndShowConsentFormIfRequired`, `canRequestAds()`, and `showPrivacyOptionsForm` for GDPR compliance.
+3. **Format Preloaders (`FrogoAdmobPreloader`)**: Implements background buffer preloading (`InterstitialAdPreloader`, `RewardedAdPreloader`, `AppOpenAdPreloader`) for zero-latency ad displays.
+4. **Adaptive & Collapsible Banners**: Implements `FrogoAdmobBannerAdaptive` (large anchored / inline) and expandable collapsible banners (`collapsible: bottom/top`).
+5. **Declarative Compose Native Ads**: Implements `FrogoNativeAdCompose` with `NativeAdView`, `MediaView`, and required attribution badges.
 
 ---
 

@@ -1,7 +1,7 @@
-# Frogo Core Android — Full API Reference (v3.0.10)
+# Frogo Core Android — Full API Reference (v3.0.13)
 
 Package: `com.frogobox.sdk`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.10`
+Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.13`
 
 ---
 

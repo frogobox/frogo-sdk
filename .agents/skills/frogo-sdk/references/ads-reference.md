@@ -1,11 +1,12 @@
-# Frogo Ext Ads — Full API Reference (v3.0.10)
+# Frogo Ext Ads — Full API Reference (v3.0.13)
 
 Package: `com.frogobox.ads`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.10`
+Artifact: `com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.13`
 
 > [!IMPORTANT]
 > **Next-Gen Mobile Ads SDK Architecture**:
-> `frogo-ext-ads` exclusively utilizes the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk`).
+> `frogo-ext-ads` exclusively utilizes the official Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk:1.6.0`).
+> Fully aligned with official Google best practices: [googleads/gma-next-gen-sdk-android-examples](https://github.com/googleads/gma-next-gen-sdk-android-examples).
 > Never import legacy `com.google.android.gms.ads.*`. All legacy artifacts are excluded.
 
 ---

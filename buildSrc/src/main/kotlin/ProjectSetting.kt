@@ -52,7 +52,7 @@ object ProjectSetting {
 
     const val VERSION_MAJOR = 3
     const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 12
+    const val VERSION_PATCH = 13
 
     // ---------------------------------------------------------------------------------------------
 
