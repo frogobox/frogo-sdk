@@ -11,7 +11,6 @@ import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
 import com.frogobox.coresdk.source.FrogoApiClient
 import com.frogobox.coresdk.source.Resource
-import com.frogobox.sdk.ext.usingChuck
 import com.frogobox.sdk.source.FrogoRemoteDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +37,6 @@ class AppRemoteDataSource(private val context: Context) : FrogoRemoteDataSource(
         return FrogoApiClient.create(
             url = NewsUrl.BASE_URL,
             isDebug = BuildConfig.DEBUG,
-            chuckInterceptor = context.usingChuck()
         )
     }
 

@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.frogobox.MainActivity
-import com.frogobox.ads.core.FrogoAdmob
 import com.frogobox.appcompose.MainComposeActivity
 import com.frogobox.appcomposeui.MainComposeUiActivity
 import com.frogobox.appsdk.main.MainSDKActivity
@@ -96,12 +95,4 @@ class AppIntegrationE2ETest {
         assertEquals(original, deserialized)
     }
 
-    @Test
-    fun testFrogoAdmobManagerResilienceWithoutGms() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        // Verify that setupAdmobApp handles missing Google Play Services safely without uncaught exceptions
-        FrogoAdmob.setupAdmobApp(context)
-        // If execution reaches here without crashing, the isolation and safety fix is effective
-        assertTrue(true)
-    }
 }

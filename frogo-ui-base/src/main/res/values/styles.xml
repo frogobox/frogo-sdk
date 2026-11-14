@@ -51,6 +51,13 @@
         <item name="android:layout_height">@dimen/frogo_dimen_48dp</item>
     </style>
 
+    <!-- ShapeAppearance -->
+
+    <style name="FrogoShapeAppearanceCircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <!-- TextView -->
 
     <style name="frogoTvListTitle" parent="frogoBaseAreaWrapContent">

@@ -1,9 +1,6 @@
 package com.frogobox.di
 
 import android.content.Context
-import com.frogobox.appadmob.source.AdmobLocalDataSource
-import com.frogobox.appadmob.source.AdmobRemoteDataSource
-import com.frogobox.appadmob.source.AdmobRepository
 import com.frogobox.appsdk.source.AppDatabase
 import com.frogobox.appsdk.source.AppLocalDataSource
 import com.frogobox.appsdk.source.AppRemoteDataSource
@@ -71,30 +68,6 @@ object AppModule {
         localDataSource: AppLocalDataSource
     ): AppRepository {
         return AppRepository(context, remoteDataSource, localDataSource)
-    }
-
-    @Provides
-    @Singleton
-    fun provideAdmobLocalDataSource(
-        appExecutors: AppExecutors,
-        preferences: PreferenceDelegatesImpl
-    ): AdmobLocalDataSource {
-        return AdmobLocalDataSource(appExecutors, preferences)
-    }
-
-    @Provides
-    @Singleton
-    fun provideAdmobRemoteDataSource(): AdmobRemoteDataSource {
-        return AdmobRemoteDataSource()
-    }
-
-    @Provides
-    @Singleton
-    fun provideAdmobRepository(
-        remoteDataSource: AdmobRemoteDataSource,
-        localDataSource: AdmobLocalDataSource
-    ): AdmobRepository {
-        return AdmobRepository(remoteDataSource, localDataSource)
     }
 
 }

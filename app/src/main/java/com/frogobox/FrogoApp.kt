@@ -5,8 +5,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.os.ConfigurationCompat
-import com.frogobox.ads.FrogoAdmobApplication
-import com.frogobox.appadmob.util.AdHelper
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_ID
 import com.frogobox.appsdk.util.AppConstant.CHANNEL_NAME
 import com.frogobox.sdk.FrogoApplication
@@ -26,7 +24,7 @@ import java.util.Locale
  *
  */
 
-@HiltAndroidApp(FrogoAdmobApplication::class)
+@HiltAndroidApp(FrogoApplication::class)
 class FrogoApp : Hilt_FrogoApp() {
 
     companion object {
@@ -56,10 +54,6 @@ class FrogoApp : Hilt_FrogoApp() {
             )
             getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
         }
-    }
-
-    override fun getAdOpenAppUnitId(context: Context?): String {
-        return AdHelper.getAdOpenAppUnitId(context)
     }
 
 }

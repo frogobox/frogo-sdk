@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/github/license/frogobox/frogo-sdk?style=flat-square)](https://github.com/frogobox/frogo-sdk/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-**Frogo SDK** is a comprehensive suite of Android libraries designed to accelerate your development workflow. From stunning Jetpack Compose UIs to seamless AdMob integration, Frogo SDK provides the building blocks you need to create high-quality apps faster.
+**Frogo SDK** is a comprehensive suite of Android libraries designed to accelerate your development workflow. From stunning Jetpack Compose UIs to robust architecture and utilities, Frogo SDK provides the building blocks you need to create high-quality apps faster.
 
 - SDK for anything your problem to make easier developing android apps
 - Available for android and desktop
@@ -39,7 +39,6 @@ What's New?? (v3.0.5 → v3.0.13)
 ## 🌟 Key Features
 
 - **🎨 Frogo Compose UI**: 60+ reusable Jetpack Compose widgets and professional templates.
-- **📢 Frogo Ext Ads**: Simplify AdMob integration with easy-to-use wrappers for Banner, Interstitial, and Native ads.
 - **🛠️ Frogo Core**: Essential utilities, base classes, and extensions for Kotlin development.
 - **📱 Multi-Platform**: Available for both Android and Desktop environments.
 
@@ -51,11 +50,6 @@ What's New?? (v3.0.5 → v3.0.13)
 
 ![Frogo Compose UI Mockup](docs/image/compose_ui_mockup.png)
 *Beautiful, modern, and highly customizable UI components following Material Design 3.*
-
-### Seamless Ad Integration
-
-![Frogo Ads Mockup](docs/image/ads_mockup.png)
-*Monetize your apps effortlessly with optimized ad placements.*
 
 ---
 
@@ -87,7 +81,7 @@ dependencies {
 
     // Or specific modules (recommended)
     implementation("com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13")
-    implementation("com.github.frogobox.frogo-sdk:frogo-ext-ads:3.0.13")
+    implementation("com.github.frogobox.frogo-sdk:frogo-core-android:3.0.13")
 }
 ```
 
@@ -102,7 +96,6 @@ dependencies {
 | `frogo-compose-android` | Compose Architecture | `FrogoComposeActivity`, Edge-to-Edge System UI, UDF `FrogoComposeStateViewModel` |
 | `frogo-compose-ui` | Modern UI Kit | 70+ Widgets, Dialogs, Bottom Sheets, Scaffolds, Coil 3 & Glide Lists |
 | `frogo-ui-base` | XML UI Base | ViewBinding helpers and XML-based view utilities |
-| `frogo-ext-ads` | Monetization Kit | GMA Next-Gen & Unity Ads Delegates, `FrogoBannerAdCompose`, App Open Ads |
 
 ---
 
@@ -135,7 +128,7 @@ Project Link: [https://github.com/frogobox/frogo-sdk](https://github.com/frogobo
 
 <!-- SEO Keywords (Hidden) -->
 <!--
-Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, AdMob Helper, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android Monetization, Android UI Kit
+Keywords: Android SDK, Jetpack Compose UI Library, Kotlin Android, Android UI Components, Android Development Tools, Frogo SDK, Android Library, Material Design 3, Android UI Kit
 -->
 
 ## 🤖 AI Agent Skill
@@ -158,8 +151,7 @@ skills/frogo-sdk/
 ├── SKILL.md                              # Main instructions for AI Agent
 └── references/
     ├── compose-ui-reference.md           # API for 60+ Jetpack Compose widgets
-    ├── core-android-reference.md         # Base classes & extension functions
-    └── ads-reference.md                  # AdMob & Unity Ads integration API
+    └── core-android-reference.md         # Base classes & extension functions
 ```
 
 ### How to Install the Skill
@@ -230,34 +222,6 @@ fun DashboardScreen(items: List<DashboardItem>) {
 }
 ```
 
-#### 📢 AdMob Integration
-
-```
-"Add a banner ad and interstitial ad to an Activity using Frogo Ads"
-```
-
-The AI agent will generate code like:
-
-```kotlin
-import com.frogobox.ads.delegate.AdmobDelegates
-import com.frogobox.ads.delegate.AdmobDelegatesImpl
-
-class MainActivity : AppCompatActivity(),
-    AdmobDelegates by AdmobDelegatesImpl() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupAdmobDelegates(this)
-
-        // Banner Ad
-        showAdBanner(binding.adView)
-
-        // Interstitial Ad
-        showAdInterstitial("ca-app-pub-xxxxx/xxxxx")
-    }
-}
-```
-
 #### 🛠️ Core Android Utilities
 
 ```
@@ -293,8 +257,7 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 | [SKILL.md](skills/frogo-sdk/SKILL.md) | Main instructions & architecture | - |
 | [compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md) | Jetpack Compose widgets | 60+ composables |
 | [core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md) | Base classes & extensions | 7 classes, 16 ext files |
-| [ads-reference.md](skills/frogo-sdk/references/ads-reference.md) | AdMob & Unity Ads | 32+ methods |
-| [templates/](skills/frogo-sdk/templates/) | Version catalog, settings & activity starters | 4 templates |
+| [templates/](skills/frogo-sdk/templates/) | Version catalog, settings & activity starters | 3 templates |
 
 ---
 
@@ -302,7 +265,7 @@ class MyActivity : FrogoBindActivity<ActivityMainBinding>() {
 
 Frogo SDK includes a standardized skill bundle compatible with modern AI coding agents (**Antigravity**, **Gemini CLI**, **Claude Code**, **Cursor**, **GitHub Copilot**, **Codex**).
 
-Installing this skill gives AI agents accurate context on Frogo SDK v3.0.13 APIs, Compose components, Next-Gen AdMob delegates, and prevents hallucination of outdated APIs.
+Installing this skill gives AI agents accurate context on Frogo SDK v3.0.13 APIs, Compose components, and core utilities, preventing hallucination of outdated APIs.
 
 #### Install Globally (Available for All Projects on Machine):
 ```powershell
