@@ -1,6 +1,6 @@
 ---
 name: frogo-sdk
-description: Use when developing Android apps or libraries integrating Frogo SDK (v3.0.13), implementing Jetpack Compose UI with Material Design 3, building edge-to-edge Compose activities with UDF/MVI State ViewModels, or using Frogo core Android utilities and extensions.
+description: Use when developing Android apps or libraries integrating Frogo SDK (v4.0.0), implementing Jetpack Compose UI with Material Design 3, building edge-to-edge Compose activities with UDF/MVI State ViewModels, or using Frogo core Android utilities and extensions.
 globs:
   - "**/*.kt"
   - "**/*.kts"
@@ -14,13 +14,14 @@ tags:
 
 # Frogo SDK Integration & Development Specialist
 
-This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v3.0.13).
+This skill provides complete instructions for integrating, developing, and extending applications using the **Frogo SDK** suite of Android libraries (v4.0.0).
 
 **Repository:** `frogobox/frogo-sdk`  
-**Latest Stable Version:** `3.0.13`  
+**Latest Stable Version:** `4.0.0`  
 **Core Tech Stack:**
-- **AGP:** `9.4.1`
+- **AGP:** `9.5.1`
 - **Kotlin:** `2.4.21`
+- **KSP:** `2.3.10`
 - **Compile / Target SDK:** `37` (Min SDK: `24`)
 - **Compose BOM:** `2026.09.00` (Material 3)
 - **Coil:** `3.6.3` (Coil 3 multiplatform/compose: `io.coil-kt.coil3:coil-compose:3.6.3`)
@@ -35,10 +36,15 @@ Frogo SDK is organized into 5 modular Android/Kotlin libraries:
 | Module | Package / Namespace | Artifact Coordinates (JitPack) | Purpose |
 | :--- | :--- | :--- | :--- |
 | `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin (no Android dependency) | Cross-platform utilities, string, date, math helpers |
-| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.13` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 16+ extension files |
-| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:3.0.13` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
-| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
-| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:3.0.13` | XML-based UI utilities and view helpers |
+| `frogo-core-android` | `com.frogobox.sdk` | `com.github.frogobox.frogo-sdk:frogo-core-android:4.0.0` | Base Activity/Fragment/BottomSheet (ViewBinding), UDF `FrogoStateViewModel`, 100% Kotlin Shimmer, 16+ extension files |
+| `frogo-compose-android` | `com.frogobox.compose` | `com.github.frogobox.frogo-sdk:frogo-compose-android:4.0.0` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) |
+| `frogo-compose-ui` | `com.frogobox.composeui` | `com.github.frogobox.frogo-sdk:frogo-compose-ui:4.0.0` | 70+ ready-to-use Compose widgets, templates, Coil 3 & Glide lists, animations, fireworks canvas, loading indicators |
+| `frogo-ui-base` | `com.frogobox.ui` | `com.github.frogobox.frogo-sdk:frogo-ui-base:4.0.0` | XML-based UI utilities and view helpers |
+
+### 🌟 Key Highlights in v4.0.0
+- **100% Kotlin Codebase**: Converted all remaining legacy Java classes and Shimmer components (`FrogoShimmer`, `FrogoShimmerDrawable`, `FrogoShimmerFrameLayout`) to clean, idiomatic Kotlin.
+- **Architectural Refocus**: Completely removed legacy advertising modules (`frogo-ads-admob`, `frogo-ads-unity`, `frogo-ext-ads`) to make Frogo SDK a pure, lightweight Android architecture and Compose UI framework.
+- **Modern Toolchain Upgrade**: Updated AGP to `9.5.1`, Kotlin to `2.4.21`, KSP to `2.3.10`, and Compile/Target SDK to `37` (Android 16).
 
 ---
 
@@ -65,7 +71,7 @@ dependencyResolutionManagement {
 
 ```toml
 [versions]
-frogoSdk = "3.0.13"
+frogoSdk = "4.0.0"
 composeBom = "2026.09.00"
 coil = "3.6.3"
 

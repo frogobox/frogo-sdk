@@ -10,14 +10,14 @@ Frogo SDK is a production-grade multi-module Android and Kotlin library suite de
 
 | Module | Package / Namespace | Description | Key Tech Stack |
 | :--- | :--- | :--- | :--- |
-| `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin utilities (platform-agnostic) | Kotlin 2.4.20 |
+| `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin utilities (platform-agnostic) | Kotlin 2.4.21 |
 | `frogo-core-android` | `com.frogobox.sdk` | Base Activity/Fragment/BottomSheet, `FrogoStateViewModel` (UDF/MVI), 16+ extension files | Android SDK 37, ViewBinding |
 | `frogo-compose-android` | `com.frogobox.compose` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) | Activity Compose, Lifecycle Compose |
 | `frogo-compose-ui` | `com.frogobox.composeui` | 70+ ready-to-use Compose widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.3, Glide Compose |
 | `frogo-ui-base` | `com.frogobox.ui` | XML-based UI utilities and view helpers | Android Views |
 | `app` | `com.frogobox.app` | Showcase application demonstrating all modules | Hilt, Compose, Navigation |
 
-**Current Version:** `3.0.13` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
+**Current Version:** `4.0.0` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
 
 ---
 
