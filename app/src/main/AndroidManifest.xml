@@ -99,42 +99,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".appadmob.mvvm.banner.BannerActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-        <activity
-            android:name=".appadmob.mvvm.rewarded.RewardedActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-        <activity
-            android:name=".appadmob.mvvm.interstitial.InterstitialActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-        <activity
-            android:name=".appadmob.mvvm.appopenad.AppOpenAdActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-        <activity
-            android:name=".appadmob.mvvm.main.MainJavaAdmobActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true"/>
-
-        <activity
-            android:name=".appadmob.mvvm.main.AboutUsActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-
-        <activity
-            android:name=".appadmob.mvvm.main.MainAdmobActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-
-        <activity
-            android:name=".appadmob.mvvm.main.MainAdmobComposeActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true" />
-
-        <activity
             android:name=".appcompose.MainComposeActivity"
             android:exported="false" />
 
@@ -160,11 +124,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id" />
 
     </application>
 

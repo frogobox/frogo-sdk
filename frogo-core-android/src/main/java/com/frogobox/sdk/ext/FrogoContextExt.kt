@@ -12,11 +12,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
-import com.chuckerteam.chucker.api.ChuckerCollector
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.frogobox.sdk.log.FLog
 import com.frogobox.sdk.util.FrogoFunc
-import okhttp3.Interceptor
 
 
 /**
@@ -92,18 +89,6 @@ fun Context.hasNotificationPermission(): Boolean {
         ) == PackageManager.PERMISSION_GRANTED
     }
     return true
-}
-
-// -------------------------------------------------------------------------------------------------
-
-
-fun Context.usingChuck(): Interceptor {
-    return ChuckerInterceptor.Builder(this)
-        .collector(ChuckerCollector(this))
-        .maxContentLength(250000L)
-        .redactHeaders(emptySet())
-        .alwaysReadResponseBody(false)
-        .build()
 }
 
 // -------------------------------------------------------------------------------------------------

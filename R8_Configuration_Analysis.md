@@ -11,7 +11,7 @@
   - `isMinifyEnabled = true`
   - `isShrinkResources = true`
   - ProGuard files configured with `getDefaultProguardFile("proguard-android-optimize.txt")` and `proguard-rules.pro`.
-- **Library Modules (`:frogo-core-android`, `:frogo-compose-android`, `:frogo-compose-ui`, `:frogo-ui-base`, `:frogo-ui-recyclerview`, `:frogo-ext-ads`)**:
+- **Library Modules (`:frogo-core-android`, `:frogo-compose-android`, `:frogo-compose-ui`, `:frogo-ui-base`)**:
   - `isMinifyEnabled = false` (configured to preserve symbols during intermediate packaging and avoid class name collisions across library modules in multi-module builds).
   - `defaultConfig.consumerProguardFile("consumer-rules.pro")` (exports clean, necessary keep rules to consuming applications during whole-program R8 minification).
   - ProGuard files configured with `getDefaultProguardFile("proguard-android-optimize.txt")` and `proguard-rules.pro`.

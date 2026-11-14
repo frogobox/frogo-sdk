@@ -1,7 +1,7 @@
-# Frogo Core Android — Full API Reference (v3.0.13)
+# Frogo Core Android — Full API Reference (v4.0.0)
 
 Package: `com.frogobox.sdk`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:3.0.13`
+Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:4.0.0`
 
 ---
 
@@ -101,6 +101,21 @@ val videoPath = FrogoFunc.getAppSpecificVideoFilePath(context)
 ---
 
 ## 5. Custom Views
+
+### `FrogoShimmerFrameLayout` (`com.frogobox.sdk.widget.shimmer`)
+100% Kotlin shimmer layout for skeleton loading effects:
+```xml
+<com.frogobox.sdk.widget.shimmer.FrogoShimmerFrameLayout
+    android:id="@+id/shimmerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- Placeholder shimmer child view -->
+</com.frogobox.sdk.widget.shimmer.FrogoShimmerFrameLayout>
+```
+```kotlin
+binding.shimmerView.startShimmer()
+binding.shimmerView.stopShimmer()
+```
 
 ### `ZoomImageView` (`com.frogobox.sdk.widget.zoomimageview`)
 Pinch-to-zoom and pan ImageView with modern matrix property:

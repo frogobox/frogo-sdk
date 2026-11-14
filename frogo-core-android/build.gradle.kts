@@ -14,7 +14,6 @@ android {
     defaultConfig {
         minSdk = ProjectSetting.PROJECT_MIN_SDK
 
-        multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -99,9 +98,6 @@ dependencies {
 
     api(libs.androidx.room.ktx)
     api(libs.androidx.room.runtime)
-
-    debugApi(libs.github.chucker)
-    releaseApi(libs.github.chucker.no.op)
 
     api(libs.github.glide)
     api(libs.github.customactivityoncrash)

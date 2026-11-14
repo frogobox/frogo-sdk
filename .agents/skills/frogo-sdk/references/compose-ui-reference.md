@@ -1,7 +1,7 @@
-# Frogo Compose UI — Full API Reference (v3.0.13)
+# Frogo Compose UI — Full API Reference (v4.0.0)
 
 Package: `com.frogobox.composeui`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:3.0.13`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-compose-ui:4.0.0`  
 Dependencies:
 - `androidx.compose:compose-bom:2026.09.00` (Material Design 3)
 - `io.coil-kt.coil3:coil-compose:3.6.3` & `io.coil-kt.coil3:coil-network-okhttp:3.6.3`
@@ -189,7 +189,7 @@ FrogoLazyColumn(
 
 ### Coil 3 Image Lists (`com.frogobox.composeui.list.coil.*`)
 > [!NOTE]
-> Powered by **Coil 3** (`io.coil-kt.coil3:coil-compose:3.6.2`). The underlying engine uses `coil3.compose.AsyncImage`.
+> Powered by **Coil 3** (`io.coil-kt.coil3:coil-compose:3.6.3`). The underlying engine uses `coil3.compose.AsyncImage`.
 ```kotlin
 import com.frogobox.composeui.list.coil.FrogoCoilImage
 import com.frogobox.composeui.list.coil.FrogoCoilLazyColumn

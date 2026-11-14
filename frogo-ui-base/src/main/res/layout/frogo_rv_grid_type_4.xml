@@ -18,18 +18,20 @@
  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frogo_rv_grid_type_4_root_linear_layout"
     style="@style/FrogoLayoutGrid8dp"
     android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/frogo_rv_grid_type_4_civ_poster"
         android:layout_width="match_parent"
         android:layout_height="@dimen/frogo_dimen_150dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/frogo_dummy_content_description"
         android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/FrogoShapeAppearanceCircle"
         tools:src="@tools:sample/avatars" />
 
     <TextView

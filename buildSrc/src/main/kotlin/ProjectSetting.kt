@@ -21,7 +21,6 @@ object ProjectSetting {
     // Layer Prefixes
     private const val LAYER_CORE = "core"
     private const val LAYER_UI = "ui"
-    private const val LAYER_EXT = "ext"
     private const val LAYER_COMPOSE = "compose"
 
     // Module Names (Directory & Gradle Include)
@@ -32,27 +31,18 @@ object ProjectSetting {
 
     const val MODULE_NAME_CORE_UI = "frogo-$LAYER_UI-base"
 
-    const val MODULE_NAME_AD = "frogo-$LAYER_EXT-ads"
-    const val MODULE_NAME_ADS_CORE = "frogo-ads-core"
-    const val MODULE_NAME_ADS_ADMOB = "frogo-ads-admob"
-    const val MODULE_NAME_ADS_UNITY = "frogo-ads-unity"
-
     // Library Names (For Package ID / Namespace)
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
     const val LIBRARY_NAME_UI = "ui"
-    const val LIBRARY_NAME_AD = "ads"
-    const val LIBRARY_NAME_ADS_CORE = "ads.core"
-    const val LIBRARY_NAME_ADS_ADMOB = "ads.admob"
-    const val LIBRARY_NAME_ADS_UNITY = "ads.unity"
     const val LIBRARY_NAME_COMPOSE = "compose"
     const val LIBRARY_NAME_COMPOSE_UI = "composeui"
 
     // ---------------------------------------------------------------------------------------------
 
-    const val VERSION_MAJOR = 3
+    const val VERSION_MAJOR = 4
     const val VERSION_MINOR = 0
-    const val VERSION_PATCH = 13
+    const val VERSION_PATCH = 0
 
     // ---------------------------------------------------------------------------------------------
 
@@ -75,11 +65,6 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
 
     const val PROJECT_LIB_ID_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_UI"
-
-    const val PROJECT_LIB_ID_AD = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_AD"
-    const val PROJECT_LIB_ID_ADS_CORE = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_ADS_CORE"
-    const val PROJECT_LIB_ID_ADS_ADMOB = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_ADS_ADMOB"
-    const val PROJECT_LIB_ID_ADS_UNITY = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_ADS_UNITY"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 10000) + (VERSION_MINOR * 100) + VERSION_PATCH
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

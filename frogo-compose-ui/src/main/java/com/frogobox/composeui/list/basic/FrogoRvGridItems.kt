@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
  *
  * Image types:
  *  - Types 1–3: Regular rectangular ImageView (full-width, 150dp height, centerCrop)
- *  - Types 4–6: CircleImageView (full-width, 150dp height, centerCrop)
+ *  - Types 4–6: Circular Image (full-width, 150dp height, centerCrop)
  *  - Type 7: Regular rectangular ImageView (full-width, 150dp height, no bottom margin)
  */
 

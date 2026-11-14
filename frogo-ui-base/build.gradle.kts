@@ -14,7 +14,6 @@ android {
     defaultConfig {
         minSdk = ProjectSetting.PROJECT_MIN_SDK
 
-        multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -72,9 +71,7 @@ kotlin {
 dependencies {
 
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    api(libs.github.circleimageview)
+    api(libs.material)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

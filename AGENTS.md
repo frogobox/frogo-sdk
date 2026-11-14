@@ -10,15 +10,14 @@ Frogo SDK is a production-grade multi-module Android and Kotlin library suite de
 
 | Module | Package / Namespace | Description | Key Tech Stack |
 | :--- | :--- | :--- | :--- |
-| `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin utilities (platform-agnostic) | Kotlin 2.4.20 |
+| `frogo-core` | `com.frogobox.coreutil` | Pure Kotlin utilities (platform-agnostic) | Kotlin 2.4.21 |
 | `frogo-core-android` | `com.frogobox.sdk` | Base Activity/Fragment/BottomSheet, `FrogoStateViewModel` (UDF/MVI), 16+ extension files | Android SDK 37, ViewBinding |
 | `frogo-compose-android` | `com.frogobox.compose` | `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI) | Activity Compose, Lifecycle Compose |
 | `frogo-compose-ui` | `com.frogobox.composeui` | 70+ ready-to-use Compose widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.3, Glide Compose |
 | `frogo-ui-base` | `com.frogobox.ui` | XML-based UI utilities and view helpers | Android Views |
-| `frogo-ext-ads` | `com.frogobox.ads` | Google Mobile Ads SDK (Next-Gen 1.6.0), Unity Ads (4.21.0), App Open Ads, Compose Ad Activities, FrogoBannerAdCompose | Next-Gen Ads Mobile SDK, Unity Ads |
 | `app` | `com.frogobox.app` | Showcase application demonstrating all modules | Hilt, Compose, Navigation |
 
-**Current Version:** `3.0.13` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
+**Current Version:** `4.0.0` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
 
 ---
 
@@ -34,10 +33,9 @@ This repository provides standardized agent skills to teach any AI agent how to 
 
 ### Specialized Reference Runbooks & Starter Templates
 When generating code or resolving issues for specific domains, consult the reference guides and starter templates:
-1. **Google Mobile Ads Next-Gen & Unity Ads:** [skills/frogo-sdk/references/ads-reference.md](skills/frogo-sdk/references/ads-reference.md)
-2. **Jetpack Compose UI (Material 3) & Coil 3:** [skills/frogo-sdk/references/compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md)
-3. **Core Android Utilities, Extensions & UDF ViewModel:** [skills/frogo-sdk/references/core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md)
-4. **Starter Templates:** [skills/frogo-sdk/templates/](skills/frogo-sdk/templates/) (`libs.versions.toml`, `settings.gradle.kts`, Compose activities)
+1. **Jetpack Compose UI (Material 3) & Coil 3:** [skills/frogo-sdk/references/compose-ui-reference.md](skills/frogo-sdk/references/compose-ui-reference.md)
+2. **Core Android Utilities, Extensions & UDF ViewModel:** [skills/frogo-sdk/references/core-android-reference.md](skills/frogo-sdk/references/core-android-reference.md)
+3. **Starter Templates:** [skills/frogo-sdk/templates/](skills/frogo-sdk/templates/) (`libs.versions.toml`, `settings.gradle.kts`, Compose activities)
 
 ### 🚀 Using this Skill in Other Projects
 To install this skill so other Android projects and AI coding agents (Antigravity, Gemini CLI, Claude Code, Cursor, Copilot, Codex) can use it:
@@ -67,7 +65,6 @@ To install this skill so other Android projects and AI coding agents (Antigravit
   - Kotlin/Java: `@Suppress("DEPRECATION")`, `@SuppressWarnings("deprecation")`
   - Any form of lint suppression ignoring obsolete APIs.
 - **MANDATORY MIGRATION:** Always migrate to modern official replacements:
-  - Migrate legacy AdMob to Google Mobile Ads SDK Next-Gen (`com.google.android.libraries.ads.mobile.sdk.*`).
   - Migrate image loading to Coil 3 (`coil3.compose.AsyncImage`).
   - Migrate edge-to-edge layout to `androidx.activity.enableEdgeToEdge`.
 
@@ -77,8 +74,6 @@ To install this skill so other Android projects and AI coding agents (Antigravit
 
 ### 3. Package Import Guardrails
 Agents must adhere to current package namespaces:
-- **AdMob (Next-Gen):** Use `com.google.android.libraries.ads.mobile.sdk.banner.AdView`, `AdSize`, `MobileAds`. NEVER import `com.google.android.gms.ads.*`.
-- **Unity Ads:** Use `com.unity3d.ads.*` via `com.frogobox.ads.delegate.UnityAdDelegates`.
 - **Coil 3:** Use `coil3.compose.AsyncImage` and `coil3.request.ImageRequest`.
 - **Compose Base Activity:** Use `com.frogobox.compose.view.FrogoComposeActivity`.
 - **Compose State ViewModel:** Use `com.frogobox.compose.viewmodel.FrogoComposeStateViewModel`.
