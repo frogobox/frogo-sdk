@@ -22,12 +22,22 @@ subprojects {
                 checkReleaseBuilds = false
             }
         }
+        extensions.configure<com.android.build.api.variant.LibraryAndroidComponentsExtension> {
+            beforeVariants { builder ->
+                (builder as? com.android.build.api.variant.HasUnitTestBuilder)?.enableUnitTest = true
+            }
+        }
     }
     plugins.withId("com.android.application") {
         configure<com.android.build.api.dsl.ApplicationExtension> {
             lint {
                 abortOnError = false
                 checkReleaseBuilds = false
+            }
+        }
+        extensions.configure<com.android.build.api.variant.ApplicationAndroidComponentsExtension> {
+            beforeVariants { builder ->
+                (builder as? com.android.build.api.variant.HasUnitTestBuilder)?.enableUnitTest = true
             }
         }
     }
