@@ -1,8 +1,8 @@
 [versions]
 # Gradle & Kotlin Plugins / Tools
-agp = "9.5.1"
+agp = "9.5.2"
 kotlin = "2.4.21"
-ksp = "2.3.10"
+ksp = "2.3.14"
 
 # AndroidX Core & UI
 coreKtx = "1.19.1"
@@ -10,7 +10,7 @@ appcompat = "1.8.0"
 activity = "1.13.0"
 fragment = "1.9.1"
 constraintlayout = "2.2.2"
-liveCycle = "2.11.0"
+liveCycle = "2.11.1"
 viewPager2 = "1.1.0"
 preference = "1.2.1"
 work = "2.12.0"
@@ -18,7 +18,7 @@ roomKtx = "2.8.5"
 datastore = "1.3.0"
 
 # AndroidX Compose
-composeBom = "2026.09.00"
+composeBom = "2026.11.01"
 navigationCompose = "2.10.2"
 
 # AndroidX Testing
@@ -46,8 +46,8 @@ mockwebserver = "5.5.1"
 coil = "3.6.3"
 
 # Bumptech (Glide)
-glide = "5.0.9"
-glideCompose = "1.0.0-beta10"
+glide = "5.0.10"
+glideCompose = "1.0.0-beta11"
 
 # Dagger Hilt
 hilt = "2.60.1"
@@ -58,7 +58,7 @@ customactivityoncrash = "2.4.0"
 # Testing
 junit = "4.13.2"
 mockk = "1.14.12"
-robolectric = "4.18"
+robolectric = "4.18.1"
 
 [libraries]
 

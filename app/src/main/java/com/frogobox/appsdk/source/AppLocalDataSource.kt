@@ -5,7 +5,7 @@ import com.frogobox.appsdk.model.SourceResponse
 import com.frogobox.appsdk.source.dao.ArticleDao
 import com.frogobox.coresdk.response.FrogoDataResponse
 import com.frogobox.coresdk.response.FrogoStateResponse
-import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.source.FrogoLocalDataSource
 import com.frogobox.sdk.util.AppExecutors
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +28,7 @@ import kotlinx.coroutines.withContext
 
 class AppLocalDataSource(
     private val appExecutors: AppExecutors,
-    private val preferences: PreferenceDelegatesImpl,
+    private val preferences: PreferenceDelegates,
     private val articleDao: ArticleDao,
 ) : FrogoLocalDataSource(appExecutors, preferences), AppDataSource {
 

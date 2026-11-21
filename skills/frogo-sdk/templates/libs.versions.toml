@@ -1,14 +1,13 @@
 [versions]
-frogoSdk = "4.0.0"
+frogoSdk = "4.0.1"
 composeBom = "2026.09.00"
 coil = "3.6.3"
 
 [libraries]
-# Frogo SDK Modular Suite
-frogo-compose-ui = { group = "com.github.frogobox.frogo-sdk", name = "frogo-compose-ui", version.ref = "frogoSdk" }
-frogo-compose-android = { group = "com.github.frogobox.frogo-sdk", name = "frogo-compose-android", version.ref = "frogoSdk" }
-frogo-core-android = { group = "com.github.frogobox.frogo-sdk", name = "frogo-core-android", version.ref = "frogoSdk" }
-frogo-ui-base = { group = "com.github.frogobox.frogo-sdk", name = "frogo-ui-base", version.ref = "frogoSdk" }
+# Frogo SDK Consolidated Suite
+frogo-core = { group = "com.github.frogobox.frogo-sdk", name = "frogo-core", version.ref = "frogoSdk" }
+frogo-android = { group = "com.github.frogobox.frogo-sdk", name = "frogo-android", version.ref = "frogoSdk" }
+frogo-compose = { group = "com.github.frogobox.frogo-sdk", name = "frogo-compose", version.ref = "frogoSdk" }
 
 # Compose BOM & Coil 3
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }

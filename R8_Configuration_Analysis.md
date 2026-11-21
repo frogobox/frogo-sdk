@@ -11,7 +11,7 @@
   - `isMinifyEnabled = true`
   - `isShrinkResources = true`
   - ProGuard files configured with `getDefaultProguardFile("proguard-android-optimize.txt")` and `proguard-rules.pro`.
-- **Library Modules (`:frogo-core-android`, `:frogo-compose-android`, `:frogo-compose-ui`, `:frogo-ui-base`)**:
+- **Library Modules (`:frogo-android`, `:frogo-compose`)**:
   - `isMinifyEnabled = false` (configured to preserve symbols during intermediate packaging and avoid class name collisions across library modules in multi-module builds).
   - `defaultConfig.consumerProguardFile("consumer-rules.pro")` (exports clean, necessary keep rules to consuming applications during whole-program R8 minification).
   - ProGuard files configured with `getDefaultProguardFile("proguard-android-optimize.txt")` and `proguard-rules.pro`.
@@ -111,25 +111,25 @@ The following keep rules were evaluated across the project's consumer files and 
 
 ### C. Specific Reflection Keep Rules (Action: Retained / Narrowed)
 
-1. **`frogo-ui-base`**:
+1. **`frogo-android`**:
    ```proguard
    # Preserve indicator classes instantiated via reflection in FrogoLoadingIndicatorView
    -keep public class com.frogobox.ui.loadingindicator.indicators.** extends com.frogobox.ui.loadingindicator.Indicator {
        public <init>();
    }
    ```
-   - **Action**: Retained in `frogo-ui-base/proguard-rules.pro` and `frogo-ui-base/consumer-rules.pro`.
+   - **Action**: Retained in `frogo-android/proguard-rules.pro` and `frogo-android/consumer-rules.pro`.
    - **Reason**: `FrogoLoadingIndicatorView.java` uses `Class.forName("com.frogobox.ui.loadingindicator.indicators." + indicatorName)` and calls `newInstance()`. This narrow rule ensures indicator classes and their no-argument constructors are preserved during whole-program R8 minification.
 
-2. **`frogo-compose-ui`**:
+2. **`frogo-compose`**:
    ```proguard
    # Preserve indicator classes instantiated via reflection in FrogoLoadingIndicatorView
    -keep public class com.frogobox.composeui.loadingindicator.indicators.** extends com.frogobox.composeui.loadingindicator.Indicator {
        public <init>();
    }
    ```
-   - **Action**: Retained in `frogo-compose-ui/proguard-rules.pro` and `frogo-compose-ui/consumer-rules.pro`.
-   - **Reason**: `FrogoLoadingIndicatorView.java` in `frogo-compose-ui` uses `Class.forName("com.frogobox.composeui.loadingindicator.indicators." + indicatorName)` and calls `newInstance()`.
+   - **Action**: Retained in `frogo-compose/proguard-rules.pro` and `frogo-compose/consumer-rules.pro`.
+   - **Reason**: `FrogoLoadingIndicatorView.java` in `frogo-compose` uses `Class.forName("com.frogobox.composeui.loadingindicator.indicators." + indicatorName)` and calls `newInstance()`.
 
 ---
 

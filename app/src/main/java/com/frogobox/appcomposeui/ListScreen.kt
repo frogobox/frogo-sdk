@@ -155,7 +155,7 @@ fun BasicListsShowcase() {
 @Composable
 fun ListStylesShowcase() {
     val scrollState = rememberScrollState()
-    val placeholderPainter = painterResource(id = com.frogobox.composeui.R.drawable.frogo_ic_empty_view)
+    val placeholderPainter = painterResource(id = com.frogobox.compose.R.drawable.frogo_ic_empty_view)
 
     Column(
         modifier = Modifier
@@ -192,7 +192,7 @@ fun ListStylesShowcase() {
 @Composable
 fun GridStylesShowcase() {
     val scrollState = rememberScrollState()
-    val placeholderPainter = painterResource(id = com.frogobox.composeui.R.drawable.frogo_ic_empty_view)
+    val placeholderPainter = painterResource(id = com.frogobox.compose.R.drawable.frogo_ic_empty_view)
 
     Column(
         modifier = Modifier
@@ -251,7 +251,7 @@ fun ImageLoadersShowcase() {
     val items = List(10) { "User Avatar #$it" }
     // Using static mockup URLs (these point to picsum or standard placeholder images)
     val imageUrl = "https://picsum.photos/200"
-    val placeholderPainter = painterResource(id = com.frogobox.composeui.R.drawable.frogo_ic_empty_view)
+    val placeholderPainter = painterResource(id = com.frogobox.compose.R.drawable.frogo_ic_empty_view)
 
     Column(modifier = Modifier.fillMaxSize()) {
         Text(
