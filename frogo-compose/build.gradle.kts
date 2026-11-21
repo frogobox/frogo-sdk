@@ -1,71 +1,14 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.compose.compiler)
-    `maven-publish`
+    id("frogo.android.library")
+    id("frogo.android.compose")
+    id("frogo.maven.publish")
 }
 
 android {
-    compileSdk {
-        version = release(ProjectSetting.PROJECT_COMPILE_SDK) {
-            minorApiLevel = ProjectSetting.PROJECT_COMPILE_SDK_MINOR
-        }
-    }
     namespace = "com.frogobox.compose"
 
-    defaultConfig {
-        minSdk = ProjectSetting.PROJECT_MIN_SDK
-
-        vectorDrawables.useSupportLibrary = true
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFile("consumer-rules.pro")
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     buildFeatures {
-        compose = true
         buildConfig = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-            isReturnDefaultValues = true
-        }
-    }
-
-    lint {
-        abortOnError = false
-        checkReleaseBuilds = false
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 }
 
