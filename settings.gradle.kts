@@ -27,8 +27,6 @@ rootProject.name = "FrogoAndroid"
 include(
     ":app",
     ":frogo-core",
-    ":frogo-core-android",
-    ":frogo-compose-android",
-    ":frogo-compose-ui",
-    ":frogo-ui-base",
+    ":frogo-android",
+    ":frogo-compose",
 )

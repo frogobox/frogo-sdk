@@ -18,25 +18,15 @@ object ProjectSetting {
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
 
-    // Layer Prefixes
-    private const val LAYER_CORE = "core"
-    private const val LAYER_UI = "ui"
-    private const val LAYER_COMPOSE = "compose"
-
     // Module Names (Directory & Gradle Include)
-    const val MODULE_NAME_CORE_SDK = "frogo-$LAYER_CORE"
-    const val MODULE_NAME_SDK = "frogo-$LAYER_CORE-android"
-    const val MODULE_NAME_COMPOSE = "frogo-$LAYER_COMPOSE-android"
-    const val MODULE_NAME_COMPOSE_UI = "frogo-$LAYER_COMPOSE-ui"
-
-    const val MODULE_NAME_CORE_UI = "frogo-$LAYER_UI-base"
+    const val MODULE_NAME_CORE_SDK = "frogo-core"
+    const val MODULE_NAME_SDK = "frogo-android"
+    const val MODULE_NAME_COMPOSE = "frogo-compose"
 
     // Library Names (For Package ID / Namespace)
     const val LIBRARY_NAME_CORE_SDK = "coresdk"
     const val LIBRARY_NAME_SDK = "sdk"
-    const val LIBRARY_NAME_UI = "ui"
     const val LIBRARY_NAME_COMPOSE = "compose"
-    const val LIBRARY_NAME_COMPOSE_UI = "composeui"
 
     // ---------------------------------------------------------------------------------------------
 
@@ -63,9 +53,6 @@ object ProjectSetting {
     const val PROJECT_LIB_ID_SDK = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_SDK"
     const val PROJECT_LIB_ID_CORE_SDK = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_CORE_SDK"
     const val PROJECT_LIB_ID_COMPOSE = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_COMPOSE"
-    const val PROJECT_LIB_ID_COMPOSE_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_COMPOSE_UI"
-
-    const val PROJECT_LIB_ID_UI = "$BASE_PACKAGE_NAME.$LIBRARY_NAME_UI"
 
     const val PROJECT_VERSION_CODE = (VERSION_MAJOR * 10000) + (VERSION_MINOR * 100) + VERSION_PATCH
     const val PROJECT_VERSION_NAME = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"

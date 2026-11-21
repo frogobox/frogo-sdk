@@ -1,7 +1,7 @@
-# Frogo Core Android — Full API Reference (v4.0.0)
+# Frogo Android — Full API Reference (v4.0.0)
 
-Package: `com.frogobox.sdk`  
-Artifact: `com.github.frogobox.frogo-sdk:frogo-core-android:4.0.0`
+Package: `com.frogobox.sdk`, `com.frogobox.ui`  
+Artifact: `com.github.frogobox.frogo-sdk:frogo-android:4.0.0`
 
 ---
 

@@ -1,0 +1,122 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
+    `maven-publish`
+}
+
+android {
+    compileSdk {
+        version = release(ProjectSetting.PROJECT_COMPILE_SDK) {
+            minorApiLevel = ProjectSetting.PROJECT_COMPILE_SDK_MINOR
+        }
+    }
+    namespace = "com.frogobox.compose"
+
+    defaultConfig {
+        minSdk = ProjectSetting.PROJECT_MIN_SDK
+
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFile("consumer-rules.pro")
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    }
+}
+
+dependencies {
+    api(project(DependencyGradle.FROGO_PATH_SDK))
+
+    // Jetpack Compose BOM
+    api(platform(libs.androidx.compose.bom))
+    api(libs.androidx.compose.ui)
+    api(libs.androidx.compose.ui.tooling.preview)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.material.icons.extended)
+    api(libs.androidx.compose.foundation)
+
+    api(libs.coil.compose)
+    api(libs.coil.network.okhttp)
+    api(libs.glide.compose)
+
+    // Legacy View interop dependencies (for migrated FrogoLoadingIndicatorView, themes, etc.)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+    // Activity Compose
+    api(libs.androidx.activity.compose)
+
+    // Lifecycle / ViewModel Compose
+    api(libs.androidx.lifecycle.viewmodel.compose)
+    api(libs.androidx.lifecycle.runtime.compose)
+
+    // Navigation Compose
+    api(libs.androidx.navigation.compose)
+
+    debugApi(libs.androidx.compose.ui.tooling)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.espresso.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            register("release", MavenPublication::class) {
+                from(components["release"])
+                groupId = ProjectSetting.PROJECT_LIB_ID_COMPOSE
+                artifactId = ProjectSetting.MODULE_NAME_COMPOSE
+                version = ProjectSetting.PROJECT_VERSION_NAME
+            }
+        }
+    }
+}
