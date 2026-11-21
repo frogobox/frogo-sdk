@@ -1,5 +1,5 @@
 [versions]
-frogoSdk = "4.0.0"
+frogoSdk = "4.0.1"
 composeBom = "2026.09.00"
 coil = "3.6.3"
 

@@ -27,7 +27,7 @@
 ## 📌 Latest Release
 
 ```text
-$version_release = 4.0.0
+$version_release = 4.0.1
 ```
 
 ### What's New in v4.0.0 (from v3.0.13)
@@ -93,7 +93,7 @@ dependencyResolutionManagement {
 
 ```toml
 [versions]
-frogoSdk = "4.0.0"
+frogoSdk = "4.0.1"
 
 [libraries]
 # Full bundle
@@ -120,12 +120,12 @@ dependencies {
 ```kotlin
 dependencies {
     // Complete SDK
-    implementation("com.github.frogobox:frogo-sdk:4.0.0")
+    implementation("com.github.frogobox:frogo-sdk:4.0.1")
 
     // Or specific modular dependencies (recommended)
-    implementation("com.github.frogobox.frogo-sdk:frogo-compose:4.0.0")
-    implementation("com.github.frogobox.frogo-sdk:frogo-android:4.0.0")
-    implementation("com.github.frogobox.frogo-sdk:frogo-core:4.0.0")
+    implementation("com.github.frogobox.frogo-sdk:frogo-compose:4.0.1")
+    implementation("com.github.frogobox.frogo-sdk:frogo-android:4.0.1")
+    implementation("com.github.frogobox.frogo-sdk:frogo-core:4.0.1")
 }
 ```
 
@@ -133,7 +133,7 @@ dependencies {
 
 ## 🤖 AI Agent Skill (`frogo-sdk`)
 
-Frogo SDK includes an official **AI Agent Skill** that enables AI coding assistants (**Antigravity**, **Gemini CLI**, **Claude Code**, **Cursor**, **GitHub Copilot**, **Codex**, **Devin**) to accurately understand, generate, and integrate Frogo SDK v4.0.0 APIs with zero obsolete patterns.
+Frogo SDK includes an official **AI Agent Skill** that enables AI coding assistants (**Antigravity**, **Gemini CLI**, **Claude Code**, **Cursor**, **GitHub Copilot**, **Codex**, **Devin**) to accurately understand, generate, and integrate Frogo SDK v4.0.1 APIs with zero obsolete patterns.
 
 ### Skill Capabilities
 - ✅ **Automated Project Setup**: Configures JitPack, version catalogs, and dependency sets.

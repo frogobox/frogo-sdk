@@ -15,7 +15,7 @@ Frogo SDK is a production-grade multi-module Android and Kotlin library suite de
 | `frogo-compose` | `com.frogobox.compose` | Complete Jetpack Compose architecture and UI kit: `FrogoComposeActivity` (Edge-to-Edge, system UI), `FrogoComposeStateViewModel` (UDF/MVI), 70+ ready-to-use widgets, templates, animations, fireworks canvas, loading spinners | Compose BOM 2026.09.00, Coil 3.6.3, Glide Compose |
 | `app` | `com.frogobox.app` | Showcase application demonstrating all modules | Hilt, Compose, Navigation |
 
-**Current Version:** `4.0.0` (defined in `buildSrc/src/main/kotlin/ProjectSetting.kt`)
+**Current Version:** `4.0.1` (defined in `build-logic/convention/src/main/kotlin/ProjectSetting.kt`)
 
 ---
 
