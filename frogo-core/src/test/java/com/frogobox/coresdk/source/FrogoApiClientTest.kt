@@ -63,6 +63,26 @@ class FrogoApiClientTest {
     }
 
     @Test
+    fun testClientCreationWithoutTrailingSlash() = runBlocking {
+        // Mock server URL without trailing slash
+        val serverUrl = mockWebServer.url("").toString().removeSuffix("/")
+
+        val apiService: TestApiService = FrogoApiClient.create(
+            url = serverUrl,
+            isDebug = true
+        )
+        assertNotNull(apiService)
+
+        val mockResponse = MockResponse()
+            .setResponseCode(200)
+            .setBody("""{"status": "ok", "code": 200}""")
+        mockWebServer.enqueue(mockResponse)
+
+        val response = apiService.getSampleData()
+        assertEquals("ok", response.status)
+    }
+
+    @Test
     fun testClientWithCustomInterceptor() {
         val client = FrogoApiClient.clientWithInterceptor(timeout = 15L)
         assertNotNull(client)

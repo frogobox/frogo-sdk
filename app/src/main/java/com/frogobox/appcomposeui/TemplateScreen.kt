@@ -303,12 +303,13 @@ fun TemplateScreen() {
             items = sampleItems
         ) { index, item ->
             ListItem(
-                headlineContent = { Text("Item $index: $item") },
                 modifier = Modifier.clickable {
                     sheetResultText = "Selected list item: $item"
                     showListSheet = false
                 }
-            )
+            ) {
+                Text("Item $index: $item")
+            }
         }
     }
 

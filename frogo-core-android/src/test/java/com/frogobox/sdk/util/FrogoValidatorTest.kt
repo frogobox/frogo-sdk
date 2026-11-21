@@ -19,6 +19,7 @@ class FrogoValidatorTest {
         assertTrue(FrogoValidator.isValidText("Hello", 3))
         assertTrue(FrogoValidator.isValidText("Hi", 2))
         assertFalse(FrogoValidator.isValidText("Hi", 3))
+        assertFalse(FrogoValidator.isValidText("   ", 3))
     }
 
     @Test

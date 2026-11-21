@@ -75,6 +75,13 @@ class FakePreferenceDelegates : PreferenceDelegates {
         }
     }
 
-    override fun <T> get(key: String, defaultValue: T): T =
-        (storage[key] as? T) ?: defaultValue
+    override fun <T> get(key: String, defaultValue: T): T {
+        val stored = storage[key] ?: return defaultValue
+        val clazz = (defaultValue as Any).javaClass
+        return if (clazz.isInstance(stored)) {
+            clazz.cast(stored) as T
+        } else {
+            defaultValue
+        }
+    }
 }

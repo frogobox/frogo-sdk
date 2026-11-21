@@ -143,8 +143,9 @@ class PiracyDelegatesImpl : PiracyDelegates {
         var process: Process? = null
         return try {
             process = Runtime.getRuntime().exec(arrayOf("/system/xbin/which", "su"))
-            val `in` = BufferedReader(InputStreamReader(process.inputStream))
-            `in`.readLine() != null
+            BufferedReader(InputStreamReader(process.inputStream)).use { reader ->
+                reader.readLine() != null
+            }
         } catch (t: Throwable) {
             false
         } finally {

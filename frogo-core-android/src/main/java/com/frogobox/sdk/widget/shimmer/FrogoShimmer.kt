@@ -483,7 +483,7 @@ class FrogoShimmer internal constructor() {
          * Sets how long the shimmering animation takes to do one full sweep.
          */
         fun setDuration(millis: Long): T {
-            require(millis >= 0) { "Given a negative duration: $millis" }
+            require(millis > 0) { "Given a non-positive duration: $millis" }
             mFrogoShimmer.animationDuration = millis
             return getThis()
         }

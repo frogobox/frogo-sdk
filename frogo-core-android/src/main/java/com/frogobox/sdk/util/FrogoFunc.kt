@@ -72,7 +72,7 @@ object FrogoFunc : IFrogoFunc {
 
 
     override fun randomNumber(start: Int, end: Int): Int {
-        require(start <= end) { "Illegal Argument" }
+        require(start <= end) { "Illegal Argument: start ($start) must be <= end ($end)" }
         return (start..end).random()
     }
 
@@ -91,6 +91,8 @@ object FrogoFunc : IFrogoFunc {
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                    activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) -> true
             else -> false
         }
     }

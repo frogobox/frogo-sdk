@@ -7,6 +7,7 @@ import com.frogobox.appsdk.source.AppRemoteDataSource
 import com.frogobox.appsdk.source.AppRepository
 import com.frogobox.appsdk.source.dao.ArticleDao
 import com.frogobox.appsdk.util.AppConstant.PREF_NAME
+import com.frogobox.sdk.delegate.preference.PreferenceDelegates
 import com.frogobox.sdk.delegate.preference.PreferenceDelegatesImpl
 import com.frogobox.sdk.util.AppExecutors
 import dagger.Module

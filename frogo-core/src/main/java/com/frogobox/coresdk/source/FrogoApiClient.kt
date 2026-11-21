@@ -63,8 +63,9 @@ object FrogoApiClient {
             interceptors = interceptors,
             isDebug = isDebug
         )
+        val formattedUrl = if (url.endsWith("/")) url else "$url/"
         return Retrofit.Builder()
-            .baseUrl(url)
+            .baseUrl(formattedUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

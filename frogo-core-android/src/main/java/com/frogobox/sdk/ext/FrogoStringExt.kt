@@ -60,8 +60,25 @@ fun String.toDate(
 ): Date {
     val parser = SimpleDateFormat(dateFormat, locale)
     parser.timeZone = timeZone
-    return parser.parse(this)
-        ?: throw IllegalArgumentException("Cannot parse date string: '$this' with format '$dateFormat'")
+    return try {
+        parser.parse(this)
+            ?: throw IllegalArgumentException("Cannot parse date string: '$this' with format '$dateFormat'")
+    } catch (e: Exception) {
+        if (e is IllegalArgumentException) throw e
+        throw IllegalArgumentException("Cannot parse date string: '$this' with format '$dateFormat'", e)
+    }
+}
+
+fun String.toDateOrNull(
+    dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+    timeZone: TimeZone = TimeZone.getTimeZone("UTC"),
+    locale: Locale = Locale.US
+): Date? {
+    return try {
+        toDate(dateFormat, timeZone, locale)
+    } catch (_: Exception) {
+        null
+    }
 }
 
 fun String.getUserMention(mention: String): String? {

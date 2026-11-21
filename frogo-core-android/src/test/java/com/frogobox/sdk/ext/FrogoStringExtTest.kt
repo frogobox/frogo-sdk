@@ -72,6 +72,12 @@ class FrogoStringExtTest {
         val dateString = "2026-08-14T12:00:00.000Z"
         val date = dateString.toDate(timeZone = TimeZone.getTimeZone("UTC"))
         assertEquals(1786708800000L, date.time)
+
+        val validOrNull = dateString.toDateOrNull(timeZone = TimeZone.getTimeZone("UTC"))
+        assertEquals(1786708800000L, validOrNull?.time)
+
+        val invalidDate = "invalid-date-format".toDateOrNull()
+        assertNull(invalidDate)
     }
 
     @Test

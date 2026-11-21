@@ -19,7 +19,11 @@ base {
 
 android {
 
-    compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
+    compileSdk {
+        version = release(ProjectSetting.PROJECT_COMPILE_SDK) {
+            minorApiLevel = ProjectSetting.PROJECT_COMPILE_SDK_MINOR
+        }
+    }
     namespace = ProjectSetting.PROJECT_NAME_SPACE
 
     defaultConfig {

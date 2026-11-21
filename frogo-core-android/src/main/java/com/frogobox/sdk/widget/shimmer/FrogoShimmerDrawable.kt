@@ -154,7 +154,8 @@ class FrogoShimmerDrawable : Drawable() {
             started = false
         }
 
-        val repeatDelayFraction = shimmer.repeatDelay.toFloat() / shimmer.animationDuration.toFloat()
+        val animDuration = maxOf(1L, shimmer.animationDuration)
+        val repeatDelayFraction = shimmer.repeatDelay.toFloat() / animDuration.toFloat()
         val newAnimator = ValueAnimator.ofFloat(0f, 1f + repeatDelayFraction).apply {
             interpolator = LinearInterpolator()
             repeatMode = shimmer.repeatMode

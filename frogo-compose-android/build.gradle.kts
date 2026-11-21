@@ -7,7 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = ProjectSetting.PROJECT_COMPILE_SDK
+    compileSdk {
+        version = release(ProjectSetting.PROJECT_COMPILE_SDK) {
+            minorApiLevel = ProjectSetting.PROJECT_COMPILE_SDK_MINOR
+        }
+    }
     namespace = "com.frogobox.compose"
 
     defaultConfig {

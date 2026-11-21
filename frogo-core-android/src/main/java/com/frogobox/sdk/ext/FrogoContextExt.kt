@@ -144,7 +144,7 @@ fun Context.getInstallerId(): String? {
     }
 }
 
-fun Context.createMediaPlayer(resId: Int): MediaPlayer {
+fun Context.createMediaPlayer(resId: Int): MediaPlayer? {
     return MediaPlayer.create(this, resId)
 }
 

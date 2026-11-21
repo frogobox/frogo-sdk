@@ -1,5 +1,6 @@
 package com.frogobox.sdk.ext
 
+import android.app.Activity
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -23,6 +24,10 @@ import com.bumptech.glide.request.target.Target
 // -------------------------------------------------------------------------------------------------
 
 fun ImageView.setImageExt(uri: Any?, placeHolder: Int? = null) {
+    val act = context as? Activity
+    if (act != null && (act.isDestroyed || act.isFinishing)) {
+        return
+    }
     val isValidString = (uri as? String)?.isNotBlank() ?: true
     if (uri != null && isValidString) {
         var request = Glide.with(context).load(uri)
@@ -46,6 +51,10 @@ fun ImageView.setImageCompressExt(
     placeHolder: Int? = null,
     diskCacheStrategy: DiskCacheStrategy = DiskCacheStrategy.AUTOMATIC
 ) {
+    val act = context as? Activity
+    if (act != null && (act.isDestroyed || act.isFinishing)) {
+        return
+    }
     val isValidString = (uri as? String)?.isNotBlank() ?: true
     if (uri != null && isValidString) {
         val w = if (this.width > 0) this.width else Target.SIZE_ORIGINAL

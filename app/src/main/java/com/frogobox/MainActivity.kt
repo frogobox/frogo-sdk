@@ -33,27 +33,19 @@ class MainActivity : FrogoBindActivity<ActivityMainBinding>() {
         binding.apply {
 
             btnSdk.setOnClickListener {
-                startActivityExt<MainSDKActivity> {
-
-                }
+                startActivityExt<MainSDKActivity>()
             }
 
             btnUi.setOnClickListener {
-                startActivityExt<MainUIActivity> {
-
-                }
+                startActivityExt<MainUIActivity>()
             }
 
             btnCompose.setOnClickListener {
-                startActivityExt<MainComposeActivity> {
-
-                }
+                startActivityExt<MainComposeActivity>()
             }
 
             btnComposeUi.setOnClickListener {
-                startActivityExt<MainComposeUiActivity> {
-
-                }
+                startActivityExt<MainComposeUiActivity>()
             }
 
         }

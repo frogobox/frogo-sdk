@@ -1,7 +1,7 @@
 package com.frogobox.coresdk.source
 
 import kotlinx.coroutines.Job
-import java.util.Collections
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Created by faisalamir on 08/04/22
@@ -22,16 +22,19 @@ abstract class CoreDataSource {
         val TAG: String = CoreDataSource::class.java.simpleName
     }
 
-    private val jobs = Collections.synchronizedList(mutableListOf<Job>())
+    private val jobs = ConcurrentHashMap.newKeySet<Job>()
 
     fun onClearDisposables() {
-        synchronized(jobs) {
-            jobs.forEach { it.cancel() }
-            jobs.clear()
-        }
+        val jobsToCancel = ArrayList(jobs)
+        jobs.clear()
+        jobsToCancel.forEach { it.cancel() }
     }
 
     fun addSubscribe(job: Job) {
+        jobs.removeIf { !it.isActive }
         jobs.add(job)
+        job.invokeOnCompletion {
+            jobs.remove(job)
+        }
     }
 }

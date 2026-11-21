@@ -49,4 +49,13 @@ class CoreDataSourceTest {
         assertEquals(numThreads * subscriptionsPerThread, jobs.size)
         assertTrue(jobs.all { it.isCancelled })
     }
+
+    @Test
+    fun testCompletedJobAutoRemoved() {
+        val dataSource = TestDataSource()
+        val job = Job()
+        dataSource.addSubscribe(job)
+        job.complete()
+        assertTrue(job.isCompleted)
+    }
 }

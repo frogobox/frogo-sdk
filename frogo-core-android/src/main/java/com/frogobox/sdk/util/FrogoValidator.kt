@@ -19,7 +19,7 @@ import android.util.Patterns
 object FrogoValidator {
 
     fun isValidText(text: String, minLength: Int = 3): Boolean {
-        return text.length >= minLength
+        return text.trim().length >= minLength
     }
 
     fun isValidEmail(username: String): Boolean {

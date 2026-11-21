@@ -35,23 +35,42 @@ class FrogoMusic(
     }
 
     override fun playMusic(isLooping: Boolean) {
-        ensurePlayer().apply {
-            this.isLooping = isLooping
-        }.start()
+        try {
+            ensurePlayer().apply {
+                this.isLooping = isLooping
+            }.start()
+        } catch (e: Exception) {
+            com.frogobox.sdk.log.FLog.e("FrogoMusic: failed to play music - ${e.message.orEmpty()}")
+        }
     }
 
     override fun playMusic() {
-        ensurePlayer().start()
+        playMusic(false)
     }
 
     override fun stopMusic() {
-        musicPlayer?.stop()
-        musicPlayer?.release()
-        musicPlayer = null
+        try {
+            if (musicPlayer?.isPlaying == true) {
+                musicPlayer?.stop()
+            }
+        } catch (e: Exception) {
+            com.frogobox.sdk.log.FLog.e("FrogoMusic: error stopping player - ${e.message.orEmpty()}")
+        } finally {
+            try {
+                musicPlayer?.release()
+            } catch (_: Exception) {}
+            musicPlayer = null
+        }
     }
 
     override fun pauseMusic() {
-        musicPlayer?.pause()
+        try {
+            if (musicPlayer?.isPlaying == true) {
+                musicPlayer?.pause()
+            }
+        } catch (e: Exception) {
+            com.frogobox.sdk.log.FLog.e("FrogoMusic: error pausing player - ${e.message.orEmpty()}")
+        }
     }
 
 }
